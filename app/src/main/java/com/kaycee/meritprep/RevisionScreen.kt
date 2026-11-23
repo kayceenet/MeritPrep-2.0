@@ -214,6 +214,15 @@ private val starterBiologyCards = listOf(
     RevisionCard("bio-her-card-6","bio-heredity","State Mendel's law of segregation.","The two alleles for a gene separate during gamete formation, so each gamete receives one allele.",0L),
     RevisionCard("bio-her-card-7","bio-heredity","What is a mutation?","A change in DNA sequence; its effect may be neutral, harmful or beneficial depending on context.",0L),
     RevisionCard("bio-her-card-8","bio-heredity","What does homozygous mean?","Having two identical alleles at a gene locus.",0L)
+) + listOf(
+    RevisionCard("bio-bt-card-1","bio-biotechnology","Define biotechnology.","Use of living organisms, cells or biological processes to develop useful products and services.",0L),
+    RevisionCard("bio-bt-card-2","bio-biotechnology","What does yeast produce during alcoholic fermentation?","Ethanol and carbon dioxide.",0L),
+    RevisionCard("bio-bt-card-3","bio-biotechnology","What is selective breeding?","Choosing parents with desirable inherited characteristics and breeding them over generations.",0L),
+    RevisionCard("bio-bt-card-4","bio-biotechnology","What is plant tissue culture?","Growing plant cells, tissues or organs on sterile nutrient media under controlled conditions.",0L),
+    RevisionCard("bio-bt-card-5","bio-biotechnology","What is micropropagation?","Rapid multiplication of plants using tissue culture techniques.",0L),
+    RevisionCard("bio-bt-card-6","bio-biotechnology","What is recombinant DNA technology?","Combining DNA sequences from different sources, often using a vector and host cell.",0L),
+    RevisionCard("bio-bt-card-7","bio-biotechnology","Give one medical application of genetic engineering.","Genetically engineered microorganisms can produce human insulin.",0L),
+    RevisionCard("bio-bt-card-8","bio-biotechnology","What does biosafety assessment examine?","Potential risks of a biological technology to human health and the environment.",0L)
 )
 
 @Composable
