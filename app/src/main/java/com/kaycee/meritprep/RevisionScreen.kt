@@ -187,6 +187,15 @@ private val starterBiologyCards = listOf(
     RevisionCard("bio-soil-card-6","bio-soil","What does a soil pH measurement indicate?","How acidic or alkaline the soil solution is.",0L),
     RevisionCard("bio-soil-card-7","bio-soil","Name two soil conservation practices.","Examples include cover crops, mulching, contour farming, terracing, windbreaks and controlled grazing.",0L),
     RevisionCard("bio-soil-card-8","bio-soil","How do earthworms benefit soil?","They mix soil and create channels that can improve aeration, drainage and structure.",0L)
+) + listOf(
+    RevisionCard("bio-env-card-1","bio-environment","Distinguish communicable from non-communicable disease.","Communicable diseases are infectious and can spread between hosts; non-communicable diseases are not transmitted person to person.",0L),
+    RevisionCard("bio-env-card-2","bio-environment","What organism transmits human malaria?","Female Anopheles mosquitoes transmit Plasmodium parasites.",0L),
+    RevisionCard("bio-env-card-3","bio-environment","Name three ways to reduce water-borne disease transmission.","Safe drinking water, proper sanitation and handwashing with soap; food hygiene also helps.",0L),
+    RevisionCard("bio-env-card-4","bio-environment","How do vaccines help protect against infection?","They stimulate immune responses and immune memory against specific pathogens or antigens.",0L),
+    RevisionCard("bio-env-card-5","bio-environment","Why do antibiotics not treat influenza?","Influenza is caused by a virus; antibiotics act against bacteria, not viruses.",0L),
+    RevisionCard("bio-env-card-6","bio-environment","What is antimicrobial resistance?","A condition in which microorganisms are no longer effectively inhibited or killed by medicines that previously worked against them.",0L),
+    RevisionCard("bio-env-card-7","bio-environment","Name three types of pollution.","Air, water, soil and noise pollution are examples.",0L),
+    RevisionCard("bio-env-card-8","bio-environment","Give two ways to conserve biodiversity.","Protect and restore habitats; use natural resources sustainably and reduce pollution.",0L)
 )
 
 @Composable
