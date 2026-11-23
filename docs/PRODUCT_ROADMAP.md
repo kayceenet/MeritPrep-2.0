@@ -19,11 +19,19 @@ Timed CBT sessions, question randomisation, answer review, scoring policies, WAE
 ### E. Mastery and revision
 Topic mastery based on repeated evidence, spaced retrieval, flashcards, error notebook and study planner.
 
+**Implemented in the current alpha:** local revision-card storage, a four-rating spaced-retrieval scheduler, 12 starter Biology cell-structure cards, a revision screen and unit-tested scheduling rules. The current card set is a starter pack, not a complete syllabus deck. The app still needs mastery evidence across multiple attempts and question forms, an error notebook and a study planner.
+
 ### F. Practical learning
 Inventory existing APK assets and lab logic; rebuild Biology, Chemistry and Physics simulations with safe, accessible controls and clear learning objectives.
 
 ### G. Platform operations
 Authenticated sync, teacher/admin CMS, analytics, backups, privacy and security review.
+
+## Current alpha status
+- Biology syllabus map: 24 units represented; two lesson routes currently available.
+- Biology original objective practice: 22 items across cell biology and classification; all clearly marked as original and unverified.
+- Revision: 12 offline starter cards with Again/Hard/Good/Easy scheduling.
+- Academic approval: pending independent subject review; no generated question is presented as an official past question.
 
 ## Acceptance principles
 - Do not equate lesson completion with mastery.
