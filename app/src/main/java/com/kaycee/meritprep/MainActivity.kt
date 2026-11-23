@@ -75,7 +75,7 @@ private fun MeritPrepApp() {
                 composable("lesson/{topicId}") { entry ->
                     LessonScreen(entry.arguments?.getString("topicId").orEmpty())
                 }
-                composable("practice") { PracticeScreenV2(onStartCbt = { nav.navigate("cbt") }, onStartTheory = { nav.navigate("waec-theory") }, onOpenMistakes = { nav.navigate("mistakes") }) }
+                composable("practice") { PracticeScreenV2(onStartCbt = { nav.navigate("cbt") }, onStartTheory = { nav.navigate("waec-theory") }, onOpenMistakes = { nav.navigate("mistakes") }, onOpenStudyPlan = { nav.navigate("study-plan") }) }
                 composable("cbt") { CbtScreen() }
                 composable("waec-theory") { BiologyTheoryScreen() }
                 composable("review") { RevisionScreen() }
