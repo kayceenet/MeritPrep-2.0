@@ -4,8 +4,9 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import org.json.JSONArray
 
-class MeritDatabase(context: Context) : SQLiteOpenHelper(context, "meritprep_local.db", null, 3) {
+class MeritDatabase(context: Context) : SQLiteOpenHelper(context, "meritprep_local.db", null, 4) {
     override fun onCreate(db: SQLiteDatabase) {
         db.execSQL("""
             CREATE TABLE topic_progress (
@@ -47,6 +48,7 @@ class MeritDatabase(context: Context) : SQLiteOpenHelper(context, "meritprep_loc
             )
         """.trimIndent())
         createCompletedLessonsTable(db)
+        createCbtTables(db)
     }
 
     private fun createCompletedLessonsTable(db: SQLiteDatabase) {
@@ -65,6 +67,42 @@ class MeritDatabase(context: Context) : SQLiteOpenHelper(context, "meritprep_loc
             db.execSQL("ALTER TABLE revision_cards ADD COLUMN ease_factor REAL NOT NULL DEFAULT 2.5")
             db.execSQL("ALTER TABLE revision_cards ADD COLUMN lapses INTEGER NOT NULL DEFAULT 0")
         }
+        if (oldVersion < 4) createCbtTables(db)
+    }
+
+    private fun createCbtTables(db: SQLiteDatabase) {
+        db.execSQL("""
+            CREATE TABLE IF NOT EXISTS cbt_sessions (
+                session_id TEXT PRIMARY KEY,
+                subject_id TEXT NOT NULL,
+                started_at INTEGER NOT NULL,
+                ends_at INTEGER NOT NULL,
+                total_questions INTEGER NOT NULL,
+                status TEXT NOT NULL,
+                score INTEGER,
+                submitted_at INTEGER
+            )
+        """.trimIndent())
+        db.execSQL("""
+            CREATE TABLE IF NOT EXISTS cbt_session_questions (
+                session_id TEXT NOT NULL,
+                question_id TEXT NOT NULL,
+                display_order INTEGER NOT NULL,
+                options_json TEXT NOT NULL,
+                correct_index INTEGER NOT NULL,
+                PRIMARY KEY(session_id, question_id)
+            )
+        """.trimIndent())
+        db.execSQL("""
+            CREATE TABLE IF NOT EXISTS cbt_answers (
+                session_id TEXT NOT NULL,
+                question_id TEXT NOT NULL,
+                selected_index INTEGER,
+                flagged INTEGER NOT NULL DEFAULT 0,
+                updated_at INTEGER NOT NULL,
+                PRIMARY KEY(session_id, question_id)
+            )
+        """.trimIndent())
     }
 
     fun recordQuestionAttempt(topicId: String, isCorrect: Boolean, studiedAt: Long = System.currentTimeMillis()) {
@@ -195,6 +233,106 @@ class MeritDatabase(context: Context) : SQLiteOpenHelper(context, "meritprep_loc
             put("lapses", card.lapses)
         }
         writableDatabase.update("revision_cards", values, "card_id = ?", arrayOf(card.cardId))
+    }
+
+
+    fun createCbtSession(
+        sessionId: String,
+        subjectId: String,
+        startedAt: Long,
+        endsAt: Long,
+        questions: List<PresentedQuestion>
+    ) {
+        val db = writableDatabase
+        db.beginTransaction()
+        try {
+            val session = ContentValues().apply {
+                put("session_id", sessionId)
+                put("subject_id", subjectId)
+                put("started_at", startedAt)
+                put("ends_at", endsAt)
+                put("total_questions", questions.size)
+                put("status", "IN_PROGRESS")
+            }
+            db.insertOrThrow("cbt_sessions", null, session)
+            questions.forEachIndexed { index, question ->
+                val row = ContentValues().apply {
+                    put("session_id", sessionId)
+                    put("question_id", question.questionId)
+                    put("display_order", index)
+                    put("options_json", JSONArray(question.options).toString())
+                    put("correct_index", question.correctPresentedIndex)
+                }
+                db.insertOrThrow("cbt_session_questions", null, row)
+            }
+            db.setTransactionSuccessful()
+        } finally { db.endTransaction() }
+    }
+
+    fun saveCbtAnswer(sessionId: String, questionId: String, selectedIndex: Int?, flagged: Boolean) {
+        val values = ContentValues().apply {
+            put("session_id", sessionId)
+            put("question_id", questionId)
+            if (selectedIndex == null) putNull("selected_index") else put("selected_index", selectedIndex)
+            put("flagged", if (flagged) 1 else 0)
+            put("updated_at", System.currentTimeMillis())
+        }
+        writableDatabase.insertWithOnConflict("cbt_answers", null, values, SQLiteDatabase.CONFLICT_REPLACE)
+    }
+
+    fun loadActiveCbtSession(subjectId: String): CbtSessionSnapshot? {
+        val db = readableDatabase
+        val session = db.rawQuery(
+            "SELECT session_id, started_at, ends_at, total_questions FROM cbt_sessions WHERE subject_id = ? AND status = 'IN_PROGRESS' ORDER BY started_at DESC LIMIT 1",
+            arrayOf(subjectId)
+        ).use { cursor ->
+            if (!cursor.moveToFirst()) null else listOf(
+                cursor.getString(0), cursor.getLong(1), cursor.getLong(2), cursor.getInt(3)
+            )
+        } ?: return null
+        val sessionId = session[0] as String
+        val questions = db.rawQuery(
+            """SELECT q.question_id, q.options_json, q.correct_index, a.selected_index, COALESCE(a.flagged, 0)
+               FROM cbt_session_questions q
+               LEFT JOIN cbt_answers a ON a.session_id = q.session_id AND a.question_id = q.question_id
+               WHERE q.session_id = ? ORDER BY q.display_order ASC""".trimIndent(),
+            arrayOf(sessionId)
+        ).use { cursor ->
+            buildList {
+                while (cursor.moveToNext()) {
+                    val optionsJson = JSONArray(cursor.getString(1))
+                    val options = buildList { for (i in 0 until optionsJson.length()) add(optionsJson.getString(i)) }
+                    add(CbtQuestionSnapshot(
+                        questionId = cursor.getString(0),
+                        options = options,
+                        correctPresentedIndex = cursor.getInt(2),
+                        selectedIndex = if (cursor.isNull(3)) null else cursor.getInt(3),
+                        flagged = cursor.getInt(4) == 1
+                    ))
+                }
+            }
+        }
+        return CbtSessionSnapshot(
+            sessionId = sessionId,
+            startedAt = session[1] as Long,
+            endsAt = session[2] as Long,
+            totalQuestions = session[3] as Int,
+            questions = questions
+        )
+    }
+
+    fun completeCbtSession(sessionId: String, score: Int, submittedAt: Long = System.currentTimeMillis()) {
+        val values = ContentValues().apply {
+            put("status", "SUBMITTED")
+            put("score", score)
+            put("submitted_at", submittedAt)
+        }
+        writableDatabase.update("cbt_sessions", values, "session_id = ? AND status = 'IN_PROGRESS'", arrayOf(sessionId))
+    }
+
+    fun abandonCbtSession(sessionId: String) {
+        val values = ContentValues().apply { put("status", "ABANDONED") }
+        writableDatabase.update("cbt_sessions", values, "session_id = ? AND status = 'IN_PROGRESS'", arrayOf(sessionId))
     }
 
     fun getTopicProgressCount(): Int =
