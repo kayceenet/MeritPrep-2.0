@@ -68,6 +68,17 @@ private val starterBiologyCards = listOf(
     RevisionCard("bio-nut-card-6","bio-nutrition","Is bile an enzyme? What does it do?","No. Bile emulsifies fats into smaller droplets and helps neutralise acidic chyme.",0L),
     RevisionCard("bio-nut-card-7","bio-nutrition","Where does most nutrient absorption occur?","In the small intestine, whose folds, villi and microvilli provide a large surface area.",0L),
     RevisionCard("bio-nut-card-8","bio-nutrition","What is assimilation?","The use or incorporation of absorbed nutrients by cells and tissues, such as using amino acids to build proteins.",0L)
+) + listOf(
+    RevisionCard("bio-trans-card-1","bio-transport","Define diffusion.","The net movement of particles from higher concentration to lower concentration due to random motion.",0L),
+    RevisionCard("bio-trans-card-2","bio-transport","Define osmosis.","The net movement of water across a selectively permeable membrane from higher to lower water potential.",0L),
+    RevisionCard("bio-trans-card-3","bio-transport","How does active transport differ from diffusion?","Active transport uses energy and transport proteins to move substances against a concentration or electrochemical gradient; diffusion is passive and moves down a concentration gradient.",0L),
+    RevisionCard("bio-trans-card-4","bio-transport","What is the role of xylem?","It transports water and dissolved mineral ions mainly from roots towards leaves and also provides support.",0L),
+    RevisionCard("bio-trans-card-5","bio-transport","What is transpiration?","Loss of water vapour from aerial parts of a plant, mainly through stomata.",0L),
+    RevisionCard("bio-trans-card-6","bio-transport","What is translocation?","Movement of organic assimilates, especially sucrose, through phloem from sources to sinks.",0L),
+    RevisionCard("bio-trans-card-7","bio-transport","What is the function of haemoglobin?","It binds oxygen reversibly and transports most oxygen in the blood within red blood cells.",0L),
+    RevisionCard("bio-trans-card-8","bio-transport","How do arteries differ from veins?","Arteries carry blood away from the heart and have thick elastic walls; veins return blood to the heart and often contain valves.",0L),
+    RevisionCard("bio-trans-card-9","bio-transport","What is the role of capillaries?","Their thin walls allow exchange of gases, nutrients and wastes between blood and tissues.",0L),
+    RevisionCard("bio-trans-card-10","bio-transport","What are the two circuits in human double circulation?","Pulmonary circulation is between heart and lungs; systemic circulation is between heart and the rest of the body.",0L)
 )
 
 @Composable
