@@ -206,7 +206,7 @@ class MeritDatabase(context: Context) : SQLiteOpenHelper(context, "meritprep_loc
     private fun updateMasteryEvidence(db: SQLiteDatabase, topicId: String) {
         val evidence = db.rawQuery(
             """SELECT COUNT(*), COUNT(DISTINCT question_id), COALESCE(SUM(is_correct), 0),
-                      COUNT(DISTINCT CAST(attempted_at / 86400000 AS INTEGER))
+                      COUNT(DISTINCT date(attempted_at / 1000, 'unixepoch', 'localtime'))
                FROM question_attempts WHERE topic_id = ?""".trimIndent(),
             arrayOf(topicId)
         ).use { cursor ->
