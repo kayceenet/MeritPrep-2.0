@@ -66,7 +66,11 @@ private fun MeritPrepApp() {
                 composable("learn") { LearnScreen(nav) }
                 composable("subject/{code}") { entry ->
                     val code = entry.arguments?.getString("code").orEmpty()
-                    SubjectScreen(subjects.firstOrNull { it.code == code } ?: subjects.first(), nav)
+                    if (code == "BIO") {
+                        BiologyCourseScreen { topicId -> nav.navigate("lesson/$topicId") }
+                    } else {
+                        SubjectScreen(subjects.firstOrNull { it.code == code } ?: subjects.first(), nav)
+                    }
                 }
                 composable("lesson/{topicId}") { entry ->
                     LessonScreen(entry.arguments?.getString("topicId").orEmpty())
