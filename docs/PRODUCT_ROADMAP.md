@@ -19,19 +19,26 @@ Timed CBT sessions, question randomisation, answer review, scoring policies, WAE
 ### E. Mastery and revision
 Topic mastery based on repeated evidence, spaced retrieval, flashcards, error notebook and study planner.
 
-**Implemented in the current alpha:** local revision-card storage, a four-rating spaced-retrieval scheduler, 12 starter Biology cell-structure cards, a revision screen and unit-tested scheduling rules. The current card set is a starter pack, not a complete syllabus deck. The app still needs mastery evidence across multiple attempts and question forms, an error notebook and a study planner.
+**Implemented in the current alpha:** local revision-card storage, a four-rating spaced-retrieval scheduler, 198 Biology revision cards spanning the mapped Biology topics, a revision screen and unit-tested scheduling rules. Mastery evidence across multiple attempts and question forms, an error notebook and a study planner remain outstanding.
 
 ### F. Practical learning
 Inventory existing APK assets and lab logic; rebuild Biology, Chemistry and Physics simulations with safe, accessible controls and clear learning objectives.
+
+**Implemented prototype work:** a Biology food-test interpretation engine and an osmosis simulation, with unit tests. These are learning prototypes, not a complete WAEC practical examination system.
 
 ### G. Platform operations
 Authenticated sync, teacher/admin CMS, analytics, backups, privacy and security review.
 
 ## Current alpha status
-- Biology syllabus map: 24 units represented; all 24 Biology syllabus units now have lesson routes.
-- Biology original objective practice: 240 items across the 24 Biology syllabus units; all clearly marked as original and unverified.
-- Revision: 12 offline starter cards with Again/Hard/Good/Easy scheduling.
+
+- Biology syllabus map: 24 units represented; each unit resolves to an authored lesson draft.
+- Biology lessons: 24 beginner-oriented lesson drafts, mapped to the syllabus units; independent academic review is pending.
+- Biology original objective practice: 240 items across the 24 units; items are explicitly marked as original and unverified.
+- Practice: topic-focused sessions and a full Biology question-bank mode with shuffled question and option order.
+- Revision: 198 offline Biology cards with Again/Hard/Good/Easy scheduling.
+- Practical learning: food-test and osmosis prototypes.
 - Academic approval: pending independent subject review; no generated question is presented as an official past question.
+- Other subjects: starter lesson content only; full syllabus mapping and course development remain outstanding.
 
 ## Acceptance principles
 - Do not equate lesson completion with mastery.
