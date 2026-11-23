@@ -138,8 +138,8 @@ class MeritDatabase(context: Context) : SQLiteOpenHelper(context, "meritprep_loc
         writableDatabase.insertOrThrow("mistake_notebook", null, values)
     }
 
-    fun getMistakes(includeResolved: Boolean = false, limit: Int = 200): List<MistakeNote> {
-        val selection = if (includeResolved) "" else "WHERE is_resolved = 0"
+    fun getMistakes(resolvedOnly: Boolean = false, limit: Int = 200): List<MistakeNote> {
+        val selection = if (resolvedOnly) "WHERE is_resolved = 1" else "WHERE is_resolved = 0"
         return readableDatabase.rawQuery(
             """SELECT mistake_id, question_id, topic_id, prompt, selected_answer, correct_answer,
                       explanation, created_at, is_resolved
