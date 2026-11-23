@@ -59,5 +59,16 @@ class LearningCatalogTest {
         assertEquals(syllabusIds, questions.map { it.topicId }.toSet())
         assertTrue(questions.all { !it.isVerified && it.source.startsWith("MeritPrep original practice item") })
     }
-}
 
+    @Test
+    fun biologyLessonsMeetMinimumInstructionalDepth() {
+        val biologyLessons = LearningCatalog.topics.filter { it.subjectCode == "BIO" }
+        assertEquals(24, biologyLessons.size)
+        biologyLessons.forEach { lesson ->
+            assertTrue("${lesson.id} needs at least four measurable objectives", lesson.objectives.size >= 4)
+            assertTrue("${lesson.id} needs at least eight teaching sections", lesson.sections.size >= 8)
+            assertTrue("${lesson.id} needs a four-option knowledge check", lesson.checkOptions.size >= 4)
+        }
+    }
+
+}
