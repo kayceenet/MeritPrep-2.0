@@ -13,9 +13,11 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.*
+import com.kaycee.meritprep.data.MeritDatabase
 
 private val subjects = listOf(
     Subject("Mathematics", "Numbers, algebra, geometry and statistics", "MATH"),
@@ -65,6 +67,9 @@ private fun MeritPrepApp() {
                 composable("subject/{code}") { entry ->
                     val code = entry.arguments?.getString("code").orEmpty()
                     SubjectScreen(subjects.firstOrNull { it.code == code } ?: subjects.first(), nav)
+                }
+                composable("lesson/{topicId}") { entry ->
+                    LessonScreen(entry.arguments?.getString("topicId").orEmpty())
                 }
                 composable("practice") { PracticeScreenV2() }
                 composable("labs") { VirtualLabScreen() }
@@ -128,25 +133,23 @@ private fun SubjectCard(subject: Subject, onClick: () -> Unit) {
 
 @Composable
 private fun SubjectScreen(subject: Subject, nav: NavHostController) {
-    val topics = when(subject.code) {
-        "BIO" -> listOf("Cell structure and organisation", "Nutrition", "Transport systems", "Ecology", "Genetics")
-        "CHEM" -> listOf("Particulate nature of matter", "Atomic structure", "Chemical bonding", "Stoichiometry", "Acids, bases and salts")
-        "PHY" -> listOf("Measurements and units", "Motion", "Forces and equilibrium", "Waves", "Electricity")
-        "MATH" -> listOf("Number bases", "Fractions and percentages", "Algebra", "Geometry", "Statistics")
-        "ENG" -> listOf("Comprehension", "Summary", "Lexis and structure", "Oral English")
-        "ECO" -> listOf("Basic economic concepts", "Demand and supply", "Production", "Market structures")
-        else -> listOf("Political concepts", "Constitution", "Arms of government", "Nigerian political development")
-    }
+    val topics = LearningCatalog.forSubject(subject.code)
     LazyColumn(Modifier.fillMaxSize().padding(20.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
         item {
             Text(subject.name, style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
-            Text("Topic catalogue starter. Full syllabus mapping and reviewed lesson content will be added in subsequent releases.")
+            Text("Start with a structured lesson. This is an initial content set, not yet a complete official syllabus map.")
+        }
+        if (topics.isEmpty()) {
+            item { Text("Lessons are being prepared for this subject.") }
         }
         items(topics) { topic ->
-            Card(Modifier.fillMaxWidth()) {
-                Column(Modifier.padding(16.dp)) {
-                    Text(topic, fontWeight = FontWeight.SemiBold)
-                    Text("Lesson content pending academic review", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            Card(onClick = { nav.navigate("lesson/" + topic.id) }, modifier = Modifier.fillMaxWidth()) {
+                Row(Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
+                    Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                        Text(topic.title, fontWeight = FontWeight.SemiBold)
+                        Text("Lesson · " + topic.objectives.size + " learning objectives", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    }
+                    Icon(Icons.Default.ChevronRight, contentDescription = "Open lesson")
                 }
             }
         }
@@ -178,10 +181,36 @@ private fun PracticeScreen() {
 
 @Composable
 private fun ProfileScreen() {
-    Column(Modifier.fillMaxSize().padding(20.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+    val context = LocalContext.current
+    val database = remember(context) { MeritDatabase(context) }
+    val completedLessons = remember { database.getCompletedLessonCount() }
+    val attemptedQuestions = remember { database.getQuestionAttemptCount() }
+    val correctAnswers = remember { database.getCorrectAnswerCount() }
+    val accuracy = if (attemptedQuestions == 0) 0 else (correctAnswers * 100) / attemptedQuestions
+
+    Column(Modifier.fillMaxSize().padding(20.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
         Text("Learner profile", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
-        Text("Your study activity and progress will appear here.")
-        LinearProgressIndicator(progress = { 0f }, modifier = Modifier.fillMaxWidth())
-        Text("No verified learning progress recorded yet.")
+        Text("Your activity is stored on this device.")
+        Card(Modifier.fillMaxWidth()) {
+            Column(Modifier.padding(18.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                Text("Lessons completed", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                Text(completedLessons.toString(), style = MaterialTheme.typography.headlineLarge, fontWeight = FontWeight.Bold)
+            }
+        }
+        Card(Modifier.fillMaxWidth()) {
+            Column(Modifier.padding(18.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                Text("Questions attempted", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                Text(attemptedQuestions.toString(), style = MaterialTheme.typography.headlineLarge, fontWeight = FontWeight.Bold)
+            }
+        }
+        Card(Modifier.fillMaxWidth()) {
+            Column(Modifier.padding(18.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                Text("Practice accuracy", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                Text("$accuracy%", style = MaterialTheme.typography.headlineLarge, fontWeight = FontWeight.Bold)
+                LinearProgressIndicator(progress = { accuracy / 100f }, modifier = Modifier.fillMaxWidth())
+                Text("$correctAnswers correct answers out of $attemptedQuestions attempts", style = MaterialTheme.typography.bodySmall)
+            }
+        }
+        Text("Accuracy is based only on recorded practice attempts. It is not an examination score or a prediction of JAMB/WAEC performance.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
     }
 }
