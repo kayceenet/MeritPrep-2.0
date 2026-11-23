@@ -66,7 +66,7 @@ private fun MeritPrepApp() {
                     val code = entry.arguments?.getString("code").orEmpty()
                     SubjectScreen(subjects.firstOrNull { it.code == code } ?: subjects.first(), nav)
                 }
-                composable("practice") { PracticeScreen() }
+                composable("practice") { PracticeScreenV2() }
                 composable("profile") { ProfileScreen() }
             }
         }
