@@ -11,6 +11,7 @@ The current alpha is a working Android app built with Kotlin, Jetpack Compose an
 - Home, Learn, Practice, Labs, Profile and Biology revision screens.
 - Seven subject entry points, with starter lesson content for Biology, Chemistry, Physics, Mathematics, English Language, Economics and Government.
 - A 24-unit Biology syllabus map, with an authored beginner-oriented lesson draft for every mapped unit.
+- An interactive plant/animal cell schematic in the introductory cell lesson, with selectable organelles and functional explanations.
 - 240 original Biology multiple-choice practice questions across the 24 mapped units, with explanations and syllabus-topic attribution.
 - Topic-focused Biology practice sessions and a full Biology question-bank mode, with shuffled questions and answer options.
 - A timed Biology CBT mock: 40 random questions, a 30-minute practice timer, question navigation, answer flags, answer review and locally persisted session state.
@@ -28,7 +29,7 @@ The current alpha is a working Android app built with Kotlin, Jetpack Compose an
 
 This is an actively developed alpha, not a completed or officially endorsed examination product.
 
-- Biology lessons, question keys, flashcards, structured-response guides and practical tasks still require independent review by qualified subject teachers.
+- Biology lessons, question keys, flashcards, structured-response guides, diagrams and practical tasks still require independent review by qualified subject teachers.
 - The 240 Biology objective questions and ten structured-response tasks are original practice content, not official JAMB or WAEC past questions.
 - Theory self-check rubrics are learning aids, not official WAEC marking schemes or examiner marking.
 - The Biology CBT mock is a MeritPrep practice configuration, not an official JAMB paper or a full multi-subject JAMB simulation.
