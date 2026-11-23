@@ -291,7 +291,23 @@ class BiologyQuestionBankTest {
             assertTrue(question.source.startsWith("MeritPrep original practice item"))
         }
     }
+    @Test
+    fun variationBankHasUniqueIdsAndValidKeys() {
+        val questions = BiologyQuestionBank.variation
+        assertTrue(questions.size >= 10)
+        assertEquals(questions.size, questions.map { it.id }.toSet().size)
+        questions.forEach { question ->
+            assertEquals("bio-variation", question.topicId)
+            assertTrue(question.prompt.isNotBlank())
+            assertTrue(question.options.size >= 4)
+            assertTrue(question.correctOptionIndex in question.options.indices)
+            assertTrue(question.explanation.isNotBlank())
+            assertFalse(question.isVerified)
+            assertTrue(question.source.startsWith("MeritPrep original practice item"))
+        }
+    }
 }
+
 
 
 
