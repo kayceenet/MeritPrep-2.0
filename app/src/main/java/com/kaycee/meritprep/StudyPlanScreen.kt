@@ -17,7 +17,11 @@ import com.kaycee.meritprep.data.StudyTopic
 import java.util.UUID
 
 @Composable
-fun StudyPlanScreen() {
+fun StudyPlanScreen(
+    onOpenLesson: (String) -> Unit = {},
+    onOpenPractice: () -> Unit = {},
+    onOpenRevision: () -> Unit = {}
+) {
     val context = LocalContext.current
     val database = remember(context) { MeritDatabase(context) }
     var plan by remember { mutableStateOf<StudyPlanSnapshot?>(null) }
@@ -126,6 +130,15 @@ fun StudyPlanScreen() {
                                         Text(item.topicTitle, fontWeight = FontWeight.SemiBold)
                                         Text("${item.activityType} · ${item.estimatedMinutes} min", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                                     }
+                                    TextButton(
+                                        onClick = {
+                                            when (item.activityType) {
+                                                "Learn lesson" -> onOpenLesson(item.topicId)
+                                                "Practise questions" -> onOpenPractice()
+                                                else -> onOpenRevision()
+                                            }
+                                        }
+                                    ) { Text("Open") }
                                 }
                             }
                         }
