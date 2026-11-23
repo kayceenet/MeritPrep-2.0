@@ -13,7 +13,7 @@ import com.kaycee.meritprep.data.MistakeNote
 import java.util.UUID
 
 @Composable
-fun PracticeScreenV2(onStartCbt: () -> Unit = {}, onStartTheory: () -> Unit = {}, onOpenMistakes: () -> Unit = {}) {
+fun PracticeScreenV2(onStartCbt: () -> Unit = {}, onStartTheory: () -> Unit = {}, onOpenMistakes: () -> Unit = {}, onOpenStudyPlan: () -> Unit = {}) {
     val context = LocalContext.current
     val database = remember(context) { MeritDatabase(context) }
     val biologyTopics = remember { LearningCatalog.forSubject("BIO") }
@@ -83,6 +83,9 @@ fun PracticeScreenV2(onStartCbt: () -> Unit = {}, onStartTheory: () -> Unit = {}
             }
             OutlinedButton(onClick = onOpenMistakes, modifier = Modifier.fillMaxWidth()) {
                 Text("Open mistake notebook")
+            }
+            OutlinedButton(onClick = onOpenStudyPlan, modifier = Modifier.fillMaxWidth()) {
+                Text("Open Biology study planner")
             }
             OutlinedButton(onClick = onStartTheory, modifier = Modifier.fillMaxWidth()) {
                 Text("WAEC theory practice")
