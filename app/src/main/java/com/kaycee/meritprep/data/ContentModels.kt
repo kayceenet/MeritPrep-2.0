@@ -66,3 +66,16 @@ data class TopicProgress(
     val lastStudiedEpochMillis: Long,
     val demonstratedMastery: Boolean
 )
+
+ 
+data class RevisionCard(
+    val cardId: String,
+    val topicId: String,
+    val front: String,
+    val back: String,
+    val dueAt: Long,
+    val intervalDays: Int = 0,
+    val repetitions: Int = 0,
+    val easeFactor: Double = 2.5,
+    val lapses: Int = 0
+)
