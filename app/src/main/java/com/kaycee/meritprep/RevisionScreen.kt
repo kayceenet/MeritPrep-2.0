@@ -142,6 +142,15 @@ private val starterBiologyCards = listOf(
     RevisionCard("bio-eco-f-card-6","bio-ecology-factors","Which instrument measures wind speed?","An anemometer.",0L),
     RevisionCard("bio-eco-f-card-7","bio-ecology-factors","What is a limiting factor?","A condition or resource that restricts growth, survival or distribution when it is scarce or unsuitable.",0L),
     RevisionCard("bio-eco-f-card-8","bio-ecology-factors","Why should ecological measurements be repeated?","To capture variation across locations and times and avoid relying on an unrepresentative reading.",0L)
+) + listOf(
+    RevisionCard("bio-eco-i-card-1","bio-interactions","What is a producer?","An organism such as a green plant or alga that makes organic substances using light energy in photosynthesis.",0L),
+    RevisionCard("bio-eco-i-card-2","bio-interactions","What is a trophic level?","A feeding position in a food chain or web, such as producer, primary consumer or secondary consumer.",0L),
+    RevisionCard("bio-eco-i-card-3","bio-interactions","What does an arrow in a food chain show?","The direction of energy transfer from the organism being eaten to the organism that eats it.",0L),
+    RevisionCard("bio-eco-i-card-4","bio-interactions","Why does energy decrease along a food chain?","Energy is lost in respiration and heat, waste and uneaten material; not all biomass is transferred to the next level.",0L),
+    RevisionCard("bio-eco-i-card-5","bio-interactions","Distinguish mutualism from parasitism.","Mutualism benefits both partners; parasitism benefits one organism and harms the host.",0L),
+    RevisionCard("bio-eco-i-card-6","bio-interactions","What is the role of decomposers?","They break down dead organic matter and wastes, returning nutrients to the environment.",0L),
+    RevisionCard("bio-eco-i-card-7","bio-interactions","What is nitrogen fixation?","Conversion of atmospheric nitrogen gas into ammonia or related biologically available nitrogen compounds, commonly by bacteria.",0L),
+    RevisionCard("bio-eco-i-card-8","bio-interactions","What is denitrification?","Conversion of nitrate to nitrogen gas by denitrifying bacteria, returning nitrogen to the atmosphere.",0L)
 )
 
 @Composable
