@@ -38,7 +38,7 @@ fun StudyPlanScreen(
         val topics = BiologyCurriculum.units.mapNotNull { unit ->
             unit.lessonId?.let { StudyTopic(it, unit.title) }
         }
-        val activities = StudyPlanGenerator.build(topics, dailyMinutes, days = 7)
+        val activities = StudyPlanGenerator.buildAdaptive(\n            topics = topics,\n            progress = database.getAllTopicProgress(),\n            minutesPerDay = dailyMinutes,\n            days = 7\n        )
         val planId = UUID.randomUUID().toString()
         val now = System.currentTimeMillis()
         val items = activities.map { activity ->
@@ -69,7 +69,7 @@ fun StudyPlanScreen(
         verticalArrangement = Arrangement.spacedBy(14.dp)
     ) {
         Text("Biology study planner", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
-        Text("A practical seven-day schedule built from the 24 Biology syllabus units. Your plan and completion ticks are stored offline.")
+        Text("A practical seven-day schedule built from the 24 Biology syllabus units. Your plan and completion ticks are stored offline.")\n        Text("New plans prioritise topics with weaker recent results, incomplete lessons and longer gaps since study. Topics with no attempts are treated as not yet evidenced, not as mastered.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
         if (currentPlan == null) {
             Text("Choose a daily study target", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
             Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
@@ -84,7 +84,7 @@ fun StudyPlanScreen(
             Card(Modifier.fillMaxWidth()) {
                 Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
                     Text("What the plan includes", fontWeight = FontWeight.Bold)
-                    Text("Each scheduled topic has a lesson task (20 min), a short practice task (5 min) and a flashcard review (5 min).")
+                    Text("Each scheduled topic has a lesson task (20 min), a short practice task (5 min) and a flashcard review (5 min).")\n                    Text("When you generate a plan, MeritPrep uses your locally recorded study evidence to bring weaker or less recently studied topics forward.")
                     Text("A 120-minute target schedules all 24 topics across six study days, leaving the seventh day for rest or catch-up.")
                 }
             }
