@@ -97,6 +97,15 @@ private val starterBiologyCards = listOf(
     RevisionCard("bio-exc-card-6","bio-excretion","Where is most filtered glucose reabsorbed?","In the proximal convoluted tubule, under normal blood-glucose conditions.",0L),
     RevisionCard("bio-exc-card-7","bio-excretion","How does ADH affect urine concentration?","It increases collecting-duct water permeability, so more water is reabsorbed and urine becomes more concentrated.",0L),
     RevisionCard("bio-exc-card-8","bio-excretion","Which nitrogenous waste do birds commonly excrete to conserve water?","Uric acid.",0L)
+) + listOf(
+    RevisionCard("bio-sup-card-1","bio-support","Name three plant tissues that contribute to support.","Collenchyma provides flexible support; sclerenchyma provides strength; xylem also contributes support. Turgor in living cells supports soft tissues.",0L),
+    RevisionCard("bio-sup-card-2","bio-support","Define a tropism.","A directional growth response of a plant to a stimulus.",0L),
+    RevisionCard("bio-sup-card-3","bio-support","What is positive phototropism?","Growth towards a light source, commonly shown by shoots.",0L),
+    RevisionCard("bio-sup-card-4","bio-support","What is an exoskeleton?","A rigid external skeleton, as in insects, that protects the body and provides muscle attachment.",0L),
+    RevisionCard("bio-sup-card-5","bio-support","What is a hydrostatic skeleton?","Support and movement produced by fluid pressure within a body cavity acting with surrounding muscles.",0L),
+    RevisionCard("bio-sup-card-6","bio-support","Distinguish a ligament from a tendon.","A ligament connects bone to bone; a tendon connects muscle to bone.",0L),
+    RevisionCard("bio-sup-card-7","bio-support","How do biceps and triceps move the elbow?","They act as an antagonistic pair: biceps contraction flexes the elbow; triceps contraction extends it.",0L),
+    RevisionCard("bio-sup-card-8","bio-support","What is included in the axial skeleton?","The skull, vertebral column and rib cage.",0L)
 )
 
 @Composable
