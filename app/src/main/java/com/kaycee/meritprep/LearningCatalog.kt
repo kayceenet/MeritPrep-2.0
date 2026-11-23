@@ -507,6 +507,31 @@ object LearningCatalog {
             "Antibiotics act against bacteria. They do not treat viral infections, and their unnecessary use contributes to antimicrobial resistance."
         ),
         LearningTopic(
+            "bio-variation", "Variation in populations", "BIO",
+            "No two people are exactly alike, and individuals within the same species differ in many characteristics. Some differences form a continuous range, while others fall into distinct categories. Variation matters because it provides the differences on which natural selection can act, and because inherited and environmental influences both shape organisms.",
+            listOf(
+                "Define variation within a species",
+                "Distinguish continuous and discontinuous variation",
+                "Compare genetic and environmental causes of variation",
+                "Explain how mutation and meiosis contribute to inherited variation",
+                "Describe the ABO blood-group system at an introductory level",
+                "Explain why variation is important in populations"
+            ),
+            listOf(
+                "What variation means" to "Variation refers to differences among individuals of the same species. Individuals may differ in height, body mass, blood group, leaf shape, flowering time or other characteristics. Variation may be inherited, caused by environmental conditions, or influenced by both genes and environment. A measured difference is not automatically genetic; the cause must be investigated.",
+                "Continuous variation" to "Continuous variation shows a range of values with many intermediate forms, such as human height or body mass. It is often influenced by many genes and environmental factors, so values may form a roughly bell-shaped distribution in a large population. Age, nutrition, health and measurement conditions can affect the observed values.",
+                "Discontinuous variation" to "Discontinuous variation places individuals into distinct categories with few or no intermediate forms for the characteristic being studied. The ABO blood groups are a common example: individuals are classified as A, B, AB or O. Some categorical traits are strongly influenced by one or a few genes, although real biological traits can be more complex than a simple school-level model.",
+                "Genetic and environmental causes" to "Genetic variation arises from differences in DNA. Mutation creates new alleles; meiosis reshuffles alleles through independent assortment and crossing over; random fertilisation combines gametes in new ways. Environmental factors such as diet, climate, disease and activity can also influence characteristics. Height, for example, has a genetic component but is also affected by nutrition and health during growth.",
+                "The ABO blood-group system" to "The ABO blood groups depend on antigens on the surface of red blood cells. The common alleles are Iᴬ, Iᴮ and i. Iᴬ and Iᴮ are codominant, while each is dominant over i. Genotypes IᴬIᴬ or Iᴬi produce group A; IᴮIᴮ or Iᴮi produce group B; IᴬIᴮ produces group AB; and ii produces group O. Blood transfusion compatibility is more complex than matching the ABO label alone because other blood-group antigens and clinical factors matter.",
+                "Using genetic crosses to explain variation" to "A genetic cross predicts possible offspring genotypes from parental alleles. For example, a parent with genotype Iᴬi can pass either Iᴬ or i; a parent with genotype Iᴮi can pass Iᴮ or i. A Punnett square lists possible combinations and their probabilities under the model. Probabilities describe expected proportions over many conceptions, not a guarantee for a particular child.",
+                "Sex chromosomes and inherited differences" to "In the common human XX/XY pattern, most females have XX sex chromosomes and most males have XY. Eggs normally carry an X chromosome; sperm carry either X or Y, so the sperm usually determines whether the resulting zygote is XX or XY. Biological sex development is more varied than this simplified model, but XX/XY is the standard introductory inheritance model used in many school questions.",
+                "Why variation matters" to "Variation can affect how individuals respond to environmental conditions. If a heritable characteristic improves survival or reproductive success in a particular environment, individuals carrying it may leave more offspring. Natural selection changes the frequency of inherited variants in populations over generations. Variation is not produced because organisms consciously need a feature; it arises through genetic processes and is acted on by selection."
+            ),
+            "Which type of variation is illustrated by the four ABO blood groups?",
+            listOf("Discontinuous variation","Continuous variation","Environmental variation only","Seasonal variation"), 0,
+            "ABO blood groups are distinct categories (A, B, AB and O), so they are a standard example of discontinuous variation."
+        ),
+        LearningTopic(
             "chem-atomic", "Atomic structure", "CHEM",
             "All ordinary matter is made of atoms. The arrangement and number of subatomic particles explain an element's identity, isotope and electrical charge.",
             listOf("Identify protons, neutrons and electrons", "Explain atomic number and mass number", "Determine the numbers of subatomic particles in simple atoms and ions"),
