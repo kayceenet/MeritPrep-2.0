@@ -115,6 +115,7 @@ private fun FoodTestLab() {
     var sample by remember { mutableStateOf(FoodTestSample.STARCH) }
     var test by remember { mutableStateOf(FoodTestType.IODINE) }
     var tested by remember { mutableStateOf(false) }
+    var prediction by remember { mutableStateOf<Boolean?>(null) }
     val result = BiologyFoodTestEngine.evaluate(sample, test)
     Card(Modifier.fillMaxWidth()) {
         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
@@ -122,15 +123,37 @@ private fun FoodTestLab() {
             Text("Choose a known sample and a reagent. Predict the result before running the simulated test.")
             Text("Sample", fontWeight = FontWeight.SemiBold)
             FoodTestSample.values().forEach { option ->
-                FilterChip(selected = sample == option, onClick = { sample = option; tested = false }, label = { Text(option.label) })
+                FilterChip(selected = sample == option, onClick = { sample = option; tested = false; prediction = null }, label = { Text(option.label) })
             }
             Text("Test", fontWeight = FontWeight.SemiBold)
             FoodTestType.values().forEach { option ->
-                FilterChip(selected = test == option, onClick = { test = option; tested = false }, label = { Text(option.label) })
+                FilterChip(selected = test == option, onClick = { test = option; tested = false; prediction = null }, label = { Text(option.label) })
             }
-            Button(onClick = { tested = true }, modifier = Modifier.fillMaxWidth()) { Text("Run simulated test") }
+            Text("Your prediction", fontWeight = FontWeight.SemiBold)
+            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                FilterChip(
+                    selected = prediction == true,
+                    onClick = { prediction = true; tested = false },
+                    label = { Text("Positive") }
+                )
+                FilterChip(
+                    selected = prediction == false,
+                    onClick = { prediction = false; tested = false },
+                    label = { Text("Negative") }
+                )
+            }
+            Button(
+                onClick = { tested = true },
+                enabled = prediction != null,
+                modifier = Modifier.fillMaxWidth()
+            ) { Text("Run simulated test") }
             if (tested) {
                 HorizontalDivider()
+                Text(
+                    if (prediction == result.positive) "Your prediction was correct." else "Your prediction was not correct. Compare it with the observation and explanation.",
+                    color = if (prediction == result.positive) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.error,
+                    fontWeight = FontWeight.SemiBold
+                )
                 Text("Expected procedure", fontWeight = FontWeight.SemiBold)
                 Text(result.procedure)
                 Text("Simulated observation", fontWeight = FontWeight.SemiBold)
