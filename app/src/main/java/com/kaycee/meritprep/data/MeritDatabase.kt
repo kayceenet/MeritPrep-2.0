@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import org.json.JSONArray
 
-class MeritDatabase(context: Context) : SQLiteOpenHelper(context, "meritprep_local.db", null, 6) {
+class MeritDatabase(context: Context) : SQLiteOpenHelper(context, "meritprep_local.db", null, 7) {
     override fun onCreate(db: SQLiteDatabase) {
         db.execSQL("""
             CREATE TABLE topic_progress (
@@ -72,6 +72,7 @@ class MeritDatabase(context: Context) : SQLiteOpenHelper(context, "meritprep_loc
         if (oldVersion < 4) createCbtTables(db)
         if (oldVersion < 5) createMistakeTable(db)
         if (oldVersion < 6) createStudyPlanTables(db)
+        if (oldVersion < 7) db.execSQL("ALTER TABLE topic_progress ADD COLUMN demonstrated_mastery INTEGER NOT NULL DEFAULT 0")
     }
 
     private fun createCbtTables(db: SQLiteDatabase) {
