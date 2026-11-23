@@ -1,5 +1,6 @@
 package com.kaycee.meritprep
 
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -97,15 +98,20 @@ private fun BiologyLab() {
     var selected by remember { mutableIntStateOf(0) }
     Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
         Text("Biology practicals", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
-        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+        Row(
+            Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()),
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
             FilterChip(selected = selected == 0, onClick = { selected = 0 }, label = { Text("Food tests") })
             FilterChip(selected = selected == 1, onClick = { selected = 1 }, label = { Text("Osmosis") })
             FilterChip(selected = selected == 2, onClick = { selected = 2 }, label = { Text("Microscope") })
+            FilterChip(selected = selected == 3, onClick = { selected = 3 }, label = { Text("Quadrat sampling") })
         }
         when (selected) {
             0 -> FoodTestLab()
             1 -> OsmosisLab()
-            else -> MagnificationLab()
+            2 -> MagnificationLab()
+            else -> QuadratSamplingLab()
         }
     }
 }
@@ -163,6 +169,56 @@ private fun FoodTestLab() {
         }
     }
     Text("Model limitation: these are qualitative teaching outcomes for defined sample compositions. Real samples may contain mixtures, and observed colour intensity depends on concentration, reagent condition and technique. This simulation does not replace a supervised laboratory practical.")
+}
+
+
+@Composable
+private fun QuadratSamplingLab() {
+    val counts = remember { mutableStateListOf(8, 12, 10, 6) }
+    var quadratArea by remember { mutableFloatStateOf(1f) }
+    var habitatArea by remember { mutableFloatStateOf(1_000f) }
+    val estimate = EcologySamplingEngine.estimate(
+        individualsPerQuadrat = counts.toList(),
+        quadratAreaSquareMetres = quadratArea.toDouble(),
+        habitatAreaSquareMetres = habitatArea.toDouble()
+    )
+
+    Card(Modifier.fillMaxWidth()) {
+        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+            Text("Quadrat sampling investigation", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+            Text("Record the number of plants or slow-moving organisms found in each sample quadrat. The model uses four sample locations.")
+            counts.forEachIndexed { index, count ->
+                Text("Quadrat ${index + 1}: $count organisms", fontWeight = FontWeight.SemiBold)
+                Slider(
+                    value = count.toFloat(),
+                    onValueChange = { counts[index] = it.roundToInt() },
+                    valueRange = 0f..30f,
+                    steps = 29
+                )
+            }
+            HorizontalDivider()
+            Text("Area of each quadrat: ${"%.2f".format(quadratArea)} m²")
+            Slider(value = quadratArea, onValueChange = { quadratArea = it }, valueRange = 0.25f..4f)
+            Text("Habitat area: ${habitatArea.roundToInt()} m²")
+            Slider(value = habitatArea, onValueChange = { habitatArea = it }, valueRange = 100f..10_000f, steps = 98)
+            HorizontalDivider()
+            Text("Sampling results", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+            Text("Total organisms counted: ${estimate.totalIndividuals}")
+            Text("Total sampled area: ${"%.2f".format(estimate.sampledAreaSquareMetres)} m²")
+            Text("Estimated density: ${"%.2f".format(estimate.meanDensityPerSquareMetre)} organisms/m²")
+            Text(
+                "Estimated habitat population: ${estimate.estimatedHabitatPopulation.roundToInt()}",
+                style = MaterialTheme.typography.titleLarge,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.primary
+            )
+        }
+    }
+    Text(
+        "Method: density = total organisms counted ÷ total area sampled. Estimated population = mean density × habitat area. The estimate assumes the quadrats are placed randomly and represent the habitat. Patchy distributions, seasonal changes and poor sampling design can make estimates unreliable.",
+        style = MaterialTheme.typography.bodySmall,
+        color = MaterialTheme.colorScheme.onSurfaceVariant
+    )
 }
 
 @Composable
