@@ -70,7 +70,7 @@ private fun MeritPrepApp() {
                 composable("subject/{code}") { entry ->
                     val code = entry.arguments?.getString("code").orEmpty()
                     if (code == "BIO") {
-                        BiologyCourseScreen { topicId -> nav.navigate("lesson/$topicId") }
+                        BiologyCourseScreen(onOpenLesson = { topicId -> nav.navigate("lesson/$topicId") }, onOpenGlossary = { nav.navigate("glossary") })
                     } else {
                         SubjectScreen(subjects.firstOrNull { it.code == code } ?: subjects.first(), nav)
                     }

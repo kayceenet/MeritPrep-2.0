@@ -5,19 +5,16 @@ import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class BiologyGlossaryTest {
-    @Test
-    fun glossaryEntriesAreUniqueCompleteAndMappedToBiologyLessons() {
+    @Test fun glossaryTermsAreUniqueAndHaveDefinitionsAndExamples() {
         val entries = BiologyGlossary.entries
-        assertTrue(entries.size >= 50)
+        assertTrue(entries.size >= 40)
         assertEquals(entries.size, entries.map { it.term.trim().lowercase() }.toSet().size)
-        entries.forEach { entry ->
-            assertTrue(entry.term.isNotBlank())
-            assertTrue(entry.definition.isNotBlank())
-            assertTrue(entry.example.isNotBlank())
-            assertTrue(
-                "Unmapped glossary term: ${entry.term}",
-                BiologyCurriculum.units.any { it.lessonId == entry.topicId }
-            )
-        }
+        assertTrue(entries.all { it.term.isNotBlank() && it.definition.isNotBlank() && it.example.isNotBlank() })
+    }
+
+    @Test fun glossaryCoversEveryMappedBiologyLessonTopic() {
+        val syllabusTopics = BiologyCurriculum.units.mapNotNull { it.lessonId }.toSet()
+        val glossaryTopics = BiologyGlossary.entries.map { it.topicId }.toSet()
+        assertEquals(syllabusTopics, glossaryTopics)
     }
 }

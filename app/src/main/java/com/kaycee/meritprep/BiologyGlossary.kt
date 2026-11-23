@@ -68,3 +68,56 @@ object BiologyGlossary {
         BiologyGlossaryEntry("Discontinuous variation", "Variation in which individuals fall into distinct categories with no intermediate forms for the characteristic being considered.", "The ABO blood groups are an example of discontinuous variation.", "bio-variation")
     )
 }
+
+
+@Composable
+fun BiologyGlossaryScreen(onOpenLesson: (String) -> Unit) {
+    var query by remember { mutableStateOf("") }
+    val matching = BiologyGlossary.entries.filter { entry ->
+        val topicTitle = LearningCatalog.find(entry.topicId)?.title.orEmpty()
+        query.isBlank() ||
+            entry.term.contains(query, ignoreCase = true) ||
+            entry.definition.contains(query, ignoreCase = true) ||
+            entry.example.contains(query, ignoreCase = true) ||
+            topicTitle.contains(query, ignoreCase = true)
+    }
+
+    Column(
+        Modifier.fillMaxSize().padding(16.dp),
+        verticalArrangement = Arrangement.spacedBy(10.dp)
+    ) {
+        Text("Biology glossary", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
+        Text("Learn key biological terms in plain language, with an example and a direct link to the lesson.")
+        OutlinedTextField(
+            value = query,
+            onValueChange = { query = it },
+            modifier = Modifier.fillMaxWidth(),
+            singleLine = true,
+            label = { Text("Search terms, definitions or topics") },
+            placeholder = { Text("e.g. osmosis, genotype, habitat") }
+        )
+        Text("${matching.size} of ${BiologyGlossary.entries.size} terms", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        if (matching.isEmpty()) {
+            Text("No matching term. Try a shorter word or search for the related topic.")
+        } else {
+            LazyColumn(
+                Modifier.weight(1f),
+                verticalArrangement = Arrangement.spacedBy(10.dp)
+            ) {
+                items(matching, key = { it.term.lowercase() }) { entry ->
+                    Card(Modifier.fillMaxWidth()) {
+                        Column(Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(7.dp)) {
+                            Text(entry.term, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+                            Text(entry.definition)
+                            Text("Example", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary)
+                            Text(entry.example, style = MaterialTheme.typography.bodyMedium)
+                            TextButton(onClick = { onOpenLesson(entry.topicId) }) {
+                                Text("Open related lesson")
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

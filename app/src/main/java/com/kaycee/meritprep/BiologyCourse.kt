@@ -61,15 +61,15 @@ object BiologyCurriculum {
 }
 
 @Composable
-fun BiologyCourseScreen(onOpenLesson: (String) -> Unit) {
+fun BiologyCourseScreen(onOpenLesson: (String) -> Unit, onOpenGlossary: () -> Unit = {}) {
     LazyColumn(Modifier.fillMaxSize().padding(18.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
         item {
             Text("Biology", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
-            Text("A guided course from first principles to examination-level application.")
+            Text("A guided course from first principles to examination-level application.")\n            OutlinedButton(onClick = onOpenGlossary) { Text("Search the Biology glossary · ${BiologyGlossary.entries.size} terms") }
             Card(colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer)) {
                 Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
                     Text("Curriculum map · ${BiologyCurriculum.units.size} JAMB topic blocks", fontWeight = FontWeight.Bold)
-                    Text("Mapped to JAMB Biology and cross-referenced with WAEC Biology. The syllabus map is complete as a structure; lessons are released only after authoring and academic checks.")
+                    Text("Mapped to JAMB Biology and cross-referenced with WAEC Biology. All 24 lesson drafts are available in this alpha; independent academic review is still pending.")
                     Text("Course version ${BiologyCurriculum.VERSION}", style = MaterialTheme.typography.labelSmall)
                 }
             }
