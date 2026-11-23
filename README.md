@@ -19,6 +19,7 @@ The current alpha is a working Android app built with Kotlin, Jetpack Compose an
 - An offline mistake notebook that captures incorrect and unanswered practice/CBT responses, explains the correction and lets learners mark concepts as reviewed.
 - Biology practical-learning prototypes for food tests with prediction feedback, osmosis, microscope magnification and quadrat-based ecological sampling.
 - Introductory Physics and Chemistry simulations for Ohm's law and solution concentration.
+- A learner profile with topic-level practice evidence, showing attempts, correct answers and lesson completion without falsely labelling a topic as mastered.
 - Local recording of lesson completion, question attempts, revision schedules, theory responses, mistake-notebook entries and active CBT session answers.
 - Automated unit tests and a GitHub Actions debug-APK build.
 
