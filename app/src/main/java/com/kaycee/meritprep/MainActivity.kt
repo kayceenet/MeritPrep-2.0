@@ -257,7 +257,7 @@ private fun ProfileScreen() {
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                         LinearProgressIndicator(progress = { topicAccuracy / 100f }, modifier = Modifier.fillMaxWidth())
-                        Text("$topicAccuracy% practice accuracy · mastery not yet demonstrated", style = MaterialTheme.typography.labelSmall)
+                        Text("$topicAccuracy% practice accuracy · " + if (progress.demonstratedMastery) "mastery evidence recorded" else "mastery not yet demonstrated", style = MaterialTheme.typography.labelSmall)
                     }
                 }
             }
