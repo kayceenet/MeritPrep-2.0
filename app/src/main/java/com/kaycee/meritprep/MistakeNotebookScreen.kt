@@ -21,7 +21,7 @@ fun MistakeNotebookScreen() {
 
     fun refresh() {
         notes.clear()
-        notes.addAll(database.getMistakes(includeResolved = showResolved))
+        notes.addAll(database.getMistakes(resolvedOnly = showResolved))
     }
 
     LaunchedEffect(database, showResolved) { refresh() }
