@@ -196,6 +196,15 @@ private val starterBiologyCards = listOf(
     RevisionCard("bio-env-card-6","bio-environment","What is antimicrobial resistance?","A condition in which microorganisms are no longer effectively inhibited or killed by medicines that previously worked against them.",0L),
     RevisionCard("bio-env-card-7","bio-environment","Name three types of pollution.","Air, water, soil and noise pollution are examples.",0L),
     RevisionCard("bio-env-card-8","bio-environment","Give two ways to conserve biodiversity.","Protect and restore habitats; use natural resources sustainably and reduce pollution.",0L)
+) + listOf(
+    RevisionCard("bio-var-card-1","bio-variation","Define variation.","Differences among individuals of the same species.",0L),
+    RevisionCard("bio-var-card-2","bio-variation","Distinguish continuous from discontinuous variation.","Continuous variation shows a range with intermediates; discontinuous variation places individuals into distinct categories.",0L),
+    RevisionCard("bio-var-card-3","bio-variation","Name three processes that create inherited genetic variation.","Mutation, crossing over and independent assortment during meiosis; random fertilisation also creates new combinations.",0L),
+    RevisionCard("bio-var-card-4","bio-variation","What are the three alleles in the basic ABO blood-group system?","Iᴬ, Iᴮ and i.",0L),
+    RevisionCard("bio-var-card-5","bio-variation","How are Iᴬ and Iᴮ related?","They are codominant; genotype IᴬIᴮ produces blood group AB.",0L),
+    RevisionCard("bio-var-card-6","bio-variation","What genotype produces blood group O in the basic ABO model?","ii.",0L),
+    RevisionCard("bio-var-card-7","bio-variation","Why is height an example of a complex trait?","It is influenced by many genes and environmental factors such as nutrition and health.",0L),
+    RevisionCard("bio-var-card-8","bio-variation","How does natural selection use variation?","It acts on heritable differences that affect reproductive success and can change variant frequencies over generations.",0L)
 )
 
 @Composable
