@@ -5,6 +5,7 @@ MeritPrep currently uses an offline-first SQLite database named `meritprep_local
 
 ## Tables
 - `topic_progress`: lesson counts, question attempts, correct answers, last study time and a separate demonstrated-mastery flag.
+- `question_attempts`: per-question attempt history used to calculate evidence-based topic mastery.
 - `completed_lessons`: idempotent lesson-completion records.
 - `study_notes`: learner notes linked to syllabus topic IDs.
 - `revision_cards`: offline flashcards with due time, interval, repetition count, ease factor and lapse count.
@@ -17,7 +18,7 @@ MeritPrep currently uses an offline-first SQLite database named `meritprep_local
 - `study_plan_items`: ordered lesson, practice and flashcard tasks with completion state.
 
 ## Schema version
-Current database version: 7.
+Current database version: 8.
 
 Migration history:
 - v2: add completed-lesson tracking.
@@ -26,9 +27,11 @@ Migration history:
 - v5: add the mistake notebook.
 - v6: add weekly study-plan storage.
 - v7: add demonstrated-mastery state to topic progress. The migration checks the table schema before adding the column so installations that already contain it do not fail.
+- v8: add question-level attempt history to support distinct-question and multi-day mastery evidence.
 
 ## Data integrity rules
 - Lesson completion is stored separately from demonstrated mastery.
+- Topic mastery is marked only after at least 10 recorded attempts, at least 8 distinct questions, activity across at least 2 calendar days and at least 80% accuracy. This is an internal learning signal, not an official examination prediction.
 - CBT answer order and correct presented index are stored together so option shuffling does not corrupt scoring after restoration.
 - CBT submission, topic-level attempt updates and mistake capture run in one SQLite transaction.
 - Practice attempts are recorded against each question's actual syllabus topic ID.
