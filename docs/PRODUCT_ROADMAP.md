@@ -20,7 +20,7 @@ Timed CBT sessions, question randomisation, answer review, scoring policies, WAE
 ## E. Mastery and revision
 Topic mastery based on repeated evidence, spaced retrieval, flashcards, mistake notebook and study planner.
 
-**Implemented in the current alpha:** local revision-card storage, a four-rating spaced-retrieval scheduler, 198 Biology revision cards spanning the mapped Biology topics, a revision screen and unit-tested scheduling rules. Mastery evidence across multiple attempts and question forms remains outstanding. The mistake notebook captures incorrect and unanswered Biology practice items with the selected answer, correction and explanation; learners can mark items reviewed. A seven-day Biology study planner schedules lessons, short practice and flashcard review, stores progress offline and supports daily targets from 60 to 150 minutes.
+**Implemented in the current alpha:** local revision-card storage, a four-rating spaced-retrieval scheduler, 198 Biology revision cards spanning the mapped Biology topics, a revision screen and unit-tested scheduling rules. The objective-practice mastery indicator requires at least 10 attempts, 8 distinct questions, 2 distinct study days and 80% correct. It is deliberately not presented as proof of mastery across theory or practical work. The mistake notebook captures incorrect and unanswered Biology practice items with the selected answer, correction and explanation; learners can mark items reviewed. The seven-day Biology planner prioritises weaker, unattempted and less recently studied topics using a transparent evidence-based heuristic, stores progress offline and supports daily targets from 60 to 150 minutes.
 
 ## F. Practical learning
 Inventory existing APK assets and lab logic; rebuild Biology, Chemistry and Physics simulations with safe, accessible controls and clear learning objectives.
@@ -40,7 +40,8 @@ Authenticated sync, teacher/admin CMS, analytics, backups, privacy and security 
 - Timed CBT: a 40-question, 30-minute Biology mock with answer navigation, flags, explanations and local active-session recovery logic.
 - Revision: 198 offline Biology cards with Again/Hard/Good/Easy scheduling.
 - Mistake notebook: offline capture of incorrect quick-practice answers and incorrect/unanswered CBT items, with review status.
-- Study planner: seven-day Biology schedule with configurable daily time target and offline activity completion tracking.
+- Study planner: adaptive seven-day Biology schedule with configurable daily time target, offline activity completion and shortcuts into lessons, practice and revision.
+- Mastery indicator: objective-question evidence threshold of 10 attempts, 8 distinct questions, 2 study days and at least 80% correct; theory and practical evidence are not yet included.
 - Practical learning: four Biology prototypes plus introductory Physics and Chemistry simulations.
 - Academic approval: pending independent subject review; no generated question is presented as an official past question.
 - Other subjects: starter lesson content only; full syllabus mapping and course development remain outstanding.
