@@ -18,9 +18,9 @@ Timed CBT sessions, question randomisation, answer review, scoring policies, WAE
 **Implemented in the current alpha:** a 40-question, 30-minute Biology practice mock, random question and option order, navigation, answer flags, scoring, explanations, and local persistence of active session state. The app stores the question order, selected answers, flags and session end time, then attempts to restore an active session on launch. Ten original WAEC-style Biology structured-response tasks are also available with model responses, self-check marking points and locally saved learner responses. These are not official papers or marking schemes.
 
 ## E. Mastery and revision
-Topic mastery based on repeated evidence, spaced retrieval, flashcards, error notebook and study planner.
+Topic mastery based on repeated evidence, spaced retrieval, flashcards, mistake notebook and study planner.
 
-**Implemented in the current alpha:** local revision-card storage, a four-rating spaced-retrieval scheduler, 198 Biology revision cards spanning the mapped Biology topics, a revision screen and unit-tested scheduling rules. Mastery evidence across multiple attempts and question forms, an error notebook and a study planner remain outstanding.
+**Implemented in the current alpha:** local revision-card storage, a four-rating spaced-retrieval scheduler, 198 Biology revision cards spanning the mapped Biology topics, a revision screen and unit-tested scheduling rules. Mastery evidence across multiple attempts and question forms and a study planner remain outstanding. The mistake notebook now captures incorrect and unanswered Biology practice items with the selected answer, correction and explanation; learners can mark items reviewed.
 
 ## F. Practical learning
 Inventory existing APK assets and lab logic; rebuild Biology, Chemistry and Physics simulations with safe, accessible controls and clear learning objectives.
@@ -39,6 +39,7 @@ Authenticated sync, teacher/admin CMS, analytics, backups, privacy and security 
 - Practice: topic-focused sessions and a full Biology question-bank mode with shuffled question and option order.
 - Timed CBT: a 40-question, 30-minute Biology mock with answer navigation, flags, explanations and local active-session recovery logic.
 - Revision: 198 offline Biology cards with Again/Hard/Good/Easy scheduling.
+- Mistake notebook: offline capture of incorrect quick-practice answers and incorrect/unanswered CBT items, with review status.
 - Practical learning: four Biology prototypes plus introductory Physics and Chemistry simulations.
 - Academic approval: pending independent subject review; no generated question is presented as an official past question.
 - Other subjects: starter lesson content only; full syllabus mapping and course development remain outstanding.
