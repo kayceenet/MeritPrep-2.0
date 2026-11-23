@@ -110,8 +110,6 @@ private fun HomeScreen(nav: NavHostController) {
                     OutlinedButton(onClick = { nav.navigate("mistakes") }) { Text("Review mistakes") }
                     OutlinedButton(onClick = { nav.navigate("study-plan") }) { Text("Build a Biology study plan") }
                     OutlinedButton(onClick = { nav.navigate("cbt") }) { Text("Start timed Biology mock") }
-                    OutlinedButton(onClick = { nav.navigate("mistakes") }) { Text("Review your mistakes") }
-                    OutlinedButton(onClick = { nav.navigate("study-plan") }) { Text("Build a 7-day Biology study plan") }
                     OutlinedButton(onClick = { nav.navigate("glossary") }) { Text("Search Biology glossary") }
                 }
             }
