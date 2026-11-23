@@ -583,6 +583,32 @@ object LearningCatalog {
             "Plant tissue culture grows cells, tissues or organs on sterile nutrient media and can be used for rapid multiplication through micropropagation."
         ),
         LearningTopic(
+            "bio-evolution-theory", "Evolution and its mechanisms", "BIO",
+            "Populations change over generations. Bacteria can become resistant to an antibiotic, and populations of animals may become better suited to local conditions when inherited traits affect reproductive success. Evolution explains these changes through processes that alter inherited variation in populations over time.",
+            listOf(
+                "Define biological evolution",
+                "Compare historical Lamarckian and Darwinian explanations",
+                "Explain natural selection using heritable variation",
+                "Identify mutation, recombination, gene flow and genetic drift as evolutionary processes",
+                "Explain how reproductive isolation can contribute to speciation",
+                "Distinguish evolution in populations from changes within an individual's lifetime"
+            ),
+            listOf(
+                "What evolution means" to "Biological evolution is change in inherited characteristics of populations across generations. In population genetics, it can be described as a change in allele frequencies over time. Individuals do not evolve genetically during their own lifetime in the population sense; populations evolve as inherited variants become more or less common. Evolution has no predetermined goal and does not mean that every organism becomes more complex or better in every respect.",
+                "Lamarck's historical explanation" to "Jean-Baptiste Lamarck proposed that use and disuse could change organs and that acquired characteristics could be inherited. This was an important historical attempt to explain adaptation, but the general claim that changes acquired through use during an individual's lifetime are passed to offspring is not supported as a broad mechanism of evolution. Modern genetics explains inheritance through DNA and the transmission of genetic variants.",
+                "Darwin and natural selection" to "Charles Darwin argued that individuals in populations vary, some variation is heritable, and more offspring are produced than can all survive and reproduce. Individuals with heritable traits that improve reproductive success in a particular environment tend to leave more offspring. Over generations, alleles associated with those traits may become more common. Selection acts on individuals, but evolution is measured as change in populations.",
+                "A step-by-step example of selection" to "Imagine a population of insects with heritable variation in colour. On a dark background, predators may more easily detect pale insects. If darker insects survive and reproduce more often, alleles associated with darker colour may increase in frequency over generations. The insects do not change colour because they decide to; selection acts on variation already present or arising through mutation and recombination. If the environment changes, the advantage may also change.",
+                "Mutation and recombination" to "Mutation creates new DNA variants and is the ultimate source of new alleles. Recombination during meiosis, including crossing over and independent assortment, creates new combinations of existing alleles. These processes generate variation, but they do not occur because an organism needs a particular adaptation. Mutations are not directed towards what would be useful.",
+                "Genetic drift and gene flow" to "Genetic drift is random change in allele frequencies, especially in small populations. It can reduce genetic variation and may cause alleles to become fixed or lost by chance. Gene flow occurs when individuals or gametes move between populations and introduce alleles. Drift and gene flow can change populations even when a trait does not improve survival or reproduction.",
+                "Natural selection and adaptation" to "An adaptation is an inherited characteristic that improves survival or reproductive success in a particular environment. Natural selection can increase the frequency of such characteristics when the advantage is heritable. A trait may be advantageous in one environment but disadvantageous in another. Selection acts on whole organisms with many interacting traits, so a characteristic can involve trade-offs.",
+                "Speciation and reproductive isolation" to "Speciation is the formation of new species. When populations become reproductively isolated, gene flow between them is reduced or stopped. Different mutations, selection pressures and genetic drift can then cause the populations to diverge. Reproductive isolation may arise through geographical separation or differences in behaviour, timing, anatomy or gamete compatibility. Speciation often takes many generations.",
+                "How to explain evolution in an examination" to "Use the sequence: heritable variation exists; an environmental factor creates different reproductive success; individuals with certain variants leave more offspring; allele frequencies change over generations. Avoid saying organisms evolve because they try, need or choose to change. Distinguish an individual's acclimatisation from inherited evolutionary change in a population."
+            ),
+            "Which statement best describes natural selection?",
+            listOf("Heritable variants associated with greater reproductive success can become more common over generations","Individuals develop useful inherited features because they need them","All mutations are beneficial","Evolution always makes organisms more complex"), 0,
+            "Natural selection changes populations when heritable variants affect reproductive success. It does not require conscious effort or produce a predetermined direction of change."
+        ),
+        LearningTopic(
             "chem-atomic", "Atomic structure", "CHEM",
             "All ordinary matter is made of atoms. The arrangement and number of subatomic particles explain an element's identity, isotope and electrical charge.",
             listOf("Identify protons, neutrons and electrons", "Explain atomic number and mass number", "Determine the numbers of subatomic particles in simple atoms and ions"),
