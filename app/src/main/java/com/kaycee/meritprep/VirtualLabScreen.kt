@@ -120,14 +120,14 @@ private fun BiologyLab() {
             FilterChip(selected = selected == 1, onClick = { selected = 1 }, label = { Text("Osmosis") })
             FilterChip(selected = selected == 2, onClick = { selected = 2 }, label = { Text("Microscope") })
             FilterChip(selected = selected == 3, onClick = { selected = 3 }, label = { Text("Quadrat sampling") })
-            FilterChip(selected = selected == 4, onClick = { selected = 4 }, label = { Text("Classification key") })
+            FilterChip(selected = selected == 4, onClick = { selected = 4 }, label = { Text("Classification key") })\n            FilterChip(selected = selected == 5, onClick = { selected = 5 }, label = { Text("Biological drawing") })
         }
         when (selected) {
             0 -> FoodTestLab()
             1 -> OsmosisLab()
             2 -> MagnificationLab()
             3 -> QuadratSamplingLab()
-            else -> BiologyClassificationLab()
+            4 -> BiologyClassificationLab()\n            else -> BiologyDrawingLab()
         }
     }
 }
@@ -347,6 +347,49 @@ private fun BiologyClassificationLab() {
     }
     Text(
         "Teaching model limitation: this key distinguishes six selected examples, not every plant or fungus. Real specimen identification uses several additional features and an appropriate regional key. A single feature should not be used to classify all organisms.",
+        style = MaterialTheme.typography.bodySmall,
+        color = MaterialTheme.colorScheme.onSurfaceVariant
+    )
+}
+
+ 
+@Composable
+private fun BiologyDrawingLab() {
+    var checkedCriteria by remember { mutableStateOf(emptySet<String>()) }
+    val total = BiologyDrawingGuide.criteria.size
+    val completed = checkedCriteria.size.coerceAtMost(total)
+
+    Card(Modifier.fillMaxWidth()) {
+        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+            Text("Biological drawing self-check", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+            Text("Use these criteria while making a biological drawing on paper. Tick each item only after checking your own drawing.")
+            LinearProgressIndicator(
+                progress = { if (total == 0) 0f else completed.toFloat() / total },
+                modifier = Modifier.fillMaxWidth()
+            )
+            Text("$completed of $total drawing criteria checked", style = MaterialTheme.typography.labelLarge)
+            BiologyDrawingGuide.criteria.forEach { criterion ->
+                Row(verticalAlignment = androidx.compose.ui.Alignment.Top) {
+                    Checkbox(
+                        checked = criterion.id in checkedCriteria,
+                        onCheckedChange = { checked ->
+                            checkedCriteria = if (checked) checkedCriteria + criterion.id else checkedCriteria - criterion.id
+                        }
+                    )
+                    Column(Modifier.weight(1f).padding(top = 10.dp), verticalArrangement = Arrangement.spacedBy(3.dp)) {
+                        Text(criterion.title, fontWeight = FontWeight.SemiBold)
+                        Text(criterion.rationale, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    }
+                }
+            }
+            if (completed == total) {
+                Text("Self-check complete. Recheck that every label points to the correct visible structure.", color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.SemiBold)
+            }
+            OutlinedButton(onClick = { checkedCriteria = emptySet() }) { Text("Reset checklist") }
+        }
+    }
+    Text(
+        "These are learning prompts, not an official WAEC marking scheme. Always follow the instructions and specimen requirements given in the actual examination.",
         style = MaterialTheme.typography.bodySmall,
         color = MaterialTheme.colorScheme.onSurfaceVariant
     )

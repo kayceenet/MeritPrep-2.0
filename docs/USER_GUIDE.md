@@ -43,7 +43,7 @@ The objective and theory items are original MeritPrep practice content. They are
 
 Open **Labs** to explore the current prototypes:
 
-- Biology: food tests, osmosis, microscope magnification, quadrat sampling and a dichotomous classification key.
+- Biology: food tests, osmosis, microscope magnification, quadrat sampling, a dichotomous classification key and a biological-drawing self-check.
 - Chemistry: solution concentration.
 - Physics: Ohm's law.
 
