@@ -160,7 +160,7 @@ fun PracticeScreenV2(onStartCbt: () -> Unit = {}, onStartTheory: () -> Unit = {}
                     enabled = selectedOption >= 0,
                     onClick = {
                         val correct = selectedOption == question.correctPresentedIndex
-                        database.recordQuestionAttempt(question.topicId, correct)
+                        database.recordQuestionAttempt(question.topicId, correct, question.questionId)
                         if (!correct) database.saveMistake(
                             MistakeNote(
                                 mistakeId = UUID.randomUUID().toString(),
