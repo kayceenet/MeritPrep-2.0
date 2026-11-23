@@ -64,6 +64,7 @@ fun CbtScreen() {
                     if (saved.flagged) flags[saved.questionId] = true
                 }
                 sessionId = snapshot.sessionId
+                currentIndex = snapshot.currentIndex.coerceIn(0, restoredQuestions.lastIndex)
                 endsAtMillis = snapshot.endsAt
                 remainingSeconds = ((snapshot.endsAt - System.currentTimeMillis()) / 1000L).toInt().coerceAtLeast(0)
                 started = true
@@ -72,6 +73,10 @@ fun CbtScreen() {
             }
         }
         restoring = false
+    }
+
+    LaunchedEffect(sessionId, currentIndex) {
+        sessionId?.let { database.updateCbtCurrentIndex(it, currentIndex) }
     }
 
     fun finishSession() {
