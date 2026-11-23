@@ -327,6 +327,23 @@ class MeritDatabase(context: Context) : SQLiteOpenHelper(context, "meritprep_loc
         writableDatabase.insertWithOnConflict("bookmarks", null, values, SQLiteDatabase.CONFLICT_REPLACE)
     }
 
+    fun isBookmarked(itemId: String): Boolean =
+        readableDatabase.rawQuery(
+            "SELECT 1 FROM bookmarks WHERE item_id = ? LIMIT 1",
+            arrayOf(itemId)
+        ).use { it.moveToFirst() }
+
+    fun getBookmarkedItemIds(itemType: String? = null): List<String> {
+        val selection = if (itemType == null) "" else " WHERE item_type = ?"
+        val args = if (itemType == null) null else arrayOf(itemType)
+        return readableDatabase.rawQuery(
+            "SELECT item_id FROM bookmarks$selection ORDER BY created_at DESC",
+            args
+        ).use { cursor ->
+            buildList { while (cursor.moveToNext()) add(cursor.getString(0)) }
+        }
+    }
+
     fun removeBookmark(itemId: String) {
         writableDatabase.delete("bookmarks", "item_id = ?", arrayOf(itemId))
     }

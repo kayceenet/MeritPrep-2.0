@@ -723,7 +723,7 @@ fun LessonScreen(topicId: String) {
     val topic = LearningCatalog.find(topicId)
     val context = LocalContext.current
     val database = remember(context) { MeritDatabase(context) }
-    var completed by remember(topicId) { mutableStateOf(database.isLessonCompleted(topicId)) }
+    var completed by remember(topicId) { mutableStateOf(database.isLessonCompleted(topicId)) }\n    var bookmarked by remember(topicId) { mutableStateOf(database.isBookmarked(topicId)) }
     val noteId = "lesson-note-$topicId"
     var noteText by remember(topicId) { mutableStateOf(database.getNoteBody(noteId).orEmpty()) }
     var noteSaved by remember(topicId) { mutableStateOf(false) }
@@ -745,6 +745,13 @@ fun LessonScreen(topicId: String) {
         Text(topic.subjectCode, style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
         Text(topic.title, style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
         Text(topic.introduction, style = MaterialTheme.typography.bodyLarge)
+        OutlinedButton(
+            onClick = {
+                if (bookmarked) database.removeBookmark(topic.id)
+                else database.bookmark(topic.id, "lesson")
+                bookmarked = !bookmarked
+            }
+        ) { Text(if (bookmarked) "Saved to bookmarks" else "Save this lesson") }
         when (topic.id) {
             "bio-cell" -> CellDiagramCard()
             "bio-nutrition" -> PhotosynthesisFlowCard()
