@@ -79,3 +79,20 @@ data class RevisionCard(
     val easeFactor: Double = 2.5,
     val lapses: Int = 0
 )
+
+
+data class CbtQuestionSnapshot(
+    val questionId: String,
+    val options: List<String>,
+    val correctPresentedIndex: Int,
+    val selectedIndex: Int?,
+    val flagged: Boolean
+)
+
+data class CbtSessionSnapshot(
+    val sessionId: String,
+    val startedAt: Long,
+    val endsAt: Long,
+    val totalQuestions: Int,
+    val questions: List<CbtQuestionSnapshot>
+)
