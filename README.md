@@ -24,7 +24,7 @@ The current alpha is a working Android app built with Kotlin, Jetpack Compose an
 - Introductory Physics and Chemistry simulations for Ohm's law and solution concentration.
 - A learner profile with topic-level practice evidence and an objective-practice mastery indicator. The current threshold requires at least 10 attempts, 8 distinct questions, 2 study days and 80% correct.
 - An adaptive seven-day study plan that prioritises weaker, unattempted and less recently studied topics using recorded learner evidence.
-- Local recording of lesson completion, question attempts, revision schedules, theory responses, mistake-notebook entries and active CBT session answers.
+- Per-topic personal lesson notes, plus local recording of lesson completion, question attempts, revision schedules, theory responses, mistake-notebook entries and active CBT session answers.
 - Automated unit tests and a GitHub Actions debug-APK build.
 
 ## Important academic limitations

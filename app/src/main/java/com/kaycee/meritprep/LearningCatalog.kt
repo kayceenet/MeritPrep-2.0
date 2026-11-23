@@ -724,6 +724,9 @@ fun LessonScreen(topicId: String) {
     val context = LocalContext.current
     val database = remember(context) { MeritDatabase(context) }
     var completed by remember(topicId) { mutableStateOf(database.isLessonCompleted(topicId)) }
+    val noteId = "lesson-note-$topicId"
+    var noteText by remember(topicId) { mutableStateOf(database.getNoteBody(noteId).orEmpty()) }
+    var noteSaved by remember(topicId) { mutableStateOf(false) }
     var selected by remember(topicId) { mutableIntStateOf(-1) }
     var checked by remember(topicId) { mutableStateOf(false) }
 
