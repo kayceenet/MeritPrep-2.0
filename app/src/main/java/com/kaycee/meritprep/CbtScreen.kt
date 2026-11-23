@@ -16,6 +16,7 @@ import androidx.compose.ui.platform.LocalContext
 import com.kaycee.meritprep.data.CbtResult
 import com.kaycee.meritprep.data.CbtSessionEngine
 import com.kaycee.meritprep.data.MeritDatabase
+import com.kaycee.meritprep.data.MistakeNote
 import com.kaycee.meritprep.data.PresentedQuestion
 import kotlinx.coroutines.delay
 import java.util.UUID
@@ -75,11 +76,26 @@ fun CbtScreen() {
     fun finishSession() {
         if (!submitted && questions.isNotEmpty()) {
             val finalResult = CbtSessionEngine.score(questions, answers)
+            val submittedAt = System.currentTimeMillis()
             val attemptRecords = questions.map { question ->
                 val selected = answers[question.questionId]
                 question.topicId to (selected != null && selected == question.correctPresentedIndex)
             }
-            sessionId?.let { database.completeCbtSession(it, finalResult.correctAnswers, attemptRecords) }
+            val mistakes = questions.mapNotNull { question ->
+                val selected = answers[question.questionId]
+                if (selected == question.correctPresentedIndex) null else MistakeNote(
+                    mistakeId = UUID.randomUUID().toString(),
+                    questionId = question.questionId,
+                    topicId = question.topicId,
+                    prompt = question.prompt,
+                    selectedAnswer = selected?.let { question.options.getOrNull(it) } ?: "Not answered",
+                    correctAnswer = question.options[question.correctPresentedIndex],
+                    explanation = question.explanation,
+                    createdAt = submittedAt,
+                    isResolved = false
+                )
+            }
+            sessionId?.let { database.completeCbtSession(it, finalResult.correctAnswers, attemptRecords, mistakes, submittedAt) }
             result = finalResult
             submitted = true
             showSubmitDialog = false
