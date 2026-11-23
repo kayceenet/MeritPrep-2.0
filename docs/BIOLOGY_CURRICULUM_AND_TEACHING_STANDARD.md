@@ -110,6 +110,7 @@ A topic should only be marked mastered after the learner demonstrates performanc
 - [x] Add ten original WAEC-style structured-response tasks with model responses and self-check marking points (independent review pending).
 - [ ] Add independently reviewed structured-response tasks and expand beyond the current original objective bank.
 - [x] Add initial visuals for cell structure, photosynthesis, food-chain energy flow, monohybrid inheritance and mammalian double circulation (review pending).
+- [x] Add an offline searchable glossary of 56 syllabus-linked terms with examples and lesson links (review pending).
 - [ ] Add reviewed, accessible diagrams and visual assets for the remaining lessons.
 - [x] Add interactive food-test (with prediction feedback), osmosis, microscope-magnification, quadrat-sampling and a guided dichotomous classification-key learning prototype.
 - [ ] Add specimen/practical tasks with reviewed marking rubrics and full WAEC practical assessment workflows.
