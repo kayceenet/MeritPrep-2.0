@@ -72,8 +72,16 @@ class MeritDatabase(context: Context) : SQLiteOpenHelper(context, "meritprep_loc
         if (oldVersion < 4) createCbtTables(db)
         if (oldVersion < 5) createMistakeTable(db)
         if (oldVersion < 6) createStudyPlanTables(db)
-        if (oldVersion < 7) db.execSQL("ALTER TABLE topic_progress ADD COLUMN demonstrated_mastery INTEGER NOT NULL DEFAULT 0")
+        if (oldVersion < 7 && !hasColumn(db, "topic_progress", "demonstrated_mastery")) db.execSQL("ALTER TABLE topic_progress ADD COLUMN demonstrated_mastery INTEGER NOT NULL DEFAULT 0")
     }
+
+    private fun hasColumn(db: SQLiteDatabase, table: String, column: String): Boolean =
+        db.rawQuery("PRAGMA table_info($table)", null).use { cursor ->
+            val nameIndex = cursor.getColumnIndex("name")
+            var found = false
+            while (cursor.moveToNext()) if (cursor.getString(nameIndex) == column) found = true
+            found
+        }
 
     private fun createCbtTables(db: SQLiteDatabase) {
         db.execSQL("""
