@@ -405,6 +405,32 @@ object LearningCatalog {
             "A niche describes how an organism uses resources, tolerates conditions and interacts with other organisms. A habitat is the place where it lives."
         ),
         LearningTopic(
+            "bio-biomes", "Local Nigerian biomes", "BIO",
+            "Nigeria contains humid coastal forests, freshwater swamps, mangroves, savannas and highland environments. These regions differ in rainfall, temperature, soil, vegetation and the organisms they support. A biome is a large ecological region characterised by its climate and dominant vegetation, together with associated animal communities.",
+            listOf(
+                "Define biome and distinguish it from a habitat",
+                "Identify major Nigerian vegetation and ecological zones",
+                "Compare rainforest, mangrove, swamp and savanna environments",
+                "Describe the Guinea, Sudan and Sahel savanna zones",
+                "Explain how altitude influences montane environments",
+                "Relate climate and vegetation to organism adaptations"
+            ),
+            listOf(
+                "Biome, vegetation zone and habitat" to "A biome is a broad ecological region associated with a characteristic climate and dominant vegetation. A habitat is the particular place where an organism lives within a biome. A vegetation zone describes a broad pattern of plant cover. Boundaries are gradual and can shift with rainfall, land use, fire, soil and climate; they should not be treated as perfectly sharp lines on a map.",
+                "Tropical rainforest" to "The humid southern part of Nigeria supports tropical rainforest in areas with high rainfall and a relatively short dry season. Rainforests commonly have layered vegetation, tall broad-leaved trees, lianas, shade-tolerant plants and high biological diversity. The canopy intercepts much of the light, while the forest floor is often shaded. Many organisms are adapted to humid conditions and complex vegetation structure.",
+                "Freshwater swamp and mangrove environments" to "Freshwater swamps occur in low-lying, waterlogged areas where soils may remain saturated for long periods. Mangrove forests occur along tidal, brackish coastal environments, including parts of the Niger Delta. Mangrove plants tolerate saline and waterlogged conditions; some have aerial roots or pneumatophores that assist gas exchange in oxygen-poor sediment. Tidal flooding, salinity and sediment conditions strongly influence which species occur.",
+                "Guinea savanna" to "The Guinea savanna forms a broad transition between the humid forest zone and drier northern savannas. It commonly has grasses with scattered trees and shrubs, a distinct wet season and dry season, and vegetation influenced by fire and grazing. Tree cover and grass height vary with rainfall, soil and land use. Many grasses regrow after seasonal burning or grazing, although frequent intense disturbance can degrade vegetation.",
+                "Sudan savanna and Sahel transition" to "The Sudan savanna is generally drier than the Guinea savanna and has shorter grasses and more widely spaced drought-tolerant trees and shrubs. Further north, the Sahel is a semi-arid transition with lower and less reliable rainfall, sparse grasses and scattered shrubs or trees. Plants may have deep roots, small leaves or seasonal growth patterns that reduce water stress. Drought and land degradation can affect these environments, but desertification is influenced by climate and human land use rather than one cause alone.",
+                "Montane environments" to "Higher elevations, including parts of the Jos Plateau, Mambilla Plateau and Obudu highlands, have cooler conditions than nearby lowlands. Temperature generally decreases with altitude, and slopes may differ in rainfall, wind exposure and soil. Montane grasslands, woodland and patches of forest occur according to local conditions. Organisms in these habitats may be adapted to cooler temperatures, strong winds and shorter growing seasons.",
+                "Climate, vegetation and animal distribution" to "Rainfall amount and seasonality influence plant growth, water availability and fire frequency. Temperature affects metabolism and growing seasons. Soil and drainage influence which plants establish. Animals respond to food, water, shelter, breeding sites and vegetation structure. A species may occur across more than one vegetation zone if it tolerates the conditions, while local populations may differ in abundance.",
+                "Human impacts and conservation in Nigeria" to "Deforestation, agricultural expansion, overgrazing, bush burning, drainage, mining, pollution and infrastructure development alter Nigerian habitats. Conservation measures include protected areas, sustainable farming and forestry, mangrove restoration, watershed protection, erosion control and community-based resource management. Conservation planning should consider local livelihoods and the ecological functions of each habitat.",
+                "How to answer Nigerian biome questions" to "Identify the biome from its climate and vegetation, not from a place name alone. Link high rainfall and layered broad-leaved trees with rainforest; tidal brackish water and aerial roots with mangroves; seasonal rainfall and grasses with savanna; and cooler high-altitude conditions with montane habitats. State that zones form transitions and local conditions vary."
+            ),
+            "Which Nigerian environment is most strongly associated with tidal brackish water and mangrove vegetation?",
+            listOf("Coastal Niger Delta","Sudan savanna","Jos Plateau grassland","Sahel grassland"), 0,
+            "Mangrove vegetation is characteristic of tidal coastal and estuarine environments, including parts of the Niger Delta, where salinity and waterlogged sediments shape plant adaptations."
+        ),
+        LearningTopic(
             "chem-atomic", "Atomic structure", "CHEM",
             "All ordinary matter is made of atoms. The arrangement and number of subatomic particles explain an element's identity, isotope and electrical charge.",
             listOf("Identify protons, neutrons and electrons", "Explain atomic number and mass number", "Determine the numbers of subatomic particles in simple atoms and ions"),
