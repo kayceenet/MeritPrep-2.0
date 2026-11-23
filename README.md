@@ -56,6 +56,7 @@ Every published lesson, diagram, question, answer key and practical rubric must 
 
 See:
 - `docs/USER_GUIDE.md`
+- `docs/PRIVACY_AND_DATA_HANDLING.md`
 - `docs/ACADEMIC_CONTENT_STANDARD.md`
 - `docs/BIOLOGY_CURRICULUM_AND_TEACHING_STANDARD.md`
 - `docs/PRODUCT_ROADMAP.md`
