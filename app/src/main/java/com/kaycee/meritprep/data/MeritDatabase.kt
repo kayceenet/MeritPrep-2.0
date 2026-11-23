@@ -158,6 +158,12 @@ class MeritDatabase(context: Context) : SQLiteOpenHelper(context, "meritprep_loc
             arrayOf(lessonId)
         ).use { it.moveToFirst() }
 
+    fun getNoteBody(noteId: String): String? =
+        readableDatabase.rawQuery(
+            "SELECT body FROM study_notes WHERE note_id = ? LIMIT 1",
+            arrayOf(noteId)
+        ).use { cursor -> if (cursor.moveToFirst()) cursor.getString(0) else null }
+
     fun saveNote(noteId: String, topicId: String, title: String, body: String) {
         val values = ContentValues().apply {
             put("note_id", noteId)
