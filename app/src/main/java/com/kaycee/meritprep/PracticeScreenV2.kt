@@ -16,7 +16,7 @@ fun PracticeScreenV2() {
     val context = LocalContext.current
     val database = remember(context) { MeritDatabase(context) }
     val questions = remember {
-        (BiologyQuestionBank.cellBiology + BiologyQuestionBank.classification + BiologyQuestionBank.adaptation + BiologyQuestionBank.plantAnatomy + BiologyQuestionBank.nutrition + BiologyQuestionBank.transport + BiologyQuestionBank.respiration + listOf(
+        (BiologyQuestionBank.cellBiology + BiologyQuestionBank.classification + BiologyQuestionBank.adaptation + BiologyQuestionBank.plantAnatomy + BiologyQuestionBank.nutrition + BiologyQuestionBank.transport + BiologyQuestionBank.respiration + BiologyQuestionBank.excretion + listOf(
             AssessmentQuestion("demo-chem-001", "chem-atomic", "The atomic number of an element is equal to the number of what particles in its nucleus?", listOf("Neutrons", "Protons", "Nucleons", "Isotopes"), 1, "The atomic number is the number of protons in the nucleus.", "MeritPrep demonstration item", false),
             AssessmentQuestion("demo-phy-001", "phy-motion", "What is the SI unit of acceleration?", listOf("m/s", "m/s²", "N", "J"), 1, "Acceleration is change in velocity per unit time, measured in metres per second squared.", "MeritPrep demonstration item", false)
         )).map { AssessmentEngine.present(it) }
