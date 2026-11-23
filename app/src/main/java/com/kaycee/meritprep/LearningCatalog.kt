@@ -764,6 +764,28 @@ fun LessonScreen(topicId: String) {
                 Text(section.second, style = MaterialTheme.typography.bodyLarge)
             }
         }
+        Card(Modifier.fillMaxWidth()) {
+            Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                Text("My lesson notes", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+                Text("Write your own summary, questions or examples. Notes are saved locally on this device.")
+                OutlinedTextField(
+                    value = noteText,
+                    onValueChange = { noteText = it; noteSaved = false },
+                    modifier = Modifier.fillMaxWidth(),
+                    minLines = 3,
+                    maxLines = 8,
+                    label = { Text("Your notes for this topic") }
+                )
+                Button(
+                    onClick = {
+                        database.saveNote(noteId, topic.id, "${topic.title} notes", noteText)
+                        noteSaved = true
+                    },
+                    modifier = Modifier.fillMaxWidth()
+                ) { Text("Save lesson notes") }
+                if (noteSaved) Text("Notes saved on this device.", color = MaterialTheme.colorScheme.primary, style = MaterialTheme.typography.bodySmall)
+            }
+        }
         HorizontalDivider()
         Text("Check your understanding", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
         Text(topic.checkQuestion, style = MaterialTheme.typography.titleMedium)
