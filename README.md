@@ -11,7 +11,7 @@ The current alpha is a working Android app built with Kotlin, Jetpack Compose an
 - Home, Learn, Practice, Labs, Profile and Biology revision screens.
 - Seven subject entry points, with starter lesson content for Biology, Chemistry, Physics, Mathematics, English Language, Economics and Government.
 - A 24-unit Biology syllabus map, with an authored beginner-oriented lesson draft for every mapped unit.
-- An interactive plant/animal cell schematic in the introductory cell lesson, with selectable organelles and functional explanations.
+- Visual teaching aids for cell structure, photosynthesis, food-chain energy flow, monohybrid inheritance and mammalian double circulation; the cell diagram also supports organelle selection and explanations.
 - 240 original Biology multiple-choice practice questions across the 24 mapped units, with explanations and syllabus-topic attribution.
 - Topic-focused Biology practice sessions and a full Biology question-bank mode, with shuffled questions and answer options.
 - A timed Biology CBT mock: 40 random questions, a 30-minute practice timer, question navigation, answer flags, answer review and locally persisted session state.
