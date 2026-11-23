@@ -79,6 +79,7 @@ private fun MeritPrepApp() {
                 composable("cbt") { CbtScreen() }
                 composable("waec-theory") { BiologyTheoryScreen() }
                 composable("review") { RevisionScreen() }
+                composable("mistakes") { MistakeNotebookScreen() }
                 composable("labs") { VirtualLabScreen() }
                 composable("profile") { ProfileScreen() }
             }
@@ -101,6 +102,7 @@ private fun HomeScreen(nav: NavHostController) {
                     Text("Continue learning, review difficult topics and practise for your examinations.")
                     Button(onClick = { nav.navigate("learn") }) { Text("Explore subjects") }
                     OutlinedButton(onClick = { nav.navigate("review") }) { Text("Start Biology revision") }
+                    OutlinedButton(onClick = { nav.navigate("mistakes") }) { Text("Review mistakes") }
                     OutlinedButton(onClick = { nav.navigate("cbt") }) { Text("Start timed Biology mock") }
                 }
             }
