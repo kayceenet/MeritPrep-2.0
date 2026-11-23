@@ -280,6 +280,31 @@ object LearningCatalog {
             "Pollination is the transfer of pollen from an anther to a stigma. Fertilisation is the later fusion of gamete nuclei."
         ),
         LearningTopic(
+            "bio-growth", "Growth and development", "BIO",
+            "A seed becomes a seedling, a child becomes an adult, and a young shoot grows towards light. Growth increases size or dry mass; development involves changes in form and function as an organism matures. This lesson explains how cells divide, enlarge and specialise, and how seeds begin a new plant.",
+            listOf(
+                "Distinguish growth from development",
+                "Identify the main processes responsible for growth",
+                "Describe the regions of growth in a plant root and shoot",
+                "Explain the conditions needed for seed germination",
+                "Compare epigeal and hypogeal germination",
+                "Describe selected roles of plant growth regulators"
+            ),
+            listOf(
+                "Growth and development are related but different" to "Growth is a relatively permanent increase in size, dry mass or cell number. Development includes the changes in structure and function that occur as an organism matures, including differentiation and the formation of specialised tissues. An organism can develop without a large increase in size at every moment. Dry mass is often a better measure of growth than fresh mass because fresh mass changes with water content.",
+                "How organisms grow" to "Growth commonly involves cell division, cell enlargement and cell differentiation. Mitosis produces genetically similar daughter cells and increases cell number. Cells may then enlarge by taking up water and synthesising cell materials. Differentiation is the process by which cells become specialised in structure and function. In animals, much growth occurs throughout the body during development; in plants, growth is concentrated in meristems.",
+                "Plant growth regions" to "Apical meristems at root and shoot tips produce primary growth, increasing length. In roots, the root cap protects the tip; behind it are regions of cell division, elongation and maturation. Lateral meristems, such as vascular cambium and cork cambium in plants that possess them, contribute to secondary growth, increasing thickness. Not all plants show the same degree of secondary growth.",
+                "What a seed needs to germinate" to "Most seeds require water, oxygen and a suitable temperature to germinate. Water activates metabolism and softens seed coverings; oxygen is needed for aerobic respiration; temperature affects enzyme-controlled reactions. Some species have additional requirements, such as light, darkness, chilling or scarification, and may show dormancy. Soil is not essential for the first stages of germination if the seed has suitable conditions and stored food.",
+                "Events during germination" to "Water uptake by a dry seed is called imbibition. Metabolic activity increases, stored food reserves are mobilised and the embryo resumes growth. The radicle usually emerges first and develops into the primary root; the plumule develops into the shoot. The seedling initially depends on stored food until leaves develop and photosynthesis can supply more organic material.",
+                "Epigeal and hypogeal germination" to "In epigeal germination, elongation of the hypocotyl raises the cotyledons above the soil surface; a common example is the bean. In hypogeal germination, the cotyledons remain below the soil while the epicotyl elongates; maize and pea are commonly used examples in school biology. The distinction is based on the position of the cotyledons, not simply on whether the seed is large or small.",
+                "Plant growth regulators" to "Plant hormones or growth regulators are chemical messengers active in small amounts. Auxins influence cell elongation, apical dominance and tropic responses. Gibberellins can promote stem elongation and help break dormancy or stimulate germination in some species. Cytokinins promote cell division and can delay leaf senescence. Ethylene is a gaseous hormone involved in fruit ripening and other responses. Effects depend on concentration, tissue and interactions among hormones.",
+                "Measuring and interpreting growth" to "Growth can be measured using length, height, leaf area, fresh mass, dry mass or cell number. Use the same method at each measurement point and control relevant variables. A growth curve often shows a lag phase, a rapid or exponential phase and a slowing or stationary phase as resources or space become limiting. A graph should have labelled axes, units and a sensible scale. Describe the pattern before suggesting a biological explanation."
+            ),
+            "Which condition is needed by most seeds for aerobic respiration during germination?",
+            listOf("Oxygen","Complete darkness in every species","Soil nutrients before the radicle emerges","A fully developed flower"), 0,
+            "Oxygen is needed for aerobic respiration, which supplies energy for the metabolic processes of germination. Water and a suitable temperature are also generally required."
+        ),
+        LearningTopic(
             "chem-atomic", "Atomic structure", "CHEM",
             "All ordinary matter is made of atoms. The arrangement and number of subatomic particles explain an element's identity, isotope and electrical charge.",
             listOf("Identify protons, neutrons and electrons", "Explain atomic number and mass number", "Determine the numbers of subatomic particles in simple atoms and ions"),
