@@ -47,7 +47,7 @@ Open **Labs** to explore the current prototypes:
 - Chemistry: solution concentration.
 - Physics: Ohm's law.
 
-The simulations are simplified teaching models. Follow the safety notes shown in the relevant lab. They do not replace supervised laboratory work or a complete WAEC practical paper.
+The simulations are simplified teaching models. Read the safety and model-limit note shown in each lab. The app does not prepare real reagents or specimens. For real practical work, follow teacher supervision, wear appropriate protection, avoid tasting or directly handling unknown specimens, and observe the stated chemical, glassware and fieldwork precautions. The simulations do not replace supervised laboratory work or a complete WAEC practical paper.
 
 ## 7. Revision cards
 

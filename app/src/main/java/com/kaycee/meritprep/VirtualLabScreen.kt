@@ -22,6 +22,20 @@ fun VirtualLabScreen() {
                 FilterChip(selected = selectedLab == index, onClick = { selectedLab = index }, label = { Text(label) })
             }
         }
+        val safetyGuidance = when (selectedLab) {
+            0 -> "This is an ideal mathematical simulation, not a physical circuit. Never connect this app to mains electricity. Real circuit work requires an isolated extra-low-voltage supply, power disconnected before changing connections and trained supervision."
+            1 -> "This is a concentration calculator; it does not prepare a real solution. In a laboratory, wear eye protection, use clean labelled glassware, never taste chemicals and follow the teacher's instructions."
+            else -> "These are simulated outcomes. In real food tests, wear goggles, avoid reagent contact and ingestion, keep ethanol away from flames, and heat Benedict's solution in a water bath under supervision. Handle slides and coverslips carefully; do not touch unknown plants or fungi, enter unsafe field sites or taste specimens. Wash hands after practical work."
+        }
+        Card(
+            Modifier.fillMaxWidth(),
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.tertiaryContainer)
+        ) {
+            Column(Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(5.dp)) {
+                Text("Safety and model limits", fontWeight = FontWeight.Bold)
+                Text(safetyGuidance, style = MaterialTheme.typography.bodySmall)
+            }
+        }
         when (selectedLab) {
             0 -> OhmsLawLab()
             1 -> ConcentrationLab()
