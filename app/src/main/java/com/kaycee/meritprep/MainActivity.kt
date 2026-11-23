@@ -75,7 +75,8 @@ private fun MeritPrepApp() {
                 composable("lesson/{topicId}") { entry ->
                     LessonScreen(entry.arguments?.getString("topicId").orEmpty())
                 }
-                composable("practice") { PracticeScreenV2() }
+                composable("practice") { PracticeScreenV2(onStartCbt = { nav.navigate("cbt") }) }
+                composable("cbt") { CbtScreen() }
                 composable("review") { RevisionScreen() }
                 composable("labs") { VirtualLabScreen() }
                 composable("profile") { ProfileScreen() }
