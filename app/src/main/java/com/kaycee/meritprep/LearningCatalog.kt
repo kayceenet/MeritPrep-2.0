@@ -381,6 +381,30 @@ object LearningCatalog {
             "A food-chain arrow points from the organism being eaten to the organism that obtains the food, showing the direction of energy transfer."
         ),
         LearningTopic(
+            "bio-habitats", "Habitats and ecological niches", "BIO",
+            "A pond, a forest canopy, a grassland and a rocky stream provide different places for organisms to live. A habitat is more than a location: it provides the food, water, shelter and conditions an organism needs. This lesson compares major habitat types and introduces the ecological niche, which describes how an organism lives and interacts within its environment.",
+            listOf(
+                "Define habitat and ecological niche",
+                "Compare aquatic, terrestrial and arboreal habitats",
+                "Identify microhabitats within larger habitats",
+                "Relate habitat conditions to organism adaptations",
+                "Explain why habitat diversity supports biodiversity"
+            ),
+            listOf(
+                "Habitat and niche" to "A habitat is the place where an organism lives, such as a pond, forest, grassland or soil layer. An ecological niche describes the role and way of life of an organism, including the resources it uses, the conditions it tolerates and its interactions with other organisms. Two species may share a habitat but occupy different niches because they use different foods, microhabitats or activity times.",
+                "Aquatic habitats" to "Aquatic habitats include freshwater environments such as rivers, streams, lakes and ponds, and marine or brackish environments such as seas, estuaries and mangrove creeks. Important factors include salinity, dissolved oxygen, light penetration, water movement, depth and temperature. Organisms may have adaptations for buoyancy, swimming, attachment, salt balance or low oxygen conditions.",
+                "Terrestrial habitats" to "Terrestrial habitats include forests, grasslands, savannas, deserts, mountains and soil. Organisms face challenges such as water loss, temperature variation, wind, gravity and changes in food availability. Plant roots anchor the plant and absorb water; waxy cuticles reduce water loss; animals may burrow, migrate or become active at cooler times. The importance of each adaptation depends on the specific habitat.",
+                "Arboreal and microhabitats" to "Arboreal organisms live mainly in trees or shrubs. They may have grasping limbs, claws, adhesive pads or other features that help them climb or move among branches. A microhabitat is a small, distinct part of a larger habitat, such as the underside of a log, a tree-hole, leaf litter, a rock crevice or the surface of a pond. Microhabitats can differ in moisture, light and temperature over short distances.",
+                "Habitat structure and resources" to "The structure of a habitat affects where organisms feed, shelter and reproduce. A forest has layers such as canopy, understory and forest floor, each with different light and moisture conditions. A pond has shallow margins, open water and bottom sediments. Grassland vegetation may provide seeds, leaves, nesting materials and hiding places. The distribution of organisms often reflects where essential resources and suitable conditions overlap.",
+                "Adaptation and habitat suitability" to "An organism is more likely to survive and reproduce where its inherited features are suited to local conditions. Fish have gills for aquatic gas exchange; many terrestrial plants have structures that limit water loss; mangrove plants tolerate saline and waterlogged conditions; burrowing animals can avoid surface heat or predators. No habitat is universally suitable: a feature that is advantageous in one environment may be disadvantageous in another.",
+                "Habitat change and conservation" to "Habitats change naturally through flooding, drought, fire, succession and seasonal variation. Human activities such as deforestation, drainage, mining, pollution, overgrazing and urban development can alter or destroy habitats. Habitat fragmentation separates populations and can reduce access to food, mates and migration routes. Conservation may involve protected areas, restoration, sustainable resource use and reducing pollution.",
+                "Field observation of habitats" to "When studying a habitat, record the location, date, time, weather and visible environmental conditions. Describe vegetation structure, water availability, soil or substrate and evidence of organisms. Use quadrats for suitable stationary organisms and transects to examine changes along an environmental gradient. Avoid disturbing organisms unnecessarily, and distinguish what was observed from what you infer."
+            ),
+            "What is an ecological niche?",
+            listOf("The role and way of life of an organism in its environment","Only the geographical name of a habitat","The total number of organisms in a country","A non-living factor such as rainfall"), 0,
+            "A niche describes how an organism uses resources, tolerates conditions and interacts with other organisms. A habitat is the place where it lives."
+        ),
+        LearningTopic(
             "chem-atomic", "Atomic structure", "CHEM",
             "All ordinary matter is made of atoms. The arrangement and number of subatomic particles explain an element's identity, isotope and electrical charge.",
             listOf("Identify protons, neutrons and electrons", "Explain atomic number and mass number", "Determine the numbers of subatomic particles in simple atoms and ions"),
