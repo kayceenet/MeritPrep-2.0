@@ -105,13 +105,13 @@ private fun BiologyLab() {
             FilterChip(selected = selected == 0, onClick = { selected = 0 }, label = { Text("Food tests") })
             FilterChip(selected = selected == 1, onClick = { selected = 1 }, label = { Text("Osmosis") })
             FilterChip(selected = selected == 2, onClick = { selected = 2 }, label = { Text("Microscope") })
-            FilterChip(selected = selected == 3, onClick = { selected = 3 }, label = { Text("Quadrat sampling") })
+            FilterChip(selected = selected == 3, onClick = { selected = 3 }, label = { Text("Quadrat sampling") })\n            FilterChip(selected = selected == 4, onClick = { selected = 4 }, label = { Text("Classification key") })
         }
         when (selected) {
             0 -> FoodTestLab()
             1 -> OsmosisLab()
             2 -> MagnificationLab()
-            else -> QuadratSamplingLab()
+            3 -> QuadratSamplingLab()\n            else -> BiologyClassificationLab()
         }
     }
 }
@@ -249,4 +249,79 @@ private fun OsmosisLab() {
         }
     }
     Text("Model limitation: the internal concentration is fixed at 0.30 mol/L to demonstrate the direction of water movement. Real cell sap and cytoplasm have complex, changing water potentials; the isotonic point varies by cell and experimental conditions.")
+}
+
+
+@Composable
+private fun BiologyClassificationLab() {
+    var photosynthetic by remember { mutableStateOf(true) }
+    var vascular by remember { mutableStateOf(true) }
+    var seeds by remember { mutableStateOf(true) }
+    var seedsEnclosed by remember { mutableStateOf(true) }
+    var oneCotyledon by remember { mutableStateOf(true) }
+    var fungus by remember { mutableStateOf(false) }
+    var result by remember { mutableStateOf<ClassificationResult?>(null) }
+
+    fun resetResult() { result = null }
+
+    Card(Modifier.fillMaxWidth()) {
+        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+            Text("Dichotomous classification key", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+            Text("Imagine that you have collected an unfamiliar specimen. Record the observable features, then follow the key. Change a feature to explore a different branch.")
+            Text("Observed features", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
+            Row(verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
+                Checkbox(checked = photosynthetic, onCheckedChange = { photosynthetic = it; resetResult() })
+                Text("Contains chlorophyll and photosynthesises")
+            }
+            Row(verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
+                Checkbox(checked = vascular, onCheckedChange = { vascular = it; resetResult() })
+                Text("Has vascular tissue (xylem and phloem)")
+            }
+            Row(verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
+                Checkbox(checked = seeds, onCheckedChange = { seeds = it; resetResult() })
+                Text("Produces seeds")
+            }
+            Row(verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
+                Checkbox(checked = seedsEnclosed, onCheckedChange = { seedsEnclosed = it; resetResult() })
+                Text("Seeds are enclosed in a fruit")
+            }
+            Row(verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
+                Checkbox(checked = oneCotyledon, onCheckedChange = { oneCotyledon = it; resetResult() })
+                Text("Seed has one cotyledon (one seed leaf)")
+            }
+            Row(verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
+                Checkbox(checked = fungus, onCheckedChange = { fungus = it; resetResult() })
+                Text("Specimen has fungal features")
+            }
+            Button(
+                onClick = {
+                    result = BiologyClassificationEngine.identify(
+                        SpecimenFeatures(photosynthetic, vascular, seeds, seedsEnclosed, oneCotyledon, fungus)
+                    )
+                },
+                modifier = Modifier.fillMaxWidth()
+            ) { Text("Follow the key and identify") }
+            result?.let { answer ->
+                HorizontalDivider()
+                Text(answer.identification ?: "Identification not supported by this key", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold, color = if (answer.identification == null) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary)
+                Text(answer.explanation)
+                Text("Decision path", style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.SemiBold)
+                answer.keySteps.forEachIndexed { index, step -> Text("${index + 1}. $step") }
+            }
+            OutlinedButton(onClick = {
+                photosynthetic = true
+                vascular = true
+                seeds = true
+                seedsEnclosed = true
+                oneCotyledon = true
+                fungus = false
+                result = null
+            }) { Text("Reset specimen features") }
+        }
+    }
+    Text(
+        "Teaching model limitation: this key distinguishes six selected examples, not every plant or fungus. Real specimen identification uses several additional features and an appropriate regional key. A single feature should not be used to classify all organisms.",
+        style = MaterialTheme.typography.bodySmall,
+        color = MaterialTheme.colorScheme.onSurfaceVariant
+    )
 }
