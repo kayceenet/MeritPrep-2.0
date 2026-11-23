@@ -14,7 +14,7 @@ import com.kaycee.meritprep.data.RevisionCard
 import com.kaycee.meritprep.data.ReviewRating
 import com.kaycee.meritprep.data.SpacedRepetitionScheduler
 
-private val starterBiologyCards = listOf(
+internal val starterBiologyCards = listOf(
     "A cell is the basic structural and functional unit of life." to "A cell is the smallest unit that can perform the processes associated with life.",
     "State the three main ideas of cell theory." to "Living organisms are made of cells; the cell is the basic unit of structure and function; new cells arise from pre-existing cells.",
     "What is the main function of the cell-surface membrane?" to "It forms a selectively permeable boundary that regulates movement of substances into and out of the cell.",
