@@ -33,4 +33,4 @@
 - Marking scheme versioned for constructed-response questions.
 
 ## Mastery policy
-A lesson being opened or completed is not proof of mastery. Mastery should require repeated evidence across appropriate questions and a later retrieval opportunity. Report progress and confidence transparently; do not promise examination scores.
+A lesson being opened or completed is not proof of mastery. The current objective-practice indicator requires at least 10 attempts, 8 distinct question IDs, attempts across at least 2 study days and at least 80% correct. This is an internal progress threshold, not proof of mastery across constructed-response, practical or unfamiliar question formats. Future versions should include delayed retrieval, additional question forms and independent validation of the threshold. Report progress and confidence transparently; do not promise examination scores.
