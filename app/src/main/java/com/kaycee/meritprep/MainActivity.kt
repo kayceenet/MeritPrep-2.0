@@ -40,6 +40,9 @@ class MainActivity : ComponentActivity() {
 @Composable
 private fun MeritPrepApp() {
     val nav = rememberNavController()
+    val currentEntry = nav.currentBackStackEntryAsState().value
+    var navigationRevision by remember { mutableIntStateOf(0) }
+    LaunchedEffect(currentEntry) { navigationRevision++ }
     MaterialTheme(
         colorScheme = lightColorScheme(
             primary = androidx.compose.ui.graphics.Color(0xFF155EEF),
@@ -52,7 +55,7 @@ private fun MeritPrepApp() {
                 NavigationBar {
                     listOf("Home" to "home", "Learn" to "learn", "Practice" to "practice", "Labs" to "labs", "Profile" to "profile").forEach { (label, route) ->
                         NavigationBarItem(
-                            selected = nav.currentBackStackEntryAsState().value?.destination?.route == route,
+                            selected = currentEntry?.destination?.route == route,
                             onClick = { nav.navigate(route) { launchSingleTop = true } },
                             icon = { Icon(when(route) { "home" -> Icons.Default.Home; "learn" -> Icons.Default.MenuBook; "practice" -> Icons.Default.Quiz; "labs" -> Icons.Default.Science; else -> Icons.Default.Person }, contentDescription = label) },
                             label = { Text(label) }
@@ -82,7 +85,7 @@ private fun MeritPrepApp() {
                 composable("mistakes") { MistakeNotebookScreen() }
                 composable("study-plan") { StudyPlanScreen(onOpenLesson = { nav.navigate("lesson/$it") }, onOpenPractice = { nav.navigate("practice") }, onOpenRevision = { nav.navigate("review") }) }
                 composable("labs") { VirtualLabScreen() }
-                composable("profile") { ProfileScreen() }
+                composable("profile") { ProfileScreen(navigationRevision) }
             }
         }
     }
@@ -195,13 +198,14 @@ private fun PracticeScreen() {
 }
 
 @Composable
-private fun ProfileScreen() {
+private fun ProfileScreen(refreshKey: Int = 0) {
     val context = LocalContext.current
     val database = remember(context) { MeritDatabase(context) }
-    val completedLessons = remember { database.getCompletedLessonCount() }
-    val attemptedQuestions = remember { database.getQuestionAttemptCount() }
-    val correctAnswers = remember { database.getCorrectAnswerCount() }
-    val topicProgress = remember { database.getAllTopicProgress() }
+    val completedLessons = remember(refreshKey) { database.getCompletedLessonCount() }
+    val attemptedQuestions = remember(refreshKey) { database.getQuestionAttemptCount() }
+    val correctAnswers = remember(refreshKey) { database.getCorrectAnswerCount() }
+    val topicProgress = remember(refreshKey) { database.getAllTopicProgress() }
+    val unresolvedMistakes = remember(refreshKey) { database.getUnresolvedMistakeCount() }
     val accuracy = if (attemptedQuestions == 0) 0 else (correctAnswers * 100) / attemptedQuestions
 
     LazyColumn(
@@ -217,6 +221,14 @@ private fun ProfileScreen() {
                 Column(Modifier.padding(18.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
                     Text("Lessons completed", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.onSurfaceVariant)
                     Text(completedLessons.toString(), style = MaterialTheme.typography.headlineLarge, fontWeight = FontWeight.Bold)
+                }
+            }
+        }
+        item {
+            Card(Modifier.fillMaxWidth()) {
+                Column(Modifier.padding(18.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                    Text("Mistakes to review", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    Text(unresolvedMistakes.toString(), style = MaterialTheme.typography.headlineLarge, fontWeight = FontWeight.Bold)
                 }
             }
         }
