@@ -5,7 +5,7 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
-class MeritDatabase(context: Context) : SQLiteOpenHelper(context, "meritprep_local.db", null, 1) {
+class MeritDatabase(context: Context) : SQLiteOpenHelper(context, "meritprep_local.db", null, 2) {
     override fun onCreate(db: SQLiteDatabase) {
         db.execSQL("""
             CREATE TABLE topic_progress (
@@ -44,10 +44,21 @@ class MeritDatabase(context: Context) : SQLiteOpenHelper(context, "meritprep_loc
                 created_at INTEGER NOT NULL
             )
         """.trimIndent())
+        createCompletedLessonsTable(db)
+    }
+
+    private fun createCompletedLessonsTable(db: SQLiteDatabase) {
+        db.execSQL("""
+            CREATE TABLE IF NOT EXISTS completed_lessons (
+                lesson_id TEXT PRIMARY KEY,
+                topic_id TEXT NOT NULL,
+                completed_at INTEGER NOT NULL
+            )
+        """.trimIndent())
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
-        // Future schema changes must use explicit, non-destructive migrations.
+        if (oldVersion < 2) createCompletedLessonsTable(db)
     }
 
     fun recordQuestionAttempt(topicId: String, isCorrect: Boolean, studiedAt: Long = System.currentTimeMillis()) {
@@ -69,16 +80,39 @@ class MeritDatabase(context: Context) : SQLiteOpenHelper(context, "meritprep_loc
         }
     }
 
-    fun markLessonCompleted(topicId: String, studiedAt: Long = System.currentTimeMillis()) {
-        writableDatabase.execSQL(
-            """INSERT INTO topic_progress(topic_id, lessons_completed, last_studied)
-               VALUES(?, 1, ?)
-               ON CONFLICT(topic_id) DO UPDATE SET
-                 lessons_completed = lessons_completed + 1,
-                 last_studied = excluded.last_studied""".trimIndent(),
-            arrayOf(topicId, studiedAt)
-        )
+    fun markLessonCompleted(lessonId: String, studiedAt: Long = System.currentTimeMillis()) {
+        val db = writableDatabase
+        db.beginTransaction()
+        try {
+            val values = ContentValues().apply {
+                put("lesson_id", lessonId)
+                put("topic_id", lessonId)
+                put("completed_at", studiedAt)
+            }
+            val inserted = db.insertWithOnConflict(
+                "completed_lessons", null, values, SQLiteDatabase.CONFLICT_IGNORE
+            )
+            if (inserted != -1L) {
+                db.execSQL(
+                    """INSERT INTO topic_progress(topic_id, lessons_completed, last_studied)
+                       VALUES(?, 1, ?)
+                       ON CONFLICT(topic_id) DO UPDATE SET
+                         lessons_completed = lessons_completed + 1,
+                         last_studied = excluded.last_studied""".trimIndent(),
+                    arrayOf(lessonId, studiedAt)
+                )
+            }
+            db.setTransactionSuccessful()
+        } finally {
+            db.endTransaction()
+        }
     }
+
+    fun isLessonCompleted(lessonId: String): Boolean =
+        readableDatabase.rawQuery(
+            "SELECT 1 FROM completed_lessons WHERE lesson_id = ? LIMIT 1",
+            arrayOf(lessonId)
+        ).use { it.moveToFirst() }
 
     fun saveNote(noteId: String, topicId: String, title: String, body: String) {
         val values = ContentValues().apply {
@@ -110,7 +144,17 @@ class MeritDatabase(context: Context) : SQLiteOpenHelper(context, "meritprep_loc
         }
 
     fun getCompletedLessonCount(): Int =
-        readableDatabase.rawQuery("SELECT COALESCE(SUM(lessons_completed), 0) FROM topic_progress", null).use { cursor ->
+        readableDatabase.rawQuery("SELECT COUNT(*) FROM completed_lessons", null).use { cursor ->
+            if (cursor.moveToFirst()) cursor.getInt(0) else 0
+        }
+
+    fun getQuestionAttemptCount(): Int =
+        readableDatabase.rawQuery("SELECT COALESCE(SUM(questions_attempted), 0) FROM topic_progress", null).use { cursor ->
+            if (cursor.moveToFirst()) cursor.getInt(0) else 0
+        }
+
+    fun getCorrectAnswerCount(): Int =
+        readableDatabase.rawQuery("SELECT COALESCE(SUM(questions_correct), 0) FROM topic_progress", null).use { cursor ->
             if (cursor.moveToFirst()) cursor.getInt(0) else 0
         }
 }
