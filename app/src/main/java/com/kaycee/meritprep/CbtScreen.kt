@@ -18,6 +18,7 @@ import com.kaycee.meritprep.data.CbtSessionEngine
 import com.kaycee.meritprep.data.MeritDatabase
 import com.kaycee.meritprep.data.PresentedQuestion
 import kotlinx.coroutines.delay
+import java.util.UUID
 
 private const val CBT_QUESTION_COUNT = 40
 private const val CBT_DURATION_SECONDS = 30 * 60
@@ -35,6 +36,41 @@ fun CbtScreen() {
     var submitted by remember { mutableStateOf(false) }
     var showSubmitDialog by remember { mutableStateOf(false) }
     var result by remember { mutableStateOf<CbtResult?>(null) }
+    var sessionId by remember { mutableStateOf<String?>(null) }
+    var endsAtMillis by remember { mutableLongStateOf(0L) }
+    var restoring by remember { mutableStateOf(true) }
+
+    LaunchedEffect(database) {
+        val snapshot = database.loadActiveCbtSession("BIO")
+        if (snapshot != null) {
+            val sourceById = BiologyQuestionBank.all.associateBy { it.id }
+            val restoredQuestions = snapshot.questions.mapNotNull { saved ->
+                val source = sourceById[saved.questionId] ?: return@mapNotNull null
+                PresentedQuestion(
+                    questionId = source.id,
+                    topicId = source.topicId,
+                    prompt = source.prompt,
+                    options = saved.options,
+                    correctPresentedIndex = saved.correctPresentedIndex,
+                    explanation = source.explanation
+                )
+            }
+            if (restoredQuestions.size == snapshot.totalQuestions) {
+                questions = restoredQuestions
+                snapshot.questions.forEach { saved ->
+                    if (saved.selectedIndex != null) answers[saved.questionId] = saved.selectedIndex
+                    if (saved.flagged) flags[saved.questionId] = true
+                }
+                sessionId = snapshot.sessionId
+                endsAtMillis = snapshot.endsAt
+                remainingSeconds = ((snapshot.endsAt - System.currentTimeMillis()) / 1000L).toInt().coerceAtLeast(0)
+                started = true
+            } else {
+                database.abandonCbtSession(snapshot.sessionId)
+            }
+        }
+        restoring = false
+    }
 
     fun finishSession() {
         if (!submitted && questions.isNotEmpty()) {
@@ -46,23 +82,28 @@ fun CbtScreen() {
                     selected != null && selected == question.correctPresentedIndex
                 )
             }
+            sessionId?.let { database.completeCbtSession(it, finalResult.correctAnswers) }
             result = finalResult
             submitted = true
             showSubmitDialog = false
         }
     }
 
-    LaunchedEffect(started, submitted) {
-        if (started && !submitted) {
-            while (remainingSeconds > 0 && !submitted) {
-                delay(1_000)
-                if (!submitted) remainingSeconds -= 1
+    LaunchedEffect(started, submitted, endsAtMillis) {
+        while (started && !submitted) {
+            val secondsLeft = ((endsAtMillis - System.currentTimeMillis()) / 1000L).toInt().coerceAtLeast(0)
+            remainingSeconds = secondsLeft
+            if (secondsLeft <= 0) {
+                finishSession()
+                break
             }
-            if (!submitted && remainingSeconds <= 0) finishSession()
+            delay(1_000)
         }
     }
 
-    if (!started) {
+    if (restoring) {
+        Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) { CircularProgressIndicator() }
+    } else if (!started) {
         Column(
             Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(20.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
@@ -81,11 +122,17 @@ fun CbtScreen() {
             }
             Button(
                 onClick = {
-                    questions = CbtSessionEngine.createQuestions(BiologyQuestionBank.all, CBT_QUESTION_COUNT)
+                    val generated = CbtSessionEngine.createQuestions(BiologyQuestionBank.all, CBT_QUESTION_COUNT)
+                    val now = System.currentTimeMillis()
+                    val newSessionId = UUID.randomUUID().toString()
+                    database.createCbtSession(newSessionId, "BIO", now, now + CBT_DURATION_SECONDS * 1000L, generated)
+                    questions = generated
                     answers.clear()
                     flags.clear()
                     currentIndex = 0
                     remainingSeconds = CBT_DURATION_SECONDS
+                    endsAtMillis = now + CBT_DURATION_SECONDS * 1000L
+                    sessionId = newSessionId
                     result = null
                     submitted = false
                     started = true
@@ -126,6 +173,8 @@ fun CbtScreen() {
                     answers.clear()
                     flags.clear()
                     result = null
+                    sessionId = null
+                    endsAtMillis = 0L
                 },
                 modifier = Modifier.fillMaxWidth()
             ) { Text("Return to CBT start") }
@@ -180,7 +229,10 @@ fun CbtScreen() {
                     Text(question.prompt, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
                     question.options.forEachIndexed { optionIndex, option ->
                         OutlinedButton(
-                            onClick = { answers[question.questionId] = optionIndex },
+                            onClick = {
+                                answers[question.questionId] = optionIndex
+                                sessionId?.let { database.saveCbtAnswer(it, question.questionId, optionIndex, flags[question.questionId] == true) }
+                            },
                             modifier = Modifier.fillMaxWidth(),
                             colors = ButtonDefaults.outlinedButtonColors(
                                 containerColor = if (answers[question.questionId] == optionIndex) MaterialTheme.colorScheme.secondaryContainer else MaterialTheme.colorScheme.surface
@@ -193,7 +245,11 @@ fun CbtScreen() {
             }
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 OutlinedButton(
-                    onClick = { flags[question.questionId] = flags[question.questionId] != true },
+                    onClick = {
+                        val nextFlag = flags[question.questionId] != true
+                        flags[question.questionId] = nextFlag
+                        sessionId?.let { database.saveCbtAnswer(it, question.questionId, answers[question.questionId], nextFlag) }
+                    },
                     modifier = Modifier.weight(1f)
                 ) { Text(if (flags[question.questionId] == true) "Unflag" else "Flag for review") }
                 OutlinedButton(
