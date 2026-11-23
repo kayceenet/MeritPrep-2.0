@@ -92,21 +92,6 @@ private fun MagnificationLab() {
     Text("The model calculates nominal magnification. Actual image quality also depends on resolution, illumination, alignment and specimen preparation.")
 }
 
-private enum class FoodSample(val label: String, val starch: Boolean, val reducingSugar: Boolean, val protein: Boolean, val lipid: Boolean) {
-    STARCH("Starch solution", true, false, false, false),
-    GLUCOSE("Glucose solution", false, true, false, false),
-    ALBUMEN("Egg albumen", false, false, true, false),
-    OIL("Vegetable oil", false, false, false, true),
-    MILK("Milk", false, true, true, true)
-}
-
-private enum class FoodReagent(val label: String) {
-    IODINE("Iodine test"),
-    BENEDICT("Benedict's test"),
-    BIURET("Biuret test"),
-    EMULSION("Ethanol emulsion test")
-}
-
 @Composable
 private fun BiologyLab() {
     var selected by remember { mutableIntStateOf(0) }
