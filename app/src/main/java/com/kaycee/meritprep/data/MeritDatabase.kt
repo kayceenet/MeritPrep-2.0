@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import org.json.JSONArray
 
-class MeritDatabase(context: Context) : SQLiteOpenHelper(context, "meritprep_local.db", null, 5) {
+class MeritDatabase(context: Context) : SQLiteOpenHelper(context, "meritprep_local.db", null, 6) {
     override fun onCreate(db: SQLiteDatabase) {
         db.execSQL("""
             CREATE TABLE topic_progress (
@@ -50,6 +50,7 @@ class MeritDatabase(context: Context) : SQLiteOpenHelper(context, "meritprep_loc
         createCompletedLessonsTable(db)
         createCbtTables(db)
         createMistakeTable(db)
+        createStudyPlanTables(db)
     }
 
     private fun createCompletedLessonsTable(db: SQLiteDatabase) {
@@ -70,6 +71,7 @@ class MeritDatabase(context: Context) : SQLiteOpenHelper(context, "meritprep_loc
         }
         if (oldVersion < 4) createCbtTables(db)
         if (oldVersion < 5) createMistakeTable(db)
+        if (oldVersion < 6) createStudyPlanTables(db)
     }
 
     private fun createCbtTables(db: SQLiteDatabase) {
@@ -470,6 +472,97 @@ class MeritDatabase(context: Context) : SQLiteOpenHelper(context, "meritprep_loc
                 )
             }
         }
+
+    private fun createStudyPlanTables(db: SQLiteDatabase) {
+        db.execSQL("""
+            CREATE TABLE IF NOT EXISTS study_plans (
+                plan_id TEXT PRIMARY KEY,
+                created_at INTEGER NOT NULL,
+                minutes_per_day INTEGER NOT NULL,
+                is_active INTEGER NOT NULL DEFAULT 1
+            )
+        """.trimIndent())
+        db.execSQL("""
+            CREATE TABLE IF NOT EXISTS study_plan_items (
+                item_id TEXT PRIMARY KEY,
+                plan_id TEXT NOT NULL,
+                day_index INTEGER NOT NULL,
+                topic_id TEXT NOT NULL,
+                topic_title TEXT NOT NULL,
+                activity_type TEXT NOT NULL,
+                estimated_minutes INTEGER NOT NULL,
+                is_completed INTEGER NOT NULL DEFAULT 0,
+                completed_at INTEGER
+            )
+        """.trimIndent())
+    }
+
+    fun createStudyPlan(planId: String, createdAt: Long, minutesPerDay: Int, items: List<StudyPlanItem>) {
+        val db = writableDatabase
+        db.beginTransaction()
+        try {
+            db.execSQL("UPDATE study_plans SET is_active = 0 WHERE is_active = 1")
+            val plan = ContentValues().apply {
+                put("plan_id", planId)
+                put("created_at", createdAt)
+                put("minutes_per_day", minutesPerDay)
+                put("is_active", 1)
+            }
+            db.insertOrThrow("study_plans", null, plan)
+            items.forEach { item ->
+                val row = ContentValues().apply {
+                    put("item_id", item.itemId)
+                    put("plan_id", planId)
+                    put("day_index", item.dayIndex)
+                    put("topic_id", item.topicId)
+                    put("topic_title", item.topicTitle)
+                    put("activity_type", item.activityType)
+                    put("estimated_minutes", item.estimatedMinutes)
+                    put("is_completed", 0)
+                }
+                db.insertOrThrow("study_plan_items", null, row)
+            }
+            db.setTransactionSuccessful()
+        } finally { db.endTransaction() }
+    }
+
+    fun getActiveStudyPlan(): StudyPlanSnapshot? {
+        val db = readableDatabase
+        val header = db.rawQuery(
+            "SELECT plan_id, created_at, minutes_per_day FROM study_plans WHERE is_active = 1 ORDER BY created_at DESC LIMIT 1",
+            null
+        ).use { cursor ->
+            if (!cursor.moveToFirst()) null else Triple(cursor.getString(0), cursor.getLong(1), cursor.getInt(2))
+        } ?: return null
+        val items = db.rawQuery(
+            """SELECT item_id, day_index, topic_id, topic_title, activity_type, estimated_minutes, is_completed
+               FROM study_plan_items WHERE plan_id = ? ORDER BY day_index, topic_title, activity_type""".trimIndent(),
+            arrayOf(header.first)
+        ).use { cursor ->
+            buildList {
+                while (cursor.moveToNext()) add(
+                    StudyPlanItem(
+                        itemId = cursor.getString(0),
+                        dayIndex = cursor.getInt(1),
+                        topicId = cursor.getString(2),
+                        topicTitle = cursor.getString(3),
+                        activityType = cursor.getString(4),
+                        estimatedMinutes = cursor.getInt(5),
+                        isCompleted = cursor.getInt(6) == 1
+                    )
+                )
+            }
+        }
+        return StudyPlanSnapshot(header.first, header.second, header.third, items)
+    }
+
+    fun setStudyPlanItemCompleted(itemId: String, completed: Boolean) {
+        val values = ContentValues().apply {
+            put("is_completed", if (completed) 1 else 0)
+            put("completed_at", if (completed) System.currentTimeMillis() else null as Long?)
+        }
+        writableDatabase.update("study_plan_items", values, "item_id = ?", arrayOf(itemId))
+    }
 
     fun getTopicProgressCount(): Int =
         readableDatabase.rawQuery("SELECT COUNT(*) FROM topic_progress", null).use { cursor ->
