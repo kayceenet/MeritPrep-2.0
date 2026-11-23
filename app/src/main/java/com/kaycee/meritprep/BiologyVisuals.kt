@@ -109,8 +109,8 @@ fun DoubleCirculationCard() {
             route.forEachIndexed { index, label ->
                 Surface(
                     color = when {
-                        label.contains("Right") || label.contains("Venae") -> MaterialTheme.colorScheme.tertiaryContainer
-                        label.contains("Left") || label == "Aorta" -> MaterialTheme.colorScheme.errorContainer
+                        label.contains("Right") || label.contains("Venae") || label == "Pulmonary artery" -> MaterialTheme.colorScheme.tertiaryContainer
+                        label.contains("Left") || label == "Aorta" || label == "Pulmonary veins" -> MaterialTheme.colorScheme.errorContainer
                         else -> MaterialTheme.colorScheme.surfaceVariant
                     },
                     shape = MaterialTheme.shapes.small
@@ -119,6 +119,7 @@ fun DoubleCirculationCard() {
                 }
                 if (index < route.lastIndex) Text("↓", Modifier.padding(start = 12.dp), fontWeight = FontWeight.Bold)
             }
+            Text("Teal marks deoxygenated blood; red marks oxygenated blood.", style = MaterialTheme.typography.labelMedium, fontWeight = FontWeight.SemiBold)
             Text("The pulmonary circuit carries blood between the heart and lungs. The systemic circuit carries blood between the heart and the rest of the body.", style = MaterialTheme.typography.bodySmall)
         }
     }
