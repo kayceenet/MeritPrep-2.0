@@ -46,6 +46,37 @@ object LearningCatalog {
             "Mitochondria contain the machinery for most stages of aerobic respiration and ATP production in eukaryotic cells."
         ),
         LearningTopic(
+            "bio-classification", "Classification and diversity of organisms", "BIO",
+            "Imagine being asked to identify every living thing in a forest. There are millions of kinds of organisms, and many look alike. Biologists solve this problem by classifying organisms: arranging them into groups using shared characteristics and evidence of relationships. Classification gives scientists a common language and helps us compare the diversity of life.",
+            listOf(
+                "Explain why biologists classify organisms",
+                "Distinguish classification, identification and naming",
+                "Arrange the main taxonomic ranks from broad to specific",
+                "Use binomial nomenclature correctly",
+                "Compare the broad features of the five traditional kingdoms",
+                "Distinguish major plant and animal groups using observable features"
+            ),
+            listOf(
+                "Why classification is useful" to "Classification organises the enormous variety of organisms into manageable groups. It helps us identify organisms, communicate accurately, compare similarities and differences, study evolutionary relationships and predict features shared by related organisms. A classification system is a scientific model: groups may be revised when new evidence, especially molecular evidence, becomes available.",
+                "Three words that mean different things" to "Classification is the arrangement of organisms into groups. Identification is the process of deciding which organism you have observed, using features or a key. Nomenclature is the formal system used to give organisms scientific names. For example, using a leaf key to identify a plant is identification; placing it in its family is classification; writing its accepted scientific name is nomenclature.",
+                "The taxonomic hierarchy" to "The familiar ranks, from broadest to most specific, are Kingdom, Phylum (called Division in many plant classifications), Class, Order, Family, Genus and Species. Remember the sequence as K–P–C–O–F–G–S. A kingdom contains many phyla; a phylum contains classes; each lower rank contains organisms with increasingly shared characteristics. A species is commonly treated as a group of organisms that can interbreed naturally to produce fertile offspring, although this definition does not fit every organism, especially asexual and fossil forms.",
+                "Scientific naming: binomial nomenclature" to "Each species is given a two-part scientific name: the genus name followed by the specific epithet. The genus begins with a capital letter; the specific epithet begins with a lower-case letter. Both words are italicised when typed, for example Homo sapiens; when handwritten, underline each word separately. After the first full mention, the genus may be abbreviated, as in H. sapiens. Scientific names reduce confusion caused by different local names for the same organism.",
+                "The five traditional kingdoms" to "In the traditional five-kingdom scheme, Monera includes prokaryotic organisms such as bacteria; they lack a membrane-bound nucleus. Protista includes diverse mainly unicellular eukaryotes such as Amoeba and many algae. Fungi are eukaryotes that absorb nutrients, commonly have chitin in their cell walls and reproduce by spores. Plantae are multicellular photosynthetic organisms with cellulose cell walls. Animalia are multicellular consumers whose cells lack cell walls. This is a syllabus-level framework; modern biology also uses domain-level classification and has revised the placement of some groups.",
+                "How to compare organisms" to "Do not classify an organism from one superficial feature alone. Compare several useful characteristics: cell type, number of cells, cell-wall composition, mode of nutrition, movement, body organisation and reproduction. For example, a mushroom is not a plant: it does not photosynthesise, obtains nutrients by absorption and has chitin-containing cell walls. A bacterium is not a tiny animal: it is prokaryotic and has no membrane-bound nucleus.",
+                "A first look at plant and animal diversity" to "Plants may be grouped by features such as vascular tissue, seeds and flowers. Mosses are non-vascular and reproduce by spores; ferns have vascular tissue but no seeds; conifers produce naked seeds, commonly in cones; flowering plants produce flowers and seeds enclosed in fruits. Animals are often introduced through major invertebrate groups and vertebrates. Invertebrates lack a vertebral column; vertebrates possess a backbone and include fish, amphibians, reptiles, birds and mammals. Use diagnostic features rather than size or habitat alone.",
+                "Viruses and the boundary of life" to "Viruses are acellular infectious agents: they are not made of cells and cannot reproduce independently. They contain genetic material (DNA or RNA) inside a protein coat, and some have an outer envelope. They replicate only inside suitable host cells using host machinery. For this reason, viruses are not placed in any of the five traditional kingdoms. Avoid calling a virus a bacterium or describing it as a cell.",
+                "How to answer classification questions" to "Read the question for the feature it asks about, then compare the options using that feature. If asked to identify a prokaryote, look for the absence of a membrane-bound nucleus. If asked to distinguish fungi from green plants, consider nutrition and cell-wall composition. For a naming question, check the two-part format and capitalisation. In a practical examination, describe visible evidence first and make an identification only when the evidence supports it."
+            ),
+            "Which statement best distinguishes a prokaryotic cell from a eukaryotic cell?",
+            listOf(
+                "A prokaryotic cell has no DNA",
+                "A prokaryotic cell has no membrane-bound nucleus",
+                "A prokaryotic cell always has a cellulose cell wall",
+                "A prokaryotic cell is always multicellular"
+            ), 1,
+            "Prokaryotic cells contain DNA and ribosomes but lack a membrane-bound nucleus. Their DNA is located in a nucleoid region."
+        ),
+        LearningTopic(
             "chem-atomic", "Atomic structure", "CHEM",
             "All ordinary matter is made of atoms. The arrangement and number of subatomic particles explain an element's identity, isotope and electrical charge.",
             listOf("Identify protons, neutrons and electrons", "Explain atomic number and mass number", "Determine the numbers of subatomic particles in simple atoms and ions"),
