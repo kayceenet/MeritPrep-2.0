@@ -109,7 +109,7 @@ A topic should only be marked mastered after the learner demonstrates performanc
 - [x] Add 240 original objective practice items across all 24 mapped Biology units (still awaiting independent review).
 - [x] Add ten original WAEC-style structured-response tasks with model responses and self-check marking points (independent review pending).
 - [ ] Add independently reviewed structured-response tasks and expand beyond the current original objective bank.
-- [x] Add an initial interactive plant/animal cell schematic with selectable organelle explanations (review pending).
+- [x] Add initial visuals for cell structure, photosynthesis, food-chain energy flow, monohybrid inheritance and mammalian double circulation (review pending).
 - [ ] Add reviewed, accessible diagrams and visual assets for the remaining lessons.
 - [x] Add interactive food-test (with prediction feedback), osmosis, microscope-magnification and quadrat-sampling learning prototypes.
 - [ ] Add specimen/practical tasks with reviewed marking rubrics and full WAEC practical assessment workflows.
