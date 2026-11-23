@@ -51,7 +51,8 @@ class StudyPlanGeneratorTest {
     @Test fun adaptiveBuildPreservesTheThreeActivitiesPerScheduledTopic() {
         val plan = StudyPlanGenerator.buildAdaptive(topics.take(3), emptyList(), 60, days = 2)
         assertEquals(9, plan.size)
-        assertEquals(3, plan.map { it.topicId }.toSet().size)\n        assertEquals(setOf("Learn lesson", "Practise questions", "Review flashcards"), plan.map { it.activityType }.toSet())
+        assertEquals(3, plan.map { it.topicId }.toSet().size)
+        assertEquals(setOf("Learn lesson", "Practise questions", "Review flashcards"), plan.map { it.activityType }.toSet())
     }
 
     @Test(expected = IllegalArgumentException::class)
