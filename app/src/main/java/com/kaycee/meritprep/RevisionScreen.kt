@@ -115,6 +115,15 @@ private val starterBiologyCards = listOf(
     RevisionCard("bio-rep-card-6","bio-reproduction","What do the ovule and ovary commonly develop into after fertilisation?","The ovule develops into a seed; the ovary commonly develops into a fruit.",0L),
     RevisionCard("bio-rep-card-7","bio-reproduction","Where does fertilisation usually occur in humans?","In the oviduct (fallopian tube).",0L),
     RevisionCard("bio-rep-card-8","bio-reproduction","What is the role of the placenta?","It allows exchange of gases, nutrients and wastes between maternal and foetal circulations, which normally remain separate.",0L)
+) + listOf(
+    RevisionCard("bio-grow-card-1","bio-growth","Distinguish growth from development.","Growth is a relatively permanent increase in size, dry mass or cell number. Development includes changes in structure and function, including differentiation.",0L),
+    RevisionCard("bio-grow-card-2","bio-growth","Name three processes involved in growth.","Cell division, cell enlargement and cell differentiation.",0L),
+    RevisionCard("bio-grow-card-3","bio-growth","Where does primary growth occur in plants?","At apical meristems near root and shoot tips.",0L),
+    RevisionCard("bio-grow-card-4","bio-growth","What three conditions are generally needed for seed germination?","Water, oxygen and a suitable temperature.",0L),
+    RevisionCard("bio-grow-card-5","bio-growth","What is imbibition?","The uptake of water by a dry seed at the start of germination.",0L),
+    RevisionCard("bio-grow-card-6","bio-growth","Distinguish epigeal from hypogeal germination.","Epigeal: cotyledons are raised above soil. Hypogeal: cotyledons remain below soil.",0L),
+    RevisionCard("bio-grow-card-7","bio-growth","What is one role of auxin?","Auxin influences cell elongation, apical dominance and tropic growth responses.",0L),
+    RevisionCard("bio-grow-card-8","bio-growth","Which plant hormone is associated with fruit ripening?","Ethylene, a gaseous plant hormone.",0L)
 )
 
 @Composable
