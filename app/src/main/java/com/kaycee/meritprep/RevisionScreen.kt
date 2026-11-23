@@ -169,6 +169,15 @@ private val starterBiologyCards = listOf(
     RevisionCard("bio-biome-card-6","bio-biomes","What is the Sahel?","A semi-arid transition with lower and less reliable rainfall and relatively sparse vegetation.",0L),
     RevisionCard("bio-biome-card-7","bio-biomes","Name two Nigerian montane areas.","The Mambilla Plateau and Obudu highlands are examples.",0L),
     RevisionCard("bio-biome-card-8","bio-biomes","Why are biome boundaries often gradual?","Rainfall, soil, altitude, land use and other local conditions vary continuously, creating transition zones.",0L)
+) + listOf(
+    RevisionCard("bio-pop-card-1","bio-populations","Define population density.","The number of individuals per unit area or volume.",0L),
+    RevisionCard("bio-pop-card-2","bio-populations","Which processes add individuals to a population?","Births and immigration.",0L),
+    RevisionCard("bio-pop-card-3","bio-populations","What is carrying capacity?","The population size an environment can support over time under prevailing conditions.",0L),
+    RevisionCard("bio-pop-card-4","bio-populations","What shape is associated with exponential population growth?","A J-shaped curve under idealised conditions.",0L),
+    RevisionCard("bio-pop-card-5","bio-populations","What shape is associated with logistic growth?","An S-shaped curve as growth slows near carrying capacity.",0L),
+    RevisionCard("bio-pop-card-6","bio-populations","Distinguish primary from secondary succession.","Primary succession begins where soil is absent or poorly developed; secondary succession occurs where soil remains after disturbance.",0L),
+    RevisionCard("bio-pop-card-7","bio-populations","What is a pioneer species?","An early coloniser of a newly available or disturbed habitat during succession.",0L),
+    RevisionCard("bio-pop-card-8","bio-populations","Calculate density for 240 seedlings in 60 m².","240 ÷ 60 = 4 seedlings per square metre.",0L)
 )
 
 @Composable
