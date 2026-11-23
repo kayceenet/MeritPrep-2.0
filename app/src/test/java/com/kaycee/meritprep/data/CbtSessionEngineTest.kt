@@ -27,6 +27,27 @@ class CbtSessionEngineTest {
         assertEquals(50, session.map { it.questionId }.toSet().size)
     }
 
+    @Test fun reportsTopicPerformanceAndPrioritisesTheLowestAccuracy() {
+        val questions = listOf(
+            PresentedQuestion("q1", "bio-cell", "Q1", listOf("A", "B"), 0, "E"),
+            PresentedQuestion("q2", "bio-cell", "Q2", listOf("A", "B"), 1, "E"),
+            PresentedQuestion("q3", "bio-transport", "Q3", listOf("A", "B"), 0, "E")
+        )
+        val performance = CbtSessionEngine.topicPerformance(
+            questions,
+            mapOf("q1" to 0, "q2" to 0, "q3" to 0)
+        )
+        assertEquals("bio-cell", performance.first().topicId)
+        assertEquals(2, performance.first().totalQuestions)
+        assertEquals(1, performance.first().correctAnswers)
+        assertEquals(50, performance.first().accuracyPercent)
+        assertEquals(100, performance.last().accuracyPercent)
+    }
+
+    @Test fun emptyTopicPerformanceIsAnEmptyList() {
+        assertTrue(CbtSessionEngine.topicPerformance(emptyList(), emptyMap()).isEmpty())
+    }
+
     @Test fun scoresCorrectAnswersAndUnansweredQuestions() {
         val pool = listOf(question("q1"), question("q2"), question("q3"))
         val session = CbtSessionEngine.createQuestions(pool, 3, Random(1))

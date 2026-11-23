@@ -9,6 +9,13 @@ data class CbtResult(
     val percentage: Int
 )
 
+data class CbtTopicPerformance(
+    val topicId: String,
+    val totalQuestions: Int,
+    val correctAnswers: Int,
+    val accuracyPercent: Int
+)
+
 object CbtSessionEngine {
     fun createQuestions(
         pool: List<AssessmentQuestion>,

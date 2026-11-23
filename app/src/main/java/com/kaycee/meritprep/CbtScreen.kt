@@ -190,6 +190,22 @@ fun CbtScreen(mode: BiologyCbtMode = BiologyCbtMode.JAMB_UTME) {
                 SummaryTile("Accuracy", "${summary.percentage}%", Modifier.weight(1f))
                 SummaryTile("Unanswered", summary.unanswered.toString(), Modifier.weight(1f))
             }
+            val topicPerformance = CbtSessionEngine.topicPerformance(questions, answers)
+            Text("Topic performance", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+            Text("Use this breakdown to choose what to revise next. Unanswered questions count as not correct.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            topicPerformance.forEach { performance ->
+                val topicTitle = LearningCatalog.find(performance.topicId)?.title ?: performance.topicId
+                Card(Modifier.fillMaxWidth()) {
+                    Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(5.dp)) {
+                        Text(topicTitle, fontWeight = FontWeight.SemiBold)
+                        Text("${performance.correctAnswers}/${performance.totalQuestions} correct · ${performance.accuracyPercent}%")
+                        LinearProgressIndicator(
+                            progress = { performance.accuracyPercent / 100f },
+                            modifier = Modifier.fillMaxWidth()
+                        )
+                    }
+                }
+            }
             Text("Answer review", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
             LazyColumn(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 itemsIndexed(questions, key = { _, q -> q.questionId }) { index, question ->
