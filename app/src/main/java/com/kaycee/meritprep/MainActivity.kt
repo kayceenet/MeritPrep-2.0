@@ -48,11 +48,11 @@ private fun MeritPrepApp() {
         Scaffold(
             bottomBar = {
                 NavigationBar {
-                    listOf("Home" to "home", "Learn" to "learn", "Practice" to "practice", "Profile" to "profile").forEach { (label, route) ->
+                    listOf("Home" to "home", "Learn" to "learn", "Practice" to "practice", "Labs" to "labs", "Profile" to "profile").forEach { (label, route) ->
                         NavigationBarItem(
                             selected = nav.currentBackStackEntryAsState().value?.destination?.route == route,
                             onClick = { nav.navigate(route) { launchSingleTop = true } },
-                            icon = { Icon(when(route) { "home" -> Icons.Default.Home; "learn" -> Icons.Default.MenuBook; "practice" -> Icons.Default.Quiz; else -> Icons.Default.Person }, contentDescription = label) },
+                            icon = { Icon(when(route) { "home" -> Icons.Default.Home; "learn" -> Icons.Default.MenuBook; "practice" -> Icons.Default.Quiz; "labs" -> Icons.Default.Science; else -> Icons.Default.Person }, contentDescription = label) },
                             label = { Text(label) }
                         )
                     }
@@ -67,6 +67,7 @@ private fun MeritPrepApp() {
                     SubjectScreen(subjects.firstOrNull { it.code == code } ?: subjects.first(), nav)
                 }
                 composable("practice") { PracticeScreenV2() }
+                composable("labs") { VirtualLabScreen() }
                 composable("profile") { ProfileScreen() }
             }
         }
