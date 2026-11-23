@@ -21,7 +21,8 @@ The current alpha is a working Android app built with Kotlin, Jetpack Compose an
 - A seven-day Biology study planner with configurable daily study targets, lesson/practice/flashcard activities, local completion tracking and shortcuts into the relevant screens.
 - Biology practical-learning prototypes for food tests with prediction feedback, osmosis, microscope magnification and quadrat-based ecological sampling.
 - Introductory Physics and Chemistry simulations for Ohm's law and solution concentration.
-- A learner profile with topic-level practice evidence, showing attempts, correct answers and lesson completion without falsely labelling a topic as mastered.
+- A learner profile with topic-level practice evidence and an objective-practice mastery indicator. The current threshold requires at least 10 attempts, 8 distinct questions, 2 study days and 80% correct.
+- An adaptive seven-day study plan that prioritises weaker, unattempted and less recently studied topics using recorded learner evidence.
 - Local recording of lesson completion, question attempts, revision schedules, theory responses, mistake-notebook entries and active CBT session answers.
 - Automated unit tests and a GitHub Actions debug-APK build.
 
@@ -34,7 +35,7 @@ This is an actively developed alpha, not a completed or officially endorsed exam
 - Theory self-check rubrics are learning aids, not official WAEC marking schemes or examiner marking.
 - The Biology CBT mock is a MeritPrep practice configuration, not an official JAMB paper or a full multi-subject JAMB simulation.
 - The syllabus map is a working mapping. It must be checked against the current official JAMB IBASS and WAEC materials before each examination cycle.
-- Adaptive scheduling based on weak topics, a complete WAEC practical examination system, cross-device synchronisation, teacher CMS and production security review remain in development.
+- The mastery indicator currently uses objective-question evidence only; it does not yet include WAEC theory, practical performance or a validated prediction model. A complete WAEC practical examination system, cross-device synchronisation, teacher CMS and production security review remain in development.
 - Other subjects currently have starter content, not complete syllabus coverage.
 
 ## Build locally
