@@ -742,7 +742,13 @@ fun LessonScreen(topicId: String) {
         Text(topic.subjectCode, style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
         Text(topic.title, style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
         Text(topic.introduction, style = MaterialTheme.typography.bodyLarge)
-        if (topic.id == "bio-cell") CellDiagramCard()
+        when (topic.id) {
+            "bio-cell" -> CellDiagramCard()
+            "bio-nutrition" -> PhotosynthesisFlowCard()
+            "bio-interactions" -> FoodChainDiagramCard()
+            "bio-heredity" -> PunnettSquareCard()
+            "bio-transport" -> DoubleCirculationCard()
+        }
         Card {
             Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 Text("By the end of this lesson, you should be able to", fontWeight = FontWeight.SemiBold)
