@@ -332,6 +332,30 @@ object LearningCatalog {
             "Insulin promotes uptake and storage of glucose, lowering blood glucose. Glucagon has the opposing effect and raises blood glucose when it is low."
         ),
         LearningTopic(
+            "bio-ecology-factors", "Factors affecting the distribution of organisms", "BIO",
+            "A mangrove crab, a rainforest tree and a grassland ant do not occur everywhere. Their distribution depends on the conditions they can tolerate and the resources they need. Ecology studies how organisms interact with one another and with their environment. This lesson explains the physical and living factors that influence where organisms are found.",
+            listOf(
+                "Define ecology, habitat, population, community and ecosystem",
+                "Distinguish abiotic from biotic environmental factors",
+                "Explain how selected environmental factors affect distribution",
+                "Identify instruments used to measure field conditions",
+                "Explain limiting factors and tolerance ranges"
+            ),
+            listOf(
+                "Ecology: organisms and their environment" to "Ecology is the study of interactions among organisms and between organisms and their physical environment. A habitat is the place where an organism lives. A population is a group of organisms of the same species living in an area at a particular time. A community consists of populations of different species in an area. An ecosystem includes the community and the non-living environment interacting as a system.",
+                "Abiotic and biotic factors" to "Abiotic factors are non-living physical or chemical conditions, including light intensity, temperature, rainfall, humidity, wind, pH, salinity, dissolved oxygen and soil properties. Biotic factors arise from living organisms and their interactions, including competition, predation, parasitism, disease, grazing and availability of food or pollinators. Both groups can affect survival, reproduction and distribution.",
+                "Light and temperature" to "Light provides energy for photosynthesis and can influence flowering, daily activity and behaviour. Temperature affects enzyme activity, metabolism, water loss and the ability to maintain body temperature. Each species has a range of conditions within which it can survive and reproduce. Extremes may reduce growth or cause death, while temperature and light can interact with water availability and other factors.",
+                "Water, humidity and wind" to "Rainfall and soil moisture influence plant growth and the availability of water for animals. Humidity affects evaporation and transpiration; high humidity can reduce the rate of water loss from surfaces. Wind can increase evaporation, affect pollination and seed dispersal, and alter the temperature experienced by organisms. Waterlogging can reduce oxygen available to plant roots, while drought can restrict photosynthesis and growth.",
+                "Soil, pH and salinity" to "Soil texture, structure, depth, mineral content, organic matter, drainage and water-holding capacity affect plant distribution. Soil pH influences nutrient availability and the activity of soil organisms. Salinity affects water uptake because high external salt concentration lowers water potential and may cause water stress. Different plants tolerate different soil and salinity conditions.",
+                "Biotic interactions" to "Competition occurs when organisms use the same limited resource, such as light, water, food or nesting sites. Predation is one organism capturing and consuming another. Parasitism benefits the parasite while harming the host. Mutualism benefits both partners, while commensalism benefits one without a clear effect on the other. These interactions can influence population size and where species occur.",
+                "Measuring environmental conditions" to "Use a thermometer to measure temperature, a rain gauge for rainfall, a hygrometer for relative humidity, a light meter for light intensity, a pH meter or indicator for acidity, and an anemometer for wind speed. Soil moisture meters can estimate soil water content. Record units, location, date, time and method. A single reading may not represent an entire habitat; repeat measurements and sample across relevant locations.",
+                "Limiting factors and tolerance" to "A limiting factor is a condition or resource that restricts growth, survival or distribution when it is in short supply or outside a suitable range. A species may have minimum, optimum and maximum tolerance levels for a factor. Distribution is usually influenced by several interacting factors rather than one variable alone. Correlation between an environmental factor and species abundance does not by itself prove that the factor caused the pattern."
+            ),
+            "Which instrument is used to measure relative humidity?",
+            listOf("Hygrometer","Rain gauge","Anemometer","Thermometer"), 0,
+            "A hygrometer measures humidity. A rain gauge measures rainfall, an anemometer measures wind speed and a thermometer measures temperature."
+        ),
+        LearningTopic(
             "chem-atomic", "Atomic structure", "CHEM",
             "All ordinary matter is made of atoms. The arrangement and number of subatomic particles explain an element's identity, isotope and electrical charge.",
             listOf("Identify protons, neutrons and electrons", "Explain atomic number and mass number", "Determine the numbers of subatomic particles in simple atoms and ions"),
