@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import org.json.JSONArray
 
-class MeritDatabase(context: Context) : SQLiteOpenHelper(context, "meritprep_local.db", null, 4) {
+class MeritDatabase(context: Context) : SQLiteOpenHelper(context, "meritprep_local.db", null, 5) {
     override fun onCreate(db: SQLiteDatabase) {
         db.execSQL("""
             CREATE TABLE topic_progress (
@@ -49,6 +49,7 @@ class MeritDatabase(context: Context) : SQLiteOpenHelper(context, "meritprep_loc
         """.trimIndent())
         createCompletedLessonsTable(db)
         createCbtTables(db)
+        createMistakeTable(db)
     }
 
     private fun createCompletedLessonsTable(db: SQLiteDatabase) {
@@ -68,6 +69,7 @@ class MeritDatabase(context: Context) : SQLiteOpenHelper(context, "meritprep_loc
             db.execSQL("ALTER TABLE revision_cards ADD COLUMN lapses INTEGER NOT NULL DEFAULT 0")
         }
         if (oldVersion < 4) createCbtTables(db)
+        if (oldVersion < 5) createMistakeTable(db)
     }
 
     private fun createCbtTables(db: SQLiteDatabase) {
@@ -104,6 +106,72 @@ class MeritDatabase(context: Context) : SQLiteOpenHelper(context, "meritprep_loc
             )
         """.trimIndent())
     }
+
+    private fun createMistakeTable(db: SQLiteDatabase) {
+        db.execSQL("""
+            CREATE TABLE IF NOT EXISTS mistake_notebook (
+                mistake_id TEXT PRIMARY KEY,
+                question_id TEXT NOT NULL,
+                topic_id TEXT NOT NULL,
+                prompt TEXT NOT NULL,
+                selected_answer TEXT NOT NULL,
+                correct_answer TEXT NOT NULL,
+                explanation TEXT NOT NULL,
+                created_at INTEGER NOT NULL,
+                is_resolved INTEGER NOT NULL DEFAULT 0
+            )
+        """.trimIndent())
+    }
+
+    fun saveMistake(note: MistakeNote) {
+        val values = ContentValues().apply {
+            put("mistake_id", note.mistakeId)
+            put("question_id", note.questionId)
+            put("topic_id", note.topicId)
+            put("prompt", note.prompt)
+            put("selected_answer", note.selectedAnswer)
+            put("correct_answer", note.correctAnswer)
+            put("explanation", note.explanation)
+            put("created_at", note.createdAt)
+            put("is_resolved", if (note.isResolved) 1 else 0)
+        }
+        writableDatabase.insertOrThrow("mistake_notebook", null, values)
+    }
+
+    fun getMistakes(includeResolved: Boolean = false, limit: Int = 200): List<MistakeNote> {
+        val selection = if (includeResolved) "" else "WHERE is_resolved = 0"
+        return readableDatabase.rawQuery(
+            """SELECT mistake_id, question_id, topic_id, prompt, selected_answer, correct_answer,
+                      explanation, created_at, is_resolved
+               FROM mistake_notebook $selection ORDER BY created_at DESC LIMIT ?""".trimIndent(),
+            arrayOf(limit.coerceIn(1, 1000).toString())
+        ).use { cursor ->
+            buildList {
+                while (cursor.moveToNext()) add(
+                    MistakeNote(
+                        mistakeId = cursor.getString(0),
+                        questionId = cursor.getString(1),
+                        topicId = cursor.getString(2),
+                        prompt = cursor.getString(3),
+                        selectedAnswer = cursor.getString(4),
+                        correctAnswer = cursor.getString(5),
+                        explanation = cursor.getString(6),
+                        createdAt = cursor.getLong(7),
+                        isResolved = cursor.getInt(8) == 1
+                    )
+                )
+            }
+        }
+    }
+
+    fun setMistakeResolved(mistakeId: String, resolved: Boolean) {
+        val values = ContentValues().apply { put("is_resolved", if (resolved) 1 else 0) }
+        writableDatabase.update("mistake_notebook", values, "mistake_id = ?", arrayOf(mistakeId))
+    }
+
+    fun getUnresolvedMistakeCount(): Int =
+        readableDatabase.rawQuery("SELECT COUNT(*) FROM mistake_notebook WHERE is_resolved = 0", null)
+            .use { if (it.moveToFirst()) it.getInt(0) else 0 }
 
     fun recordQuestionAttempt(topicId: String, isCorrect: Boolean, studiedAt: Long = System.currentTimeMillis()) {
         val db = writableDatabase
@@ -331,6 +399,7 @@ class MeritDatabase(context: Context) : SQLiteOpenHelper(context, "meritprep_loc
         sessionId: String,
         score: Int,
         attempts: List<Pair<String, Boolean>>,
+        mistakes: List<MistakeNote> = emptyList(),
         submittedAt: Long = System.currentTimeMillis()
     ) {
         val db = writableDatabase
@@ -351,6 +420,20 @@ class MeritDatabase(context: Context) : SQLiteOpenHelper(context, "meritprep_loc
                          last_studied = excluded.last_studied""".trimIndent(),
                     arrayOf(topicId, if (isCorrect) 1 else 0, submittedAt)
                 )
+            }
+            mistakes.forEach { note ->
+                val mistakeValues = ContentValues().apply {
+                    put("mistake_id", note.mistakeId)
+                    put("question_id", note.questionId)
+                    put("topic_id", note.topicId)
+                    put("prompt", note.prompt)
+                    put("selected_answer", note.selectedAnswer)
+                    put("correct_answer", note.correctAnswer)
+                    put("explanation", note.explanation)
+                    put("created_at", note.createdAt)
+                    put("is_resolved", if (note.isResolved) 1 else 0)
+                }
+                db.insertOrThrow("mistake_notebook", null, mistakeValues)
             }
             val values = ContentValues().apply {
                 put("status", "SUBMITTED")
