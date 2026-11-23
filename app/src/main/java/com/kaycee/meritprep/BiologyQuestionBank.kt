@@ -341,4 +341,31 @@ object BiologyQuestionBank {
         AssessmentQuestion("bio-evo-e-010","bio-evolution-evidence","Which statement best describes evolutionary history?",listOf("Evolution produces branching lineages rather than a single ladder of progress","All organisms evolve towards humans","Every lineage becomes more complex over time","Evolution has one predetermined final goal"),0,"Evolution is branching and has no predetermined goal. Different lineages evolve in different ways according to their histories and environments.","MeritPrep original practice item · Evolutionary trends",false)
     )
 
+
+    val all: List<AssessmentQuestion> = listOf(
+        cellBiology,
+        classification,
+        adaptation,
+        plantAnatomy,
+        nutrition,
+        transport,
+        respiration,
+        excretion,
+        support,
+        reproduction,
+        growth,
+        coordination,
+        ecologyFactors,
+        ecologyInteractions,
+        habitats,
+        nigerianBiomes,
+        populations,
+        soil,
+        humanEnvironment,
+        variation,
+        heredity,
+        biotechnology,
+        evolutionTheory,
+        evolutionEvidence
+    ).flatten()
 }
