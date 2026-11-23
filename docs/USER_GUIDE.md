@@ -18,7 +18,7 @@ The app does not require an account or internet connection for its current local
 1. Open **Learn**, then choose **Biology**.
 2. Select a syllabus unit.
 3. Read the lesson sections in order. The drafts are written for beginners and include definitions, examples and exam connections.
-4. Use the interactive visuals in the cell, nutrition, interaction, heredity and transport lessons.
+4. Use the interactive visuals in the cell, nutrition, interaction, heredity, plant transport, excretion, reproduction and evolution lessons.
 5. Answer the understanding check. The lesson can only be marked complete after the correct answer is selected.
 6. Use **My lesson notes** to save your own explanations, questions or examples for that topic. Notes are stored locally on the device. Use **Save this lesson** to add the topic to your saved-lessons list, which is available from Home.
 7. Lesson completion records that the lesson was completed; it does not automatically mean the topic is mastered.

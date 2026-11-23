@@ -147,3 +147,114 @@ private fun PunnettCell(value: String, header: Boolean) {
         }
     }
 }
+
+
+@Composable
+fun PlantTransportCard() {
+    Card(Modifier.fillMaxWidth()) {
+        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(9.dp)) {
+            Text("Transport in plants", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+            Text("Water and mineral ions mainly travel in xylem. Sugars and other organic solutes move through phloem by translocation.")
+            Text("Water pathway", fontWeight = FontWeight.SemiBold)
+            Row(Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                FlowLabel("Soil", "Water", MaterialTheme.colorScheme.tertiaryContainer)
+                Text("→", fontWeight = FontWeight.Bold)
+                FlowLabel("Root hair", "Absorption", MaterialTheme.colorScheme.surfaceVariant)
+                Text("→", fontWeight = FontWeight.Bold)
+                FlowLabel("Xylem", "Water + ions", MaterialTheme.colorScheme.secondaryContainer)
+                Text("→", fontWeight = FontWeight.Bold)
+                FlowLabel("Leaf", "Transpiration", MaterialTheme.colorScheme.tertiaryContainer)
+            }
+            Text("Food pathway", fontWeight = FontWeight.SemiBold)
+            Row(Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                FlowLabel("Mature leaf", "Source", MaterialTheme.colorScheme.tertiaryContainer)
+                Text("⇄", fontWeight = FontWeight.Bold)
+                FlowLabel("Phloem", "Translocation", MaterialTheme.colorScheme.secondaryContainer)
+                Text("⇄", fontWeight = FontWeight.Bold)
+                FlowLabel("Root / fruit", "Sink", MaterialTheme.colorScheme.surfaceVariant)
+            }
+            Text("Xylem transport is mainly upward from roots. Phloem moves solutes from sources to sinks; movement can occur in different directions in different sieve tubes.", style = MaterialTheme.typography.bodySmall)
+        }
+    }
+}
+
+@Composable
+fun NephronFlowCard() {
+    val stages = listOf(
+        "Glomerulus and Bowman's capsule" to "Pressure-driven ultrafiltration moves water and small dissolved substances into the filtrate. Blood cells and most large plasma proteins remain in the blood.",
+        "Proximal convoluted tubule" to "Selective reabsorption returns all glucose in a healthy kidney, amino acids, much of the water and many useful ions to the blood.",
+        "Loop of Henle" to "The loop helps establish a concentration gradient in the kidney medulla, supporting the production of concentrated urine.",
+        "Distal convoluted tubule" to "Further selective reabsorption and secretion help regulate salts, pH and the composition of the filtrate.",
+        "Collecting duct" to "Water reabsorption is adjusted partly by antidiuretic hormone (ADH). The remaining fluid passes towards the renal pelvis as urine."
+    )
+    Card(Modifier.fillMaxWidth()) {
+        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            Text("A simplified nephron pathway", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+            Text("Follow the filtrate from the blood filtration step to the collecting duct.")
+            stages.forEachIndexed { index, stage ->
+                Surface(
+                    color = if (index == 0 || index == stages.lastIndex) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.surfaceVariant,
+                    shape = MaterialTheme.shapes.medium
+                ) {
+                    Column(Modifier.fillMaxWidth().padding(11.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                        Text("${index + 1}. ${stage.first}", fontWeight = FontWeight.SemiBold)
+                        Text(stage.second, style = MaterialTheme.typography.bodySmall)
+                    }
+                }
+                if (index < stages.lastIndex) Text("↓", Modifier.padding(start = 12.dp), fontWeight = FontWeight.Bold)
+            }
+            Text("The nephron diagram is simplified. Real kidney function also depends on blood flow, hormones and exchange between tubules and surrounding capillaries.", style = MaterialTheme.typography.bodySmall)
+        }
+    }
+}
+
+@Composable
+fun FlowerReproductionCard() {
+    Card(Modifier.fillMaxWidth()) {
+        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(9.dp)) {
+            Text("Sexual reproduction in a flowering plant", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+            Text("Pollination is the transfer of pollen from anther to stigma. Fertilisation happens later, when a male nucleus fuses with the egg nucleus in an ovule.")
+            val route = listOf(
+                "Anther" to "Produces pollen grains",
+                "Stigma" to "Receives pollen during pollination",
+                "Style" to "Pollen tube grows towards the ovary",
+                "Ovary and ovule" to "Male nucleus fuses with the egg nucleus"
+            )
+            route.forEachIndexed { index, step ->
+                Surface(color = MaterialTheme.colorScheme.surfaceVariant, shape = MaterialTheme.shapes.medium) {
+                    Column(Modifier.fillMaxWidth().padding(11.dp), verticalArrangement = Arrangement.spacedBy(3.dp)) {
+                        Text(step.first, fontWeight = FontWeight.Bold)
+                        Text(step.second, style = MaterialTheme.typography.bodySmall)
+                    }
+                }
+                if (index < route.lastIndex) Text("↓", Modifier.padding(start = 12.dp), fontWeight = FontWeight.Bold)
+            }
+            Text("After fertilisation, the ovule develops into a seed and the ovary usually develops into a fruit.", style = MaterialTheme.typography.bodySmall)
+        }
+    }
+}
+
+@Composable
+fun NaturalSelectionCard() {
+    val stages = listOf(
+        "Variation" to "Individuals in a population differ. Some differences are inherited.",
+        "Selection pressure" to "A factor such as predation, disease or limited food affects survival or reproduction.",
+        "Differential reproduction" to "Individuals with advantageous inherited traits may leave more offspring in that environment.",
+        "Population change" to "Over generations, the associated inherited traits can become more common."
+    )
+    Card(Modifier.fillMaxWidth()) {
+        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            Text("Natural selection over generations", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+            stages.forEachIndexed { index, stage ->
+                Surface(color = if (index == stages.lastIndex) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.surfaceVariant, shape = MaterialTheme.shapes.medium) {
+                    Column(Modifier.fillMaxWidth().padding(11.dp), verticalArrangement = Arrangement.spacedBy(3.dp)) {
+                        Text("${index + 1}. ${stage.first}", fontWeight = FontWeight.SemiBold)
+                        Text(stage.second, style = MaterialTheme.typography.bodySmall)
+                    }
+                }
+                if (index < stages.lastIndex) Text("↓", Modifier.padding(start = 12.dp), fontWeight = FontWeight.Bold)
+            }
+            Text("Natural selection does not occur because organisms decide to change. Populations evolve as inherited variants contribute differently to later generations.", style = MaterialTheme.typography.bodySmall)
+        }
+    }
+}

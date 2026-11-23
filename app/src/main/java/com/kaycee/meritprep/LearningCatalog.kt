@@ -758,7 +758,13 @@ fun LessonScreen(topicId: String) {
             "bio-nutrition" -> PhotosynthesisFlowCard()
             "bio-interactions" -> FoodChainDiagramCard()
             "bio-heredity" -> PunnettSquareCard()
-            "bio-transport" -> DoubleCirculationCard()
+            "bio-transport" -> {
+                PlantTransportCard()
+                DoubleCirculationCard()
+            }
+            "bio-excretion" -> NephronFlowCard()
+            "bio-reproduction" -> FlowerReproductionCard()
+            "bio-evolution-theory" -> NaturalSelectionCard()
         }
         Card {
             Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
