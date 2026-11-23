@@ -456,6 +456,31 @@ object LearningCatalog {
             "Population density = number of individuals ÷ area = 240 ÷ 60 = 4 seedlings per square metre."
         ),
         LearningTopic(
+            "bio-soil", "Soil ecology and conservation", "BIO",
+            "Soil is more than loose material beneath our feet. It contains mineral particles, organic matter, water, air and living organisms. Its structure influences plant growth, water movement and the organisms that can live in it. This lesson compares common soil types and explains how soil can be tested, degraded and conserved.",
+            listOf(
+                "Describe the main components of soil",
+                "Compare sandy, clayey and loamy soils",
+                "Explain soil texture, porosity, permeability and capillarity",
+                "Describe soil horizons and the role of humus",
+                "Explain how soil properties affect organisms and plant growth",
+                "Identify causes of soil degradation and methods of conservation"
+            ),
+            listOf(
+                "What soil contains" to "Soil contains mineral particles derived from rock, organic matter from living and dead organisms, water, air and a diverse community of organisms. Soil organisms include bacteria, fungi, earthworms, insects and other invertebrates. They contribute to decomposition, nutrient cycling, soil structure and aeration. The proportions of air and water vary with soil texture, structure, drainage and recent rainfall.",
+                "Soil texture: sand, silt and clay" to "Soil texture depends on the relative proportions of sand, silt and clay particles. Sandy soils have relatively large particles and large pore spaces; water drains quickly and nutrients may be leached. Clayey soils have very small particles and can retain much water and nutrients, but may drain and aerate poorly when compacted or waterlogged. Loam contains a balanced mixture of particle sizes and often supports good cultivation, although its properties still depend on organic matter and structure.",
+                "Porosity, permeability and capillarity" to "Porosity describes the proportion of soil volume made up of pore spaces. Permeability describes how easily water or air passes through connected pores. Capillarity is the movement of water through small spaces due to adhesion, cohesion and surface tension. A soil may have high total porosity but low permeability if many pores are tiny or poorly connected. Soil structure and compaction affect these properties.",
+                "Soil profile and horizons" to "A soil profile is a vertical section showing layers called horizons. A typical profile may include an organic surface layer, topsoil rich in mineral particles and organic matter, subsoil with accumulated materials, and weathered parent material above bedrock. The depth and clarity of horizons vary among soils and climates. Do not assume every soil has every horizon equally developed.",
+                "Humus, fertility and soil organisms" to "Humus is relatively stable organic matter formed during decomposition. It can improve soil structure, water retention and nutrient supply. Decomposers break down organic residues and release nutrients; earthworms mix soil and create channels that improve aeration and drainage. Soil fertility depends on nutrient availability, pH, organic matter, water, structure and biological activity, not on colour alone.",
+                "Soil tests and field investigation" to "Soil texture can be estimated by feel or investigated by settling particles in water, although field methods have limitations. pH can be tested with indicator paper or a calibrated meter. Infiltration tests estimate how quickly water enters soil; moisture sensors estimate water content. For a fair comparison, collect samples from defined depths and locations, use consistent methods, repeat measurements and record units and conditions.",
+                "Soil degradation" to "Soil can be degraded by erosion, nutrient depletion, salinisation, compaction, contamination, deforestation, overgrazing and poorly managed irrigation. Water erosion removes topsoil through splash, sheet, rill and gully processes. Wind erosion can remove dry, exposed particles. Loss of topsoil reduces fertility and can increase sedimentation in rivers and reservoirs.",
+                "Soil conservation" to "Conservation methods include maintaining vegetation cover, mulching, cover crops, contour farming, terracing on suitable slopes, windbreaks, reduced tillage, controlled grazing, adding appropriate organic matter and managing irrigation to prevent salinisation. The best method depends on slope, rainfall, soil type, land use and local conditions. Conservation should reduce erosion while maintaining soil structure and fertility."
+            ),
+            "Which soil type generally has the largest particles and the fastest drainage?",
+            listOf("Sandy soil","Clayey soil","Peat only","Compacted clay"), 0,
+            "Sandy soil has relatively large particles and pore spaces, so water generally drains more quickly than in clayey soil."
+        ),
+        LearningTopic(
             "chem-atomic", "Atomic structure", "CHEM",
             "All ordinary matter is made of atoms. The arrangement and number of subatomic particles explain an element's identity, isotope and electrical charge.",
             listOf("Identify protons, neutrons and electrons", "Explain atomic number and mass number", "Determine the numbers of subatomic particles in simple atoms and ions"),
