@@ -13,7 +13,7 @@ import com.kaycee.meritprep.data.MistakeNote
 import java.util.UUID
 
 @Composable
-fun PracticeScreenV2(onStartCbt: () -> Unit = {}, onStartTheory: () -> Unit = {}) {
+fun PracticeScreenV2(onStartCbt: () -> Unit = {}, onStartTheory: () -> Unit = {}, onOpenMistakes: () -> Unit = {}) {
     val context = LocalContext.current
     val database = remember(context) { MeritDatabase(context) }
     val biologyTopics = remember { LearningCatalog.forSubject("BIO") }
