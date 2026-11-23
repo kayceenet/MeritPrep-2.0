@@ -76,6 +76,7 @@ private fun MeritPrepApp() {
                     LessonScreen(entry.arguments?.getString("topicId").orEmpty())
                 }
                 composable("practice") { PracticeScreenV2() }
+                composable("review") { RevisionScreen() }
                 composable("labs") { VirtualLabScreen() }
                 composable("profile") { ProfileScreen() }
             }
@@ -97,6 +98,7 @@ private fun HomeScreen(nav: NavHostController) {
                     Text("Your study workspace", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
                     Text("Continue learning, review difficult topics and practise for your examinations.")
                     Button(onClick = { nav.navigate("learn") }) { Text("Explore subjects") }
+                    OutlinedButton(onClick = { nav.navigate("review") }) { Text("Start Biology revision") }
                 }
             }
         }
