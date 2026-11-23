@@ -481,6 +481,32 @@ object LearningCatalog {
             "Sandy soil has relatively large particles and pore spaces, so water generally drains more quickly than in clayey soil."
         ),
         LearningTopic(
+            "bio-environment", "Humans, health and the environment", "BIO",
+            "Human health depends on more than the absence of disease. Safe water, sanitation, clean air, balanced nutrition, vaccination and healthy ecosystems all influence well-being. This lesson explains how infectious diseases spread, how communities reduce risk and how pollution and habitat loss affect people and other organisms.",
+            listOf(
+                "Distinguish communicable and non-communicable diseases",
+                "Identify major pathogen groups and routes of transmission",
+                "Explain the roles of vectors, hosts and reservoirs",
+                "Describe prevention, sanitation, vaccination and responsible medicine use",
+                "Identify major forms and effects of pollution",
+                "Explain conservation and sustainable environmental practices"
+            ),
+            listOf(
+                "Communicable and non-communicable diseases" to "Communicable diseases are caused by infectious agents and can spread directly or indirectly between hosts. Non-communicable diseases are not transmitted from person to person; examples include many cardiovascular diseases, cancers and inherited disorders. Risk factors for non-communicable disease may include genetics, age, diet, physical activity, tobacco exposure and environmental conditions.",
+                "Pathogens and routes of transmission" to "Pathogens include bacteria, viruses, protozoa, fungi and parasitic worms. Transmission may occur through respiratory droplets or aerosols, contaminated food or water, direct contact, blood and other body fluids, or vectors. The route depends on the pathogen. Safe water, food hygiene, ventilation, handwashing, appropriate protective measures and infection prevention can interrupt transmission.",
+                "Vectors, hosts and reservoirs" to "A vector is an organism that transmits a pathogen between hosts; female Anopheles mosquitoes transmit malaria parasites. A host is an organism in which a pathogen lives or reproduces. A reservoir is a human, animal or environmental source in which an infectious agent is normally maintained. Not every insect is a vector, and not every disease is vector-borne. Vector control may include removing breeding sites, using insecticide-treated nets where recommended and applying locally approved control measures.",
+                "Prevention and vaccination" to "Disease prevention includes personal hygiene, safe water, sanitation, food safety, vaccination, vector control, early diagnosis and appropriate treatment. Vaccines expose the immune system to an antigen or instructions for producing an antigen, helping it develop immune memory without requiring the person to experience the full disease. Vaccine schedules and recommendations vary by age, location and current public-health guidance; follow official health advice.",
+                "Medicines and antimicrobial resistance" to "Antibiotics act against bacteria, not viruses, so they do not treat common viral infections such as influenza. Antiviral medicines act against selected viruses; antifungal and antiparasitic medicines target other pathogen groups. Misuse or unnecessary use of antimicrobials can select for resistant organisms. Use medicines only as prescribed or directed by qualified health professionals, and do not share leftover antibiotics.",
+                "Water, sanitation and community health" to "Contaminated water can transmit pathogens that cause diarrhoeal diseases. Safe drinking water, proper sewage disposal, handwashing with soap, food hygiene and protection of water sources reduce risk. Open defaecation and poorly managed waste can contaminate soil and water. Public-health measures work best when supported by accessible facilities, community participation and reliable health information.",
+                "Pollution and its effects" to "Air pollution can come from vehicle exhaust, industrial emissions, burning waste and household fuels; it can affect respiratory and cardiovascular health. Water pollution may result from sewage, agricultural runoff, oil spills and industrial discharge. Soil pollution can arise from chemicals, heavy metals and poorly managed waste. Noise pollution can affect hearing, sleep and stress. Effects depend on the pollutant, dose, duration and exposure route.",
+                "Climate, biodiversity and environmental health" to "Climate change can alter heat exposure, rainfall, water availability, crop productivity and the distribution of some disease vectors. Habitat destruction and biodiversity loss can disrupt ecosystem services such as pollination, water purification and soil formation. Environmental effects are complex; avoid claiming that one environmental change causes every disease outbreak. Risk depends on ecology, infrastructure, behaviour and public-health systems.",
+                "Conservation and responsible action" to "Conservation protects species, habitats and ecosystem functions. Approaches include protected areas, restoration, sustainable harvesting, pollution control, waste reduction, erosion control and environmental education. Individuals can reduce litter, conserve water, dispose of waste safely and support evidence-based community programmes. Effective solutions should be adapted to local ecological and social conditions."
+            ),
+            "Which medicine group is specifically used to treat bacterial infections rather than viral infections?",
+            listOf("Antibiotics","Antihistamines","Antacids","Analgesics"), 0,
+            "Antibiotics act against bacteria. They do not treat viral infections, and their unnecessary use contributes to antimicrobial resistance."
+        ),
+        LearningTopic(
             "chem-atomic", "Atomic structure", "CHEM",
             "All ordinary matter is made of atoms. The arrangement and number of subatomic particles explain an element's identity, isotope and electrical charge.",
             listOf("Identify protons, neutrons and electrons", "Explain atomic number and mass number", "Determine the numbers of subatomic particles in simple atoms and ions"),
