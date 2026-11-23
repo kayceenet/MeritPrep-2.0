@@ -9,6 +9,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.kaycee.meritprep.data.AssessmentEngine
 import com.kaycee.meritprep.data.MeritDatabase
+import com.kaycee.meritprep.data.MistakeNote
+import java.util.UUID
 
 @Composable
 fun PracticeScreenV2(onStartCbt: () -> Unit = {}, onStartTheory: () -> Unit = {}) {
@@ -153,6 +155,19 @@ fun PracticeScreenV2(onStartCbt: () -> Unit = {}, onStartTheory: () -> Unit = {}
                     onClick = {
                         val correct = selectedOption == question.correctPresentedIndex
                         database.recordQuestionAttempt(question.topicId, correct)
+                        if (!correct) database.saveMistake(
+                            MistakeNote(
+                                mistakeId = UUID.randomUUID().toString(),
+                                questionId = question.questionId,
+                                topicId = question.topicId,
+                                prompt = question.prompt,
+                                selectedAnswer = question.options[selectedOption],
+                                correctAnswer = question.options[question.correctPresentedIndex],
+                                explanation = question.explanation,
+                                createdAt = System.currentTimeMillis(),
+                                isResolved = false
+                            )
+                        )
                         if (correct) score++
                         checked = true
                     }
