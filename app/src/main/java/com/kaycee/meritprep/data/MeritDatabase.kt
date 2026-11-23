@@ -175,18 +175,48 @@ class MeritDatabase(context: Context) : SQLiteOpenHelper(context, "meritprep_loc
         readableDatabase.rawQuery("SELECT COUNT(*) FROM mistake_notebook WHERE is_resolved = 0", null)
             .use { if (it.moveToFirst()) it.getInt(0) else 0 }
 
+    private fun incrementTopicProgress(
+        db: SQLiteDatabase,
+        topicId: String,
+        questionAttempts: Int = 0,
+        questionsCorrect: Int = 0,
+        lessonsCompleted: Int = 0,
+        studiedAt: Long = System.currentTimeMillis()
+    ) {
+        val exists = db.rawQuery(
+            "SELECT 1 FROM topic_progress WHERE topic_id = ? LIMIT 1",
+            arrayOf(topicId)
+        ).use { it.moveToFirst() }
+        if (exists) {
+            db.execSQL(
+                """UPDATE topic_progress SET
+                     questions_attempted = questions_attempted + ?,
+                     questions_correct = questions_correct + ?,
+                     lessons_completed = lessons_completed + ?,
+                     last_studied = ?
+                   WHERE topic_id = ?""".trimIndent(),
+                arrayOf(questionAttempts, questionsCorrect, lessonsCompleted, studiedAt, topicId)
+            )
+        } else {
+            val values = ContentValues().apply {
+                put("topic_id", topicId)
+                put("questions_attempted", questionAttempts)
+                put("questions_correct", questionsCorrect)
+                put("lessons_completed", lessonsCompleted)
+                put("last_studied", studiedAt)
+            }
+            db.insertOrThrow("topic_progress", null, values)
+        }
+    }
+
     fun recordQuestionAttempt(topicId: String, isCorrect: Boolean, studiedAt: Long = System.currentTimeMillis()) {
         val db = writableDatabase
         db.beginTransaction()
         try {
-            db.execSQL(
-                """INSERT INTO topic_progress(topic_id, questions_attempted, questions_correct, last_studied)
-                   VALUES(?, 1, ?, ?)
-                   ON CONFLICT(topic_id) DO UPDATE SET
-                     questions_attempted = questions_attempted + 1,
-                     questions_correct = questions_correct + excluded.questions_correct,
-                     last_studied = excluded.last_studied""".trimIndent(),
-                arrayOf(topicId, if (isCorrect) 1 else 0, studiedAt)
+            incrementTopicProgress(
+                db, topicId, questionAttempts = 1,
+                questionsCorrect = if (isCorrect) 1 else 0,
+                studiedAt = studiedAt
             )
             db.setTransactionSuccessful()
         } finally {
@@ -207,14 +237,7 @@ class MeritDatabase(context: Context) : SQLiteOpenHelper(context, "meritprep_loc
                 "completed_lessons", null, values, SQLiteDatabase.CONFLICT_IGNORE
             )
             if (inserted != -1L) {
-                db.execSQL(
-                    """INSERT INTO topic_progress(topic_id, lessons_completed, last_studied)
-                       VALUES(?, 1, ?)
-                       ON CONFLICT(topic_id) DO UPDATE SET
-                         lessons_completed = lessons_completed + 1,
-                         last_studied = excluded.last_studied""".trimIndent(),
-                    arrayOf(lessonId, studiedAt)
-                )
+                incrementTopicProgress(db, lessonId, lessonsCompleted = 1, studiedAt = studiedAt)
             }
             db.setTransactionSuccessful()
         } finally {
@@ -413,14 +436,10 @@ class MeritDatabase(context: Context) : SQLiteOpenHelper(context, "meritprep_loc
             ).use { it.moveToFirst() }
             if (!isActive) return
             attempts.forEach { (topicId, isCorrect) ->
-                db.execSQL(
-                    """INSERT INTO topic_progress(topic_id, questions_attempted, questions_correct, last_studied)
-                       VALUES(?, 1, ?, ?)
-                       ON CONFLICT(topic_id) DO UPDATE SET
-                         questions_attempted = questions_attempted + 1,
-                         questions_correct = questions_correct + excluded.questions_correct,
-                         last_studied = excluded.last_studied""".trimIndent(),
-                    arrayOf(topicId, if (isCorrect) 1 else 0, submittedAt)
+                incrementTopicProgress(
+                    db, topicId, questionAttempts = 1,
+                    questionsCorrect = if (isCorrect) 1 else 0,
+                    studiedAt = submittedAt
                 )
             }
             mistakes.forEach { note ->
