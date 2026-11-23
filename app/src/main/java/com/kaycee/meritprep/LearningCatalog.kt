@@ -305,6 +305,33 @@ object LearningCatalog {
             "Oxygen is needed for aerobic respiration, which supplies energy for the metabolic processes of germination. Water and a suitable temperature are also generally required."
         ),
         LearningTopic(
+            "bio-coordination", "Coordination, control and homeostasis", "BIO",
+            "When a ball moves towards your face, you blink and move your head before you have time to think about it. When your body becomes hot, sweating helps cool you. These responses depend on coordination: detecting changes, processing information and activating effectors. This lesson introduces the nervous and endocrine systems and explains how the body keeps internal conditions within suitable limits.",
+            listOf(
+                "Explain the meaning of coordination and homeostasis",
+                "Identify the main parts of the nervous system",
+                "Describe a reflex arc",
+                "Relate sense organs to the stimuli they detect",
+                "Compare nervous and hormonal coordination",
+                "Explain selected roles of endocrine glands and hormones",
+                "Describe how the body regulates temperature and water balance"
+            ),
+            listOf(
+                "Coordination and homeostasis" to "Coordination is the organised control of activities in an organism. Receptors detect stimuli; coordination centres process information; effectors such as muscles or glands produce responses. Homeostasis is the regulation of internal conditions within suitable limits despite external or internal changes. Examples include regulation of body temperature, blood glucose and water balance. Homeostasis involves monitoring and negative feedback, not keeping every value perfectly constant.",
+                "The nervous system" to "The central nervous system consists of the brain and spinal cord. The peripheral nervous system includes nerves that carry information between the central nervous system and the rest of the body. A neurone is a specialised cell that transmits electrical signals. Sensory neurones carry impulses from receptors towards the central nervous system; relay neurones connect pathways within it; motor neurones carry impulses to effectors.",
+                "The reflex arc" to "A reflex is a rapid, automatic response to a stimulus that does not require conscious decision-making before the initial response. A simple reflex arc includes a receptor, sensory neurone, relay neurone in the central nervous system, motor neurone and effector. For example, touching a very hot object can trigger withdrawal of the hand. Reflexes protect the body, but not every reflex pathway is identical; some involve the brain as well as the spinal cord.",
+                "Sense organs and receptors" to "Receptors are specialised cells or nerve endings that detect particular stimuli. The eye detects light; the ear detects sound and contributes to balance; the nose detects airborne chemicals; the tongue detects dissolved chemicals associated with taste; and the skin contains receptors for touch, pressure, temperature and pain. A receptor converts a stimulus into a signal that can be transmitted through the nervous system.",
+                "Nervous and endocrine coordination compared" to "Nervous coordination uses electrical impulses along neurones and chemical neurotransmitters at synapses. It is usually rapid, targeted and relatively short-lived. Endocrine coordination uses hormones released by glands into the blood; hormones act on target cells with suitable receptors. Hormonal responses are often slower to begin and may last longer, although timing varies. The two systems interact to coordinate body functions.",
+                "Endocrine glands and hormones" to "The pituitary gland releases hormones that regulate other glands and body functions. The thyroid produces thyroxine, which influences metabolic rate. The pancreas contains islets that release insulin and glucagon to regulate blood glucose. The adrenal glands release hormones including adrenaline, which prepares the body for rapid action. The ovaries and testes produce sex hormones involved in reproduction and secondary sexual characteristics. Hormones act only on target cells with appropriate receptors.",
+                "Blood glucose regulation" to "After a meal, blood glucose tends to rise. The pancreas releases insulin, which promotes glucose uptake by many cells and storage as glycogen in liver and muscle, lowering blood glucose. When blood glucose falls, glucagon promotes breakdown of liver glycogen and release of glucose into the blood. This is a negative-feedback system. Insulin and glucagon have opposing effects; they do not both raise blood glucose.",
+                "Temperature regulation" to "The hypothalamus helps coordinate thermoregulation. When body temperature rises, sweating and widening of skin blood vessels increase heat loss. When body temperature falls, narrowing of skin blood vessels reduces heat loss, shivering generates heat through muscle activity, and behavioural responses such as seeking warmth may occur. Sweating cools the body as water evaporates from the skin; high humidity can reduce the effectiveness of evaporation.",
+                "Water balance and negative feedback" to "Osmoreceptors in the hypothalamus detect changes related to blood water potential. When the body needs to conserve water, more antidiuretic hormone (ADH) is released from the posterior pituitary, increasing water reabsorption in kidney collecting ducts. When water is abundant, ADH release falls and more dilute urine is produced. Negative feedback reduces the original change and helps keep internal conditions within a functional range."
+            ),
+            "Which hormone lowers blood glucose concentration after a meal?",
+            listOf("Insulin","Glucagon","Adrenaline","Thyroxine"), 0,
+            "Insulin promotes uptake and storage of glucose, lowering blood glucose. Glucagon has the opposing effect and raises blood glucose when it is low."
+        ),
+        LearningTopic(
             "chem-atomic", "Atomic structure", "CHEM",
             "All ordinary matter is made of atoms. The arrangement and number of subatomic particles explain an element's identity, isotope and electrical charge.",
             listOf("Identify protons, neutrons and electrons", "Explain atomic number and mass number", "Determine the numbers of subatomic particles in simple atoms and ions"),
