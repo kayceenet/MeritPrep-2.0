@@ -532,6 +532,32 @@ object LearningCatalog {
             "ABO blood groups are distinct categories (A, B, AB and O), so they are a standard example of discontinuous variation."
         ),
         LearningTopic(
+            "bio-heredity", "Heredity and genetics", "BIO",
+            "Children often resemble their parents, but they are not identical to them. Heredity is the passing of genetic information from parents to offspring. Genetics studies genes, alleles, chromosomes and how characteristics are inherited. This lesson builds from DNA and genes to simple genetic crosses and the interpretation of inheritance patterns.",
+            listOf(
+                "Define heredity, gene, allele, chromosome, genotype and phenotype",
+                "Explain the relationship between DNA, genes and chromosomes",
+                "Distinguish dominant and recessive alleles",
+                "Use a Punnett square to predict a simple monohybrid cross",
+                "State the basic principles of Mendelian inheritance",
+                "Explain sex determination and introductory sex-linked inheritance"
+            ),
+            listOf(
+                "DNA, genes and chromosomes" to "DNA (deoxyribonucleic acid) is the molecule that stores hereditary information in most organisms. A gene is a section of DNA that contributes to a functional product, such as a protein or functional RNA. In eukaryotic cells, DNA is packaged with proteins into chromosomes, which are found mainly in the nucleus. Different versions of the same gene are called alleles. Not all DNA sequences are genes, and not every characteristic is controlled by a single gene.",
+                "Genotype and phenotype" to "Genotype is the genetic constitution of an organism for a gene or set of genes. Phenotype is the observable characteristic produced through the interaction of genotype and environment. For a simple gene with two alleles, an organism may be homozygous (two copies of the same allele) or heterozygous (two different alleles). A heterozygote may show the dominant phenotype in a complete-dominance model.",
+                "Dominant and recessive alleles" to "In a simple complete-dominance model, a dominant allele is expressed in the phenotype of a heterozygote, while a recessive phenotype appears only when two recessive alleles are present. Dominant does not mean common, stronger, healthier or better. Recessive does not mean rare or harmful. Many real traits involve multiple genes, incomplete dominance, codominance or environmental influences.",
+                "Mendel's monohybrid cross" to "A monohybrid cross follows the inheritance of one gene. If T represents a dominant allele and t a recessive allele, a cross between Tt and Tt can produce TT, Tt, Tt and tt. The expected genotype ratio is 1 TT : 2 Tt : 1 tt; under complete dominance, the expected phenotype ratio is 3 dominant : 1 recessive. These are probability expectations, not guaranteed outcomes in a small family.",
+                "How to use a Punnett square" to "Write the possible gametes from each parent along the top and side of a grid. Combine one allele from each parent in every box. Count the possible genotypes and, if needed, translate them into phenotypes using the dominance relationship given. State the assumptions, such as equal gamete probability and complete dominance. Do not confuse a genotype ratio with a phenotype ratio.",
+                "Mendelian principles and their limits" to "Mendel's law of segregation states that the two alleles for a gene separate during gamete formation, so each gamete receives one allele. Independent assortment applies to genes that assort independently, commonly because they are on different chromosomes or sufficiently far apart on the same chromosome. Genes close together on a chromosome may be linked and do not assort independently in the simple way. Mendelian models are useful starting points but do not explain every inheritance pattern.",
+                "Sex determination and sex-linked inheritance" to "In the common human XX/XY model, most females have XX sex chromosomes and most males have XY. Genes on the X chromosome may show X-linked inheritance. A male with one X chromosome has only one copy of most X-linked genes, so a recessive allele on that chromosome may be expressed. A carrier female with one normal and one recessive allele may pass either allele to offspring. Use the pedigree or cross information provided rather than assuming a trait is sex-linked.",
+                "Mutation and genetic variation" to "Mutation is a change in DNA sequence. Mutations may have no effect, harmful effects or beneficial effects depending on the gene, environment and context. Mutations in cells that contribute to gametes can be inherited; mutations in ordinary body cells are generally not passed to offspring. Meiosis and fertilisation also create new combinations of alleles. Genetic variation is the raw material on which natural selection can act.",
+                "Genetics in health and society" to "Genetic information can help explain inherited conditions, blood groups and family resemblance. Genetic risk is not always certainty: many conditions involve multiple genes and environmental factors. Genetic tests require appropriate interpretation, consent and privacy safeguards. Avoid stigmatising language or assuming that a genotype determines a person's worth, behaviour or entire health future."
+            ),
+            "In a simple complete-dominance cross Tt × Tt, what is the expected genotype ratio?",
+            listOf("1 TT : 2 Tt : 1 tt","3 TT : 1 tt","1 Tt : 1 tt","All Tt"), 0,
+            "Each parent produces T and t gametes. The four equally likely combinations are TT, Tt, Tt and tt, giving a 1:2:1 genotype ratio."
+        ),
+        LearningTopic(
             "chem-atomic", "Atomic structure", "CHEM",
             "All ordinary matter is made of atoms. The arrangement and number of subatomic particles explain an element's identity, isotope and electrical charge.",
             listOf("Identify protons, neutrons and electrons", "Explain atomic number and mass number", "Determine the numbers of subatomic particles in simple atoms and ions"),
