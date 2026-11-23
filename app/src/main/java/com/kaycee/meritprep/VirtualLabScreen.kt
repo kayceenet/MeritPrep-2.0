@@ -292,7 +292,17 @@ private fun BiologyClassificationLab() {
                 Text("Seed has one cotyledon (one seed leaf)")
             }
             Row(verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
-                Checkbox(checked = fungus, onCheckedChange = { fungus = it; resetResult() })
+                Checkbox(checked = fungus, onCheckedChange = { selected ->
+                    fungus = selected
+                    if (selected) {
+                        photosynthetic = false
+                        vascular = false
+                        seeds = false
+                        seedsEnclosed = false
+                        oneCotyledon = false
+                    }
+                    resetResult()
+                })
                 Text("Specimen has fungal features")
             }
             Button(

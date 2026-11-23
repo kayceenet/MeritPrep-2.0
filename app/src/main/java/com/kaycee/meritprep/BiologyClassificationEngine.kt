@@ -18,6 +18,18 @@ data class ClassificationResult(
 object BiologyClassificationEngine {
     fun identify(features: SpecimenFeatures): ClassificationResult {
         val steps = mutableListOf<String>()
+        if (features.isFungus && features.photosynthetic) {
+            steps += "The observations conflict: this key does not treat fungi as photosynthetic organisms."
+            return ClassificationResult(null, steps, "Recheck the observations. Fungi obtain nutrients by absorption and do not photosynthesise.")
+        }
+        if (features.seedsEnclosedInFruit && !features.producesSeeds) {
+            steps += "The observations conflict: a fruit-enclosed seed cannot be present if the specimen does not produce seeds."
+            return ClassificationResult(null, steps, "Recheck the seed and fruit observations before following the key.")
+        }
+        if (features.hasOneCotyledon && !features.producesSeeds) {
+            steps += "The observations conflict: cotyledons are seed leaves."
+            return ClassificationResult(null, steps, "A specimen must produce seeds before cotyledon number can be used in this key.")
+        }
         if (features.isFungus && !features.photosynthetic) {
             steps += "The specimen is not photosynthetic and has fungal characteristics."
             return ClassificationResult(

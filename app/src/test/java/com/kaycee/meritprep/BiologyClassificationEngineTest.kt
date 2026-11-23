@@ -31,6 +31,21 @@ class BiologyClassificationEngineTest {
         assertTrue(result.explanation.contains("broader key"))
     }
 
+    @Test fun rejectsContradictoryFungalAndPhotosyntheticObservations() {
+        val result = BiologyClassificationEngine.identify(
+            SpecimenFeatures(true, false, false, false, false, true)
+        )
+        assertNull(result.identification)
+        assertTrue(result.explanation.contains("Recheck"))
+    }
+
+    @Test fun rejectsFruitOrCotyledonClaimsWhenNoSeedsAreObserved() {
+        val result = BiologyClassificationEngine.identify(
+            SpecimenFeatures(true, true, false, true, true)
+        )
+        assertNull(result.identification)
+    }
+
     @Test fun keyExplainsTheDifferenceBetweenSporeBearingAndSeedProducingPlants() {
         val fern = BiologyClassificationEngine.identify(SpecimenFeatures(true, true, false, false, false))
         val pine = BiologyClassificationEngine.identify(SpecimenFeatures(true, true, true, false, false))
