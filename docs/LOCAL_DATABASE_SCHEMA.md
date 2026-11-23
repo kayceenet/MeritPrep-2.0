@@ -18,7 +18,7 @@ MeritPrep currently uses an offline-first SQLite database named `meritprep_local
 - `study_plan_items`: ordered lesson, practice and flashcard tasks with completion state.
 
 ## Schema version
-Current database version: 8.
+Current database version: 9.
 
 Migration history:
 - v2: add completed-lesson tracking.
@@ -28,6 +28,7 @@ Migration history:
 - v6: add weekly study-plan storage.
 - v7: add demonstrated-mastery state to topic progress. The migration checks the table schema before adding the column so installations that already contain it do not fail.
 - v8: add question-level attempt history to support distinct-question and multi-day mastery evidence.
+- v9: add the current question index to active CBT session metadata.
 
 ## Data integrity rules
 - Lesson completion is stored separately from demonstrated mastery.
