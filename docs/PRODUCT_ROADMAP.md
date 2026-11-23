@@ -29,6 +29,9 @@ Inventory existing APK assets and lab logic; rebuild Biology, Chemistry and Phys
 ### G. Platform operations
 Authenticated sync, teacher/admin CMS, analytics, backups, privacy and security review.
 
+### F. Timed CBT practice
+A Biology practice mock now selects 40 random original questions from the 240-item bank, shuffles answer options, provides a 30-minute practice timer, question navigation, answer flags, unanswered-question review, scoring and explanations. This is a MeritPrep practice configuration, not a claim about official JAMB timing or an official past-paper set. Session recovery after force-close and multi-subject full-length mocks remain to be implemented.
+
 ## Current alpha status
 
 - Biology syllabus map: 24 units represented; each unit resolves to an authored lesson draft.
