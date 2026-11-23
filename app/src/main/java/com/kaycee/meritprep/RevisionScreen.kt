@@ -124,6 +124,15 @@ private val starterBiologyCards = listOf(
     RevisionCard("bio-grow-card-6","bio-growth","Distinguish epigeal from hypogeal germination.","Epigeal: cotyledons are raised above soil. Hypogeal: cotyledons remain below soil.",0L),
     RevisionCard("bio-grow-card-7","bio-growth","What is one role of auxin?","Auxin influences cell elongation, apical dominance and tropic growth responses.",0L),
     RevisionCard("bio-grow-card-8","bio-growth","Which plant hormone is associated with fruit ripening?","Ethylene, a gaseous plant hormone.",0L)
+) + listOf(
+    RevisionCard("bio-coord-card-1","bio-coordination","Define homeostasis.","Regulation of internal conditions within suitable limits despite internal or external changes.",0L),
+    RevisionCard("bio-coord-card-2","bio-coordination","What makes up the central nervous system?","The brain and spinal cord.",0L),
+    RevisionCard("bio-coord-card-3","bio-coordination","Name the parts of a simple reflex arc in order.","Receptor → sensory neurone → relay neurone → motor neurone → effector.",0L),
+    RevisionCard("bio-coord-card-4","bio-coordination","Distinguish nervous from hormonal coordination.","Nervous coordination uses impulses along neurones and is often rapid and targeted; hormonal coordination uses hormones carried in blood to target cells.",0L),
+    RevisionCard("bio-coord-card-5","bio-coordination","What is the effect of insulin on blood glucose?","Insulin promotes glucose uptake and storage, lowering blood glucose.",0L),
+    RevisionCard("bio-coord-card-6","bio-coordination","What is the effect of glucagon on blood glucose?","Glucagon promotes breakdown of liver glycogen and release of glucose, raising blood glucose.",0L),
+    RevisionCard("bio-coord-card-7","bio-coordination","How does sweating cool the body?","Evaporation of sweat from the skin removes heat from the body.",0L),
+    RevisionCard("bio-coord-card-8","bio-coordination","How does ADH help regulate water balance?","It increases water reabsorption in kidney collecting ducts, producing more concentrated urine.",0L)
 )
 
 @Composable
