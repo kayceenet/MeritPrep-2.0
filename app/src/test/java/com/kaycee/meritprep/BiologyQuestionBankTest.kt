@@ -366,27 +366,20 @@ class BiologyQuestionBankTest {
             assertTrue(question.source.startsWith("MeritPrep original practice item"))
         }
     }
+
+    @Test
+    fun completeBankHasNoDuplicatePromptsOrRepeatedOptionsWithinAnItem() {
+        val questions = BiologyQuestionBank.all
+        assertEquals(240, questions.size)
+        assertEquals(questions.size, questions.map { it.prompt.trim().lowercase() }.toSet().size)
+        questions.forEach { question ->
+            assertTrue(question.options.all { it.isNotBlank() })
+            assertEquals(
+                "Repeated distractor in ${question.id}",
+                question.options.size,
+                question.options.map { it.trim().lowercase() }.toSet().size
+            )
+        }
+    }
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
