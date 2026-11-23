@@ -106,7 +106,7 @@ A topic should only be marked mastered after the learner demonstrates performanc
 - [x] WAEC practical strand checklist represented.
 - [x] First Biology cell lesson expanded for beginner teaching.
 - [ ] Author full lessons for all remaining syllabus units.
-- [ ] Add original, reviewed objective and structured-response question banks.
+- [x] Add an initial 12-item original cell-biology objective bank (still awaiting independent review).\n- [ ] Expand original questions across all syllabus units and add reviewed structured-response items.
 - [ ] Add labelled diagrams, animations and offline visual assets.
 - [ ] Add specimen/practical tasks with reviewed marking rubrics.
 - [ ] Add syllabus coverage reporting and reviewer workflow.
