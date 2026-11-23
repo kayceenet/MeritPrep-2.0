@@ -100,11 +100,12 @@ private fun HomeScreen(nav: NavHostController) {
                     Text("Continue learning, review difficult topics and practise for your examinations.")
                     Button(onClick = { nav.navigate("learn") }) { Text("Explore subjects") }
                     OutlinedButton(onClick = { nav.navigate("review") }) { Text("Start Biology revision") }
+                    OutlinedButton(onClick = { nav.navigate("cbt") }) { Text("Start timed Biology mock") }
                 }
             }
         }
         item { Text("Study areas", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold) }
-        items(subjects.take(4)) { subject ->
+        items(subjects) { subject ->
             SubjectCard(subject) { nav.navigate("subject/${subject.code}") }
         }
     }
