@@ -61,10 +61,7 @@ fun RevisionScreen() {
     ) {
         Text("Spaced revision", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
         Text("Recall first. Reveal the explanation. Then rate how difficult it was to remember.")
-        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            AssistChip(onClick = {}, label = { Text("Due: ${dueCards.size}") })
-            AssistChip(onClick = {}, label = { Text("Reviewed: $reviewedCount") })
-        }
+        Text("Due now: ${dueCards.size}   ·   Reviewed this session: $reviewedCount", style = MaterialTheme.typography.labelLarge)
         if (current == null) {
             Card(Modifier.fillMaxWidth()) {
                 Column(Modifier.padding(18.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
