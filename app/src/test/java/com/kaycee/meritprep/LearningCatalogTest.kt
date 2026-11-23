@@ -27,6 +27,17 @@ class LearningCatalogTest {
     }
 
     @Test
+    fun biologyCurriculumCoversAllFiveJambSectionsWithUniqueUnits() {
+        val ids = BiologyCurriculum.units.map { it.id }
+        assertEquals(ids.size, ids.toSet().size)
+        assertEquals(23, BiologyCurriculum.units.size)
+        assertEquals(5, BiologyCurriculum.sections.size)
+        assertTrue(BiologyCurriculum.units.all { it.title.isNotBlank() && it.scope.isNotBlank() && it.outcomes.isNotBlank() })
+        assertTrue(BiologyCurriculum.units.any { it.lessonId == "bio-cell" })
+        assertTrue(BiologyCurriculum.waecPracticalStrands.size >= 6)
+    }
+
+    @Test
     fun eachInitialSubjectHasAtLeastOneLesson() {
         listOf("BIO", "CHEM", "PHY", "MATH", "ENG", "ECO", "GOV").forEach { code ->
             assertTrue("Missing starter lesson for $code", LearningCatalog.forSubject(code).isNotEmpty())
