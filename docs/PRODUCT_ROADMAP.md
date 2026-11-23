@@ -25,7 +25,7 @@ Topic mastery based on repeated evidence, spaced retrieval, flashcards, mistake 
 ## F. Practical learning
 Inventory existing APK assets and lab logic; rebuild Biology, Chemistry and Physics simulations with safe, accessible controls and clear learning objectives.
 
-**Implemented prototypes:** Biology food-test interpretation with prediction feedback, osmosis, microscope magnification, quadrat-based ecological sampling and a dichotomous classification key; introductory Physics Ohm's law and Chemistry concentration simulations. These are learning prototypes, not a complete WAEC practical examination system.
+**Implemented prototypes:** Biology food-test interpretation with prediction feedback, osmosis, microscope magnification, quadrat-based ecological sampling and a dichotomous classification key, plus a biological drawing self-check checklist; introductory Physics Ohm's law and Chemistry concentration simulations. These are learning prototypes, not a complete WAEC practical examination system.
 
 ## G. Platform operations
 Authenticated sync, teacher/admin CMS, analytics, backups, privacy and security review.
