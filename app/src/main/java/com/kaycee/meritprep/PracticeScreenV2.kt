@@ -16,11 +16,10 @@ fun PracticeScreenV2() {
     val context = LocalContext.current
     val database = remember(context) { MeritDatabase(context) }
     val questions = remember {
-        listOf(
-            AssessmentQuestion("demo-bio-001", "bio-cell", "Which organelle is the principal site of aerobic respiration in eukaryotic cells?", listOf("Mitochondrion", "Ribosome", "Cell wall", "Nucleus"), 0, "The mitochondrion is the principal site of aerobic respiration in eukaryotic cells.", "MeritPrep demonstration item", false),
+        (BiologyQuestionBank.cellBiology + listOf(
             AssessmentQuestion("demo-chem-001", "chem-atomic", "The atomic number of an element is equal to the number of what particles in its nucleus?", listOf("Neutrons", "Protons", "Nucleons", "Isotopes"), 1, "The atomic number is the number of protons in the nucleus.", "MeritPrep demonstration item", false),
             AssessmentQuestion("demo-phy-001", "phy-motion", "What is the SI unit of acceleration?", listOf("m/s", "m/s²", "N", "J"), 1, "Acceleration is change in velocity per unit time, measured in metres per second squared.", "MeritPrep demonstration item", false)
-        ).map { AssessmentEngine.present(it) }
+        )).map { AssessmentEngine.present(it) }
     }
     var index by remember { mutableIntStateOf(0) }
     var selected by remember { mutableIntStateOf(-1) }
@@ -61,9 +60,9 @@ fun PracticeScreenV2() {
                     onClick = {
                         val correct = selected == q.correctPresentedIndex
                         val topicId = when (q.questionId) {
-                            "demo-bio-001" -> "bio-cell"
                             "demo-chem-001" -> "chem-atomic"
-                            else -> "phy-motion"
+                            "demo-phy-001" -> "phy-motion"
+                            else -> "bio-cell"
                         }
                         database.recordQuestionAttempt(topicId, correct)
                         if (correct) score++
