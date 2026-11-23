@@ -120,14 +120,16 @@ private fun BiologyLab() {
             FilterChip(selected = selected == 1, onClick = { selected = 1 }, label = { Text("Osmosis") })
             FilterChip(selected = selected == 2, onClick = { selected = 2 }, label = { Text("Microscope") })
             FilterChip(selected = selected == 3, onClick = { selected = 3 }, label = { Text("Quadrat sampling") })
-            FilterChip(selected = selected == 4, onClick = { selected = 4 }, label = { Text("Classification key") })\n            FilterChip(selected = selected == 5, onClick = { selected = 5 }, label = { Text("Biological drawing") })
+            FilterChip(selected = selected == 4, onClick = { selected = 4 }, label = { Text("Classification key") })
+            FilterChip(selected = selected == 5, onClick = { selected = 5 }, label = { Text("Biological drawing") })
         }
         when (selected) {
             0 -> FoodTestLab()
             1 -> OsmosisLab()
             2 -> MagnificationLab()
             3 -> QuadratSamplingLab()
-            4 -> BiologyClassificationLab()\n            else -> BiologyDrawingLab()
+            4 -> BiologyClassificationLab()
+            else -> BiologyDrawingLab()
         }
     }
 }
