@@ -1,7 +1,7 @@
 # MeritPrep Biology Curriculum and Teaching Standard
 
 **Course version:** 2026.1  
-**Status:** syllabus map implemented; lesson authoring and independent academic review are in progress.
+**Status:** all 24 mapped Biology units have authored lesson drafts and original objective practice; independent subject review and syllabus verification remain pending.
 
 ## 1. Curriculum authority and scope
 
@@ -105,12 +105,14 @@ A topic should only be marked mastered after the learner demonstrates performanc
 - [x] WAEC cross-links recorded for each unit.
 - [x] WAEC practical strand checklist represented.
 - [x] First Biology cell lesson expanded for beginner teaching.
-- [ ] Author full lessons for all remaining syllabus units.
-- [x] Add an initial 12-item original cell-biology objective bank (still awaiting independent review).\n- [ ] Expand original questions across all syllabus units and add reviewed structured-response items.
-- [ ] Add labelled diagrams, animations and offline visual assets.
-- [ ] Add specimen/practical tasks with reviewed marking rubrics.
+- [x] Author a beginner-oriented lesson draft for each of the 24 mapped Biology syllabus units (draft status; independent review pending).
+- [x] Add 240 original objective practice items across all 24 mapped Biology units (still awaiting independent review).
+- [ ] Add reviewed structured-response items and expand beyond the current original objective bank.
+- [ ] Add a reviewed, accessible diagram and visual-asset set for every lesson.
+- [x] Add initial interactive food-test and osmosis learning prototypes.
+- [ ] Add specimen/practical tasks with reviewed marking rubrics and full WAEC practical assessment workflows.
 - [ ] Add syllabus coverage reporting and reviewer workflow.
 - [ ] Independently review and approve the twenty-four authored lesson drafts, 240 objective questions and 198 revision cards.
 - [ ] Validate every item against the current official syllabus before release.
 
-The curriculum map is not a claim that all 24 units are already taught. The app must show authored, reviewed and pending content honestly.
+The 24 units currently have lesson drafts and mapped original practice items, but draft availability is not academic approval. The app must show authored, reviewed and pending content honestly.
