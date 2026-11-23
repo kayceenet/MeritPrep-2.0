@@ -80,7 +80,7 @@ private fun MeritPrepApp() {
                 composable("waec-theory") { BiologyTheoryScreen() }
                 composable("review") { RevisionScreen() }
                 composable("mistakes") { MistakeNotebookScreen() }
-                composable("study-plan") { StudyPlanScreen() }
+                composable("study-plan") { StudyPlanScreen(onOpenLesson = { nav.navigate("lesson/$it") }, onOpenPractice = { nav.navigate("practice") }, onOpenRevision = { nav.navigate("review") }) }
                 composable("labs") { VirtualLabScreen() }
                 composable("profile") { ProfileScreen() }
             }
@@ -107,6 +107,7 @@ private fun HomeScreen(nav: NavHostController) {
                     OutlinedButton(onClick = { nav.navigate("study-plan") }) { Text("Build a Biology study plan") }
                     OutlinedButton(onClick = { nav.navigate("cbt") }) { Text("Start timed Biology mock") }
                     OutlinedButton(onClick = { nav.navigate("mistakes") }) { Text("Review your mistakes") }
+                    OutlinedButton(onClick = { nav.navigate("study-plan") }) { Text("Build a 7-day Biology study plan") }
                 }
             }
         }
