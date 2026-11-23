@@ -791,7 +791,7 @@ fun LessonScreen(topicId: String) {
             Text(if (completed) "Lesson completed" else "Mark lesson complete")
         }
         Text(
-            "Academic status: beginner-focused teaching draft mapped to the JAMB cell-organisation objectives and WAEC cell-structure outcomes. Independent subject review is still required before formal approval.",
+            "Academic status: beginner-focused teaching draft mapped to its Biology syllabus topic. Independent subject review is still required before formal approval.",
             style = MaterialTheme.typography.bodySmall,
             color = MaterialTheme.colorScheme.onSurfaceVariant
         )
