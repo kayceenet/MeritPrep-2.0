@@ -127,3 +127,25 @@ data class StudyPlanSnapshot(
     val minutesPerDay: Int,
     val items: List<StudyPlanItem>
 )
+
+
+data class QuestionAttemptRecord(
+    val questionId: String,
+    val topicId: String,
+    val isCorrect: Boolean
+)
+
+data class MasteryEvidence(
+    val attempts: Int,
+    val distinctQuestions: Int,
+    val correctAnswers: Int,
+    val distinctStudyDays: Int
+)
+
+object MasteryPolicy {
+    fun isDemonstrated(evidence: MasteryEvidence): Boolean =
+        evidence.attempts >= 10 &&
+        evidence.distinctQuestions >= 8 &&
+        evidence.distinctStudyDays >= 2 &&
+        evidence.correctAnswers * 100 >= evidence.attempts * 80
+}
