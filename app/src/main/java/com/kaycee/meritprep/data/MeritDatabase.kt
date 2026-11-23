@@ -167,7 +167,7 @@ class MeritDatabase(context: Context) : SQLiteOpenHelper(context, "meritprep_loc
         } finally { db.endTransaction() }
     }
 
-    fun getDueRevisionCards(now: Long = System.currentTimeMillis(), limit: Int = 30): List<RevisionCard> =
+    fun getDueRevisionCards(now: Long = System.currentTimeMillis(), limit: Int = 200): List<RevisionCard> =
         readableDatabase.rawQuery(
             "SELECT card_id, topic_id, front, back, due_at, interval_days, repetitions, ease_factor, lapses FROM revision_cards WHERE due_at <= ? ORDER BY due_at ASC LIMIT ?",
             arrayOf(now.toString(), limit.toString())
