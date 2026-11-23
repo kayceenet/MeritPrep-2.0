@@ -198,31 +198,76 @@ private fun ProfileScreen() {
     val completedLessons = remember { database.getCompletedLessonCount() }
     val attemptedQuestions = remember { database.getQuestionAttemptCount() }
     val correctAnswers = remember { database.getCorrectAnswerCount() }
+    val topicProgress = remember { database.getAllTopicProgress() }
     val accuracy = if (attemptedQuestions == 0) 0 else (correctAnswers * 100) / attemptedQuestions
 
-    Column(Modifier.fillMaxSize().padding(20.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
-        Text("Learner profile", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
-        Text("Your activity is stored on this device.")
-        Card(Modifier.fillMaxWidth()) {
-            Column(Modifier.padding(18.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                Text("Lessons completed", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                Text(completedLessons.toString(), style = MaterialTheme.typography.headlineLarge, fontWeight = FontWeight.Bold)
+    LazyColumn(
+        Modifier.fillMaxSize().padding(20.dp),
+        verticalArrangement = Arrangement.spacedBy(12.dp)
+    ) {
+        item {
+            Text("Learner profile", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
+            Text("Your learning activity and practice evidence are stored on this device.")
+        }
+        item {
+            Card(Modifier.fillMaxWidth()) {
+                Column(Modifier.padding(18.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                    Text("Lessons completed", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    Text(completedLessons.toString(), style = MaterialTheme.typography.headlineLarge, fontWeight = FontWeight.Bold)
+                }
             }
         }
-        Card(Modifier.fillMaxWidth()) {
-            Column(Modifier.padding(18.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                Text("Questions attempted", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                Text(attemptedQuestions.toString(), style = MaterialTheme.typography.headlineLarge, fontWeight = FontWeight.Bold)
+        item {
+            Card(Modifier.fillMaxWidth()) {
+                Column(Modifier.padding(18.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                    Text("Questions attempted", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    Text(attemptedQuestions.toString(), style = MaterialTheme.typography.headlineLarge, fontWeight = FontWeight.Bold)
+                }
             }
         }
-        Card(Modifier.fillMaxWidth()) {
-            Column(Modifier.padding(18.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                Text("Practice accuracy", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                Text("$accuracy%", style = MaterialTheme.typography.headlineLarge, fontWeight = FontWeight.Bold)
-                LinearProgressIndicator(progress = { accuracy / 100f }, modifier = Modifier.fillMaxWidth())
-                Text("$correctAnswers correct answers out of $attemptedQuestions attempts", style = MaterialTheme.typography.bodySmall)
+        item {
+            Card(Modifier.fillMaxWidth()) {
+                Column(Modifier.padding(18.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                    Text("Practice accuracy", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    Text("$accuracy%", style = MaterialTheme.typography.headlineLarge, fontWeight = FontWeight.Bold)
+                    LinearProgressIndicator(progress = { accuracy / 100f }, modifier = Modifier.fillMaxWidth())
+                    Text("$correctAnswers correct answers out of $attemptedQuestions attempts", style = MaterialTheme.typography.bodySmall)
+                }
             }
         }
-        Text("Accuracy is based only on recorded practice attempts. It is not an examination score or a prediction of JAMB/WAEC performance.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        item {
+            Text("Topic-level practice evidence", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+            Text("Use this to identify topics that need more practice. It is not a mastery score.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        }
+        if (topicProgress.isEmpty()) {
+            item {
+                Text("No topic-level activity yet. Complete a lesson or answer practice questions to build your progress record.")
+            }
+        } else {
+            items(topicProgress, key = { it.topicId }) { progress ->
+                val title = LearningCatalog.find(progress.topicId)?.title ?: progress.topicId
+                val topicAccuracy = if (progress.questionsAttempted == 0) 0
+                    else (progress.questionsCorrect * 100) / progress.questionsAttempted
+                Card(Modifier.fillMaxWidth()) {
+                    Column(Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                        Text(title, fontWeight = FontWeight.SemiBold)
+                        Text(
+                            "${progress.questionsCorrect} correct / ${progress.questionsAttempted} attempted · ${progress.lessonsCompleted} lesson(s) completed",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                        LinearProgressIndicator(progress = { topicAccuracy / 100f }, modifier = Modifier.fillMaxWidth())
+                        Text("$topicAccuracy% practice accuracy · mastery not yet demonstrated", style = MaterialTheme.typography.labelSmall)
+                    }
+                }
+            }
+        }
+        item {
+            Text(
+                "Accuracy is based only on recorded practice attempts. It is not an examination score or a prediction of JAMB/WAEC performance.",
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+        }
     }
 }
