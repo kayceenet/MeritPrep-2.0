@@ -27,4 +27,48 @@ object StudyPlanGenerator {
             }
         }
     }
+
+    /**
+     * Prioritises topics using recorded evidence without treating low evidence as mastery.
+     * Unattempted topics receive a neutral prior and a small exploration bonus.
+     */
+    fun prioritiseTopics(
+        topics: List<StudyTopic>,
+        progress: List<TopicProgress>,
+        nowEpochMillis: Long = System.currentTimeMillis()
+    ): List<StudyTopic> {
+        val progressByTopic = progress.associateBy { it.topicId }
+        return topics.withIndex().sortedWith(
+            compareByDescending<IndexedValue<StudyTopic>> { indexed ->
+                val evidence = progressByTopic[indexed.value.id]
+                if (evidence == null) {
+                    0.75
+                } else {
+                    val attempts = evidence.questionsAttempted.coerceAtLeast(0)
+                    val correct = evidence.questionsCorrect.coerceIn(0, attempts)
+                    val smoothedErrorRate = (attempts - correct + 2.0) / (attempts + 4.0)
+                    val lessonGap = if (evidence.lessonsCompleted == 0) 0.15 else 0.0
+                    val ageDays = if (evidence.lastStudiedEpochMillis <= 0L) {
+                        30.0
+                    } else {
+                        ((nowEpochMillis - evidence.lastStudiedEpochMillis).coerceAtLeast(0L) / 86_400_000.0)
+                    }
+                    val recencyGap = (ageDays / 30.0).coerceIn(0.0, 1.0) * 0.10
+                    val masteryAdjustment = if (evidence.demonstratedMastery) -0.10 else 0.0
+                    smoothedErrorRate + lessonGap + recencyGap + masteryAdjustment
+                }
+            }.thenBy { indexed -> indexed.index }
+        ).map { it.value }
+    }
+
+    fun buildAdaptive(
+        topics: List<StudyTopic>,
+        progress: List<TopicProgress>,
+        minutesPerDay: Int,
+        days: Int = 7,
+        nowEpochMillis: Long = System.currentTimeMillis()
+    ): List<PlannedStudyActivity> {
+        val prioritised = prioritiseTopics(topics, progress, nowEpochMillis)
+        return build(prioritised, minutesPerDay, days)
+    }
 }
