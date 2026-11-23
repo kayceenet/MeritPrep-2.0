@@ -223,6 +223,15 @@ private val starterBiologyCards = listOf(
     RevisionCard("bio-bt-card-6","bio-biotechnology","What is recombinant DNA technology?","Combining DNA sequences from different sources, often using a vector and host cell.",0L),
     RevisionCard("bio-bt-card-7","bio-biotechnology","Give one medical application of genetic engineering.","Genetically engineered microorganisms can produce human insulin.",0L),
     RevisionCard("bio-bt-card-8","bio-biotechnology","What does biosafety assessment examine?","Potential risks of a biological technology to human health and the environment.",0L)
+) + listOf(
+    RevisionCard("bio-evo-t-card-1","bio-evolution-theory","Define biological evolution.","Change in inherited characteristics or allele frequencies in populations across generations.",0L),
+    RevisionCard("bio-evo-t-card-2","bio-evolution-theory","What is the central idea of natural selection?","Heritable variants that improve reproductive success in a particular environment can become more common over generations.",0L),
+    RevisionCard("bio-evo-t-card-3","bio-evolution-theory","What is the ultimate source of new alleles?","Mutation, a change in DNA sequence.",0L),
+    RevisionCard("bio-evo-t-card-4","bio-evolution-theory","What is genetic drift?","Random change in allele frequencies, often with stronger effects in small populations.",0L),
+    RevisionCard("bio-evo-t-card-5","bio-evolution-theory","What is gene flow?","Transfer of alleles between populations through migrating individuals or gametes.",0L),
+    RevisionCard("bio-evo-t-card-6","bio-evolution-theory","How can reproductive isolation lead to speciation?","It reduces gene flow, allowing populations to diverge through mutation, selection and drift over generations.",0L),
+    RevisionCard("bio-evo-t-card-7","bio-evolution-theory","Does natural selection create mutations because organisms need them?","No. Mutations arise without regard to need; selection acts on heritable variation already present or arising.",0L),
+    RevisionCard("bio-evo-t-card-8","bio-evolution-theory","Distinguish acclimatisation from evolution.","Acclimatisation is an individual's adjustment during life; evolution is inherited population change across generations.",0L)
 )
 
 @Composable
