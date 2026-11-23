@@ -450,6 +450,27 @@ class MeritDatabase(context: Context) : SQLiteOpenHelper(context, "meritprep_loc
         writableDatabase.update("cbt_sessions", values, "session_id = ? AND status = 'IN_PROGRESS'", arrayOf(sessionId))
     }
 
+    fun getAllTopicProgress(): List<TopicProgress> =
+        readableDatabase.rawQuery(
+            """SELECT topic_id, lessons_completed, questions_attempted, questions_correct,
+                      last_studied, demonstrated_mastery
+               FROM topic_progress ORDER BY last_studied DESC""".trimIndent(),
+            null
+        ).use { cursor ->
+            buildList {
+                while (cursor.moveToNext()) add(
+                    TopicProgress(
+                        topicId = cursor.getString(0),
+                        lessonsCompleted = cursor.getInt(1),
+                        questionsAttempted = cursor.getInt(2),
+                        questionsCorrect = cursor.getInt(3),
+                        lastStudiedEpochMillis = cursor.getLong(4),
+                        demonstratedMastery = cursor.getInt(5) == 1
+                    )
+                )
+            }
+        }
+
     fun getTopicProgressCount(): Int =
         readableDatabase.rawQuery("SELECT COUNT(*) FROM topic_progress", null).use { cursor ->
             if (cursor.moveToFirst()) cursor.getInt(0) else 0
