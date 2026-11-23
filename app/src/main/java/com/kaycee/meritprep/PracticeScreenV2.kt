@@ -59,12 +59,7 @@ fun PracticeScreenV2() {
                     enabled = selected >= 0,
                     onClick = {
                         val correct = selected == q.correctPresentedIndex
-                        val topicId = when (q.questionId) {
-                            "demo-chem-001" -> "chem-atomic"
-                            "demo-phy-001" -> "phy-motion"
-                            else -> "bio-cell"
-                        }
-                        database.recordQuestionAttempt(topicId, correct)
+                        database.recordQuestionAttempt(q.topicId, correct)
                         if (correct) score++
                         checked = true
                     }
