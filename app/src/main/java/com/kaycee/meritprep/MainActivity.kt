@@ -84,7 +84,8 @@ private fun MeritPrepApp() {
                 composable("review") { RevisionScreen() }
                 composable("mistakes") { MistakeNotebookScreen() }
                 composable("study-plan") { StudyPlanScreen(onOpenLesson = { nav.navigate("lesson/$it") }, onOpenPractice = { nav.navigate("practice") }, onOpenRevision = { nav.navigate("review") }) }
-                composable("glossary") { BiologyGlossaryScreen(onOpenLesson = { nav.navigate("lesson/$it") }) }\n                composable("bookmarks") { BookmarksScreen(onOpenLesson = { nav.navigate("lesson/$it") }) }
+                composable("glossary") { BiologyGlossaryScreen(onOpenLesson = { nav.navigate("lesson/$it") }) }
+                composable("bookmarks") { BookmarksScreen(onOpenLesson = { nav.navigate("lesson/$it") }) }
                 composable("labs") { VirtualLabScreen() }
                 composable("profile") { ProfileScreen(navigationRevision) }
             }
@@ -110,7 +111,8 @@ private fun HomeScreen(nav: NavHostController) {
                     OutlinedButton(onClick = { nav.navigate("mistakes") }) { Text("Review mistakes") }
                     OutlinedButton(onClick = { nav.navigate("study-plan") }) { Text("Build a Biology study plan") }
                     OutlinedButton(onClick = { nav.navigate("cbt") }) { Text("Start timed Biology mock") }
-                    OutlinedButton(onClick = { nav.navigate("glossary") }) { Text("Search Biology glossary") }\n                    OutlinedButton(onClick = { nav.navigate("bookmarks") }) { Text("Saved lessons") }
+                    OutlinedButton(onClick = { nav.navigate("glossary") }) { Text("Search Biology glossary") }
+                    OutlinedButton(onClick = { nav.navigate("bookmarks") }) { Text("Saved lessons") }
                 }
             }
         }
