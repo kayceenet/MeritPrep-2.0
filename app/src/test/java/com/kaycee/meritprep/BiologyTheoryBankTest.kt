@@ -15,7 +15,7 @@ class BiologyTheoryBankTest {
             assertTrue(task.title.isNotBlank())
             assertTrue(task.instruction.isNotBlank())
             assertTrue(task.marks > 0)
-            assertTrue(task.markingPoints.isNotEmpty())
+            assertEquals(task.marks, task.markingPoints.size)
             assertTrue(task.modelAnswer.isNotBlank())
             assertFalse(task.topicId.isBlank())
             assertTrue(BiologyCurriculum.units.any { it.lessonId == task.topicId })
