@@ -3,43 +3,42 @@
 ## Product learning cycle
 Learn → Explore → Practise → Assess → Correct → Retrieve → Master.
 
-## Release stages
-### A. Foundation
-Android navigation, subject catalogue, lesson shell, build automation.
+## A. Foundation
+Android navigation, subject catalogue, lesson shell and build automation.
 
-### B. Curriculum
+## B. Curriculum
 Versioned JAMB/WAEC syllabus entities; subject/topic/objective mapping; content provenance, reviewer, approval and revision history.
 
-### C. Learning
+## C. Learning
 Structured lessons, worked examples, diagrams, formative checks, downloadable learning packs and offline progress.
 
-### D. Examination
+## D. Examination
 Timed CBT sessions, question randomisation, answer review, scoring policies, WAEC objective/theory/practical practice and transparent feedback.
 
-### E. Mastery and revision
+**Implemented in the current alpha:** a 40-question, 30-minute Biology practice mock, random question and option order, navigation, answer flags, scoring, explanations, and local persistence of active session state. The app stores the question order, selected answers, flags and session end time, then attempts to restore an active session on launch. This is not yet a full official-format, multi-subject JAMB mock.
+
+## E. Mastery and revision
 Topic mastery based on repeated evidence, spaced retrieval, flashcards, error notebook and study planner.
 
 **Implemented in the current alpha:** local revision-card storage, a four-rating spaced-retrieval scheduler, 198 Biology revision cards spanning the mapped Biology topics, a revision screen and unit-tested scheduling rules. Mastery evidence across multiple attempts and question forms, an error notebook and a study planner remain outstanding.
 
-### F. Practical learning
+## F. Practical learning
 Inventory existing APK assets and lab logic; rebuild Biology, Chemistry and Physics simulations with safe, accessible controls and clear learning objectives.
 
-**Implemented prototype work:** a Biology food-test interpretation engine and an osmosis simulation, with unit tests. These are learning prototypes, not a complete WAEC practical examination system.
+**Implemented prototypes:** Biology food-test interpretation with prediction feedback, osmosis, microscope magnification and quadrat-based ecological sampling; introductory Physics Ohm's law and Chemistry concentration simulations. These are learning prototypes, not a complete WAEC practical examination system.
 
-### G. Platform operations
+## G. Platform operations
 Authenticated sync, teacher/admin CMS, analytics, backups, privacy and security review.
-
-### F. Timed CBT practice
-A Biology practice mock now selects 40 random original questions from the 240-item bank, shuffles answer options, provides a 30-minute practice timer, question navigation, answer flags, unanswered-question review, scoring and explanations. This is a MeritPrep practice configuration, not a claim about official JAMB timing or an official past-paper set. Session recovery after force-close and multi-subject full-length mocks remain to be implemented.
 
 ## Current alpha status
 
 - Biology syllabus map: 24 units represented; each unit resolves to an authored lesson draft.
 - Biology lessons: 24 beginner-oriented lesson drafts, mapped to the syllabus units; independent academic review is pending.
 - Biology original objective practice: 240 items across the 24 units; items are explicitly marked as original and unverified.
-- Practice: topic-focused sessions and a Biology question-bank mode with shuffled answer options; the timed mock randomizes question order.
+- Practice: topic-focused sessions and a full Biology question-bank mode with shuffled question and option order.
+- Timed CBT: a 40-question, 30-minute Biology mock with answer navigation, flags, explanations and local active-session recovery logic.
 - Revision: 198 offline Biology cards with Again/Hard/Good/Easy scheduling.
-- Practical learning: food-test and osmosis prototypes.
+- Practical learning: four Biology prototypes plus introductory Physics and Chemistry simulations.
 - Academic approval: pending independent subject review; no generated question is presented as an official past question.
 - Other subjects: starter lesson content only; full syllabus mapping and course development remain outstanding.
 
