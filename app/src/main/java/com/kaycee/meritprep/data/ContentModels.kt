@@ -94,6 +94,7 @@ data class CbtSessionSnapshot(
     val startedAt: Long,
     val endsAt: Long,
     val totalQuestions: Int,
+    val currentIndex: Int = 0,
     val questions: List<CbtQuestionSnapshot>
 )
 
