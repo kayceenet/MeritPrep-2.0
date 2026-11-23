@@ -1,0 +1,243 @@
+package com.kaycee.meritprep
+
+import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.platform.LocalContext
+import com.kaycee.meritprep.data.CbtResult
+import com.kaycee.meritprep.data.CbtSessionEngine
+import com.kaycee.meritprep.data.MeritDatabase
+import com.kaycee.meritprep.data.PresentedQuestion
+import kotlinx.coroutines.delay
+
+private const val CBT_QUESTION_COUNT = 40
+private const val CBT_DURATION_SECONDS = 30 * 60
+
+@Composable
+fun CbtScreen() {
+    val context = LocalContext.current
+    val database = remember(context) { MeritDatabase(context) }
+    var questions by remember { mutableStateOf(emptyList<PresentedQuestion>()) }
+    val answers = remember { mutableStateMapOf<String, Int>() }
+    val flags = remember { mutableStateMapOf<String, Boolean>() }
+    var currentIndex by remember { mutableIntStateOf(0) }
+    var remainingSeconds by remember { mutableIntStateOf(CBT_DURATION_SECONDS) }
+    var started by remember { mutableStateOf(false) }
+    var submitted by remember { mutableStateOf(false) }
+    var showSubmitDialog by remember { mutableStateOf(false) }
+    var result by remember { mutableStateOf<CbtResult?>(null) }
+
+    fun finishSession() {
+        if (!submitted && questions.isNotEmpty()) {
+            val finalResult = CbtSessionEngine.score(questions, answers)
+            questions.forEach { question ->
+                val selected = answers[question.questionId]
+                database.recordQuestionAttempt(
+                    question.topicId,
+                    selected != null && selected == question.correctPresentedIndex
+                )
+            }
+            result = finalResult
+            submitted = true
+            showSubmitDialog = false
+        }
+    }
+
+    LaunchedEffect(started, submitted) {
+        if (started && !submitted) {
+            while (remainingSeconds > 0 && !submitted) {
+                delay(1_000)
+                if (!submitted) remainingSeconds -= 1
+            }
+            if (!submitted && remainingSeconds <= 0) finishSession()
+        }
+    }
+
+    if (!started) {
+        Column(
+            Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(20.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            Text("Timed Biology CBT", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
+            Text("A timed practice mock built from MeritPrep's original Biology question bank.")
+            Card(Modifier.fillMaxWidth()) {
+                Column(Modifier.padding(18.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                    Text("Practice session", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+                    Text("$CBT_QUESTION_COUNT randomly selected questions")
+                    Text("30-minute countdown")
+                    Text("Answer navigation, review flags and final explanations")
+                    HorizontalDivider()
+                    Text("These are original, unverified practice questions, not official JAMB past questions. The session length is a MeritPrep practice setting, not a claim about the official examination timing.", style = MaterialTheme.typography.bodySmall)
+                }
+            }
+            Button(
+                onClick = {
+                    questions = CbtSessionEngine.createQuestions(BiologyQuestionBank.all, CBT_QUESTION_COUNT)
+                    answers.clear()
+                    flags.clear()
+                    currentIndex = 0
+                    remainingSeconds = CBT_DURATION_SECONDS
+                    result = null
+                    submitted = false
+                    started = true
+                },
+                modifier = Modifier.fillMaxWidth()
+            ) { Text("Start timed mock") }
+        }
+    } else if (submitted) {
+        val summary = result ?: CbtSessionEngine.score(questions, answers)
+        Column(Modifier.fillMaxSize().padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+            Text("Mock completed", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
+            Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                SummaryTile("Score", "${summary.correctAnswers}/${summary.totalQuestions}", Modifier.weight(1f))
+                SummaryTile("Accuracy", "${summary.percentage}%", Modifier.weight(1f))
+                SummaryTile("Unanswered", summary.unanswered.toString(), Modifier.weight(1f))
+            }
+            Text("Answer review", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+            LazyColumn(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                itemsIndexed(questions, key = { _, q -> q.questionId }) { index, question ->
+                    val chosen = answers[question.questionId]
+                    val correct = chosen == question.correctPresentedIndex
+                    Card(Modifier.fillMaxWidth()) {
+                        Column(Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(5.dp)) {
+                            Text("Question ${index + 1} · ${if (correct) "Correct" else "Review"}", fontWeight = FontWeight.Bold, color = if (correct) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.error)
+                            Text(question.prompt, fontWeight = FontWeight.SemiBold)
+                            Text("Your answer: ${chosen?.let { question.options.getOrNull(it) } ?: "Not answered"}")
+                            Text("Correct answer: ${question.options[question.correctPresentedIndex]}")
+                            Text(question.explanation, style = MaterialTheme.typography.bodySmall)
+                        }
+                    }
+                }
+            }
+            Button(
+                onClick = {
+                    started = false
+                    submitted = false
+                    questions = emptyList()
+                    answers.clear()
+                    flags.clear()
+                    result = null
+                },
+                modifier = Modifier.fillMaxWidth()
+            ) { Text("Return to CBT start") }
+        }
+    } else {
+        val question = questions[currentIndex]
+        val answeredCount = answers.size
+        val flaggedCount = flags.values.count { it }
+        Column(
+            Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Column(Modifier.weight(1f)) {
+                    Text("Biology practice mock", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+                    Text("Question ${currentIndex + 1} of ${questions.size}", style = MaterialTheme.typography.bodySmall)
+                }
+                Surface(color = if (remainingSeconds <= 300) MaterialTheme.colorScheme.errorContainer else MaterialTheme.colorScheme.secondaryContainer, shape = MaterialTheme.shapes.medium) {
+                    Text(formatCbtTime(remainingSeconds), Modifier.padding(horizontal = 12.dp, vertical = 8.dp), fontWeight = FontWeight.Bold)
+                }
+            }
+            LinearProgressIndicator(progress = { answeredCount.toFloat() / questions.size }, modifier = Modifier.fillMaxWidth())
+            Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                Text("Answered $answeredCount/${questions.size}", style = MaterialTheme.typography.labelMedium)
+                Text("Flagged $flaggedCount", style = MaterialTheme.typography.labelMedium)
+            }
+            Text("Question navigator", style = MaterialTheme.typography.labelLarge, fontWeight = FontWeight.SemiBold)
+            Row(Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                questions.forEachIndexed { index, item ->
+                    val isCurrent = index == currentIndex
+                    val isAnswered = answers.containsKey(item.questionId)
+                    val isFlagged = flags[item.questionId] == true
+                    FilledTonalButton(
+                        onClick = { currentIndex = index },
+                        modifier = Modifier.size(42.dp),
+                        contentPadding = PaddingValues(0.dp),
+                        colors = ButtonDefaults.filledTonalButtonColors(
+                            containerColor = when {
+                                isCurrent -> MaterialTheme.colorScheme.primary
+                                isFlagged -> MaterialTheme.colorScheme.tertiaryContainer
+                                isAnswered -> MaterialTheme.colorScheme.secondaryContainer
+                                else -> MaterialTheme.colorScheme.surfaceVariant
+                            },
+                            contentColor = if (isCurrent) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSurface
+                        )
+                    ) { Text(if (isFlagged) "${index + 1}⚑" else "${index + 1}") }
+                }
+            }
+            Card(Modifier.fillMaxWidth()) {
+                Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                    Text("QUESTION ${currentIndex + 1}", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
+                    Text(question.prompt, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
+                    question.options.forEachIndexed { optionIndex, option ->
+                        OutlinedButton(
+                            onClick = { answers[question.questionId] = optionIndex },
+                            modifier = Modifier.fillMaxWidth(),
+                            colors = ButtonDefaults.outlinedButtonColors(
+                                containerColor = if (answers[question.questionId] == optionIndex) MaterialTheme.colorScheme.secondaryContainer else MaterialTheme.colorScheme.surface
+                            )
+                        ) {
+                            Text((if (answers[question.questionId] == optionIndex) "✓  " else "") + option)
+                        }
+                    }
+                }
+            }
+            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                OutlinedButton(
+                    onClick = { flags[question.questionId] = flags[question.questionId] != true },
+                    modifier = Modifier.weight(1f)
+                ) { Text(if (flags[question.questionId] == true) "Unflag" else "Flag for review") }
+                OutlinedButton(
+                    onClick = { if (currentIndex > 0) currentIndex-- },
+                    enabled = currentIndex > 0,
+                    modifier = Modifier.weight(1f)
+                ) { Text("Previous") }
+                Button(
+                    onClick = { if (currentIndex < questions.lastIndex) currentIndex++ },
+                    enabled = currentIndex < questions.lastIndex,
+                    modifier = Modifier.weight(1f)
+                ) { Text(if (currentIndex == questions.lastIndex) "Last" else "Next") }
+            }
+            OutlinedButton(onClick = { showSubmitDialog = true }, modifier = Modifier.fillMaxWidth()) {
+                Text("Submit mock")
+            }
+        }
+    }
+
+    if (showSubmitDialog && !submitted) {
+        val unanswered = questions.count { !answers.containsKey(it.questionId) }
+        val flagged = flags.values.count { it }
+        AlertDialog(
+            onDismissRequest = { showSubmitDialog = false },
+            title = { Text("Submit this mock?") },
+            text = { Text("$unanswered question(s) are unanswered and $flagged question(s) are flagged. You cannot change answers after submission.") },
+            confirmButton = { Button(onClick = { finishSession() }) { Text("Submit now") } },
+            dismissButton = { TextButton(onClick = { showSubmitDialog = false }) { Text("Continue mock") } }
+        )
+    }
+}
+
+@Composable
+private fun SummaryTile(label: String, value: String, modifier: Modifier = Modifier) {
+    Card(modifier) {
+        Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+            Text(label, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            Text(value, style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+        }
+    }
+}
+
+private fun formatCbtTime(seconds: Int): String {
+    val minutes = (seconds.coerceAtLeast(0) / 60).toString().padStart(2, '0')
+    val remainder = (seconds.coerceAtLeast(0) % 60).toString().padStart(2, '0')
+    return "$minutes:$remainder"
+}
