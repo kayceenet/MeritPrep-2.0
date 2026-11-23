@@ -30,7 +30,7 @@ class LearningCatalogTest {
     fun biologyCurriculumCoversAllFiveJambSectionsWithUniqueUnits() {
         val ids = BiologyCurriculum.units.map { it.id }
         assertEquals(ids.size, ids.toSet().size)
-        assertEquals(23, BiologyCurriculum.units.size)
+        assertEquals(24, BiologyCurriculum.units.size)
         assertEquals(5, BiologyCurriculum.sections.size)
         assertTrue(BiologyCurriculum.units.all { it.title.isNotBlank() && it.scope.isNotBlank() && it.outcomes.isNotBlank() })
         assertTrue(BiologyCurriculum.units.any { it.lessonId == "bio-cell" })
