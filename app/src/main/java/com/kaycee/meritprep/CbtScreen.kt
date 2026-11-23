@@ -75,14 +75,11 @@ fun CbtScreen() {
     fun finishSession() {
         if (!submitted && questions.isNotEmpty()) {
             val finalResult = CbtSessionEngine.score(questions, answers)
-            questions.forEach { question ->
+            val attemptRecords = questions.map { question ->
                 val selected = answers[question.questionId]
-                database.recordQuestionAttempt(
-                    question.topicId,
-                    selected != null && selected == question.correctPresentedIndex
-                )
+                question.topicId to (selected != null && selected == question.correctPresentedIndex)
             }
-            sessionId?.let { database.completeCbtSession(it, finalResult.correctAnswers) }
+            sessionId?.let { database.completeCbtSession(it, finalResult.correctAnswers, attemptRecords) }
             result = finalResult
             submitted = true
             showSubmitDialog = false
