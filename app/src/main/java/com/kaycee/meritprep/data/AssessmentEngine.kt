@@ -4,6 +4,7 @@ import kotlin.random.Random
 
 data class PresentedQuestion(
     val questionId: String,
+    val topicId: String,
     val prompt: String,
     val options: List<String>,
     val correctPresentedIndex: Int,
@@ -23,6 +24,7 @@ object AssessmentEngine {
         val correctIndex = indexed.indexOfFirst { it.first == question.correctOptionIndex }
         return PresentedQuestion(
             questionId = question.id,
+            topicId = question.topicId,
             prompt = question.prompt,
             options = indexed.map { it.second },
             correctPresentedIndex = correctIndex,
