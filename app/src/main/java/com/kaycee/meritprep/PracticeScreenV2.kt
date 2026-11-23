@@ -81,6 +81,9 @@ fun PracticeScreenV2(onStartCbt: () -> Unit = {}, onStartTheory: () -> Unit = {}
             OutlinedButton(onClick = onStartCbt, modifier = Modifier.fillMaxWidth()) {
                 Text("Start timed CBT practice")
             }
+            OutlinedButton(onClick = onOpenMistakes, modifier = Modifier.fillMaxWidth()) {
+                Text("Open mistake notebook")
+            }
             OutlinedButton(onClick = onStartTheory, modifier = Modifier.fillMaxWidth()) {
                 Text("WAEC theory practice")
             }
