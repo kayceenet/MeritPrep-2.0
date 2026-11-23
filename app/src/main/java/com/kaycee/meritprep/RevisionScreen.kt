@@ -35,7 +35,40 @@ private val starterBiologyCards = listOf(
         back = pair.second,
         dueAt = 0L
     )
-}
+} + listOf(
+    RevisionCard("bio-class-card-1","bio-classification","What is the difference between classification and identification?","Classification arranges organisms into groups; identification determines which organism has been observed, often using a key.",0L),
+    RevisionCard("bio-class-card-2","bio-classification","State the taxonomic ranks from broadest to most specific.","Kingdom → Phylum (or Division in plants) → Class → Order → Family → Genus → Species.",0L),
+    RevisionCard("bio-class-card-3","bio-classification","How is a scientific species name written?","Use two words: Genus with an initial capital, followed by the lower-case specific epithet. Italicise both when typed, e.g. Homo sapiens.",0L),
+    RevisionCard("bio-class-card-4","bio-classification","What feature separates prokaryotic from eukaryotic cells?","Prokaryotic cells lack a membrane-bound nucleus; eukaryotic cells have one.",0L),
+    RevisionCard("bio-class-card-5","bio-classification","Why are fungi not classified as green plants?","Fungi obtain nutrients by absorption and do not photosynthesise; their cell walls commonly contain chitin rather than cellulose.",0L),
+    RevisionCard("bio-class-card-6","bio-classification","Why are viruses excluded from the five traditional kingdoms?","Viruses are acellular and replicate only inside suitable host cells; they are not cellular organisms.",0L),
+    RevisionCard("bio-class-card-7","bio-classification","Which plant group has vascular tissue but reproduces by spores rather than seeds?","Ferns have vascular tissue but do not produce seeds.",0L),
+    RevisionCard("bio-class-card-8","bio-classification","What is the purpose of a dichotomous key?","It guides identification through a sequence of paired contrasting statements based on observable features.",0L),
+    RevisionCard("bio-adapt-card-1","bio-adaptation","Define adaptation.","An inherited characteristic that can improve survival and reproductive success in a particular environment.",0L),
+    RevisionCard("bio-adapt-card-2","bio-adaptation","Name the three broad types of adaptation.","Structural (physical features), physiological (internal functions) and behavioural (patterns of activity).",0L),
+    RevisionCard("bio-adapt-card-3","bio-adaptation","How does a streamlined body help a fish?","It reduces resistance or drag as the fish moves through water.",0L),
+    RevisionCard("bio-adapt-card-4","bio-adaptation","How do root or stem features of xerophytes help conserve water?","Reduced leaf area, thick cuticles and water-storing tissues can reduce water loss or store water; the exact features vary by species.",0L),
+    RevisionCard("bio-adapt-card-5","bio-adaptation","What are pneumatophores?","Aerial roots in some mangroves that project above waterlogged sediment and assist gas exchange.",0L),
+    RevisionCard("bio-adapt-card-6","bio-adaptation","Distinguish adaptation from acclimatisation.","Adaptation is inherited across generations; acclimatisation is an adjustment within an individual's lifetime.",0L),
+    RevisionCard("bio-adapt-card-7","bio-adaptation","What is camouflage?","A feature or pattern that makes an organism less conspicuous against its surroundings.",0L),
+    RevisionCard("bio-adapt-card-8","bio-adaptation","Why can nocturnal activity be advantageous in hot environments?","It can reduce exposure to extreme daytime heat and may reduce water loss or heat stress.",0L),
+    RevisionCard("bio-plant-card-1","bio-plant-anatomy","What are the three main tissue systems in flowering plants?","Dermal (epidermal), ground and vascular tissue systems.",0L),
+    RevisionCard("bio-plant-card-2","bio-plant-anatomy","What is the function of root hairs?","They increase the surface area for absorption of water and mineral ions from the soil.",0L),
+    RevisionCard("bio-plant-card-3","bio-plant-anatomy","What does xylem transport?","Water and dissolved mineral ions, mainly from roots towards aerial parts of the plant.",0L),
+    RevisionCard("bio-plant-card-4","bio-plant-anatomy","What does phloem transport?","Organic substances such as sucrose between sources and sinks; movement may occur in different directions in different sieve tubes.",0L),
+    RevisionCard("bio-plant-card-5","bio-plant-anatomy","What is the role of guard cells?","They regulate the opening and closing of stomata by changes in their turgor.",0L),
+    RevisionCard("bio-plant-card-6","bio-plant-anatomy","Why is palisade mesophyll important?","It commonly contains many chloroplasts and is a major site of photosynthesis in a typical leaf.",0L),
+    RevisionCard("bio-plant-card-7","bio-plant-anatomy","Why are xylem walls often lignified?","Lignin strengthens the walls and helps prevent collapse during water transport.",0L),
+    RevisionCard("bio-plant-card-8","bio-plant-anatomy","How do alveoli support gas exchange?","They provide a large moist surface with thin walls and a rich capillary supply, supporting rapid diffusion.",0L),
+    RevisionCard("bio-nut-card-1","bio-nutrition","Write the simplified balanced equation for photosynthesis.","6CO₂ + 6H₂O → C₆H₁₂O₆ + 6O₂, in the presence of light and chlorophyll.",0L),
+    RevisionCard("bio-nut-card-2","bio-nutrition","Name four factors that can affect photosynthesis rate.","Light intensity, carbon dioxide concentration, temperature and water availability; chlorophyll content also matters.",0L),
+    RevisionCard("bio-nut-card-3","bio-nutrition","What is the role of magnesium in plants?","Magnesium is a component of the chlorophyll molecule.",0L),
+    RevisionCard("bio-nut-card-4","bio-nutrition","What is the role of nitrate ions in plant nutrition?","They provide nitrogen for synthesising amino acids and proteins.",0L),
+    RevisionCard("bio-nut-card-5","bio-nutrition","What are the main functions of proteins in the diet?","They provide amino acids for growth, tissue repair, enzymes and other body molecules.",0L),
+    RevisionCard("bio-nut-card-6","bio-nutrition","Is bile an enzyme? What does it do?","No. Bile emulsifies fats into smaller droplets and helps neutralise acidic chyme.",0L),
+    RevisionCard("bio-nut-card-7","bio-nutrition","Where does most nutrient absorption occur?","In the small intestine, whose folds, villi and microvilli provide a large surface area.",0L),
+    RevisionCard("bio-nut-card-8","bio-nutrition","What is assimilation?","The use or incorporation of absorbed nutrients by cells and tissues, such as using amino acids to build proteins.",0L)
+)
 
 @Composable
 fun RevisionScreen() {
