@@ -16,9 +16,10 @@ The current alpha is a working Android app built with Kotlin, Jetpack Compose an
 - A timed Biology CBT mock: 40 random questions, a 30-minute practice timer, question navigation, answer flags, answer review and locally persisted session state.
 - Ten original WAEC-style Biology structured-response tasks, with model responses, self-check marking points and locally saved learner responses.
 - 198 Biology revision cards with an on-device Again / Hard / Good / Easy spaced-retrieval scheduler.
+- An offline mistake notebook that captures incorrect and unanswered practice/CBT responses, explains the correction and lets learners mark concepts as reviewed.
 - Biology practical-learning prototypes for food tests with prediction feedback, osmosis, microscope magnification and quadrat-based ecological sampling.
 - Introductory Physics and Chemistry simulations for Ohm's law and solution concentration.
-- Local recording of lesson completion, question attempts, revision schedules, theory responses and active CBT session answers.
+- Local recording of lesson completion, question attempts, revision schedules, theory responses, mistake-notebook entries and active CBT session answers.
 - Automated unit tests and a GitHub Actions debug-APK build.
 
 ## Important academic limitations
