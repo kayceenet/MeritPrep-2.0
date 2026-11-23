@@ -559,7 +559,7 @@ class MeritDatabase(context: Context) : SQLiteOpenHelper(context, "meritprep_loc
     fun setStudyPlanItemCompleted(itemId: String, completed: Boolean) {
         val values = ContentValues().apply {
             put("is_completed", if (completed) 1 else 0)
-            put("completed_at", if (completed) System.currentTimeMillis() else null as Long?)
+            if (completed) put("completed_at", System.currentTimeMillis()) else putNull("completed_at")
         }
         writableDatabase.update("study_plan_items", values, "item_id = ?", arrayOf(itemId))
     }
