@@ -34,4 +34,9 @@ class AssessmentEngineTest {
         assertEquals(0, result.percentage)
         assertTrue(result.answers.isEmpty())
     }
+    @Test fun presentedQuestionRetainsItsSyllabusTopicId() {
+        val presented = AssessmentEngine.present(question, Random(7))
+        assertEquals(question.topicId, presented.topicId)
+    }
 }
+
