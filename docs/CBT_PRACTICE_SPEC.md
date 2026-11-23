@@ -13,7 +13,7 @@
 - The 40-question/30-minute setting is a MeritPrep practice configuration, not an official JAMB or WAEC timing specification.
 - Questions are original and unverified; they are not represented as official past questions.
 - The current mock is Biology-only. Full JAMB multi-subject sessions, WAEC paper formats and subject-specific official blueprints require separate implementation and academic verification.
-- The current session is held in memory. If the app is force-closed or the process is killed, an in-progress session is not yet restored. Persistent session recovery is a next engineering task.
+- The active session, shuffled question order, presented options, answers and review flags are stored locally. On reopening the CBT screen, the app restores the session and recalculates remaining time from the saved deadline. The current question position resets to the first question after restoration; preserving the exact position and restoring completed-session review after leaving the screen remain follow-up improvements.
 - No readiness score or guaranteed examination outcome is inferred from this mock.
 
 ## Acceptance checks
