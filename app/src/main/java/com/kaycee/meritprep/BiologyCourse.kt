@@ -96,7 +96,7 @@ fun BiologyCourseScreen(onOpenLesson: (String) -> Unit, onOpenGlossary: () -> Un
         item {
             Text("WAEC practical preparation", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
             BiologyCurriculum.waecPracticalStrands.forEachIndexed { index, strand -> Text("${index + 1}. $strand") }
-            Text("Interactive learning prototypes for food tests, osmosis, microscopy, quadrat sampling and classification are available in Labs. A complete WAEC practical paper, specimen bank and independently reviewed marking rubrics are still in development.", style = MaterialTheme.typography.bodySmall)
+            Text("Interactive learning prototypes for food tests, osmosis, microscopy, quadrat sampling and classification, plus a biological drawing self-check, are available in Labs. A complete WAEC practical paper, specimen bank and independently reviewed marking rubrics are still in development.", style = MaterialTheme.typography.bodySmall)
         }
     }
 }
