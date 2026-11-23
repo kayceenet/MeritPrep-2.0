@@ -37,7 +37,7 @@ A Biology practice mock now selects 40 random original questions from the 240-it
 - Biology syllabus map: 24 units represented; each unit resolves to an authored lesson draft.
 - Biology lessons: 24 beginner-oriented lesson drafts, mapped to the syllabus units; independent academic review is pending.
 - Biology original objective practice: 240 items across the 24 units; items are explicitly marked as original and unverified.
-- Practice: topic-focused sessions and a full Biology question-bank mode with shuffled question and option order.
+- Practice: topic-focused sessions and a Biology question-bank mode with shuffled answer options; the timed mock randomizes question order.
 - Revision: 198 offline Biology cards with Again/Hard/Good/Easy scheduling.
 - Practical learning: food-test and osmosis prototypes.
 - Academic approval: pending independent subject review; no generated question is presented as an official past question.
