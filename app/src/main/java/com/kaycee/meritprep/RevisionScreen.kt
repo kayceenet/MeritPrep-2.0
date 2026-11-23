@@ -133,6 +133,15 @@ private val starterBiologyCards = listOf(
     RevisionCard("bio-coord-card-6","bio-coordination","What is the effect of glucagon on blood glucose?","Glucagon promotes breakdown of liver glycogen and release of glucose, raising blood glucose.",0L),
     RevisionCard("bio-coord-card-7","bio-coordination","How does sweating cool the body?","Evaporation of sweat from the skin removes heat from the body.",0L),
     RevisionCard("bio-coord-card-8","bio-coordination","How does ADH help regulate water balance?","It increases water reabsorption in kidney collecting ducts, producing more concentrated urine.",0L)
+) + listOf(
+    RevisionCard("bio-eco-f-card-1","bio-ecology-factors","Define habitat.","The place where an organism lives.",0L),
+    RevisionCard("bio-eco-f-card-2","bio-ecology-factors","Distinguish population from community.","A population is members of one species in an area; a community includes populations of different species in that area.",0L),
+    RevisionCard("bio-eco-f-card-3","bio-ecology-factors","Give four abiotic factors.","Examples include temperature, light intensity, rainfall, humidity, pH, salinity, wind and soil properties.",0L),
+    RevisionCard("bio-eco-f-card-4","bio-ecology-factors","Give three examples of biotic interactions.","Competition, predation and parasitism; mutualism and commensalism are other examples.",0L),
+    RevisionCard("bio-eco-f-card-5","bio-ecology-factors","Which instrument measures relative humidity?","A hygrometer.",0L),
+    RevisionCard("bio-eco-f-card-6","bio-ecology-factors","Which instrument measures wind speed?","An anemometer.",0L),
+    RevisionCard("bio-eco-f-card-7","bio-ecology-factors","What is a limiting factor?","A condition or resource that restricts growth, survival or distribution when it is scarce or unsuitable.",0L),
+    RevisionCard("bio-eco-f-card-8","bio-ecology-factors","Why should ecological measurements be repeated?","To capture variation across locations and times and avoid relying on an unrepresentative reading.",0L)
 )
 
 @Composable
