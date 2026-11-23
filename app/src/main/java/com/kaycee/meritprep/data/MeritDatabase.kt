@@ -321,13 +321,39 @@ class MeritDatabase(context: Context) : SQLiteOpenHelper(context, "meritprep_loc
         )
     }
 
-    fun completeCbtSession(sessionId: String, score: Int, submittedAt: Long = System.currentTimeMillis()) {
-        val values = ContentValues().apply {
-            put("status", "SUBMITTED")
-            put("score", score)
-            put("submitted_at", submittedAt)
-        }
-        writableDatabase.update("cbt_sessions", values, "session_id = ? AND status = 'IN_PROGRESS'", arrayOf(sessionId))
+    fun completeCbtSession(
+        sessionId: String,
+        score: Int,
+        attempts: List<Pair<String, Boolean>>,
+        submittedAt: Long = System.currentTimeMillis()
+    ) {
+        val db = writableDatabase
+        db.beginTransaction()
+        try {
+            val isActive = db.rawQuery(
+                "SELECT 1 FROM cbt_sessions WHERE session_id = ? AND status = 'IN_PROGRESS' LIMIT 1",
+                arrayOf(sessionId)
+            ).use { it.moveToFirst() }
+            if (!isActive) return
+            attempts.forEach { (topicId, isCorrect) ->
+                db.execSQL(
+                    """INSERT INTO topic_progress(topic_id, questions_attempted, questions_correct, last_studied)
+                       VALUES(?, 1, ?, ?)
+                       ON CONFLICT(topic_id) DO UPDATE SET
+                         questions_attempted = questions_attempted + 1,
+                         questions_correct = questions_correct + excluded.questions_correct,
+                         last_studied = excluded.last_studied""".trimIndent(),
+                    arrayOf(topicId, if (isCorrect) 1 else 0, submittedAt)
+                )
+            }
+            val values = ContentValues().apply {
+                put("status", "SUBMITTED")
+                put("score", score)
+                put("submitted_at", submittedAt)
+            }
+            db.update("cbt_sessions", values, "session_id = ? AND status = 'IN_PROGRESS'", arrayOf(sessionId))
+            db.setTransactionSuccessful()
+        } finally { db.endTransaction() }
     }
 
     fun abandonCbtSession(sessionId: String) {
