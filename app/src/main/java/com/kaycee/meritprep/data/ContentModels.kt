@@ -109,3 +109,21 @@ data class MistakeNote(
     val createdAt: Long,
     val isResolved: Boolean
 )
+
+
+data class StudyPlanItem(
+    val itemId: String,
+    val dayIndex: Int,
+    val topicId: String,
+    val topicTitle: String,
+    val activityType: String,
+    val estimatedMinutes: Int,
+    val isCompleted: Boolean
+)
+
+data class StudyPlanSnapshot(
+    val planId: String,
+    val createdAt: Long,
+    val minutesPerDay: Int,
+    val items: List<StudyPlanItem>
+)
