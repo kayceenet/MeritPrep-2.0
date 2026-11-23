@@ -55,7 +55,7 @@ class LearningCatalogTest {
         val questions = BiologyQuestionBank.all
         assertEquals(240, questions.size)
         assertEquals(questions.size, questions.map { it.id }.toSet().size)
-        val syllabusIds = BiologyCurriculum.units.map { it.id }.toSet()
+        val syllabusIds = BiologyCurriculum.units.mapNotNull { it.lessonId }.toSet()
         assertEquals(syllabusIds, questions.map { it.topicId }.toSet())
         assertTrue(questions.all { !it.isVerified && it.source.startsWith("MeritPrep original practice item") })
     }
