@@ -65,7 +65,8 @@ fun BiologyCourseScreen(onOpenLesson: (String) -> Unit, onOpenGlossary: () -> Un
     LazyColumn(Modifier.fillMaxSize().padding(18.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
         item {
             Text("Biology", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
-            Text("A guided course from first principles to examination-level application.")\n            OutlinedButton(onClick = onOpenGlossary) { Text("Search the Biology glossary · ${BiologyGlossary.entries.size} terms") }
+            Text("A guided course from first principles to examination-level application.")
+            OutlinedButton(onClick = onOpenGlossary) { Text("Search the Biology glossary · ${BiologyGlossary.entries.size} terms") }
             Card(colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer)) {
                 Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
                     Text("Curriculum map · ${BiologyCurriculum.units.size} JAMB topic blocks", fontWeight = FontWeight.Bold)
