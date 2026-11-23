@@ -151,6 +151,15 @@ private val starterBiologyCards = listOf(
     RevisionCard("bio-eco-i-card-6","bio-interactions","What is the role of decomposers?","They break down dead organic matter and wastes, returning nutrients to the environment.",0L),
     RevisionCard("bio-eco-i-card-7","bio-interactions","What is nitrogen fixation?","Conversion of atmospheric nitrogen gas into ammonia or related biologically available nitrogen compounds, commonly by bacteria.",0L),
     RevisionCard("bio-eco-i-card-8","bio-interactions","What is denitrification?","Conversion of nitrate to nitrogen gas by denitrifying bacteria, returning nitrogen to the atmosphere.",0L)
+) + listOf(
+    RevisionCard("bio-hab-card-1","bio-habitats","Define habitat.","The place where an organism lives.",0L),
+    RevisionCard("bio-hab-card-2","bio-habitats","What is an ecological niche?","The role and way of life of an organism, including its resource use, tolerances and interactions.",0L),
+    RevisionCard("bio-hab-card-3","bio-habitats","What does arboreal mean?","Living mainly in trees or shrubs.",0L),
+    RevisionCard("bio-hab-card-4","bio-habitats","What is a microhabitat?","A small, distinct part of a larger habitat with its own local conditions, such as leaf litter or a tree-hole.",0L),
+    RevisionCard("bio-hab-card-5","bio-habitats","Name three major aquatic habitat types.","Freshwater, marine and brackish habitats.",0L),
+    RevisionCard("bio-hab-card-6","bio-habitats","What is quadrat sampling used for?","Estimating abundance or distribution of suitable stationary organisms in a defined area.",0L),
+    RevisionCard("bio-hab-card-7","bio-habitats","What is a transect used for?","Recording changes in organisms or environmental conditions along a line or gradient.",0L),
+    RevisionCard("bio-hab-card-8","bio-habitats","Give two ways humans can fragment habitats.","Road construction and urban or agricultural development can divide continuous habitat into separated patches.",0L)
 )
 
 @Composable
