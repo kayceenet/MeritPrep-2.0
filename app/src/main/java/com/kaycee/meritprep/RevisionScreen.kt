@@ -88,6 +88,15 @@ private val starterBiologyCards = listOf(
     RevisionCard("bio-resp-card-6","bio-respiration","Give three features of alveoli that support gas exchange.","Large combined surface area, thin moist walls and a rich capillary supply.",0L),
     RevisionCard("bio-resp-card-7","bio-respiration","What happens to the diaphragm during inspiration?","It contracts and flattens, increasing thoracic volume and helping lower pressure in the lungs.",0L),
     RevisionCard("bio-resp-card-8","bio-respiration","How is most oxygen transported in human blood?","Bound reversibly to haemoglobin in red blood cells.",0L)
+) + listOf(
+    RevisionCard("bio-exc-card-1","bio-excretion","Distinguish excretion from egestion.","Excretion removes metabolic waste products; egestion removes undigested material from the alimentary canal.",0L),
+    RevisionCard("bio-exc-card-2","bio-excretion","Where is urea formed in mammals?","In the liver, mainly through conversion of ammonia generated during amino-acid breakdown.",0L),
+    RevisionCard("bio-exc-card-3","bio-excretion","What is the function of a contractile vacuole in a freshwater protist?","It collects and expels excess water to help maintain osmotic balance.",0L),
+    RevisionCard("bio-exc-card-4","bio-excretion","What is the functional unit of the kidney?","The nephron.",0L),
+    RevisionCard("bio-exc-card-5","bio-excretion","Define ultrafiltration in the kidney.","Pressure-driven filtration at the glomerulus that moves water and small solutes into Bowman's capsule while retaining blood cells and most large proteins.",0L),
+    RevisionCard("bio-exc-card-6","bio-excretion","Where is most filtered glucose reabsorbed?","In the proximal convoluted tubule, under normal blood-glucose conditions.",0L),
+    RevisionCard("bio-exc-card-7","bio-excretion","How does ADH affect urine concentration?","It increases collecting-duct water permeability, so more water is reabsorbed and urine becomes more concentrated.",0L),
+    RevisionCard("bio-exc-card-8","bio-excretion","Which nitrogenous waste do birds commonly excrete to conserve water?","Uric acid.",0L)
 )
 
 @Composable
