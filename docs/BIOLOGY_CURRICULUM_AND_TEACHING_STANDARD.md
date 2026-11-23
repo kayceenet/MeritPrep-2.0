@@ -109,7 +109,7 @@ A topic should only be marked mastered after the learner demonstrates performanc
 - [x] Add 240 original objective practice items across all 24 mapped Biology units (still awaiting independent review).
 - [ ] Add reviewed structured-response items and expand beyond the current original objective bank.
 - [ ] Add a reviewed, accessible diagram and visual-asset set for every lesson.
-- [x] Add initial interactive food-test and osmosis learning prototypes.
+- [x] Add interactive food-test (with prediction feedback), osmosis, microscope-magnification and quadrat-sampling learning prototypes.
 - [ ] Add specimen/practical tasks with reviewed marking rubrics and full WAEC practical assessment workflows.
 - [ ] Add syllabus coverage reporting and reviewer workflow.
 - [ ] Independently review and approve the twenty-four authored lesson drafts, 240 objective questions and 198 revision cards.
