@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import org.json.JSONArray
 
-class MeritDatabase(context: Context) : SQLiteOpenHelper(context, "meritprep_local.db", null, 7) {
+class MeritDatabase(context: Context) : SQLiteOpenHelper(context, "meritprep_local.db", null, 8) {
     override fun onCreate(db: SQLiteDatabase) {
         db.execSQL("""
             CREATE TABLE topic_progress (
@@ -51,6 +51,7 @@ class MeritDatabase(context: Context) : SQLiteOpenHelper(context, "meritprep_loc
         createCbtTables(db)
         createMistakeTable(db)
         createStudyPlanTables(db)
+        createQuestionAttemptsTable(db)
     }
 
     private fun createCompletedLessonsTable(db: SQLiteDatabase) {
@@ -73,6 +74,7 @@ class MeritDatabase(context: Context) : SQLiteOpenHelper(context, "meritprep_loc
         if (oldVersion < 5) createMistakeTable(db)
         if (oldVersion < 6) createStudyPlanTables(db)
         if (oldVersion < 7 && !hasColumn(db, "topic_progress", "demonstrated_mastery")) db.execSQL("ALTER TABLE topic_progress ADD COLUMN demonstrated_mastery INTEGER NOT NULL DEFAULT 0")
+        if (oldVersion < 8) createQuestionAttemptsTable(db)
     }
 
     private fun hasColumn(db: SQLiteDatabase, table: String, column: String): Boolean =
@@ -184,6 +186,39 @@ class MeritDatabase(context: Context) : SQLiteOpenHelper(context, "meritprep_loc
         readableDatabase.rawQuery("SELECT COUNT(*) FROM mistake_notebook WHERE is_resolved = 0", null)
             .use { if (it.moveToFirst()) it.getInt(0) else 0 }
 
+    private fun insertQuestionAttempt(
+        db: SQLiteDatabase,
+        questionId: String,
+        topicId: String,
+        isCorrect: Boolean,
+        attemptedAt: Long
+    ) {
+        val values = ContentValues().apply {
+            put("attempt_id", java.util.UUID.randomUUID().toString())
+            put("question_id", questionId)
+            put("topic_id", topicId)
+            put("is_correct", if (isCorrect) 1 else 0)
+            put("attempted_at", attemptedAt)
+        }
+        db.insertOrThrow("question_attempts", null, values)
+    }
+
+    private fun updateMasteryEvidence(db: SQLiteDatabase, topicId: String) {
+        val evidence = db.rawQuery(
+            """SELECT COUNT(*), COUNT(DISTINCT question_id), COALESCE(SUM(is_correct), 0),
+                      COUNT(DISTINCT CAST(attempted_at / 86400000 AS INTEGER))
+               FROM question_attempts WHERE topic_id = ?""".trimIndent(),
+            arrayOf(topicId)
+        ).use { cursor ->
+            cursor.moveToFirst()
+            MasteryEvidence(cursor.getInt(0), cursor.getInt(1), cursor.getInt(2), cursor.getInt(3))
+        }
+        val values = ContentValues().apply {
+            put("demonstrated_mastery", if (MasteryPolicy.isDemonstrated(evidence)) 1 else 0)
+        }
+        db.update("topic_progress", values, "topic_id = ?", arrayOf(topicId))
+    }
+
     private fun incrementTopicProgress(
         db: SQLiteDatabase,
         topicId: String,
@@ -218,7 +253,7 @@ class MeritDatabase(context: Context) : SQLiteOpenHelper(context, "meritprep_loc
         }
     }
 
-    fun recordQuestionAttempt(topicId: String, isCorrect: Boolean, studiedAt: Long = System.currentTimeMillis()) {
+    fun recordQuestionAttempt(topicId: String, isCorrect: Boolean, questionId: String? = null, studiedAt: Long = System.currentTimeMillis()) {
         val db = writableDatabase
         db.beginTransaction()
         try {
@@ -227,6 +262,10 @@ class MeritDatabase(context: Context) : SQLiteOpenHelper(context, "meritprep_loc
                 questionsCorrect = if (isCorrect) 1 else 0,
                 studiedAt = studiedAt
             )
+            if (questionId != null) {
+                insertQuestionAttempt(db, questionId, topicId, isCorrect, studiedAt)
+                updateMasteryEvidence(db, topicId)
+            }
             db.setTransactionSuccessful()
         } finally {
             db.endTransaction()
@@ -432,7 +471,7 @@ class MeritDatabase(context: Context) : SQLiteOpenHelper(context, "meritprep_loc
     fun completeCbtSession(
         sessionId: String,
         score: Int,
-        attempts: List<Pair<String, Boolean>>,
+        attempts: List<QuestionAttemptRecord>,
         mistakes: List<MistakeNote> = emptyList(),
         submittedAt: Long = System.currentTimeMillis()
     ) {
@@ -444,13 +483,15 @@ class MeritDatabase(context: Context) : SQLiteOpenHelper(context, "meritprep_loc
                 arrayOf(sessionId)
             ).use { it.moveToFirst() }
             if (!isActive) return
-            attempts.forEach { (topicId, isCorrect) ->
+            attempts.forEach { attempt ->
                 incrementTopicProgress(
-                    db, topicId, questionAttempts = 1,
-                    questionsCorrect = if (isCorrect) 1 else 0,
+                    db, attempt.topicId, questionAttempts = 1,
+                    questionsCorrect = if (attempt.isCorrect) 1 else 0,
                     studiedAt = submittedAt
                 )
+                insertQuestionAttempt(db, attempt.questionId, attempt.topicId, attempt.isCorrect, submittedAt)
             }
+            attempts.map { it.topicId }.toSet().forEach { updateMasteryEvidence(db, it) }
             mistakes.forEach { note ->
                 val mistakeValues = ContentValues().apply {
                     put("mistake_id", note.mistakeId)
@@ -500,6 +541,19 @@ class MeritDatabase(context: Context) : SQLiteOpenHelper(context, "meritprep_loc
                 )
             }
         }
+
+    private fun createQuestionAttemptsTable(db: SQLiteDatabase) {
+        db.execSQL("""
+            CREATE TABLE IF NOT EXISTS question_attempts (
+                attempt_id TEXT PRIMARY KEY,
+                question_id TEXT NOT NULL,
+                topic_id TEXT NOT NULL,
+                is_correct INTEGER NOT NULL,
+                attempted_at INTEGER NOT NULL
+            )
+        """.trimIndent())
+        db.execSQL("CREATE INDEX IF NOT EXISTS idx_question_attempts_topic ON question_attempts(topic_id, attempted_at)")
+    }
 
     private fun createStudyPlanTables(db: SQLiteDatabase) {
         db.execSQL("""
