@@ -55,6 +55,7 @@ The debug APK is generated at `app/build/outputs/apk/debug/app-debug.apk`.
 Every published lesson, diagram, question, answer key and practical rubric must have a stable identifier, syllabus mapping, source and rights record, content version, named author, independent reviewer and approval status. Never label generated or unverified questions as official past questions. Lesson completion is not the same as demonstrated mastery.
 
 See:
+- `docs/USER_GUIDE.md`
 - `docs/ACADEMIC_CONTENT_STANDARD.md`
 - `docs/BIOLOGY_CURRICULUM_AND_TEACHING_STANDARD.md`
 - `docs/PRODUCT_ROADMAP.md`
