@@ -63,7 +63,7 @@ class StudyPlanGeneratorTest {
         val strong = TopicProgress("strong", 1, 20, 20, now, true)
         val weak = TopicProgress("weak", 0, 20, 2, now - 60L * 86_400_000L, false)
         val ordered = StudyPlanGenerator.prioritiseTopics(
-            listOf(strong.let { StudyTopic(it.topicId, "Strong") }, StudyTopic("weak", "Weak")),
+            listOf(StudyTopic("strong", "Strong"), StudyTopic("weak", "Weak")),
             listOf(strong, weak),
             now
         )
