@@ -43,4 +43,21 @@ class LearningCatalogTest {
             assertTrue("Missing starter lesson for $code", LearningCatalog.forSubject(code).isNotEmpty())
         }
     }
+    @Test
+    fun everyBiologySyllabusUnitHasAnAuthoredLessonRoute() {
+        val lessonIds = LearningCatalog.topics.filter { it.subjectCode == "BIO" }.map { it.id }.toSet()
+        assertEquals(24, lessonIds.size)
+        assertTrue(BiologyCurriculum.units.all { it.lessonId != null && it.lessonId in lessonIds })
+    }
+
+    @Test
+    fun originalBiologyQuestionsCoverEverySyllabusUnit() {
+        val questions = BiologyQuestionBank.all
+        assertEquals(240, questions.size)
+        assertEquals(questions.size, questions.map { it.id }.toSet().size)
+        val syllabusIds = BiologyCurriculum.units.map { it.id }.toSet()
+        assertEquals(syllabusIds, questions.map { it.topicId }.toSet())
+        assertTrue(questions.all { !it.isVerified && it.source.startsWith("MeritPrep original practice item") })
+    }
 }
+
