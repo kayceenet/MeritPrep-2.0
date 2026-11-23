@@ -160,6 +160,15 @@ private val starterBiologyCards = listOf(
     RevisionCard("bio-hab-card-6","bio-habitats","What is quadrat sampling used for?","Estimating abundance or distribution of suitable stationary organisms in a defined area.",0L),
     RevisionCard("bio-hab-card-7","bio-habitats","What is a transect used for?","Recording changes in organisms or environmental conditions along a line or gradient.",0L),
     RevisionCard("bio-hab-card-8","bio-habitats","Give two ways humans can fragment habitats.","Road construction and urban or agricultural development can divide continuous habitat into separated patches.",0L)
+) + listOf(
+    RevisionCard("bio-biome-card-1","bio-biomes","What is a biome?","A large ecological region associated with a characteristic climate and dominant vegetation, with its associated animal communities.",0L),
+    RevisionCard("bio-biome-card-2","bio-biomes","Name three broad Nigerian ecological environments.","Examples include tropical rainforest, savanna and mangrove or freshwater swamp; montane environments also occur at higher elevations.",0L),
+    RevisionCard("bio-biome-card-3","bio-biomes","What characterises tropical rainforest?","High rainfall, layered vegetation, tall broad-leaved trees and high biological diversity.",0L),
+    RevisionCard("bio-biome-card-4","bio-biomes","Where are mangroves found in Nigeria?","In tidal coastal and estuarine environments, including parts of the Niger Delta.",0L),
+    RevisionCard("bio-biome-card-5","bio-biomes","How does Guinea savanna differ from Sudan savanna?","Guinea savanna is generally wetter with taller grasses and more scattered trees; Sudan savanna is generally drier with shorter grasses and more widely spaced trees.",0L),
+    RevisionCard("bio-biome-card-6","bio-biomes","What is the Sahel?","A semi-arid transition with lower and less reliable rainfall and relatively sparse vegetation.",0L),
+    RevisionCard("bio-biome-card-7","bio-biomes","Name two Nigerian montane areas.","The Mambilla Plateau and Obudu highlands are examples.",0L),
+    RevisionCard("bio-biome-card-8","bio-biomes","Why are biome boundaries often gradual?","Rainfall, soil, altitude, land use and other local conditions vary continuously, creating transition zones.",0L)
 )
 
 @Composable
