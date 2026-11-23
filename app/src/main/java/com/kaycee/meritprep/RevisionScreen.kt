@@ -205,6 +205,15 @@ private val starterBiologyCards = listOf(
     RevisionCard("bio-var-card-6","bio-variation","What genotype produces blood group O in the basic ABO model?","ii.",0L),
     RevisionCard("bio-var-card-7","bio-variation","Why is height an example of a complex trait?","It is influenced by many genes and environmental factors such as nutrition and health.",0L),
     RevisionCard("bio-var-card-8","bio-variation","How does natural selection use variation?","It acts on heritable differences that affect reproductive success and can change variant frequencies over generations.",0L)
+) + listOf(
+    RevisionCard("bio-her-card-1","bio-heredity","What is a gene?","A section of DNA that contributes to a functional product, such as a protein or functional RNA.",0L),
+    RevisionCard("bio-her-card-2","bio-heredity","What are alleles?","Alternative versions of the same gene.",0L),
+    RevisionCard("bio-her-card-3","bio-heredity","Distinguish genotype from phenotype.","Genotype is the genetic constitution; phenotype is the observable characteristic produced by genotype interacting with the environment.",0L),
+    RevisionCard("bio-her-card-4","bio-heredity","What is the expected genotype ratio from Tt × Tt?","1 TT : 2 Tt : 1 tt.",0L),
+    RevisionCard("bio-her-card-5","bio-heredity","What is the expected phenotype ratio from Tt × Tt under complete dominance?","3 dominant : 1 recessive.",0L),
+    RevisionCard("bio-her-card-6","bio-heredity","State Mendel's law of segregation.","The two alleles for a gene separate during gamete formation, so each gamete receives one allele.",0L),
+    RevisionCard("bio-her-card-7","bio-heredity","What is a mutation?","A change in DNA sequence; its effect may be neutral, harmful or beneficial depending on context.",0L),
+    RevisionCard("bio-her-card-8","bio-heredity","What does homozygous mean?","Having two identical alleles at a gene locus.",0L)
 )
 
 @Composable
