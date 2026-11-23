@@ -558,6 +558,31 @@ object LearningCatalog {
             "Each parent produces T and t gametes. The four equally likely combinations are TT, Tt, Tt and tt, giving a 1:2:1 genotype ratio."
         ),
         LearningTopic(
+            "bio-biotechnology", "Biotechnology", "BIO",
+            "People have used living organisms to make useful products for thousands of years, from fermented foods to improved crop varieties. Modern biotechnology can work with cells, enzymes and DNA to produce medicines, improve crops and investigate biological problems. This lesson compares traditional and modern methods and explains why safety and responsible use matter.",
+            listOf(
+                "Define biotechnology and distinguish traditional from modern methods",
+                "Explain the use of microorganisms in fermentation",
+                "Describe selective breeding and tissue culture",
+                "Outline the basic idea of recombinant DNA technology",
+                "Identify applications of biotechnology in medicine and agriculture",
+                "Discuss benefits, limitations and biosafety considerations"
+            ),
+            listOf(
+                "What biotechnology means" to "Biotechnology is the use of living organisms, cells or biological processes to develop products and services. Traditional biotechnology includes fermentation and selective breeding. Modern biotechnology may use cell culture, molecular biology, recombinant DNA, genetic testing and genome-editing methods. The boundary between traditional and modern methods is not absolute; both use biological systems to achieve a useful purpose.",
+                "Fermentation in food production" to "Yeast can ferment sugars to produce ethanol and carbon dioxide; this process is used in bread-making and some beverage production. Lactic acid bacteria ferment sugars to produce lactic acid in foods such as yoghurt and some fermented vegetables. Fermentation conditions such as temperature, pH, oxygen availability and substrate affect the product and rate. Food fermentation must use suitable organisms and hygienic conditions.",
+                "Selective breeding" to "Selective breeding involves choosing parents with desirable inherited characteristics and breeding them over generations. It has been used to improve crop yield, disease resistance, animal productivity and other traits. It can be relatively accessible, but it may take many generations, can reduce genetic diversity and may unintentionally increase inherited problems if the breeding population is too narrow.",
+                "Plant tissue culture" to "Plant tissue culture grows plant cells, tissues or organs on a sterile nutrient medium under controlled conditions. Small pieces of plant tissue, called explants, can produce many plantlets through micropropagation. Tissue culture can rapidly multiply selected plants and help produce disease-free planting material when starting material and procedures are appropriate. Contamination, cost, specialised skills and genetic variation among regenerated plants are potential limitations.",
+                "Recombinant DNA technology" to "Recombinant DNA technology combines DNA sequences from different sources. A gene of interest may be inserted into a vector, such as a plasmid, and introduced into a host cell. The host can then copy the DNA or express the gene product. In a simplified example, genetically engineered microorganisms can produce human insulin. Real procedures involve careful selection of the gene, vector, host, regulatory sequences and verification of the product.",
+                "Applications in medicine and agriculture" to "Biotechnology is used to produce some medicines, diagnostic reagents and vaccines; to investigate inherited conditions; and to develop crops with selected traits. Genetically modified crops may be designed for traits such as insect resistance or herbicide tolerance. Outcomes depend on the crop, trait, farming system and local environment. Biotechnology can support food production and health care but does not replace good farming, public-health systems or clinical care.",
+                "Benefits, limitations and biosafety" to "Potential benefits include improved crop traits, more consistent production of medicines, faster propagation of useful plants and better diagnostic tools. Limitations include cost, technical requirements, unequal access, unintended effects and public concerns. Biosafety assesses potential risks to human health and the environment, including gene flow, effects on non-target organisms and development of resistance. Decisions should be based on evidence, regulation and transparent assessment rather than unsupported claims.",
+                "Ethics, ownership and responsible use" to "Biotechnology raises questions about consent, privacy of genetic information, access to treatments, intellectual property, effects on farmers and communities, animal welfare and environmental protection. Responsible use includes independent risk assessment, monitoring, clear labelling where required, fair access and public engagement. Avoid assuming that every biotechnology application is automatically safe or automatically harmful."
+            ),
+            "Which method grows many new plants from small pieces of tissue under sterile conditions?",
+            listOf("Plant tissue culture","Natural pollination only","Transpiration","Selective grazing"), 0,
+            "Plant tissue culture grows cells, tissues or organs on sterile nutrient media and can be used for rapid multiplication through micropropagation."
+        ),
+        LearningTopic(
             "chem-atomic", "Atomic structure", "CHEM",
             "All ordinary matter is made of atoms. The arrangement and number of subatomic particles explain an element's identity, isotope and electrical charge.",
             listOf("Identify protons, neutrons and electrons", "Explain atomic number and mass number", "Determine the numbers of subatomic particles in simple atoms and ions"),
