@@ -13,9 +13,11 @@ The current alpha is a working Android app built with Kotlin, Jetpack Compose an
 - A 24-unit Biology syllabus map, with an authored beginner-oriented lesson draft for every mapped unit.
 - 240 original Biology multiple-choice practice questions across the 24 mapped units, with explanations and syllabus-topic attribution.
 - Topic-focused Biology practice sessions and a full Biology question-bank mode, with shuffled questions and answer options.
+- A timed Biology CBT mock: 40 random questions, a 30-minute practice timer, question navigation, answer flags, answer review and locally persisted session state.
 - 198 Biology revision cards with an on-device Again / Hard / Good / Easy spaced-retrieval scheduler.
-- Biology practical-learning prototypes for food-test interpretation and osmosis.
-- Local recording of lesson completion, question attempts and revision schedules.
+- Biology practical-learning prototypes for food tests with prediction feedback, osmosis, microscope magnification and quadrat-based ecological sampling.
+- Introductory Physics and Chemistry simulations for Ohm's law and solution concentration.
+- Local recording of lesson completion, question attempts, revision schedules and active CBT session answers.
 - Automated unit tests and a GitHub Actions debug-APK build.
 
 ## Important academic limitations
@@ -24,8 +26,9 @@ This is an actively developed alpha, not a completed or officially endorsed exam
 
 - Biology lessons, question keys, flashcards and practical tasks still require independent review by qualified subject teachers.
 - The 240 Biology questions are original practice items, not official JAMB or WAEC past questions.
+- The Biology CBT mock is a MeritPrep practice configuration, not an official JAMB paper or a full multi-subject JAMB simulation.
 - The syllabus map is a working mapping. It must be checked against the current official JAMB IBASS and WAEC materials before each examination cycle.
-- Full timed JAMB CBT, WAEC theory marking, a complete practical examination system, cross-device synchronisation, teacher CMS and production security review remain in development.
+- WAEC theory marking, a complete practical examination system, cross-device synchronisation, teacher CMS and production security review remain in development.
 - Other subjects currently have starter content, not complete syllabus coverage.
 
 ## Build locally
