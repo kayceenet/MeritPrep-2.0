@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import org.json.JSONArray
 
-class MeritDatabase(context: Context) : SQLiteOpenHelper(context, "meritprep_local.db", null, 8) {
+class MeritDatabase(context: Context) : SQLiteOpenHelper(context, "meritprep_local.db", null, 9) {
     override fun onCreate(db: SQLiteDatabase) {
         db.execSQL("""
             CREATE TABLE topic_progress (
@@ -75,6 +75,7 @@ class MeritDatabase(context: Context) : SQLiteOpenHelper(context, "meritprep_loc
         if (oldVersion < 6) createStudyPlanTables(db)
         if (oldVersion < 7 && !hasColumn(db, "topic_progress", "demonstrated_mastery")) db.execSQL("ALTER TABLE topic_progress ADD COLUMN demonstrated_mastery INTEGER NOT NULL DEFAULT 0")
         if (oldVersion < 8) createQuestionAttemptsTable(db)
+        if (oldVersion < 9 && !hasColumn(db, "cbt_sessions", "current_index")) db.execSQL("ALTER TABLE cbt_sessions ADD COLUMN current_index INTEGER NOT NULL DEFAULT 0")
     }
 
     private fun hasColumn(db: SQLiteDatabase, table: String, column: String): Boolean =
@@ -94,6 +95,7 @@ class MeritDatabase(context: Context) : SQLiteOpenHelper(context, "meritprep_loc
                 ends_at INTEGER NOT NULL,
                 total_questions INTEGER NOT NULL,
                 status TEXT NOT NULL,
+                current_index INTEGER NOT NULL DEFAULT 0,
                 score INTEGER,
                 submitted_at INTEGER
             )
@@ -416,6 +418,16 @@ class MeritDatabase(context: Context) : SQLiteOpenHelper(context, "meritprep_loc
         } finally { db.endTransaction() }
     }
 
+    fun updateCbtCurrentIndex(sessionId: String, currentIndex: Int) {
+        val values = ContentValues().apply { put("current_index", currentIndex.coerceAtLeast(0)) }
+        writableDatabase.update(
+            "cbt_sessions",
+            values,
+            "session_id = ? AND status = 'IN_PROGRESS'",
+            arrayOf(sessionId)
+        )
+    }
+
     fun saveCbtAnswer(sessionId: String, questionId: String, selectedIndex: Int?, flagged: Boolean) {
         val values = ContentValues().apply {
             put("session_id", sessionId)
@@ -430,11 +442,11 @@ class MeritDatabase(context: Context) : SQLiteOpenHelper(context, "meritprep_loc
     fun loadActiveCbtSession(subjectId: String): CbtSessionSnapshot? {
         val db = readableDatabase
         val session = db.rawQuery(
-            "SELECT session_id, started_at, ends_at, total_questions FROM cbt_sessions WHERE subject_id = ? AND status = 'IN_PROGRESS' ORDER BY started_at DESC LIMIT 1",
+            "SELECT session_id, started_at, ends_at, total_questions, current_index FROM cbt_sessions WHERE subject_id = ? AND status = 'IN_PROGRESS' ORDER BY started_at DESC LIMIT 1",
             arrayOf(subjectId)
         ).use { cursor ->
             if (!cursor.moveToFirst()) null else listOf(
-                cursor.getString(0), cursor.getLong(1), cursor.getLong(2), cursor.getInt(3)
+                cursor.getString(0), cursor.getLong(1), cursor.getLong(2), cursor.getInt(3), cursor.getInt(4)
             )
         } ?: return null
         val sessionId = session[0] as String
@@ -464,6 +476,7 @@ class MeritDatabase(context: Context) : SQLiteOpenHelper(context, "meritprep_loc
             startedAt = session[1] as Long,
             endsAt = session[2] as Long,
             totalQuestions = session[3] as Int,
+            currentIndex = session[4] as Int,
             questions = questions
         )
     }
