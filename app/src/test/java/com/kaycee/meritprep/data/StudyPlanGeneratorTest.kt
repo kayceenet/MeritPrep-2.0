@@ -21,6 +21,39 @@ class StudyPlanGeneratorTest {
         assertEquals(42, plan.size)
     }
 
+    @Test fun weakerTopicIsPrioritisedAheadOfDemonstratedStrongTopic() {
+        val now = 1_800_000_000_000L
+        val evidence = listOf(
+            TopicProgress("topic-1", 1, 20, 19, now, true),
+            TopicProgress("topic-2", 1, 10, 3, now, false)
+        )
+        val ordered = StudyPlanGenerator.prioritiseTopics(topics.take(2), evidence, now)
+        assertEquals("topic-2", ordered.first().id)
+    }
+
+    @Test fun unattemptedTopicIsPrioritisedAsUnprovenRatherThanMastered() {
+        val now = 1_800_000_000_000L
+        val evidence = listOf(TopicProgress("topic-1", 1, 12, 12, now, true))
+        val ordered = StudyPlanGenerator.prioritiseTopics(topics.take(2), evidence, now)
+        assertEquals("topic-2", ordered.first().id)
+    }
+
+    @Test fun olderStudyEvidenceRaisesPriorityAndTiesRemainStable() {
+        val now = 1_800_000_000_000L
+        val recent = TopicProgress("topic-1", 1, 8, 4, now, false)
+        val old = TopicProgress("topic-2", 1, 8, 4, now - 45L * 86_400_000L, false)
+        val ordered = StudyPlanGenerator.prioritiseTopics(topics.take(2), listOf(recent, old), now)
+        assertEquals("topic-2", ordered.first().id)
+        val tied = StudyPlanGenerator.prioritiseTopics(topics.take(2), emptyList(), now)
+        assertEquals(listOf("topic-1", "topic-2"), tied.map { it.id })
+    }
+
+    @Test fun adaptiveBuildPreservesTheThreeActivitiesPerScheduledTopic() {
+        val plan = StudyPlanGenerator.buildAdaptive(topics.take(3), emptyList(), 60, days = 2)
+        assertEquals(6, plan.size)
+        assertEquals(setOf("Learn lesson", "Practise questions", "Review flashcards"), plan.map { it.activityType }.toSet())
+    }
+
     @Test(expected = IllegalArgumentException::class)
     fun rejectsDailyTargetBelowThirtyMinutes() {
         StudyPlanGenerator.build(topics, minutesPerDay = 20)
