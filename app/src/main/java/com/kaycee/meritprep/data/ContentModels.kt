@@ -96,3 +96,16 @@ data class CbtSessionSnapshot(
     val totalQuestions: Int,
     val questions: List<CbtQuestionSnapshot>
 )
+
+
+data class MistakeNote(
+    val mistakeId: String,
+    val questionId: String,
+    val topicId: String,
+    val prompt: String,
+    val selectedAnswer: String,
+    val correctAnswer: String,
+    val explanation: String,
+    val createdAt: Long,
+    val isResolved: Boolean
+)
