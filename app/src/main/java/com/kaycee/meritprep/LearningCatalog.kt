@@ -356,6 +356,31 @@ object LearningCatalog {
             "A hygrometer measures humidity. A rain gauge measures rainfall, an anemometer measures wind speed and a thermometer measures temperature."
         ),
         LearningTopic(
+            "bio-interactions", "Ecological relationships and energy flow", "BIO",
+            "A grass plant captures light energy, a grasshopper feeds on the plant, and a frog may feed on the grasshopper. When organisms interact, energy and materials move through ecosystems. This lesson explains feeding relationships, ecological roles, symbiosis and the cycling of essential materials.",
+            listOf(
+                "Define producer, consumer, decomposer and trophic level",
+                "Construct and interpret food chains and food webs",
+                "Explain why energy decreases along food chains",
+                "Distinguish major ecological relationships",
+                "Describe the water, carbon and nitrogen cycles"
+            ),
+            listOf(
+                "Producers, consumers and decomposers" to "Producers, such as green plants and algae, make organic substances using light energy in photosynthesis. Consumers obtain organic food by feeding on other organisms. Decomposers, including many bacteria and fungi, break down dead organic matter and wastes, releasing nutrients back into the environment. Decomposition is essential for nutrient recycling.",
+                "Food chains and trophic levels" to "A food chain shows a feeding pathway through an ecosystem. A simple example is grass → grasshopper → frog → snake. The arrow points from the organism being eaten to the organism that obtains the food, showing the direction of energy transfer. The producer is usually the first trophic level; primary consumers feed on producers, secondary consumers feed on primary consumers, and so on. Real organisms may feed at more than one trophic level.",
+                "Food webs and ecological stability" to "A food web links many food chains because most organisms have more than one food source or predator. Removing one species can affect several other populations. A food web with alternative feeding pathways may be less vulnerable to the loss of a single food source, although the actual effect depends on species interactions and ecosystem conditions. Do not assume every change produces the same response in every ecosystem.",
+                "Why energy decreases along a food chain" to "Energy enters most ecosystems as sunlight and is captured by producers. At each trophic transfer, not all biomass is eaten or digested; some energy is lost in faeces and other wastes, and much is released as heat during respiration and other metabolic processes. Less energy is therefore available to the next trophic level. The often-quoted ten per cent transfer is a rough teaching generalisation, not a fixed law for every ecosystem.",
+                "Ecological relationships" to "Competition occurs when organisms require the same limited resource. Predation occurs when one organism captures and consumes another. Parasitism benefits the parasite and harms the host. Mutualism benefits both partners, such as a pollinator obtaining nectar while transferring pollen. Commensalism benefits one organism without a clear effect on the other. These relationships can be context-dependent and may change with environmental conditions.",
+                "The water cycle" to "Water evaporates from oceans, lakes and soil; plants release water vapour through transpiration. Water vapour condenses to form clouds and returns as precipitation. Some water runs over land into rivers and oceans; some infiltrates the soil and may recharge groundwater. Organisms take up water and return it through respiration, excretion and decomposition. Solar energy drives much of the movement of water through the cycle.",
+                "The carbon cycle" to "Plants and algae remove carbon dioxide from the atmosphere or water during photosynthesis and incorporate carbon into organic molecules. Carbon moves through food chains as organisms feed. Respiration by plants, animals and microorganisms returns carbon dioxide to the environment. Decomposition releases carbon from dead organic matter; combustion of biomass and fossil fuels also releases carbon dioxide. Oceans exchange carbon dioxide with the atmosphere and store large amounts of carbon.",
+                "The nitrogen cycle" to "Most organisms cannot use atmospheric nitrogen gas directly. Nitrogen-fixing bacteria convert nitrogen gas into ammonia or related compounds. Nitrifying bacteria convert ammonium into nitrite and nitrate. Plants absorb nitrate or ammonium and use nitrogen to make amino acids and nucleic acids. Animals obtain nitrogen by feeding. Decomposers return nitrogen to soil as ammonium through ammonification; denitrifying bacteria convert nitrate to nitrogen gas, returning it to the atmosphere.",
+                "Interpreting ecological diagrams and data" to "In a food chain, follow the arrows from food to feeder. In a food web, trace all pathways relevant to the organism in the question. In nutrient-cycle diagrams, identify the process and the material moving between reservoirs. When comparing population data, state the trend and use values from the graph or table. Distinguish a direct observation from an explanation of the cause."
+            ),
+            "In a food chain, what does an arrow normally show?",
+            listOf("The direction of energy transfer from food to feeder","The direction in which an animal walks","The direction of rainfall","The direction of reproduction"), 0,
+            "A food-chain arrow points from the organism being eaten to the organism that obtains the food, showing the direction of energy transfer."
+        ),
+        LearningTopic(
             "chem-atomic", "Atomic structure", "CHEM",
             "All ordinary matter is made of atoms. The arrangement and number of subatomic particles explain an element's identity, isotope and electrical charge.",
             listOf("Identify protons, neutrons and electrons", "Explain atomic number and mass number", "Determine the numbers of subatomic particles in simple atoms and ions"),
