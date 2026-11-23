@@ -229,6 +229,31 @@ object LearningCatalog {
             "Ultrafiltration is pressure-driven filtration at the glomerulus. Blood cells and most large plasma proteins remain in the blood, while water and small solutes enter Bowman's capsule."
         ),
         LearningTopic(
+            "bio-support", "Support and movement", "BIO",
+            "A young plant bends towards a window, a grasshopper jumps, and a human arm lifts a bag. These movements depend on structures that support the body and systems that generate force. Plants use cell walls, tissues and growth responses; animals use skeletons, joints and muscles.",
+            listOf(
+                "Explain how plants support their bodies",
+                "Describe tropic responses in plants",
+                "Compare hydrostatic skeletons, exoskeletons and endoskeletons",
+                "Identify major parts of the mammalian skeleton",
+                "Explain the roles of joints, tendons, ligaments and cartilage",
+                "Describe how antagonistic muscles produce movement"
+            ),
+            listOf(
+                "Support in plants" to "Plants do not have bones. Their support comes from cell walls, turgor pressure and specialised tissues. Parenchyma cells can provide support when turgid; collenchyma provides flexible support in growing regions; sclerenchyma has thick, often lignified walls and provides strength; xylem also contributes support. When a plant wilts, loss of turgor reduces support and leaves or stems may droop.",
+                "Tropisms: directional growth responses" to "A tropism is a directional growth response to a stimulus. Shoots commonly show positive phototropism by growing towards light. Roots commonly show positive gravitropism by growing in the direction of gravity, while shoots commonly show negative gravitropism. Roots often show positive hydrotropism towards moisture. Auxin distribution contributes to differential growth; the response depends on the organ and conditions. A tropism is growth, not simply a rapid movement of the whole plant.",
+                "Three broad skeleton types" to "A hydrostatic skeleton uses fluid pressure within a body cavity, with surrounding muscles, to support movement; earthworms are a familiar example. An exoskeleton is a rigid external covering, as in insects and many crustaceans; it protects the body and provides muscle attachment, but must be shed for growth in arthropods. An endoskeleton is an internal framework, as in vertebrates, and grows with the body. Each type has advantages and limitations.",
+                "The mammalian skeleton" to "The human skeleton is commonly divided into the axial skeleton and appendicular skeleton. The axial skeleton includes the skull, vertebral column and rib cage; it supports and protects the central body. The appendicular skeleton includes the limb bones and the girdles that attach them. The skeleton supports the body, protects organs, provides attachment for muscles, enables movement and contains marrow involved in blood-cell production.",
+                "Joints and connective structures" to "A joint is a place where bones meet. Some joints allow little or no movement; synovial joints allow a wide range of movement. In a synovial joint, cartilage covers the ends of bones, synovial fluid lubricates the joint, and ligaments connect bone to bone and help stabilise it. Tendons connect muscle to bone. Cartilage reduces friction and helps distribute forces; it is not the same as a ligament or tendon.",
+                "Muscles work in antagonistic pairs" to "Skeletal muscles pull when they contract; they do not push. At the elbow, the biceps and triceps act as an antagonistic pair. When the biceps contracts and the triceps relaxes, the elbow flexes. When the triceps contracts and the biceps relaxes, the elbow extends. The muscle that produces the main movement is the agonist; the opposing muscle is the antagonist. Muscles attach to bones through tendons.",
+                "Movement in animals" to "Movement may involve limbs, body-wall muscles, fins, wings or other specialised structures. Insects use jointed appendages and an exoskeleton; fish use muscles acting on the body and tail with fins for stability and steering; birds use wings and a light but strong skeleton for flight; mammals use coordinated skeletal muscles, joints and sensory feedback. Do not assume every animal moves in the same way.",
+                "How to answer support and movement questions" to "Identify the structure, state its role and explain how it contributes to support or movement. For a synovial joint, distinguish cartilage, synovial fluid, ligament and tendon. For a muscle action, state which muscle contracts and which relaxes. For a tropism, identify the stimulus and direction of growth. Precise use of terms often determines whether an answer earns full marks."
+            ),
+            "At the elbow, which muscle contracts to extend the forearm?",
+            listOf("Triceps","Biceps","Deltoid only","Diaphragm"), 0,
+            "The triceps contracts to extend the elbow while the biceps relaxes. The two muscles form an antagonistic pair."
+        ),
+        LearningTopic(
             "chem-atomic", "Atomic structure", "CHEM",
             "All ordinary matter is made of atoms. The arrangement and number of subatomic particles explain an element's identity, isotope and electrical charge.",
             listOf("Identify protons, neutrons and electrons", "Explain atomic number and mass number", "Determine the numbers of subatomic particles in simple atoms and ions"),
