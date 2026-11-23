@@ -431,6 +431,31 @@ object LearningCatalog {
             "Mangrove vegetation is characteristic of tidal coastal and estuarine environments, including parts of the Niger Delta, where salinity and waterlogged sediments shape plant adaptations."
         ),
         LearningTopic(
+            "bio-populations", "Population ecology and succession", "BIO",
+            "A population of grasshoppers may increase after a rainy season, then decline when food becomes scarce. A bare surface may gradually develop into a community of plants and animals. Population ecology studies changes in population size and structure; ecological succession describes changes in communities over time.",
+            listOf(
+                "Define population size, density and distribution",
+                "Explain factors that change population size",
+                "Calculate simple population density",
+                "Describe exponential and logistic population growth",
+                "Explain carrying capacity and limiting factors",
+                "Compare primary and secondary succession"
+            ),
+            listOf(
+                "Population size and density" to "Population size is the number of individuals in a population. Population density is the number of individuals per unit area or volume. For example, if 120 plants are counted in 30 square metres, density is 4 plants per square metre. Always state the unit and the area or volume sampled. Density does not describe how individuals are spaced; distribution or dispersion describes their spatial pattern.",
+                "How populations change" to "Population size changes through births, deaths, immigration and emigration. Births and immigration add individuals; deaths and emigration remove them. Food availability, disease, predation, competition, climate, habitat quality and human activities can affect these processes. A population may fluctuate seasonally or over longer periods.",
+                "Population growth patterns" to "Under ideal conditions with abundant resources, a population may increase rapidly in an exponential or J-shaped pattern. In real environments, resources and space are limited. Logistic or S-shaped growth describes an initial increase followed by slowing as the population approaches the environment's carrying capacity. These are models; actual populations may fluctuate or fail to follow a smooth curve.",
+                "Carrying capacity and limiting factors" to "Carrying capacity is the population size that an environment can support over time under prevailing conditions. It depends on resources such as food, water, space and shelter, as well as disease, predation and environmental conditions. Carrying capacity can change when climate, habitat or resource availability changes. It is not a permanent fixed number for a habitat.",
+                "Sampling populations" to "Quadrats can estimate the density of plants or slow-moving organisms. Random sampling helps reduce selection bias; systematic sampling can reveal changes along a gradient. For mobile animals, mark–release–recapture may be used under suitable assumptions: marks should not affect survival or recapture probability, marked individuals should mix back into the population, and the population should be reasonably closed during the study. Estimates are uncertain and should not be treated as exact counts.",
+                "Primary succession" to "Primary succession begins on a surface where soil is absent or very poorly developed, such as newly exposed rock. Pioneer organisms, including lichens and mosses in some settings, colonise the surface and contribute to weathering and organic matter accumulation. As soil develops, grasses, herbs, shrubs and eventually other communities may establish. The sequence depends on climate, substrate and local species.",
+                "Secondary succession" to "Secondary succession occurs where a community has been disturbed but soil remains, such as after cultivation is abandoned or some fires. Seeds, roots, soil organisms and nutrients may remain, so recovery can be faster than primary succession. The sequence varies with disturbance severity, climate, soil and nearby sources of colonising species.",
+                "Ecological succession and disturbance" to "Succession is a directional change in community composition over time, but it does not always lead to one universal final community. Repeated fire, grazing, flooding, drought or human activity can maintain or redirect vegetation patterns. In examination answers, identify the starting condition, the role of pioneer species, how soil or habitat conditions change, and why later communities can establish."
+            ),
+            "A habitat contains 240 seedlings in an area of 60 m². What is the population density?",
+            listOf("4 seedlings/m²","60 seedlings/m²","180 seedlings/m²","300 seedlings/m²"), 0,
+            "Population density = number of individuals ÷ area = 240 ÷ 60 = 4 seedlings per square metre."
+        ),
+        LearningTopic(
             "chem-atomic", "Atomic structure", "CHEM",
             "All ordinary matter is made of atoms. The arrangement and number of subatomic particles explain an element's identity, isotope and electrical charge.",
             listOf("Identify protons, neutrons and electrons", "Explain atomic number and mass number", "Determine the numbers of subatomic particles in simple atoms and ions"),
