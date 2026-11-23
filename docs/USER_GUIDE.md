@@ -33,7 +33,7 @@ Open **Search Biology glossary** from Home or the Biology course. Search by term
 From **Practice**:
 
 - **Topic practice** lets you choose one Biology topic or the full original Biology objective bank. Questions and options are shuffled.
-- **Timed CBT practice** starts a 40-question, 30-minute Biology mock. You can move between questions, change answers, flag items, submit and review explanations. Active session state is stored locally so the app can attempt to restore an unfinished session.
+- **Timed CBT practice** starts a 40-question, 30-minute Biology mock. You can move between questions, change answers, flag items, submit and review explanations. Active session state, including the current question position, is stored locally so the app can restore an unfinished session.
 - **WAEC theory practice** provides ten original structured-response tasks. Write and save your answer, reveal the model response and tick the marking points you believe you covered.
 - **Mistake notebook** stores incorrect and unanswered objective responses with the correction and explanation. Mark an item reviewed after you have understood it.
 
