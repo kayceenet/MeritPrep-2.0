@@ -77,6 +77,7 @@ private fun MeritPrepApp() {
                 }
                 composable("practice") { PracticeScreenV2(onStartCbt = { nav.navigate("cbt") }) }
                 composable("cbt") { CbtScreen() }
+                composable("waec-theory") { BiologyTheoryScreen() }
                 composable("review") { RevisionScreen() }
                 composable("labs") { VirtualLabScreen() }
                 composable("profile") { ProfileScreen() }
