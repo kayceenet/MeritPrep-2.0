@@ -28,8 +28,8 @@ Inventory existing APK assets and lab logic; rebuild Biology, Chemistry and Phys
 Authenticated sync, teacher/admin CMS, analytics, backups, privacy and security review.
 
 ## Current alpha status
-- Biology syllabus map: 24 units represented; eleven lesson routes currently available.
-- Biology original objective practice: 110 items across cell biology, classification, adaptation, plant/mammalian structure, nutrition, transport, respiration, excretion, support/movement, reproduction and growth; all clearly marked as original and unverified.
+- Biology syllabus map: 24 units represented; twelve lesson routes currently available.
+- Biology original objective practice: 120 items across cell biology, classification, adaptation, plant/mammalian structure, nutrition, transport, respiration, excretion, support/movement, reproduction, growth and coordination; all clearly marked as original and unverified.
 - Revision: 12 offline starter cards with Again/Hard/Good/Easy scheduling.
 - Academic approval: pending independent subject review; no generated question is presented as an official past question.
 
