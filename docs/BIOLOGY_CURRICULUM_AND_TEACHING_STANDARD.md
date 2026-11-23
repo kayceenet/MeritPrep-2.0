@@ -110,7 +110,7 @@ A topic should only be marked mastered after the learner demonstrates performanc
 - [ ] Add labelled diagrams, animations and offline visual assets.
 - [ ] Add specimen/practical tasks with reviewed marking rubrics.
 - [ ] Add syllabus coverage reporting and reviewer workflow.
-- [ ] Independently review and approve the seven authored lesson drafts, 70 objective questions and 62 revision cards.
+- [ ] Independently review and approve the eight authored lesson drafts, 80 objective questions and 70 revision cards.
 - [ ] Validate every item against the current official syllabus before release.
 
 The curriculum map is not a claim that all 24 units are already taught. The app must show authored, reviewed and pending content honestly.
