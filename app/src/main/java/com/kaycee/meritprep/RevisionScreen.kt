@@ -178,6 +178,15 @@ private val starterBiologyCards = listOf(
     RevisionCard("bio-pop-card-6","bio-populations","Distinguish primary from secondary succession.","Primary succession begins where soil is absent or poorly developed; secondary succession occurs where soil remains after disturbance.",0L),
     RevisionCard("bio-pop-card-7","bio-populations","What is a pioneer species?","An early coloniser of a newly available or disturbed habitat during succession.",0L),
     RevisionCard("bio-pop-card-8","bio-populations","Calculate density for 240 seedlings in 60 m².","240 ÷ 60 = 4 seedlings per square metre.",0L)
+) + listOf(
+    RevisionCard("bio-soil-card-1","bio-soil","Name the main components of soil.","Mineral particles, organic matter, water, air and living organisms.",0L),
+    RevisionCard("bio-soil-card-2","bio-soil","How does sandy soil generally behave when water is added?","Its relatively large particles and pore spaces allow water to drain quickly.",0L),
+    RevisionCard("bio-soil-card-3","bio-soil","What is soil porosity?","The proportion of soil volume occupied by pore spaces.",0L),
+    RevisionCard("bio-soil-card-4","bio-soil","What is soil permeability?","How easily water or air passes through connected soil pores.",0L),
+    RevisionCard("bio-soil-card-5","bio-soil","What is humus?","Relatively stable organic matter formed during decomposition.",0L),
+    RevisionCard("bio-soil-card-6","bio-soil","What does a soil pH measurement indicate?","How acidic or alkaline the soil solution is.",0L),
+    RevisionCard("bio-soil-card-7","bio-soil","Name two soil conservation practices.","Examples include cover crops, mulching, contour farming, terracing, windbreaks and controlled grazing.",0L),
+    RevisionCard("bio-soil-card-8","bio-soil","How do earthworms benefit soil?","They mix soil and create channels that can improve aeration, drainage and structure.",0L)
 )
 
 @Composable
