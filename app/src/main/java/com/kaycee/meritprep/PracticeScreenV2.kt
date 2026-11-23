@@ -11,7 +11,7 @@ import com.kaycee.meritprep.data.AssessmentEngine
 import com.kaycee.meritprep.data.MeritDatabase
 
 @Composable
-fun PracticeScreenV2(onStartCbt: () -> Unit = {}) {
+fun PracticeScreenV2(onStartCbt: () -> Unit = {}, onStartTheory: () -> Unit = {}) {
     val context = LocalContext.current
     val database = remember(context) { MeritDatabase(context) }
     val biologyTopics = remember { LearningCatalog.forSubject("BIO") }
@@ -78,6 +78,9 @@ fun PracticeScreenV2(onStartCbt: () -> Unit = {}) {
             Text("Choose a focused topic or practise the complete Biology bank.")
             OutlinedButton(onClick = onStartCbt, modifier = Modifier.fillMaxWidth()) {
                 Text("Start timed CBT practice")
+            }
+            OutlinedButton(onClick = onStartTheory, modifier = Modifier.fillMaxWidth()) {
+                Text("WAEC theory practice")
             }
             Box {
                 OutlinedButton(onClick = { topicMenuExpanded = true }) {
