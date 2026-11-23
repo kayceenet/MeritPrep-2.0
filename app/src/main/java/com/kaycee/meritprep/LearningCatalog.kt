@@ -754,7 +754,7 @@ fun LessonScreen(topicId: String) {
                 Text(section.second, style = MaterialTheme.typography.bodyLarge)
             }
         }
-        Divider()
+        HorizontalDivider()
         Text("Check your understanding", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
         Text(topic.checkQuestion, style = MaterialTheme.typography.titleMedium)
         topic.checkOptions.forEachIndexed { index, option ->
@@ -785,13 +785,24 @@ fun LessonScreen(topicId: String) {
                 database.markLessonCompleted(topic.id)
                 completed = true
             },
-            enabled = !completed,
+            enabled = !completed && checked && selected == topic.correctOption,
             modifier = Modifier.fillMaxWidth()
         ) {
-            Text(if (completed) "Lesson completed" else "Mark lesson complete")
+            Text(if (completed) "Lesson completed" else "Complete lesson")
+        }
+        if (!completed) {
+            Text(
+                "To complete this lesson, answer the understanding check correctly. You can retry after reading the explanation.",
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
         }
         Text(
-            "Academic status: beginner-focused teaching draft mapped to its Biology syllabus topic. Independent subject review is still required before formal approval.",
+            if (topic.subjectCode == "BIO") {
+                "Academic status: beginner-focused Biology teaching draft mapped to its syllabus topic. Independent subject review is still required before formal approval."
+            } else {
+                "Academic status: starter teaching content. Full syllabus mapping and independent subject review are still required."
+            },
             style = MaterialTheme.typography.bodySmall,
             color = MaterialTheme.colorScheme.onSurfaceVariant
         )
