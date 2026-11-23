@@ -5,7 +5,7 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
-class MeritDatabase(context: Context) : SQLiteOpenHelper(context, "meritprep_local.db", null, 2) {
+class MeritDatabase(context: Context) : SQLiteOpenHelper(context, "meritprep_local.db", null, 3) {
     override fun onCreate(db: SQLiteDatabase) {
         db.execSQL("""
             CREATE TABLE topic_progress (
@@ -34,7 +34,9 @@ class MeritDatabase(context: Context) : SQLiteOpenHelper(context, "meritprep_loc
                 back TEXT NOT NULL,
                 due_at INTEGER NOT NULL,
                 interval_days INTEGER NOT NULL DEFAULT 0,
-                repetitions INTEGER NOT NULL DEFAULT 0
+                repetitions INTEGER NOT NULL DEFAULT 0,
+                ease_factor REAL NOT NULL DEFAULT 2.5,
+                lapses INTEGER NOT NULL DEFAULT 0
             )
         """.trimIndent())
         db.execSQL("""
@@ -59,6 +61,10 @@ class MeritDatabase(context: Context) : SQLiteOpenHelper(context, "meritprep_loc
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
         if (oldVersion < 2) createCompletedLessonsTable(db)
+        if (oldVersion < 3) {
+            db.execSQL("ALTER TABLE revision_cards ADD COLUMN ease_factor REAL NOT NULL DEFAULT 2.5")
+            db.execSQL("ALTER TABLE revision_cards ADD COLUMN lapses INTEGER NOT NULL DEFAULT 0")
+        }
     }
 
     fun recordQuestionAttempt(topicId: String, isCorrect: Boolean, studiedAt: Long = System.currentTimeMillis()) {
@@ -136,6 +142,59 @@ class MeritDatabase(context: Context) : SQLiteOpenHelper(context, "meritprep_loc
 
     fun removeBookmark(itemId: String) {
         writableDatabase.delete("bookmarks", "item_id = ?", arrayOf(itemId))
+    }
+
+
+    fun seedRevisionCards(cards: List<RevisionCard>) {
+        val db = writableDatabase
+        db.beginTransaction()
+        try {
+            cards.forEach { card ->
+                val values = ContentValues().apply {
+                    put("card_id", card.cardId)
+                    put("topic_id", card.topicId)
+                    put("front", card.front)
+                    put("back", card.back)
+                    put("due_at", card.dueAt)
+                    put("interval_days", card.intervalDays)
+                    put("repetitions", card.repetitions)
+                    put("ease_factor", card.easeFactor)
+                    put("lapses", card.lapses)
+                }
+                db.insertWithOnConflict("revision_cards", null, values, SQLiteDatabase.CONFLICT_IGNORE)
+            }
+            db.setTransactionSuccessful()
+        } finally { db.endTransaction() }
+    }
+
+    fun getDueRevisionCards(now: Long = System.currentTimeMillis(), limit: Int = 30): List<RevisionCard> =
+        readableDatabase.rawQuery(
+            "SELECT card_id, topic_id, front, back, due_at, interval_days, repetitions, ease_factor, lapses FROM revision_cards WHERE due_at <= ? ORDER BY due_at ASC LIMIT ?",
+            arrayOf(now.toString(), limit.toString())
+        ).use { cursor ->
+            buildList {
+                while (cursor.moveToNext()) add(RevisionCard(
+                    cardId = cursor.getString(0), topicId = cursor.getString(1),
+                    front = cursor.getString(2), back = cursor.getString(3),
+                    dueAt = cursor.getLong(4), intervalDays = cursor.getInt(5),
+                    repetitions = cursor.getInt(6), easeFactor = cursor.getFloat(7).toDouble(),
+                    lapses = cursor.getInt(8)
+                ))
+            }
+        }
+
+    fun getRevisionCardCount(): Int =
+        readableDatabase.rawQuery("SELECT COUNT(*) FROM revision_cards", null).use {
+            if (it.moveToFirst()) it.getInt(0) else 0
+        }
+
+    fun reviewRevisionCard(card: RevisionCard) {
+        val values = ContentValues().apply {
+            put("due_at", card.dueAt); put("interval_days", card.intervalDays)
+            put("repetitions", card.repetitions); put("ease_factor", card.easeFactor)
+            put("lapses", card.lapses)
+        }
+        writableDatabase.update("revision_cards", values, "card_id = ?", arrayOf(card.cardId))
     }
 
     fun getTopicProgressCount(): Int =
