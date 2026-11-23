@@ -79,6 +79,15 @@ private val starterBiologyCards = listOf(
     RevisionCard("bio-trans-card-8","bio-transport","How do arteries differ from veins?","Arteries carry blood away from the heart and have thick elastic walls; veins return blood to the heart and often contain valves.",0L),
     RevisionCard("bio-trans-card-9","bio-transport","What is the role of capillaries?","Their thin walls allow exchange of gases, nutrients and wastes between blood and tissues.",0L),
     RevisionCard("bio-trans-card-10","bio-transport","What are the two circuits in human double circulation?","Pulmonary circulation is between heart and lungs; systemic circulation is between heart and the rest of the body.",0L)
+) + listOf(
+    RevisionCard("bio-resp-card-1","bio-respiration","Distinguish breathing from cellular respiration.","Breathing is ventilation, the movement of air into and out of lungs. Cellular respiration is a chemical process in cells that transfers energy from food molecules to ATP.",0L),
+    RevisionCard("bio-resp-card-2","bio-respiration","Write the simplified equation for aerobic respiration.","Glucose + oxygen → carbon dioxide + water + energy transferred to ATP and released as heat.",0L),
+    RevisionCard("bio-resp-card-3","bio-respiration","Where does glycolysis occur in eukaryotic cells?","In the cytosol.",0L),
+    RevisionCard("bio-resp-card-4","bio-respiration","What is produced by anaerobic metabolism in human skeletal muscle?","Lactate is produced from pyruvate, allowing glycolysis to continue when oxygen delivery is insufficient for demand.",0L),
+    RevisionCard("bio-resp-card-5","bio-respiration","What are the products of alcoholic fermentation in yeast?","Ethanol and carbon dioxide.",0L),
+    RevisionCard("bio-resp-card-6","bio-respiration","Give three features of alveoli that support gas exchange.","Large combined surface area, thin moist walls and a rich capillary supply.",0L),
+    RevisionCard("bio-resp-card-7","bio-respiration","What happens to the diaphragm during inspiration?","It contracts and flattens, increasing thoracic volume and helping lower pressure in the lungs.",0L),
+    RevisionCard("bio-resp-card-8","bio-respiration","How is most oxygen transported in human blood?","Bound reversibly to haemoglobin in red blood cells.",0L)
 )
 
 @Composable
