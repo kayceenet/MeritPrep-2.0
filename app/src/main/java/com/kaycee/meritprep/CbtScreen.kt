@@ -17,6 +17,7 @@ import com.kaycee.meritprep.data.CbtResult
 import com.kaycee.meritprep.data.CbtSessionEngine
 import com.kaycee.meritprep.data.MeritDatabase
 import com.kaycee.meritprep.data.MistakeNote
+import com.kaycee.meritprep.data.QuestionAttemptRecord
 import com.kaycee.meritprep.data.PresentedQuestion
 import kotlinx.coroutines.delay
 import java.util.UUID
@@ -79,7 +80,11 @@ fun CbtScreen() {
             val submittedAt = System.currentTimeMillis()
             val attemptRecords = questions.map { question ->
                 val selected = answers[question.questionId]
-                question.topicId to (selected != null && selected == question.correctPresentedIndex)
+                QuestionAttemptRecord(
+                    questionId = question.questionId,
+                    topicId = question.topicId,
+                    isCorrect = selected != null && selected == question.correctPresentedIndex
+                )
             }
             val mistakes = questions.mapNotNull { question ->
                 val selected = answers[question.questionId]
