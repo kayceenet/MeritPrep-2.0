@@ -13,7 +13,7 @@ import com.kaycee.meritprep.data.MistakeNote
 import java.util.UUID
 
 @Composable
-fun PracticeScreenV2(onStartCbt: () -> Unit = {}, onStartTheory: () -> Unit = {}, onOpenMistakes: () -> Unit = {}, onOpenStudyPlan: () -> Unit = {}) {
+fun PracticeScreenV2(onStartCbt: () -> Unit = {}, onStartWaecObjective: () -> Unit = {}, onStartTheory: () -> Unit = {}, onOpenMistakes: () -> Unit = {}, onOpenStudyPlan: () -> Unit = {}) {
     val context = LocalContext.current
     val database = remember(context) { MeritDatabase(context) }
     val biologyTopics = remember { LearningCatalog.forSubject("BIO") }
@@ -79,7 +79,10 @@ fun PracticeScreenV2(onStartCbt: () -> Unit = {}, onStartTheory: () -> Unit = {}
             Text("Biology practice", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
             Text("Choose a focused topic or practise the complete Biology bank.")
             OutlinedButton(onClick = onStartCbt, modifier = Modifier.fillMaxWidth()) {
-                Text("Start timed CBT practice")
+                Text("Start JAMB-style Biology CBT")
+            }
+            OutlinedButton(onClick = onStartWaecObjective, modifier = Modifier.fillMaxWidth()) {
+                Text("Start WAEC Biology objective practice")
             }
             OutlinedButton(onClick = onOpenMistakes, modifier = Modifier.fillMaxWidth()) {
                 Text("Open mistake notebook")

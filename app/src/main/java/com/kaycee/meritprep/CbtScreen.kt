@@ -22,18 +22,36 @@ import com.kaycee.meritprep.data.PresentedQuestion
 import kotlinx.coroutines.delay
 import java.util.UUID
 
-private const val CBT_QUESTION_COUNT = 40
-private const val CBT_DURATION_SECONDS = 30 * 60
+enum class BiologyCbtMode(
+    val sessionSubjectId: String,
+    val title: String,
+    val subtitle: String,
+    val questionCount: Int,
+    val durationSeconds: Int,
+    val durationLabel: String,
+    val resultTitle: String
+) {
+    JAMB_UTME(
+        "BIO", "Timed Biology CBT",
+        "A JAMB-style practice mock built from MeritPrep's original Biology question bank.",
+        40, 30 * 60, "30-minute countdown", "Biology JAMB-style practice result"
+    ),
+    WAEC_OBJECTIVE(
+        "BIO_WAEC", "WAEC Biology Objective Practice",
+        "A timed objective practice session built from MeritPrep's original Biology question bank.",
+        50, 60 * 60, "60-minute MeritPrep practice timer", "Biology WAEC-style objective result"
+    )
+}
 
 @Composable
-fun CbtScreen() {
+fun CbtScreen(mode: BiologyCbtMode = BiologyCbtMode.JAMB_UTME) {
     val context = LocalContext.current
     val database = remember(context) { MeritDatabase(context) }
     var questions by remember { mutableStateOf(emptyList<PresentedQuestion>()) }
     val answers = remember { mutableStateMapOf<String, Int>() }
     val flags = remember { mutableStateMapOf<String, Boolean>() }
     var currentIndex by remember { mutableIntStateOf(0) }
-    var remainingSeconds by remember { mutableIntStateOf(CBT_DURATION_SECONDS) }
+    var remainingSeconds by remember(mode) { mutableIntStateOf(mode.durationSeconds) }
     var started by remember { mutableStateOf(false) }
     var submitted by remember { mutableStateOf(false) }
     var showSubmitDialog by remember { mutableStateOf(false) }
@@ -43,7 +61,7 @@ fun CbtScreen() {
     var restoring by remember { mutableStateOf(true) }
 
     LaunchedEffect(database) {
-        val snapshot = database.loadActiveCbtSession("BIO")
+        val snapshot = database.loadActiveCbtSession(mode.sessionSubjectId)
         if (snapshot != null) {
             val sourceById = BiologyQuestionBank.all.associateBy { it.id }
             val restoredQuestions = snapshot.questions.mapNotNull { saved ->
@@ -131,13 +149,13 @@ fun CbtScreen() {
             Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(20.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            Text("Timed Biology CBT", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
-            Text("A timed practice mock built from MeritPrep's original Biology question bank.")
+            Text(mode.title, style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
+            Text(mode.subtitle)
             Card(Modifier.fillMaxWidth()) {
                 Column(Modifier.padding(18.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                     Text("Practice session", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
-                    Text("$CBT_QUESTION_COUNT randomly selected questions")
-                    Text("30-minute countdown")
+                    Text("${mode.questionCount} randomly selected questions")
+                    Text(mode.durationLabel)
                     Text("Answer navigation, review flags and final explanations")
                     HorizontalDivider()
                     Text("These are original, unverified practice questions, not official JAMB past questions. The session length is a MeritPrep practice setting, not a claim about the official examination timing.", style = MaterialTheme.typography.bodySmall)
@@ -145,16 +163,16 @@ fun CbtScreen() {
             }
             Button(
                 onClick = {
-                    val generated = CbtSessionEngine.createQuestions(BiologyQuestionBank.all, CBT_QUESTION_COUNT)
+                    val generated = CbtSessionEngine.createQuestions(BiologyQuestionBank.all, mode.questionCount)
                     val now = System.currentTimeMillis()
                     val newSessionId = UUID.randomUUID().toString()
-                    database.createCbtSession(newSessionId, "BIO", now, now + CBT_DURATION_SECONDS * 1000L, generated)
+                    database.createCbtSession(newSessionId, mode.sessionSubjectId, now, now + mode.durationSeconds * 1000L, generated)
                     questions = generated
                     answers.clear()
                     flags.clear()
                     currentIndex = 0
-                    remainingSeconds = CBT_DURATION_SECONDS
-                    endsAtMillis = now + CBT_DURATION_SECONDS * 1000L
+                    remainingSeconds = mode.durationSeconds
+                    endsAtMillis = now + mode.durationSeconds * 1000L
                     sessionId = newSessionId
                     result = null
                     submitted = false
@@ -212,7 +230,7 @@ fun CbtScreen() {
         ) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Column(Modifier.weight(1f)) {
-                    Text("Biology practice mock", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+                    Text(mode.resultTitle, style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
                     Text("Question ${currentIndex + 1} of ${questions.size}", style = MaterialTheme.typography.bodySmall)
                 }
                 Surface(color = if (remainingSeconds <= 300) MaterialTheme.colorScheme.errorContainer else MaterialTheme.colorScheme.secondaryContainer, shape = MaterialTheme.shapes.medium) {

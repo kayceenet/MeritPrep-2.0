@@ -15,7 +15,8 @@ The current alpha is a working Android app built with Kotlin, Jetpack Compose an
 - Visual teaching aids for cell structure, photosynthesis, food-chain energy flow, monohybrid inheritance and mammalian double circulation; the cell diagram also supports organelle selection and explanations.
 - 240 original Biology multiple-choice practice questions across the 24 mapped units, with explanations and syllabus-topic attribution.
 - Topic-focused Biology practice sessions and a full Biology question-bank mode, with shuffled questions and answer options.
-- A timed Biology CBT mock: 40 random questions, a 30-minute practice timer, question navigation, answer flags, answer review and locally persisted session state.
+- A timed JAMB-style Biology CBT mock: 40 random questions, a 30-minute practice timer, question navigation, answer flags, answer review and locally persisted session state.
+- A separate WAEC-style Biology objective mock: 50 random questions and a 60-minute MeritPrep practice timer, using the same original question bank and session controls. These are practice settings, not claims about official paper timing.
 - Ten original WAEC-style Biology structured-response tasks, with model responses, self-check marking points and locally saved learner responses.
 - 198 Biology revision cards with an on-device Again / Hard / Good / Easy spaced-retrieval scheduler.
 - An offline mistake notebook that captures incorrect and unanswered practice/CBT responses, explains the correction and lets learners mark concepts as reviewed.

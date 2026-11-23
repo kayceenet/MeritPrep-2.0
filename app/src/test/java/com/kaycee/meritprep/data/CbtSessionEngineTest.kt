@@ -20,6 +20,13 @@ class CbtSessionEngineTest {
         assertTrue(session.all { it.topicId == "bio-cell" && it.correctPresentedIndex in it.options.indices })
     }
 
+    @Test fun createsFiftyQuestionWaecPracticeSessionFromTheSameOriginalPool() {
+        val pool = (1..60).map { question("waec$it", it % 4) }
+        val session = CbtSessionEngine.createQuestions(pool, 50, Random(21))
+        assertEquals(50, session.size)
+        assertEquals(50, session.map { it.questionId }.toSet().size)
+    }
+
     @Test fun scoresCorrectAnswersAndUnansweredQuestions() {
         val pool = listOf(question("q1"), question("q2"), question("q3"))
         val session = CbtSessionEngine.createQuestions(pool, 3, Random(1))
