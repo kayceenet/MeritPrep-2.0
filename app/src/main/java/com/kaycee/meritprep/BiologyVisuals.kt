@@ -137,7 +137,7 @@ private fun FlowLabel(title: String, value: String, color: androidx.compose.ui.g
 @Composable
 private fun PunnettCell(value: String, header: Boolean) {
     Surface(
-        modifier = Modifier.weight(1f),
+        modifier = Modifier.width(100.dp),
         color = if (header) MaterialTheme.colorScheme.secondaryContainer else MaterialTheme.colorScheme.surfaceVariant,
         shape = MaterialTheme.shapes.small
     ) {
