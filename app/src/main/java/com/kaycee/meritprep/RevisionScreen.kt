@@ -106,6 +106,15 @@ private val starterBiologyCards = listOf(
     RevisionCard("bio-sup-card-6","bio-support","Distinguish a ligament from a tendon.","A ligament connects bone to bone; a tendon connects muscle to bone.",0L),
     RevisionCard("bio-sup-card-7","bio-support","How do biceps and triceps move the elbow?","They act as an antagonistic pair: biceps contraction flexes the elbow; triceps contraction extends it.",0L),
     RevisionCard("bio-sup-card-8","bio-support","What is included in the axial skeleton?","The skull, vertebral column and rib cage.",0L)
+) + listOf(
+    RevisionCard("bio-rep-card-1","bio-reproduction","Distinguish sexual from asexual reproduction.","Sexual reproduction involves fusion of gametes and usually produces genetic variation. Asexual reproduction usually involves one parent and no gamete fusion.",0L),
+    RevisionCard("bio-rep-card-2","bio-reproduction","Name three examples of asexual reproduction.","Binary fission, budding and vegetative propagation are examples; spore formation and fragmentation also occur.",0L),
+    RevisionCard("bio-rep-card-3","bio-reproduction","What is the chromosome status of gametes and the zygote?","Gametes are haploid; fertilisation forms a diploid zygote.",0L),
+    RevisionCard("bio-rep-card-4","bio-reproduction","Name the parts of a typical stamen.","Anther and filament.",0L),
+    RevisionCard("bio-rep-card-5","bio-reproduction","Define pollination.","Transfer of pollen from anther to stigma.",0L),
+    RevisionCard("bio-rep-card-6","bio-reproduction","What do the ovule and ovary commonly develop into after fertilisation?","The ovule develops into a seed; the ovary commonly develops into a fruit.",0L),
+    RevisionCard("bio-rep-card-7","bio-reproduction","Where does fertilisation usually occur in humans?","In the oviduct (fallopian tube).",0L),
+    RevisionCard("bio-rep-card-8","bio-reproduction","What is the role of the placenta?","It allows exchange of gases, nutrients and wastes between maternal and foetal circulations, which normally remain separate.",0L)
 )
 
 @Composable
