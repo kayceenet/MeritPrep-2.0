@@ -536,7 +536,7 @@ class MeritDatabase(context: Context) : SQLiteOpenHelper(context, "meritprep_loc
         } ?: return null
         val items = db.rawQuery(
             """SELECT item_id, day_index, topic_id, topic_title, activity_type, estimated_minutes, is_completed
-               FROM study_plan_items WHERE plan_id = ? ORDER BY day_index, topic_title, activity_type""".trimIndent(),
+               FROM study_plan_items WHERE plan_id = ? ORDER BY day_index, rowid""".trimIndent(),
             arrayOf(header.first)
         ).use { cursor ->
             buildList {
