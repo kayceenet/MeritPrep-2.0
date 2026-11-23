@@ -16,6 +16,7 @@ data class BiologyTheoryTask(
         require(instruction.isNotBlank())
         require(marks > 0)
         require(markingPoints.isNotEmpty())
+        require(markingPoints.size == marks) { "Each self-check point must represent one available mark." }
     }
 }
 
