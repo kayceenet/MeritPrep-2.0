@@ -232,6 +232,15 @@ private val starterBiologyCards = listOf(
     RevisionCard("bio-evo-t-card-6","bio-evolution-theory","How can reproductive isolation lead to speciation?","It reduces gene flow, allowing populations to diverge through mutation, selection and drift over generations.",0L),
     RevisionCard("bio-evo-t-card-7","bio-evolution-theory","Does natural selection create mutations because organisms need them?","No. Mutations arise without regard to need; selection acts on heritable variation already present or arising.",0L),
     RevisionCard("bio-evo-t-card-8","bio-evolution-theory","Distinguish acclimatisation from evolution.","Acclimatisation is an individual's adjustment during life; evolution is inherited population change across generations.",0L)
+) + listOf(
+    RevisionCard("bio-evo-e-card-1","bio-evolution-evidence","What do fossils show?","Preserved remains or traces of past organisms that document past life, extinction and change through geological time.",0L),
+    RevisionCard("bio-evo-e-card-2","bio-evolution-evidence","What are homologous structures?","Structures with a similar underlying anatomical pattern due to common ancestry, even if their functions differ.",0L),
+    RevisionCard("bio-evo-e-card-3","bio-evolution-evidence","What are analogous structures?","Structures with similar functions that evolved independently from different ancestral structures.",0L),
+    RevisionCard("bio-evo-e-card-4","bio-evolution-evidence","What is a vestigial structure?","A reduced feature inherited from ancestors in which it had a different or more prominent function; it may retain some function.",0L),
+    RevisionCard("bio-evo-e-card-5","bio-evolution-evidence","How does DNA comparison provide evolutionary evidence?","Sequence similarities and differences can help infer relatedness and construct phylogenetic trees.",0L),
+    RevisionCard("bio-evo-e-card-6","bio-evolution-evidence","Define biogeography.","The study of the geographical distribution of organisms and the processes that shape those patterns.",0L),
+    RevisionCard("bio-evo-e-card-7","bio-evolution-evidence","Why is the fossil record incomplete?","Fossilisation is uncommon; fossils may be destroyed, altered or remain undiscovered.",0L),
+    RevisionCard("bio-evo-e-card-8","bio-evolution-evidence","Does evolution form a ladder of progress?","No. Evolution produces branching lineages with no predetermined goal or universal direction towards greater complexity.",0L)
 )
 
 @Composable
