@@ -99,9 +99,14 @@ private fun BiologyLab() {
         Text("Biology practicals", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             FilterChip(selected = selected == 0, onClick = { selected = 0 }, label = { Text("Food tests") })
-            FilterChip(selected = selected == 1, onClick = { selected = 1 }, label = { Text("Microscope") })
+            FilterChip(selected = selected == 1, onClick = { selected = 1 }, label = { Text("Osmosis") })
+            FilterChip(selected = selected == 2, onClick = { selected = 2 }, label = { Text("Microscope") })
         }
-        if (selected == 0) FoodTestLab() else MagnificationLab()
+        when (selected) {
+            0 -> FoodTestLab()
+            1 -> OsmosisLab()
+            else -> MagnificationLab()
+        }
     }
 }
 
@@ -135,4 +140,34 @@ private fun FoodTestLab() {
         }
     }
     Text("Model limitation: these are qualitative teaching outcomes for defined sample compositions. Real samples may contain mixtures, and observed colour intensity depends on concentration, reagent condition and technique. This simulation does not replace a supervised laboratory practical.")
+}
+
+@Composable
+private fun OsmosisLab() {
+    var externalConcentration by remember { mutableFloatStateOf(0.1f) }
+    var plantCell by remember { mutableStateOf(true) }
+    val cellType = if (plantCell) OsmosisCellType.PLANT else OsmosisCellType.ANIMAL
+    val result = OsmosisSimulation.evaluate(externalConcentration.toDouble(), 0.3, cellType)
+    Card(Modifier.fillMaxWidth()) {
+        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+            Text("Osmosis investigation", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+            Text("Model water movement across a selectively permeable cell membrane. The cell's internal solute concentration is fixed at 0.30 mol/L for this demonstration.")
+            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                FilterChip(selected = plantCell, onClick = { plantCell = true }, label = { Text("Plant cell") })
+                FilterChip(selected = !plantCell, onClick = { plantCell = false }, label = { Text("Animal cell") })
+            }
+            Text("External solute concentration: ${"%.2f".format(externalConcentration)} mol/L")
+            Slider(value = externalConcentration, onValueChange = { externalConcentration = it }, valueRange = 0f..0.6f, steps = 11)
+            HorizontalDivider()
+            Text(result.tonicity, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+            Text("Net water movement: " + when (result.waterMovement) {
+                WaterMovement.INTO_CELL -> "into the cell"
+                WaterMovement.NO_NET_MOVEMENT -> "no net movement"
+                WaterMovement.OUT_OF_CELL -> "out of the cell"
+            })
+            Text("Predicted cell response: ${result.response}")
+            Text(result.explanation)
+        }
+    }
+    Text("Model limitation: the internal concentration is fixed at 0.30 mol/L to demonstrate the direction of water movement. Real cell sap and cytoplasm have complex, changing water potentials; the isotonic point varies by cell and experimental conditions.")
 }
