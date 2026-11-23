@@ -203,7 +203,7 @@ fun LessonScreen(topicId: String) {
             Text(if (completed) "Lesson completed" else "Mark lesson complete")
         }
         Text(
-            "Learning note: this is an initial teaching draft. Syllabus alignment and final academic approval are still required before it is treated as an official exam-preparation resource.",
+            "Academic status: beginner-focused teaching draft mapped to the JAMB cell-organisation objectives and WAEC cell-structure outcomes. Independent subject review is still required before formal approval.",
             style = MaterialTheme.typography.bodySmall,
             color = MaterialTheme.colorScheme.onSurfaceVariant
         )
