@@ -6,9 +6,9 @@ import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class PhysicsQuestionBankTest {
-    @Test fun containsOneHundredSixtyOriginalQuestionsAcrossThirtyTwoDevelopedTopics() {
-        assertEquals(160, PhysicsQuestionBank.all.size)
-        assertEquals(32, PhysicsCourse.topics.count { !it.isSyllabusOutline })
+    @Test fun containsOneHundredNinetyFiveOriginalQuestionsAcrossThirtyNineDevelopedTopics() {
+        assertEquals(195, PhysicsQuestionBank.all.size)
+        assertEquals(39, PhysicsCourse.topics.count { !it.isSyllabusOutline })
         PhysicsCourse.topics.filterNot { it.isSyllabusOutline }.forEach { topic ->
             assertEquals(5, PhysicsQuestionBank.forTopic(topic.id).size)
         }
