@@ -27,6 +27,8 @@ fun PhysicsWaecPracticalScreen() {
             "waec-physics-hooke" -> fit.gradient
             "waec-physics-pendulum" -> PhysicsPracticalAnalysisEngine.gravityFromPendulumGradient(fit.gradient)
             "waec-physics-ohm" -> fit.gradient
+            "waec-physics-density" -> fit.gradient
+            "waec-physics-resistivity" -> fit.gradient * 0.50e-6
             else -> fit.gradient
         }
     }
@@ -34,12 +36,16 @@ fun PhysicsWaecPracticalScreen() {
         "waec-physics-hooke" -> "Spring constant, k"
         "waec-physics-pendulum" -> "Gravitational field strength, g"
         "waec-physics-ohm" -> "Resistance, R"
+        "waec-physics-density" -> "Density, ρ"
+        "waec-physics-resistivity" -> "Resistivity, ρ"
         else -> "Gradient"
     }
     val derivedUnit = when (task.id) {
         "waec-physics-hooke" -> "N m⁻¹"
         "waec-physics-pendulum" -> "m s⁻²"
         "waec-physics-ohm" -> "Ω"
+        "waec-physics-density" -> "g cm⁻³"
+        "waec-physics-resistivity" -> "Ω m"
         else -> ""
     }
 
