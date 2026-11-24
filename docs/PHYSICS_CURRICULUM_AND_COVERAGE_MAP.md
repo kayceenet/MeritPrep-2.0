@@ -11,9 +11,9 @@ The topic headings below follow the 39 numbered topic headings in the Physics do
 
 ## Current implementation
 
-The first eight topics have beginner-focused lesson drafts, each with learning objectives, explanatory sections, a formative understanding check and a topic-linked original question set. The first block contains 40 original objective questions, five per developed topic. The Physics practice screen shuffles the question order and answer options, records attempts locally and captures incorrect responses in the mistake notebook.
+The first sixteen topics have beginner-focused lesson drafts, each with learning objectives, explanatory sections, a formative understanding check and a topic-linked original question set. The current bank contains 80 original objective questions, five per developed topic. The Physics practice screen shuffles the question order and answer options, records attempts locally and captures incorrect responses in the mistake notebook.
 
-The remaining 31 topics are syllabus outlines only. They cannot be marked as completed lessons. Physics content is draft material and has not received independent academic review.
+The remaining 23 topics are syllabus outlines only. They cannot be marked as completed lessons. Physics content is draft material and has not received independent academic review.
 
 ## Topic coverage
 
@@ -27,14 +27,14 @@ The remaining 31 topics are syllabus outlines only. They cannot be marked as com
 | 6 | Work, energy and power | Lesson draft + 5 original questions |
 | 7 | Friction | Lesson draft + 5 original questions |
 | 8 | Simple machines | Lesson draft + 5 original questions |
-| 9 | Elasticity | Syllabus outline |
-| 10 | Pressure | Syllabus outline |
-| 11 | Liquids at rest | Syllabus outline |
-| 12 | Temperature and its measurement | Syllabus outline |
-| 13 | Thermal expansion | Syllabus outline |
-| 14 | Gas laws | Syllabus outline |
-| 15 | Quantity of heat | Syllabus outline |
-| 16 | Change of state | Syllabus outline |
+| 9 | Elasticity | Lesson draft + 5 original questions |
+| 10 | Pressure | Lesson draft + 5 original questions |
+| 11 | Liquids at rest | Lesson draft + 5 original questions |
+| 12 | Temperature and its measurement | Lesson draft + 5 original questions |
+| 13 | Thermal expansion | Lesson draft + 5 original questions |
+| 14 | Gas laws | Lesson draft + 5 original questions |
+| 15 | Quantity of heat | Lesson draft + 5 original questions |
+| 16 | Change of state | Lesson draft + 5 original questions |
 | 17 | Vapours | Syllabus outline |
 | 18 | Structure of matter and kinetic theory | Syllabus outline |
 | 19 | Heat transfer | Syllabus outline |
@@ -64,7 +64,7 @@ The remaining 31 topics are syllabus outlines only. They cannot be marked as com
 - All 40 questions in the current Physics bank are original MeritPrep practice items.
 - They must not be labelled as official JAMB or WAEC past questions.
 - Every question has one keyed answer and an explanatory feedback note; the bank has structural unit tests for IDs, topic mapping, option count, answer-key bounds and provenance labels.
-- The current 40-item practice set is not a full JAMB mock and is not a prediction of examination performance.
+- The current 80-item practice set is not a full JAMB mock and is not a prediction of examination performance.
 - The practice UI uses the shared local attempt and mistake-notebook workflow.
 
 ## Next development work
