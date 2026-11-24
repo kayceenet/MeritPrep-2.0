@@ -205,6 +205,69 @@ private fun SimpleMachineLab() {
 }
 
 @Composable
+private fun WavePropertiesLab() {
+    var frequency by remember { mutableFloatStateOf(5f) }
+    var wavelength by remember { mutableFloatStateOf(2f) }
+    val speed = frequency * wavelength
+    val period = 1f / frequency
+    Card(Modifier.fillMaxWidth()) {
+        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+            Text("Wave speed and period", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+            Text("Adjust frequency and wavelength to see how wave speed changes.")
+            Text("Frequency: ${"%.1f".format(frequency)} Hz")
+            Slider(value = frequency, onValueChange = { frequency = it }, valueRange = 1f..20f)
+            Text("Wavelength: ${"%.2f".format(wavelength)} m")
+            Slider(value = wavelength, onValueChange = { wavelength = it }, valueRange = 0.1f..5f)
+            HorizontalDivider()
+            Text("Wave speed: ${"%.2f".format(speed)} m/s", style = MaterialTheme.typography.titleMedium)
+            Text("Period: ${"%.3f".format(period)} s")
+            Text("v = fλ     T = 1/f", fontWeight = FontWeight.SemiBold)
+        }
+    }
+    Text("The model assumes a uniform medium and a constant wave speed for the selected frequency and wavelength. Changing medium may change wave speed.")
+}
+
+@Composable
+private fun EchoDistanceLab() {
+    var soundSpeed by remember { mutableFloatStateOf(340f) }
+    var echoTime by remember { mutableFloatStateOf(2f) }
+    val distance = soundSpeed * echoTime / 2f
+    Card(Modifier.fillMaxWidth()) {
+        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+            Text("Echo sounding", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+            Text("An echo time includes the journey to the reflecting surface and the return journey.")
+            Text("Sound speed: ${"%.0f".format(soundSpeed)} m/s")
+            Slider(value = soundSpeed, onValueChange = { soundSpeed = it }, valueRange = 300f..360f)
+            Text("Round-trip echo time: ${"%.2f".format(echoTime)} s")
+            Slider(value = echoTime, onValueChange = { echoTime = it }, valueRange = 0.1f..4f)
+            HorizontalDivider()
+            Text("Distance to reflector: ${"%.2f".format(distance)} m", style = MaterialTheme.typography.titleMedium)
+            Text("d = vt/2", fontWeight = FontWeight.SemiBold)
+        }
+    }
+    Text("The calculation assumes a stationary reflector, a known uniform sound speed and a correctly measured round-trip time.")
+}
+
+@Composable
+private fun ReflectionLab() {
+    var incidentAngle by remember { mutableFloatStateOf(35f) }
+    val reflectedAngle = incidentAngle
+    Card(Modifier.fillMaxWidth()) {
+        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+            Text("Law of reflection", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+            Text("Angles are measured from the normal, not from the mirror surface.")
+            Text("Angle of incidence: ${"%.0f".format(incidentAngle)}°")
+            Slider(value = incidentAngle, onValueChange = { incidentAngle = it }, valueRange = 0f..90f, steps = 89)
+            HorizontalDivider()
+            Text("Angle of reflection: ${"%.0f".format(reflectedAngle)}°", style = MaterialTheme.typography.titleMedium)
+            Text("i = r", fontWeight = FontWeight.SemiBold)
+            Text("The incident ray, reflected ray and normal lie in the same plane.")
+        }
+    }
+    Text("This is an ideal plane-mirror model. Real surfaces may scatter light if they are rough compared with the wavelength.")
+}
+
+@Composable
 private fun ConcentrationLab() {
     var selected by remember { mutableIntStateOf(0) }
     Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
