@@ -53,7 +53,8 @@ The remaining eight topics are syllabus outlines only. They are not represented 
 
 ## Next development work
 
-1. Develop differentiation, applications of differentiation and integration with graph-based examples.
+1. Develop differentiation and its applications, including limits, rates of change, maxima and minima.
+2. Develop integration with algebraic and simple trigonometric examples and areas under curves.
 3. Complete representation of data, measures of location and dispersion, permutation, combination and probability with worked problems.
 4. Add topic-specific formula tools and interactive visual models where they improve understanding.
 5. Expand objective practice only after verifying every question, distractor, calculation and explanation.
