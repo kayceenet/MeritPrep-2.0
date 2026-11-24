@@ -8,19 +8,31 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.unit.dp
 import com.kaycee.meritprep.data.PhysicsPracticalAnalysisEngine
+import com.kaycee.meritprep.data.MeritDatabase
+import org.json.JSONObject
 import kotlin.math.max
 import kotlin.math.min
 
 @Composable
 fun PhysicsWaecPracticalScreen() {
+    val context = LocalContext.current
+    val database = remember(context) { MeritDatabase(context) }
     var selectedIndex by remember { mutableIntStateOf(0) }
-    var learnerResponse by remember { mutableStateOf("") }
-    var showWorkedAnalysis by remember { mutableStateOf(false) }
     val task = PhysicsWaecPracticalBank.tasks[selectedIndex]
+    val noteId = "waec-physics-practical:${task.id}"
+    val savedPayload = remember(task.id) { database.getNoteBody(noteId) }
+    var learnerResponse by remember(task.id) {
+        mutableStateOf(runCatching { JSONObject(savedPayload ?: "{}").optString("answer", "") }.getOrDefault(""))
+    }
+    var saveMessage by remember(task.id) {
+        mutableStateOf(if (savedPayload.isNullOrBlank()) "" else "Your last saved response is available on this device.")
+    }
+    var showWorkedAnalysis by remember(task.id) { mutableStateOf(false) }
     val fit = remember(task) { PhysicsPracticalAnalysisEngine.linearFit(task.readings) }
     val derivedValue = remember(task, fit) {
         when (task.id) {
@@ -61,7 +73,6 @@ fun PhysicsWaecPracticalScreen() {
                     selected = selectedIndex == index,
                     onClick = {
                         selectedIndex = index
-                        learnerResponse = ""
                         showWorkedAnalysis = false
                     },
                     label = { Text(item.title.substringBefore(" ")) }
@@ -111,12 +122,24 @@ fun PhysicsWaecPracticalScreen() {
         Text(task.taskPrompt)
         OutlinedTextField(
             value = learnerResponse,
-            onValueChange = { learnerResponse = it; showWorkedAnalysis = false },
+            onValueChange = { learnerResponse = it; showWorkedAnalysis = false; saveMessage = "" },
             modifier = Modifier.fillMaxWidth(),
             minLines = 4,
             label = { Text("Write your calculations, graph interpretation and precautions") },
             placeholder = { Text("Include formulae, substitution, units and experimental precautions…") }
         )
+        Button(
+            onClick = {
+                val payload = JSONObject().put("answer", learnerResponse)
+                database.saveNote(noteId, task.id, "WAEC Physics practical: ${task.title}", payload.toString())
+                saveMessage = "Practical response saved on this device."
+            },
+            enabled = learnerResponse.isNotBlank(),
+            modifier = Modifier.fillMaxWidth()
+        ) { Text("Save my practical response") }
+        if (saveMessage.isNotBlank()) {
+            Text(saveMessage, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.primary)
+        }
         Button(onClick = { showWorkedAnalysis = true }, modifier = Modifier.fillMaxWidth()) {
             Text("Reveal worked analysis and marking checklist")
         }
@@ -136,7 +159,7 @@ fun PhysicsWaecPracticalScreen() {
                 }
             }
         }
-        Text("Paper 3 practice format: the current working syllabus reference describes three practical questions, of which candidates answer two, in 2¾ hours for 50 marks. Confirm the instructions for your examination session with WAEC or your school.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        Text("Practical responses are stored locally on this device. Paper 3 practice format: the current working syllabus reference describes three practical questions, of which candidates answer two, in 2¾ hours for 50 marks. Confirm the instructions for your examination session with WAEC or your school.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
     }
 }
 
