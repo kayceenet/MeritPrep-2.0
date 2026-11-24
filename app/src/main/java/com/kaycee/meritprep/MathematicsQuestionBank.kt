@@ -97,7 +97,32 @@ object MathematicsQuestionBank {
         q("math-integration-002","math-integration","When x is in radians, ∫cos x dx is:",listOf("−sin x+C","sin x+C","cos x+C","−cos x+C"),1,"The derivative of sin x is cos x, so the antiderivative is sin x+C."),
         q("math-integration-003","math-integration","Evaluate ∫₀² 2x dx.",listOf("2","3","4","8"),2,"An antiderivative is x². Evaluate 2²−0²=4."),
         q("math-integration-004","math-integration","For n≠−1, ∫xⁿ dx equals:",listOf("nxⁿ⁻¹+C","xⁿ⁺¹/(n+1)+C","xⁿ/n+C","(n+1)xⁿ+C"),1,"The power increases by one and the result is divided by the new power."),
-        q("math-integration-005","math-integration","A definite integral of a curve below the x-axis contributes:",listOf("Positive signed area","Negative signed area","Zero in every case","The curve's gradient"),1,"Definite integrals represent signed area; regions below the x-axis contribute negatively.")
+        q("math-integration-005","math-integration","A definite integral of a curve below the x-axis contributes:",listOf("Positive signed area","Negative signed area","Zero in every case","The curve's gradient"),1,"Definite integrals represent signed area; regions below the x-axis contribute negatively."),
+        q("math-data-representation-001","math-data-representation","A category occurs 18 times in a data set of 60 observations. What angle represents it in a pie chart?",listOf("18°","60°","108°","180°"),2,"Sector angle=(18/60)×360°=108°."),
+        q("math-data-representation-002","math-data-representation","Which graph is most suitable for displaying continuous grouped data?",listOf("Histogram","Pictogram","Separated bar chart","Venn diagram"),0,"A histogram uses adjoining rectangles for continuous grouped data."),
+        q("math-data-representation-003","math-data-representation","The total frequency in a frequency table is:",listOf("The largest class boundary","The number of observations","The class width","The modal value"),1,"Adding all frequencies gives the total number of observations."),
+        q("math-data-representation-004","math-data-representation","Find the midpoint of the class interval 10–20.",listOf("10","12","15","20"),2,"Class midpoint=(10+20)/2=15."),
+        q("math-data-representation-005","math-data-representation","Cumulative frequency is obtained by:",listOf("Multiplying class limits","Adding frequencies successively","Dividing frequency by class width","Subtracting the median"),1,"Cumulative frequency is the running total of frequencies."),
+        q("math-measures-location-001","math-measures-location","Find the mean of 2, 4 and 6.",listOf("3","4","5","6"),1,"Mean=(2+4+6)/3=4."),
+        q("math-measures-location-002","math-measures-location","Find the median of 3, 4, 4, 5 and 9.",listOf("3","4","5","9"),1,"The ordered data have five values; the middle (third) value is 4."),
+        q("math-measures-location-003","math-measures-location","The mode of 2, 3, 3, 4, 5 is:",listOf("2","3","4","5"),1,"The mode is the most frequent value, which is 3."),
+        q("math-measures-location-004","math-measures-location","A student scores 60 in a test weighted 2 and 80 in a test weighted 3. The weighted mean is:",listOf("68","70","72","75"),2,"Weighted mean=(60×2+80×3)/(2+3)=360/5=72."),
+        q("math-measures-location-005","math-measures-location","For grouped data, an estimate of the mean is found using:",listOf("Lower class limits only","Class midpoints multiplied by frequencies","The highest frequency only","The class width divided by the median"),1,"Use Σ(f×class midpoint)/Σf to estimate the grouped mean."),
+        q("math-measures-dispersion-001","math-measures-dispersion","Find the range of 2, 4, 7 and 9.",listOf("5","6","7","11"),2,"Range=maximum−minimum=9−2=7."),
+        q("math-measures-dispersion-002","math-measures-dispersion","If Q₁=3 and Q₃=8, the interquartile range is:",listOf("3","5","8","11"),1,"IQR=Q₃−Q₁=8−3=5."),
+        q("math-measures-dispersion-003","math-measures-dispersion","The population variance of 2, 4, 4 and 6 is:",listOf("1","1.5","2","4"),2,"The mean is 4; squared deviations sum to 8, and 8/4=2."),
+        q("math-measures-dispersion-004","math-measures-dispersion","If the variance of a data set is 9, its standard deviation is:",listOf("2","3","6","9"),1,"Standard deviation is the positive square root of variance: √9=3."),
+        q("math-measures-dispersion-005","math-measures-dispersion","When two data sets have the same mean, the one with the larger standard deviation has:",listOf("Less spread","Greater spread","No variation","A smaller range always"),1,"A larger standard deviation indicates greater spread around the mean."),
+        q("math-permutation-combination-001","math-permutation-combination","Evaluate 5!.",listOf("20","60","100","120"),3,"5!=5×4×3×2×1=120."),
+        q("math-permutation-combination-002","math-permutation-combination","How many ordered ways can 2 people be selected from 5?",listOf("10","15","20","25"),2,"5P2=5×4=20."),
+        q("math-permutation-combination-003","math-permutation-combination","How many unordered pairs can be selected from 5 people?",listOf("5","10","15","20"),1,"5C2=5!/(2!3!)=10."),
+        q("math-permutation-combination-004","math-permutation-combination","How many distinct arrangements can be made from the letters of BANANA?",listOf("30","60","120","720"),1,"There are 6 letters with A repeated 3 times and N repeated twice: 6!/(3!2!)=60."),
+        q("math-permutation-combination-005","math-permutation-combination","The number of ways to choose 3 objects from 5 without regard to order is:",listOf("5","10","20","60"),1,"5C3=5!/(3!2!)=10."),
+        q("math-probability-001","math-probability","A fair six-sided die is rolled once. What is the probability of an even number?",listOf("1/6","1/3","1/2","2/3"),2,"The even outcomes are 2, 4 and 6, so probability=3/6=1/2."),
+        q("math-probability-002","math-probability","If P(A)=0.3, what is P(not A)?",listOf("0.3","0.5","0.7","1.3"),2,"P(A')=1−P(A)=1−0.3=0.7."),
+        q("math-probability-003","math-probability","If A and B are mutually exclusive with P(A)=0.2 and P(B)=0.5, find P(A or B).",listOf("0.1","0.3","0.7","1.0"),2,"For mutually exclusive events, P(A∪B)=P(A)+P(B)=0.7."),
+        q("math-probability-004","math-probability","If independent events A and B have probabilities 0.5 and 0.4, P(A and B) is:",listOf("0.1","0.2","0.4","0.9"),1,"For independent events, P(A∩B)=P(A)P(B)=0.5×0.4=0.2."),
+        q("math-probability-005","math-probability","A bag contains 3 red balls and 2 blue balls. The probability of selecting a red ball at random is:",listOf("2/5","3/5","1/2","3/2"),1,"There are 3 red balls among 5 equally likely balls, so P(red)=3/5.")
 
     )
 
