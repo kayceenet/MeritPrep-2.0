@@ -369,11 +369,11 @@ fun BiologyPopulationSamplingCard() {
                         Text("Sampled area: ${"%.2f".format(java.util.Locale.UK, estimate.sampledAreaM2)} m²")
                     }
                 }
-                Text("Worked example", fontWeight = FontWeight.Bold)
-                Text("1. Add the counts: 4 + 6 + 5 + 7 + 3 = 25 organisms.")
-                Text("2. Calculate sampled area: 5 quadrats × 1 m² = 5 m².")
-                Text("3. Calculate density: 25 ÷ 5 = 5 organisms/m².")
-                Text("4. Estimate the habitat population: 5 × 100 = 500 organisms.")
+                Text("Follow the calculation", fontWeight = FontWeight.Bold)
+                Text("1. Add the sample counts: ${counts.filterNotNull().joinToString(" + ")} = ${estimate.totalCount} organisms.")
+                Text("2. Find the sampled area: ${estimate.quadratCount} quadrats × ${"%.2f".format(java.util.Locale.UK, quadratArea)} m² = ${"%.2f".format(java.util.Locale.UK, estimate.sampledAreaM2)} m².")
+                Text("3. Find the mean density: ${estimate.totalCount} ÷ ${"%.2f".format(java.util.Locale.UK, estimate.sampledAreaM2)} = ${"%.2f".format(java.util.Locale.UK, estimate.densityPerM2)} organisms/m².")
+                Text("4. Estimate the habitat population: ${"%.2f".format(java.util.Locale.UK, estimate.densityPerM2)} × ${"%.2f".format(java.util.Locale.UK, estimate.habitatAreaM2)} = ${"%.1f".format(java.util.Locale.UK, estimate.estimatedPopulation)} organisms.")
                 Text("Formula: estimated population = (total organisms counted ÷ total sampled area) × habitat area.", fontWeight = FontWeight.SemiBold)
             } else {
                 Text("Enter whole-number counts of zero or more, and positive area values. Separate each quadrat count with a comma. The combined quadrat area must not exceed the habitat area.", color = MaterialTheme.colorScheme.error, style = MaterialTheme.typography.bodySmall)
