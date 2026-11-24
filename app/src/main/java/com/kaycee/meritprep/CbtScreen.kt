@@ -51,6 +51,11 @@ enum class CbtMode(
         "PHY_WAEC", "WAEC Physics Objective Practice",
         "50 original MeritPrep Physics questions in a WAEC-style objective session. The timer follows a working syllabus reference and must be verified for the candidate's examination session.",
         50, 75 * 60, "75-minute working-reference practice timer", "Physics WAEC-style objective result"
+    ),
+    MATHEMATICS_UTME(
+        "MATH", "Timed Mathematics CBT",
+        "A JAMB-style Mathematics practice mock drawn from all 23 syllabus-mapped topics in MeritPrep's original question bank.",
+        40, 30 * 60, "30-minute MeritPrep practice timer", "Mathematics JAMB-style practice result"
     )
 }
 
