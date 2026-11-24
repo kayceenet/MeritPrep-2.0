@@ -36,13 +36,15 @@ The reference syllabus assesses more than formula recall. Learners should practi
 
 ## Implemented original practice tasks
 
-The app currently provides three data-analysis exercises:
+The app currently provides five original data-analysis exercises:
 
 | Exercise | Variables and graph | Main result from gradient |
 |---|---|---|
 | Spring extension | Force F against extension x | Spring constant k |
 | Simple pendulum | Period squared T² against length L | g = 4π² / gradient |
 | Ohm's law | Voltage V against current I | Resistance R |
+| Density | Mass m against volume V | Density ρ |
+| Resistivity | Resistance R against wire length L | Resistivity ρ = gradient × cross-sectional area |
 
 Each task includes:
 - Aim and apparatus list.
@@ -70,7 +72,7 @@ Each task has a mark total, answer-writing space, indicative marking points and 
 ## Important limitations
 
 - The readings are simulated learning data, not observations from a physical experiment.
-- The three tasks are original MeritPrep exercises, not official WAEC past questions.
+- The five tasks are original MeritPrep exercises, not official WAEC past questions.
 - The app does not automatically award marks to free-text answers.
 - The displayed graph is a worked visual aid. It does not assess the learner's ability to choose graph-paper scales and plot points manually.
 - The current set does not assess practical apparatus handling, measurement uncertainty, repeatability, error bars or a complete Paper 3 examination.
@@ -78,7 +80,7 @@ Each task has a mark total, answer-writing space, indicative marking points and 
 
 ## Next development work
 
-1. Add practical tasks for density and relative density, moments, focal length, resistivity, specific heat capacity and electrical circuits.
+1. Add practical tasks for moments, focal length, specific heat capacity and further electrical-circuit investigations.
 2. Add repeated readings, mean values, uncertainty and percentage-error calculations.
 3. Add learner-controlled graph scales and manual point plotting.
 4. Add a full alternative-to-practical exercise with apparatus diagrams, observations, calculations and method evaluation.
