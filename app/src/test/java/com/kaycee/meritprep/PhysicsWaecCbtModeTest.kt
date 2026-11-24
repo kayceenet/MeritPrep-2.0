@@ -2,7 +2,6 @@ package com.kaycee.meritprep
 
 import com.kaycee.meritprep.data.CbtSessionEngine
 import org.junit.Assert.assertEquals
-import org.junit.Assert.assertEquals as assertEqualsAlias
 import org.junit.Assert.assertTrue
 import org.junit.Test
 import kotlin.random.Random
