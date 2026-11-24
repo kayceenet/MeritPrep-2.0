@@ -363,3 +363,39 @@ fun BiologyPopulationSamplingCard() {
         }
     }
 }
+
+
+@Composable
+fun EcologicalSuccessionCard() {
+    Card(Modifier.fillMaxWidth()) {
+        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+            Text("Ecological succession: how communities change", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+            Text("Succession is a gradual change in the species composition and structure of an ecological community over time.")
+
+            Surface(color = MaterialTheme.colorScheme.primaryContainer, shape = MaterialTheme.shapes.medium) {
+                Column(Modifier.fillMaxWidth().padding(12.dp), verticalArrangement = Arrangement.spacedBy(5.dp)) {
+                    Text("PRIMARY SUCCESSION", fontWeight = FontWeight.Bold)
+                    Text("Bare rock or a newly exposed surface")
+                    Text("↓ Pioneer organisms such as lichens and mosses")
+                    Text("↓ Weathering and organic matter help soil develop")
+                    Text("↓ Grasses, herbs, shrubs and later trees may establish")
+                    Text("It begins where developed soil is absent, so soil formation is a major early process.")
+                }
+            }
+
+            Surface(color = MaterialTheme.colorScheme.secondaryContainer, shape = MaterialTheme.shapes.medium) {
+                Column(Modifier.fillMaxWidth().padding(12.dp), verticalArrangement = Arrangement.spacedBy(5.dp)) {
+                    Text("SECONDARY SUCCESSION", fontWeight = FontWeight.Bold)
+                    Text("A disturbed area where soil remains")
+                    Text("↓ Grasses and other fast-colonising plants")
+                    Text("↓ Shrubs and young trees may establish")
+                    Text("↓ A more complex community may develop")
+                    Text("It often proceeds faster because soil, nutrients, seeds or roots may remain after the disturbance.")
+                }
+            }
+
+            Text("Key comparison", fontWeight = FontWeight.Bold)
+            Text("The presence or absence of developed soil is the main distinction. The sequence and final community depend on climate, soil, disturbance, seed sources and other local conditions; succession does not always follow one fixed path.")
+        }
+    }
+}
