@@ -11,7 +11,7 @@ The current alpha is a working Android app built with Kotlin, Jetpack Compose an
 - Home, Learn, Practice, Labs, Profile and Biology revision screens.
 - Seven subject entry points, with starter lesson content for Biology, Chemistry, Physics, Mathematics, English Language, Economics and Government.
 - A 24-unit Biology syllabus map, with an authored beginner-oriented lesson draft for every mapped unit.
-- An 18-topic JAMB Chemistry syllabus map based on the Chemistry PDF served through JAMB IBASS. Four topics currently have beginner-oriented lesson drafts (separation, chemical combination, kinetic theory/gas laws, and atomic structure/bonding); the remaining 14 are mapped outlines awaiting full lesson development. WAEC Chemistry mapping remains a separate verification task.
+- An 18-topic JAMB Chemistry syllabus map based on the Chemistry PDF served through JAMB IBASS. Eight topics now have beginner-oriented lesson drafts: separation and purification; chemical combination and the mole concept; kinetic theory and gas laws; atomic structure and bonding; nuclear chemistry; solubility; environmental pollution; and acids, bases and salts. The remaining 10 are mapped outlines awaiting full lesson development. WAEC Chemistry mapping remains a separate verification task.
 - A searchable offline Biology glossary with 57 syllabus-linked terms, plain-language definitions, examples and direct lesson links.
 - Visual teaching aids for cell structure, photosynthesis, plant transport, food-chain energy flow, monohybrid inheritance, mammalian double circulation, nephron function, flowering-plant reproduction and natural selection; the cell diagram also supports organelle selection and explanations.
 - 240 original Biology multiple-choice practice questions across the 24 mapped units, with explanations and syllabus-topic attribution.
@@ -42,7 +42,7 @@ This is an actively developed alpha, not a completed or officially endorsed exam
 - The Biology CBT mock is a MeritPrep practice configuration, not an official JAMB paper or a full multi-subject JAMB simulation.
 - The syllabus map is a working mapping. It must be checked against the current official JAMB IBASS and WAEC materials before each examination cycle.
 - The mastery indicator currently uses objective-question evidence only; it does not yet include WAEC theory, practical performance or a validated prediction model. A complete WAEC practical examination system, cross-device synchronisation, teacher CMS and production security review remain in development.
-- Chemistry has a JAMB topic map and four draft lessons, but is not yet a complete course; the remaining 14 mapped topics need full teaching content and WAEC-specific alignment. Other subjects currently have starter content, not complete syllabus coverage.
+- Chemistry has a JAMB topic map and eight draft lessons, but is not yet a complete course; the remaining 10 mapped topics need full teaching content and WAEC-specific alignment. Other subjects currently have starter content, not complete syllabus coverage.
 
 ## Build locally
 
