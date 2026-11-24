@@ -47,7 +47,7 @@ Authenticated sync, teacher/admin CMS, analytics, backups, privacy and security 
 - Mistake notebook: offline capture of incorrect quick-practice answers and incorrect/unanswered CBT items, with review status.
 - Study planner: adaptive seven-day Biology schedule with configurable daily time target, offline activity completion and shortcuts into lessons, practice and revision.
 - Mastery indicator: objective-question evidence threshold of 10 attempts, 8 distinct questions, 2 study days and at least 80% correct; theory and practical evidence are not yet included.
-- Practical learning: six Biology practical prototypes plus introductory Physics and Chemistry simulations.
+- Practical learning: seven Biology practical prototypes, including a quadrat population estimator with worked calculations and a controlled soil drainage/water-retention investigation, plus introductory Physics and Chemistry simulations.
 - Academic approval: pending independent subject review; no generated question is presented as an official past question.
 - Other subjects: starter lesson content only; full syllabus mapping and course development remain outstanding.
 
