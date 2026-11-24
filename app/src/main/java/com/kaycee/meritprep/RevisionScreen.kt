@@ -390,6 +390,28 @@ internal val starterRevisionCards = listOf(
     RevisionCard("math-progression-card-1","math-progression","Write the nth term of an arithmetic progression.","Tₙ = a + (n−1)d.",0L),
     RevisionCard("math-progression-card-2","math-progression","Write the sum of the first n terms of an arithmetic progression.","Sₙ = n/2[2a+(n−1)d].",0L),
     RevisionCard("math-progression-card-3","math-progression","When does a geometric progression have a finite sum to infinity?","When |r|<1; then S∞ = a/(1−r).",0L)
+) + listOf(
+    RevisionCard("math-binary-card-1","math-binary-operations","What is closure of a binary operation?","Combining any two elements of the set gives a result that is still in the set.",0L),
+    RevisionCard("math-binary-card-2","math-binary-operations","What is an identity element e?","An element satisfying a*e = e*a = a for every element a in the set.",0L),
+    RevisionCard("math-binary-card-3","math-binary-operations","How do you find an inverse of a under a binary operation?","Solve a*x = e, where e is the identity element, and check that x belongs to the set.",0L),
+    RevisionCard("math-matrices-card-1","math-matrices","What is the determinant of a 2×2 matrix [[a,b],[c,d]]?","ad−bc.",0L),
+    RevisionCard("math-matrices-card-2","math-matrices","When does a square matrix have an inverse?","When its determinant is non-zero.",0L),
+    RevisionCard("math-matrices-card-3","math-matrices","If A is m×n and B is n×p, what is the order of AB?","m×p.",0L),
+    RevisionCard("math-geometry-card-1","math-euclidean-geometry","What is the sum of the interior angles of a triangle?","180°.",0L),
+    RevisionCard("math-geometry-card-2","math-euclidean-geometry","What is the angle in a semicircle?","90°.",0L),
+    RevisionCard("math-geometry-card-3","math-euclidean-geometry","State Pythagoras' theorem.","In a right-angled triangle, hypotenuse² = side₁² + side₂².",0L),
+    RevisionCard("math-mensuration-card-1","math-mensuration","What is the volume of a cylinder?","V = πr²h.",0L),
+    RevisionCard("math-mensuration-card-2","math-mensuration","If all lengths are scaled by k, how does area change?","Area is scaled by k²; volume is scaled by k³.",0L),
+    RevisionCard("math-mensuration-card-3","math-mensuration","What is the arc length of a sector with angle θ in radians?","s = rθ.",0L),
+    RevisionCard("math-loci-card-1","math-loci","What is the locus of points equidistant from two fixed points?","The perpendicular bisector of the line segment joining them.",0L),
+    RevisionCard("math-loci-card-2","math-loci","What is the locus of points equidistant from two intersecting lines?","The two angle bisectors.",0L),
+    RevisionCard("math-loci-card-3","math-loci","What is the locus at a fixed perpendicular distance from a straight line?","Two lines parallel to the given line, one on each side.",0L),
+    RevisionCard("math-coordinate-card-1","math-coordinate-geometry","Write the gradient formula between two points.","m = (y₂−y₁)/(x₂−x₁).",0L),
+    RevisionCard("math-coordinate-card-2","math-coordinate-geometry","Write the distance formula between two coordinate points.","d = √[(x₂−x₁)²+(y₂−y₁)²].",0L),
+    RevisionCard("math-coordinate-card-3","math-coordinate-geometry","What is the equation of a straight line with gradient m and y-intercept c?","y = mx + c.",0L),
+    RevisionCard("math-trig-card-1","math-trigonometry","State SOH-CAH-TOA.","sinθ=opposite/hypotenuse; cosθ=adjacent/hypotenuse; tanθ=opposite/adjacent.",0L),
+    RevisionCard("math-trig-card-2","math-trigonometry","State the sine rule.","a/sinA = b/sinB = c/sinC.",0L),
+    RevisionCard("math-trig-card-3","math-trigonometry","How is a three-figure bearing measured?","Clockwise from north, from 000° to 360°.",0L)
 )
 
 @Composable
