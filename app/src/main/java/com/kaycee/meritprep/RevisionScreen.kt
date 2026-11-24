@@ -412,6 +412,16 @@ internal val starterRevisionCards = listOf(
     RevisionCard("math-trig-card-1","math-trigonometry","State SOH-CAH-TOA.","sinθ=opposite/hypotenuse; cosθ=adjacent/hypotenuse; tanθ=opposite/adjacent.",0L),
     RevisionCard("math-trig-card-2","math-trigonometry","State the sine rule.","a/sinA = b/sinB = c/sinC.",0L),
     RevisionCard("math-trig-card-3","math-trigonometry","How is a three-figure bearing measured?","Clockwise from north, from 000° to 360°.",0L)
+) + listOf(
+    RevisionCard("math-diff-card-1","math-differentiation","What is the derivative of xⁿ?","nxⁿ⁻¹.",0L),
+    RevisionCard("math-diff-card-2","math-differentiation","What does dy/dx represent geometrically?","The gradient of the tangent to the curve y=f(x) at the stated x-value.",0L),
+    RevisionCard("math-diff-card-3","math-differentiation","What is the derivative of sin x when x is in radians?","cos x.",0L),
+    RevisionCard("math-application-diff-card-1","math-application-differentiation","What condition identifies a stationary point?","f'(x)=0.",0L),
+    RevisionCard("math-application-diff-card-2","math-application-differentiation","What does f''(x)>0 at a stationary point indicate?","A local minimum, because the curve is concave upwards.",0L),
+    RevisionCard("math-application-diff-card-3","math-application-differentiation","How are velocity and acceleration obtained from displacement s(t)?","v=ds/dt and a=d²s/dt².",0L),
+    RevisionCard("math-integration-card-1","math-integration","What is the indefinite integral of xⁿ for n≠−1?","xⁿ⁺¹/(n+1)+C.",0L),
+    RevisionCard("math-integration-card-2","math-integration","Why is the constant C included in an indefinite integral?","Because the derivative of any constant is zero, so all antiderivatives differ by a constant.",0L),
+    RevisionCard("math-integration-card-3","math-integration","How is a definite integral evaluated using an antiderivative F?","Calculate F(upper limit)−F(lower limit).",0L)
 )
 
 @Composable
