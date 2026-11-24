@@ -11,7 +11,7 @@ The topic headings below follow the 39 numbered topic headings in the Physics do
 
 ## Current implementation
 
-The first thirty-two topics have beginner-focused lesson drafts, each with learning objectives, explanatory sections, a formative understanding check and a topic-linked original question set. The current bank contains 160 original objective questions, five per developed topic. The Physics practice screen shuffles the question order and answer options, records attempts locally and captures incorrect responses in the mistake notebook. The spaced-revision workflow also includes 82 Physics recall cards mapped across these twenty-four developed topics.
+The first thirty-two topics have beginner-focused lesson drafts, each with learning objectives, explanatory sections, a formative understanding check and a topic-linked original question set. The current bank contains 160 original objective questions, five per developed topic. The Physics practice screen shuffles the question order and answer options, records attempts locally and captures incorrect responses in the mistake notebook. The spaced-revision workflow also includes 97 Physics recall cards mapped across all thirty-two developed topics.
 
 The remaining seven topics are syllabus outlines only. They cannot be marked as completed lessons. Physics content is draft material and has not received independent academic review.
 
@@ -92,7 +92,7 @@ These are idealised calculation models, not physical laboratory instruments or c
 
 ## Assessment integrity
 
-- All 135 questions in the current Physics bank are original MeritPrep practice items.
+- All 160 questions in the current Physics bank are original MeritPrep practice items.
 - They must not be labelled as official JAMB or WAEC past questions.
 - Every question has one keyed answer and an explanatory feedback note; the bank has structural unit tests for IDs, topic mapping, option count, answer-key bounds and provenance labels.
 - The current 160-item practice set is not a full JAMB mock and is not a prediction of examination performance.
@@ -100,7 +100,7 @@ These are idealised calculation models, not physical laboratory instruments or c
 
 ## Next development work
 
-1. Develop the remaining 12 syllabus topics into full beginner lessons and add five or more reviewed practice items per topic.
+1. Develop the remaining seven syllabus topics into full beginner lessons and add five or more reviewed practice items per topic.
 2. Develop worked examples with explicit units, sign conventions, diagrams and graph interpretation.
 3. Extend the current virtual models into structured alternative-to-practical tasks with experimental variables, simulated readings, data tables, graph plotting, uncertainty calculations and evaluation prompts.
 4. Expand the question bank only after topic coverage and answer keys are checked.
