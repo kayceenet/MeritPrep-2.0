@@ -343,6 +343,28 @@ internal val starterRevisionCards = listOf(
     RevisionCard("phy-electrical-power-card-1","phy-electrical-power","Write the electrical power equation.","P = VI; for an ohmic resistor P = I²R = V²/R.",0L),
     RevisionCard("phy-electrical-power-card-2","phy-electrical-power","Convert 1 kWh to joules.","1 kWh = 3.6 × 10⁶ J.",0L),
     RevisionCard("phy-electrical-power-card-3","phy-electrical-power","Why is electricity transmitted at high voltage?","For a given power, higher voltage means lower current, reducing resistive cable losses I²R.",0L)
+) + listOf(
+    RevisionCard("phy-magnetism-card-1","phy-magnetism","How do like and unlike magnetic poles interact?","Like poles repel; unlike poles attract.",0L),
+    RevisionCard("phy-magnetism-card-2","phy-magnetism","What is the SI unit of magnetic flux density?","The tesla (T). Magnetic flux is measured in webers (Wb).",0L),
+    RevisionCard("phy-magnetism-card-3","phy-magnetism","What is the right-hand grip rule used for?","It gives the direction of the magnetic field around a straight current-carrying conductor.",0L),
+    RevisionCard("phy-magnetic-force-card-1","phy-magnetic-force","Write the force on a straight current-carrying wire in a magnetic field.","F = BIL sin θ, where θ is the angle between the current and magnetic field.",0L),
+    RevisionCard("phy-magnetic-force-card-2","phy-magnetic-force","What does Fleming's left-hand rule identify?","The relationship between magnetic field direction, conventional current and the resulting force or motion.",0L),
+    RevisionCard("phy-magnetic-force-card-3","phy-magnetic-force","How does a split-ring commutator help a simple DC motor rotate continuously?","It reverses the current in the coil every half-turn so the turning effect continues in the same rotational direction.",0L),
+    RevisionCard("phy-induction-card-1","phy-induction","State Faraday's law of electromagnetic induction.","The magnitude of induced emf is proportional to the rate of change of magnetic flux linkage.",0L),
+    RevisionCard("phy-induction-card-2","phy-induction","What does Lenz's law state?","The induced current produces a magnetic effect that opposes the change in flux that caused it.",0L),
+    RevisionCard("phy-induction-card-3","phy-induction","What is the ideal transformer turns-voltage relationship?","Vₛ/Vₚ = Nₛ/Nₚ.",0L),
+    RevisionCard("phy-ac-card-1","phy-ac-circuits","How is rms voltage related to peak voltage for a sinusoidal supply?","Vᵣₘₛ = V₀/√2.",0L),
+    RevisionCard("phy-ac-card-2","phy-ac-circuits","Write the capacitive and inductive reactance equations.","Xc = 1/(2πfC); Xl = 2πfL.",0L),
+    RevisionCard("phy-ac-card-3","phy-ac-circuits","What is the condition for series RLC resonance?","Inductive reactance equals capacitive reactance: Xl = Xc.",0L),
+    RevisionCard("phy-conduction-card-1","phy-conduction","What is an electrolyte?","A substance that conducts electricity when molten or in aqueous solution because it contains mobile ions.",0L),
+    RevisionCard("phy-conduction-card-2","phy-conduction","State Faraday's first law of electrolysis.","The mass deposited or liberated at an electrode is proportional to the quantity of charge passed, for the same electrolyte.",0L),
+    RevisionCard("phy-conduction-card-3","phy-conduction","What is required for current to pass through a gas?","The gas must contain charged particles such as ions and electrons, usually produced by ionisation.",0L),
+    RevisionCard("phy-modern-card-1","phy-modern","What is the photoelectric effect?","Emission of electrons from a material when electromagnetic radiation of sufficiently high frequency falls on it.",0L),
+    RevisionCard("phy-modern-card-2","phy-modern","What is half-life?","The time taken for the number of undecayed radioactive nuclei, or activity, to fall to half its initial value.",0L),
+    RevisionCard("phy-modern-card-3","phy-modern","What is the difference between nuclear fission and fusion?","Fission splits a heavy nucleus; fusion combines light nuclei. Both can release energy under suitable conditions.",0L),
+    RevisionCard("phy-electronics-card-1","phy-electronics","What is the difference between an n-type and p-type semiconductor?","An n-type semiconductor has electrons as majority charge carriers; a p-type semiconductor has holes as majority carriers.",0L),
+    RevisionCard("phy-electronics-card-2","phy-electronics","What is the main function of a p-n junction diode?","It allows current much more readily in the forward direction than in the reverse direction under normal operating conditions.",0L),
+    RevisionCard("phy-electronics-card-3","phy-electronics","What does a transistor commonly do in a simple electronic circuit?","It can act as an electronic switch or amplify a signal.",0L)
 )
 
 @Composable
