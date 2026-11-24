@@ -11,9 +11,9 @@ The topic headings below follow the 39 numbered topic headings in the Physics do
 
 ## Current implementation
 
-The first twenty-four topics have beginner-focused lesson drafts, each with learning objectives, explanatory sections, a formative understanding check and a topic-linked original question set. The current bank contains 120 original objective questions, five per developed topic. The Physics practice screen shuffles the question order and answer options, records attempts locally and captures incorrect responses in the mistake notebook. The spaced-revision workflow also includes 73 Physics recall cards mapped across these twenty-four developed topics.
+The first twenty-seven topics have beginner-focused lesson drafts, each with learning objectives, explanatory sections, a formative understanding check and a topic-linked original question set. The current bank contains 135 original objective questions, five per developed topic. The Physics practice screen shuffles the question order and answer options, records attempts locally and captures incorrect responses in the mistake notebook. The spaced-revision workflow also includes 82 Physics recall cards mapped across these twenty-four developed topics.
 
-The remaining 15 topics are syllabus outlines only. They cannot be marked as completed lessons. Physics content is draft material and has not received independent academic review.
+The remaining 12 topics are syllabus outlines only. They cannot be marked as completed lessons. Physics content is draft material and has not received independent academic review.
 
 ### Virtual practical models
 
@@ -59,9 +59,9 @@ The calculation engines have unit tests for the main relationships and invalid i
 | 22 | Characteristics of sound waves | Lesson draft + 5 original questions |
 | 23 | Light energy | Lesson draft + 5 original questions |
 | 24 | Reflection of light at plane and curved surfaces | Lesson draft + 5 original questions |
-| 25 | Refraction of light through plane and curved surfaces | Syllabus outline |
-| 26 | Optical instruments | Syllabus outline |
-| 27 | Dispersion of light and colours | Syllabus outline |
+| 25 | Refraction of light through plane and curved surfaces | Lesson draft + 5 original questions |
+| 26 | Optical instruments | Lesson draft + 5 original questions |
+| 27 | Dispersion of light and colours | Lesson draft + 5 original questions |
 | 28 | Electrostatics | Syllabus outline |
 | 29 | Capacitors | Syllabus outline |
 | 30 | Electric cells | Syllabus outline |
@@ -92,15 +92,15 @@ These are idealised calculation models, not physical laboratory instruments or c
 
 ## Assessment integrity
 
-- All 120 questions in the current Physics bank are original MeritPrep practice items.
+- All 135 questions in the current Physics bank are original MeritPrep practice items.
 - They must not be labelled as official JAMB or WAEC past questions.
 - Every question has one keyed answer and an explanatory feedback note; the bank has structural unit tests for IDs, topic mapping, option count, answer-key bounds and provenance labels.
-- The current 120-item practice set is not a full JAMB mock and is not a prediction of examination performance.
+- The current 135-item practice set is not a full JAMB mock and is not a prediction of examination performance.
 - The practice UI uses the shared local attempt and mistake-notebook workflow.
 
 ## Next development work
 
-1. Develop the remaining 15 syllabus topics into full beginner lessons and add five or more reviewed practice items per topic.
+1. Develop the remaining 12 syllabus topics into full beginner lessons and add five or more reviewed practice items per topic.
 2. Develop worked examples with explicit units, sign conventions, diagrams and graph interpretation.
 3. Extend the current virtual models into structured alternative-to-practical tasks with experimental variables, simulated readings, data tables, graph plotting, uncertainty calculations and evaluation prompts.
 4. Expand the question bank only after topic coverage and answer keys are checked.
