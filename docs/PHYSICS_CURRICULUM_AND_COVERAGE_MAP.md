@@ -61,7 +61,7 @@ The remaining 23 topics are syllabus outlines only. They cannot be marked as com
 
 ## Assessment integrity
 
-- All 40 questions in the current Physics bank are original MeritPrep practice items.
+- All 80 questions in the current Physics bank are original MeritPrep practice items.
 - They must not be labelled as official JAMB or WAEC past questions.
 - Every question has one keyed answer and an explanatory feedback note; the bank has structural unit tests for IDs, topic mapping, option count, answer-key bounds and provenance labels.
 - The current 80-item practice set is not a full JAMB mock and is not a prediction of examination performance.
@@ -69,7 +69,7 @@ The remaining 23 topics are syllabus outlines only. They cannot be marked as com
 
 ## Next development work
 
-1. Complete full lessons and question sets for elasticity, pressure, liquids at rest and thermal physics.
+1. Develop the remaining 23 syllabus topics into full beginner lessons and add five or more reviewed practice items per topic.
 2. Develop worked examples with explicit units, sign conventions, diagrams and graph interpretation.
 3. Add Physics practical simulations and alternative-to-practical tasks with variables, observations, data tables, graphs, uncertainty and evaluation.
 4. Expand the question bank only after topic coverage and answer keys are checked.
