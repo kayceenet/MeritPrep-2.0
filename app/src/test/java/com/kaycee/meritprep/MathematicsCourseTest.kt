@@ -14,9 +14,9 @@ class MathematicsCourseTest {
         assertTrue(MathematicsCourse.topics.all { it.subjectCode == "MATH" })
     }
 
-    @Test fun firstEighteenTopicsAreDevelopedAndRemainingFiveAreOutlines() {
-        assertEquals(18, MathematicsCourse.topics.count { !it.isSyllabusOutline })
-        assertEquals(5, MathematicsCourse.topics.count { it.isSyllabusOutline })
+    @Test fun allTwentyThreeTopicsHaveDevelopedLessonDrafts() {
+        assertEquals(23, MathematicsCourse.topics.count { !it.isSyllabusOutline })
+        assertEquals(0, MathematicsCourse.topics.count { it.isSyllabusOutline })
         MathematicsCourse.topics.filterNot { it.isSyllabusOutline }.forEach {
             assertTrue(it.objectives.size >= 4)
             assertTrue(it.sections.size >= 4)
