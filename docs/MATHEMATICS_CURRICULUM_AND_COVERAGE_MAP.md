@@ -56,7 +56,7 @@ All syllabus topics now have lesson drafts. They are not represented as complete
 1. Add topic-specific visual tools for statistics, including frequency tables, histograms, ogives, box plots and measures of dispersion.
 2. Add interactive counting and probability experiments, including tree diagrams, independent events and sampling without replacement.
 3. Expand objective practice beyond five questions per topic after verifying every question, distractor, calculation and explanation.
-4. Add a timed JAMB-style Mathematics CBT only after validating the full question pool and practice configuration.
+4. Expand the timed Mathematics CBT with more validated questions and review the timing against the official examination structure before making any timing claims.
 5. Independently review all lessons, worked solutions, diagrams and questions before changing content status from draft.
 
 ## Academic review checklist
