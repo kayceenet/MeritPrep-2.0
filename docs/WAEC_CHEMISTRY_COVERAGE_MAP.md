@@ -91,11 +91,11 @@ The current JAMB Chemistry work provides a useful foundation but must not be mis
 | Nigeria Section C | Not yet implemented as a separate country-specific map | Add non-metals, metals and compounds as distinct WAEC units |
 | WAEC objective practice | Existing Chemistry items are JAMB-topic-mapped | Create a WAEC blueprint and verify coverage before calling it a WAEC mock |
 | WAEC theory | No Chemistry theory bank yet | Create structured-response tasks, marking points and worked model answers |
-| Quantitative practical | No Chemistry titration assessment yet | Build burette-reading, titre, concordance, stoichiometry and calculation practice |
-| Qualitative practical | No Chemistry ion/gas identification assessment yet | Build observation, inference and confirmatory-test exercises |
-| Practical activity paper | Existing Chemistry concentration model only | Add safe, guided practical simulations with observations, data recording and limitations |
+| Quantitative practical | Interactive 1:1 HCl–NaOH mean-titre calculator is implemented and unit-tested | Add raw burette readings, concordant-titre selection, stoichiometric ratios beyond 1:1, redox titration and marking practice |
+| Qualitative practical | Interactive reference for selected NH₄⁺, Ca²⁺, Pb²⁺, Cu²⁺, Fe²⁺, Fe³⁺, Al³⁺ and Zn²⁺ with NaOH/NH₃ observations | Add anions, gas tests, confirmatory tests, mixtures, inference scoring and experimental limitations |
+| Practical activity paper | Concentration, titration and selected cation-test simulations are available | Add practical activity investigations, student observation sheets, data interpretation and marking guidance |
 
-## Content and safety rules
+## Implemented practical learning components (MeritPrep alpha)\n\n- **Solution concentration:** adjustable NaCl mass and final solution volume with molarity output.\n- **Acid-base titration:** HCl–NaOH 1:1 reaction; learner supplies standard acid concentration, mean titre and NaOH aliquot; the app calculates the unknown NaOH concentration and shows the equation. A pure calculation engine has unit tests.\n- **Qualitative cation reference:** selected cations tested with aqueous NaOH or aqueous ammonia, including excess-reagent behaviour and the warmed ammonium test. A pure reference engine has unit tests.\n\nThese components are teaching simulations/reference exercises, not a complete WAEC Paper 3 simulator. They do not assess burette reading, endpoint judgement, concordance, safe physical technique or every required qualitative test. The current cation scheme is deliberately limited and must not be used as a universal identification key.\n\n## Content and safety rules
 
 - Mark all newly authored material as original MeritPrep practice content, not official WAEC past questions.
 - Keep syllabus source, rights/provenance, author, reviewer, version and approval status with each content object.
