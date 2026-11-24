@@ -19,13 +19,15 @@ fun estimatePopulationFromQuadrats(
     quadratAreaM2: Double,
     habitatAreaM2: Double
 ): PopulationEstimate? {
-    val estimate = runCatching {
+    val estimate = try {
         EcologySamplingEngine.estimate(
             individualsPerQuadrat = counts,
             quadratAreaSquareMetres = quadratAreaM2,
             habitatAreaSquareMetres = habitatAreaM2
         )
-    }.getOrNull() ?: return null
+    } catch (_: IllegalArgumentException) {
+        return null
+    }
 
     return PopulationEstimate(
         totalCount = estimate.totalIndividuals,
