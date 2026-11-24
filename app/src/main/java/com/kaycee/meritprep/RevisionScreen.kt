@@ -292,6 +292,31 @@ internal val starterRevisionCards = listOf(
     RevisionCard("phy-state-card-1","phy-change-state","Write the equation for energy during a change of state.","Q = mL, where L is the specific latent heat.",0L),
     RevisionCard("phy-state-card-2","phy-change-state","How does evaporation differ from boiling?","Evaporation occurs at the liquid surface and can happen below the boiling point; boiling occurs throughout the liquid at its boiling condition.",0L),
     RevisionCard("phy-state-card-3","phy-change-state","What happens to the temperature of a pure substance during melting at constant pressure?","It remains approximately constant while latent heat is supplied for the change of state.",0L)
+) + listOf(
+    RevisionCard("phy-vapours-card-1","phy-vapours","Define saturated vapour pressure.","The pressure of a vapour in dynamic equilibrium with its liquid at a stated temperature.",0L),
+    RevisionCard("phy-vapours-card-2","phy-vapours","When does a liquid boil?","When its vapour pressure equals the external pressure.",0L),
+    RevisionCard("phy-vapours-card-3","phy-vapours","Define relative humidity.","Actual water-vapour pressure divided by saturated vapour pressure at the same temperature, multiplied by 100%.",0L),
+    RevisionCard("phy-kinetic-card-1","phy-kinetic-theory","What causes Brownian motion?","Uneven collisions of rapidly moving fluid molecules with small suspended particles.",0L),
+    RevisionCard("phy-kinetic-card-2","phy-kinetic-theory","How is gas pressure produced in kinetic theory?","Gas molecules collide with container walls and transfer momentum, producing force per unit area.",0L),
+    RevisionCard("phy-kinetic-card-3","phy-kinetic-theory","What is diffusion?","Net movement of particles from higher to lower concentration due to random motion.",0L),
+    RevisionCard("phy-heat-transfer-card-1","phy-heat-transfer","Distinguish conduction, convection and radiation.","Conduction transfers energy without bulk movement; convection uses bulk fluid movement; radiation transfers energy by electromagnetic waves.",0L),
+    RevisionCard("phy-heat-transfer-card-2","phy-heat-transfer","Which mode of heat transfer can cross a vacuum?","Radiation.",0L),
+    RevisionCard("phy-heat-transfer-card-3","phy-heat-transfer","Why are dark, dull surfaces good thermal emitters?","They generally emit thermal radiation more effectively than light, shiny surfaces.",0L),
+    RevisionCard("phy-waves-card-1","phy-waves","Write the relationship between wave speed, frequency and wavelength.","v = fλ.",0L),
+    RevisionCard("phy-waves-card-2","phy-waves","Distinguish transverse and longitudinal waves.","Transverse oscillations are perpendicular to propagation; longitudinal oscillations are parallel to propagation.",0L),
+    RevisionCard("phy-waves-card-3","phy-waves","What is diffraction?","Spreading of waves around obstacles or through openings.",0L),
+    RevisionCard("phy-sound-prop-card-1","phy-sound-propagation","Why can sound not travel through a vacuum?","Sound is a mechanical wave and requires a material medium to transmit the disturbance.",0L),
+    RevisionCard("phy-sound-prop-card-2","phy-sound-propagation","How do you calculate distance to a reflecting wall from an echo time t?","Distance = vt/2 because the sound travels to the wall and back.",0L),
+    RevisionCard("phy-sound-prop-card-3","phy-sound-propagation","What is reverberation?","Persistence of sound in an enclosed space due to repeated reflections after the source stops.",0L),
+    RevisionCard("phy-sound-char-card-1","phy-sound-characteristics","What physical quantity is most closely related to pitch?","Frequency.",0L),
+    RevisionCard("phy-sound-char-card-2","phy-sound-characteristics","What is sound intensity?","Sound power transmitted per unit area, measured in W m⁻².",0L),
+    RevisionCard("phy-sound-char-card-3","phy-sound-characteristics","What is the fundamental frequency of an ideal pipe closed at one end?","f = v/(4L).",0L),
+    RevisionCard("phy-light-card-1","phy-light-energy","Distinguish luminous and non-luminous objects.","Luminous objects produce their own light; non-luminous objects are seen by reflecting or scattering light.",0L),
+    RevisionCard("phy-light-card-2","phy-light-energy","Write the wave equation for light in a vacuum.","c = fλ, where c is approximately 3.00 × 10⁸ m s⁻¹.",0L),
+    RevisionCard("phy-light-card-3","phy-light-energy","Why is the image in a pinhole camera inverted?","Rays from the top and bottom of the object cross at the pinhole before reaching the screen.",0L),
+    RevisionCard("phy-reflection-card-1","phy-reflection","State the law of reflection.","The angle of incidence equals the angle of reflection, measured from the normal.",0L),
+    RevisionCard("phy-reflection-card-2","phy-reflection","Describe the image formed by a plane mirror.","Virtual, upright, same size as the object and apparently the same distance behind the mirror as the object is in front.",0L),
+    RevisionCard("phy-reflection-card-3","phy-reflection","Why are convex mirrors used as vehicle side mirrors?","They form virtual, upright and diminished images and provide a wide field of view.",0L)
 )
 
 @Composable
