@@ -7,6 +7,40 @@ data class TitrationResult(
 )
 
 object ChemistryPracticalEngine {
+    fun meanConcordantTitre(
+        initialReadingsCm3: List<Double>,
+        finalReadingsCm3: List<Double>,
+        toleranceCm3: Double = 0.20
+    ): Double {
+        require(initialReadingsCm3.size == finalReadingsCm3.size && initialReadingsCm3.size >= 2) {
+            "Enter at least two complete burette readings."
+        }
+        require(toleranceCm3.isFinite() && toleranceCm3 > 0.0) {
+            "Concordance tolerance must be greater than zero."
+        }
+        require(initialReadingsCm3.all { it.isFinite() && it >= 0.0 } &&
+            finalReadingsCm3.all { it.isFinite() && it >= 0.0 }) {
+            "Burette readings must be valid non-negative numbers."
+        }
+        val titres = initialReadingsCm3.indices.map { index ->
+            finalReadingsCm3[index] - initialReadingsCm3[index]
+        }
+        require(titres.all { it > 0.0 }) {
+            "Each final burette reading must exceed its initial reading."
+        }
+        val sorted = titres.sorted()
+        val bestCluster = sorted.indices.flatMap { start ->
+            (start until sorted.size).mapNotNull { end ->
+                val cluster = sorted.subList(start, end + 1)
+                if (cluster.size >= 2 && cluster.last() - cluster.first() <= toleranceCm3) cluster else null
+            }
+        }.maxByOrNull { it.size }
+        require(bestCluster != null) {
+            "No two titres are concordant within %.2f cm³. Repeat the titration.".format(toleranceCm3)
+        }
+        return bestCluster.average()
+    }
+
     fun calculateOneToOneTitration(
         titrantConcentration: Double,
         titreCm3: Double,
