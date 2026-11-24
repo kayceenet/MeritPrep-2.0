@@ -1,7 +1,8 @@
 # MeritPrep timed subject practice CBT
 
 ## Current implementation
-- Biology JAMB-style mode: 40 questions selected randomly from the original Biology bank.\n- Physics JAMB-style mode: 40 questions selected randomly from the 195 original Physics questions mapped across all 39 JAMB Physics topics.
+- Biology JAMB-style mode: 40 questions selected randomly from the original Biology bank.
+- Physics JAMB-style mode: 40 questions selected randomly from the 195 original Physics questions mapped across all 39 JAMB Physics topics.
 - Answer options are shuffled while preserving the correct answer mapping.
 - 30-minute countdown for a MeritPrep practice session.
 - Question navigation, horizontal question navigator, answer selection and review flags.
