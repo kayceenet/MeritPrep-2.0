@@ -775,6 +775,7 @@ fun LessonScreen(topicId: String) {
         when (topic.id) {
             "bio-cell" -> CellDiagramCard()
             "bio-nutrition" -> PhotosynthesisFlowCard()
+            "bio-respiration" -> RespirationComparisonCard()
             "bio-interactions" -> FoodChainDiagramCard()
             "bio-heredity" -> PunnettSquareCard()
             "bio-transport" -> {
