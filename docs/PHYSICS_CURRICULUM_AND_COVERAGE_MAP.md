@@ -11,9 +11,9 @@ The topic headings below follow the 39 numbered topic headings in the Physics do
 
 ## Current implementation
 
-The first sixteen topics have beginner-focused lesson drafts, each with learning objectives, explanatory sections, a formative understanding check and a topic-linked original question set. The current bank contains 80 original objective questions, five per developed topic. The Physics practice screen shuffles the question order and answer options, records attempts locally and captures incorrect responses in the mistake notebook. The spaced-revision workflow also includes 49 Physics recall cards mapped across these sixteen developed topics.
+The first twenty-four topics have beginner-focused lesson drafts, each with learning objectives, explanatory sections, a formative understanding check and a topic-linked original question set. The current bank contains 120 original objective questions, five per developed topic. The Physics practice screen shuffles the question order and answer options, records attempts locally and captures incorrect responses in the mistake notebook. The spaced-revision workflow also includes 73 Physics recall cards mapped across these twenty-four developed topics.
 
-The remaining 23 topics are syllabus outlines only. They cannot be marked as completed lessons. Physics content is draft material and has not received independent academic review.
+The remaining 15 topics are syllabus outlines only. They cannot be marked as completed lessons. Physics content is draft material and has not received independent academic review.
 
 ## Topic coverage
 
@@ -35,14 +35,14 @@ The remaining 23 topics are syllabus outlines only. They cannot be marked as com
 | 14 | Gas laws | Lesson draft + 5 original questions |
 | 15 | Quantity of heat | Lesson draft + 5 original questions |
 | 16 | Change of state | Lesson draft + 5 original questions |
-| 17 | Vapours | Syllabus outline |
-| 18 | Structure of matter and kinetic theory | Syllabus outline |
-| 19 | Heat transfer | Syllabus outline |
-| 20 | Waves | Syllabus outline |
-| 21 | Propagation of sound waves | Syllabus outline |
-| 22 | Characteristics of sound waves | Syllabus outline |
-| 23 | Light energy | Syllabus outline |
-| 24 | Reflection of light at plane and curved surfaces | Syllabus outline |
+| 17 | Vapours | Lesson draft + 5 original questions |
+| 18 | Structure of matter and kinetic theory | Lesson draft + 5 original questions |
+| 19 | Heat transfer | Lesson draft + 5 original questions |
+| 20 | Waves | Lesson draft + 5 original questions |
+| 21 | Propagation of sound waves | Lesson draft + 5 original questions |
+| 22 | Characteristics of sound waves | Lesson draft + 5 original questions |
+| 23 | Light energy | Lesson draft + 5 original questions |
+| 24 | Reflection of light at plane and curved surfaces | Lesson draft + 5 original questions |
 | 25 | Refraction of light through plane and curved surfaces | Syllabus outline |
 | 26 | Optical instruments | Syllabus outline |
 | 27 | Dispersion of light and colours | Syllabus outline |
@@ -64,7 +64,7 @@ The remaining 23 topics are syllabus outlines only. They cannot be marked as com
 - All 80 questions in the current Physics bank are original MeritPrep practice items.
 - They must not be labelled as official JAMB or WAEC past questions.
 - Every question has one keyed answer and an explanatory feedback note; the bank has structural unit tests for IDs, topic mapping, option count, answer-key bounds and provenance labels.
-- The current 80-item practice set is not a full JAMB mock and is not a prediction of examination performance.
+- The current 120-item practice set is not a full JAMB mock and is not a prediction of examination performance.
 - The practice UI uses the shared local attempt and mistake-notebook workflow.
 
 ## Next development work
