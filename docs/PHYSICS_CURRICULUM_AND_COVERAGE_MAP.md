@@ -11,9 +11,9 @@ The topic headings below follow the 39 numbered topic headings in the Physics do
 
 ## Current implementation
 
-The first twenty-seven topics have beginner-focused lesson drafts, each with learning objectives, explanatory sections, a formative understanding check and a topic-linked original question set. The current bank contains 135 original objective questions, five per developed topic. The Physics practice screen shuffles the question order and answer options, records attempts locally and captures incorrect responses in the mistake notebook. The spaced-revision workflow also includes 82 Physics recall cards mapped across these twenty-four developed topics.
+The first thirty-two topics have beginner-focused lesson drafts, each with learning objectives, explanatory sections, a formative understanding check and a topic-linked original question set. The current bank contains 160 original objective questions, five per developed topic. The Physics practice screen shuffles the question order and answer options, records attempts locally and captures incorrect responses in the mistake notebook. The spaced-revision workflow also includes 82 Physics recall cards mapped across these twenty-four developed topics.
 
-The remaining 12 topics are syllabus outlines only. They cannot be marked as completed lessons. Physics content is draft material and has not received independent academic review.
+The remaining seven topics are syllabus outlines only. They cannot be marked as completed lessons. Physics content is draft material and has not received independent academic review.
 
 ### Virtual practical models
 
@@ -62,11 +62,11 @@ The calculation engines have unit tests for the main relationships and invalid i
 | 25 | Refraction of light through plane and curved surfaces | Lesson draft + 5 original questions |
 | 26 | Optical instruments | Lesson draft + 5 original questions |
 | 27 | Dispersion of light and colours | Lesson draft + 5 original questions |
-| 28 | Electrostatics | Syllabus outline |
-| 29 | Capacitors | Syllabus outline |
-| 30 | Electric cells | Syllabus outline |
-| 31 | Current electricity | Syllabus outline |
-| 32 | Electrical energy and power | Syllabus outline |
+| 28 | Electrostatics | Lesson draft + 5 original questions |
+| 29 | Capacitors | Lesson draft + 5 original questions |
+| 30 | Electric cells | Lesson draft + 5 original questions |
+| 31 | Current electricity | Lesson draft + 5 original questions |
+| 32 | Electrical energy and power | Lesson draft + 5 original questions |
 | 33 | Magnets and magnetic fields | Syllabus outline |
 | 34 | Force on a current-carrying conductor in a magnetic field | Syllabus outline |
 | 35 | Electromagnetic induction | Syllabus outline |
@@ -95,7 +95,7 @@ These are idealised calculation models, not physical laboratory instruments or c
 - All 135 questions in the current Physics bank are original MeritPrep practice items.
 - They must not be labelled as official JAMB or WAEC past questions.
 - Every question has one keyed answer and an explanatory feedback note; the bank has structural unit tests for IDs, topic mapping, option count, answer-key bounds and provenance labels.
-- The current 135-item practice set is not a full JAMB mock and is not a prediction of examination performance.
+- The current 160-item practice set is not a full JAMB mock and is not a prediction of examination performance.
 - The practice UI uses the shared local attempt and mistake-notebook workflow.
 
 ## Next development work
