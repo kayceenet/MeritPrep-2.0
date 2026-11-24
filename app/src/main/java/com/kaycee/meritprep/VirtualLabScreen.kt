@@ -461,6 +461,7 @@ private fun BiologyLab() {
             FilterChip(selected = selected == 3, onClick = { selected = 3 }, label = { Text("Quadrat sampling") })
             FilterChip(selected = selected == 4, onClick = { selected = 4 }, label = { Text("Classification key") })
             FilterChip(selected = selected == 5, onClick = { selected = 5 }, label = { Text("Biological drawing") })
+            FilterChip(selected = selected == 6, onClick = { selected = 6 }, label = { Text("Plan an experiment") })
         }
         when (selected) {
             0 -> FoodTestLab()
@@ -468,7 +469,8 @@ private fun BiologyLab() {
             2 -> MagnificationLab()
             3 -> QuadratSamplingLab()
             4 -> BiologyClassificationLab()
-            else -> BiologyDrawingLab()
+            5 -> BiologyDrawingLab()
+            else -> BiologyExperimentPlannerLab()
         }
     }
 }
@@ -740,4 +742,40 @@ private fun BiologyDrawingLab() {
         style = MaterialTheme.typography.bodySmall,
         color = MaterialTheme.colorScheme.onSurfaceVariant
     )
+}
+
+ 
+@Composable
+private fun BiologyExperimentPlannerLab() {
+    var investigation by remember { mutableStateOf("How does light intensity affect the rate of photosynthesis?") }
+    var independent by remember { mutableStateOf("Light intensity (or distance from the lamp)") }
+    var dependent by remember { mutableStateOf("Number of oxygen bubbles released per minute") }
+    var controls by remember { mutableStateOf("Plant species and size, carbon dioxide concentration, temperature, and counting time") }
+    var method by remember { mutableStateOf("Allow the plant to equilibrate, change one light level at a time, count bubbles for the same time interval, repeat each level and calculate a mean.") }
+    var showReview by remember { mutableStateOf(false) }
+
+    Card(Modifier.fillMaxWidth()) {
+        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+            Text("Plan a biological investigation", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+            Text("Identify what is changed, what is measured, what is kept constant and how reliable results will be collected. Edit the example or use it as a guide.")
+            OutlinedTextField(value = investigation, onValueChange = { investigation = it; showReview = false }, label = { Text("Research question / aim") }, modifier = Modifier.fillMaxWidth(), minLines = 2)
+            OutlinedTextField(value = independent, onValueChange = { independent = it; showReview = false }, label = { Text("Independent variable - what you change") }, modifier = Modifier.fillMaxWidth(), minLines = 2)
+            OutlinedTextField(value = dependent, onValueChange = { dependent = it; showReview = false }, label = { Text("Dependent variable - what you measure") }, modifier = Modifier.fillMaxWidth(), minLines = 2)
+            OutlinedTextField(value = controls, onValueChange = { controls = it; showReview = false }, label = { Text("Control variables - what you keep constant") }, modifier = Modifier.fillMaxWidth(), minLines = 2)
+            OutlinedTextField(value = method, onValueChange = { method = it; showReview = false }, label = { Text("Method, repeats and recording") }, modifier = Modifier.fillMaxWidth(), minLines = 3)
+            Button(onClick = { showReview = true }, enabled = investigation.isNotBlank() && independent.isNotBlank() && dependent.isNotBlank() && controls.isNotBlank() && method.isNotBlank(), modifier = Modifier.fillMaxWidth()) {
+                Text("Review my investigation plan")
+            }
+            if (showReview) {
+                HorizontalDivider()
+                Text("Plan checklist", fontWeight = FontWeight.Bold)
+                Text("A focused research question is stated.")
+                Text("The factor being changed is identified.")
+                Text("The outcome being measured is identified.")
+                Text("Other factors that could affect the result are controlled.")
+                Text("The method uses repeated measurements and a consistent time interval.")
+                Text("Before submission, check that your method names the apparatus, measurement units, range of values, recording method and how a mean or graph will be used. This checklist does not automatically prove that your variables or method are scientifically suitable.")
+            }
+        }
+    }
 }
