@@ -55,6 +55,27 @@ object CbtSessionEngine {
             .sortedWith(compareBy<CbtTopicPerformance> { it.accuracyPercent }.thenBy { it.topicId })
     }
 
+    fun topicPerformance(
+        questions: List<PresentedQuestion>,
+        selectedAnswers: Map<String, Int>
+    ): List<CbtTopicPerformance> {
+        return questions
+            .groupBy { it.topicId }
+            .map { (topicId, topicQuestions) ->
+                val correct = topicQuestions.count { question ->
+                    selectedAnswers[question.questionId] == question.correctPresentedIndex
+                }
+                CbtTopicPerformance(
+                    topicId = topicId,
+                    totalQuestions = topicQuestions.size,
+                    correctAnswers = correct,
+                    accuracyPercent = if (topicQuestions.isEmpty()) 0
+                    else (correct * 100) / topicQuestions.size
+                )
+            }
+            .sortedWith(compareBy<CbtTopicPerformance> { it.accuracyPercent }.thenBy { it.topicId })
+    }
+
     fun score(
         questions: List<PresentedQuestion>,
         selectedAnswers: Map<String, Int>
