@@ -27,7 +27,8 @@ object ChemistryCourse {
         checkQuestion = "What is the most useful first step when studying this topic?",
         checkOptions = listOf("Memorise isolated facts without context", "Understand the key terms and the principle behind them", "Skip examples and go straight to difficult questions", "Assume every substance behaves in the same way"),
         correctOption = 1,
-        explanation = "Understanding the terms and governing principle makes it easier to explain observations and solve new problems."
+        explanation = "Understanding the terms and governing principle makes it easier to explain observations and solve new problems.",
+        isSyllabusOutline = true
     )
 
     val topics: List<LearningTopic> = listOf(
