@@ -42,7 +42,7 @@ The app currently provides five original data-analysis exercises:
 |---|---|---|
 | Spring extension | Force F against extension x | Spring constant k |
 | Simple pendulum | Period squared T² against length L | g = 4π² / gradient |
-| Ohm's law | Voltage V against current I | Resistance R |
+| Ohm's law | Voltage V against current I | Resistance R |\n| Density | Mass m against volume V | Density ρ |\n| Wire resistivity | Resistance R against wire length L | Resistivity ρ from gradient = ρ/A |
 | Density | Mass m against volume V | Density ρ |
 | Resistivity | Resistance R against wire length L | Resistivity ρ = gradient × cross-sectional area |
 
