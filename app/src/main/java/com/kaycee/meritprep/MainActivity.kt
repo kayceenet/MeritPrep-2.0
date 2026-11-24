@@ -79,6 +79,7 @@ private fun MeritPrepApp() {
                     LessonScreen(entry.arguments?.getString("topicId").orEmpty())
                 }
                 composable("practice") { PracticeScreenV2(onStartCbt = { nav.navigate("cbt") }, onStartWaecObjective = { nav.navigate("waec-objective") }, onStartTheory = { nav.navigate("waec-theory") }, onOpenMistakes = { nav.navigate("mistakes") }, onOpenStudyPlan = { nav.navigate("study-plan") }) }
+                composable("placement") { PlacementAssessmentScreen(onOpenLesson = { nav.navigate("lesson/$it") }) }
                 composable("cbt") { CbtScreen(BiologyCbtMode.JAMB_UTME) }
                 composable("waec-objective") { CbtScreen(BiologyCbtMode.WAEC_OBJECTIVE) }
                 composable("waec-theory") { BiologyTheoryScreen() }
@@ -112,6 +113,7 @@ private fun HomeScreen(nav: NavHostController) {
                     OutlinedButton(onClick = { nav.navigate("mistakes") }) { Text("Review mistakes") }
                     OutlinedButton(onClick = { nav.navigate("study-plan") }) { Text("Build a Biology study plan") }
                     OutlinedButton(onClick = { nav.navigate("cbt") }) { Text("Start timed Biology mock") }
+                    OutlinedButton(onClick = { nav.navigate("placement") }) { Text("Take Biology placement check") }
                     OutlinedButton(onClick = { nav.navigate("glossary") }) { Text("Search Biology glossary") }
                     OutlinedButton(onClick = { nav.navigate("bookmarks") }) { Text("Saved lessons") }
                 }
