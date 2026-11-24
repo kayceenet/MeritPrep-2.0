@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.platform.LocalContext
+import com.kaycee.meritprep.data.AssessmentQuestion
 import com.kaycee.meritprep.data.CbtResult
 import com.kaycee.meritprep.data.CbtSessionEngine
 import com.kaycee.meritprep.data.MeritDatabase
@@ -22,7 +23,7 @@ import com.kaycee.meritprep.data.PresentedQuestion
 import kotlinx.coroutines.delay
 import java.util.UUID
 
-enum class BiologyCbtMode(
+enum class CbtMode(
     val sessionSubjectId: String,
     val title: String,
     val subtitle: String,
@@ -40,11 +41,16 @@ enum class BiologyCbtMode(
         "BIO_WAEC", "WAEC Biology Objective Practice",
         "A timed objective practice session built from MeritPrep's original Biology question bank.",
         50, 60 * 60, "60-minute MeritPrep practice timer", "Biology WAEC-style objective result"
+    ),
+    PHYSICS_UTME(
+        "PHY", "Timed Physics CBT",
+        "A JAMB-style Physics practice mock drawn from all 39 syllabus-mapped topics in MeritPrep's original question bank.",
+        40, 30 * 60, "30-minute MeritPrep practice timer", "Physics JAMB-style practice result"
     )
 }
 
 @Composable
-fun CbtScreen(mode: BiologyCbtMode = BiologyCbtMode.JAMB_UTME) {
+fun CbtScreen(mode: CbtMode = CbtMode.JAMB_UTME, questionPool: List<AssessmentQuestion> = BiologyQuestionBank.all) {
     val context = LocalContext.current
     val database = remember(context) { MeritDatabase(context) }
     var questions by remember { mutableStateOf(emptyList<PresentedQuestion>()) }
@@ -63,7 +69,7 @@ fun CbtScreen(mode: BiologyCbtMode = BiologyCbtMode.JAMB_UTME) {
     LaunchedEffect(database) {
         val snapshot = database.loadActiveCbtSession(mode.sessionSubjectId)
         if (snapshot != null) {
-            val sourceById = BiologyQuestionBank.all.associateBy { it.id }
+            val sourceById = questionPool.associateBy { it.id }
             val restoredQuestions = snapshot.questions.mapNotNull { saved ->
                 val source = sourceById[saved.questionId] ?: return@mapNotNull null
                 PresentedQuestion(
@@ -163,7 +169,7 @@ fun CbtScreen(mode: BiologyCbtMode = BiologyCbtMode.JAMB_UTME) {
             }
             Button(
                 onClick = {
-                    val generated = CbtSessionEngine.createQuestions(BiologyQuestionBank.all, mode.questionCount)
+                    val generated = CbtSessionEngine.createQuestions(questionPool, mode.questionCount)
                     val now = System.currentTimeMillis()
                     val newSessionId = UUID.randomUUID().toString()
                     database.createCbtSession(newSessionId, mode.sessionSubjectId, now, now + mode.durationSeconds * 1000L, generated)
