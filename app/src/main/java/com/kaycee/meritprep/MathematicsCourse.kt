@@ -162,6 +162,9 @@ object MathematicsCourse {
     )
 
     val topics: List<LearningTopic> = syllabusEntries.map { entry ->
-        MathematicsCourseExtension.topics.firstOrNull { it.id == entry.id } ?: entry
+        MathematicsCourseExtension.topics.firstOrNull { it.id == entry.id }
+            ?: MathematicsCourseExtension2.topics.firstOrNull { it.id == entry.id }
+            ?: MathematicsCourseExtension3.topics.firstOrNull { it.id == entry.id }
+            ?: entry
     }
 }
