@@ -55,6 +55,18 @@ Each task includes:
 
 The graph analysis engine calculates a least-squares straight-line gradient, intercept and coefficient of determination. It also calculates gravitational field strength from the simple-pendulum gradient. The engine and task data have unit tests.
 
+## Structured theory practice
+
+The Physics subject area also includes six original structured-response tasks covering:
+- Motion, forces and energy.
+- Thermal physics and gas laws.
+- Waves and sound.
+- Refraction and optical instruments.
+- Current electricity and electromagnetic induction.
+- Atomic physics, radioactivity and electronics.
+
+Each task has a mark total, answer-writing space, indicative marking points and examiner guidance. Learners can reveal the marking points and self-check their response. This is formative practice only: the app does not grade free text, and the checklist is not an official WAEC mark scheme. Six tasks do not constitute a complete Paper 2 examination.
+
 ## Important limitations
 
 - The readings are simulated learning data, not observations from a physical experiment.
