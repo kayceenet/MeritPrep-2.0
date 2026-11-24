@@ -547,7 +547,7 @@ private fun QuadratSamplingLab() {
             Text("Field procedure", fontWeight = FontWeight.SemiBold)
             Text("1. Mark out the habitat area and, where practical, divide it into a grid.")
             Text("2. Select sample positions randomly so that you do not choose only places where the organism is easy to see.")
-            Text("3. Place the same quadrat at each selected position and count the target organisms using one consistent boundary rule.")
+            Text("3. Place the same quadrat at each selected position and count the target organisms. A common boundary rule is to include organisms touching the top and right edges but exclude those touching the bottom and left edges, preventing double-counting between adjacent quadrats.")
             Text("4. Repeat at enough positions to represent the habitat. Record the quadrat size, locations and conditions.")
             Text("5. Add the counts, divide by the total sampled area to obtain density, then multiply by habitat area to estimate population.")
             counts.forEachIndexed { index, count ->
