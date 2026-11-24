@@ -163,12 +163,12 @@ private fun SubjectScreen(subject: Subject, nav: NavHostController) {
     LazyColumn(Modifier.fillMaxSize().padding(20.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
         item {
             Text(subject.name, style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
-            Text(if (subject.code == "CHEM") "18 JAMB Chemistry topics are mapped from the IBASS syllabus. Eight beginner lesson drafts and 60 original practice questions are available; 10 topics remain as syllabus outlines in development." else "Start with a structured lesson. This is an initial content set, not yet a complete official syllabus map.")
+            Text(if (subject.code == "CHEM") "18 JAMB Chemistry topics are mapped from the IBASS syllabus. All 18 JAMB topics now have beginner-oriented lesson drafts and 90 original practice questions. Content still requires independent subject-teacher review and separate WAEC alignment." else "Start with a structured lesson. This is an initial content set, not yet a complete official syllabus map.")
         }
         if (subject.code == "CHEM") {
             item {
                 Button(onClick = { nav.navigate("chemistry-practice") }, modifier = Modifier.fillMaxWidth()) {
-                    Text("Practise Chemistry · 60 questions")
+                    Text("Practise Chemistry · 90 questions")
                 }
             }
         }
