@@ -70,14 +70,15 @@ object MathematicsCourseExtension3 {
             "The mean is 4. The squared deviations sum to 8; divide by 4 to obtain population variance 2."
         ),
         LearningTopic(
-            "math-permutation-combination", "Permutation", "MATH",
-            "Counting methods help solve problems where listing every possible arrangement would take too long. A permutation is an arrangement in which order matters. Factorials and the nPr formula provide a systematic way to count ordered selections.",
+            "math-permutation-combination", "Permutation and combination", "MATH",
+            "Counting methods help solve problems where listing every possible arrangement or selection would take too long. A permutation is an arrangement in which order matters; a combination is a selection in which order does not matter. Factorials, nPr and nCr provide systematic counting methods.",
             listOf(
                 "Use factorial notation",
                 "Calculate arrangements of distinct objects",
                 "Apply nPr to ordered selections",
                 "Count arrangements involving repeated objects",
-                "Recognise when order matters"
+                "Apply nCr to selections where order does not matter",
+                "Distinguish permutations from combinations"
             ),
             listOf(
                 "Factorials" to "For a positive integer n, n! = n×(n−1)×…×2×1, and 0! = 1. Factorials count arrangements of distinct objects. For example, 4! = 4×3×2×1 = 24.",
@@ -85,33 +86,34 @@ object MathematicsCourseExtension3 {
                 "Arrangements with repeated objects" to "If n objects include repeated groups of sizes a, b and so on, the number of distinct linear arrangements is n!/(a!b!…). For example, BANANA has six letters with A repeated three times and N twice, so its distinct arrangements are 6!/(3!2!) = 60.",
                 "Worked example" to "The number of ways to arrange 3 of 5 different books in a row is 5P3 = 5!/(5−3)! = 5×4×3 = 60. Order matters because changing the order creates a different arrangement.",
                 "Restrictions" to "For arrangements with restrictions, place the restricted objects first or use complementary counting. If two objects must stay together, treat them as one block, arrange the block with the other objects, then arrange the objects inside the block.",
-                "Recognising permutations" to "Use permutations for ordered roles, positions, codes and rankings. If the question asks only which objects are selected and not their order, use combinations instead."
+                "Combinations" to "A combination selects r objects from n distinct objects without arranging them. The number of combinations is nCr = n!/[r!(n−r)!]. For example, choosing two people from five gives 5C2=10. The order of selection does not create a new group.",
+                "Choosing the correct method" to "Use nPr for ordered roles, positions, codes and rankings. Use nCr for teams, committees and selections where order does not matter. For the same n and r, nPr = nCr×r!."
             ),
             "How many ways can 3 different books be arranged in a row?",
             listOf("3", "6", "9", "12"), 1,
             "There are 3! = 3×2×1 = 6 arrangements."
         ),
         LearningTopic(
-            "math-combination", "Combination", "MATH",
-            "A combination is a selection in which order does not matter. Choosing three committee members from a group is a combination because the same three people form the same committee regardless of the order in which they are named.",
+            "math-probability", "Probability", "MATH",
+            "Probability measures how likely an event is to occur. It ranges from zero for an impossible event to one for a certain event. A clear sample space helps avoid counting outcomes incorrectly, especially when more than one event occurs.",
             listOf(
-                "Distinguish combinations from permutations",
-                "Calculate nCr using factorials",
-                "Use symmetry of combinations",
-                "Solve simple selection and committee problems",
-                "Combine counting methods with basic probability"
+                "Identify sample spaces and events",
+                "Calculate probability for equally likely outcomes",
+                "Use complement and addition rules",
+                "Distinguish mutually exclusive and independent events",
+                "Apply multiplication and simple conditional probability rules"
             ),
             listOf(
-                "Meaning of a combination" to "A combination selects r objects from n distinct objects without arranging them. The number of combinations is nCr = n!/[r!(n−r)!]. Dividing by r! removes the different orders of the same selected group.",
-                "Worked example" to "The number of ways to choose 2 learners from 5 is 5C2 = 5!/[2!3!] = (5×4)/(2×1) = 10. Choosing A then B is the same committee as choosing B then A.",
-                "Symmetry property" to "nCr = nC(n−r). Choosing r objects to include is equivalent to choosing n−r objects to leave out. This identity can simplify calculations.",
-                "Permutations compared with combinations" to "Use nPr when order matters, such as assigning first, second and third positions. Use nCr when order does not matter, such as selecting a team. For the same n and r, nPr = nCr×r!.",
-                "Restrictions and groups" to "For selection problems with restrictions, count the permitted groups carefully. You may split the problem into cases, use complementary counting or choose required members first. Avoid counting the same group more than once.",
-                "Combination in probability" to "Combinations are useful when outcomes are groups rather than ordered sequences. For equally likely selections, probability = number of favourable groups/total possible groups, provided every group is equally likely."
+                "Sample spaces and events" to "A sample space S is the set of all possible outcomes of a random experiment. An event is a subset of the sample space. For equally likely outcomes, P(A)=n(A)/n(S). List outcomes systematically and ensure each possible outcome is counted once.",
+                "Complementary events" to "The complement A' means that event A does not occur. P(A')=1−P(A). This is often simpler than counting every outcome outside A directly. Probability always lies between zero and one inclusive.",
+                "Addition rule" to "For any two events, P(A∪B)=P(A)+P(B)−P(A∩B). If A and B are mutually exclusive, they cannot occur together, so P(A∩B)=0 and P(A∪B)=P(A)+P(B). Do not add probabilities without subtracting overlap when events can occur together.",
+                "Multiplication and independence" to "For independent events, P(A∩B)=P(A)P(B). Independence means the occurrence of one event does not change the probability of the other. For dependent events, use conditional probability: P(A∩B)=P(A)P(B|A).",
+                "Worked example" to "A fair six-sided die has outcomes 1,2,3,4,5,6. The even outcomes are 2,4,6, so P(even)=3/6=1/2. The complement is an odd result, also with probability 1/2.",
+                "Tree diagrams and careful counting" to "A tree diagram shows successive stages of an experiment. Multiply probabilities along a path to find the probability of that sequence, then add probabilities of separate paths that satisfy the event. For sampling without replacement, probabilities change after each selection."
             ),
-            "How many different pairs can be selected from 5 people?",
-            listOf("5", "10", "20", "25"), 1,
-            "The number of pairs is 5C2 = 5!/(2!3!) = 10."
+            "A fair six-sided die is rolled once. What is the probability of obtaining an even number?",
+            listOf("1/6", "1/3", "1/2", "2/3"), 2,
+            "There are three even outcomes (2,4,6) out of six equally likely outcomes, so P(even)=3/6=1/2."
         )
     )
 }
