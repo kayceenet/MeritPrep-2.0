@@ -204,10 +204,14 @@ Calculation logic is separated from the Compose interface and covered by unit te
 
 The Chemistry catalogue now maps all 18 topic headings in the Chemistry PDF served by JAMB's Integrated Brochure and Syllabus System (IBASS). The source URL is recorded in `ChemistryCourse.kt`: https://ibass.jamb.gov.ng/static/media/Chemistry.9efd0b98043d56922aaa.pdf
 
-Four topics currently have beginner-oriented draft lessons with objectives, explanatory sections, worked examples or misconception guidance, and an understanding check:
+Eight topics currently have beginner-oriented draft lessons with objectives, explanatory sections, worked examples or misconception guidance, and an understanding check:
 1. Separation of mixtures and purification
 2. Chemical combination and the mole concept
 3. Kinetic theory of matter and gas laws
 4. Atomic structure, periodicity and chemical bonding
+5. Nuclear chemistry
+6. Solubility
+7. Environmental pollution
+8. Acids, bases and salts
 
-The other 14 topics are syllabus-mapped outlines, not completed lessons. The JAMB mapping must be checked against the live IBASS document at each exam-cycle update. WAEC Chemistry has a separate syllabus and practical/theory requirements; a WAEC-specific mapping and independent teacher review remain outstanding. No Chemistry content is marked academically approved.
+The other 10 topics are syllabus-mapped outlines, not completed lessons. The JAMB mapping must be checked against the live IBASS document at each exam-cycle update. WAEC Chemistry has a separate syllabus and practical/theory requirements; a WAEC-specific mapping and independent teacher review remain outstanding. No Chemistry content is marked academically approved.
