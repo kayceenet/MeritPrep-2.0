@@ -82,7 +82,22 @@ object MathematicsQuestionBank {
         q("math-trigonometry-002","math-trigonometry","What is tan 45°?",listOf("0","1/2","1","√3"),2,"tan 45° = 1."),
         q("math-trigonometry-003","math-trigonometry","The area of a triangle with sides a and b and included angle C is:",listOf("ab sin C","1/2 ab sin C","1/2(a+b)C","a²+b²"),1,"Area = 1/2 ab sin C."),
         q("math-trigonometry-004","math-trigonometry","A bearing is measured:",listOf("Anticlockwise from east","Clockwise from north","Anticlockwise from south","From the nearest road"),1,"Bearings are measured clockwise from north and written using three digits."),
-        q("math-trigonometry-005","math-trigonometry","Which rule relates a side of a triangle to the sine of its opposite angle?",listOf("Cosine rule","Sine rule","Pythagoras' theorem","Tangent rule"),1,"The sine rule is a/sin A = b/sin B = c/sin C.")
+        q("math-trigonometry-005","math-trigonometry","Which rule relates a side of a triangle to the sine of its opposite angle?",listOf("Cosine rule","Sine rule","Pythagoras' theorem","Tangent rule"),1,"The sine rule is a/sin A = b/sin B = c/sin C."),
+        q("math-differentiation-001","math-differentiation","Differentiate y = x⁴.",listOf("x³","2x³","4x³","4x⁴"),2,"By the power rule, d(x⁴)/dx = 4x³."),
+        q("math-differentiation-002","math-differentiation","Differentiate y = 3x² − 5x + 4.",listOf("6x−5","3x−5","6x²−5","3x²−5x"),0,"Differentiate term by term: 6x−5+0 = 6x−5."),
+        q("math-differentiation-003","math-differentiation","When x is measured in radians, d(sin x)/dx is:",listOf("−cos x","cos x","sin x","−sin x"),1,"The derivative of sin x is cos x when x is in radians."),
+        q("math-differentiation-004","math-differentiation","The derivative of a constant is:",listOf("The constant itself","One","Zero","Undefined"),2,"A constant does not change with x, so its derivative is zero."),
+        q("math-differentiation-005","math-differentiation","If y=2x³−4x²+7x−9, find dy/dx at x=2.",listOf("7","11","15","19"),2,"dy/dx=6x²−8x+7. At x=2: 24−16+7=15."),
+        q("math-application-differentiation-001","math-application-differentiation","A stationary point of y=f(x) occurs where:",listOf("f(x)=0","f'(x)=0","f''(x)=0 always","x=0"),1,"At a stationary point the tangent is horizontal, so the first derivative is zero."),
+        q("math-application-differentiation-002","math-application-differentiation","For f(x)=x²−4x+3, the stationary point occurs at x=",listOf("−2","0","2","4"),2,"f'(x)=2x−4. Set it to zero to obtain x=2."),
+        q("math-application-differentiation-003","math-application-differentiation","At a stationary point, f''(x)>0 indicates a local:",listOf("Maximum","Minimum","Point of inflection always","Vertical tangent"),1,"A positive second derivative means the curve is concave upwards, indicating a local minimum."),
+        q("math-application-differentiation-004","math-application-differentiation","If s is displacement as a function of time t, velocity is:",listOf("ds/dt","d²s/dt²","s/t²","dt/ds"),0,"Velocity is the rate of change of displacement: v=ds/dt."),
+        q("math-application-differentiation-005","math-application-differentiation","The gradient of the tangent to y=f(x) at x=a is:",listOf("f(a)","f'(a)","f''(a)","a/f(a)"),1,"The derivative evaluated at a gives the tangent gradient at that point."),
+        q("math-integration-001","math-integration","Evaluate ∫3x² dx.",listOf("x³+C","3x³+C","6x+C","x²+C"),0,"Increase the power and divide by the new power: 3×x³/3=x³+C."),
+        q("math-integration-002","math-integration","When x is in radians, ∫cos x dx is:",listOf("−sin x+C","sin x+C","cos x+C","−cos x+C"),1,"The derivative of sin x is cos x, so the antiderivative is sin x+C."),
+        q("math-integration-003","math-integration","Evaluate ∫₀² 2x dx.",listOf("2","3","4","8"),2,"An antiderivative is x². Evaluate 2²−0²=4."),
+        q("math-integration-004","math-integration","For n≠−1, ∫xⁿ dx equals:",listOf("nxⁿ⁻¹+C","xⁿ⁺¹/(n+1)+C","xⁿ/n+C","(n+1)xⁿ+C"),1,"The power increases by one and the result is divided by the new power."),
+        q("math-integration-005","math-integration","A definite integral of a curve below the x-axis contributes:",listOf("Positive signed area","Negative signed area","Zero in every case","The curve's gradient"),1,"Definite integrals represent signed area; regions below the x-axis contribute negatively.")
 
     )
 
