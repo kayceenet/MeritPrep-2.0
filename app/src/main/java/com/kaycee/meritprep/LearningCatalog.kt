@@ -773,6 +773,7 @@ fun LessonScreen(topicId: String) {
             }
         ) { Text(if (bookmarked) "Saved to bookmarks" else "Save this lesson") }
         when (topic.id) {
+            "bio-adaptation" -> AdaptationTypesCard()
             "bio-cell" -> CellDiagramCard()
             "bio-nutrition" -> PhotosynthesisFlowCard()
             "bio-respiration" -> RespirationComparisonCard()
