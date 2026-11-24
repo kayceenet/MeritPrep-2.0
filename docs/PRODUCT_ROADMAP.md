@@ -1,5 +1,7 @@
 # MeritPrep 2.0 Product Roadmap
 
+The complete agreed product scope and delivery gates are consolidated in [`MASTER_PRODUCT_SPEC.md`](MASTER_PRODUCT_SPEC.md). This roadmap is the implementation status view; the master specification is the requirements baseline.
+
 ## Product learning cycle
 Learn → Explore → Practise → Assess → Correct → Retrieve → Master.
 
@@ -29,6 +31,8 @@ Inventory existing APK assets and lab logic; rebuild Biology, Chemistry and Phys
 
 ## G. Platform operations
 Authenticated sync, teacher/admin CMS, analytics, backups, privacy and security review.
+
+**Governance foundation added:** `ContentGovernancePolicy` now evaluates content provenance, syllabus mapping, version, authorship, independent approval, reviewer/date and reuse rights. It also blocks an official-past-question label unless the item is a reviewed question with verified exam year, paper and question number. This policy is unit-tested. It is not yet wired into SQLite, the learner publishing path or a teacher/admin CMS.
 
 ## Current alpha status
 
