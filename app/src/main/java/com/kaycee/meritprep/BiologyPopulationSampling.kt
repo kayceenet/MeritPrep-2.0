@@ -11,33 +11,29 @@ data class PopulationEstimate(
 )
 
 /**
- * Estimates population size from representative quadrat samples.
- * Assumes the sampled quadrats have equal area and represent the habitat.
+ * Nullable lesson-facing adapter for the shared ecology sampling engine.
+ * Invalid learner input is represented as null so the screen can show guidance.
  */
 fun estimatePopulationFromQuadrats(
     counts: List<Int>,
     quadratAreaM2: Double,
     habitatAreaM2: Double
 ): PopulationEstimate? {
-    if (counts.isEmpty() || counts.any { it < 0 }) return null
-    if (!quadratAreaM2.isFinite() || !habitatAreaM2.isFinite()) return null
-    if (quadratAreaM2 <= 0.0 || habitatAreaM2 <= 0.0) return null
+    val estimate = runCatching {
+        EcologySamplingEngine.estimate(
+            individualsPerQuadrat = counts,
+            quadratAreaSquareMetres = quadratAreaM2,
+            habitatAreaSquareMetres = habitatAreaM2
+        )
+    }.getOrNull() ?: return null
 
-    val totalLong = counts.sumOf { it.toLong() }
-    if (totalLong > Int.MAX_VALUE) return null
-    val total = totalLong.toInt()
-    val sampledArea = counts.size * quadratAreaM2
-    if (!sampledArea.isFinite() || sampledArea > habitatAreaM2) return null
-    val density = total.toDouble() / sampledArea
-    val estimatedPopulation = density * habitatAreaM2
-    if (!density.isFinite() || !estimatedPopulation.isFinite()) return null
     return PopulationEstimate(
-        totalCount = total,
-        quadratCount = counts.size,
-        sampledAreaM2 = sampledArea,
+        totalCount = estimate.totalIndividuals,
+        quadratCount = estimate.quadratCount,
+        sampledAreaM2 = estimate.sampledAreaSquareMetres,
         habitatAreaM2 = habitatAreaM2,
-        meanPerQuadrat = total.toDouble() / counts.size,
-        densityPerM2 = density,
-        estimatedPopulation = estimatedPopulation
+        meanPerQuadrat = estimate.totalIndividuals.toDouble() / estimate.quadratCount,
+        densityPerM2 = estimate.meanDensityPerSquareMetre,
+        estimatedPopulation = estimate.estimatedHabitatPopulation
     )
 }
