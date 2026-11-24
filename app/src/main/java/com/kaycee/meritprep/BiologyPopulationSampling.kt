@@ -23,8 +23,11 @@ fun estimatePopulationFromQuadrats(
     if (!quadratAreaM2.isFinite() || !habitatAreaM2.isFinite()) return null
     if (quadratAreaM2 <= 0.0 || habitatAreaM2 <= 0.0) return null
 
-    val total = counts.sum()
+    val totalLong = counts.sumOf { it.toLong() }
+    if (totalLong > Int.MAX_VALUE) return null
+    val total = totalLong.toInt()
     val sampledArea = counts.size * quadratAreaM2
+    if (!sampledArea.isFinite() || sampledArea > habitatAreaM2) return null
     val density = total.toDouble() / sampledArea
     return PopulationEstimate(
         totalCount = total,
