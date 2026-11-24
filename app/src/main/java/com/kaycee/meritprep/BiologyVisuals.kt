@@ -217,15 +217,20 @@ fun FlowerReproductionCard() {
     Card(Modifier.fillMaxWidth()) {
         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(9.dp)) {
             Text("Sexual reproduction in a flowering plant", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
-            Text("Pollination is the transfer of pollen from anther to stigma. Fertilisation happens later, when a male nucleus fuses with the egg nucleus in an ovule.")
+            Text("Pollination and fertilisation are different events. Pollination transfers pollen from anther to stigma; fertilisation is the fusion of gamete nuclei inside the ovule.")
+
             val route = listOf(
-                "Anther" to "Produces pollen grains",
-                "Stigma" to "Receives pollen during pollination",
-                "Style" to "Pollen tube grows towards the ovary",
-                "Ovary and ovule" to "Male nucleus fuses with the egg nucleus"
+                "1. Pollination" to "A pollen grain is transferred from an anther to a compatible stigma.",
+                "2. Pollen tube growth" to "The pollen grain germinates. A pollen tube grows down through the style towards an ovule in the ovary.",
+                "3. Two male gametes" to "The pollen tube carries two male gametes into the embryo sac of the ovule.",
+                "4. First fusion" to "One male gamete fuses with the egg cell to form a diploid zygote (2n), which develops into the embryo.",
+                "5. Second fusion" to "The other male gamete fuses with the two polar nuclei (usually treated as a single diploid secondary nucleus, 2n) to form a triploid primary endosperm nucleus (3n). The endosperm nourishes the developing embryo."
             )
             route.forEachIndexed { index, step ->
-                Surface(color = MaterialTheme.colorScheme.surfaceVariant, shape = MaterialTheme.shapes.medium) {
+                Surface(
+                    color = if (index == 3 || index == 4) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.surfaceVariant,
+                    shape = MaterialTheme.shapes.medium
+                ) {
                     Column(Modifier.fillMaxWidth().padding(11.dp), verticalArrangement = Arrangement.spacedBy(3.dp)) {
                         Text(step.first, fontWeight = FontWeight.Bold)
                         Text(step.second, style = MaterialTheme.typography.bodySmall)
@@ -233,7 +238,16 @@ fun FlowerReproductionCard() {
                 }
                 if (index < route.lastIndex) Text("↓", Modifier.padding(start = 12.dp), fontWeight = FontWeight.Bold)
             }
-            Text("After fertilisation, the ovule develops into a seed and the ovary usually develops into a fruit.", style = MaterialTheme.typography.bodySmall)
+
+            Text("What develops after fertilisation?", fontWeight = FontWeight.Bold)
+            Text("The ovule develops into a seed. Its integuments form the seed coat. The ovary usually develops into a fruit. The zygote forms the embryo, while the endosperm provides nourishment.")
+            Surface(color = MaterialTheme.colorScheme.tertiaryContainer, shape = MaterialTheme.shapes.medium) {
+                Text(
+                    "EXAM CHECK: Double fertilisation means two fusion events occur in the same embryo sac: male gamete + egg (2n zygote), and male gamete + two polar nuclei (usually 3n endosperm nucleus).",
+                    Modifier.fillMaxWidth().padding(12.dp),
+                    fontWeight = FontWeight.SemiBold
+                )
+            }
         }
     }
 }
