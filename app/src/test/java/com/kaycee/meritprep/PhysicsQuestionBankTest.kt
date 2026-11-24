@@ -7,8 +7,8 @@ import org.junit.Test
 
 class PhysicsQuestionBankTest {
     @Test fun containsEightyOriginalQuestionsAcrossSixteenDevelopedTopics() {
-        assertEquals(80, PhysicsQuestionBank.all.size)
-        assertEquals(16, PhysicsCourse.topics.count { !it.isSyllabusOutline })
+        assertEquals(120, PhysicsQuestionBank.all.size)
+        assertEquals(24, PhysicsCourse.topics.count { !it.isSyllabusOutline })
         PhysicsCourse.topics.filterNot { it.isSyllabusOutline }.forEach { topic ->
             assertEquals(5, PhysicsQuestionBank.forTopic(topic.id).size)
         }
