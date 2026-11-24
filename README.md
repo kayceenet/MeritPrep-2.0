@@ -19,7 +19,7 @@ The current alpha is a working Android app built with Kotlin, Jetpack Compose an
 - A Biology placement diagnostic that samples one original question from each of the 24 syllabus topics, reports topic-level starting evidence, records attempts locally and sends incorrect or unanswered items to the mistake notebook. It is a study-orientation tool, not a grade predictor.
 - A timed JAMB-style Biology CBT mock: 40 random questions, a 30-minute practice timer, question navigation, answer flags, answer review and locally persisted session state, including the current question position.
 - A separate WAEC-style Biology objective mock: 50 random questions and a 60-minute MeritPrep practice timer, using the same original question bank and session controls. These are practice settings, not claims about official paper timing. Both mocks provide per-topic performance breakdowns and answer explanations.
-- Ten original WAEC-style Biology structured-response tasks, with model responses, self-check marking points and locally saved learner responses.
+- Fifteen original WAEC-style Biology structured-response tasks, with model responses, self-check marking points and locally saved learner responses.
 - 198 Biology revision cards with an on-device Again / Hard / Good / Easy spaced-retrieval scheduler.
 - An offline mistake notebook that captures incorrect and unanswered practice/CBT responses, explains the correction and lets learners mark concepts as reviewed.
 - A seven-day Biology study planner with configurable daily study targets, lesson/practice/flashcard activities, local completion tracking and shortcuts into the relevant screens.
