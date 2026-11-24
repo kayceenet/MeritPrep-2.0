@@ -147,6 +147,32 @@ object PhysicsQuestionBank {
         q("phy-dispersion-003","phy-dispersion","In a glass prism under normal dispersion, which colour is deviated least?",listOf("Violet","Blue","Green","Red"),3,"Red light is deviated least; violet is deviated most."),
         q("phy-dispersion-004","phy-dispersion","The primary colours used for additive mixing of light are:",listOf("Red, green and blue","Red, yellow and blue","Cyan, magenta and yellow","Orange, green and violet"),0,"Red, green and blue are the primary additive colours used in displays."),
         q("phy-dispersion-005","phy-dispersion","A red filter illuminated by white light mainly transmits:",listOf("All visible wavelengths equally","Red light","Violet light only","No visible light"),1,"A red filter transmits red wavelengths more strongly and absorbs much of the other visible light.")
+,
+        q("phy-electrostatics-001","phy-electrostatics","Like electric charges:",listOf("Attract","Repel","Always become neutral","Have no force between them"),1,"Like charges repel; unlike charges attract."),
+        q("phy-electrostatics-002","phy-electrostatics","Coulomb's law states that electrostatic force between point charges varies inversely as:",listOf("Their separation","The square of their separation","The product of their charges","The sum of their charges"),1,"F = k|q₁q₂|/r², so force varies inversely as the square of separation."),
+        q("phy-electrostatics-003","phy-electrostatics","The SI unit of electric charge is:",listOf("Ampere","Volt","Coulomb","Ohm"),2,"Electric charge is measured in coulombs (C)."),
+        q("phy-electrostatics-004","phy-electrostatics","Electric field strength is defined as:",listOf("Force per unit positive test charge","Energy per unit mass","Charge per unit time","Resistance per unit length"),0,"Electric field strength E = F/q."),
+        q("phy-electrostatics-005","phy-electrostatics","Charging a conductor without direct contact using a nearby charged body is called:",listOf("Conduction","Induction","Fusion","Electrolysis"),1,"Charging by induction involves charge redistribution without direct contact."),
+        q("phy-capacitors-001","phy-capacitors","Capacitance is defined as:",listOf("Q/V","V/Q","Q × V","I/R"),0,"Capacitance C = Q/V."),
+        q("phy-capacitors-002","phy-capacitors","The SI unit of capacitance is:",listOf("Ohm","Farad","Henry","Tesla"),1,"Capacitance is measured in farads (F)."),
+        q("phy-capacitors-003","phy-capacitors","A 100 μF capacitor is connected across 12 V. The charge stored is:",listOf("12 μC","120 μC","1200 μC","12 000 μC"),2,"Q = CV = 100 × 10⁻⁶ × 12 = 1.2 × 10⁻³ C = 1200 μC."),
+        q("phy-capacitors-004","phy-capacitors","Two capacitors of 2 μF and 3 μF are connected in parallel. Their equivalent capacitance is:",listOf("1.2 μF","2.5 μF","5 μF","6 μF"),2,"Capacitances add in parallel: Cₑq = 2 + 3 = 5 μF."),
+        q("phy-capacitors-005","phy-capacitors","The energy stored in a capacitor is:",listOf("CV²","½CV²","2CV²","C/V²"),1,"Energy stored E = ½CV²."),
+        q("phy-cells-001","phy-cells","The emf of a cell is the:",listOf("Energy supplied per unit charge","Current per unit resistance","Charge per unit time","Resistance per unit voltage"),0,"Emf is energy supplied by the source per unit charge."),
+        q("phy-cells-002","phy-cells","A cell has emf 1.5 V, internal resistance 0.5 Ω and supplies 1 A. Its terminal voltage is:",listOf("0.5 V","1.0 V","1.5 V","2.0 V"),1,"V = ε − Ir = 1.5 − (1 × 0.5) = 1.0 V."),
+        q("phy-cells-003","phy-cells","When identical cells are connected in series aiding, their total emf:",listOf("Adds","Becomes zero","Is always halved","Remains that of one cell"),0,"Emfs of identical cells connected in series aiding add."),
+        q("phy-cells-004","phy-cells","Which is a rechargeable cell?",listOf("Zinc-carbon primary cell","Alkaline primary cell","Lead-acid cell","Single-use button cell"),2,"Lead-acid cells are secondary cells and can be recharged using an appropriate charger."),
+        q("phy-cells-005","phy-cells","Lost volts in a cell with internal resistance r supplying current I are:",listOf("I/r","Ir","I²r²","r/I"),1,"Lost volts = Ir."),
+        q("phy-current-electricity-001","phy-current-electricity","Electric current is the rate of flow of:",listOf("Energy","Charge","Resistance","Power"),1,"Current I = Q/t."),
+        q("phy-current-electricity-002","phy-current-electricity","A 4 Ω resistor carries a current of 2 A. The potential difference across it is:",listOf("2 V","4 V","6 V","8 V"),3,"Ohm's law: V = IR = 2 × 4 = 8 V."),
+        q("phy-current-electricity-003","phy-current-electricity","Two resistors of 4 Ω and 6 Ω are connected in series. Their equivalent resistance is:",listOf("2.4 Ω","4 Ω","6 Ω","10 Ω"),3,"Series resistances add: 4 + 6 = 10 Ω."),
+        q("phy-current-electricity-004","phy-current-electricity","An ammeter is connected in a circuit:",listOf("In parallel with the component","In series with the circuit","Across the supply only","Without completing the circuit"),1,"An ammeter is connected in series and has low internal resistance."),
+        q("phy-current-electricity-005","phy-current-electricity","The resistance of a uniform wire is given by:",listOf("R = ρA/L","R = ρL/A","R = LA/ρ","R = ρ/(LA)"),1,"R = ρL/A, where ρ is resistivity, L length and A cross-sectional area."),
+        q("phy-electrical-power-001","phy-electrical-power","Electrical power in a DC circuit is:",listOf("P = VI","P = V/I","P = I/V","P = V + I"),0,"Electrical power P = VI."),
+        q("phy-electrical-power-002","phy-electrical-power","One kilowatt-hour is equal to:",listOf("3.6 × 10³ J","3.6 × 10⁵ J","3.6 × 10⁶ J","3.6 × 10⁹ J"),2,"1 kWh = 1000 W × 3600 s = 3.6 × 10⁶ J."),
+        q("phy-electrical-power-003","phy-electrical-power","A 2 kW heater operates for 3 hours. Energy used is:",listOf("0.67 kWh","2 kWh","5 kWh","6 kWh"),3,"E = Pt = 2 × 3 = 6 kWh."),
+        q("phy-electrical-power-004","phy-electrical-power","For a resistor, the heating effect of current is given by:",listOf("H = I²Rt","H = IR/t","H = I/Rt","H = R/(It)"),0,"Joule heating: H = I²Rt."),
+        q("phy-electrical-power-005","phy-electrical-power","Electricity is transmitted at high voltage mainly to:",listOf("Increase current in the cables","Reduce current and resistive power losses for a given power","Make resistance zero","Eliminate the need for transformers"),1,"For a given transmitted power, higher voltage means lower current; cable losses I²R are therefore reduced.")
 
     )
 
