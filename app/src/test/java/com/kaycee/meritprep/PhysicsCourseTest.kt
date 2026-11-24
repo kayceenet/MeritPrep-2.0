@@ -29,9 +29,9 @@ class PhysicsCourseTest {
         assertTrue(PhysicsCourse.topics.all { it.subjectCode == "PHY" })
     }
 
-    @Test fun thirtyTwoDevelopedLessonsAndRemainingEntriesAreOutlines() {
-        assertEquals(32, PhysicsCourse.topics.count { !it.isSyllabusOutline })
-        assertEquals(7, PhysicsCourse.topics.count { it.isSyllabusOutline })
+    @Test fun allThirtyNineTopicsHaveDevelopedLessons() {
+        assertEquals(39, PhysicsCourse.topics.count { !it.isSyllabusOutline })
+        assertEquals(0, PhysicsCourse.topics.count { it.isSyllabusOutline })
         PhysicsCourse.topics.filterNot { it.isSyllabusOutline }.forEach {
             assertTrue(it.objectives.size >= 4)
             assertTrue(it.sections.size >= 4)
