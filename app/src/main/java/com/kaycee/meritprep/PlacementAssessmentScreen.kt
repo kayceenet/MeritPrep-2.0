@@ -138,7 +138,7 @@ fun PlacementAssessmentScreen(onOpenLesson: (String) -> Unit) {
             }
             item {
                 Text("Your results have been added to your local practice history. Incorrect and unanswered items are in your mistake notebook.")
-                Button(onClick = onOpenLesson("bio-cell"), modifier = Modifier.fillMaxWidth()) {
+                Button(onClick = { onOpenLesson("bio-cell") }, modifier = Modifier.fillMaxWidth()) {
                     Text("Start with the first Biology lesson")
                 }
             }
