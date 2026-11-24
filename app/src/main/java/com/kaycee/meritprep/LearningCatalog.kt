@@ -777,6 +777,7 @@ fun LessonScreen(topicId: String) {
             "bio-nutrition" -> PhotosynthesisFlowCard()
             "bio-respiration" -> RespirationComparisonCard()
             "bio-interactions" -> FoodChainDiagramCard()
+            "bio-populations" -> BiologyPopulationSamplingCard()
             "bio-heredity" -> PunnettSquareCard()
             "bio-transport" -> {
                 PlantTransportCard()
