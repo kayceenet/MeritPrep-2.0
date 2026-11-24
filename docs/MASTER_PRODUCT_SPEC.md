@@ -145,7 +145,7 @@ The repository currently contains a Kotlin/Compose Android application with:
 - 240 original Biology objective practice questions;
 - Biology glossary and process visuals;
 - Biology JAMB-style and WAEC-style objective practice mocks;
-- original WAEC-style Biology structured-response tasks with self-check guidance;
+- 15 original WAEC-style Biology structured-response tasks with model responses, self-check guidance and locally persisted learner progress;
 - Biology revision cards and a spaced-retrieval scheduler;
 - a mistake notebook, personal notes, bookmarks and study planner;
 - Biology practical-learning prototypes; a 39-topic Physics JAMB curriculum with 195 original questions and 118 revision cards; Physics CBT, virtual practical models and WAEC practical/theory exercises;
