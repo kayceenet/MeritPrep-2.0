@@ -83,6 +83,7 @@ private fun MeritPrepApp() {
                 composable("physics-practice") { PhysicsPracticeScreen() }
                 composable("physics-waec-practical") { PhysicsWaecPracticalScreen() }
                 composable("physics-waec-theory") { PhysicsWaecTheoryScreen() }
+                composable("physics-waec-objective") { CbtScreen(CbtMode.WAEC_PHYSICS_OBJECTIVE, PhysicsWaecObjectiveBank.all) }
                 composable("chemistry-waec-theory") { ChemistryWaecTheoryScreen() }
                 composable("chemistry-waec-objective") { ChemistryWaecObjectiveScreen() }
                 composable("chemistry-qualitative") { ChemistryQualitativeGuideScreen() }
@@ -190,6 +191,11 @@ private fun SubjectScreen(subject: Subject, nav: NavHostController) {
             item {
                 OutlinedButton(onClick = { nav.navigate("physics-waec-theory") }, modifier = Modifier.fillMaxWidth()) {
                     Text("WAEC Physics theory · structured answers")
+                }
+            }
+            item {
+                OutlinedButton(onClick = { nav.navigate("physics-waec-objective") }, modifier = Modifier.fillMaxWidth()) {
+                    Text("WAEC Physics objective · 50-question practice")
                 }
             }
             item {
