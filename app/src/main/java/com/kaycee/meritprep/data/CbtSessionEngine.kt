@@ -28,6 +28,33 @@ object CbtSessionEngine {
         return selected.map { AssessmentEngine.present(it, random) }
     }
 
+    /**
+     * Summarises accuracy by syllabus topic. Topics with lower accuracy appear first
+     * so the learner can use the result to choose the next revision task.
+     * Unanswered questions remain in the denominator and are therefore not counted
+     * as correct.
+     */
+    fun topicPerformance(
+        questions: List<PresentedQuestion>,
+        selectedAnswers: Map<String, Int>
+    ): List<CbtTopicPerformance> {
+        return questions
+            .groupBy { it.topicId }
+            .map { (topicId, topicQuestions) ->
+                val correct = topicQuestions.count {
+                    selectedAnswers[it.questionId] == it.correctPresentedIndex
+                }
+                val total = topicQuestions.size
+                CbtTopicPerformance(
+                    topicId = topicId,
+                    totalQuestions = total,
+                    correctAnswers = correct,
+                    accuracyPercent = if (total == 0) 0 else (correct * 100) / total
+                )
+            }
+            .sortedWith(compareBy<CbtTopicPerformance> { it.accuracyPercent }.thenBy { it.topicId })
+    }
+
     fun score(
         questions: List<PresentedQuestion>,
         selectedAnswers: Map<String, Int>
