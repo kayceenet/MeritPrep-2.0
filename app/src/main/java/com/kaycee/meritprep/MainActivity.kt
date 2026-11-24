@@ -82,6 +82,7 @@ private fun MeritPrepApp() {
                 composable("chemistry-practice") { ChemistryPracticeScreen() }
                 composable("physics-practice") { PhysicsPracticeScreen() }
                 composable("physics-waec-practical") { PhysicsWaecPracticalScreen() }
+                composable("physics-waec-theory") { PhysicsWaecTheoryScreen() }
                 composable("chemistry-waec-theory") { ChemistryWaecTheoryScreen() }
                 composable("chemistry-waec-objective") { ChemistryWaecObjectiveScreen() }
                 composable("chemistry-qualitative") { ChemistryQualitativeGuideScreen() }
@@ -184,6 +185,11 @@ private fun SubjectScreen(subject: Subject, nav: NavHostController) {
             item {
                 OutlinedButton(onClick = { nav.navigate("physics-waec-practical") }, modifier = Modifier.fillMaxWidth()) {
                     Text("WAEC Physics practical · graph and data analysis")
+                }
+            }
+            item {
+                OutlinedButton(onClick = { nav.navigate("physics-waec-theory") }, modifier = Modifier.fillMaxWidth()) {
+                    Text("WAEC Physics theory · structured answers")
                 }
             }
             item {
