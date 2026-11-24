@@ -11,7 +11,7 @@ The topic headings below follow the 39 numbered topic headings in the Physics do
 
 ## Current implementation
 
-The first sixteen topics have beginner-focused lesson drafts, each with learning objectives, explanatory sections, a formative understanding check and a topic-linked original question set. The current bank contains 80 original objective questions, five per developed topic. The Physics practice screen shuffles the question order and answer options, records attempts locally and captures incorrect responses in the mistake notebook.
+The first sixteen topics have beginner-focused lesson drafts, each with learning objectives, explanatory sections, a formative understanding check and a topic-linked original question set. The current bank contains 80 original objective questions, five per developed topic. The Physics practice screen shuffles the question order and answer options, records attempts locally and captures incorrect responses in the mistake notebook. The spaced-revision workflow also includes 49 Physics recall cards mapped across these sixteen developed topics.
 
 The remaining 23 topics are syllabus outlines only. They cannot be marked as completed lessons. Physics content is draft material and has not received independent academic review.
 
