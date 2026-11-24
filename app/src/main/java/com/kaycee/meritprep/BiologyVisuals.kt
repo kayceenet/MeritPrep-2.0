@@ -258,3 +258,42 @@ fun NaturalSelectionCard() {
         }
     }
 }
+
+
+@Composable
+fun RespirationComparisonCard() {
+    Card(Modifier.fillMaxWidth()) {
+        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+            Text("Cellular respiration: with and without oxygen", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+            Text("Respiration is a set of chemical reactions inside cells that transfers energy from glucose into ATP. It is not the same as breathing or simply taking in oxygen.")
+
+            Surface(color = MaterialTheme.colorScheme.primaryContainer, shape = MaterialTheme.shapes.medium) {
+                Column(Modifier.fillMaxWidth().padding(12.dp), verticalArrangement = Arrangement.spacedBy(5.dp)) {
+                    Text("AEROBIC RESPIRATION", fontWeight = FontWeight.Bold)
+                    Text("Glucose + oxygen → carbon dioxide + water + energy")
+                    Text("Most stages occur in mitochondria; glycolysis begins in the cytoplasm.", style = MaterialTheme.typography.bodySmall)
+                    Text("It releases much more energy per glucose molecule than the anaerobic pathways described below.", style = MaterialTheme.typography.bodySmall)
+                }
+            }
+
+            Surface(color = MaterialTheme.colorScheme.secondaryContainer, shape = MaterialTheme.shapes.medium) {
+                Column(Modifier.fillMaxWidth().padding(12.dp), verticalArrangement = Arrangement.spacedBy(5.dp)) {
+                    Text("ANAEROBIC PATHWAY IN HUMAN MUSCLE", fontWeight = FontWeight.Bold)
+                    Text("Glucose → lactate + a small amount of energy")
+                    Text("It occurs in the cytoplasm and can help supply ATP when oxygen delivery cannot meet demand.", style = MaterialTheme.typography.bodySmall)
+                }
+            }
+
+            Surface(color = MaterialTheme.colorScheme.tertiaryContainer, shape = MaterialTheme.shapes.medium) {
+                Column(Modifier.fillMaxWidth().padding(12.dp), verticalArrangement = Arrangement.spacedBy(5.dp)) {
+                    Text("ALCOHOLIC FERMENTATION IN YEAST", fontWeight = FontWeight.Bold)
+                    Text("Glucose → ethanol + carbon dioxide + a small amount of energy")
+                    Text("Yeast uses this pathway when oxygen is unavailable or limited.", style = MaterialTheme.typography.bodySmall)
+                }
+            }
+
+            Text("Remember", fontWeight = FontWeight.Bold)
+            Text("Breathing moves air into and out of the lungs. Gas exchange moves oxygen and carbon dioxide across a respiratory surface. Cellular respiration is the chemical process in cells that transfers energy to ATP.")
+        }
+    }
+}
