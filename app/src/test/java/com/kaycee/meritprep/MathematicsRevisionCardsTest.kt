@@ -5,10 +5,10 @@ import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class MathematicsRevisionCardsTest {
-    @Test fun includesTwentyFourMathematicsCardsAcrossEightDevelopedTopics() {
+    @Test fun includesFortyFiveMathematicsCardsAcrossFifteenDevelopedTopics() {
         val cards = starterRevisionCards.filter { it.cardId.startsWith("math-") }
-        assertEquals(24, cards.size)
-        assertEquals(8, cards.map { it.topicId }.distinct().size)
+        assertEquals(45, cards.size)
+        assertEquals(15, cards.map { it.topicId }.distinct().size)
     }
 
     @Test fun mathematicsCardsHaveUniqueIdsAndCompleteRecallContent() {
