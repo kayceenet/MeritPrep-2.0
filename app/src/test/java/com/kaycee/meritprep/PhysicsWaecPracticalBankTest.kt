@@ -6,9 +6,9 @@ import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class PhysicsWaecPracticalBankTest {
-    @Test fun containsThreeOriginalPracticalTasksWithCompleteData() {
+    @Test fun containsFiveOriginalPracticalTasksWithCompleteData() {
         val tasks = PhysicsWaecPracticalBank.tasks
-        assertEquals(3, tasks.size)
+        assertEquals(5, tasks.size)
         assertEquals(tasks.size, tasks.map { it.id }.distinct().size)
         tasks.forEach {
             assertTrue(it.aim.isNotBlank())
@@ -32,5 +32,13 @@ class PhysicsWaecPracticalBankTest {
 
         val ohm = PhysicsPracticalAnalysisEngine.linearFit(tasks.getValue("waec-physics-ohm").readings)
         assertTrue(ohm.gradient in 4.8..5.2)
+
+        val density = PhysicsPracticalAnalysisEngine.linearFit(tasks.getValue("waec-physics-density").readings)
+        assertTrue(density.gradient in 2.68..2.72)
+
+        val resistancePerMetre = PhysicsPracticalAnalysisEngine.linearFit(tasks.getValue("waec-physics-resistivity").readings)
+        assertTrue(resistancePerMetre.gradient in 0.034..0.036)
+        val resistivity = resistancePerMetre.gradient * 0.50e-6
+        assertTrue(resistivity in 1.7e-8..1.8e-8)
     }
 }
