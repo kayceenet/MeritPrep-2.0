@@ -650,19 +650,6 @@ object LearningCatalog {
             "Neutrons = mass number − atomic number = 23 − 11 = 12."
         ),
         LearningTopic(
-            "phy-motion", "Motion and acceleration", "PHY",
-            "Mechanics describes how objects move and how forces affect their motion. Clear definitions and correct units are essential when solving motion problems.",
-            listOf("Distinguish distance from displacement", "Define speed, velocity and acceleration", "Use basic equations of uniform acceleration"),
-            listOf(
-                "Distance and displacement" to "Distance is the total length of the path travelled and is a scalar quantity. Displacement is the straight-line change in position in a specified direction and is a vector quantity.",
-                "Speed and velocity" to "Average speed is total distance divided by total time. Average velocity is displacement divided by time. Speed has magnitude only, while velocity includes direction.",
-                "Acceleration" to "Acceleration is the rate of change of velocity with time: a = (v − u)/t. Its SI unit is metre per second squared (m/s²). A negative value may indicate acceleration opposite to the chosen positive direction."
-            ),
-            "A car's velocity increases from 5 m/s to 17 m/s in 4 s. What is its average acceleration?",
-            listOf("2 m/s²", "3 m/s²", "4 m/s²", "5.5 m/s²"), 1,
-            "a = (v − u)/t = (17 − 5)/4 = 3 m/s²."
-        ),
-        LearningTopic(
             "math-algebra", "Introduction to algebra", "MATH",
             "Algebra uses letters and symbols to represent numbers and relationships. It allows general rules to be written and unknown values to be found systematically.",
             listOf("Identify variables, coefficients and constants", "Simplify like terms", "Solve simple linear equations"),
