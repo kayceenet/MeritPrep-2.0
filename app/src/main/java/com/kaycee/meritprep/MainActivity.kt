@@ -87,8 +87,9 @@ private fun MeritPrepApp() {
                 composable("chemistry-qualitative") { ChemistryQualitativeGuideScreen() }
                 composable("chemistry-redox-titration") { ChemistryRedoxTitrationScreen() }
                 composable("placement") { PlacementAssessmentScreen(onOpenLesson = { nav.navigate("lesson/$it") }) }
-                composable("cbt") { CbtScreen(BiologyCbtMode.JAMB_UTME) }
-                composable("waec-objective") { CbtScreen(BiologyCbtMode.WAEC_OBJECTIVE) }
+                composable("cbt") { CbtScreen(CbtMode.JAMB_UTME) }
+                composable("waec-objective") { CbtScreen(CbtMode.WAEC_OBJECTIVE) }
+                composable("physics-cbt") { CbtScreen(CbtMode.PHYSICS_UTME, PhysicsQuestionBank.all) }
                 composable("waec-theory") { BiologyTheoryScreen() }
                 composable("review") { RevisionScreen() }
                 composable("mistakes") { MistakeNotebookScreen() }
@@ -183,6 +184,11 @@ private fun SubjectScreen(subject: Subject, nav: NavHostController) {
             item {
                 OutlinedButton(onClick = { nav.navigate("physics-waec-practical") }, modifier = Modifier.fillMaxWidth()) {
                     Text("WAEC Physics practical · graph and data analysis")
+                }
+            }
+            item {
+                OutlinedButton(onClick = { nav.navigate("physics-cbt") }, modifier = Modifier.fillMaxWidth()) {
+                    Text("Start timed Physics CBT · 40 questions")
                 }
             }
         }
