@@ -269,6 +269,33 @@ internal val starterRevisionCards = listOf(
     RevisionCard("phy-machines-card-3","phy-machines","Why is the efficiency of a real machine usually below 100%?","Some input energy is transferred to non-useful forms such as heat and sound because of friction, deformation and other losses.",0L)
 )
 
+ + listOf(
+    RevisionCard("phy-elasticity-card-1","phy-elasticity","State Hooke's law.","Within the limit of proportionality, extension is directly proportional to applied force: F = kx.",0L),
+    RevisionCard("phy-elasticity-card-2","phy-elasticity","Define Young's modulus.","Young's modulus = tensile stress/tensile strain = FL/(AΔL), for a uniform specimen in the linear elastic region.",0L),
+    RevisionCard("phy-elasticity-card-3","phy-elasticity","What does the area under a force-extension graph represent?","Work done in stretching the spring, stored as elastic potential energy for an ideal elastic spring.",0L),
+    RevisionCard("phy-pressure-card-1","phy-pressure","Write the expression for pressure in a static liquid at depth h.","Gauge pressure p = ρgh, assuming uniform density and gravitational field.",0L),
+    RevisionCard("phy-pressure-card-2","phy-pressure","What is Pascal's principle?","A pressure change applied to an enclosed fluid is transmitted throughout the fluid.",0L),
+    RevisionCard("phy-pressure-card-3","phy-pressure","Distinguish gauge pressure from absolute pressure.","Gauge pressure is relative to the surface or atmospheric reference; absolute pressure includes atmospheric pressure.",0L),
+    RevisionCard("phy-liquids-card-1","phy-liquids-rest","Define density and state its SI unit.","Density = mass/volume, measured in kg m⁻³.",0L),
+    RevisionCard("phy-liquids-card-2","phy-liquids-rest","State Archimedes' principle.","A body wholly or partly immersed in a fluid experiences an upthrust equal to the weight of fluid displaced.",0L),
+    RevisionCard("phy-liquids-card-3","phy-liquids-rest","What is the law of floatation?","A floating body displaces a fluid whose weight equals the weight of the body.",0L),
+    RevisionCard("phy-temperature-card-1","phy-temperature","How do you convert Celsius temperature to kelvin?","T(K) = θ(°C) + 273.15. Kelvin values are written without a degree sign.",0L),
+    RevisionCard("phy-temperature-card-2","phy-temperature","What is a thermometric property?","A measurable physical property that changes predictably with temperature, such as electrical resistance or liquid volume.",0L),
+    RevisionCard("phy-temperature-card-3","phy-temperature","What is thermal equilibrium?","Bodies in thermal equilibrium have the same temperature and no net heat transfer between them.",0L),
+    RevisionCard("phy-expansion-card-1","phy-thermal-expansion","Write the equation for linear thermal expansion.","ΔL = αL₀ΔT, where α is the coefficient of linear expansivity.",0L),
+    RevisionCard("phy-expansion-card-2","phy-thermal-expansion","What is the approximate volume expansivity of an isotropic solid in terms of linear expansivity α?","Approximately 3α for small expansion and an isotropic solid.",0L),
+    RevisionCard("phy-expansion-card-3","phy-thermal-expansion","At what temperature does water have its maximum density?","Approximately 4 °C. Water expands as it cools from 4 °C to 0 °C.",0L),
+    RevisionCard("phy-gas-card-1","phy-gas-laws","State Boyle's law.","For a fixed mass of gas at constant temperature, pV = constant.",0L),
+    RevisionCard("phy-gas-card-2","phy-gas-laws","State Charles's law.","At constant pressure, the volume of a fixed mass of gas is directly proportional to its absolute temperature: V/T = constant.",0L),
+    RevisionCard("phy-gas-card-3","phy-gas-laws","Write the ideal gas equation and state its variables.","pV = nRT; p is pressure, V volume, n amount in moles, R molar gas constant and T absolute temperature.",0L),
+    RevisionCard("phy-heat-card-1","phy-heat-quantity","Distinguish heat capacity from specific heat capacity.","Heat capacity is energy needed to raise a whole body's temperature by 1 K; specific heat capacity is energy needed per kilogram per kelvin.",0L),
+    RevisionCard("phy-heat-card-2","phy-heat-quantity","Write the equation for heat transfer without a change of state.","Q = mcΔT.",0L),
+    RevisionCard("phy-heat-card-3","phy-heat-quantity","In an ideal insulated method-of-mixtures experiment, what is the energy balance?","Heat lost by hotter bodies equals heat gained by cooler bodies.",0L),
+    RevisionCard("phy-state-card-1","phy-change-state","Write the equation for energy during a change of state.","Q = mL, where L is the specific latent heat.",0L),
+    RevisionCard("phy-state-card-2","phy-change-state","How does evaporation differ from boiling?","Evaporation occurs at the liquid surface and can happen below the boiling point; boiling occurs throughout the liquid at its boiling condition.",0L),
+    RevisionCard("phy-state-card-3","phy-change-state","What happens to the temperature of a pure substance during melting at constant pressure?","It remains approximately constant while latent heat is supplied for the change of state.",0L)
+)
+
 @Composable
 fun RevisionScreen() {
     val context = LocalContext.current
