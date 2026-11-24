@@ -215,3 +215,10 @@ Eight topics currently have beginner-oriented draft lessons with objectives, exp
 8. Acids, bases and salts
 
 The other 10 topics are syllabus-mapped outlines, not completed lessons. The JAMB mapping must be checked against the live IBASS document at each exam-cycle update. WAEC Chemistry has a separate syllabus and practical/theory requirements; a WAEC-specific mapping and independent teacher review remain outstanding. No Chemistry content is marked academically approved.
+
+
+## Chemistry formative practice
+
+The eight developed Chemistry topics have a bank of 40 original multiple-choice practice items (five per topic). Each item includes a topic ID, four options, an answer key, an explanation and explicit MeritPrep-original provenance. The bank is not represented as official JAMB or WAEC past questions.
+
+A dedicated Chemistry practice screen supports topic-focused or mixed practice, answer feedback, local attempt recording and saving incorrect answers to the mistake notebook. The current practice bank is formative; it does not yet provide a full timed Chemistry CBT or a complete WAEC theory/practical assessment.
