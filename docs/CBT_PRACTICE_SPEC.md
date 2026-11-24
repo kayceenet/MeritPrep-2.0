@@ -1,7 +1,7 @@
-# MeritPrep timed Biology practice CBT
+# MeritPrep timed subject practice CBT
 
 ## Current implementation
-- 40 questions selected randomly from the 240 original Biology question bank.
+- Biology JAMB-style mode: 40 questions selected randomly from the original Biology bank.\n- Physics JAMB-style mode: 40 questions selected randomly from the 195 original Physics questions mapped across all 39 JAMB Physics topics.
 - Answer options are shuffled while preserving the correct answer mapping.
 - 30-minute countdown for a MeritPrep practice session.
 - Question navigation, horizontal question navigator, answer selection and review flags.
@@ -12,7 +12,7 @@
 ## Important limitations
 - The 40-question/30-minute setting is a MeritPrep practice configuration, not an official JAMB or WAEC timing specification.
 - Questions are original and unverified; they are not represented as official past questions.
-- The current mock is Biology-only. Full JAMB multi-subject sessions, WAEC paper formats and subject-specific official blueprints require separate implementation and academic verification.
+- Biology and Physics have separate practice modes and local session keys. Full multi-subject JAMB sessions, other WAEC paper formats and official subject blueprints require separate implementation and academic verification.
 - The active session, shuffled question order, presented options, answers and review flags are stored locally. On reopening the CBT screen, the app restores the session and recalculates remaining time from the saved deadline. The current question position is persisted and restored. Restoring completed-session review after leaving the screen remains a follow-up improvement.
 - No readiness score or guaranteed examination outcome is inferred from this mock.
 
