@@ -38,7 +38,7 @@ fun VirtualLabScreen() {
             }
         }
         when (selectedLab) {
-            0 -> OhmsLawLab()
+            0 -> PhysicsLab()
             1 -> ConcentrationLab()
             else -> BiologyLab()
         }
@@ -66,6 +66,133 @@ private fun OhmsLawLab() {
         }
     }
     Text("Model assumptions: ideal DC source and fixed ohmic resistance. This is a mathematical simulation, not a real electrical circuit.")
+}
+
+@Composable
+private fun PhysicsLab() {
+    var selected by remember { mutableIntStateOf(0) }
+    Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+        Text("Physics practical models", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+        Row(Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            listOf("Ohm's law", "Motion", "Vectors", "Moments", "Machines").forEachIndexed { index, label ->
+                FilterChip(selected = selected == index, onClick = { selected = index }, label = { Text(label) })
+            }
+        }
+        when (selected) {
+            0 -> OhmsLawLab()
+            1 -> UniformMotionLab()
+            2 -> VectorAdditionLab()
+            3 -> MomentsLab()
+            else -> SimpleMachineLab()
+        }
+    }
+}
+
+@Composable
+private fun UniformMotionLab() {
+    var initialVelocity by remember { mutableFloatStateOf(2f) }
+    var acceleration by remember { mutableFloatStateOf(1.5f) }
+    var time by remember { mutableFloatStateOf(4f) }
+    val finalVelocity = initialVelocity + acceleration * time
+    val displacement = initialVelocity * time + 0.5f * acceleration * time * time
+    Card(Modifier.fillMaxWidth()) {
+        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+            Text("Uniformly accelerated motion", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+            Text("Change the initial velocity, constant acceleration and elapsed time.")
+            Text("Initial velocity: ${"%.1f".format(initialVelocity)} m/s")
+            Slider(value = initialVelocity, onValueChange = { initialVelocity = it }, valueRange = 0f..20f)
+            Text("Acceleration: ${"%.1f".format(acceleration)} m/s²")
+            Slider(value = acceleration, onValueChange = { acceleration = it }, valueRange = -3f..5f)
+            Text("Time: ${"%.1f".format(time)} s")
+            Slider(value = time, onValueChange = { time = it }, valueRange = 0f..10f)
+            HorizontalDivider()
+            Text("Final velocity: ${"%.2f".format(finalVelocity)} m/s", style = MaterialTheme.typography.titleMedium)
+            Text("Displacement: ${"%.2f".format(displacement)} m")
+            Text("v = u + at     s = ut + ½at²", fontWeight = FontWeight.SemiBold)
+        }
+    }
+    Text("Model assumptions: straight-line motion and constant acceleration. A negative acceleration is defined relative to the selected positive direction; it does not always mean the object is slowing down.")
+}
+
+@Composable
+private fun VectorAdditionLab() {
+    var east by remember { mutableFloatStateOf(3f) }
+    var north by remember { mutableFloatStateOf(4f) }
+    val magnitude = kotlin.math.sqrt(east * east + north * north)
+    val angle = Math.toDegrees(kotlin.math.atan2(north.toDouble(), east.toDouble()))
+    Card(Modifier.fillMaxWidth()) {
+        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+            Text("Perpendicular vector addition", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+            Text("Model a journey or two perpendicular vector components. Positive values point east and north.")
+            Text("East component: ${"%.1f".format(east)} units")
+            Slider(value = east, onValueChange = { east = it }, valueRange = 0f..10f)
+            Text("North component: ${"%.1f".format(north)} units")
+            Slider(value = north, onValueChange = { north = it }, valueRange = 0f..10f)
+            HorizontalDivider()
+            Text("Resultant magnitude: ${"%.2f".format(magnitude)} units", style = MaterialTheme.typography.titleMedium)
+            Text("Direction: ${"%.1f".format(angle)}° north of east")
+            Text("R = √(E² + N²)", fontWeight = FontWeight.SemiBold)
+        }
+    }
+    Text("This model adds two perpendicular components only. It does not model non-perpendicular vectors or measurement uncertainty.")
+}
+
+@Composable
+private fun MomentsLab() {
+    var effort by remember { mutableFloatStateOf(10f) }
+    var effortArm by remember { mutableFloatStateOf(0.4f) }
+    var load by remember { mutableFloatStateOf(8f) }
+    var loadArm by remember { mutableFloatStateOf(0.5f) }
+    val clockwise = effort * effortArm
+    val anticlockwise = load * loadArm
+    val netMoment = clockwise - anticlockwise
+    Card(Modifier.fillMaxWidth()) {
+        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+            Text("Principle of moments", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+            Text("Adjust the forces and their perpendicular distances from a pivot.")
+            Text("Effort force: ${"%.1f".format(effort)} N")
+            Slider(value = effort, onValueChange = { effort = it }, valueRange = 0f..20f)
+            Text("Effort arm: ${"%.2f".format(effortArm)} m")
+            Slider(value = effortArm, onValueChange = { effortArm = it }, valueRange = 0.05f..1f)
+            Text("Load force: ${"%.1f".format(load)} N")
+            Slider(value = load, onValueChange = { load = it }, valueRange = 0f..20f)
+            Text("Load arm: ${"%.2f".format(loadArm)} m")
+            Slider(value = loadArm, onValueChange = { loadArm = it }, valueRange = 0.05f..1f)
+            HorizontalDivider()
+            Text("Effort moment: ${"%.2f".format(clockwise)} N m")
+            Text("Load moment: ${"%.2f".format(anticlockwise)} N m")
+            Text("Net moment (clockwise positive): ${"%.2f".format(netMoment)} N m", style = MaterialTheme.typography.titleMedium)
+            Text(if (kotlin.math.abs(netMoment) < 0.05f) "Approximately balanced in this ideal model." else if (netMoment > 0f) "Clockwise moment is greater." else "Anticlockwise moment is greater.")
+        }
+    }
+    Text("Model assumptions: rigid, weightless lever and forces acting perpendicular to the lever. Real setups may include the lever's own weight and friction at the pivot.")
+}
+
+@Composable
+private fun SimpleMachineLab() {
+    var load by remember { mutableFloatStateOf(300f) }
+    var effort by remember { mutableFloatStateOf(100f) }
+    var velocityRatio by remember { mutableFloatStateOf(4f) }
+    val mechanicalAdvantage = if (effort > 0f) load / effort else 0f
+    val efficiency = if (velocityRatio > 0f) mechanicalAdvantage / velocityRatio * 100f else 0f
+    Card(Modifier.fillMaxWidth()) {
+        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+            Text("Simple machine efficiency", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+            Text("Change the load, effort and velocity ratio to see how machine efficiency is calculated.")
+            Text("Load: ${load.roundToInt()} N")
+            Slider(value = load, onValueChange = { load = it }, valueRange = 50f..500f)
+            Text("Effort: ${effort.roundToInt()} N")
+            Slider(value = effort, onValueChange = { effort = it }, valueRange = 10f..250f)
+            Text("Velocity ratio: ${"%.1f".format(velocityRatio)}")
+            Slider(value = velocityRatio, onValueChange = { velocityRatio = it }, valueRange = 1f..8f)
+            HorizontalDivider()
+            Text("Mechanical advantage: ${"%.2f".format(mechanicalAdvantage)}")
+            Text("Efficiency: ${"%.1f".format(efficiency)}%", style = MaterialTheme.typography.titleMedium)
+            Text("MA = Load/Effort     Efficiency = (MA/VR) × 100%", fontWeight = FontWeight.SemiBold)
+            if (efficiency > 100f) Text("This input combination gives efficiency above 100%. It is not physically possible for a passive machine; check the assumed load, effort and velocity ratio.", color = MaterialTheme.colorScheme.error)
+        }
+    }
+    Text("The sliders represent idealised measurements. A real machine's efficiency is at most 100%; friction and deformation reduce useful output work.")
 }
 
 @Composable
