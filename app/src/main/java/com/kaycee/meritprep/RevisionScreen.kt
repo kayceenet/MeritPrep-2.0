@@ -327,6 +327,22 @@ internal val starterRevisionCards = listOf(
     RevisionCard("phy-dispersion-card-1","phy-dispersion","What causes dispersion in a glass prism?","The refractive index varies with wavelength, so different colours refract by different amounts.",0L),
     RevisionCard("phy-dispersion-card-2","phy-dispersion","Which visible colour is deviated most by ordinary glass?","Violet is deviated most; red is deviated least under normal dispersion.",0L),
     RevisionCard("phy-dispersion-card-3","phy-dispersion","What are the primary additive colours of light?","Red, green and blue.",0L)
+) + listOf(
+    RevisionCard("phy-electrostatics-card-1","phy-electrostatics","State Coulomb's law.","For two stationary point charges, F = k|q₁q₂|/r² along the line joining them.",0L),
+    RevisionCard("phy-electrostatics-card-2","phy-electrostatics","Define electric field strength.","Force per unit positive test charge: E = F/q.",0L),
+    RevisionCard("phy-electrostatics-card-3","phy-electrostatics","What is charging by induction?","Charging a conductor without direct contact by redistributing charge with a nearby charged body and using earthing in the correct sequence.",0L),
+    RevisionCard("phy-capacitors-card-1","phy-capacitors","Define capacitance.","Charge stored per unit potential difference: C = Q/V.",0L),
+    RevisionCard("phy-capacitors-card-2","phy-capacitors","Write the energy stored in a capacitor.","E = ½CV² = ½QV = Q²/(2C).",0L),
+    RevisionCard("phy-capacitors-card-3","phy-capacitors","How do capacitances combine in parallel?","Cₑq = C₁ + C₂ + …",0L),
+    RevisionCard("phy-cells-card-1","phy-cells","Define electromotive force.","Energy supplied by a source per unit charge around the complete circuit.",0L),
+    RevisionCard("phy-cells-card-2","phy-cells","Write the terminal voltage of a discharging cell with internal resistance.","V = ε − Ir, where ε is emf, I current and r internal resistance.",0L),
+    RevisionCard("phy-cells-card-3","phy-cells","What happens to emf when identical cells are connected in series aiding?","Their emfs add; internal resistances also add.",0L),
+    RevisionCard("phy-current-card-1","phy-current-electricity","Define electric current.","Rate of flow of charge: I = Q/t.",0L),
+    RevisionCard("phy-current-card-2","phy-current-electricity","State Ohm's law.","For a conductor at constant temperature and unchanged physical conditions, V = IR.",0L),
+    RevisionCard("phy-current-card-3","phy-current-electricity","How are two resistors combined in parallel?","1/Rₑq = 1/R₁ + 1/R₂.",0L),
+    RevisionCard("phy-electrical-power-card-1","phy-electrical-power","Write the electrical power equation.","P = VI; for an ohmic resistor P = I²R = V²/R.",0L),
+    RevisionCard("phy-electrical-power-card-2","phy-electrical-power","Convert 1 kWh to joules.","1 kWh = 3.6 × 10⁶ J.",0L),
+    RevisionCard("phy-electrical-power-card-3","phy-electrical-power","Why is electricity transmitted at high voltage?","For a given power, higher voltage means lower current, reducing resistive cable losses I²R.",0L)
 )
 
 @Composable
