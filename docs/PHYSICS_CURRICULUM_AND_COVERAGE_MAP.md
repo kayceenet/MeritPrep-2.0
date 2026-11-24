@@ -15,6 +15,19 @@ The first twenty-four topics have beginner-focused lesson drafts, each with lear
 
 The remaining 15 topics are syllabus outlines only. They cannot be marked as completed lessons. Physics content is draft material and has not received independent academic review.
 
+### Virtual practical models
+
+The Physics virtual-lab area includes interactive models for:
+- Ohm's law, uniformly accelerated motion and perpendicular vector addition.
+- Moments about a pivot and simple-machine mechanical advantage and efficiency.
+- Hooke's law, spring force and elastic potential energy.
+- Pressure from force and contact area.
+- Density, hydrostatic gauge pressure and Archimedes' upthrust.
+- Sensible heat transfer and latent heat during a phase change.
+- Boyle's law and Charles's law, with absolute temperature in kelvin.
+
+The calculation engines have unit tests for the main relationships and invalid input handling. These are idealised simulations: they do not collect sensor data, reproduce measurement uncertainty or replace a supervised practical investigation. Learners should still practise recording readings, plotting graphs, estimating uncertainty and evaluating sources of error.
+
 ## Topic coverage
 
 | No. | JAMB topic | Current status |
@@ -61,7 +74,7 @@ The remaining 15 topics are syllabus outlines only. They cannot be marked as com
 
 ## Assessment integrity
 
-- All 80 questions in the current Physics bank are original MeritPrep practice items.
+- All 120 questions in the current Physics bank are original MeritPrep practice items.
 - They must not be labelled as official JAMB or WAEC past questions.
 - Every question has one keyed answer and an explanatory feedback note; the bank has structural unit tests for IDs, topic mapping, option count, answer-key bounds and provenance labels.
 - The current 120-item practice set is not a full JAMB mock and is not a prediction of examination performance.
@@ -69,7 +82,7 @@ The remaining 15 topics are syllabus outlines only. They cannot be marked as com
 
 ## Next development work
 
-1. Develop the remaining 23 syllabus topics into full beginner lessons and add five or more reviewed practice items per topic.
+1. Develop the remaining 15 syllabus topics into full beginner lessons and add five or more reviewed practice items per topic.
 2. Develop worked examples with explicit units, sign conventions, diagrams and graph interpretation.
 3. Add Physics practical simulations and alternative-to-practical tasks with variables, observations, data tables, graphs, uncertainty and evaluation.
 4. Expand the question bank only after topic coverage and answer keys are checked.
