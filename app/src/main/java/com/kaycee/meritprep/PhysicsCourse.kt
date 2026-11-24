@@ -183,6 +183,10 @@ object PhysicsCourse {
         outline("phy-electronics", "Introductory electronics", "Conductors, semiconductors and insulators; intrinsic and extrinsic semiconductors; n-type and p-type materials; diodes, rectification and transistor amplification.")
     )
 
-    val topics: List<LearningTopic> =
-        syllabusEntries.filterNot { entry -> PhysicsCourseExtension.topics.any { it.id == entry.id } } + PhysicsCourseExtension.topics
+    private val developedById = PhysicsCourseExtension.topics.associateBy { it.id }
+
+    /** Preserve the official syllabus sequence while replacing outline entries with developed lessons. */
+    val topics: List<LearningTopic> = syllabusEntries.map { entry ->
+        developedById[entry.id] ?: entry
+    }
 }
