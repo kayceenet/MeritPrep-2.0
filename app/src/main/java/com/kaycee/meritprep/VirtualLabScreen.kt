@@ -110,41 +110,55 @@ private fun SolutionConcentrationSimulation() {
 @Composable
 private fun AcidBaseTitrationSimulation() {
     var acidConcentration by remember { mutableStateOf("0.100") }
-    var acidTitre by remember { mutableStateOf("24.80") }
     var baseAliquot by remember { mutableStateOf("25.00") }
+    val readings = remember { mutableStateListOf("0.00", "24.80", "0.10", "24.85", "0.00", "25.40") }
     var result by remember { mutableStateOf<com.kaycee.meritprep.data.TitrationResult?>(null) }
     var error by remember { mutableStateOf<String?>(null) }
+    val labels = listOf("Trial 1 initial reading (cm³)", "Trial 1 final reading (cm³)", "Trial 2 initial reading (cm³)", "Trial 2 final reading (cm³)", "Trial 3 initial reading (cm³)", "Trial 3 final reading (cm³)")
     Card(Modifier.fillMaxWidth()) {
         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
             Text("HCl–NaOH titration", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
-            Text("A standard hydrochloric acid solution is used to titrate a measured sodium hydroxide aliquot.")
+            Text("Enter the initial and final burette readings for up to three trials. The model selects the largest set of titres concordant within 0.20 cm³.")
             Text("HCl + NaOH → NaCl + H₂O", fontWeight = FontWeight.SemiBold)
             OutlinedTextField(value = acidConcentration, onValueChange = { acidConcentration = it; result = null }, label = { Text("HCl concentration (mol/dm³)") }, modifier = Modifier.fillMaxWidth(), singleLine = true)
-            OutlinedTextField(value = acidTitre, onValueChange = { acidTitre = it; result = null }, label = { Text("Mean acid titre (cm³)") }, modifier = Modifier.fillMaxWidth(), singleLine = true)
             OutlinedTextField(value = baseAliquot, onValueChange = { baseAliquot = it; result = null }, label = { Text("NaOH aliquot (cm³)") }, modifier = Modifier.fillMaxWidth(), singleLine = true)
+            labels.forEachIndexed { index, label ->
+                OutlinedTextField(
+                    value = readings[index],
+                    onValueChange = { readings[index] = it; result = null },
+                    label = { Text(label) },
+                    modifier = Modifier.fillMaxWidth(),
+                    singleLine = true
+                )
+            }
             Button(onClick = {
                 try {
+                    val parsed = readings.map { it.trim().toDouble() }
+                    val meanTitre = ChemistryPracticalEngine.meanConcordantTitre(
+                        listOf(parsed[0], parsed[2], parsed[4]),
+                        listOf(parsed[1], parsed[3], parsed[5])
+                    )
                     result = ChemistryPracticalEngine.calculateOneToOneTitration(
                         acidConcentration.trim().toDouble(),
-                        acidTitre.trim().toDouble(),
+                        meanTitre,
                         baseAliquot.trim().toDouble()
                     )
                     error = null
                 } catch (e: Exception) {
                     result = null
-                    error = e.message ?: "Check the entered values."
+                    error = e.message ?: "Check the entered readings."
                 }
-            }, modifier = Modifier.fillMaxWidth()) { Text("Calculate NaOH concentration") }
+            }, modifier = Modifier.fillMaxWidth()) { Text("Find concordant mean and calculate") }
             result?.let {
                 HorizontalDivider()
-                Text("Calculated titre: ${"%.2f".format(it.titreCm3)} cm³")
+                Text("Mean concordant titre: ${"%.3f".format(it.titreCm3)} cm³")
                 Text("NaOH concentration: ${"%.4f".format(it.analyteConcentrationMolPerDm3)} mol/dm³", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary)
                 Text("Working: ${it.calculation}")
             }
             error?.let { Text(it, color = MaterialTheme.colorScheme.error) }
         }
     }
-    Text("The calculation assumes a 1:1 reaction and uses a supplied mean titre. Real practical work requires repeated concordant titres, correct meniscus readings, suitable indicator selection and a balanced equation. This screen does not simulate colour change or certify practical technique.")
+    Text("The calculation assumes a 1:1 reaction and a 0.20 cm³ concordance tolerance. Real practical work requires careful meniscus readings, suitable indicator selection, correct rinsing and endpoint technique. The model does not simulate colour change or certify practical skill.")
 }
 
 @Composable
