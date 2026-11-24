@@ -26,7 +26,7 @@ object PhysicsCourse {
         isSyllabusOutline = true
     )
 
-    val topics: List<LearningTopic> = listOf(
+    private val syllabusEntries: List<LearningTopic> = listOf(
         LearningTopic(
             "phy-measurements", "Measurements and units", "PHY",
             "Physics begins with measurement. When a mechanic checks the length of a bolt, a nurse reads a thermometer or an electrician measures current, the result is meaningful only when the quantity, unit and measuring method are clear. This lesson starts with the language of measurement and builds towards accuracy, dimensions and simple experimental errors.",
@@ -182,4 +182,7 @@ object PhysicsCourse {
         outline("phy-modern", "Elementary modern physics", "Atomic models and energy levels; spectra; thermionic and photoelectric emission; Einstein's equation; X-rays; radioactivity, half-life, fission, fusion, binding energy, matter waves and uncertainty principle."),
         outline("phy-electronics", "Introductory electronics", "Conductors, semiconductors and insulators; intrinsic and extrinsic semiconductors; n-type and p-type materials; diodes, rectification and transistor amplification.")
     )
+
+    val topics: List<LearningTopic> =
+        syllabusEntries.filterNot { entry -> PhysicsCourseExtension.topics.any { it.id == entry.id } } + PhysicsCourseExtension.topics
 }
