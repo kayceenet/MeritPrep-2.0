@@ -12,7 +12,7 @@ class ChemistryPracticalEngineTest {
             listOf(0.00, 0.10, 0.00),
             listOf(24.80, 24.85, 25.40)
         )
-        assertEquals(24.825, mean, 1e-9)
+        assertEquals(24.775, mean, 1e-9)
     }
 
     @Test fun rejectsNonConcordantOrIncompleteTitres() {
