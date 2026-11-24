@@ -58,4 +58,27 @@ class CbtSessionEngineTest {
         assertEquals(1, result.unanswered)
         assertEquals(66, result.percentage)
     }
+    @Test fun spreadsMockQuestionsAcrossTopicsBeforeRepeatingTopics() {
+        val pool = (0 until 24).flatMap { topic ->
+            (0 until 5).map { index ->
+                AssessmentQuestion(
+                    id = "topic${topic}_q$index",
+                    topicId = "topic$topic",
+                    prompt = "Question $topic/$index",
+                    options = listOf("A", "B", "C", "D"),
+                    correctOptionIndex = index % 4,
+                    explanation = "Explanation",
+                    source = "MeritPrep original practice item",
+                    isVerified = false
+                )
+            }
+        }
+        val session = CbtSessionEngine.createQuestions(pool, 40, Random(17))
+        val counts = session.groupingBy { it.topicId }.eachCount()
+        assertEquals(24, counts.size)
+        assertTrue(counts.values.all { it in 1..2 })
+        assertTrue(counts.values.maxOrNull()!! - counts.values.minOrNull()!! <= 1)
+        assertEquals(40, session.map { it.questionId }.toSet().size)
+    }
+
 }
