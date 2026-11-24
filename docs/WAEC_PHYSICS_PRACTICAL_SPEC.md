@@ -57,6 +57,12 @@ Each task includes:
 
 The graph analysis engine calculates a least-squares straight-line gradient, intercept and coefficient of determination. It also calculates gravitational field strength from the simple-pendulum gradient. The engine and task data have unit tests.
 
+## Objective practice
+
+The app now includes a separate 50-question WAEC-style Physics objective bank mapped across all 39 JAMB Physics topic IDs. A timed CBT session presents 50 shuffled questions with shuffled options, a 75-minute working-reference timer, scoring, explanations, local attempt recording and mistake-notebook capture.
+
+The 75-minute duration follows the third-party-hosted syllabus copy cited above. Verify the current WAEC-issued Paper 1 instructions before treating this timer as definitive. The 50 items are original MeritPrep practice questions, not official WAEC past questions.
+
 ## Structured theory practice
 
 The Physics subject area also includes six original structured-response tasks covering:
