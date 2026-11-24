@@ -405,4 +405,18 @@ class BiologyQuestionBankTest {
         assertFalse(BiologyQuestionBank.plantAnatomy.any { it.prompt.contains("alveoli", ignoreCase = true) || it.prompt.contains("villi", ignoreCase = true) })
     }
 
+    @Test
+    fun selectedBiologyItemsUseTopicRelevantDistractors() {
+        val photosynthesis = BiologyQuestionBank.nutrition.first { it.id == "bio-nut-010" }
+        assertEquals(setOf("Light intensity", "Temperature", "Carbon dioxide concentration", "Water availability"), photosynthesis.options.toSet())
+
+        val habitat = BiologyQuestionBank.all.first { it.id == "bio-hab-001" }
+        assertTrue(habitat.options.any { it.contains("niche", ignoreCase = true) })
+        assertTrue(habitat.options.any { it.contains("community", ignoreCase = true) })
+
+        val porosity = BiologyQuestionBank.all.first { it.id == "bio-soil-005" }
+        assertTrue(porosity.options.any { it.contains("bulk density", ignoreCase = true) })
+        assertTrue(porosity.options.any { it.contains("water", ignoreCase = true) })
+    }
+
 }
