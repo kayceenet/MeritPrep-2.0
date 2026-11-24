@@ -82,6 +82,7 @@ private fun MeritPrepApp() {
                 composable("chemistry-practice") { ChemistryPracticeScreen() }
                 composable("physics-practice") { PhysicsPracticeScreen() }
                 composable("mathematics-practice") { MathematicsPracticeScreen() }
+                composable("mathematics-cbt") { CbtScreen(CbtMode.MATHEMATICS_UTME, MathematicsQuestionBank.all) }
                 composable("physics-waec-practical") { PhysicsWaecPracticalScreen() }
                 composable("physics-waec-theory") { PhysicsWaecTheoryScreen() }
                 composable("physics-waec-objective") { CbtScreen(CbtMode.WAEC_PHYSICS_OBJECTIVE, PhysicsWaecObjectiveBank.all) }
@@ -182,6 +183,11 @@ private fun SubjectScreen(subject: Subject, nav: NavHostController) {
             item {
                 Button(onClick = { nav.navigate("mathematics-practice") }, modifier = Modifier.fillMaxWidth()) {
                     Text("Practise Mathematics · 115 questions")
+                }
+            }
+            item {
+                OutlinedButton(onClick = { nav.navigate("mathematics-cbt") }, modifier = Modifier.fillMaxWidth()) {
+                    Text("Timed Mathematics JAMB-style CBT · 40 questions")
                 }
             }
         }
