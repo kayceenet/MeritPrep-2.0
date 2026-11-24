@@ -879,6 +879,7 @@ fun LessonScreen(topicId: String) {
             when {
                 topic.isSyllabusOutline -> "Academic status: syllabus outline only. Full lesson development is in progress; this outline cannot be marked as a completed lesson."
                 topic.subjectCode == "BIO" -> "Academic status: beginner-focused Biology teaching draft mapped to its syllabus topic. Independent subject review is still required before formal approval."
+                topic.subjectCode == "PHY" -> "Academic status: beginner-focused Physics teaching draft mapped to the JAMB IBASS topic. Independent Physics-teacher review is still required before formal approval."
                 else -> "Academic status: starter teaching content. Full syllabus mapping and independent subject review are still required."
             },
             style = MaterialTheme.typography.bodySmall,
