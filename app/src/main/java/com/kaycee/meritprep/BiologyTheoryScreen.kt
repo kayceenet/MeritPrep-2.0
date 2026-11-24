@@ -11,6 +11,26 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.kaycee.meritprep.data.MeritDatabase
+import org.json.JSONArray
+import org.json.JSONObject
+
+private fun decodeBiologyTheoryProgress(raw: String?): Pair<String, Set<Int>> {
+    if (raw.isNullOrBlank()) return "" to emptySet()
+    return runCatching {
+        val payload = JSONObject(raw)
+        val points = payload.optJSONArray("checkedPoints") ?: JSONArray()
+        val checked = buildSet {
+            for (index in 0 until points.length()) {
+                val point = points.optInt(index, -1)
+                if (point >= 0) add(point)
+            }
+        }
+        payload.optString("response", "") to checked
+    }.getOrElse {
+        // Preserve answers saved by earlier app versions as plain text.
+        raw to emptySet()
+    }
+}
 
 @Composable
 fun BiologyTheoryScreen() {
@@ -21,10 +41,11 @@ fun BiologyTheoryScreen() {
     var menuExpanded by remember { mutableStateOf(false) }
     val task = tasks.first { it.id == selectedTaskId }
     val noteId = "waec-theory-${task.id}"
-    var response by remember(task.id) { mutableStateOf(database.getNoteBody(noteId).orEmpty()) }
+    val restoredProgress = remember(task.id) { decodeBiologyTheoryProgress(database.getNoteBody(noteId)) }
+    var response by remember(task.id) { mutableStateOf(restoredProgress.first) }
     var saved by remember(task.id) { mutableStateOf(false) }
     var rubricVisible by remember(task.id) { mutableStateOf(false) }
-    var checkedPoints by remember(task.id) { mutableStateOf(emptySet<Int>()) }
+    var checkedPoints by remember(task.id) { mutableStateOf(restoredProgress.second) }
 
     Column(
         Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(18.dp),
@@ -65,7 +86,12 @@ fun BiologyTheoryScreen() {
         Row(horizontalArrangement = Arrangement.spacedBy(10.dp), verticalAlignment = Alignment.CenterVertically) {
             Button(
                 onClick = {
-                    database.saveNote(noteId, task.topicId, "WAEC theory · ${task.title}", response)
+                    val payload = JSONObject()
+                        .put("response", response)
+                        .put("checkedPoints", JSONArray().apply {
+                            checkedPoints.sorted().forEach { put(it) }
+                        })
+                    database.saveNote(noteId, task.topicId, "WAEC theory · ${task.title}", payload.toString())
                     saved = true
                 },
                 enabled = response.isNotBlank()
@@ -91,6 +117,7 @@ fun BiologyTheoryScreen() {
                                 checked = index in checkedPoints,
                                 onCheckedChange = { checked ->
                                     checkedPoints = if (checked) checkedPoints + index else checkedPoints - index
+                                    saved = false
                                 }
                             )
                             Text(point, modifier = Modifier.weight(1f).padding(top = 11.dp))
