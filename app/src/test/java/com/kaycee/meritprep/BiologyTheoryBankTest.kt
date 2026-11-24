@@ -9,7 +9,7 @@ class BiologyTheoryBankTest {
     @Test
     fun theoryTasksHaveUniqueIdsAndValidMarkingGuides() {
         val tasks = BiologyTheoryBank.all
-        assertEquals(10, tasks.size)
+        assertEquals(15, tasks.size)
         assertEquals(tasks.size, tasks.map { it.id }.toSet().size)
         tasks.forEach { task ->
             assertTrue(task.title.isNotBlank())
