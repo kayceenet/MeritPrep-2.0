@@ -177,11 +177,11 @@ private fun SubjectScreen(subject: Subject, nav: NavHostController) {
         }
         if (subject.code == "MATH") {
             item {
-                Text("JAMB Mathematics map: 23 numbered topics from the IBASS syllabus. The first eighteen topics have beginner-focused lesson drafts and 90 original practice questions. The remaining five entries are syllabus outlines, not completed lessons. Independent Mathematics-teacher review is outstanding.")
+                Text("JAMB Mathematics map: 23 numbered topics from the IBASS syllabus. All twenty-three topics now have beginner-focused lesson drafts and 115 original practice questions. Independent Mathematics-teacher review is outstanding.")
             }
             item {
                 Button(onClick = { nav.navigate("mathematics-practice") }, modifier = Modifier.fillMaxWidth()) {
-                    Text("Practise Mathematics · 90 questions")
+                    Text("Practise Mathematics · 115 questions")
                 }
             }
         }
