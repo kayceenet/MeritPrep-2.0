@@ -650,19 +650,6 @@ object LearningCatalog {
             "Neutrons = mass number − atomic number = 23 − 11 = 12."
         ),
         LearningTopic(
-            "math-algebra", "Introduction to algebra", "MATH",
-            "Algebra uses letters and symbols to represent numbers and relationships. It allows general rules to be written and unknown values to be found systematically.",
-            listOf("Identify variables, coefficients and constants", "Simplify like terms", "Solve simple linear equations"),
-            listOf(
-                "Expressions and terms" to "In 4x + 7, x is the variable, 4 is its coefficient and 7 is a constant. Terms are separated by addition or subtraction signs. Only like terms, which have the same variable part, can be combined.",
-                "Simplifying expressions" to "Collect like terms by adding or subtracting their coefficients. For example, 3x + 5x − 2 becomes 8x − 2. Unlike terms such as x and x² cannot be combined.",
-                "Solving linear equations" to "An equation remains balanced when the same operation is applied to both sides. To solve 2x + 5 = 17, subtract 5 from both sides to get 2x = 12, then divide by 2 to obtain x = 6."
-            ),
-            "Solve the equation 3x − 4 = 11.",
-            listOf("3", "5", "7", "15"), 1,
-            "Add 4 to both sides: 3x = 15. Divide by 3: x = 5."
-        ),
-        LearningTopic(
             "eng-comprehension", "Reading comprehension", "ENG",
             "Comprehension tests the ability to understand a passage, identify its main ideas and interpret information accurately. Answers should be grounded in the passage rather than assumptions.",
             listOf("Identify the central idea of a passage", "Distinguish stated facts from inferences", "Use context to interpret unfamiliar words"),
@@ -702,7 +689,7 @@ object LearningCatalog {
             listOf("Legislature", "Executive", "Judiciary", "Civil service"), 2,
             "The judiciary interprets and applies the law when deciding cases and resolving legal disputes."
         )
-    ) + ChemistryCourse.topics + PhysicsCourse.topics
+    ) + ChemistryCourse.topics + PhysicsCourse.topics + MathematicsCourse.topics
 
     fun forSubject(code: String): List<LearningTopic> = topics.filter { it.subjectCode == code }
     fun find(topicId: String): LearningTopic? = topics.firstOrNull { it.id == topicId }
