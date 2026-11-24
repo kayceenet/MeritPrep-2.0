@@ -39,6 +39,6 @@ class BiologyPopulationSamplingTest {
     @Test
     fun rejectsOverflowingSampleAreaAndNonFiniteEstimate() {
         assertNull(estimatePopulationFromQuadrats(listOf(1, 2), Double.MAX_VALUE, Double.MAX_VALUE))
-        assertNull(estimatePopulationFromQuadrats(listOf(Int.MAX_VALUE), 1.0, Double.MAX_VALUE))
+        assertNull(estimatePopulationFromQuadrats(listOf(Int.MAX_VALUE), 1.0E-308, 1.0E308))
     }
 }
