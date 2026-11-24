@@ -224,7 +224,7 @@ All 18 topics now have beginner-oriented draft lessons with learning objectives,
 17. Chemistry and industry
 18. Astronomical chemistry
 
-These are authored draft lessons, not academically approved material. The JAMB mapping must be checked against the live IBASS document at each exam-cycle update. WAEC Chemistry has a separate syllabus and practical/theory requirements; WAEC-specific alignment and independent review by a qualified Chemistry teacher remain outstanding.
+These are authored draft lessons, not academically approved material. The JAMB mapping must be checked against the live IBASS document at each exam-cycle update. WAEC Chemistry has a separate syllabus and practical/theory requirements; A separate Nigeria WAEC Chemistry working coverage map now records the common syllabus, Nigeria-specific Section C and practical requirements in `docs/WAEC_CHEMISTRY_COVERAGE_MAP.md`. Interactive alpha practical components now include NaCl concentration, a 1:1 HCl–NaOH mean-titre calculation and a limited cation-test reference. These are not a complete WAEC practical assessment; the third-party syllabus copy must be checked against current WAEC-issued materials, and the lessons, calculations and qualitative observations require independent review by a qualified Chemistry teacher.
  
 ## Chemistry formative practice
 
