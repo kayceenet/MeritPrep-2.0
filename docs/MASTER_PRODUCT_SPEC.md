@@ -138,7 +138,7 @@ The repository currently contains a Kotlin/Compose Android application with:
 - original WAEC-style Biology structured-response tasks with self-check guidance;
 - Biology revision cards and a spaced-retrieval scheduler;
 - a mistake notebook, personal notes, bookmarks and study planner;
-- Biology practical-learning prototypes and introductory Physics/Chemistry simulations;
+- Biology practical-learning prototypes; a 39-topic Physics JAMB curriculum with 195 original questions and 118 revision cards; Physics CBT, virtual practical models and WAEC practical/theory exercises;
 - local SQLite persistence and unit-tested learning/assessment logic;
 - GitHub Actions unit tests and debug APK builds.
 
@@ -231,3 +231,5 @@ These are authored draft lessons, not academically approved material. The JAMB m
 All 18 Chemistry topics have a bank of 90 original multiple-choice practice items (five per topic). Each item includes a topic ID, four options, an answer key, an explanation and explicit MeritPrep-original provenance. The bank is not represented as official JAMB or WAEC past questions.
 
 A dedicated Chemistry practice screen supports topic-focused or mixed practice, answer feedback, local attempt recording and saving incorrect answers to the mistake notebook. The current objective practice bank is formative and does not yet provide a full timed Chemistry CBT. A separate Chemistry WAEC theory alpha now includes six original structured-response tasks with indicative marking points and an answer-writing/self-check screen. The practical alpha includes concentration, a 1:1 titration calculation and selected cation observations. Neither is a complete WAEC assessment, and the content requires independent Chemistry-teacher review.
+
+Physics now has draft lessons for all 39 JAMB syllabus topics, 195 original topic-mapped objective questions, 118 spaced-revision cards and a 40-question, 30-minute JAMB-style practice CBT. The timer and question count are MeritPrep practice settings, not a claim about official JAMB timing. Fifteen virtual-lab models cover mechanics, elasticity, fluids, thermal physics, gas laws, waves, optics, resistor networks and capacitors. A WAEC Physics alpha includes five original practical data-analysis exercises (spring extension, pendulum, Ohm's law, density and wire resistivity) and six structured theory tasks with self-check marking points. These exercises use simulated data, do not grade free-text answers and do not constitute a complete WAEC Paper 1, Paper 2 or Paper 3. Physics lessons and assessment content remain draft material pending independent subject-teacher review.
