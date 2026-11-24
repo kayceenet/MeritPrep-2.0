@@ -198,3 +198,16 @@ The Android alpha includes an offline calculator workspace for common quantitati
 - Chemistry: molar concentration and dilution using C₁V₁ = C₂V₂.
 
 Calculation logic is separated from the Compose interface and covered by unit tests. Inputs are validated for zero denominators, non-positive physical quantities and invalid dilution conditions. Results show the equation, substituted working and output unit. These are focused learning tools, not a replacement for a general-purpose scientific calculator; further formula coverage is planned.
+
+
+## Chemistry course development status
+
+The Chemistry catalogue now maps all 18 topic headings in the Chemistry PDF served by JAMB's Integrated Brochure and Syllabus System (IBASS). The source URL is recorded in `ChemistryCourse.kt`: https://ibass.jamb.gov.ng/static/media/Chemistry.9efd0b98043d56922aaa.pdf
+
+Four topics currently have beginner-oriented draft lessons with objectives, explanatory sections, worked examples or misconception guidance, and an understanding check:
+1. Separation of mixtures and purification
+2. Chemical combination and the mole concept
+3. Kinetic theory of matter and gas laws
+4. Atomic structure, periodicity and chemical bonding
+
+The other 14 topics are syllabus-mapped outlines, not completed lessons. The JAMB mapping must be checked against the live IBASS document at each exam-cycle update. WAEC Chemistry has a separate syllabus and practical/theory requirements; a WAEC-specific mapping and independent teacher review remain outstanding. No Chemistry content is marked academically approved.
