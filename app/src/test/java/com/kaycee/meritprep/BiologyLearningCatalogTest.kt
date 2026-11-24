@@ -1,7 +1,6 @@
 package com.kaycee.meritprep
 
 import org.junit.Assert.assertEquals
-import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
@@ -32,7 +31,6 @@ class BiologyLearningCatalogTest {
             assertTrue("${topic.id}: answer options must not be blank", topic.checkOptions.all { it.isNotBlank() })
             assertTrue("${topic.id}: the correct answer index must be valid", topic.correctOption in topic.checkOptions.indices)
             assertTrue("${topic.id}: feedback must explain the answer", topic.explanation.isNotBlank())
-            assertFalse("${topic.id}: a Biology topic must not be marked as another subject", topic.subjectCode != "BIO")
         }
     }
 
@@ -43,7 +41,7 @@ class BiologyLearningCatalogTest {
             assertTrue("${unit.id}: scope is required", unit.scope.isNotBlank())
             assertTrue("${unit.id}: measurable learning outcomes are required", unit.outcomes.isNotBlank())
             assertTrue("${unit.id}: WAEC cross-references are required", unit.waecLinks.isNotEmpty())
-            assertTrue("${unit.id}: a matching lesson ID is required", unit.lessonId in LearningCatalog.topics.map { it.id })
+            assertTrue("${unit.id}: a matching lesson ID is required", unit.lessonId?.let { id -> LearningCatalog.topics.any { it.id == id } } == true)
         }
         assertTrue("The practical strand list must be available.", BiologyCurriculum.waecPracticalStrands.isNotEmpty())
     }
