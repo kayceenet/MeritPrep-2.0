@@ -382,4 +382,16 @@ class BiologyQuestionBankTest {
         }
     }
 
+
+    @Test
+    fun correctAnswerPositionsAreBalancedAcrossTheCompleteBank() {
+        val questions = BiologyQuestionBank.all
+        val counts = questions.groupingBy { it.correctOptionIndex }.eachCount()
+
+        assertEquals(setOf(0, 1, 2, 3), counts.keys)
+        (0..3).forEach { optionIndex ->
+            assertEquals("Correct answers should be evenly distributed across A-D", 60, counts[optionIndex])
+        }
+    }
+
 }
