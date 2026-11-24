@@ -25,6 +25,9 @@ The Physics virtual-lab area includes interactive models for:
 - Density, hydrostatic gauge pressure and Archimedes' upthrust.
 - Sensible heat transfer and latent heat during a phase change.
 - Boyle's law and Charles's law, with absolute temperature in kelvin.
+- Wave speed and period from frequency and wavelength.
+- Echo sounding using round-trip sound travel time.
+- Reflection at a plane mirror, with angles measured from the normal.
 
 The calculation engines have unit tests for the main relationships and invalid input handling. These are idealised simulations: they do not collect sensor data, reproduce measurement uncertainty or replace a supervised practical investigation. Learners should still practise recording readings, plotting graphs, estimating uncertainty and evaluating sources of error.
 
