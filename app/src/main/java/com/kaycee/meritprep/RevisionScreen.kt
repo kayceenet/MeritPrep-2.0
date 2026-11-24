@@ -422,6 +422,22 @@ internal val starterRevisionCards = listOf(
     RevisionCard("math-integration-card-1","math-integration","What is the indefinite integral of xⁿ for n≠−1?","xⁿ⁺¹/(n+1)+C.",0L),
     RevisionCard("math-integration-card-2","math-integration","Why is the constant C included in an indefinite integral?","Because the derivative of any constant is zero, so all antiderivatives differ by a constant.",0L),
     RevisionCard("math-integration-card-3","math-integration","How is a definite integral evaluated using an antiderivative F?","Calculate F(upper limit)−F(lower limit).",0L)
+) + listOf(
+    RevisionCard("math-data-card-1","math-data-representation","What angle represents a category with frequency f in a pie chart of total frequency N?","(f/N)×360°.",0L),
+    RevisionCard("math-data-card-2","math-data-representation","What is the main difference between a bar chart and a histogram?","Bar-chart bars are separated for categories/discrete values; histogram bars adjoin for continuous grouped data.",0L),
+    RevisionCard("math-data-card-3","math-data-representation","How is cumulative frequency obtained?","Add the class frequencies successively to form a running total.",0L),
+    RevisionCard("math-location-card-1","math-measures-location","How is the arithmetic mean calculated?","Sum of observations divided by the number of observations.",0L),
+    RevisionCard("math-location-card-2","math-measures-location","How do you find the median?","Arrange values in order and identify the middle value, or average the two middle values when the count is even.",0L),
+    RevisionCard("math-location-card-3","math-measures-location","What is the weighted mean formula?","Σ(wx)/Σw.",0L),
+    RevisionCard("math-dispersion-card-1","math-measures-dispersion","What is the range?","Maximum value minus minimum value.",0L),
+    RevisionCard("math-dispersion-card-2","math-measures-dispersion","What is the interquartile range?","Q₃−Q₁.",0L),
+    RevisionCard("math-dispersion-card-3","math-measures-dispersion","How is standard deviation related to variance?","Standard deviation is the positive square root of variance.",0L),
+    RevisionCard("math-counting-card-1","math-permutation-combination","When should a permutation be used?","When order matters, such as assigning positions or arranging objects.",0L),
+    RevisionCard("math-counting-card-2","math-permutation-combination","When should a combination be used?","When selecting a group and order does not matter.",0L),
+    RevisionCard("math-counting-card-3","math-permutation-combination","Write the formula for nCr.","nCr = n!/[r!(n−r)!].",0L),
+    RevisionCard("math-probability-card-1","math-probability","What is the complement rule?","P(A')=1−P(A).",0L),
+    RevisionCard("math-probability-card-2","math-probability","What is the addition rule for mutually exclusive events?","P(A∪B)=P(A)+P(B).",0L),
+    RevisionCard("math-probability-card-3","math-probability","For independent events, how is P(A and B) calculated?","P(A∩B)=P(A)×P(B).",0L)
 )
 
 @Composable
