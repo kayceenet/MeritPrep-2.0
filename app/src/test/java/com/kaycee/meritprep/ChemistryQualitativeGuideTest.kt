@@ -8,7 +8,7 @@ import org.junit.Test
 class ChemistryQualitativeGuideTest {
     @Test fun includesCoreAnionAndGasTests() {
         val targets = ChemistryQualitativeGuide.tests.map { it.target }.toSet()
-        listOf("Carbonate (CO₃²⁻)", "Sulfate (SO₄²⁻)", "Chloride (Cl⁻)", "Bromide (Br⁻)", "Iodide (I⁻)", "Nitrate (NO₃⁻)", "Carbon dioxide (CO₂)", "Ammonia (NH₃)", "Hydrogen (H₂)", "Oxygen (O₂)", "Chlorine (Cl₂)", "Sulfur dioxide (SO₂)").forEach {
+        listOf("Carbonate (CO₃²⁻)", "Sulfate (SO₄²⁻)", "Chloride (Cl⁻)", "Bromide (Br⁻)", "Iodide (I⁻)", "Nitrate (NO₃⁻)", "Sulfite (SO₃²⁻)", "Carbon dioxide (CO₂)", "Ammonia (NH₃)", "Hydrogen (H₂)", "Oxygen (O₂)", "Chlorine (Cl₂)", "Sulfur dioxide (SO₂)", "Hydrogen chloride (HCl)").forEach {
             assertTrue("Missing qualitative test: $it", it in targets)
         }
     }
@@ -29,8 +29,8 @@ class ChemistryQualitativeGuideTest {
     }
 
     @Test fun hazardousGasTestsCarryExplicitWarnings() {
-        val hazardous = ChemistryQualitativeGuide.tests.filter { it.target in setOf("Chlorine (Cl₂)", "Sulfur dioxide (SO₂)", "Ammonia (NH₃)", "Hydrogen (H₂)") }
-        assertEquals(4, hazardous.size)
+        val hazardous = ChemistryQualitativeGuide.tests.filter { it.target in setOf("Chlorine (Cl₂)", "Sulfur dioxide (SO₂)", "Ammonia (NH₃)", "Hydrogen (H₂)", "Hydrogen chloride (HCl)") }
+        assertEquals(5, hazardous.size)
         hazardous.forEach { assertTrue(it.caution.isNotBlank()) }
     }
 }
