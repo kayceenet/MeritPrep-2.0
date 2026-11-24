@@ -5,7 +5,7 @@ import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class PhysicsRevisionCardsTest {
-    @Test fun includesFortyNinePhysicsCardsAcrossSixteenDevelopedTopics() {
+    @Test fun includesSeventyThreePhysicsCardsAcrossTwentyFourDevelopedTopics() {
         val cards = starterRevisionCards.filter { it.cardId.startsWith("phy-") }
         assertEquals(73, cards.size)
         assertEquals(24, cards.map { it.topicId }.distinct().size)
