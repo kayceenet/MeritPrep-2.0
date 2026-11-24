@@ -81,6 +81,7 @@ private fun MeritPrepApp() {
                 composable("practice") { PracticeScreenV2(onStartCbt = { nav.navigate("cbt") }, onStartWaecObjective = { nav.navigate("waec-objective") }, onStartTheory = { nav.navigate("waec-theory") }, onOpenMistakes = { nav.navigate("mistakes") }, onOpenStudyPlan = { nav.navigate("study-plan") }) }
                 composable("chemistry-practice") { ChemistryPracticeScreen() }
                 composable("chemistry-waec-theory") { ChemistryWaecTheoryScreen() }
+                composable("chemistry-waec-objective") { ChemistryWaecObjectiveScreen() }
                 composable("placement") { PlacementAssessmentScreen(onOpenLesson = { nav.navigate("lesson/$it") }) }
                 composable("cbt") { CbtScreen(BiologyCbtMode.JAMB_UTME) }
                 composable("waec-objective") { CbtScreen(BiologyCbtMode.WAEC_OBJECTIVE) }
@@ -175,6 +176,11 @@ private fun SubjectScreen(subject: Subject, nav: NavHostController) {
             item {
                 OutlinedButton(onClick = { nav.navigate("chemistry-waec-theory") }, modifier = Modifier.fillMaxWidth()) {
                     Text("WAEC Chemistry theory practice")
+                }
+            }
+            item {
+                OutlinedButton(onClick = { nav.navigate("chemistry-waec-objective") }, modifier = Modifier.fillMaxWidth()) {
+                    Text("Timed WAEC Chemistry objective · 30 questions")
                 }
             }
         }
