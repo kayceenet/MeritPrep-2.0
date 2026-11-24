@@ -13,10 +13,10 @@ class PhysicsWaecObjectiveBankTest {
         questions.forEach {
             assertTrue(it.id.startsWith("waec-phy-"))
             assertEquals(4, it.options.size)
-            assertTrue(it.correctIndex in it.options.indices)
+            assertTrue(it.correctOptionIndex in it.options.indices)
             assertTrue(it.explanation.isNotBlank())
-            assertTrue(it.sourceLabel.contains("MeritPrep original WAEC-style Physics practice"))
-            assertTrue(!it.isOfficial)
+            assertTrue(it.source.contains("MeritPrep original WAEC-style Physics practice"))
+            assertTrue(!it.isVerified)
         }
     }
 
