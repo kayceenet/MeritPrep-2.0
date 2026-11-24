@@ -39,7 +39,7 @@ class BiologyQuestionBankTest {
     @Test
     fun adaptationBankHasUniqueIdsAndValidKeys() {
         val questions = BiologyQuestionBank.adaptation
-        assertTrue(questions.size >= 8)
+        assertTrue(questions.size >= 10)
         assertEquals(questions.size, questions.map { it.id }.toSet().size)
         questions.forEach { question ->
             assertEquals("bio-adaptation", question.topicId)
@@ -370,7 +370,7 @@ class BiologyQuestionBankTest {
     @Test
     fun completeBankHasNoDuplicatePromptsOrRepeatedOptionsWithinAnItem() {
         val questions = BiologyQuestionBank.all
-        assertEquals(242, questions.size)
+        assertEquals(244, questions.size)
         assertEquals(questions.size, questions.map { it.prompt.trim().lowercase() }.toSet().size)
         questions.forEach { question ->
             assertTrue(question.options.all { it.isNotBlank() })
