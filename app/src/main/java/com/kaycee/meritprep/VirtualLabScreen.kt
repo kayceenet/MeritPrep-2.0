@@ -544,6 +544,12 @@ private fun QuadratSamplingLab() {
         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
             Text("Quadrat sampling investigation", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
             Text("Record the number of plants or slow-moving organisms found in each sample quadrat. The model uses four sample locations.")
+            Text("Field procedure", fontWeight = FontWeight.SemiBold)
+            Text("1. Mark out the habitat area and, where practical, divide it into a grid.")
+            Text("2. Select sample positions randomly so that you do not choose only places where the organism is easy to see.")
+            Text("3. Place the same quadrat at each selected position and count the target organisms using one consistent boundary rule.")
+            Text("4. Repeat at enough positions to represent the habitat. Record the quadrat size, locations and conditions.")
+            Text("5. Add the counts, divide by the total sampled area to obtain density, then multiply by habitat area to estimate population.")
             counts.forEachIndexed { index, count ->
                 Text("Quadrat ${index + 1}: $count organisms", fontWeight = FontWeight.SemiBold)
                 Slider(
