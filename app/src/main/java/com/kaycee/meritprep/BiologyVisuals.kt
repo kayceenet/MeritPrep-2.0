@@ -413,3 +413,39 @@ fun EcologicalSuccessionCard() {
         }
     }
 }
+
+
+@Composable
+fun AdaptationTypesCard() {
+    Card(Modifier.fillMaxWidth()) {
+        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(9.dp)) {
+            Text("Adaptations: structure, function and behaviour", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+            Text("An adaptation is an inherited feature that can improve survival or reproductive success in a particular environment. Adaptations occur in populations over generations.")
+
+            Surface(color = MaterialTheme.colorScheme.primaryContainer, shape = MaterialTheme.shapes.medium) {
+                Column(Modifier.fillMaxWidth().padding(12.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                    Text("STRUCTURAL (BODY FORM)", fontWeight = FontWeight.Bold)
+                    Text("A physical feature of an organism.")
+                    Text("Examples: a cactus has leaves reduced to spines and a waxy surface that help limit water loss; mangroves may have specialised roots that aid support or gas exchange in waterlogged soils.")
+                }
+            }
+            Surface(color = MaterialTheme.colorScheme.secondaryContainer, shape = MaterialTheme.shapes.medium) {
+                Column(Modifier.fillMaxWidth().padding(12.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                    Text("PHYSIOLOGICAL (INTERNAL FUNCTION)", fontWeight = FontWeight.Bold)
+                    Text("A process inside the organism.")
+                    Text("Examples: some desert animals conserve water by producing concentrated urine; some mangroves regulate salt uptake or remove excess salt.")
+                }
+            }
+            Surface(color = MaterialTheme.colorScheme.tertiaryContainer, shape = MaterialTheme.shapes.medium) {
+                Column(Modifier.fillMaxWidth().padding(12.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                    Text("BEHAVIOURAL (WAY OF ACTING)", fontWeight = FontWeight.Bold)
+                    Text("A pattern of activity that can reduce risk or improve access to resources.")
+                    Text("Examples: some desert animals are active at night to avoid the hottest part of the day; some birds migrate when food or climate conditions change.")
+                }
+            }
+
+            Text("Do not confuse adaptation with acclimatisation", fontWeight = FontWeight.Bold)
+            Text("Adaptation is an inherited population-level feature shaped over generations. Acclimatisation is an adjustment made by an individual during its lifetime and is usually reversible; it does not, by itself, change the genes passed to offspring.")
+        }
+    }
+}
