@@ -144,13 +144,13 @@ object MathematicsCourse {
             "a=4, d=3. T₁₀=4+(10−1)×3=4+27=31."
         )
     ) + listOf(
-        outline("math-binary-operations", "Binary operations", "Closure, commutativity, associativity and distributivity; identity and inverse elements in simple cases."),
-        outline("math-matrices", "Matrices and determinants", "Basic matrix operations for matrices not exceeding 3×3; determinants; inverse of 2×2 matrices; stated exclusions for higher-degree equations."),
-        outline("math-euclidean-geometry", "Euclidean geometry", "Properties of angles and lines; triangles, quadrilaterals and polygons; circle theorems; cyclic quadrilaterals; intersecting chords; geometric constructions."),
-        outline("math-mensuration", "Mensuration", "Perimeters and areas of plane figures; arcs and chords; sectors and segments; surface areas and volumes of simple and composite solids; longitudes and latitudes."),
-        outline("math-loci", "Loci", "Loci in two dimensions based on parallel lines, perpendicular bisectors, angle bisectors and circles."),
-        outline("math-coordinate-geometry", "Coordinate geometry", "Midpoint, gradient and distance between points; parallel and perpendicular lines; equations of straight lines in standard forms."),
-        outline("math-trigonometry", "Trigonometry", "Trigonometric ratios for angles from −360° to 360°; special angles; elevation and depression; bearings; areas and solutions of triangles; sine and cosine graphs."),
+        MathematicsCourseExtension.topics.first { it.id == "math-binary-operations" },
+        MathematicsCourseExtension.topics.first { it.id == "math-matrices" },
+        MathematicsCourseExtension.topics.first { it.id == "math-euclidean-geometry" },
+        MathematicsCourseExtension.topics.first { it.id == "math-mensuration" },
+        MathematicsCourseExtension.topics.first { it.id == "math-loci" },
+        MathematicsCourseExtension.topics.first { it.id == "math-coordinate-geometry" },
+        MathematicsCourseExtension.topics.first { it.id == "math-trigonometry" },
         outline("math-differentiation", "Differentiation", "Limits of functions; differentiation of explicit algebraic and simple trigonometric functions."),
         outline("math-application-differentiation", "Application of differentiation", "Rates of change; maxima and minima."),
         outline("math-integration", "Integration", "Integration of explicit algebraic and simple trigonometric functions; area under a curve in simple cases."),
