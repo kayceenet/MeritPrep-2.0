@@ -11,7 +11,7 @@ import com.kaycee.meritprep.data.CalculatorEngine
 private data class CalculatorTool(val title: String, val subject: String, val formula: String, val fields: List<String>, val calculate: (List<Double>) -> CalculationResult)
 private val calculatorTools = listOf(
     CalculatorTool("Percentage", "Mathematics", "Percentage = (part ÷ whole) × 100", listOf("Part", "Whole")) { CalculatorEngine.percentage(it[0], it[1]) },
-    CalculatorTool("Arithmetic mean", "Mathematics", "Mean = sum of values ÷ number of values", listOf("Values (comma-separated)")) { CalculatorEngine.mean(it[0].toString().split(",").map { value -> value.trim().toDouble() }) },
+    CalculatorTool("Arithmetic mean", "Mathematics", "Mean = sum of values ÷ number of values", listOf("Values (comma-separated)")) { CalculatorEngine.mean(it) },
     CalculatorTool("Ohm's law: current", "Physics", "I = V ÷ R", listOf("Voltage (V)", "Resistance (Ω)")) { CalculatorEngine.ohmsLaw(it[0], it[1]) },
     CalculatorTool("Speed", "Physics", "Speed = distance ÷ time", listOf("Distance (m)", "Time (s)")) { CalculatorEngine.speed(it[0], it[1]) },
     CalculatorTool("Density", "Physics / Chemistry", "Density = mass ÷ volume", listOf("Mass (g)", "Volume (cm³)")) { CalculatorEngine.density(it[0], it[1]) },
