@@ -11,9 +11,9 @@ This working map follows the 23 Mathematics topic headings currently summarised 
 
 ## Current implementation
 
-The first fifteen topics have beginner-focused lesson drafts with objectives, explanatory sections, examples or applications, misconception guidance and a formative check. The current objective bank contains 75 original MeritPrep questions, five per developed topic. The practice screen shuffles questions and options, records attempts locally and saves incorrect responses to the mistake notebook. The spaced-revision workflow includes 45 Mathematics recall cards across these fifteen topics.
+The first eighteen topics have beginner-focused lesson drafts with objectives, explanatory sections, examples or applications, misconception guidance and a formative check. The current objective bank contains 90 original MeritPrep questions, five per developed topic. The practice screen shuffles questions and options, records attempts locally and saves incorrect responses to the mistake notebook. The spaced-revision workflow includes 54 Mathematics recall cards across these eighteen topics.
 
-The remaining eight topics are syllabus outlines only. They are not represented as completed lessons. All Mathematics teaching and questions are draft content and require independent subject-teacher review.
+The remaining five topics are syllabus outlines only. They are not represented as completed lessons. All Mathematics teaching and questions are draft content and require independent subject-teacher review.
 
 ## Topic coverage
 
@@ -34,9 +34,9 @@ The remaining eight topics are syllabus outlines only. They are not represented 
 | 13 | Loci | Lesson draft + 5 original questions |
 | 14 | Coordinate geometry | Lesson draft + 5 original questions |
 | 15 | Trigonometry | Lesson draft + 5 original questions |
-| 16 | Differentiation | Syllabus outline |
-| 17 | Application of differentiation | Syllabus outline |
-| 18 | Integration | Syllabus outline |
+| 16 | Differentiation | Lesson draft + 5 original questions |
+| 17 | Application of differentiation | Lesson draft + 5 original questions |
+| 18 | Integration | Lesson draft + 5 original questions |
 | 19 | Representation of data | Syllabus outline |
 | 20 | Measures of location | Syllabus outline |
 | 21 | Measures of dispersion | Syllabus outline |
@@ -45,7 +45,7 @@ The remaining eight topics are syllabus outlines only. They are not represented 
 
 ## Assessment integrity
 
-- All 75 questions in the current bank are original MeritPrep practice items, not official JAMB or WAEC past questions.
+- All 90 questions in the current bank are original MeritPrep practice items, not official JAMB or WAEC past questions.
 - Questions have one keyed answer and explanatory feedback; structural unit tests check IDs, topic mapping, option counts, answer-key bounds and provenance.
 - The current practice bank is not a full JAMB mock and does not predict examination performance.
 - The practice screen uses the local attempt and mistake-notebook workflow.
@@ -53,13 +53,12 @@ The remaining eight topics are syllabus outlines only. They are not represented 
 
 ## Next development work
 
-1. Develop differentiation and its applications, including limits, rates of change, maxima and minima.
-2. Develop integration with algebraic and simple trigonometric examples and areas under curves.
-3. Complete representation of data, measures of location and dispersion, permutation, combination and probability with worked problems.
-4. Add topic-specific formula tools and interactive visual models where they improve understanding.
-5. Expand objective practice only after verifying every question, distractor, calculation and explanation.
-6. Add a timed JAMB-style Mathematics CBT only after validating the question pool and practice configuration.
-7. Independently review all lessons, calculations, diagrams and questions before changing content status from draft.
+1. Complete the remaining five syllabus topics: representation of data, measures of location and dispersion, permutations, combinations and probability.
+2. Add visual statistics tools for tables, charts, mean, median, mode, variance and standard deviation.
+3. Expand probability examples to include mutually exclusive events, independent events and conditional reasoning at the syllabus level.
+4. Expand objective practice only after verifying every question, distractor, calculation and explanation.
+5. Add a timed JAMB-style Mathematics CBT only after validating the full question pool and practice configuration.
+6. Independently review all lessons, worked solutions, diagrams and questions before changing content status from draft.
 
 ## Academic review checklist
 
