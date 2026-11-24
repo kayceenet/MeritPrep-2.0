@@ -25,11 +25,7 @@ class BiologyPopulationSamplingTest {
 
     @Test
     fun acceptsZeroCountsButRejectsInvalidSamplingInputs() {
-        assertEquals(
-            0.0,
-            estimatePopulationFromQuadrats(listOf(0, 0, 0), 1.0, 50.0)!!.estimatedPopulation,
-            0.0001
-        )
+        assertEquals(0.0, estimatePopulationFromQuadrats(listOf(0, 0, 0), 1.0, 50.0)!!.estimatedPopulation, 0.0001)
         assertNull(estimatePopulationFromQuadrats(emptyList(), 1.0, 50.0))
         assertNull(estimatePopulationFromQuadrats(listOf(1, -1), 1.0, 50.0))
         assertNull(estimatePopulationFromQuadrats(listOf(1), 0.0, 50.0))
@@ -37,5 +33,12 @@ class BiologyPopulationSamplingTest {
         assertNull(estimatePopulationFromQuadrats(listOf(1, 2), 1.0, 1.0))
         assertNull(estimatePopulationFromQuadrats(listOf(Int.MAX_VALUE, 1), 1.0, 10.0))
         assertNull(estimatePopulationFromQuadrats(listOf(1), Double.NaN, 50.0))
+        assertNull(estimatePopulationFromQuadrats(listOf(1), 1.0, Double.POSITIVE_INFINITY))
+    }
+
+    @Test
+    fun rejectsOverflowingSampleAreaAndNonFiniteEstimate() {
+        assertNull(estimatePopulationFromQuadrats(listOf(1, 2), Double.MAX_VALUE, Double.MAX_VALUE))
+        assertNull(estimatePopulationFromQuadrats(listOf(Int.MAX_VALUE), 1.0, Double.MAX_VALUE))
     }
 }
