@@ -71,4 +71,14 @@ class LearningCatalogTest {
         }
     }
 
+    @Test
+    fun biologyLessonKnowledgeCheckAnswersAreBalancedAcrossAllFourPositions() {
+        val lessons = LearningCatalog.topics.filter { it.subjectCode == "BIO" }
+        val counts = lessons.groupingBy { it.correctOption }.eachCount()
+        assertEquals(setOf(0, 1, 2, 3), counts.keys)
+        (0..3).forEach { optionIndex ->
+            assertEquals("Biology lesson answers should be evenly distributed", 6, counts[optionIndex])
+        }
+    }
+
 }
