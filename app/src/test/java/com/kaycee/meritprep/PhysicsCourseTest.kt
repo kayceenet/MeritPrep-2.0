@@ -17,13 +17,16 @@ class PhysicsCourseTest {
         assertEquals("phy-change-state", PhysicsCourse.topics[15].id)
         assertEquals("phy-vapours", PhysicsCourse.topics[16].id)
         assertEquals("phy-reflection", PhysicsCourse.topics[23].id)
+        assertEquals("phy-refraction", PhysicsCourse.topics[24].id)
+        assertEquals("phy-optical-instruments", PhysicsCourse.topics[25].id)
+        assertEquals("phy-dispersion", PhysicsCourse.topics[26].id)
         assertEquals(39, PhysicsCourse.topics.map { it.id }.distinct().size)
         assertTrue(PhysicsCourse.topics.all { it.subjectCode == "PHY" })
     }
 
-    @Test fun twentyFourDevelopedLessonsAndRemainingEntriesAreOutlines() {
-        assertEquals(24, PhysicsCourse.topics.count { !it.isSyllabusOutline })
-        assertEquals(15, PhysicsCourse.topics.count { it.isSyllabusOutline })
+    @Test fun twentySevenDevelopedLessonsAndRemainingEntriesAreOutlines() {
+        assertEquals(27, PhysicsCourse.topics.count { !it.isSyllabusOutline })
+        assertEquals(12, PhysicsCourse.topics.count { it.isSyllabusOutline })
         PhysicsCourse.topics.filterNot { it.isSyllabusOutline }.forEach {
             assertTrue(it.objectives.size >= 4)
             assertTrue(it.sections.size >= 4)
