@@ -370,7 +370,7 @@ class BiologyQuestionBankTest {
     @Test
     fun completeBankHasNoDuplicatePromptsOrRepeatedOptionsWithinAnItem() {
         val questions = BiologyQuestionBank.all
-        assertEquals(240, questions.size)
+        assertEquals(242, questions.size)
         assertEquals(questions.size, questions.map { it.prompt.trim().lowercase() }.toSet().size)
         questions.forEach { question ->
             assertTrue(question.options.all { it.isNotBlank() })
@@ -389,9 +389,11 @@ class BiologyQuestionBankTest {
         val counts = questions.groupingBy { it.correctOptionIndex }.eachCount()
 
         assertEquals(setOf(0, 1, 2, 3), counts.keys)
-        (0..3).forEach { optionIndex ->
-            assertEquals("Correct answers should be evenly distributed across A-D", 60, counts[optionIndex])
-        }
+        val frequencies = (0..3).map { counts[it] ?: 0 }
+        assertTrue(
+            "Correct answers should be distributed evenly across A-D",
+            frequencies.maxOrNull()!! - frequencies.minOrNull()!! <= 1
+        )
     }
 
 }
