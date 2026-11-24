@@ -69,6 +69,10 @@ WAEC practical preparation must include specimen observation and comparison, bio
 
 ## 4. Assessment requirements
 
+### 4.0 Placement and baseline diagnostics
+
+A learner should be able to take a low-stakes starting-point check before following a study plan. The diagnostic should sample across the selected subject's syllabus topics, expose topic-level evidence and recommend where to begin. It must record unanswered items separately, avoid presenting a small diagnostic as a validated grade prediction, and feed errors into the learner's revision workflow. Diagnostic blueprints and sampling rules must be versioned as syllabus coverage expands.
+
 ### 4.1 Question-bank integrity
 
 Each assessment item must have a stable ID, subject, topic/objective mapping, format, difficulty/cognitive demand, answer key or rubric, explanation, provenance, rights status, author, reviewer, version and publication status. Original practice questions must be labelled as original. An item may be labelled as an official past question only when its exam, year, paper, question number, source and reuse rights have been verified.
