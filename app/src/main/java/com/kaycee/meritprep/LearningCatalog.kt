@@ -788,6 +788,7 @@ fun LessonScreen(topicId: String) {
                 DoubleCirculationCard()
             }
             "bio-excretion" -> NephronFlowCard()
+            "bio-soil" -> SoilWaterInvestigationCard()
             "bio-reproduction" -> FlowerReproductionCard()
             "bio-evolution-theory" -> NaturalSelectionCard()
         }
