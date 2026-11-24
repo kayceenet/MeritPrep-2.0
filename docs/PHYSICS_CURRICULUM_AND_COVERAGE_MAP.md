@@ -11,9 +11,9 @@ The topic headings below follow the 39 numbered topic headings in the Physics do
 
 ## Current implementation
 
-The first thirty-two topics have beginner-focused lesson drafts, each with learning objectives, explanatory sections, a formative understanding check and a topic-linked original question set. The current bank contains 160 original objective questions, five per developed topic. The Physics practice screen shuffles the question order and answer options, records attempts locally and captures incorrect responses in the mistake notebook. The spaced-revision workflow also includes 97 Physics recall cards mapped across all thirty-two developed topics.
+All thirty-nine topics have beginner-focused lesson drafts, each with learning objectives, explanatory sections, a formative understanding check and a topic-linked original question set. The current bank contains 195 original objective questions, five per developed topic. The Physics practice screen shuffles the question order and answer options, records attempts locally and captures incorrect responses in the mistake notebook. The spaced-revision workflow also includes 118 Physics recall cards mapped across all thirty-nine topics.
 
-The remaining seven topics are syllabus outlines only. They cannot be marked as completed lessons. Physics content is draft material and has not received independent academic review.
+All 39 topics now have lesson drafts. They remain draft content and must not be treated as academically approved until independent review is complete. Physics content is draft material and has not received independent academic review.
 
 ### Virtual practical models
 
@@ -69,13 +69,13 @@ The calculation engines have unit tests for the main relationships and invalid i
 | 30 | Electric cells | Lesson draft + 5 original questions |
 | 31 | Current electricity | Lesson draft + 5 original questions |
 | 32 | Electrical energy and power | Lesson draft + 5 original questions |
-| 33 | Magnets and magnetic fields | Syllabus outline |
-| 34 | Force on a current-carrying conductor in a magnetic field | Syllabus outline |
-| 35 | Electromagnetic induction | Syllabus outline |
-| 36 | Simple AC circuits | Syllabus outline |
-| 37 | Conduction of electricity through liquids and gases | Syllabus outline |
-| 38 | Elementary modern physics | Syllabus outline |
-| 39 | Introductory electronics | Syllabus outline |
+| 33 | Magnets and magnetic fields | Lesson draft + 5 original questions |
+| 34 | Force on a current-carrying conductor in a magnetic field | Lesson draft + 5 original questions |
+| 35 | Electromagnetic induction | Lesson draft + 5 original questions |
+| 36 | Simple AC circuits | Lesson draft + 5 original questions |
+| 37 | Conduction of electricity through liquids and gases | Lesson draft + 5 original questions |
+| 38 | Elementary modern physics | Lesson draft + 5 original questions |
+| 39 | Introductory electronics | Lesson draft + 5 original questions |
 
 ## Interactive Physics models
 
@@ -101,15 +101,15 @@ The pure calculation engines have unit tests for the main relationships and inva
 
 ## Assessment integrity
 
-- All 160 questions in the current Physics bank are original MeritPrep practice items.
+- All 195 questions in the current Physics bank are original MeritPrep practice items.
 - They must not be labelled as official JAMB or WAEC past questions.
 - Every question has one keyed answer and an explanatory feedback note; the bank has structural unit tests for IDs, topic mapping, option count, answer-key bounds and provenance labels.
-- The current 160-item practice set is not a full JAMB mock and is not a prediction of examination performance.
+- The current 195-item practice set is not a full JAMB mock and is not a prediction of examination performance.
 - The practice UI uses the shared local attempt and mistake-notebook workflow.
 
 ## Next development work
 
-1. Develop the remaining seven syllabus topics into full beginner lessons and add five or more reviewed practice items per topic.
+1. Independently review and deepen all 39 lesson drafts, with particular attention to prerequisite explanations, worked examples, diagrams and misconceptions.
 2. Develop worked examples with explicit units, sign conventions, diagrams and graph interpretation.
 3. Extend the current virtual models into structured alternative-to-practical tasks with experimental variables, simulated readings, data tables, graph plotting, uncertainty calculations and evaluation prompts.
 4. Expand the question bank only after topic coverage and answer keys are checked.
