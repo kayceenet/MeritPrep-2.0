@@ -27,7 +27,7 @@ class CalculatorEngineTest {
     }
     @Test fun phAndFaradaysLaw() {
         assertEquals(3.0, CalculatorEngine.pH(1e-3).value, 1e-9)
-        assertEquals(1.1855, CalculatorEngine.electrolysisMass(2.0, 3600.0, 63.546, 2.0).value, 1e-3)
+        assertEquals(2.371, CalculatorEngine.electrolysisMass(2.0, 3600.0, 63.546, 2.0).value, 1e-3)
     }
     @Test fun invalidInputsAreRejected() {
         assertThrows(IllegalArgumentException::class.java) { CalculatorEngine.percentage(2.0, 0.0) }
