@@ -10,6 +10,10 @@ class PhysicsWaecObjectiveBankTest {
         assertEquals(50, questions.size)
         assertEquals(50, questions.map { it.id }.distinct().size)
         assertEquals(39, questions.map { it.topicId }.distinct().size)
+        assertEquals(
+            PhysicsCourse.topics.map { it.id }.toSet(),
+            questions.map { it.topicId }.toSet()
+        )
         questions.forEach {
             assertTrue(it.id.startsWith("waec-phy-"))
             assertEquals(4, it.options.size)
