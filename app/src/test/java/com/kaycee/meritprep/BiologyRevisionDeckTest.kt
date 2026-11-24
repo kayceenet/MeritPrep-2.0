@@ -6,7 +6,7 @@ import org.junit.Test
 
 class BiologyRevisionDeckTest {
     @Test fun revisionDeckHasUniqueCardsMappedToEveryBiologyTopic() {
-        val cards = starterBiologyCards
+        val cards = starterRevisionCards.filter { it.topicId.startsWith("bio-") }
         assertEquals(198, cards.size)
         assertEquals(cards.size, cards.map { it.cardId }.toSet().size)
         val lessonIds = BiologyCurriculum.units.mapNotNull { it.lessonId }.toSet()
