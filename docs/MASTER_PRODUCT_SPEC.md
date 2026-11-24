@@ -187,3 +187,14 @@ These are alpha implementations. Biology content is pending independent academic
 - Never claim a build, test, APK or feature is complete without verification.
 - Preserve existing learner data during schema migrations.
 - Keep the original `kayceenet/Merit` repository untouched; MeritPrep 2.0 is developed in its separate repository.
+
+
+## Scientific calculator toolkit
+
+The Android alpha includes an offline calculator workspace for common quantitative tasks across Mathematics, Physics and Chemistry:
+- Mathematics: percentage and arithmetic mean.
+- Physics: current from Ohm's law and speed.
+- Physics/Chemistry: density.
+- Chemistry: molar concentration and dilution using C₁V₁ = C₂V₂.
+
+Calculation logic is separated from the Compose interface and covered by unit tests. Inputs are validated for zero denominators, non-positive physical quantities and invalid dilution conditions. Results show the equation, substituted working and output unit. These are focused learning tools, not a replacement for a general-purpose scientific calculator; further formula coverage is planned.
