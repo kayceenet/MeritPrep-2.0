@@ -317,6 +317,16 @@ internal val starterRevisionCards = listOf(
     RevisionCard("phy-reflection-card-1","phy-reflection","State the law of reflection.","The angle of incidence equals the angle of reflection, measured from the normal.",0L),
     RevisionCard("phy-reflection-card-2","phy-reflection","Describe the image formed by a plane mirror.","Virtual, upright, same size as the object and apparently the same distance behind the mirror as the object is in front.",0L),
     RevisionCard("phy-reflection-card-3","phy-reflection","Why are convex mirrors used as vehicle side mirrors?","They form virtual, upright and diminished images and provide a wide field of view.",0L)
+) + listOf(
+    RevisionCard("phy-refraction-card-1","phy-refraction","State Snell's law for two media.","n₁ sin i = n₂ sin r, with both angles measured from the normal.",0L),
+    RevisionCard("phy-refraction-card-2","phy-refraction","When can total internal reflection occur?","When light travels from a higher-index medium to a lower-index medium and the incidence angle exceeds the critical angle.",0L),
+    RevisionCard("phy-refraction-card-3","phy-refraction","How is apparent depth related to real depth for near-normal viewing from air?","Apparent depth ≈ real depth divided by the refractive index of the liquid relative to air.",0L),
+    RevisionCard("phy-optics-card-1","phy-optical-instruments","How is lens power calculated?","P = 1/f, where focal length f is in metres and power is in dioptres.",0L),
+    RevisionCard("phy-optics-card-2","phy-optical-instruments","Which lens corrects myopia?","A diverging (concave) lens.",0L),
+    RevisionCard("phy-optics-card-3","phy-optical-instruments","Which lens corrects hyperopia?","A converging (convex) lens.",0L),
+    RevisionCard("phy-dispersion-card-1","phy-dispersion","What causes dispersion in a glass prism?","The refractive index varies with wavelength, so different colours refract by different amounts.",0L),
+    RevisionCard("phy-dispersion-card-2","phy-dispersion","Which visible colour is deviated most by ordinary glass?","Violet is deviated most; red is deviated least under normal dispersion.",0L),
+    RevisionCard("phy-dispersion-card-3","phy-dispersion","What are the primary additive colours of light?","Red, green and blue.",0L)
 )
 
 @Composable
