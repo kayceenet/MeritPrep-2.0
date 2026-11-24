@@ -172,9 +172,7 @@ object BiologyTheoryBank {
                 "Flexible or reduced supporting tissues may be sufficient because water supports the plant."
             ),
             "A cactus may have leaves reduced to spines, which lowers surface area for water loss, and a thick waxy cuticle that reduces evaporation. Its succulent stem stores water. A floating aquatic plant may have stomata mainly on the upper leaf surface where they contact air, and large air spaces that provide buoyancy and assist gas movement. These features suit the different water conditions of the habitats."
-        )
-
-        ,
+        ),
         BiologyTheoryTask(
             "theory-respiration-11", "bio-respiration", "Aerobic and anaerobic respiration",
             "Compare aerobic respiration with anaerobic respiration in human muscle cells. State where each occurs, the oxygen requirement, the relative energy yield and the products formed.",
