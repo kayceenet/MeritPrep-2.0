@@ -81,6 +81,7 @@ private fun MeritPrepApp() {
                 composable("practice") { PracticeScreenV2(onStartCbt = { nav.navigate("cbt") }, onStartWaecObjective = { nav.navigate("waec-objective") }, onStartTheory = { nav.navigate("waec-theory") }, onOpenMistakes = { nav.navigate("mistakes") }, onOpenStudyPlan = { nav.navigate("study-plan") }) }
                 composable("chemistry-practice") { ChemistryPracticeScreen() }
                 composable("physics-practice") { PhysicsPracticeScreen() }
+                composable("mathematics-practice") { MathematicsPracticeScreen() }
                 composable("physics-waec-practical") { PhysicsWaecPracticalScreen() }
                 composable("physics-waec-theory") { PhysicsWaecTheoryScreen() }
                 composable("physics-waec-objective") { CbtScreen(CbtMode.WAEC_PHYSICS_OBJECTIVE, PhysicsWaecObjectiveBank.all) }
@@ -173,6 +174,16 @@ private fun SubjectScreen(subject: Subject, nav: NavHostController) {
         item {
             Text(subject.name, style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
             Text(if (subject.code == "CHEM") "18 JAMB Chemistry topics are mapped from the IBASS syllabus. All 18 JAMB topics now have beginner-oriented lesson drafts and 90 original practice questions. Content still requires independent subject-teacher review and separate WAEC alignment." else "Start with a structured lesson. This is an initial content set, not yet a complete official syllabus map.")
+        }
+        if (subject.code == "MATH") {
+            item {
+                Text("JAMB Mathematics map: 23 numbered topics from the IBASS syllabus. The first eight topics have beginner-focused lesson drafts and 40 original practice questions. The remaining 15 entries are syllabus outlines, not completed lessons. Independent Mathematics-teacher review is outstanding.")
+            }
+            item {
+                Button(onClick = { nav.navigate("mathematics-practice") }, modifier = Modifier.fillMaxWidth()) {
+                    Text("Practise Mathematics · 40 questions")
+                }
+            }
         }
         if (subject.code == "PHY") {
             item {
