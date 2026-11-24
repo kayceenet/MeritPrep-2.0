@@ -11,9 +11,9 @@ data class FluidPracticalResult(
     val upthrustN: Double
 )
 
-data class ThermalPracticalResult(
-    val heatTransferJ: Double,
-    val finalLengthM: Double? = null
+data class LinearExpansionResult(
+    val changeInLengthM: Double,
+    val finalLengthM: Double
 )
 
 data class GasLawPracticalResult(
@@ -99,7 +99,7 @@ object PhysicsPracticalExtension {
         originalLengthM: Double,
         coefficientPerKelvin: Double,
         temperatureChangeK: Double
-    ): ThermalPracticalResult {
+    ): LinearExpansionResult {
         require(originalLengthM.isFinite() && originalLengthM > 0.0) { "Original length must be finite and greater than zero." }
         require(coefficientPerKelvin.isFinite() && coefficientPerKelvin >= 0.0) {
             "Expansion coefficient must be finite and cannot be negative."
@@ -107,10 +107,9 @@ object PhysicsPracticalExtension {
         require(temperatureChangeK.isFinite()) { "Temperature change must be finite." }
         val finalLength = originalLengthM * (1.0 + coefficientPerKelvin * temperatureChangeK)
         require(finalLength.isFinite() && finalLength > 0.0) { "Calculated final length must be positive and finite." }
-        return ThermalPracticalResult(
-            heatTransferJ = originalLengthM * coefficientPerKelvin * temperatureChangeK,
-            finalLengthM = finalLength
-        )
+        val changeInLength = finalLength - originalLengthM
+        require(changeInLength.isFinite()) { "Calculated expansion is outside the supported range." }
+        return LinearExpansionResult(changeInLength, finalLength)
     }
 
     fun boylesLawFinalPressure(
