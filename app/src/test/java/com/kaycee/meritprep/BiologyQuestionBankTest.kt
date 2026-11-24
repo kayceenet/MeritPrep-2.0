@@ -396,4 +396,13 @@ class BiologyQuestionBankTest {
         )
     }
 
+    @Test
+    fun anatomyQuestionsAreMappedToTheirRelevantBiologyTopics() {
+        assertTrue(BiologyQuestionBank.plantAnatomy.any { it.id == "bio-plant-007" && it.prompt.contains("root", ignoreCase = true) })
+        assertTrue(BiologyQuestionBank.plantAnatomy.any { it.id == "bio-plant-008" && it.prompt.contains("dicot stem", ignoreCase = true) })
+        assertTrue(BiologyQuestionBank.nutrition.any { it.id == "bio-nut-011" && it.prompt.contains("villi", ignoreCase = true) })
+        assertTrue(BiologyQuestionBank.respiration.any { it.id == "bio-resp-011" && it.prompt.contains("alveoli", ignoreCase = true) })
+        assertFalse(BiologyQuestionBank.plantAnatomy.any { it.prompt.contains("alveoli", ignoreCase = true) || it.prompt.contains("villi", ignoreCase = true) })
+    }
+
 }
