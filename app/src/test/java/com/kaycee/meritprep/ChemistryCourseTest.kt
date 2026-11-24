@@ -12,23 +12,21 @@ class ChemistryCourseTest {
     }
 
     @Test fun allEighteenTopicsHaveBeginnerLessonContent() {
-        val developed = ChemistryCourse.topics
-        assertTrue(developed.all { it.objectives.size >= 4 })
-        assertTrue(developed.all { it.sections.size >= 4 })
-        assertTrue(developed.none { it.isSyllabusOutline })
-        assertTrue(developed.all { it.checkOptions.size == 4 })
+        val lessons = ChemistryCourse.topics
+        assertEquals(18, lessons.count { !it.isSyllabusOutline })
+        assertTrue(lessons.all { it.objectives.size >= 4 })
+        assertTrue(lessons.all { it.sections.size >= 4 })
+        assertTrue(lessons.all { it.checkOptions.size == 4 })
+        assertTrue(lessons.all { it.introduction.isNotBlank() && it.explanation.isNotBlank() })
     }
 
-    @Test fun finalSixTopicsHaveBeginnerLessonContent() {
+    @Test fun finalSixTopicsHaveAuthoredTeachingContent() {
         val ids = ChemistryCourse.topics.map { it.id }
-        assertTrue(ids.containsAll(listOf("chem-nuclear", "chem-solubility", "chem-pollution", "chem-acids-bases", "chem-redox", "chem-electrolysis", "chem-energy", "chem-rates")))
-        assertEquals(18, ChemistryCourse.topics.count { !it.isSyllabusOutline })
+        assertTrue(ids.containsAll(listOf("chem-equilibrium", "chem-nonmetals", "chem-metals", "chem-organic", "chem-industry", "chem-astro")))
+        assertTrue(ChemistryCourse.topics.none { it.isSyllabusOutline })
     }
 
-    @Test fun allTopicsAreDevelopedAndNotOutlineOnly() {
-        val mappedDrafts = ChemistryCourse.topics.drop(12)
-        assertEquals(0, mappedDrafts.size)
-        assertTrue(mappedDrafts.all { it.isSyllabusOutline })
-        assertTrue(mappedDrafts.all { it.sections.any { section -> section.first == "Syllabus scope" } })
+    @Test fun noSyllabusTopicIsMistakenForAnUnfinishedOutline() {
+        assertTrue(ChemistryCourse.topics.none { it.isSyllabusOutline })
     }
 }
