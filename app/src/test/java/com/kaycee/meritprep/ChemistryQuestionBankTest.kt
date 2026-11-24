@@ -6,10 +6,10 @@ import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class ChemistryQuestionBankTest {
-    @Test fun containsFortyOriginalQuestionsAcrossEightDevelopedTopics() {
-        assertEquals(40, ChemistryQuestionBank.all.size)
-        assertEquals(40, ChemistryQuestionBank.all.map { it.id }.distinct().size)
-        assertEquals(8, ChemistryQuestionBank.all.map { it.topicId }.distinct().size)
+    @Test fun containsSixtyOriginalQuestionsAcrossTwelveDevelopedTopics() {
+        assertEquals(60, ChemistryQuestionBank.all.size)
+        assertEquals(60, ChemistryQuestionBank.all.map { it.id }.distinct().size)
+        assertEquals(12, ChemistryQuestionBank.all.map { it.topicId }.distinct().size)
     }
 
     @Test fun eachDevelopedTopicHasFiveQuestions() {
