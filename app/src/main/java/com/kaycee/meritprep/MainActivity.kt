@@ -83,6 +83,7 @@ private fun MeritPrepApp() {
                 composable("chemistry-waec-theory") { ChemistryWaecTheoryScreen() }
                 composable("chemistry-waec-objective") { ChemistryWaecObjectiveScreen() }
                 composable("chemistry-qualitative") { ChemistryQualitativeGuideScreen() }
+                composable("chemistry-redox-titration") { ChemistryRedoxTitrationScreen() }
                 composable("placement") { PlacementAssessmentScreen(onOpenLesson = { nav.navigate("lesson/$it") }) }
                 composable("cbt") { CbtScreen(BiologyCbtMode.JAMB_UTME) }
                 composable("waec-objective") { CbtScreen(BiologyCbtMode.WAEC_OBJECTIVE) }
@@ -187,6 +188,11 @@ private fun SubjectScreen(subject: Subject, nav: NavHostController) {
             item {
                 OutlinedButton(onClick = { nav.navigate("chemistry-qualitative") }, modifier = Modifier.fillMaxWidth()) {
                     Text("Qualitative analysis · anions and gases")
+                }
+            }
+            item {
+                OutlinedButton(onClick = { nav.navigate("chemistry-redox-titration") }, modifier = Modifier.fillMaxWidth()) {
+                    Text("Redox titration · iron(II) calculation")
                 }
             }
         }
