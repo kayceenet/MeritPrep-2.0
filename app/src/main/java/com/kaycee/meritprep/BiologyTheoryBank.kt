@@ -173,5 +173,83 @@ object BiologyTheoryBank {
             ),
             "A cactus may have leaves reduced to spines, which lowers surface area for water loss, and a thick waxy cuticle that reduces evaporation. Its succulent stem stores water. A floating aquatic plant may have stomata mainly on the upper leaf surface where they contact air, and large air spaces that provide buoyancy and assist gas movement. These features suit the different water conditions of the habitats."
         )
+
+        ,
+        BiologyTheoryTask(
+            "theory-respiration-11", "bio-respiration", "Aerobic and anaerobic respiration",
+            "Compare aerobic respiration with anaerobic respiration in human muscle cells. State where each occurs, the oxygen requirement, the relative energy yield and the products formed.",
+            7,
+            listOf(
+                "Aerobic respiration requires oxygen; anaerobic respiration does not require oxygen.",
+                "Glycolysis occurs in the cytoplasm in both pathways.",
+                "In eukaryotic cells, most stages of aerobic respiration occur in mitochondria.",
+                "Aerobic respiration releases much more energy per glucose molecule than anaerobic glycolysis.",
+                "The overall products of aerobic respiration are carbon dioxide and water.",
+                "In human muscle cells, anaerobic respiration converts pyruvate to lactate.",
+                "Lactate accumulation is associated with intense exercise; it can later be metabolised when oxygen is available."
+            ),
+            "Both pathways begin with glycolysis in the cytoplasm. Aerobic respiration requires oxygen and, in eukaryotic cells, most of its later stages occur in mitochondria. It releases much more energy per glucose molecule and its overall products are carbon dioxide and water. When oxygen supply cannot meet demand during intense exercise, muscle cells can continue glycolysis by converting pyruvate to lactate. This anaerobic pathway releases far less energy per glucose molecule. Lactate can later be transported and metabolised."
+        ),
+        BiologyTheoryTask(
+            "theory-kidney-12", "bio-excretion", "Urine formation in the nephron",
+            "Describe the main stages involved in urine formation in a mammalian kidney, beginning at the glomerulus. Explain why glucose is normally absent from the urine of a healthy person.",
+            7,
+            listOf(
+                "Blood enters the glomerulus through the afferent arteriole.",
+                "High hydrostatic pressure drives ultrafiltration into Bowman's capsule.",
+                "Water and small solutes enter the filtrate; blood cells and most plasma proteins remain in the blood.",
+                "Selective reabsorption returns useful substances such as all filtered glucose, amino acids and needed ions to the blood under normal conditions.",
+                "Much water is reabsorbed along the nephron, with the amount regulated partly by antidiuretic hormone.",
+                "Tubular secretion moves selected substances from blood into the tubule.",
+                "Glucose is normally completely reabsorbed in the proximal convoluted tubule when blood glucose is within the normal range and transport capacity is not exceeded."
+            ),
+            "Blood enters the glomerulus through the afferent arteriole. The high pressure in its capillaries forces water and small dissolved substances into Bowman's capsule; blood cells and most plasma proteins remain in the blood. As filtrate passes along the nephron, selective reabsorption returns useful substances, including glucose, amino acids and needed ions, to the blood. Water is also reabsorbed, with hormonal regulation helping adjust its amount. Tubular secretion transfers selected substances from blood into the tubule. Glucose is normally absent from urine because it is reabsorbed in the proximal convoluted tubule, provided the filtered load does not exceed the transport capacity."
+        ),
+        BiologyTheoryTask(
+            "theory-reproduction-13", "bio-reproduction", "Pollination and fertilisation in flowering plants",
+            "Distinguish pollination from fertilisation. Trace the events from pollen landing on a compatible stigma to the formation of a seed and fruit.",
+            7,
+            listOf(
+                "Pollination is the transfer of pollen grains from anther to stigma.",
+                "Fertilisation is the fusion of male and female gamete nuclei.",
+                "A compatible pollen grain hydrates and germinates on the stigma.",
+                "A pollen tube grows through the style towards an ovule in the ovary.",
+                "The male nucleus or nuclei travel through the pollen tube.",
+                "In angiosperms, one male nucleus fuses with the egg to form a diploid zygote; the other fuses with the polar nuclei to form endosperm (double fertilisation).",
+                "The ovule develops into a seed and the ovary usually develops into a fruit."
+            ),
+            "Pollination is the transfer of pollen from anther to stigma; it is not fertilisation. After compatible pollen lands on the stigma, it can germinate and form a pollen tube that grows down the style towards an ovule. Male nuclei travel through the tube. In flowering plants, one male nucleus fuses with the egg to form a diploid zygote, while the other fuses with the polar nuclei to form endosperm. This is double fertilisation. The ovule develops into a seed and the ovary usually develops into a fruit."
+        ),
+        BiologyTheoryTask(
+            "theory-variation-14", "bio-variation", "Continuous and discontinuous variation",
+            "Differentiate continuous variation from discontinuous variation. Give two examples of each and explain the roles of genes and the environment in producing variation.",
+            7,
+            listOf(
+                "Continuous variation shows a range of values with many intermediate forms.",
+                "Examples include human height and body mass.",
+                "Discontinuous variation falls into distinct categories with no usual intermediate category for the trait as measured.",
+                "Examples include ABO blood group and the ability to taste PTC (as commonly taught in introductory genetics).",
+                "Continuous traits are often influenced by many genes (polygenic inheritance).",
+                "Environmental factors such as nutrition and health can also affect continuous traits.",
+                "Discontinuous traits are often strongly influenced by one or a few genes, although the genetic basis varies by trait."
+            ),
+            "Continuous variation shows a range of values, often with many intermediate forms; human height and body mass are examples. Such traits are commonly influenced by many genes and can also be affected by environmental factors such as nutrition and health. Discontinuous variation places individuals into distinct categories, such as ABO blood groups. Discontinuous traits are often controlled by one or a few genes, although this is not a universal rule. The pattern depends on the genetic and environmental influences on the particular characteristic."
+        ),
+        BiologyTheoryTask(
+            "theory-soil-15", "bio-soil", "Comparing soil types and drainage",
+            "A farmer compares sandy, clayey and loamy soils. Describe how their particle size, drainage, water retention and suitability for crop growth differ. Explain why loam is often useful for cultivation.",
+            7,
+            listOf(
+                "Sandy soil has relatively large particles and large pore spaces.",
+                "Sandy soil usually drains quickly and retains relatively little water and dissolved nutrients.",
+                "Clayey soil has very small particles and small pore spaces.",
+                "Clayey soil usually drains slowly and retains more water, but may become waterlogged and poorly aerated.",
+                "Loam contains a mixture of sand, silt and clay, often with organic matter.",
+                "Loam can provide a balance of drainage, water retention, aeration and nutrient-holding capacity.",
+                "Soil suitability also depends on structure, organic matter, pH, climate and the crop being grown."
+            ),
+            "Sandy soil contains relatively large particles with large pore spaces, so water drains quickly and little water or dissolved nutrient is retained. Clayey soil has very small particles and pore spaces; it holds more water but drains slowly and can become waterlogged and poorly aerated. Loam contains a mixture of sand, silt and clay and often organic matter. It can provide a useful balance of drainage, water retention, aeration and nutrient-holding capacity. The best soil for a crop also depends on soil structure, pH, organic matter, climate and the crop's requirements."
+        )
+
     )
 }
