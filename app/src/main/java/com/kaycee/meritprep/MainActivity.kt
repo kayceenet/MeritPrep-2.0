@@ -162,7 +162,7 @@ private fun SubjectScreen(subject: Subject, nav: NavHostController) {
     LazyColumn(Modifier.fillMaxSize().padding(20.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
         item {
             Text(subject.name, style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
-            Text("Start with a structured lesson. This is an initial content set, not yet a complete official syllabus map.")
+            Text(if (subject.code == "CHEM") "18 JAMB Chemistry topics are mapped from the IBASS syllabus. Four beginner lesson drafts are available; the remaining entries are syllabus outlines in development." else "Start with a structured lesson. This is an initial content set, not yet a complete official syllabus map.")
         }
         if (topics.isEmpty()) {
             item { Text("Lessons are being prepared for this subject.") }
