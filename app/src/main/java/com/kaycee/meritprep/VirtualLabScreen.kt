@@ -12,6 +12,7 @@ import androidx.compose.ui.unit.dp
 import kotlin.math.roundToInt
 import com.kaycee.meritprep.data.ChemistryPracticalEngine
 import com.kaycee.meritprep.data.PhysicsPracticalEngine
+import com.kaycee.meritprep.data.PhysicsWaveOpticsEngine
 
 @Composable
 fun VirtualLabScreen() {
@@ -211,8 +212,9 @@ private fun SimpleMachineLab() {
 private fun WavePropertiesLab() {
     var frequency by remember { mutableFloatStateOf(5f) }
     var wavelength by remember { mutableFloatStateOf(2f) }
-    val speed = frequency * wavelength
-    val period = 1f / frequency
+    val wave = PhysicsWaveOpticsEngine.waveProperties(frequency.toDouble(), wavelength.toDouble())
+    val speed = wave.speedMetresPerSecond.toFloat()
+    val period = wave.periodSeconds.toFloat()
     Card(Modifier.fillMaxWidth()) {
         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
             Text("Wave speed and period", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
@@ -234,7 +236,7 @@ private fun WavePropertiesLab() {
 private fun EchoDistanceLab() {
     var soundSpeed by remember { mutableFloatStateOf(340f) }
     var echoTime by remember { mutableFloatStateOf(2f) }
-    val distance = soundSpeed * echoTime / 2f
+    val distance = PhysicsWaveOpticsEngine.echoDistance(soundSpeed.toDouble(), echoTime.toDouble()).toFloat()
     Card(Modifier.fillMaxWidth()) {
         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
             Text("Echo sounding", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
@@ -254,7 +256,7 @@ private fun EchoDistanceLab() {
 @Composable
 private fun ReflectionLab() {
     var incidentAngle by remember { mutableFloatStateOf(35f) }
-    val reflectedAngle = incidentAngle
+    val reflectedAngle = PhysicsWaveOpticsEngine.reflectedAngleDegrees(incidentAngle.toDouble()).toFloat()
     Card(Modifier.fillMaxWidth()) {
         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
             Text("Law of reflection", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
