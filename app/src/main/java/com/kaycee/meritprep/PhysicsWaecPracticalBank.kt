@@ -107,6 +107,63 @@ object PhysicsWaecPracticalBank {
                 "Open the switch between readings to limit heating",
                 "Avoid loose connections and read analogue scales at eye level"
             )
+        ),
+        PhysicsWaecPracticalTask(
+            id = "waec-physics-density",
+            title = "Density from mass-volume readings",
+            aim = "Investigate the relationship between mass and volume for samples of the same material and estimate the material's density.",
+            apparatus = listOf("Digital or beam balance", "Set of same-material solid samples of different volumes", "Measuring cylinder or vernier caliper", "Thread for displacement method", "Water where displacement is required"),
+            independentVariable = "Volume V (cm³)",
+            dependentVariable = "Mass m (g)",
+            controlledVariables = listOf("Use samples made from the same uniform material", "Use the same balance and volume-measurement method", "Remove trapped air bubbles during displacement readings"),
+            xAxisLabel = "Volume, V (cm³)",
+            yAxisLabel = "Mass, m (g)",
+            readings = listOf(
+                PracticalGraphPoint(10.0, 27.0),
+                PracticalGraphPoint(20.0, 54.1),
+                PracticalGraphPoint(30.0, 80.8),
+                PracticalGraphPoint(40.0, 108.2),
+                PracticalGraphPoint(50.0, 134.9)
+            ),
+            taskPrompt = "Plot mass m against volume V. Determine the gradient and state the physical quantity represented. Explain how you would measure the volume of an irregular sample and state two precautions.",
+            workedInterpretation = "For samples of the same uniform material, m = ρV. The gradient of a mass-volume graph is density. The supplied readings give a gradient close to 2.70 g cm⁻³. For an irregular solid that sinks and does not dissolve, its volume can be found by water displacement in a measuring cylinder or displacement can.",
+            examinerPoints = listOf(
+                "Record mass and volume with correct units and consistent precision",
+                "Use the same material for every sample",
+                "Plot mass on the vertical axis and volume on the horizontal axis",
+                "Draw a best-fit line and calculate gradient Δm/ΔV",
+                "State density with the correct unit, such as g cm⁻³",
+                "Read the measuring cylinder at eye level and use the meniscus correctly",
+                "Remove trapped air bubbles and ensure the sample is fully immersed without touching the vessel"
+            )
+        ),
+        PhysicsWaecPracticalTask(
+            id = "waec-physics-resistivity",
+            title = "Resistance and length of a wire",
+            aim = "Investigate how the resistance of a uniform wire depends on its length and estimate its resistivity.",
+            apparatus = listOf("Uniform resistance wire", "Metre rule", "Ammeter", "Voltmeter", "DC supply", "Rheostat", "Switch and connecting leads", "Micrometer screw gauge"),
+            independentVariable = "Wire length L (m)",
+            dependentVariable = "Resistance R (Ω)",
+            controlledVariables = listOf("Use the same wire material and diameter", "Keep current low and open the switch between readings to limit heating", "Use the same meter ranges and connection arrangement"),
+            xAxisLabel = "Length, L (m)",
+            yAxisLabel = "Resistance, R (Ω)",
+            readings = listOf(
+                PracticalGraphPoint(0.20, 0.0070),
+                PracticalGraphPoint(0.40, 0.0141),
+                PracticalGraphPoint(0.60, 0.0209),
+                PracticalGraphPoint(0.80, 0.0281),
+                PracticalGraphPoint(1.00, 0.0350)
+            ),
+            taskPrompt = "Plot resistance R against wire length L. Find the gradient. If the wire's cross-sectional area is 0.50 mm², calculate its resistivity using R = ρL/A. Give the SI unit and state two precautions.",
+            workedInterpretation = "For a uniform wire, R = ρL/A. The gradient of R against L is ρ/A. The supplied readings give a gradient close to 0.035 Ω m⁻¹. The cross-sectional area 0.50 mm² = 5.0 × 10⁻⁷ m², so ρ = gradient × A ≈ 1.75 × 10⁻⁸ Ω m.",
+            examinerPoints = listOf(
+                "Measure wire length from the correct reference points",
+                "Measure diameter at several positions and in two perpendicular directions",
+                "Calculate cross-sectional area using A = πd²/4 and convert to m²",
+                "Connect the ammeter in series and voltmeter in parallel",
+                "Calculate resistance R = V/I for each length",
+                "Plot R against L and use gradient = ρ/A",
+                "Open the switch between readings to limit heating and keep the wire taut but not stretched"
+            )
         )
-    )
-}
+
