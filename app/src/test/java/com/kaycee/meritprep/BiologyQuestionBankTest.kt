@@ -419,4 +419,22 @@ class BiologyQuestionBankTest {
         assertTrue(porosity.options.any { it.contains("water", ignoreCase = true) })
     }
 
+    @Test
+    fun classificationQuestionsAssessDistinctCoreConceptsWithoutCommonMisconceptions() {
+        val fungi = BiologyQuestionBank.classification.first { it.id == "bio-class-004" }
+        assertTrue(fungi.options.any { it.contains("absorption", ignoreCase = true) })
+        assertTrue(fungi.options.any { it.contains("chitin", ignoreCase = true) })
+
+        val viruses = BiologyQuestionBank.classification.first { it.id == "bio-class-005" }
+        assertTrue(viruses.explanation.contains("DNA or RNA", ignoreCase = true))
+        assertTrue(viruses.explanation.contains("host-cell", ignoreCase = true))
+
+        val identification = BiologyQuestionBank.classification.first { it.id == "bio-class-008" }
+        assertTrue(identification.explanation.contains("Classification", ignoreCase = true))
+        assertTrue(identification.explanation.contains("nomenclature", ignoreCase = true))
+
+        val scientificNames = BiologyQuestionBank.classification.first { it.id == "bio-class-009" }
+        assertTrue(scientificNames.options.any { it.contains("specific epithet", ignoreCase = true) })
+    }
+
 }
