@@ -51,6 +51,12 @@ gradle --no-daemon assembleDebug
 
 The debug APK is generated at `app/build/outputs/apk/debug/app-debug.apk`.
 
+## Complete product requirements
+
+See `docs/MASTER_PRODUCT_SPEC.md` for the consolidated requirements recovered from the previous project discussions: the full JAMB/WAEC learning journey, all seven subjects, beginner-to-exam teaching standard, simulations and virtual practicals, assessment integrity, offline-first design, content management, academic review, privacy, security and staged acceptance gates.
+
+The codebase now includes a tested academic content publication policy (`ContentGovernance.kt`) that blocks publication when provenance, rights, independent review or reviewer/date metadata is missing. This is a domain-level safeguard; persistence, editor screens and the teacher/admin CMS are still to be implemented.
+
 ## Academic integrity and content governance
 
 Every published lesson, diagram, question, answer key and practical rubric must have a stable identifier, syllabus mapping, source and rights record, content version, named author, independent reviewer and approval status. Never label generated or unverified questions as official past questions. Lesson completion is not the same as demonstrated mastery.
@@ -61,6 +67,7 @@ See:
 - `docs/ACADEMIC_CONTENT_STANDARD.md`
 - `docs/BIOLOGY_CURRICULUM_AND_TEACHING_STANDARD.md`
 - `docs/PRODUCT_ROADMAP.md`
+- `docs/MASTER_PRODUCT_SPEC.md`
 - `docs/ACADEMIC_REVIEW_CHECKLIST.md`
 - `docs/CBT_PRACTICE_SPEC.md`
 - `docs/MISTAKE_NOTEBOOK_SPEC.md`
