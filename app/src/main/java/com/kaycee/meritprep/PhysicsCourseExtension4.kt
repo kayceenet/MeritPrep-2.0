@@ -30,7 +30,7 @@ object PhysicsCourseExtension4 {
                 "Applications and limitations" to "Capacitors smooth voltage fluctuations, couple or decouple signals, store short bursts of energy and set timing constants with resistors. Real capacitors have voltage ratings, leakage, equivalent series resistance and dielectric limits. Never exceed the rated voltage or assume a capacitor is discharged simply because the circuit is switched off."
             ),
             "A 100 μF capacitor is connected across 12 V. What charge does it store?",
-            listOf("0.12 μC", "1.2 μC", "120 μC", "1200 μC"), 2,
+            listOf("0.12 μC", "1.2 μC", "120 μC", "1200 μC"), 3,
             "Q = CV = 100 × 10⁻⁶ × 12 = 1.2 × 10⁻³ C = 1200 μC. Check the conversion: 1 mC = 1000 μC."
         ),
         LearningTopic(
