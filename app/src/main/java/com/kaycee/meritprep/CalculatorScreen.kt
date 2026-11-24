@@ -15,8 +15,14 @@ private val calculatorTools = listOf(
     CalculatorTool("Ohm's law: current", "Physics", "I = V ÷ R", listOf("Voltage (V)", "Resistance (Ω)")) { CalculatorEngine.ohmsLaw(it[0], it[1]) },
     CalculatorTool("Speed", "Physics", "Speed = distance ÷ time", listOf("Distance (m)", "Time (s)")) { CalculatorEngine.speed(it[0], it[1]) },
     CalculatorTool("Density", "Physics / Chemistry", "Density = mass ÷ volume", listOf("Mass (g)", "Volume (cm³)")) { CalculatorEngine.density(it[0], it[1]) },
+    CalculatorTool("Heat energy", "Physics", "Q = mcΔT", listOf("Mass (kg)", "Specific heat capacity (J kg⁻¹ K⁻¹)", "Temperature change (°C or K)")) { CalculatorEngine.heatEnergy(it[0], it[1], it[2]) },
     CalculatorTool("Molar concentration", "Chemistry", "C = n ÷ V", listOf("Amount (mol)", "Volume (L)")) { CalculatorEngine.molarity(it[0], it[1]) },
-    CalculatorTool("Dilution", "Chemistry", "C₁V₁ = C₂V₂", listOf("Initial concentration (C₁)", "Initial volume (V₁)", "Final concentration (C₂)")) { CalculatorEngine.dilution(it[0], it[1], it[2]) }
+    CalculatorTool("Dilution", "Chemistry", "C₁V₁ = C₂V₂", listOf("Initial concentration (C₁)", "Initial volume (V₁)", "Final concentration (C₂)")) { CalculatorEngine.dilution(it[0], it[1], it[2]) },
+    CalculatorTool("Moles from mass", "Chemistry", "n = m ÷ M", listOf("Mass (g)", "Molar mass (g/mol)")) { CalculatorEngine.molesFromMass(it[0], it[1]) },
+    CalculatorTool("Boyle's law", "Chemistry", "P₁V₁ = P₂V₂ (constant temperature)", listOf("Initial pressure (P₁)", "Initial volume (V₁)", "Final volume (V₂)")) { CalculatorEngine.boylesLaw(it[0], it[1], it[2]) },
+    CalculatorTool("Charles's law", "Chemistry", "V₁/T₁ = V₂/T₂ (constant pressure)", listOf("Initial volume (V₁)", "Initial temperature (K)", "Final temperature (K)")) { CalculatorEngine.charlesLaw(it[0], it[1], it[2]) },
+    CalculatorTool("pH from [H⁺]", "Chemistry", "pH = −log₁₀[H⁺] (concentration in mol/L)", listOf("Hydrogen-ion concentration (mol/L)")) { CalculatorEngine.pH(it[0]) },
+    CalculatorTool("Electrolysis: deposited mass", "Chemistry", "m = ItM ÷ zF; F ≈ 96485.33212 C/mol", listOf("Current (A)", "Time (s)", "Molar mass (g/mol)", "Electrons transferred per ion (z)")) { CalculatorEngine.electrolysisMass(it[0], it[1], it[2], it[3]) }
 )
 @Composable
 fun CalculatorScreen() {
@@ -42,8 +48,8 @@ fun CalculatorScreen() {
         }
         Button(onClick = {
             try {
-                result = if (selected.title == "Arithmetic mean") CalculatorEngine.mean(inputs[0].split(",").map { it.trim().toDouble() })
-                else selected.calculate(inputs.map { it.trim().toDouble() })
+                val values = if (selected.title == "Arithmetic mean") inputs[0].split(",").map { it.trim().toDouble() } else inputs.map { it.trim().toDouble() }
+                result = selected.calculate(values)
                 error = null
             } catch (e: Exception) { result = null; error = e.message ?: "Check the values and try again." }
         }, modifier = Modifier.fillMaxWidth()) { Text("Calculate") }
@@ -57,6 +63,6 @@ fun CalculatorScreen() {
             }
         }
         error?.let { Text(it, color = MaterialTheme.colorScheme.error) }
-        Text("Use compatible units. These tools support learning and practice; show full working in examinations.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        Text("Use compatible units. Gas-law temperatures must be entered in kelvin. pH assumes the supplied value is hydrogen-ion concentration. Electrolysis uses Faraday's law and assumes constant current and 100% current efficiency. These tools support learning; show full working in examinations.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
     }
 }
