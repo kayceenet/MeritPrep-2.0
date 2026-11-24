@@ -11,9 +11,9 @@ This working map follows the 23 Mathematics topic headings currently summarised 
 
 ## Current implementation
 
-The first eight topics have beginner-focused lesson drafts with objectives, explanatory sections, examples or applications, misconception guidance and a formative check. The current objective bank contains 40 original MeritPrep questions, five per developed topic. The practice screen shuffles questions and options, records attempts locally and saves incorrect responses to the mistake notebook. The spaced-revision workflow includes 24 Mathematics recall cards across these eight topics.
+The first fifteen topics have beginner-focused lesson drafts with objectives, explanatory sections, examples or applications, misconception guidance and a formative check. The current objective bank contains 75 original MeritPrep questions, five per developed topic. The practice screen shuffles questions and options, records attempts locally and saves incorrect responses to the mistake notebook. The spaced-revision workflow includes 45 Mathematics recall cards across these fifteen topics.
 
-The remaining 15 topics are syllabus outlines only. They are not represented as completed lessons. All Mathematics teaching and questions are draft content and require independent subject-teacher review.
+The remaining eight topics are syllabus outlines only. They are not represented as completed lessons. All Mathematics teaching and questions are draft content and require independent subject-teacher review.
 
 ## Topic coverage
 
@@ -27,13 +27,13 @@ The remaining 15 topics are syllabus outlines only. They are not represented as 
 | 6 | Variation | Lesson draft + 5 original questions |
 | 7 | Inequalities | Lesson draft + 5 original questions |
 | 8 | Progression | Lesson draft + 5 original questions |
-| 9 | Binary operations | Syllabus outline |
-| 10 | Matrices and determinants | Syllabus outline |
-| 11 | Euclidean geometry | Syllabus outline |
-| 12 | Mensuration | Syllabus outline |
-| 13 | Loci | Syllabus outline |
-| 14 | Coordinate geometry | Syllabus outline |
-| 15 | Trigonometry | Syllabus outline |
+| 9 | Binary operations | Lesson draft + 5 original questions |
+| 10 | Matrices and determinants | Lesson draft + 5 original questions |
+| 11 | Euclidean geometry | Lesson draft + 5 original questions |
+| 12 | Mensuration | Lesson draft + 5 original questions |
+| 13 | Loci | Lesson draft + 5 original questions |
+| 14 | Coordinate geometry | Lesson draft + 5 original questions |
+| 15 | Trigonometry | Lesson draft + 5 original questions |
 | 16 | Differentiation | Syllabus outline |
 | 17 | Application of differentiation | Syllabus outline |
 | 18 | Integration | Syllabus outline |
@@ -45,7 +45,7 @@ The remaining 15 topics are syllabus outlines only. They are not represented as 
 
 ## Assessment integrity
 
-- All 40 questions in the current bank are original MeritPrep practice items, not official JAMB or WAEC past questions.
+- All 75 questions in the current bank are original MeritPrep practice items, not official JAMB or WAEC past questions.
 - Questions have one keyed answer and explanatory feedback; structural unit tests check IDs, topic mapping, option counts, answer-key bounds and provenance.
 - The current practice bank is not a full JAMB mock and does not predict examination performance.
 - The practice screen uses the local attempt and mistake-notebook workflow.
@@ -53,9 +53,8 @@ The remaining 15 topics are syllabus outlines only. They are not represented as 
 
 ## Next development work
 
-1. Complete binary operations, matrices, geometry, mensuration, loci, coordinate geometry and trigonometry.
-2. Develop differentiation, applications of differentiation and integration with graph-based examples.
-3. Complete statistics, permutations, combinations and probability with worked problems.
+1. Develop differentiation, applications of differentiation and integration with graph-based examples.
+3. Complete representation of data, measures of location and dispersion, permutation, combination and probability with worked problems.
 4. Add topic-specific formula tools and interactive visual models where they improve understanding.
 5. Expand objective practice only after verifying every question, distractor, calculation and explanation.
 6. Add a timed JAMB-style Mathematics CBT only after validating the question pool and practice configuration.
