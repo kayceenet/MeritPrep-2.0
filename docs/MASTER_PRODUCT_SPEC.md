@@ -204,7 +204,7 @@ Calculation logic is separated from the Compose interface and covered by unit te
 
 The Chemistry catalogue now maps all 18 topic headings in the Chemistry PDF served by JAMB's Integrated Brochure and Syllabus System (IBASS). The source URL is recorded in `ChemistryCourse.kt`: https://ibass.jamb.gov.ng/static/media/Chemistry.9efd0b98043d56922aaa.pdf
 
-Eight topics currently have beginner-oriented draft lessons with objectives, explanatory sections, worked examples or misconception guidance, and an understanding check:
+Twelve topics currently have beginner-oriented draft lessons with objectives, explanatory sections, worked examples or misconception guidance, and an understanding check:
 1. Separation of mixtures and purification
 2. Chemical combination and the mole concept
 3. Kinetic theory of matter and gas laws
@@ -213,12 +213,16 @@ Eight topics currently have beginner-oriented draft lessons with objectives, exp
 6. Solubility
 7. Environmental pollution
 8. Acids, bases and salts
+9. Oxidation and reduction
+10. Electrolysis
+11. Energy changes
+12. Rates of chemical reaction
 
-The other 10 topics are syllabus-mapped outlines, not completed lessons. The JAMB mapping must be checked against the live IBASS document at each exam-cycle update. WAEC Chemistry has a separate syllabus and practical/theory requirements; a WAEC-specific mapping and independent teacher review remain outstanding. No Chemistry content is marked academically approved.
+The other six topics are syllabus-mapped outlines, not completed lessons. The JAMB mapping must be checked against the live IBASS document at each exam-cycle update. WAEC Chemistry has a separate syllabus and practical/theory requirements; a WAEC-specific mapping and independent teacher review remain outstanding. No Chemistry content is marked academically approved.
 
 
 ## Chemistry formative practice
 
-The eight developed Chemistry topics have a bank of 40 original multiple-choice practice items (five per topic). Each item includes a topic ID, four options, an answer key, an explanation and explicit MeritPrep-original provenance. The bank is not represented as official JAMB or WAEC past questions.
+The twelve developed Chemistry topics have a bank of 60 original multiple-choice practice items (five per topic). Each item includes a topic ID, four options, an answer key, an explanation and explicit MeritPrep-original provenance. The bank is not represented as official JAMB or WAEC past questions.
 
 A dedicated Chemistry practice screen supports topic-focused or mixed practice, answer feedback, local attempt recording and saving incorrect answers to the mistake notebook. The current practice bank is formative; it does not yet provide a full timed Chemistry CBT or a complete WAEC theory/practical assessment.
