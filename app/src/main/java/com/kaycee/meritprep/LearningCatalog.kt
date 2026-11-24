@@ -23,7 +23,8 @@ data class LearningTopic(
     val checkQuestion: String,
     val checkOptions: List<String>,
     val correctOption: Int,
-    val explanation: String
+    val explanation: String,
+    val isSyllabusOutline: Boolean = false
 )
 
 object LearningCatalog {
@@ -875,10 +876,10 @@ fun LessonScreen(topicId: String) {
                 database.markLessonCompleted(topic.id)
                 completed = true
             },
-            enabled = !completed && checked && selected == topic.correctOption,
+            enabled = !topic.isSyllabusOutline && !completed && checked && selected == topic.correctOption,
             modifier = Modifier.fillMaxWidth()
         ) {
-            Text(if (completed) "Lesson completed" else "Complete lesson")
+            Text(if (topic.isSyllabusOutline) "Lesson in development" else if (completed) "Lesson completed" else "Complete lesson")
         }
         if (!completed) {
             Text(
@@ -888,10 +889,10 @@ fun LessonScreen(topicId: String) {
             )
         }
         Text(
-            if (topic.subjectCode == "BIO") {
-                "Academic status: beginner-focused Biology teaching draft mapped to its syllabus topic. Independent subject review is still required before formal approval."
-            } else {
-                "Academic status: starter teaching content. Full syllabus mapping and independent subject review are still required."
+            when {
+                topic.isSyllabusOutline -> "Academic status: syllabus outline only. Full lesson development is in progress; this outline cannot be marked as a completed lesson."
+                topic.subjectCode == "BIO" -> "Academic status: beginner-focused Biology teaching draft mapped to its syllabus topic. Independent subject review is still required before formal approval."
+                else -> "Academic status: starter teaching content. Full syllabus mapping and independent subject review are still required."
             },
             style = MaterialTheme.typography.bodySmall,
             color = MaterialTheme.colorScheme.onSurfaceVariant
