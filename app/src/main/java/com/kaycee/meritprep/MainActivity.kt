@@ -79,6 +79,7 @@ private fun MeritPrepApp() {
                     LessonScreen(entry.arguments?.getString("topicId").orEmpty())
                 }
                 composable("practice") { PracticeScreenV2(onStartCbt = { nav.navigate("cbt") }, onStartWaecObjective = { nav.navigate("waec-objective") }, onStartTheory = { nav.navigate("waec-theory") }, onOpenMistakes = { nav.navigate("mistakes") }, onOpenStudyPlan = { nav.navigate("study-plan") }) }
+                composable("chemistry-practice") { ChemistryPracticeScreen() }
                 composable("placement") { PlacementAssessmentScreen(onOpenLesson = { nav.navigate("lesson/$it") }) }
                 composable("cbt") { CbtScreen(BiologyCbtMode.JAMB_UTME) }
                 composable("waec-objective") { CbtScreen(BiologyCbtMode.WAEC_OBJECTIVE) }
@@ -162,7 +163,14 @@ private fun SubjectScreen(subject: Subject, nav: NavHostController) {
     LazyColumn(Modifier.fillMaxSize().padding(20.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
         item {
             Text(subject.name, style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
-            Text(if (subject.code == "CHEM") "18 JAMB Chemistry topics are mapped from the IBASS syllabus. Four beginner lesson drafts are available; the remaining entries are syllabus outlines in development." else "Start with a structured lesson. This is an initial content set, not yet a complete official syllabus map.")
+            Text(if (subject.code == "CHEM") "18 JAMB Chemistry topics are mapped from the IBASS syllabus. Eight beginner lesson drafts and 40 original practice questions are available; 10 topics remain as syllabus outlines in development." else "Start with a structured lesson. This is an initial content set, not yet a complete official syllabus map.")
+        }
+        if (subject.code == "CHEM") {
+            item {
+                Button(onClick = { nav.navigate("chemistry-practice") }, modifier = Modifier.fillMaxWidth()) {
+                    Text("Practise Chemistry · 40 questions")
+                }
+            }
         }
         if (topics.isEmpty()) {
             item { Text("Lessons are being prepared for this subject.") }
