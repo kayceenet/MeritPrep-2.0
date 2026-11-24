@@ -193,11 +193,11 @@ These are alpha implementations. Biology content is pending independent academic
 
 The Android alpha includes an offline calculator workspace for common quantitative tasks across Mathematics, Physics and Chemistry:
 - Mathematics: percentage and arithmetic mean.
-- Physics: current from Ohm's law and speed.
+- Physics: current from Ohm's law, speed and heat energy using Q = mcΔT.
 - Physics/Chemistry: density.
-- Chemistry: molar concentration and dilution using C₁V₁ = C₂V₂.
+- Chemistry: molar concentration, dilution, moles from mass, Boyle's law, Charles's law, pH from hydrogen-ion concentration and Faraday-law electrolysis mass.
 
-Calculation logic is separated from the Compose interface and covered by unit tests. Inputs are validated for zero denominators, non-positive physical quantities and invalid dilution conditions. Results show the equation, substituted working and output unit. These are focused learning tools, not a replacement for a general-purpose scientific calculator; further formula coverage is planned.
+Calculation logic is separated from the Compose interface and covered by unit tests. Inputs are validated for invalid denominators, non-positive physical quantities, absolute-temperature requirements and electrolysis valence. Results show the equation, substituted working and output unit. Gas-law temperatures must be supplied in kelvin. The pH tool uses concentration as entered and does not calculate activity corrections; the electrolysis estimate assumes constant current and 100% current efficiency. These are focused learning tools, not a replacement for a general-purpose scientific calculator.
 
 
 ## Chemistry course development status
