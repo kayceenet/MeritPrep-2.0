@@ -44,8 +44,7 @@ object LearningCatalog {
                 "How to read a biological diagram" to "When studying a cell diagram, first identify the outline and orientation. Locate the nucleus, then use the relative positions and shapes of other structures. A label line should touch the structure being named, should be straight where possible, and should not cross another label line. Draw only what is visible; do not add an organelle simply because you expect it to be present. In an examination, clear proportions and correct labels matter more than artistic shading.",
                 "Common misconceptions to avoid" to "The cell wall is not the same as the cell membrane: the wall provides support, while the membrane controls exchange. Not every plant cell contains chloroplasts; root cells usually lack them because they are not exposed to light for photosynthesis. Mitochondria are not the only place where energy-related reactions occur, but they are the main site of aerobic respiration in most eukaryotic cells. Cells are not all identical in shape or function; their structures are specialised for their roles."
             ),
-            "Which structure is the main site of aerobic respiration in most eukaryotic cells?",
-            listOf("Ribosome", "Mitochondrion", "Cell wall", "Golgi apparatus"), 1,
+            "Which structure is the main site of aerobic respiration in most eukaryotic cells?",listOf("Mitochondrion", "Ribosome", "Cell wall", "Golgi apparatus"),0,
             "Mitochondria contain the machinery for most stages of aerobic respiration and ATP production in eukaryotic cells."
         ),
         LearningTopic(
@@ -70,13 +69,7 @@ object LearningCatalog {
                 "Viruses and the boundary of life" to "Viruses are acellular infectious agents: they are not made of cells and cannot reproduce independently. They contain genetic material (DNA or RNA) inside a protein coat, and some have an outer envelope. They replicate only inside suitable host cells using host machinery. For this reason, viruses are not placed in any of the five traditional kingdoms. Avoid calling a virus a bacterium or describing it as a cell.",
                 "How to answer classification questions" to "Read the question for the feature it asks about, then compare the options using that feature. If asked to identify a prokaryote, look for the absence of a membrane-bound nucleus. If asked to distinguish fungi from green plants, consider nutrition and cell-wall composition. For a naming question, check the two-part format and capitalisation. In a practical examination, describe visible evidence first and make an identification only when the evidence supports it."
             ),
-            "Which statement best distinguishes a prokaryotic cell from a eukaryotic cell?",
-            listOf(
-                "A prokaryotic cell has no DNA",
-                "A prokaryotic cell has no membrane-bound nucleus",
-                "A prokaryotic cell always has a cellulose cell wall",
-                "A prokaryotic cell is always multicellular"
-            ), 1,
+            "Which statement best distinguishes a prokaryotic cell from a eukaryotic cell?",listOf("A prokaryotic cell has no DNA", "A prokaryotic cell has no membrane-bound nucleus", "A prokaryotic cell always has a cellulose cell wall", "A prokaryotic cell is always multicellular"),1,
             "Prokaryotic cells contain DNA and ribosomes but lack a membrane-bound nucleus. Their DNA is located in a nucleoid region."
         ),
         LearningTopic(
@@ -99,8 +92,7 @@ object LearningCatalog {
                 "Adaptation is not the same as acclimatisation" to "An adaptation is an inherited population characteristic shaped over generations. Acclimatisation is a change within an individual's lifetime, such as a temporary physiological response to a change in temperature or altitude. A person sweating more in hot weather is acclimatising; it is not a new inherited adaptation. Natural selection acts on heritable variation across generations, not on a conscious effort by an organism to change.",
                 "Exam reasoning: feature, challenge and advantage" to "For an adaptation question, use a three-step explanation: name the feature, identify the environmental challenge, and explain how the feature helps. Example: a fish's streamlined body reduces water resistance, allowing efficient movement through water. Avoid vague answers such as 'it helps the fish survive' without explaining the mechanism. A good answer links structure or behaviour to a specific function."
             ),
-            "Which option is a behavioural adaptation that may help an animal avoid extreme daytime heat?",
-            listOf("Being active mainly at night","Having a streamlined body","Having a thick layer of fat","Producing concentrated urine"), 0,
+            "Which option is a behavioural adaptation that may help an animal avoid extreme daytime heat?",listOf("Having a streamlined body", "Having a thick layer of fat", "Being active mainly at night", "Producing concentrated urine"),2,
             "Nocturnal activity is a behavioural pattern. It allows an animal to avoid the hottest part of the day. A streamlined body and fat layer are structural features, while concentrated urine is a physiological function."
         ),
         LearningTopic(
@@ -123,8 +115,7 @@ object LearningCatalog {
                 "Relating structure to function" to "A good biological explanation connects a visible feature to what it allows the organ to do. Thin alveolar walls shorten the diffusion distance for gases; a dense capillary network maintains concentration gradients; villi provide a large surface area and a blood supply for absorbed nutrients; cardiac muscle contracts rhythmically to pump blood. In plants, root hairs increase absorptive surface area, while lignified xylem walls support water transport under tension.",
                 "How to study a transverse section" to "A transverse section is a cut across an organ, at right angles to its length. First identify the outer boundary, then locate major tissue regions and vascular structures. Use the specimen and orientation given; the arrangement of vascular bundles differs among roots, stems and plant groups. Label only structures you can identify. A biological drawing should have clear single lines, accurate proportions, no unnecessary shading and straight label lines that do not cross."
             ),
-            "Which plant tissue transports water and dissolved mineral ions mainly from the roots towards the leaves?",
-            listOf("Xylem","Phloem","Epidermis","Palisade mesophyll"), 0,
+            "Which plant tissue transports water and dissolved mineral ions mainly from the roots towards the leaves?",listOf("Phloem", "Epidermis", "Palisade mesophyll", "Xylem"),3,
             "Xylem conducts water and dissolved mineral ions from roots towards aerial parts of the plant. Phloem transports organic substances such as sucrose between sources and sinks."
         ),
         LearningTopic(
@@ -148,8 +139,7 @@ object LearningCatalog {
                 "Digestion: breaking large molecules into absorbable units" to "Mechanical digestion breaks food into smaller pieces, increasing surface area. Chemical digestion uses enzymes to hydrolyse large molecules. Amylase breaks starch into smaller carbohydrates; proteases break proteins into peptides and amino acids; lipases break triglycerides into fatty acids and monoglycerides. Enzymes are specific and work best under suitable temperature and pH conditions. Bile is not a digestive enzyme: it emulsifies fat into smaller droplets, increasing the surface area available to lipase.",
                 "Absorption and assimilation" to "Most absorption occurs in the small intestine. Its folds, villi and microvilli provide a large surface area. Glucose and amino acids enter blood capillaries in the villi; many products of fat digestion enter intestinal epithelial cells and are packaged into particles that pass mainly into lacteals of the lymphatic system. Assimilation is the use or incorporation of absorbed nutrients by cells and tissues, for example using amino acids to build proteins or glucose in respiration. The large intestine absorbs water and electrolytes and helps form faeces."
             ),
-            "Which statement about bile is correct?",
-            listOf("It emulsifies fats but is not a digestive enzyme","It digests proteins into amino acids","It converts glucose into starch","It is produced by the pancreas"), 0,
+            "Which statement about bile is correct?",listOf("It emulsifies fats but is not a digestive enzyme", "It digests proteins into amino acids", "It converts glucose into starch", "It is produced by the pancreas"),0,
             "Bile is produced by the liver. It emulsifies fat into smaller droplets and helps neutralise acidic chyme; it is not an enzyme."
         ),
         LearningTopic(
@@ -175,8 +165,7 @@ object LearningCatalog {
                 "The heart and blood vessels" to "The human heart has four chambers: right and left atria and right and left ventricles. The right side sends deoxygenated blood to the lungs through the pulmonary artery; oxygenated blood returns to the left atrium through pulmonary veins. The left ventricle pumps blood through the aorta to the body. Arteries carry blood away from the heart and have thick, elastic walls; veins return blood to the heart and often contain valves; capillaries have very thin walls that allow exchange with tissues. Vessel type is defined by direction of flow, not by oxygen content.",
                 "Two circuits and the lymphatic system" to "Pulmonary circulation carries blood between the heart and lungs. Systemic circulation carries blood between the heart and the rest of the body. In humans, the two circuits form a double circulatory system. Some fluid leaves blood capillaries and bathes tissues; much returns to capillaries, while excess tissue fluid enters lymphatic vessels as lymph and is eventually returned to the blood. Lymphatic vessels also participate in immune defence and transport absorbed fats from the small intestine."
             ),
-            "Which process moves mineral ions into root hair cells against a concentration gradient using energy?",
-            listOf("Active transport","Diffusion","Osmosis","Transpiration"), 0,
+            "Which process moves mineral ions into root hair cells against a concentration gradient using energy?",listOf("Diffusion", "Active transport", "Osmosis", "Transpiration"),1,
             "Active transport uses energy and membrane transport proteins to move substances against a concentration or electrochemical gradient."
         ),
         LearningTopic(
@@ -201,8 +190,7 @@ object LearningCatalog {
                 "How ventilation works" to "During inspiration, the diaphragm contracts and flattens, and external intercostal muscles lift the ribs up and out. Thoracic volume increases, pressure in the lungs falls below atmospheric pressure and air flows in. During quiet expiration, these muscles relax; elastic recoil reduces thoracic volume, pressure rises and air flows out. Forced expiration uses additional muscles. Air moves because of pressure differences, not because the lungs actively suck it in.",
                 "Gas exchange in plants and practical interpretation" to "Plants exchange gases mainly by diffusion through stomata in leaves and lenticels in some stems. Oxygen and carbon dioxide move according to their gradients; the direction can change with photosynthesis and respiration. In a practical investigation, identify the organism and conditions, state which gas or process is being tested, control relevant variables and distinguish an observation from an inference. A colour change in an indicator is an observation; the conclusion about carbon dioxide is an inference."
             ),
-            "Which statement correctly describes cellular respiration?",
-            listOf("It is a set of cellular chemical reactions that transfers energy from food molecules to ATP","It is simply the movement of air into the lungs","It occurs only in the lungs","It is the same as photosynthesis"), 0,
+            "Which statement correctly describes cellular respiration?",listOf("It is simply the movement of air into the lungs", "It occurs only in the lungs", "It is a set of cellular chemical reactions that transfers energy from food molecules to ATP", "It is the same as photosynthesis"),2,
             "Cellular respiration is a chemical process in cells that releases energy from organic molecules and transfers some of it to ATP. Breathing is ventilation and is a separate process."
         ),
         LearningTopic(
@@ -227,8 +215,7 @@ object LearningCatalog {
                 "Excretion in plants" to "Plants do not have specialised kidneys. Some waste products diffuse out through stomata or lenticels; others are stored in vacuoles, leaves, bark or fruits that may later be shed. Some plants release substances such as resins, gums or latex. Oxygen produced during photosynthesis and carbon dioxide produced during respiration can diffuse out when their concentration gradients favour movement. Plant waste handling varies among species and conditions.",
                 "Exam and practical reasoning" to "When asked to identify an excretory structure, connect it to the organism and its function. When asked about urine formation, keep the sequence clear: ultrafiltration forms filtrate; selective reabsorption returns useful substances and water; secretion adds selected substances to the tubule; the remaining fluid becomes urine. For a kidney diagram, label cortex, medulla, pelvis, ureter and blood vessels only when their positions are clear."
             ),
-            "Which process forces water and small solutes from glomerular blood into Bowman's capsule?",
-            listOf("Ultrafiltration","Egestion","Translocation","Ventilation"), 0,
+            "Which process forces water and small solutes from glomerular blood into Bowman's capsule?",listOf("Egestion", "Translocation", "Ventilation", "Ultrafiltration"),3,
             "Ultrafiltration is pressure-driven filtration at the glomerulus. Blood cells and most large plasma proteins remain in the blood, while water and small solutes enter Bowman's capsule."
         ),
         LearningTopic(
@@ -252,8 +239,7 @@ object LearningCatalog {
                 "Movement in animals" to "Movement may involve limbs, body-wall muscles, fins, wings or other specialised structures. Insects use jointed appendages and an exoskeleton; fish use muscles acting on the body and tail with fins for stability and steering; birds use wings and a light but strong skeleton for flight; mammals use coordinated skeletal muscles, joints and sensory feedback. Do not assume every animal moves in the same way.",
                 "How to answer support and movement questions" to "Identify the structure, state its role and explain how it contributes to support or movement. For a synovial joint, distinguish cartilage, synovial fluid, ligament and tendon. For a muscle action, state which muscle contracts and which relaxes. For a tropism, identify the stimulus and direction of growth. Precise use of terms often determines whether an answer earns full marks."
             ),
-            "At the elbow, which muscle contracts to extend the forearm?",
-            listOf("Triceps","Biceps","Deltoid only","Diaphragm"), 0,
+            "At the elbow, which muscle contracts to extend the forearm?",listOf("Triceps", "Biceps", "Deltoid only", "Diaphragm"),0,
             "The triceps contracts to extend the elbow while the biceps relaxes. The two muscles form an antagonistic pair."
         ),
         LearningTopic(
@@ -278,8 +264,7 @@ object LearningCatalog {
                 "Menstrual cycle, fertilisation and implantation" to "The menstrual cycle involves coordinated changes in the ovaries and uterus. Follicle-stimulating hormone supports follicle development; oestrogen helps rebuild the uterine lining; a surge of luteinising hormone triggers ovulation; progesterone from the corpus luteum helps maintain the uterine lining. If fertilisation occurs, the early embryo divides as it travels towards the uterus and may implant in the uterine lining. If pregnancy does not occur, hormone levels fall and the uterine lining is shed during menstruation. Cycle length varies among individuals.",
                 "Pregnancy and development" to "After implantation, the developing embryo receives nutrients and oxygen from maternal blood through exchange across the placenta; maternal and foetal blood normally do not mix directly. The umbilical cord connects the foetus to the placenta. The amniotic sac and fluid cushion the developing foetus. The placenta also allows carbon dioxide and metabolic wastes to pass from foetal to maternal blood. Development proceeds through embryonic and foetal stages, with growth and organ maturation before birth."
             ),
-            "What is pollination?",
-            listOf("Transfer of pollen from anther to stigma","Fusion of male and female nuclei","Development of an ovule into a seed","Germination of a seed"), 0,
+            "What is pollination?",listOf("Fusion of male and female nuclei", "Transfer of pollen from anther to stigma", "Development of an ovule into a seed", "Germination of a seed"),1,
             "Pollination is the transfer of pollen from an anther to a stigma. Fertilisation is the later fusion of gamete nuclei."
         ),
         LearningTopic(
@@ -303,8 +288,7 @@ object LearningCatalog {
                 "Plant growth regulators" to "Plant hormones or growth regulators are chemical messengers active in small amounts. Auxins influence cell elongation, apical dominance and tropic responses. Gibberellins can promote stem elongation and help break dormancy or stimulate germination in some species. Cytokinins promote cell division and can delay leaf senescence. Ethylene is a gaseous hormone involved in fruit ripening and other responses. Effects depend on concentration, tissue and interactions among hormones.",
                 "Measuring and interpreting growth" to "Growth can be measured using length, height, leaf area, fresh mass, dry mass or cell number. Use the same method at each measurement point and control relevant variables. A growth curve often shows a lag phase, a rapid or exponential phase and a slowing or stationary phase as resources or space become limiting. A graph should have labelled axes, units and a sensible scale. Describe the pattern before suggesting a biological explanation."
             ),
-            "Which condition is needed by most seeds for aerobic respiration during germination?",
-            listOf("Oxygen","Complete darkness in every species","Soil nutrients before the radicle emerges","A fully developed flower"), 0,
+            "Which condition is needed by most seeds for aerobic respiration during germination?",listOf("Complete darkness in every species", "Soil nutrients before the radicle emerges", "Oxygen", "A fully developed flower"),2,
             "Oxygen is needed for aerobic respiration, which supplies energy for the metabolic processes of germination. Water and a suitable temperature are also generally required."
         ),
         LearningTopic(
@@ -330,8 +314,7 @@ object LearningCatalog {
                 "Temperature regulation" to "The hypothalamus helps coordinate thermoregulation. When body temperature rises, sweating and widening of skin blood vessels increase heat loss. When body temperature falls, narrowing of skin blood vessels reduces heat loss, shivering generates heat through muscle activity, and behavioural responses such as seeking warmth may occur. Sweating cools the body as water evaporates from the skin; high humidity can reduce the effectiveness of evaporation.",
                 "Water balance and negative feedback" to "Osmoreceptors in the hypothalamus detect changes related to blood water potential. When the body needs to conserve water, more antidiuretic hormone (ADH) is released from the posterior pituitary, increasing water reabsorption in kidney collecting ducts. When water is abundant, ADH release falls and more dilute urine is produced. Negative feedback reduces the original change and helps keep internal conditions within a functional range."
             ),
-            "Which hormone lowers blood glucose concentration after a meal?",
-            listOf("Insulin","Glucagon","Adrenaline","Thyroxine"), 0,
+            "Which hormone lowers blood glucose concentration after a meal?",listOf("Glucagon", "Adrenaline", "Thyroxine", "Insulin"),3,
             "Insulin promotes uptake and storage of glucose, lowering blood glucose. Glucagon has the opposing effect and raises blood glucose when it is low."
         ),
         LearningTopic(
@@ -354,8 +337,7 @@ object LearningCatalog {
                 "Measuring environmental conditions" to "Use a thermometer to measure temperature, a rain gauge for rainfall, a hygrometer for relative humidity, a light meter for light intensity, a pH meter or indicator for acidity, and an anemometer for wind speed. Soil moisture meters can estimate soil water content. Record units, location, date, time and method. A single reading may not represent an entire habitat; repeat measurements and sample across relevant locations.",
                 "Limiting factors and tolerance" to "A limiting factor is a condition or resource that restricts growth, survival or distribution when it is in short supply or outside a suitable range. A species may have minimum, optimum and maximum tolerance levels for a factor. Distribution is usually influenced by several interacting factors rather than one variable alone. Correlation between an environmental factor and species abundance does not by itself prove that the factor caused the pattern."
             ),
-            "Which instrument is used to measure relative humidity?",
-            listOf("Hygrometer","Rain gauge","Anemometer","Thermometer"), 0,
+            "Which instrument is used to measure relative humidity?",listOf("Hygrometer", "Rain gauge", "Anemometer", "Thermometer"),0,
             "A hygrometer measures humidity. A rain gauge measures rainfall, an anemometer measures wind speed and a thermometer measures temperature."
         ),
         LearningTopic(
@@ -379,8 +361,7 @@ object LearningCatalog {
                 "The nitrogen cycle" to "Most organisms cannot use atmospheric nitrogen gas directly. Nitrogen-fixing bacteria convert nitrogen gas into ammonia or related compounds. Nitrifying bacteria convert ammonium into nitrite and nitrate. Plants absorb nitrate or ammonium and use nitrogen to make amino acids and nucleic acids. Animals obtain nitrogen by feeding. Decomposers return nitrogen to soil as ammonium through ammonification; denitrifying bacteria convert nitrate to nitrogen gas, returning it to the atmosphere.",
                 "Interpreting ecological diagrams and data" to "In a food chain, follow the arrows from food to feeder. In a food web, trace all pathways relevant to the organism in the question. In nutrient-cycle diagrams, identify the process and the material moving between reservoirs. When comparing population data, state the trend and use values from the graph or table. Distinguish a direct observation from an explanation of the cause."
             ),
-            "In a food chain, what does an arrow normally show?",
-            listOf("The direction of energy transfer from food to feeder","The direction in which an animal walks","The direction of rainfall","The direction of reproduction"), 0,
+            "In a food chain, what does an arrow normally show?",listOf("The direction in which an animal walks", "The direction of energy transfer from food to feeder", "The direction of rainfall", "The direction of reproduction"),1,
             "A food-chain arrow points from the organism being eaten to the organism that obtains the food, showing the direction of energy transfer."
         ),
         LearningTopic(
@@ -403,8 +384,7 @@ object LearningCatalog {
                 "Habitat change and conservation" to "Habitats change naturally through flooding, drought, fire, succession and seasonal variation. Human activities such as deforestation, drainage, mining, pollution, overgrazing and urban development can alter or destroy habitats. Habitat fragmentation separates populations and can reduce access to food, mates and migration routes. Conservation may involve protected areas, restoration, sustainable resource use and reducing pollution.",
                 "Field observation of habitats" to "When studying a habitat, record the location, date, time, weather and visible environmental conditions. Describe vegetation structure, water availability, soil or substrate and evidence of organisms. Use quadrats for suitable stationary organisms and transects to examine changes along an environmental gradient. Avoid disturbing organisms unnecessarily, and distinguish what was observed from what you infer."
             ),
-            "What is an ecological niche?",
-            listOf("The role and way of life of an organism in its environment","Only the geographical name of a habitat","The total number of organisms in a country","A non-living factor such as rainfall"), 0,
+            "What is an ecological niche?",listOf("Only the geographical name of a habitat", "The total number of organisms in a country", "The role and way of life of an organism in its environment", "A non-living factor such as rainfall"),2,
             "A niche describes how an organism uses resources, tolerates conditions and interacts with other organisms. A habitat is the place where it lives."
         ),
         LearningTopic(
@@ -429,8 +409,7 @@ object LearningCatalog {
                 "Human impacts and conservation in Nigeria" to "Deforestation, agricultural expansion, overgrazing, bush burning, drainage, mining, pollution and infrastructure development alter Nigerian habitats. Conservation measures include protected areas, sustainable farming and forestry, mangrove restoration, watershed protection, erosion control and community-based resource management. Conservation planning should consider local livelihoods and the ecological functions of each habitat.",
                 "How to answer Nigerian biome questions" to "Identify the biome from its climate and vegetation, not from a place name alone. Link high rainfall and layered broad-leaved trees with rainforest; tidal brackish water and aerial roots with mangroves; seasonal rainfall and grasses with savanna; and cooler high-altitude conditions with montane habitats. State that zones form transitions and local conditions vary."
             ),
-            "Which Nigerian environment is most strongly associated with tidal brackish water and mangrove vegetation?",
-            listOf("Coastal Niger Delta","Sudan savanna","Jos Plateau grassland","Sahel grassland"), 0,
+            "Which Nigerian environment is most strongly associated with tidal brackish water and mangrove vegetation?",listOf("Sudan savanna", "Jos Plateau grassland", "Sahel grassland", "Coastal Niger Delta"),3,
             "Mangrove vegetation is characteristic of tidal coastal and estuarine environments, including parts of the Niger Delta, where salinity and waterlogged sediments shape plant adaptations."
         ),
         LearningTopic(
@@ -454,8 +433,7 @@ object LearningCatalog {
                 "Secondary succession" to "Secondary succession occurs where a community has been disturbed but soil remains, such as after cultivation is abandoned or some fires. Seeds, roots, soil organisms and nutrients may remain, so recovery can be faster than primary succession. The sequence varies with disturbance severity, climate, soil and nearby sources of colonising species.",
                 "Ecological succession and disturbance" to "Succession is a directional change in community composition over time, but it does not always lead to one universal final community. Repeated fire, grazing, flooding, drought or human activity can maintain or redirect vegetation patterns. In examination answers, identify the starting condition, the role of pioneer species, how soil or habitat conditions change, and why later communities can establish."
             ),
-            "A habitat contains 240 seedlings in an area of 60 m². What is the population density?",
-            listOf("4 seedlings/m²","60 seedlings/m²","180 seedlings/m²","300 seedlings/m²"), 0,
+            "A habitat contains 240 seedlings in an area of 60 m². What is the population density?",listOf("4 seedlings/m²", "60 seedlings/m²", "180 seedlings/m²", "300 seedlings/m²"),0,
             "Population density = number of individuals ÷ area = 240 ÷ 60 = 4 seedlings per square metre."
         ),
         LearningTopic(
@@ -479,8 +457,7 @@ object LearningCatalog {
                 "Soil degradation" to "Soil can be degraded by erosion, nutrient depletion, salinisation, compaction, contamination, deforestation, overgrazing and poorly managed irrigation. Water erosion removes topsoil through splash, sheet, rill and gully processes. Wind erosion can remove dry, exposed particles. Loss of topsoil reduces fertility and can increase sedimentation in rivers and reservoirs.",
                 "Soil conservation" to "Conservation methods include maintaining vegetation cover, mulching, cover crops, contour farming, terracing on suitable slopes, windbreaks, reduced tillage, controlled grazing, adding appropriate organic matter and managing irrigation to prevent salinisation. The best method depends on slope, rainfall, soil type, land use and local conditions. Conservation should reduce erosion while maintaining soil structure and fertility."
             ),
-            "Which soil type generally has the largest particles and the fastest drainage?",
-            listOf("Sandy soil","Clayey soil","Peat only","Compacted clay"), 0,
+            "Which soil type generally has the largest particles and the fastest drainage?",listOf("Clayey soil", "Sandy soil", "Peat only", "Compacted clay"),1,
             "Sandy soil has relatively large particles and pore spaces, so water generally drains more quickly than in clayey soil."
         ),
         LearningTopic(
@@ -505,8 +482,7 @@ object LearningCatalog {
                 "Climate, biodiversity and environmental health" to "Climate change can alter heat exposure, rainfall, water availability, crop productivity and the distribution of some disease vectors. Habitat destruction and biodiversity loss can disrupt ecosystem services such as pollination, water purification and soil formation. Environmental effects are complex; avoid claiming that one environmental change causes every disease outbreak. Risk depends on ecology, infrastructure, behaviour and public-health systems.",
                 "Conservation and responsible action" to "Conservation protects species, habitats and ecosystem functions. Approaches include protected areas, restoration, sustainable harvesting, pollution control, waste reduction, erosion control and environmental education. Individuals can reduce litter, conserve water, dispose of waste safely and support evidence-based community programmes. Effective solutions should be adapted to local ecological and social conditions."
             ),
-            "Which medicine group is specifically used to treat bacterial infections rather than viral infections?",
-            listOf("Antibiotics","Antihistamines","Antacids","Analgesics"), 0,
+            "Which medicine group is specifically used to treat bacterial infections rather than viral infections?",listOf("Antihistamines", "Antacids", "Antibiotics", "Analgesics"),2,
             "Antibiotics act against bacteria. They do not treat viral infections, and their unnecessary use contributes to antimicrobial resistance."
         ),
         LearningTopic(
@@ -530,8 +506,7 @@ object LearningCatalog {
                 "Sex chromosomes and inherited differences" to "In the common human XX/XY pattern, most females have XX sex chromosomes and most males have XY. Eggs normally carry an X chromosome; sperm carry either X or Y, so the sperm usually determines whether the resulting zygote is XX or XY. Biological sex development is more varied than this simplified model, but XX/XY is the standard introductory inheritance model used in many school questions.",
                 "Why variation matters" to "Variation can affect how individuals respond to environmental conditions. If a heritable characteristic improves survival or reproductive success in a particular environment, individuals carrying it may leave more offspring. Natural selection changes the frequency of inherited variants in populations over generations. Variation is not produced because organisms consciously need a feature; it arises through genetic processes and is acted on by selection."
             ),
-            "Which type of variation is illustrated by the four ABO blood groups?",
-            listOf("Discontinuous variation","Continuous variation","Environmental variation only","Seasonal variation"), 0,
+            "Which type of variation is illustrated by the four ABO blood groups?",listOf("Continuous variation", "Environmental variation only", "Seasonal variation", "Discontinuous variation"),3,
             "ABO blood groups are distinct categories (A, B, AB and O), so they are a standard example of discontinuous variation."
         ),
         LearningTopic(
@@ -556,8 +531,7 @@ object LearningCatalog {
                 "Mutation and genetic variation" to "Mutation is a change in DNA sequence. Mutations may have no effect, harmful effects or beneficial effects depending on the gene, environment and context. Mutations in cells that contribute to gametes can be inherited; mutations in ordinary body cells are generally not passed to offspring. Meiosis and fertilisation also create new combinations of alleles. Genetic variation is the raw material on which natural selection can act.",
                 "Genetics in health and society" to "Genetic information can help explain inherited conditions, blood groups and family resemblance. Genetic risk is not always certainty: many conditions involve multiple genes and environmental factors. Genetic tests require appropriate interpretation, consent and privacy safeguards. Avoid stigmatising language or assuming that a genotype determines a person's worth, behaviour or entire health future."
             ),
-            "In a simple complete-dominance cross Tt × Tt, what is the expected genotype ratio?",
-            listOf("1 TT : 2 Tt : 1 tt","3 TT : 1 tt","1 Tt : 1 tt","All Tt"), 0,
+            "In a simple complete-dominance cross Tt × Tt, what is the expected genotype ratio?",listOf("1 TT : 2 Tt : 1 tt", "3 TT : 1 tt", "1 Tt : 1 tt", "All Tt"),0,
             "Each parent produces T and t gametes. The four equally likely combinations are TT, Tt, Tt and tt, giving a 1:2:1 genotype ratio."
         ),
         LearningTopic(
@@ -581,8 +555,7 @@ object LearningCatalog {
                 "Benefits, limitations and biosafety" to "Potential benefits include improved crop traits, more consistent production of medicines, faster propagation of useful plants and better diagnostic tools. Limitations include cost, technical requirements, unequal access, unintended effects and public concerns. Biosafety assesses potential risks to human health and the environment, including gene flow, effects on non-target organisms and development of resistance. Decisions should be based on evidence, regulation and transparent assessment rather than unsupported claims.",
                 "Ethics, ownership and responsible use" to "Biotechnology raises questions about consent, privacy of genetic information, access to treatments, intellectual property, effects on farmers and communities, animal welfare and environmental protection. Responsible use includes independent risk assessment, monitoring, clear labelling where required, fair access and public engagement. Avoid assuming that every biotechnology application is automatically safe or automatically harmful."
             ),
-            "Which method grows many new plants from small pieces of tissue under sterile conditions?",
-            listOf("Plant tissue culture","Natural pollination only","Transpiration","Selective grazing"), 0,
+            "Which method grows many new plants from small pieces of tissue under sterile conditions?",listOf("Natural pollination only", "Plant tissue culture", "Transpiration", "Selective grazing"),1,
             "Plant tissue culture grows cells, tissues or organs on sterile nutrient media and can be used for rapid multiplication through micropropagation."
         ),
         LearningTopic(
@@ -607,8 +580,7 @@ object LearningCatalog {
                 "Speciation and reproductive isolation" to "Speciation is the formation of new species. When populations become reproductively isolated, gene flow between them is reduced or stopped. Different mutations, selection pressures and genetic drift can then cause the populations to diverge. Reproductive isolation may arise through geographical separation or differences in behaviour, timing, anatomy or gamete compatibility. Speciation often takes many generations.",
                 "How to explain evolution in an examination" to "Use the sequence: heritable variation exists; an environmental factor creates different reproductive success; individuals with certain variants leave more offspring; allele frequencies change over generations. Avoid saying organisms evolve because they try, need or choose to change. Distinguish an individual's acclimatisation from inherited evolutionary change in a population."
             ),
-            "Which statement best describes natural selection?",
-            listOf("Heritable variants associated with greater reproductive success can become more common over generations","Individuals develop useful inherited features because they need them","All mutations are beneficial","Evolution always makes organisms more complex"), 0,
+            "Which statement best describes natural selection?",listOf("Individuals develop useful inherited features because they need them", "All mutations are beneficial", "Heritable variants associated with greater reproductive success can become more common over generations", "Evolution always makes organisms more complex"),2,
             "Natural selection changes populations when heritable variants affect reproductive success. It does not require conscious effort or produce a predetermined direction of change."
         ),
         LearningTopic(
@@ -632,8 +604,7 @@ object LearningCatalog {
                 "Broad evolutionary trends in plants and animals" to "Plant evolution includes the development of vascular tissues, seeds and flowers in different lineages. These features changed how plants transport water, reproduce and disperse offspring, but modern plant groups are not a simple ladder from 'primitive' to 'advanced'. Animal lineages show diverse changes in body symmetry, segmentation, skeletons, specialised organs and reproductive strategies. Evolution produces branching lineages, not a single march towards perfection.",
                 "How to evaluate evolutionary evidence" to "Identify what is being compared, state the observed similarity or difference, and explain how it supports or limits an evolutionary interpretation. Similar bone patterns may support homology; similar functions with different underlying structures may indicate analogy; DNA similarity can support common ancestry. No single feature should be used carelessly to claim a direct ancestor. Strong explanations combine independent evidence and acknowledge uncertainty where appropriate."
             ),
-            "The forelimbs of a human, bat and whale have a similar underlying bone arrangement but different functions. They are examples of",
-            listOf("homologous structures","analogous structures only","unrelated structures","artificial selection"), 0,
+            "The forelimbs of a human, bat and whale have a similar underlying bone arrangement but different functions. They are examples of",listOf("analogous structures only", "unrelated structures", "artificial selection", "homologous structures"),3,
             "The shared underlying bone pattern supports common ancestry, even though the forelimbs are adapted for different functions. This is homology."
         ),
         LearningTopic(
