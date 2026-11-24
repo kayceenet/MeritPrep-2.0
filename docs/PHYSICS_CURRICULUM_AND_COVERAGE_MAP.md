@@ -72,6 +72,21 @@ The calculation engines have unit tests for the main relationships and invalid i
 | 38 | Elementary modern physics | Syllabus outline |
 | 39 | Introductory electronics | Syllabus outline |
 
+## Interactive Physics models
+
+The Physics tab in the virtual laboratory currently contains eight mathematical models:
+
+- Ohm's law: adjustable voltage and resistance, with current and power outputs.
+- Uniformly accelerated motion: initial velocity, acceleration and time, with final velocity and displacement.
+- Perpendicular vector addition: two components, resultant magnitude and direction.
+- Principle of moments: force and perpendicular arm lengths, with clockwise and anticlockwise moments.
+- Simple-machine performance: load, effort, mechanical advantage, velocity ratio and efficiency, including a warning for impossible efficiency above 100%.
+- Wave properties: frequency, wavelength, wave speed and period.
+- Echo sounding: round-trip time and sound speed to estimate distance to a reflector.
+- Plane-mirror reflection: equality of incident and reflected angles measured from the normal.
+
+These are idealised calculation models, not physical laboratory instruments or complete practical examinations. Their assumptions and limitations are shown in the app. They do not yet assess experimental technique, measurement uncertainty or graph-drawing skill.
+
 ## Assessment integrity
 
 - All 120 questions in the current Physics bank are original MeritPrep practice items.
