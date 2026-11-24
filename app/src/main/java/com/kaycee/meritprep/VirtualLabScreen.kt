@@ -75,7 +75,7 @@ private fun PhysicsLab() {
     Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
         Text("Physics practical models", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
         Row(Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            listOf("Ohm's law", "Motion", "Vectors", "Moments", "Machines", "Elasticity", "Pressure", "Fluids", "Heat", "Gas laws").forEachIndexed { index, label ->
+            listOf("Ohm's law", "Motion", "Vectors", "Moments", "Machines", "Elasticity", "Pressure", "Fluids", "Heat", "Gas laws", "Waves", "Echoes", "Reflection").forEachIndexed { index, label ->
                 FilterChip(selected = selected == index, onClick = { selected = index }, label = { Text(label) })
             }
         }
@@ -89,7 +89,10 @@ private fun PhysicsLab() {
             6 -> PhysicsPressureLab()
             7 -> PhysicsFluidsLab()
             8 -> PhysicsHeatLab()
-            else -> PhysicsGasLawsLab()
+            9 -> PhysicsGasLawsLab()
+            10 -> WavePropertiesLab()
+            11 -> EchoDistanceLab()
+            else -> ReflectionLab()
         }
     }
 }
