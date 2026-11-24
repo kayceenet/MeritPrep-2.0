@@ -24,7 +24,26 @@ object CbtSessionEngine {
     ): List<PresentedQuestion> {
         require(count > 0) { "A CBT session must contain at least one question." }
         require(pool.size >= count) { "The question pool is smaller than the requested session." }
-        val selected = pool.shuffled(random).take(count)
+        // Round-robin across syllabus topics so a short mock does not over-sample
+        // a few topics simply because their question banks are larger.
+        val topicBuckets = pool.groupBy { it.topicId }
+            .mapValues { (_, questions) -> questions.shuffled(random) }
+        val topicOrder = topicBuckets.keys.shuffled(random)
+        val selected = ArrayList<AssessmentQuestion>(count)
+        var round = 0
+        while (selected.size < count) {
+            var addedThisRound = false
+            topicOrder.forEach { topicId ->
+                val question = topicBuckets.getValue(topicId).getOrNull(round)
+                if (question != null && selected.size < count) {
+                    selected += question
+                    addedThisRound = true
+                }
+            }
+            if (!addedThisRound) break
+            round++
+        }
+        check(selected.size == count) { "The question pool could not fill the requested session." }
         return selected.map { AssessmentEngine.present(it, random) }
     }
 
