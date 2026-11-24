@@ -415,7 +415,7 @@ class BiologyQuestionBankTest {
         assertTrue(habitat.options.any { it.contains("community", ignoreCase = true) })
 
         val porosity = BiologyQuestionBank.all.first { it.id == "bio-soil-005" }
-        assertTrue(porosity.options.any { it.contains("bulk density", ignoreCase = true) })
+        assertTrue(porosity.options.any { it.contains("bulk volume", ignoreCase = true) })
         assertTrue(porosity.options.any { it.contains("water", ignoreCase = true) })
     }
 
