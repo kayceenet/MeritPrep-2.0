@@ -24,6 +24,7 @@ The current alpha is a working Android app built with Kotlin, Jetpack Compose an
 - A seven-day Biology study planner with configurable daily study targets, lesson/practice/flashcard activities, local completion tracking and shortcuts into the relevant screens.
 - Biology practical-learning prototypes for food tests with prediction feedback, osmosis, microscope magnification, quadrat-based ecological sampling, a dichotomous classification key and a biological-drawing self-check.
 - Introductory Physics and Chemistry simulations for Ohm's law and solution concentration.
+- A dedicated offline scientific calculator workspace linked from Home, with tested tools for percentage, arithmetic mean, Ohm's law current, speed, density, molar concentration and dilution. Each result displays its formula, working and units, with input validation.
 - Offline lesson read-aloud using the Android device's installed text-to-speech voice, with stop control and lifecycle cleanup. This is a reconstructed accessibility feature based on static APK feature traces; the original speech implementation was not recovered.
 - A learner profile with topic-level practice evidence and an objective-practice mastery indicator. The current threshold requires at least 10 attempts, 8 distinct questions, 2 study days and 80% correct.
 - An adaptive seven-day study plan that prioritises weaker, unattempted and less recently studied topics using recorded learner evidence.
