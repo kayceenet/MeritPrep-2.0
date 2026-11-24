@@ -28,6 +28,8 @@ The Physics virtual-lab area includes interactive models for:
 - Wave speed and period from frequency and wavelength.
 - Echo sounding using round-trip sound travel time.
 - Reflection at a plane mirror, with angles measured from the normal.
+- Resistor networks in series and parallel, including equivalent resistance, current and power.
+- Capacitor networks in series and parallel, including equivalent capacitance, stored charge and energy.
 
 The calculation engines have unit tests for the main relationships and invalid input handling. These are idealised simulations: they do not collect sensor data, reproduce measurement uncertainty or replace a supervised practical investigation. Learners should still practise recording readings, plotting graphs, estimating uncertainty and evaluating sources of error.
 
@@ -77,18 +79,25 @@ The calculation engines have unit tests for the main relationships and invalid i
 
 ## Interactive Physics models
 
-The Physics tab in the virtual laboratory currently contains eight mathematical models:
+The Physics tab in the virtual laboratory currently contains fifteen mathematical models:
 
 - Ohm's law: adjustable voltage and resistance, with current and power outputs.
 - Uniformly accelerated motion: initial velocity, acceleration and time, with final velocity and displacement.
 - Perpendicular vector addition: two components, resultant magnitude and direction.
 - Principle of moments: force and perpendicular arm lengths, with clockwise and anticlockwise moments.
 - Simple-machine performance: load, effort, mechanical advantage, velocity ratio and efficiency, including a warning for impossible efficiency above 100%.
+- Elasticity: spring constant, extension, restoring-force magnitude and elastic potential energy.
+- Pressure: force and contact area.
+- Fluids: object density, hydrostatic gauge pressure and Archimedes' upthrust.
+- Calorimetry and latent heat: sensible heat transfer and phase-change energy.
+- Gas laws: Boyle's law and Charles's law, with absolute temperature in kelvin.
 - Wave properties: frequency, wavelength, wave speed and period.
 - Echo sounding: round-trip time and sound speed to estimate distance to a reflector.
 - Plane-mirror reflection: equality of incident and reflected angles measured from the normal.
+- Resistor networks: series and parallel equivalent resistance, total current and power.
+- Capacitor networks: series and parallel equivalent capacitance, stored charge and energy.
 
-These are idealised calculation models, not physical laboratory instruments or complete practical examinations. Their assumptions and limitations are shown in the app. They do not yet assess experimental technique, measurement uncertainty or graph-drawing skill.
+The pure calculation engines have unit tests for the main relationships and invalid-input handling. These are idealised models, not physical laboratory instruments or complete practical examinations. Their assumptions and limitations are shown in the app. They do not yet assess experimental technique, measurement uncertainty or graph-drawing skill.
 
 ## Assessment integrity
 
