@@ -454,3 +454,41 @@ fun AdaptationTypesCard() {
         }
     }
 }
+
+
+@Composable
+fun SoilWaterInvestigationCard() {
+    Card(Modifier.fillMaxWidth()) {
+        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(9.dp)) {
+            Text("Practical: compare water movement through soils", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+            Text("Soil texture affects pore spaces, drainage and water retention. Sandy soil usually drains quickly; clayey soil usually drains slowly and retains more water; loamy soil often provides a useful balance for plant growth.")
+
+            Text("A fair-test method", fontWeight = FontWeight.Bold)
+            val steps = listOf(
+                "Label three identical funnels: sand, clay-rich soil and loam.",
+                "Place the same type and size of filter paper in each funnel.",
+                "Measure the same dry mass of each soil sample, for example 50 g.",
+                "Pour the same measured volume of water into each sample at the same rate.",
+                "Collect the drained water for the same fixed time, then measure its volume.",
+                "Repeat the test and calculate the mean drainage volume for each soil."
+            )
+            steps.forEachIndexed { index, step ->
+                Text("${index + 1}. $step", style = MaterialTheme.typography.bodyMedium)
+            }
+
+            Surface(color = MaterialTheme.colorScheme.primaryContainer, shape = MaterialTheme.shapes.medium) {
+                Column(Modifier.fillMaxWidth().padding(12.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                    Text("Variables", fontWeight = FontWeight.Bold)
+                    Text("Independent: soil type.")
+                    Text("Dependent: volume of water drained in the fixed time.")
+                    Text("Controlled: dry soil mass, funnel, filter paper, water volume, pouring rate and drainage time.")
+                }
+            }
+
+            Text("Interpreting results", fontWeight = FontWeight.Bold)
+            Text("More water collected in the same time indicates faster drainage under the test conditions. Water retained can be estimated as water added minus water collected, but this is an approximation because some water may remain on the apparatus or be lost during handling.")
+            Text("Do not claim that one soil is always best for every crop. Plant suitability also depends on nutrients, pH, structure, climate and the crop's water needs.")
+            Text("Safety: do not taste or directly inhale soil. Wash hands after handling samples and follow laboratory or field hygiene procedures.")
+        }
+    }
+}
