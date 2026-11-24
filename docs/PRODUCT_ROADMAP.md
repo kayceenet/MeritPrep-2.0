@@ -39,7 +39,7 @@ Authenticated sync, teacher/admin CMS, analytics, backups, privacy and security 
 - Biology syllabus map: 24 units represented; each unit resolves to an authored lesson draft.
 - Biology lessons: 24 beginner-oriented lesson drafts, mapped to the syllabus units; independent academic review is pending.
 - Biology content integrity: automated unit tests check all 24 syllabus-to-lesson mappings, required beginner-lesson teaching elements, valid formative answer keys, unique question IDs, question provenance, glossary uniqueness and glossary-to-lesson links.
-- Biology original objective practice: 242 items across the 24 units; items are explicitly marked as original and unverified.
+- Biology original objective practice: 244 items across the 24 units; items are explicitly marked as original and unverified.
 - WAEC-style theory: 15 original structured-response tasks with model responses, self-check points and locally saved responses; independent review is pending.
 - Practice: topic-focused sessions and a full Biology question-bank mode with shuffled question and option order.
 - Timed CBT: a 40-question, 30-minute Biology mock with answer navigation, flags, explanations and local active-session recovery logic.
