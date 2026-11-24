@@ -142,7 +142,7 @@ This was a static inspection only. It did not establish runtime behaviour, compl
 The repository currently contains a Kotlin/Compose Android application with:
 - seven subject entry points, with complete syllabus coverage not yet available for all subjects;
 - a 24-unit Biology syllabus map and 24 beginner-oriented lesson drafts;
-- 240 original Biology objective practice questions;
+- 242 original Biology objective practice questions;
 - Biology glossary and process visuals;
 - Biology JAMB-style and WAEC-style objective practice mocks;
 - 15 original WAEC-style Biology structured-response tasks with model responses, self-check guidance and locally persisted learner progress;
@@ -168,7 +168,7 @@ These are alpha implementations. Biology content is pending independent academic
 - Produce a subject-by-subject syllabus coverage matrix.
 
 ### Gate 3 — Complete Biology
-- Review all 24 lesson drafts, 240 objective questions, theory tasks, flashcards, diagrams and practical prototypes.
+- Review all 24 lesson drafts, 242 objective questions, theory tasks, flashcards, diagrams and practical prototypes.
 - Expand practical activities into guided investigations with observation/data recording and interpretation.
 - Add reviewed content versions and evidence-based learner feedback.
 
