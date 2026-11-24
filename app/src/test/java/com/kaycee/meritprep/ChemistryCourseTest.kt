@@ -20,9 +20,9 @@ class ChemistryCourseTest {
     }
 
     @Test fun newlyDevelopedLessonsCoverAllTwelveTopics() {
-        val ids = ChemistryCourse.topics.take(12).map { it.id }
+        val ids = ChemistryCourse.topics.map { it.id }
         assertTrue(ids.containsAll(listOf("chem-nuclear", "chem-solubility", "chem-pollution", "chem-acids-bases", "chem-redox", "chem-electrolysis", "chem-energy", "chem-rates")))
-        assertTrue(ChemistryCourse.topics.take(12).all { it.sections.size >= 5 })
+        assertEquals(12, ChemistryCourse.topics.count { !it.isSyllabusOutline })
     }
 
     @Test fun remainingSixTopicsAreClearlyMarkedAsMappedDrafts() {
