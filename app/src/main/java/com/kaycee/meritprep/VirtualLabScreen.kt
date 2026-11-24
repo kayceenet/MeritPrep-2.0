@@ -11,6 +11,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import kotlin.math.roundToInt
 import com.kaycee.meritprep.data.ChemistryPracticalEngine
+import com.kaycee.meritprep.data.PhysicsPracticalEngine
 
 @Composable
 fun VirtualLabScreen() {
@@ -93,8 +94,9 @@ private fun UniformMotionLab() {
     var initialVelocity by remember { mutableFloatStateOf(2f) }
     var acceleration by remember { mutableFloatStateOf(1.5f) }
     var time by remember { mutableFloatStateOf(4f) }
-    val finalVelocity = initialVelocity + acceleration * time
-    val displacement = initialVelocity * time + 0.5f * acceleration * time * time
+    val motion = PhysicsPracticalEngine.uniformMotion(initialVelocity.toDouble(), acceleration.toDouble(), time.toDouble())
+    val finalVelocity = motion.finalVelocityMps
+    val displacement = motion.displacementM
     Card(Modifier.fillMaxWidth()) {
         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
             Text("Uniformly accelerated motion", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
@@ -118,8 +120,9 @@ private fun UniformMotionLab() {
 private fun VectorAdditionLab() {
     var east by remember { mutableFloatStateOf(3f) }
     var north by remember { mutableFloatStateOf(4f) }
-    val magnitude = kotlin.math.sqrt(east * east + north * north)
-    val angle = Math.toDegrees(kotlin.math.atan2(north.toDouble(), east.toDouble()))
+    val vector = PhysicsPracticalEngine.perpendicularVector(east.toDouble(), north.toDouble())
+    val magnitude = vector.magnitude
+    val angle = vector.angleDegreesFromPositiveX
     Card(Modifier.fillMaxWidth()) {
         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
             Text("Perpendicular vector addition", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
@@ -143,8 +146,8 @@ private fun MomentsLab() {
     var effortArm by remember { mutableFloatStateOf(0.4f) }
     var load by remember { mutableFloatStateOf(8f) }
     var loadArm by remember { mutableFloatStateOf(0.5f) }
-    val clockwise = effort * effortArm
-    val anticlockwise = load * loadArm
+    val clockwise = PhysicsPracticalEngine.moment(effort.toDouble(), effortArm.toDouble()).toFloat()
+    val anticlockwise = PhysicsPracticalEngine.moment(load.toDouble(), loadArm.toDouble()).toFloat()
     val netMoment = clockwise - anticlockwise
     Card(Modifier.fillMaxWidth()) {
         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
@@ -173,8 +176,9 @@ private fun SimpleMachineLab() {
     var load by remember { mutableFloatStateOf(300f) }
     var effort by remember { mutableFloatStateOf(100f) }
     var velocityRatio by remember { mutableFloatStateOf(4f) }
-    val mechanicalAdvantage = if (effort > 0f) load / effort else 0f
-    val efficiency = if (velocityRatio > 0f) mechanicalAdvantage / velocityRatio * 100f else 0f
+    val machine = PhysicsPracticalEngine.machinePerformance(load.toDouble(), effort.toDouble(), velocityRatio.toDouble())
+    val mechanicalAdvantage = machine.mechanicalAdvantage.toFloat()
+    val efficiency = machine.efficiencyPercent.toFloat()
     Card(Modifier.fillMaxWidth()) {
         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
             Text("Simple machine efficiency", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
