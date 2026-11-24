@@ -34,6 +34,8 @@ class BiologyPopulationSamplingTest {
         assertNull(estimatePopulationFromQuadrats(listOf(1, -1), 1.0, 50.0))
         assertNull(estimatePopulationFromQuadrats(listOf(1), 0.0, 50.0))
         assertNull(estimatePopulationFromQuadrats(listOf(1), 1.0, -50.0))
+        assertNull(estimatePopulationFromQuadrats(listOf(1, 2), 1.0, 1.0))
+        assertNull(estimatePopulationFromQuadrats(listOf(Int.MAX_VALUE, 1), 1.0, 10.0))
         assertNull(estimatePopulationFromQuadrats(listOf(1), Double.NaN, 50.0))
     }
 }
