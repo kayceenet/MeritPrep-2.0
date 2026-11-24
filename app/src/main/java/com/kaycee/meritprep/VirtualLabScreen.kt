@@ -25,7 +25,7 @@ fun VirtualLabScreen() {
             }
         }
         val safetyGuidance = when (selectedLab) {
-            0 -> "This is an ideal mathematical simulation, not a physical circuit. Never connect this app to mains electricity. Real circuit work requires an isolated extra-low-voltage supply, power disconnected before changing connections and trained supervision."
+            0 -> "These are ideal mathematical models, not physical apparatus. The Ohm's law model is not a real circuit; never connect this app to mains electricity. Physical experiments with electricity, moving masses, sound or optics require suitable equipment, a risk assessment and trained supervision."
             1 -> "This is a concentration calculator; it does not prepare a real solution. In a laboratory, wear eye protection, use clean labelled glassware, never taste chemicals and follow the teacher's instructions."
             else -> "These are simulated outcomes. In real food tests, wear goggles, avoid reagent contact and ingestion, keep ethanol away from flames, and heat Benedict's solution in a water bath under supervision. Handle slides and coverslips carefully; do not touch unknown plants or fungi, enter unsafe field sites or taste specimens. Wash hands after practical work."
         }
