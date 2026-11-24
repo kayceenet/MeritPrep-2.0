@@ -267,9 +267,7 @@ internal val starterRevisionCards = listOf(
     RevisionCard("phy-machines-card-1","phy-machines","Define mechanical advantage and velocity ratio.","MA = load/effort. VR = distance moved by effort/distance moved by load.",0L),
     RevisionCard("phy-machines-card-2","phy-machines","How is machine efficiency calculated?","Efficiency = (MA/VR) × 100% or (useful output work/input work) × 100%.",0L),
     RevisionCard("phy-machines-card-3","phy-machines","Why is the efficiency of a real machine usually below 100%?","Some input energy is transferred to non-useful forms such as heat and sound because of friction, deformation and other losses.",0L)
-)
-
- + listOf(
+) + listOf(
     RevisionCard("phy-elasticity-card-1","phy-elasticity","State Hooke's law.","Within the limit of proportionality, extension is directly proportional to applied force: F = kx.",0L),
     RevisionCard("phy-elasticity-card-2","phy-elasticity","Define Young's modulus.","Young's modulus = tensile stress/tensile strain = FL/(AΔL), for a uniform specimen in the linear elastic region.",0L),
     RevisionCard("phy-elasticity-card-3","phy-elasticity","What does the area under a force-extension graph represent?","Work done in stretching the spring, stored as elastic potential energy for an ideal elastic spring.",0L),
