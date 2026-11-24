@@ -213,10 +213,10 @@ object BiologyTheoryBank {
                 "A compatible pollen grain hydrates and germinates on the stigma.",
                 "A pollen tube grows through the style towards an ovule in the ovary.",
                 "The male nucleus or nuclei travel through the pollen tube.",
-                "In angiosperms, one male nucleus fuses with the egg to form a diploid zygote; the other fuses with the polar nuclei to form endosperm (double fertilisation).",
+                "In angiosperms, one haploid male gamete fuses with the haploid egg to form a diploid zygote (2n); the other fuses with the two haploid polar nuclei to form a triploid primary endosperm nucleus (3n). These are the two events of double fertilisation.",
                 "The ovule develops into a seed and the ovary usually develops into a fruit."
             ),
-            "Pollination is the transfer of pollen from anther to stigma; it is not fertilisation. After compatible pollen lands on the stigma, it can germinate and form a pollen tube that grows down the style towards an ovule. Male nuclei travel through the tube. In flowering plants, one male nucleus fuses with the egg to form a diploid zygote, while the other fuses with the polar nuclei to form endosperm. This is double fertilisation. The ovule develops into a seed and the ovary usually develops into a fruit."
+            "Pollination is the transfer of pollen from anther to stigma; it is not fertilisation. After compatible pollen lands on the stigma, it can germinate and form a pollen tube that grows down the style towards an ovule. The tube carries two haploid male gametes. One fuses with the haploid egg to form a diploid zygote (2n), which develops into the embryo. The other fuses with the two haploid polar nuclei to form a triploid primary endosperm nucleus (3n); the endosperm nourishes the developing embryo. These two fusion events are called double fertilisation. The ovule develops into a seed, its integuments form the seed coat, and the ovary usually develops into a fruit."
         ),
         BiologyTheoryTask(
             "theory-variation-14", "bio-variation", "Continuous and discontinuous variation",
