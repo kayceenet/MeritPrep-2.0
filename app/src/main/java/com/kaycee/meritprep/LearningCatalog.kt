@@ -10,6 +10,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.kaycee.meritprep.data.MeritDatabase
+import android.speech.tts.TextToSpeech
+import java.util.Locale
 
 data class LearningTopic(
     val id: String,
@@ -731,6 +733,22 @@ fun LessonScreen(topicId: String) {
     var selected by remember(topicId) { mutableIntStateOf(-1) }
     var checked by remember(topicId) { mutableStateOf(false) }
 
+    var speechReady by remember(topicId) { mutableStateOf(false) }
+    var speechEngine by remember(topicId) { mutableStateOf<TextToSpeech?>(null) }
+    DisposableEffect(topicId, context) {
+        val engine = TextToSpeech(context.applicationContext) { status ->
+            speechReady = status == TextToSpeech.SUCCESS
+            if (status == TextToSpeech.SUCCESS) speechEngine?.language = Locale.UK
+        }
+        speechEngine = engine
+        onDispose {
+            engine.stop()
+            engine.shutdown()
+            speechEngine = null
+            speechReady = false
+        }
+    }
+
     if (topic == null) {
         Column(Modifier.fillMaxSize().padding(24.dp)) {
             Text("Lesson not available", style = MaterialTheme.typography.headlineSmall)
@@ -746,6 +764,32 @@ fun LessonScreen(topicId: String) {
         Text(topic.subjectCode, style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
         Text(topic.title, style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
         Text(topic.introduction, style = MaterialTheme.typography.bodyLarge)
+
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            Button(
+                onClick = {
+                    val narration = buildString {
+                        append(topic.title).append(". ")
+                        append(topic.introduction).append(". ")
+                        topic.objectives.forEach { append(it).append(". ") }
+                        topic.sections.forEach { append(it.first).append(". ").append(it.second).append(". ") }
+                        append("Check your understanding. ").append(topic.checkQuestion)
+                    }
+                    speechEngine?.language = Locale.UK
+                    speechEngine?.speak(narration, TextToSpeech.QUEUE_FLUSH, null, "lesson-${topic.id}")
+                },
+                enabled = speechReady,
+                modifier = Modifier.weight(1f)
+            ) { Text(if (speechReady) "Listen to lesson" else "Preparing audio…") }
+            OutlinedButton(onClick = { speechEngine?.stop() }, enabled = speechReady) {
+                Text("Stop")
+            }
+        }
+        Text(
+            "Audio uses your device's text-to-speech voice and works offline when a compatible voice is installed.",
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
         OutlinedButton(
             onClick = {
                 if (bookmarked) database.removeBookmark(topic.id)
