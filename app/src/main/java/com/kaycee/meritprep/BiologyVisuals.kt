@@ -5,6 +5,10 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -294,6 +298,68 @@ fun RespirationComparisonCard() {
 
             Text("Remember", fontWeight = FontWeight.Bold)
             Text("Breathing moves air into and out of the lungs. Gas exchange moves oxygen and carbon dioxide across a respiratory surface. Cellular respiration is the chemical process in cells that transfers energy to ATP.")
+        }
+    }
+}
+
+
+@Composable
+fun BiologyPopulationSamplingCard() {
+    var countsText by remember { mutableStateOf("4, 6, 5, 7, 3") }
+    var quadratAreaText by remember { mutableStateOf("1") }
+    var habitatAreaText by remember { mutableStateOf("100") }
+
+    val counts = countsText.split(",").map { it.trim().toIntOrNull() }
+    val quadratArea = quadratAreaText.toDoubleOrNull()
+    val habitatArea = habitatAreaText.toDoubleOrNull()
+    val estimate = if (counts.isNotEmpty() && counts.all { it != null } &&
+        quadratArea != null && habitatArea != null
+    ) {
+        estimatePopulationFromQuadrats(counts.filterNotNull(), quadratArea, habitatArea)
+    } else null
+
+    Card(Modifier.fillMaxWidth()) {
+        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(9.dp)) {
+            Text("Estimate a population using quadrats", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+            Text("A quadrat is a frame used to sample organisms in a defined area. Place it randomly at several locations, count the organisms inside each frame, then use the mean density to estimate the population in the whole habitat.")
+            OutlinedTextField(
+                value = countsText,
+                onValueChange = { countsText = it },
+                modifier = Modifier.fillMaxWidth(),
+                label = { Text("Counts in each quadrat (comma-separated)") },
+                supportingText = { Text("Example: 4, 6, 5, 7, 3") },
+                singleLine = true
+            )
+            OutlinedTextField(
+                value = quadratAreaText,
+                onValueChange = { quadratAreaText = it },
+                modifier = Modifier.fillMaxWidth(),
+                label = { Text("Area of one quadrat (m²)") },
+                singleLine = true
+            )
+            OutlinedTextField(
+                value = habitatAreaText,
+                onValueChange = { habitatAreaText = it },
+                modifier = Modifier.fillMaxWidth(),
+                label = { Text("Total habitat area (m²)") },
+                singleLine = true
+            )
+            if (estimate != null) {
+                Surface(color = MaterialTheme.colorScheme.primaryContainer, shape = MaterialTheme.shapes.medium) {
+                    Column(Modifier.fillMaxWidth().padding(12.dp), verticalArrangement = Arrangement.spacedBy(5.dp)) {
+                        Text("ESTIMATED POPULATION", fontWeight = FontWeight.Bold)
+                        Text("${"%.1f".format(java.util.Locale.UK, estimate.estimatedPopulation)} organisms", style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold)
+                        Text("Total counted: ${estimate.totalCount} in ${estimate.quadratCount} quadrats")
+                        Text("Mean per quadrat: ${"%.2f".format(java.util.Locale.UK, estimate.meanPerQuadrat)}")
+                        Text("Estimated density: ${"%.2f".format(java.util.Locale.UK, estimate.densityPerM2)} organisms/m²")
+                        Text("Sampled area: ${"%.2f".format(java.util.Locale.UK, estimate.sampledAreaM2)} m²")
+                    }
+                }
+                Text("Method: estimated population = mean density × total habitat area.", fontWeight = FontWeight.SemiBold)
+            } else {
+                Text("Enter whole-number counts of zero or more, and positive area values. Separate each quadrat count with a comma.", color = MaterialTheme.colorScheme.error, style = MaterialTheme.typography.bodySmall)
+            }
+            Text("This is an estimate, not an exact census. It is most useful when quadrat positions are selected without bias and the sampled locations represent the habitat. It is unsuitable for organisms that move rapidly in and out of the sampling area.", style = MaterialTheme.typography.bodySmall)
         }
     }
 }
