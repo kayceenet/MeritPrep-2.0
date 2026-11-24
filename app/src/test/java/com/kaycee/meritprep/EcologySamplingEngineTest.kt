@@ -41,4 +41,23 @@ class EcologySamplingEngineTest {
             EcologySamplingEngine.estimate(listOf(2), 1.0, 0.0)
         }
     }
+    @Test
+    fun rejectsNonFiniteAreasAndOverflowingCalculations() {
+        assertThrows(IllegalArgumentException::class.java) {
+            EcologySamplingEngine.estimate(listOf(1), Double.NaN, 100.0)
+        }
+        assertThrows(IllegalArgumentException::class.java) {
+            EcologySamplingEngine.estimate(listOf(1), 1.0, Double.POSITIVE_INFINITY)
+        }
+        assertThrows(IllegalArgumentException::class.java) {
+            EcologySamplingEngine.estimate(listOf(Int.MAX_VALUE, 1), 1.0, 100.0)
+        }
+        assertThrows(IllegalArgumentException::class.java) {
+            EcologySamplingEngine.estimate(listOf(1, 2), Double.MAX_VALUE, Double.MAX_VALUE)
+        }
+        assertThrows(IllegalArgumentException::class.java) {
+            EcologySamplingEngine.estimate(listOf(Int.MAX_VALUE), 1.0E-308, 1.0E308)
+        }
+    }
+
 }
