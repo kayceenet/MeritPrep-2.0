@@ -7,6 +7,23 @@ import org.junit.Assert.assertThrows
 import org.junit.Test
 
 class ChemistryPracticalEngineTest {
+    @Test fun calculatesMeanFromConcordantBuretteReadings() {
+        val mean = ChemistryPracticalEngine.meanConcordantTitre(
+            listOf(0.00, 0.10, 0.00),
+            listOf(24.80, 24.85, 25.40)
+        )
+        assertEquals(24.825, mean, 1e-9)
+    }
+
+    @Test fun rejectsNonConcordantOrIncompleteTitres() {
+        assertThrows(IllegalArgumentException::class.java) {
+            ChemistryPracticalEngine.meanConcordantTitre(listOf(0.0, 0.0), listOf(20.0, 21.0))
+        }
+        assertThrows(IllegalArgumentException::class.java) {
+            ChemistryPracticalEngine.meanConcordantTitre(listOf(0.0), listOf(20.0))
+        }
+    }
+
     @Test fun calculatesOneToOneTitration() {
         val result = ChemistryPracticalEngine.calculateOneToOneTitration(0.1, 24.8, 25.0)
         assertEquals(24.8, result.titreCm3, 1e-9)
