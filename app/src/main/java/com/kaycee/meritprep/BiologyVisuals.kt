@@ -369,11 +369,16 @@ fun BiologyPopulationSamplingCard() {
                         Text("Sampled area: ${"%.2f".format(java.util.Locale.UK, estimate.sampledAreaM2)} m²")
                     }
                 }
-                Text("Method: estimated population = mean density × total habitat area.", fontWeight = FontWeight.SemiBold)
+                Text("Worked example", fontWeight = FontWeight.Bold)
+                Text("1. Add the counts: 4 + 6 + 5 + 7 + 3 = 25 organisms.")
+                Text("2. Calculate sampled area: 5 quadrats × 1 m² = 5 m².")
+                Text("3. Calculate density: 25 ÷ 5 = 5 organisms/m².")
+                Text("4. Estimate the habitat population: 5 × 100 = 500 organisms.")
+                Text("Formula: estimated population = (total organisms counted ÷ total sampled area) × habitat area.", fontWeight = FontWeight.SemiBold)
             } else {
-                Text("Enter whole-number counts of zero or more, and positive area values. Separate each quadrat count with a comma.", color = MaterialTheme.colorScheme.error, style = MaterialTheme.typography.bodySmall)
+                Text("Enter whole-number counts of zero or more, and positive area values. Separate each quadrat count with a comma. The combined quadrat area must not exceed the habitat area.", color = MaterialTheme.colorScheme.error, style = MaterialTheme.typography.bodySmall)
             }
-            Text("This is an estimate, not an exact census. It is most useful when quadrat positions are selected without bias and the sampled locations represent the habitat. It is unsuitable for organisms that move rapidly in and out of the sampling area.", style = MaterialTheme.typography.bodySmall)
+            Text("Sampling quality matters: use quadrats of equal known area, place them randomly or with a clearly described unbiased sampling plan, and sample enough locations to represent the habitat. Record the organism and sampling conditions. This method is unsuitable for organisms that move rapidly in and out of the area. The result is an estimate, not an exact census.", style = MaterialTheme.typography.bodySmall)
         }
     }
 }
