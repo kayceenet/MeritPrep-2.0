@@ -84,7 +84,7 @@ The calculation engines have unit tests for the main relationships and invalid i
 
 1. Develop the remaining 15 syllabus topics into full beginner lessons and add five or more reviewed practice items per topic.
 2. Develop worked examples with explicit units, sign conventions, diagrams and graph interpretation.
-3. Add Physics practical simulations and alternative-to-practical tasks with variables, observations, data tables, graphs, uncertainty and evaluation.
+3. Extend the current virtual models into structured alternative-to-practical tasks with experimental variables, simulated readings, data tables, graph plotting, uncertainty calculations and evaluation prompts.
 4. Expand the question bank only after topic coverage and answer keys are checked.
 5. Add a full JAMB Physics CBT configuration only after the current official examination blueprint and timing are verified.
 6. Independently review all lessons, calculations, diagrams and questions before changing content status from draft.
