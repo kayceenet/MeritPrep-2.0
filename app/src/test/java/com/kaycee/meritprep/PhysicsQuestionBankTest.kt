@@ -16,12 +16,14 @@ class PhysicsQuestionBankTest {
 
     @Test fun questionIdsAreUniqueAndOptionsHaveOneValidKey() {
         val questions = PhysicsQuestionBank.all
-        assertEquals(questions.size, questions.map { it.questionId }.distinct().size)
+        assertEquals(questions.size, questions.map { it.id }.distinct().size)
         questions.forEach {
             assertTrue(it.prompt.isNotBlank())
             assertEquals(4, it.options.size)
-            assertTrue(it.correctIndex in it.options.indices)
+            assertTrue(it.correctOptionIndex in it.options.indices)
             assertTrue(it.explanation.isNotBlank())
+            assertFalse(it.isVerified)
+            assertTrue(it.source.startsWith("MeritPrep original Physics practice"))
         }
     }
 
