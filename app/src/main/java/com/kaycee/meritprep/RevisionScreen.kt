@@ -241,9 +241,7 @@ internal val starterRevisionCards = listOf(
     RevisionCard("bio-evo-e-card-6","bio-evolution-evidence","Define biogeography.","The study of the geographical distribution of organisms and the processes that shape those patterns.",0L),
     RevisionCard("bio-evo-e-card-7","bio-evolution-evidence","Why is the fossil record incomplete?","Fossilisation is uncommon; fossils may be destroyed, altered or remain undiscovered.",0L),
     RevisionCard("bio-evo-e-card-8","bio-evolution-evidence","Does evolution form a ladder of progress?","No. Evolution produces branching lineages with no predetermined goal or universal direction towards greater complexity.",0L)
-)
-
- + listOf(
+) + listOf(
     RevisionCard("phy-measure-card-1","phy-measurements","What are the seven SI base quantities?","Length, mass, time, electric current, thermodynamic temperature, amount of substance and luminous intensity.",0L),
     RevisionCard("phy-measure-card-2","phy-measurements","What is the SI unit of force?","The newton (N), equivalent to kg m s⁻².",0L),
     RevisionCard("phy-measure-card-3","phy-measurements","What are the dimensions of acceleration?","[LT⁻²], because acceleration is change in velocity per unit time.",0L),
