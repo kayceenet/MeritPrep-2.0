@@ -22,7 +22,7 @@ object MathematicsCourse {
         isSyllabusOutline = true
     )
 
-    val topics: List<LearningTopic> = listOf(
+    private val syllabusEntries: List<LearningTopic> = listOf(
         LearningTopic(
             "math-number-bases", "Number bases and modular arithmetic", "MATH",
             "Our everyday number system uses base ten, but computers and some mathematical problems use other bases. A number's value depends on its digits and their place values. This lesson shows how to read, convert and calculate in different bases, then introduces modular arithmetic as a way of working with remainders.",
@@ -160,4 +160,8 @@ object MathematicsCourse {
         outline("math-permutation-combination", "Permutation and combination", "Linear and circular arrangements; arrangements involving repeated objects; simple counting problems."),
         outline("math-probability", "Probability", "Experimental probability; sample spaces; addition and multiplication of probabilities; mutually exclusive and independent cases.")
     )
+
+    val topics: List<LearningTopic> = syllabusEntries.map { entry ->
+        MathematicsCourseExtension.topics.firstOrNull { it.id == entry.id } ?: entry
+    }
 }
