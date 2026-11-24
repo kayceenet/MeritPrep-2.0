@@ -89,6 +89,7 @@ private fun MeritPrepApp() {
                 composable("glossary") { BiologyGlossaryScreen(onOpenLesson = { nav.navigate("lesson/$it") }) }
                 composable("bookmarks") { BookmarksScreen(onOpenLesson = { nav.navigate("lesson/$it") }) }
                 composable("labs") { VirtualLabScreen() }
+                composable("calculators") { CalculatorScreen() }
                 composable("profile") { ProfileScreen(navigationRevision) }
             }
         }
@@ -116,6 +117,7 @@ private fun HomeScreen(nav: NavHostController) {
                     OutlinedButton(onClick = { nav.navigate("placement") }) { Text("Take Biology placement check") }
                     OutlinedButton(onClick = { nav.navigate("glossary") }) { Text("Search Biology glossary") }
                     OutlinedButton(onClick = { nav.navigate("bookmarks") }) { Text("Saved lessons") }
+                    OutlinedButton(onClick = { nav.navigate("calculators") }) { Text("Open scientific calculators") }
                 }
             }
         }
