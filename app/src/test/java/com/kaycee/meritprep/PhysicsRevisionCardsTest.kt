@@ -7,8 +7,8 @@ import org.junit.Test
 class PhysicsRevisionCardsTest {
     @Test fun includesFortyNinePhysicsCardsAcrossSixteenDevelopedTopics() {
         val cards = starterRevisionCards.filter { it.cardId.startsWith("phy-") }
-        assertEquals(49, cards.size)
-        assertEquals(16, cards.map { it.topicId }.distinct().size)
+        assertEquals(73, cards.size)
+        assertEquals(24, cards.map { it.topicId }.distinct().size)
     }
 
     @Test fun physicsCardsHaveUniqueIdsAndCompleteRecallContent() {
