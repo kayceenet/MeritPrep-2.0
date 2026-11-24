@@ -172,11 +172,11 @@ private fun SubjectScreen(subject: Subject, nav: NavHostController) {
         }
         if (subject.code == "PHY") {
             item {
-                Text("JAMB Physics map: 39 numbered topics from the IBASS syllabus. The first sixteen topics have beginner-focused lesson drafts and 80 original practice questions. The remaining 23 entries are syllabus outlines, not completed lessons. Independent Physics-teacher review is outstanding.")
+                Text("JAMB Physics map: 39 numbered topics from the IBASS syllabus. The first twenty-four topics have beginner-focused lesson drafts and 120 original practice questions. The remaining 15 entries are syllabus outlines, not completed lessons. Independent Physics-teacher review is outstanding.")
             }
             item {
                 Button(onClick = { nav.navigate("physics-practice") }, modifier = Modifier.fillMaxWidth()) {
-                    Text("Practise Physics · 80 questions")
+                    Text("Practise Physics · 120 questions")
                 }
             }
         }
