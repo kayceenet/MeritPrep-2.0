@@ -36,7 +36,7 @@ object MathematicsQuestionBank {
         q("math-variation-001","math-variation","If y varies directly as x and y=18 when x=6, find y when x=10.",listOf("24","28","30","36"),2,"y=kx; k=18/6=3. When x=10, y=30."),
         q("math-variation-002","math-variation","If y varies inversely as x and y=4 when x=6, find y when x=8.",listOf("2","3","4","6"),1,"xy=k=24. When x=8, y=24/8=3."),
         q("math-variation-003","math-variation","If z varies jointly as x and y, the equation is:",listOf("z=kx+y","z=kxy","z=k/x+y","z=k/(xy)"),1,"Joint variation of z as x and y is represented by z=kxy."),
-        q("math-variation-004","math-variation","If y=5+2x, what is y when x=7?",listOf("12","14","17","19"),2,"Substitute x=7: y=5+14=19. Correct option is 19, index 3."),
+        q("math-variation-004","math-variation","If y=5+2x, what is y when x=7?",listOf("12","14","17","19"),3,"Substitute x=7: y=5+14=19. Correct option is 19, index 3."),
         q("math-variation-005","math-variation","If y varies directly as x, a 20% increase in x produces what percentage increase in y?",listOf("10%","20%","40%","No change"),1,"For direct variation y=kx with constant k, the percentage change in y equals the percentage change in x."),
         q("math-inequalities-001","math-inequalities","Solve −2x > 6.",listOf("x > −3","x < −3","x > 3","x < 3"),1,"Divide by −2 and reverse the inequality sign: x<−3."),
         q("math-inequalities-002","math-inequalities","Solve 3x+2 ≤ 11.",listOf("x ≤ 3","x ≥ 3","x ≤ 9","x ≥ 9"),0,"3x≤9, so x≤3."),
