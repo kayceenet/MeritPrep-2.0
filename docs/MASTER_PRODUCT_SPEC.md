@@ -36,7 +36,17 @@ The initial subject catalogue is:
 - Economics
 - Government
 
-The catalogue must not be confused with syllabus completion. Each subject requires its own current syllabus map, objectives, lesson sequence, assessment blueprint and content review. Biology is the first developed subject; the other six must be brought to equivalent coverage in a staged subject-by-subject programme.
+### Current implementation status (alpha)
+
+The catalogue must not be confused with syllabus completion. The following is the current code-backed scope; it is not a claim of academic approval:
+
+- **Biology:** developed JAMB syllabus map, beginner lesson drafts, original objective practice, revision cards, WAEC-style theory and practical learning prototypes. Some syllabus depth and WAEC coverage remain under development.
+- **Chemistry:** 18-topic JAMB map, 18 beginner lesson drafts and 90 original objective questions. The alpha includes WAEC-style objective, structured theory, titration and selected qualitative-analysis learning tools. Practical coverage and syllabus verification remain incomplete.
+- **Physics:** all 39 JAMB topic headings have lesson drafts, with 195 original topic-mapped questions and 118 revision cards. The alpha includes a 40-question JAMB-style practice CBT, a 50-question WAEC-style objective CBT, 15 virtual-lab models, five original WAEC-style practical data exercises and six structured theory tasks. The WAEC Paper 1 timer follows a working syllabus reference and requires verification against the current WAEC-issued instructions.
+- **Mathematics:** 23-topic JAMB map, 15 beginner lesson drafts, 75 original objective questions and 45 revision cards. Eight topics remain syllabus outlines. A full timed JAMB CBT and WAEC-specific Mathematics coverage have not yet been implemented.
+- **English Language, Economics and Government:** subject entry points and starter content; full syllabus mapping and assessment coverage remain outstanding.
+
+All four developed subject areas remain draft content pending independent subject-teacher review. Original practice items are not official past questions.
 
 ## 3. Learning experience requirements
 
