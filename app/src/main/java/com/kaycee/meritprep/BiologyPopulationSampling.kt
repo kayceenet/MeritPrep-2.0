@@ -29,6 +29,8 @@ fun estimatePopulationFromQuadrats(
     val sampledArea = counts.size * quadratAreaM2
     if (!sampledArea.isFinite() || sampledArea > habitatAreaM2) return null
     val density = total.toDouble() / sampledArea
+    val estimatedPopulation = density * habitatAreaM2
+    if (!density.isFinite() || !estimatedPopulation.isFinite()) return null
     return PopulationEstimate(
         totalCount = total,
         quadratCount = counts.size,
@@ -36,6 +38,6 @@ fun estimatePopulationFromQuadrats(
         habitatAreaM2 = habitatAreaM2,
         meanPerQuadrat = total.toDouble() / counts.size,
         densityPerM2 = density,
-        estimatedPopulation = density * habitatAreaM2
+        estimatedPopulation = estimatedPopulation
     )
 }
