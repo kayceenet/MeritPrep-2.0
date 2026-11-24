@@ -8,17 +8,40 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.kaycee.meritprep.data.MeritDatabase
+import org.json.JSONArray
+import org.json.JSONObject
 
 @Composable
 fun PhysicsWaecTheoryScreen() {
+    val context = LocalContext.current
+    val database = remember(context) { MeritDatabase(context) }
     val tasks = PhysicsWaecTheoryBank.tasks
     var selectedIndex by remember { mutableIntStateOf(0) }
     val task = tasks[selectedIndex]
-    var answer by remember(task.id) { mutableStateOf("") }
+    val noteId = "waec-physics-theory:${task.id}"
+    val savedPayload = remember(task.id) { database.getNoteBody(noteId) }
+    var answer by remember(task.id) {
+        mutableStateOf(
+            runCatching { JSONObject(savedPayload ?: "{}").optString("answer", "") }
+                .getOrDefault("")
+        )
+    }
     var revealed by remember(task.id) { mutableStateOf(false) }
-    var checkedPoints by remember(task.id) { mutableStateOf(emptySet<Int>()) }
+    var checkedPoints by remember(task.id) {
+        mutableStateOf(
+            runCatching {
+                val values = JSONObject(savedPayload ?: "{}").optJSONArray("checkedPoints") ?: JSONArray()
+                buildSet { for (i in 0 until values.length()) add(values.getInt(i)) }
+            }.getOrDefault(emptySet())
+        )
+    }
+    var saveMessage by remember(task.id) {
+        mutableStateOf(if (savedPayload.isNullOrBlank()) "" else "Your last saved response is available on this device.")
+    }
 
     Column(
         Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(20.dp),
@@ -38,12 +61,26 @@ fun PhysicsWaecTheoryScreen() {
                 Text(task.prompt, style = MaterialTheme.typography.bodyLarge)
                 OutlinedTextField(
                     value = answer,
-                    onValueChange = { answer = it },
+                    onValueChange = { answer = it; saveMessage = "" },
                     modifier = Modifier.fillMaxWidth(),
                     minLines = 6,
                     label = { Text("Write your answer before revealing the guidance") },
                     placeholder = { Text("Show equations, substitutions, units and explanations…") }
                 )
+                Button(
+                    onClick = {
+                        val payload = JSONObject()
+                            .put("answer", answer)
+                            .put("checkedPoints", JSONArray(checkedPoints.sorted()))
+                        database.saveNote(noteId, task.id, "WAEC Physics theory: ${task.topic}", payload.toString())
+                        saveMessage = "Response and self-check progress saved on this device."
+                    },
+                    enabled = answer.isNotBlank() || checkedPoints.isNotEmpty(),
+                    modifier = Modifier.fillMaxWidth()
+                ) { Text("Save my response") }
+                if (saveMessage.isNotBlank()) {
+                    Text(saveMessage, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.primary)
+                }
                 Button(onClick = { revealed = true }, modifier = Modifier.fillMaxWidth()) {
                     Text(if (revealed) "Marking guidance revealed" else "Reveal marking guidance")
                 }
@@ -60,6 +97,7 @@ fun PhysicsWaecTheoryScreen() {
                                 checked = index in checkedPoints,
                                 onCheckedChange = { checked ->
                                     checkedPoints = if (checked) checkedPoints + index else checkedPoints - index
+                                    saveMessage = ""
                                 }
                             )
                             Text(point, modifier = Modifier.weight(1f).padding(top = 12.dp))
@@ -69,6 +107,16 @@ fun PhysicsWaecTheoryScreen() {
                     HorizontalDivider()
                     Text("Examiner guidance", fontWeight = FontWeight.Bold)
                     Text(task.guidance)
+                    OutlinedButton(
+                        onClick = {
+                            val payload = JSONObject()
+                                .put("answer", answer)
+                                .put("checkedPoints", JSONArray(checkedPoints.sorted()))
+                            database.saveNote(noteId, task.id, "WAEC Physics theory: ${task.topic}", payload.toString())
+                            saveMessage = "Response and self-check progress saved on this device."
+                        },
+                        modifier = Modifier.fillMaxWidth()
+                    ) { Text("Save answer and checklist") }
                 }
             }
         }
@@ -76,6 +124,6 @@ fun PhysicsWaecTheoryScreen() {
             OutlinedButton(onClick = { selectedIndex = (selectedIndex - 1).coerceAtLeast(0) }, enabled = selectedIndex > 0) { Text("Previous task") }
             Button(onClick = { selectedIndex = (selectedIndex + 1).coerceAtMost(tasks.lastIndex) }, enabled = selectedIndex < tasks.lastIndex) { Text("Next task") }
         }
-        Text("Self-check only: the checklist is not an official mark allocation. Your written response is not submitted or graded by a teacher. Independent Physics-teacher review is still required.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        Text("Self-check only: the checklist is not an official mark allocation. Your written response is not submitted or graded by a teacher. Responses are stored locally on this device. Independent Physics-teacher review is still required.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
     }
 }
