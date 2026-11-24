@@ -43,7 +43,7 @@ This is an actively developed alpha, not a completed or officially endorsed exam
 - The Biology CBT mock is a MeritPrep practice configuration, not an official JAMB paper or a full multi-subject JAMB simulation.
 - The syllabus map is a working mapping. It must be checked against the current official JAMB IBASS and WAEC materials before each examination cycle.
 - The mastery indicator currently uses objective-question evidence only; it does not yet include WAEC theory, practical performance or a validated prediction model. A complete WAEC practical examination system, cross-device synchronisation, teacher CMS and production security review remain in development.
-- Chemistry has a full 18-topic JAMB map with beginner-oriented draft lessons and 90 original practice questions. The content is not academically approved; independent subject-teacher review and WAEC-specific alignment remain outstanding. Physics now has a 39-topic JAMB map, eight lesson drafts and 40 original practice questions; the remaining 31 topics are outlines. Mathematics, English Language, Economics and Government still have starter content, not complete syllabus coverage.
+- Chemistry has a full 18-topic JAMB map with beginner-oriented draft lessons and 90 original practice questions. The content is not academically approved; independent subject-teacher review and WAEC-specific alignment remain outstanding. Physics now has a 39-topic JAMB map, sixteen lesson drafts and 80 original practice questions; the remaining 23 topics are syllabus outlines. Mathematics, English Language, Economics and Government still have starter content, not complete syllabus coverage.
 
 ## Build locally
 
