@@ -714,7 +714,7 @@ object LearningCatalog {
             listOf("Legislature", "Executive", "Judiciary", "Civil service"), 2,
             "The judiciary interprets and applies the law when deciding cases and resolving legal disputes."
         )
-    )
+    ) + ChemistryCourse.topics
 
     fun forSubject(code: String): List<LearningTopic> = topics.filter { it.subjectCode == code }
     fun find(topicId: String): LearningTopic? = topics.firstOrNull { it.id == topicId }
