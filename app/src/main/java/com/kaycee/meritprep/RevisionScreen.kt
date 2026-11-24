@@ -365,6 +365,31 @@ internal val starterRevisionCards = listOf(
     RevisionCard("phy-electronics-card-1","phy-electronics","What is the difference between an n-type and p-type semiconductor?","An n-type semiconductor has electrons as majority charge carriers; a p-type semiconductor has holes as majority carriers.",0L),
     RevisionCard("phy-electronics-card-2","phy-electronics","What is the main function of a p-n junction diode?","It allows current much more readily in the forward direction than in the reverse direction under normal operating conditions.",0L),
     RevisionCard("phy-electronics-card-3","phy-electronics","What does a transistor commonly do in a simple electronic circuit?","It can act as an electronic switch or amplify a signal.",0L)
+) + listOf(
+    RevisionCard("math-bases-card-1","math-number-bases","How do you convert a base-b numeral to base ten?","Multiply each digit by its place value (a power of b) and add the results.",0L),
+    RevisionCard("math-bases-card-2","math-number-bases","How do you convert a positive whole number from base ten to base b?","Divide repeatedly by b, record remainders and read the remainders from bottom to top.",0L),
+    RevisionCard("math-bases-card-3","math-number-bases","What does a mod n represent?","The remainder when integer a is divided by positive integer n.",0L),
+    RevisionCard("math-fractions-card-1","math-fractions-percentages","How do you add fractions with different denominators?","Express them with a common denominator, add the numerators and simplify.",0L),
+    RevisionCard("math-fractions-card-2","math-fractions-percentages","How do you calculate simple interest?","I = Prt, where P is principal, r is annual rate as a decimal and t is time in years.",0L),
+    RevisionCard("math-fractions-card-3","math-fractions-percentages","What is the usual reference value for profit percentage?","Cost price: profit percentage = profit/cost price × 100%.",0L),
+    RevisionCard("math-indices-card-1","math-indices-logs-surds","State the product law of indices.","aᵐ × aⁿ = aᵐ⁺ⁿ for a valid non-zero base.",0L),
+    RevisionCard("math-indices-card-2","math-indices-logs-surds","What does logₐ x = y mean?","aʸ = x, where a>0, a≠1 and x>0.",0L),
+    RevisionCard("math-indices-card-3","math-indices-logs-surds","How do you simplify √72?","√72 = √(36×2) = 6√2.",0L),
+    RevisionCard("math-sets-card-1","math-sets","What does A∪B mean?","The union: elements in A or B or both.",0L),
+    RevisionCard("math-sets-card-2","math-sets","What does A∩B mean?","The intersection: elements common to both A and B.",0L),
+    RevisionCard("math-sets-card-3","math-sets","Write the two-set cardinality formula.","n(A∪B)=n(A)+n(B)−n(A∩B).",0L),
+    RevisionCard("math-polynomials-card-1","math-polynomials","State the factor theorem.","(x−a) is a factor of f(x) if and only if f(a)=0.",0L),
+    RevisionCard("math-polynomials-card-2","math-polynomials","State the remainder theorem.","The remainder when f(x) is divided by (x−a) is f(a).",0L),
+    RevisionCard("math-polynomials-card-3","math-polynomials","What is the degree of a polynomial?","The highest power of the variable with a non-zero coefficient.",0L),
+    RevisionCard("math-variation-card-1","math-variation","Write the model for direct variation.","y = kx, where k is the constant of variation.",0L),
+    RevisionCard("math-variation-card-2","math-variation","Write the model for inverse variation.","y = k/x, or xy = k.",0L),
+    RevisionCard("math-variation-card-3","math-variation","Write a model for partial variation.","y = a + bx, where a and b are constants.",0L),
+    RevisionCard("math-inequalities-card-1","math-inequalities","What happens to an inequality sign when multiplying by a negative number?","Reverse the inequality sign.",0L),
+    RevisionCard("math-inequalities-card-2","math-inequalities","How do you solve a quadratic inequality with two real roots?","Find the roots, split the number line into intervals and test the sign in each interval.",0L),
+    RevisionCard("math-inequalities-card-3","math-inequalities","Which endpoint is used for a strict inequality such as x<4?","An open endpoint at 4, because 4 is excluded.",0L),
+    RevisionCard("math-progression-card-1","math-progression","Write the nth term of an arithmetic progression.","Tₙ = a + (n−1)d.",0L),
+    RevisionCard("math-progression-card-2","math-progression","Write the sum of the first n terms of an arithmetic progression.","Sₙ = n/2[2a+(n−1)d].",0L),
+    RevisionCard("math-progression-card-3","math-progression","When does a geometric progression have a finite sum to infinity?","When |r|<1; then S∞ = a/(1−r).",0L)
 )
 
 @Composable
