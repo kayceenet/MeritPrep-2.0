@@ -14,7 +14,7 @@ import com.kaycee.meritprep.data.RevisionCard
 import com.kaycee.meritprep.data.ReviewRating
 import com.kaycee.meritprep.data.SpacedRepetitionScheduler
 
-internal val starterBiologyCards = listOf(
+internal val starterRevisionCards = listOf(
     "A cell is the basic structural and functional unit of life." to "A cell is the smallest unit that can perform the processes associated with life.",
     "State the three main ideas of cell theory." to "Living organisms are made of cells; the cell is the basic unit of structure and function; new cells arise from pre-existing cells.",
     "What is the main function of the cell-surface membrane?" to "It forms a selectively permeable boundary that regulates movement of substances into and out of the cell.",
@@ -243,6 +243,34 @@ internal val starterBiologyCards = listOf(
     RevisionCard("bio-evo-e-card-8","bio-evolution-evidence","Does evolution form a ladder of progress?","No. Evolution produces branching lineages with no predetermined goal or universal direction towards greater complexity.",0L)
 )
 
+ + listOf(
+    RevisionCard("phy-measure-card-1","phy-measurements","What are the seven SI base quantities?","Length, mass, time, electric current, thermodynamic temperature, amount of substance and luminous intensity.",0L),
+    RevisionCard("phy-measure-card-2","phy-measurements","What is the SI unit of force?","The newton (N), equivalent to kg m s⁻².",0L),
+    RevisionCard("phy-measure-card-3","phy-measurements","What are the dimensions of acceleration?","[LT⁻²], because acceleration is change in velocity per unit time.",0L),
+    RevisionCard("phy-vectors-card-1","phy-vectors","Distinguish a scalar from a vector.","A scalar has magnitude only. A vector has magnitude and direction.",0L),
+    RevisionCard("phy-vectors-card-2","phy-vectors","How do you find the resultant of perpendicular components A and B?","R = √(A² + B²). The direction from A is θ = tan⁻¹(B/A), with the correct quadrant stated.",0L),
+    RevisionCard("phy-vectors-card-3","phy-vectors","A learner walks 3 m east then 4 m north. What are the distance and displacement magnitude?","Distance = 7 m. Displacement magnitude = √(3² + 4²) = 5 m.",0L),
+    RevisionCard("phy-motion-card-1","phy-motion","Write the four equations of uniformly accelerated straight-line motion.","v = u + at; s = ut + ½at²; v² = u² + 2as; s = ½(u + v)t. They require constant acceleration.",0L),
+    RevisionCard("phy-motion-card-2","phy-motion","What does the gradient of a displacement-time graph represent?","Velocity.",0L),
+    RevisionCard("phy-motion-card-3","phy-motion","What does the area under a velocity-time graph represent?","Signed displacement over the time interval.",0L),
+    RevisionCard("phy-motion-card-4","phy-motion","State Newton's second law in its common constant-mass form.","The resultant force on a body is F = ma, where m is mass and a is acceleration.",0L),
+    RevisionCard("phy-gravity-card-1","phy-gravity","Distinguish mass from weight.","Mass measures inertia and is measured in kilograms. Weight is gravitational force W = mg and is measured in newtons.",0L),
+    RevisionCard("phy-gravity-card-2","phy-gravity","State Newton's law of universal gravitation.","F = Gm₁m₂/r² for two point masses or spherically symmetric bodies, with r measured between their centres.",0L),
+    RevisionCard("phy-gravity-card-3","phy-gravity","What is gravitational field strength?","Gravitational force per unit mass: g = F/m, measured in N kg⁻¹.",0L),
+    RevisionCard("phy-equilibrium-card-1","phy-equilibrium","What are the conditions for translational equilibrium in two dimensions?","ΣFₓ = 0 and ΣFᵧ = 0.",0L),
+    RevisionCard("phy-equilibrium-card-2","phy-equilibrium","Define the moment of a force.","Moment = force × perpendicular distance from the pivot to the force's line of action; unit N m.",0L),
+    RevisionCard("phy-equilibrium-card-3","phy-equilibrium","When may Lami's theorem be used?","For a particle in equilibrium under exactly three coplanar, concurrent and non-parallel forces.",0L),
+    RevisionCard("phy-energy-card-1","phy-work-energy","Write the equation for work done by a constant force at angle θ to displacement.","W = Fs cos θ.",0L),
+    RevisionCard("phy-energy-card-2","phy-work-energy","Write the expressions for kinetic and gravitational potential energy near Earth's surface.","Kinetic energy Eₖ = ½mv². Gravitational potential energy Eₚ = mgh relative to a chosen reference level.",0L),
+    RevisionCard("phy-energy-card-3","phy-work-energy","Define power and state its SI unit.","Power is the rate of energy transfer or work done: P = E/t = W/t. SI unit: watt (W).",0L),
+    RevisionCard("phy-friction-card-1","phy-friction","What is limiting friction?","The maximum static friction just before relative sliding begins.",0L),
+    RevisionCard("phy-friction-card-2","phy-friction","In the simple dry-friction model, how is limiting friction related to normal reaction?","Fₘₐₓ = μR, where μ is the coefficient of friction and R is the normal reaction.",0L),
+    RevisionCard("phy-friction-card-3","phy-friction","What is terminal velocity?","The constant speed reached when the resultant force becomes zero, so acceleration is zero.",0L),
+    RevisionCard("phy-machines-card-1","phy-machines","Define mechanical advantage and velocity ratio.","MA = load/effort. VR = distance moved by effort/distance moved by load.",0L),
+    RevisionCard("phy-machines-card-2","phy-machines","How is machine efficiency calculated?","Efficiency = (MA/VR) × 100% or (useful output work/input work) × 100%.",0L),
+    RevisionCard("phy-machines-card-3","phy-machines","Why is the efficiency of a real machine usually below 100%?","Some input energy is transferred to non-useful forms such as heat and sound because of friction, deformation and other losses.",0L)
+)
+
 @Composable
 fun RevisionScreen() {
     val context = LocalContext.current
@@ -253,7 +281,7 @@ fun RevisionScreen() {
     var reviewedCount by remember { mutableIntStateOf(0) }
 
     fun refresh() {
-        database.seedRevisionCards(starterBiologyCards)
+        database.seedRevisionCards(starterRevisionCards)
         dueCards = database.getDueRevisionCards()
         currentIndex = 0
         revealed = false
