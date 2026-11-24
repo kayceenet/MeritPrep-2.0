@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import kotlin.math.roundToInt
+import com.kaycee.meritprep.data.ChemistryPracticalEngine
 
 @Composable
 fun VirtualLabScreen() {
@@ -69,6 +70,24 @@ private fun OhmsLawLab() {
 
 @Composable
 private fun ConcentrationLab() {
+    var selected by remember { mutableIntStateOf(0) }
+    Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+        Text("Chemistry practicals", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+        Row(Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            FilterChip(selected = selected == 0, onClick = { selected = 0 }, label = { Text("Concentration") })
+            FilterChip(selected = selected == 1, onClick = { selected = 1 }, label = { Text("Acid-base titration") })
+            FilterChip(selected = selected == 2, onClick = { selected = 2 }, label = { Text("Cation tests") })
+        }
+        when (selected) {
+            0 -> SolutionConcentrationSimulation()
+            1 -> AcidBaseTitrationSimulation()
+            else -> CationIdentificationSimulation()
+        }
+    }
+}
+
+@Composable
+private fun SolutionConcentrationSimulation() {
     var soluteMass by remember { mutableFloatStateOf(5f) }
     var volume by remember { mutableFloatStateOf(0.5f) }
     val molarity = (soluteMass / 58.44f) / volume
@@ -82,10 +101,110 @@ private fun ConcentrationLab() {
             Slider(value = volume, onValueChange = { volume = it }, valueRange = 0.1f..2f)
             HorizontalDivider()
             Text("Molar concentration: ${"%.3f".format(molarity)} mol/L", style = MaterialTheme.typography.titleMedium)
-            Text("M = (mass ÷ molar mass) ÷ volume; NaCl molar mass ≈ 58.44 g/mol.")
+            Text("C = (mass ÷ molar mass) ÷ final solution volume; NaCl molar mass ≈ 58.44 g/mol.")
         }
     }
-    Text("This simplified calculator assumes the stated final solution volume and complete dissolution. It does not model temperature or non-ideal solution behaviour.")
+    Text("This simplified model assumes complete dissolution and the stated final solution volume. It does not model temperature or non-ideal solution behaviour.")
+}
+
+@Composable
+private fun AcidBaseTitrationSimulation() {
+    var acidConcentration by remember { mutableStateOf("0.100") }
+    var acidTitre by remember { mutableStateOf("24.80") }
+    var baseAliquot by remember { mutableStateOf("25.00") }
+    var result by remember { mutableStateOf<com.kaycee.meritprep.data.TitrationResult?>(null) }
+    var error by remember { mutableStateOf<String?>(null) }
+    Card(Modifier.fillMaxWidth()) {
+        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+            Text("HCl–NaOH titration", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+            Text("A standard hydrochloric acid solution is used to titrate a measured sodium hydroxide aliquot.")
+            Text("HCl + NaOH → NaCl + H₂O", fontWeight = FontWeight.SemiBold)
+            OutlinedTextField(value = acidConcentration, onValueChange = { acidConcentration = it; result = null }, label = { Text("HCl concentration (mol/dm³)") }, modifier = Modifier.fillMaxWidth(), singleLine = true)
+            OutlinedTextField(value = acidTitre, onValueChange = { acidTitre = it; result = null }, label = { Text("Mean acid titre (cm³)") }, modifier = Modifier.fillMaxWidth(), singleLine = true)
+            OutlinedTextField(value = baseAliquot, onValueChange = { baseAliquot = it; result = null }, label = { Text("NaOH aliquot (cm³)") }, modifier = Modifier.fillMaxWidth(), singleLine = true)
+            Button(onClick = {
+                try {
+                    result = ChemistryPracticalEngine.calculateOneToOneTitration(
+                        acidConcentration.trim().toDouble(),
+                        acidTitre.trim().toDouble(),
+                        baseAliquot.trim().toDouble()
+                    )
+                    error = null
+                } catch (e: Exception) {
+                    result = null
+                    error = e.message ?: "Check the entered values."
+                }
+            }, modifier = Modifier.fillMaxWidth()) { Text("Calculate NaOH concentration") }
+            result?.let {
+                HorizontalDivider()
+                Text("Calculated titre: ${"%.2f".format(it.titreCm3)} cm³")
+                Text("NaOH concentration: ${"%.4f".format(it.analyteConcentrationMolPerDm3)} mol/dm³", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary)
+                Text("Working: ${it.calculation}")
+            }
+            error?.let { Text(it, color = MaterialTheme.colorScheme.error) }
+        }
+    }
+    Text("The calculation assumes a 1:1 reaction and uses a supplied mean titre. Real practical work requires repeated concordant titres, correct meniscus readings, suitable indicator selection and a balanced equation. This screen does not simulate colour change or certify practical technique.")
+}
+
+@Composable
+private fun CationIdentificationSimulation() {
+    val ions = listOf("NH₄⁺", "Ca²⁺", "Pb²⁺", "Cu²⁺", "Fe²⁺", "Fe³⁺", "Al³⁺", "Zn²⁺")
+    var ion by remember { mutableStateOf("Cu²⁺") }
+    var reagent by remember { mutableStateOf("NaOH(aq)") }
+    var excess by remember { mutableStateOf(false) }
+    var warmed by remember { mutableStateOf(false) }
+    var observation by remember { mutableStateOf<String?>(null) }
+    var error by remember { mutableStateOf<String?>(null) }
+    Card(Modifier.fillMaxWidth()) {
+        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+            Text("Qualitative cation analysis", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+            Text("Select a cation, reagent and test condition. Predict how a known ion behaves in the simplified reference scheme.")
+            Text("Cation", fontWeight = FontWeight.SemiBold)
+            Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                ions.chunked(4).forEach { group ->
+                    Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                        group.forEach { item ->
+                            FilterChip(selected = ion == item, onClick = { ion = item; observation = null; error = null }, label = { Text(item) })
+                        }
+                    }
+                }
+            }
+            Text("Reagent", fontWeight = FontWeight.SemiBold)
+            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                listOf("NaOH(aq)", "NH₃(aq)").forEach { item ->
+                    FilterChip(selected = reagent == item, onClick = { reagent = item; observation = null; error = null }, label = { Text(item) })
+                }
+            }
+            Row(verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
+                Checkbox(checked = excess, onCheckedChange = { excess = it; observation = null })
+                Text("Reagent added in excess")
+            }
+            if (ion == "NH₄⁺") {
+                Row(verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
+                    Checkbox(checked = warmed, onCheckedChange = { warmed = it; observation = null })
+                    Text("Sample warmed gently")
+                }
+            }
+            Button(onClick = {
+                try {
+                    observation = ChemistryPracticalEngine.cationObservation(ion, reagent, excess, warmed)
+                    error = null
+                } catch (e: Exception) {
+                    observation = null
+                    error = e.message ?: "This test combination is not supported."
+                }
+            }, modifier = Modifier.fillMaxWidth()) { Text("Show expected observation") }
+            observation?.let {
+                HorizontalDivider()
+                Text("Expected observation", fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary)
+                Text(it)
+                Text("Inference: use this result alongside appropriate confirmatory tests. Do not identify an unknown ion from one observation alone.", style = MaterialTheme.typography.bodySmall)
+            }
+            error?.let { Text(it, color = MaterialTheme.colorScheme.error) }
+        }
+    }
+    Text("This is a simplified reference for selected cations and two reagents. It is not a complete qualitative-analysis scheme. Real results depend on concentration, interfering ions and technique. Practical work involving chemicals must be conducted under qualified supervision.")
 }
 
 @Composable
