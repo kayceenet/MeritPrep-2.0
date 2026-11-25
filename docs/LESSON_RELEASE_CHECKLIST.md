@@ -250,3 +250,13 @@ A topic may not be labelled complete if any applicable critical item above is FA
 - Added 17 supplemental Biology investigations/explorers, 9 supplemental Physics model workspaces, and explicit Chemistry supplemental coverage checks. Existing subject-specific practical and visual activities remain integrated.
 - Added display-math parsing and structured equation cards, expanded symbol support, and extended core equation panels across Chemistry and Physics.
 - Verification gate: latest workflow after the code repairs is run `45718825275`; unit tests/build were still running at the time this note was written. Do not treat the newest source as release-ready until that run or a later main-branch run succeeds.
+
+
+### Guided investigation coverage — 25 November 2026
+
+- Biology: regression test checks every curriculum lesson mapping has a guided investigation profile.
+- Chemistry: regression test checks every course topic has a guided investigation profile.
+- Physics: regression test checks every course topic has a guided investigation profile.
+- Combined route audit found no unmapped course topic and no duplicate topic routes after removing overlapping branches.
+- Profiles include apparatus/materials, question, variables, controls, safety, procedure, model response and limitations. The route tests validate mapping only; scientific peer review and real-app visual review remain separate release gates.
+- Latest source changes are under the main-branch workflow triggered by commit `a2cb025d2302d0dd46791323ba80d9f0cdd4ea1e`; await successful unit tests and APK build before release.
