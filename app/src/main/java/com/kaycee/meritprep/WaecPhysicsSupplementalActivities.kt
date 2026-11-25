@@ -9,7 +9,16 @@ import androidx.compose.ui.unit.dp
 import kotlin.math.*
 
 @Composable
+internal object WaecPhysicsActivityRoutes {
+    val supportedTopicIds = setOf(
+        "phy-measurements", "phy-motion", "phy-gravity", "phy-elasticity",
+        "phy-heat-transfer", "phy-refraction", "phy-light-energy", "phy-magnetism",
+        "phy-electronics", "phy-kinetic-theory", "phy-modern"
+    )
+}
+
 fun WaecPhysicsSupplementalActivity(topicId: String) {
+    if (topicId !in WaecPhysicsActivityRoutes.supportedTopicIds) return
     when (topicId) {
         "phy-measurements" -> WaecDimensionalAnalysisActivity()
         "phy-motion" -> WaecProjectileActivity()
