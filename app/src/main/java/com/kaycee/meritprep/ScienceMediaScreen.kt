@@ -261,16 +261,16 @@ fun ScienceMediaScreen(onOpenLabs: () -> Unit, onOpenLesson: (String) -> Unit) {
                     }
                     Button(
                         onClick = {
-                            resourceOpened = true
-                            database.saveNote(
-                                noteId,
-                                resource.topicId,
-                                "Science media reflection · ${resource.title}",
-                                JSONObject().put("opened", true).put("reflection", reflection).toString()
-                            )
-                            reflectionSaved = reflection.isNotBlank()
                             try {
                                 context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(resource.sourceUrl)))
+                                resourceOpened = true
+                                database.saveNote(
+                                    noteId,
+                                    resource.topicId,
+                                    "Science media reflection · ${resource.title}",
+                                    JSONObject().put("opened", true).put("reflection", reflection).toString()
+                                )
+                                reflectionSaved = reflection.isNotBlank()
                             } catch (_: ActivityNotFoundException) {
                                 Toast.makeText(context, "No browser is available to open this resource.", Toast.LENGTH_LONG).show()
                             } catch (_: Exception) {
