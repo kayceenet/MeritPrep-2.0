@@ -11,7 +11,7 @@ class WaecScienceActivityRoutingTest {
             "bio-cell", "bio-classification", "bio-nutrition", "bio-plant-anatomy",
             "bio-reproduction", "bio-interactions", "bio-ecology-factors", "bio-habitats",
             "bio-populations", "bio-environment", "bio-variation", "bio-adaptation",
-            "bio-soil", "bio-excretion", "bio-coordination"
+            "bio-soil", "bio-excretion", "bio-coordination", "bio-biomes", "bio-biotechnology"
         )
         assertEquals(expected, WaecBiologyActivityRoutes.supportedTopicIds)
     }
