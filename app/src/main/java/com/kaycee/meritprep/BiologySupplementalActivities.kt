@@ -13,7 +13,7 @@ import kotlin.math.exp
 import kotlin.math.roundToInt
 
 internal val biologySupplementalActivityTopicIds = setOf(
-    "bio-classification", "bio-plant-anatomy", "bio-respiration", "bio-excretion", "bio-support",
+    "bio-classification", "bio-adaptation", "bio-interactions", "bio-plant-anatomy", "bio-respiration", "bio-excretion", "bio-support",
     "bio-reproduction", "bio-coordination", "bio-ecology-factors",
     "bio-habitats", "bio-biomes", "bio-soil", "bio-environment",
     "bio-variation", "bio-biotechnology", "bio-evolution-evidence"
@@ -23,6 +23,8 @@ internal val biologySupplementalActivityTopicIds = setOf(
 fun BiologySupplementalLessonActivity(topicId: String) {
     when (topicId) {
         "bio-classification" -> ClassificationExplorer()
+        "bio-adaptation" -> AdaptationExplorer()
+        "bio-interactions" -> FoodWebExplorer()
         "bio-plant-anatomy" -> TranspirationExplorer()
         "bio-respiration" -> RespirationExplorer()
         "bio-excretion" -> NephronExplorer()
@@ -60,6 +62,56 @@ private fun ModelSlider(label: String, value: Float, range: ClosedFloatingPointR
             Text("${value.roundToInt()} $unit", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary)
         }
         Slider(value = value, onValueChange = onChange, valueRange = range)
+    }
+}
+
+@Composable
+private fun AdaptationExplorer() {
+    var habitat by remember { mutableStateOf("Desert") }
+    var type by remember { mutableStateOf("Structural") }
+    val examples = mapOf(
+        "Desert" to mapOf(
+            "Structural" to "A cactus has a reduced leaf surface (spines) and a thick, water-storing stem.",
+            "Physiological" to "Some desert plants use CAM photosynthesis, opening stomata mainly at night to reduce water loss.",
+            "Behavioural" to "Many desert animals are nocturnal and shelter during the hottest part of the day."
+        ),
+        "Aquatic" to mapOf(
+            "Structural" to "Fish have streamlined bodies and fins; floating aquatic plants may have air spaces.",
+            "Physiological" to "Marine organisms regulate internal water and ion balance despite surrounding salinity.",
+            "Behavioural" to "Some aquatic animals migrate vertically or seasonally to find food and suitable conditions."
+        ),
+        "Cold region" to mapOf(
+            "Structural" to "Insulating fur, feathers or a layer of fat reduces heat loss; compact body shapes reduce surface area relative to volume.",
+            "Physiological" to "Some animals use counter-current heat exchange and seasonal changes in metabolism.",
+            "Behavioural" to "Huddling, migration and sheltering can reduce exposure to cold."
+        )
+    )
+    BiologyModelCard("Adaptation and survival explorer", "Compare structural, physiological and behavioural features and connect each one to a survival challenge.", "Examples are generalisations. An adaptation is an inherited feature shaped over generations, not a change an individual chooses because it needs it.") {
+        Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+            listOf("Desert", "Aquatic", "Cold region").forEach { item -> FilterChip(habitat == item, { habitat = item }, { Text(item) }) }
+        }
+        Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+            listOf("Structural", "Physiological", "Behavioural").forEach { item -> FilterChip(type == item, { type = item }, { Text(item) }) }
+        }
+        Text("$habitat · $type adaptation", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary)
+        Text(examples[habitat]?.get(type).orEmpty())
+        Text("Test your explanation: identify the selection pressure, describe the inherited feature and explain how it can affect survival or reproduction.")
+    }
+}
+
+@Composable
+private fun FoodWebExplorer() {
+    var producerEnergy by remember { mutableFloatStateOf(1000f) }
+    var transfer by remember { mutableFloatStateOf(10f) }
+    var levels by remember { mutableFloatStateOf(3f) }
+    val remaining = producerEnergy * (transfer / 100f).coerceIn(0f, 1f).let { fraction -> Math.pow(fraction.toDouble(), levels.roundToInt().toDouble()).toFloat() }
+    BiologyModelCard("Food-chain energy transfer simulator", "Change the energy captured by producers, the transfer fraction and the number of trophic transfers.", "The often-taught 10% transfer is a rough ecological rule, not a fixed law. Real efficiencies vary among ecosystems and trophic links.") {
+        ModelSlider("Producer energy", producerEnergy, 100f..5000f, "kJ") { producerEnergy = it }
+        ModelSlider("Energy transfer per level", transfer, 5f..20f, "%") { transfer = it }
+        ModelSlider("Number of transfers", levels, 1f..4f, "levels") { levels = it }
+        EquationDisplayCard("E_n = E_0 \\times (\\frac{t}{100})^n", caption = "SIMPLIFIED ENERGY-TRANSFER MODEL")
+        Text("Energy reaching the selected trophic level: ${remaining.roundToInt()} kJ", style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
+        Text("Energy is lost from the transfer pathway through respiration, movement, heat, waste and uneaten or undigested material. Matter is recycled; energy flows through ecosystems.")
     }
 }
 
