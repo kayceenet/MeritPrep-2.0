@@ -62,6 +62,10 @@ fun ScienceMediaScreen(onOpenLabs: () -> Unit, onOpenLesson: (String) -> Unit) {
     var lightSurvival by remember { mutableFloatStateOf(45f) }
     var darkSurvival by remember { mutableFloatStateOf(80f) }
     var selectionGenerations by remember { mutableFloatStateOf(5f) }
+    var selectedParentOneIndex by remember { mutableIntStateOf(1) }
+    var selectedParentTwoIndex by remember { mutableIntStateOf(1) }
+    val parentGenotypes = MendelianGenotype.values()
+    val mendelianResult = MendelianInheritanceSimulation.evaluate(parentGenotypes[selectedParentOneIndex], parentGenotypes[selectedParentTwoIndex])
     val selectionResult = NaturalSelectionSimulation.evaluate(
         NaturalSelectionConditions(
             initialLightCount.toInt(),
