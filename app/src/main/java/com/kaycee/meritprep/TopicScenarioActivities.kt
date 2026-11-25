@@ -132,7 +132,7 @@ fun TopicScenarioActivity(topicId: String) {
                     onClick = { if (!revealed) selected = index },
                     enabled = !revealed,
                     modifier = Modifier.fillMaxWidth()
-                ) { Text(('A' + index) + ".  " + option, modifier = Modifier.fillMaxWidth()) }
+                ) { ScientificText(('A' + index) + ".  " + option, modifier = Modifier.fillMaxWidth(), style = MaterialTheme.typography.bodyMedium) }
             }
             if (revealed) {
                 Text(if (selected == scenario.answer) "Sound scientific decision" else "Revisit the principle", color = if (selected == scenario.answer) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.error, fontWeight = FontWeight.Bold)
