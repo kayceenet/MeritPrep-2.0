@@ -7,14 +7,15 @@ Version 1.0 — Complete for every lesson, topic batch or release
 - [ ] Repository confirmed: `kayceenet/MeritPrep-2.0` (not the original Merit repository).
 - [ ] Branch and starting commit recorded.
 - [ ] Current source, tests, topic IDs and dependencies inspected.
-- [ ] Academic standard and this checklist read.
+- [ ] Academic standard, this checklist and official syllabus source register read.
+- [ ] Relevant subject JAMB/WAEC crosswalks read; secondary WAEC mirrors clearly marked provisional.
 - [ ] Run objective and scope stated.
 - [ ] Exact JAMB/WAEC syllabus statements affected identified.
 - [ ] Existing functionality and regression risks identified.
 
 ## B. Syllabus and academic alignment
 - [ ] Current official JAMB syllabus source/version checked.
-- [ ] Current official WAEC syllabus source/version checked.
+- [ ] Current official WAEC syllabus source/version checked; if only a secondary reproduction is available, primary verification remains an explicit release blocker.
 - [ ] Exact syllabus wording recorded; no invented or assumed requirements.
 - [ ] Every affected statement mapped to the correct subject, topic and lesson ID.
 - [ ] JAMB/WAEC differences and overlaps documented.
@@ -54,6 +55,7 @@ Version 1.0 — Complete for every lesson, topic batch or release
 - [ ] Learner is asked to predict before observing where appropriate.
 - [ ] Inputs/controls have meaningful, scientifically coherent effects.
 - [ ] Inputs, outputs, ranges and units are clear.
+- [ ] Input domains exclude physically invalid ranges or explain the boundary case.
 - [ ] Numerical results, diagrams, animation and graphs agree.
 - [ ] Learner is asked to observe, explain and apply the result.
 - [ ] Boundary cases and invalid inputs are handled safely.
@@ -115,6 +117,7 @@ Version 1.0 — Complete for every lesson, topic batch or release
 - [ ] Formulae, derivations, calculations and unit conversions are checked.
 - [ ] Graph conventions, gradients and significant figures are correct.
 - [ ] Model outputs tested against hand-calculated/known examples.
+- [ ] Animation timing, geometry and parameter changes checked against the same underlying model.
 - [ ] Boundary and limiting cases tested.
 - [ ] Data are plausible and clearly identified as simulated or real.
 - [ ] Simplifications and uncertainties are not hidden.
