@@ -991,7 +991,9 @@ fun LessonScreen(topicId: String) {
 private fun TopicConceptInlineVisual(topicId: String, sectionIndex: Int) {
     if (sectionIndex != 0) return
     when (topicId) {
+        "bio-adaptation" -> AdaptationTypesCard()
         "bio-cell" -> CellDiagramCard()
+        "bio-interactions" -> FoodChainDiagramCard()
         "bio-nutrition" -> PhotosynthesisFlowCard()
         "bio-respiration" -> RespirationComparisonCard()
         "bio-transport" -> PlantTransportCard()
@@ -1002,6 +1004,9 @@ private fun TopicConceptInlineVisual(topicId: String, sectionIndex: Int) {
         "bio-populations" -> BiologyPopulationSamplingCard()
         "bio-soil" -> SoilWaterInvestigationCard()
         "bio-evolution-theory" -> NaturalSelectionCard()
+        "phy-motion" -> ProjectileMotionAnimation(speed = 25f, angleDegrees = 45f)
+        "phy-gravity" -> SatelliteOrbitAnimation()
+        "chem-kinetic-gas" -> ParticleKineticAnimation(temperatureKelvin = 300f)
         else -> TopicScienceAnimation(topicId)
     }
 }
