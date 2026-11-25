@@ -66,6 +66,18 @@ class BiologyReferenceContentTest {
     }
 
     @Test
+    fun xLinkedInheritancePracticeCoversTransmissionAndRiskProbabilities() {
+        val questions = BiologyQuestionBank.all.associateBy { it.id }
+        val ids = (11..14).map { "bio-her-${it.toString().padStart(3, '0')}" }
+        assertTrue(ids.all { it in questions })
+        val content = ids.mapNotNull { questions[it]?.prompt + " " + questions[it]?.explanation }.joinToString(" ").lowercase()
+        assertTrue(content.contains("x-linked recessive"))
+        assertTrue(content.contains("affected son"))
+        assertTrue(content.contains("25%"))
+        assertTrue(content.contains("50%"))
+    }
+
+    @Test
     fun glossaryEntriesAreCompleteUniqueAndLinkedToLessons() {
         val entries = BiologyGlossary.entries
         val lessonIds = BiologyCurriculum.units.mapNotNull { it.lessonId }.toSet()
