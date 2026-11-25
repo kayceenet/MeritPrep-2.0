@@ -15,9 +15,13 @@ import com.kaycee.meritprep.data.*
 @Composable
 fun ChemistryInteractiveLessonActivity(topicId: String) {
     when (topicId) {
-        "chem-acids-bases", "chem-redox", "chem-combination" -> ChemistryTitrationInquiry()
-        "chem-metals", "chem-nonmetals", "chem-separation" -> ChemistryQualitativeInquiry()
-        "chem-rates", "chem-energy" -> ChemistryRateInquiry()
+        "chem-acids-bases" -> ChemistryTitrationInquiry()
+        "chem-redox" -> ChemistryRedoxTitrationInquiry()
+        "chem-combination" -> ChemistryStoichiometryInquiry()
+        "chem-separation" -> ChemistrySeparationInquiry()
+        "chem-metals", "chem-nonmetals" -> ChemistryQualitativeInquiry()
+        "chem-rates" -> ChemistryRateInquiry()
+        "chem-energy" -> ChemistryCalorimetryInquiry()
         "chem-electrolysis" -> ElectrolysisConceptInquiry()
         "chem-kinetic-gas" -> GasLawInquiry()
         "chem-equilibrium" -> EquilibriumInquiry()
@@ -410,4 +414,96 @@ private fun InductionInquiry() {
         Text("Induced emf magnitude: " + "%.3f".format(inducedEmf) + " V", fontWeight = FontWeight.Bold)
         Text("The sign and direction depend on the direction of flux change and Lenz's law. This model calculates magnitude only and assumes the same flux change links every turn.", style = MaterialTheme.typography.bodySmall)
     } }
+}
+
+
+@Composable
+private fun ChemistryRedoxTitrationInquiry() {
+    var permanganate by remember { mutableFloatStateOf(0.02f) }
+    var titre by remember { mutableFloatStateOf(20f) }
+    var aliquot by remember { mutableFloatStateOf(25f) }
+    val ironConcentration = 5f * permanganate * titre / aliquot
+    Card(Modifier.fillMaxWidth()) {
+        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            Text("Redox titration: iron(II) with acidified permanganate", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+            Text("Use the balanced ionic equation: MnO₄⁻ + 8H⁺ + 5Fe²⁺ → Mn²⁺ + 4H₂O + 5Fe³⁺.")
+            Text("Permanganate concentration: " + "%.3f".format(permanganate) + " mol dm⁻³")
+            Slider(permanganate, { permanganate = it }, valueRange = 0.005f..0.1f)
+            Text("Mean titre: " + "%.2f".format(titre) + " cm³")
+            Slider(titre, { titre = it }, valueRange = 5f..40f)
+            Text("Iron(II) aliquot: " + "%.1f".format(aliquot) + " cm³")
+            Slider(aliquot, { aliquot = it }, valueRange = 10f..50f)
+            HorizontalDivider()
+            Text("Calculated Fe²⁺ concentration: " + "%.4f".format(ironConcentration) + " mol dm⁻³", style = MaterialTheme.typography.headlineSmall)
+            Text("The factor of five comes from the mole ratio 1 mol MnO₄⁻ : 5 mol Fe²⁺. Volumes are in the same units, so their ratio is dimensionless.")
+            Text("Model assumes complete reaction in acidic solution, a correct endpoint and the stated balanced equation. In practice, use a suitable acid and approved laboratory procedure.", style = MaterialTheme.typography.bodySmall)
+        }
+    }
+}
+
+@Composable
+private fun ChemistryStoichiometryInquiry() {
+    var hydrogen by remember { mutableFloatStateOf(2f) }
+    var oxygen by remember { mutableFloatStateOf(1f) }
+    val water = minOf(hydrogen, 2f * oxygen)
+    Card(Modifier.fillMaxWidth()) {
+        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            Text("Stoichiometry and limiting reactants", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+            Text("For 2H₂ + O₂ → 2H₂O, compare the available mole amounts and identify the limiting reactant.")
+            Text("Hydrogen available: " + "%.2f".format(hydrogen) + " mol")
+            Slider(hydrogen, { hydrogen = it }, valueRange = 0f..10f)
+            Text("Oxygen available: " + "%.2f".format(oxygen) + " mol")
+            Slider(oxygen, { oxygen = it }, valueRange = 0f..10f)
+            HorizontalDivider()
+            Text("Maximum water formed: " + "%.2f".format(water) + " mol", style = MaterialTheme.typography.headlineSmall)
+            Text(if (hydrogen / 2f < oxygen) "Hydrogen is limiting; oxygen remains in excess." else if (hydrogen / 2f > oxygen) "Oxygen is limiting; hydrogen remains in excess." else "The reactants are in the exact stoichiometric ratio.")
+            Text("This ideal calculation assumes complete reaction and no side reactions. It does not include yield losses.")
+        }
+    }
+}
+
+@Composable
+private fun ChemistrySeparationInquiry() {
+    var mixture by remember { mutableStateOf("Sand and water") }
+    val method = when (mixture) {
+        "Sand and water" -> "Filtration: insoluble sand is retained while water passes through."
+        "Salt and water" -> "Crystallisation or evaporation: remove solvent to recover dissolved salt; distillation can recover water."
+        "Ethanol and water" -> "Fractional distillation: miscible liquids are separated using differences in boiling behaviour."
+        "Ink pigments" -> "Paper chromatography: components move differently between stationary and mobile phases."
+        else -> "Magnetic separation: a magnet attracts the iron while sulfur remains."
+    }
+    Card(Modifier.fillMaxWidth()) {
+        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            Text("Choose a separation method", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+            Text("Select the mixture, identify the physical property that differs, then choose an appropriate technique.")
+            listOf("Sand and water", "Salt and water", "Ethanol and water", "Ink pigments", "Iron and sulfur").forEach {
+                FilterChip(mixture == it, { mixture = it }, { Text(it) })
+            }
+            HorizontalDivider()
+            Text("Recommended method", fontWeight = FontWeight.Bold)
+            Text(method)
+            Text("Explain why the selected physical property makes the separation possible. State whether each component is recovered and how purity could be checked.")
+        }
+    }
+}
+
+@Composable
+private fun ChemistryCalorimetryInquiry() {
+    var mass by remember { mutableFloatStateOf(100f) }
+    var rise by remember { mutableFloatStateOf(10f) }
+    val energy = mass / 1000f * 4180f * rise
+    Card(Modifier.fillMaxWidth()) {
+        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            Text("Calorimetry: heat energy and temperature rise", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+            Text("Use Q = mcΔT. For water, take c = 4180 J kg⁻¹ K⁻¹.")
+            Text("Water mass: " + mass.toInt() + " g")
+            Slider(mass, { mass = it }, valueRange = 25f..250f)
+            Text("Temperature rise: " + "%.1f".format(rise) + " °C")
+            Slider(rise, { rise = it }, valueRange = 1f..50f)
+            HorizontalDivider()
+            Text("Heat gained by water: " + "%.0f".format(energy) + " J", style = MaterialTheme.typography.headlineSmall)
+            Text("Worked substitution: Q = (" + "%.3f".format(mass / 1000f) + " kg) × 4180 × " + "%.1f".format(rise) + " K.")
+            Text("Ideal water-only calculation. A real calorimeter loses heat to surroundings and absorbs energy itself; those effects require correction.", style = MaterialTheme.typography.bodySmall)
+        }
+    }
 }
