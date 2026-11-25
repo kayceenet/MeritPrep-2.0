@@ -779,9 +779,9 @@ private fun BiologyExperimentPlannerLab() {
                     add(row.optString("value") to row.optString("result"))
                 }
             } else {
-                add("10 cm" to "")
-                add("20 cm" to "")
-                add("30 cm" to "")
+                add("10" to "")
+                add("20" to "")
+                add("30" to "")
             }
         }
     }
@@ -832,9 +832,9 @@ private fun BiologyExperimentPlannerLab() {
     Card(Modifier.fillMaxWidth()) {
         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
             Text("Record your results", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
-            Text("Enter the independent-variable value and measured outcome. For repeated trials at one setting, separate readings with commas or semicolons, for example: 12, 13, 11. Include units in the variable values or headings. The app calculates the mean and range for each row.")
+            Text("Enter a numeric independent-variable value and the measured outcome. Put the unit in the variable name or heading, not beside each x-value. For repeated trials at one setting, separate readings with commas or semicolons, for example: 12, 13, 11. The app calculates the mean and range for each row.")
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                Text("Independent variable", modifier = Modifier.weight(1f), fontWeight = FontWeight.SemiBold)
+                Text(independent.ifBlank { "Independent variable" }, modifier = Modifier.weight(1f), fontWeight = FontWeight.SemiBold)
                 Text("Measured result", modifier = Modifier.weight(1f), fontWeight = FontWeight.SemiBold)
             }
             resultRows.forEachIndexed { index, row ->
@@ -878,7 +878,7 @@ private fun BiologyExperimentPlannerLab() {
                 BiologyResultsGraph(points = graphPoints)
                 Text(BiologyExperimentAnalysis.describeTrend(graphPoints), style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.primary)
                 Text("This describes the recorded pattern; it does not by itself prove causation. Consider repeats, uncertainty and other variables before drawing a conclusion.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                Text("The graph sorts numeric independent-variable values from lowest to highest. Each plotted point is the mean of the readings entered for that condition.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                Text("The graph sorts numeric independent-variable values from lowest to highest. Each plotted point is the mean of the readings entered for that condition; points are joined in x-order to show the observed pattern. For a formal graph, consider whether a straight or curved best-fit line is scientifically appropriate.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
             } else if (resultRows.any { it.first.isNotBlank() || it.second.isNotBlank() }) {
                 Text("A graph will appear when at least two complete rows have valid, distinct numeric x-values and valid numerical results.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
