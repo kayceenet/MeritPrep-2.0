@@ -221,6 +221,7 @@ private fun EquationExpression(
         parts.forEach { part ->
             if (part.numerator != null && part.denominator != null) {
                 Column(
+                    modifier = Modifier.width(IntrinsicSize.Max),
                     horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.spacedBy(1.dp)
                 ) {
