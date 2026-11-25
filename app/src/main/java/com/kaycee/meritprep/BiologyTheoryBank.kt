@@ -249,5 +249,22 @@ object BiologyTheoryBank {
             "Sandy soil contains relatively large particles with large pore spaces, so water drains quickly and little water or dissolved nutrient is retained. Clayey soil has very small particles and pore spaces; it holds more water but drains slowly and can become waterlogged and poorly aerated. Loam contains a mixture of sand, silt and clay and often organic matter. It can provide a useful balance of drainage, water retention, aeration and nutrient-holding capacity. The best soil for a crop also depends on soil structure, pH, organic matter, climate and the crop's requirements."
         )
 
+        BiologyTheoryTask(
+            "theory-growth-16", "bio-growth", "Comparing mitosis and meiosis",
+            "A diploid cell has 2n = 6 chromosomes. (a) Describe the main events of mitosis. (b) Describe the two meiotic divisions, including the behaviour of homologous chromosomes and sister chromatids. (c) State the number and chromosome complement of the products of each process. (d) Explain one biological importance of each process.",
+            8,
+            listOf(
+                "Mitosis is one nuclear division following one round of DNA replication; replicated chromosomes align individually and sister chromatids separate.",
+                "Mitosis produces two daughter cells, each normally diploid with 6 chromosomes and genetically very similar to the parent cell.",
+                "Meiosis follows one round of DNA replication but consists of two nuclear divisions, meiosis I and meiosis II, with no DNA replication between them.",
+                "In prophase I, homologous chromosomes pair to form bivalents and crossing over may occur between non-sister chromatids.",
+                "At anaphase I, homologous chromosomes separate while sister chromatids remain joined; chromosome number is halved in each resulting cell.",
+                "At anaphase II, centromeres divide and sister chromatids separate, producing four haploid products.",
+                "Each normal meiotic product has 3 chromosomes; crossing over and independent assortment contribute to genetic variation.",
+                "Mitosis supports growth, tissue repair and asexual reproduction; meiosis produces haploid gametes or spores and helps maintain chromosome number across sexual generations."
+            ),
+            "Mitosis consists of one nuclear division after DNA replication. Replicated chromosomes align individually at the equator, and sister chromatids separate when centromeres divide. Cytokinesis normally produces two daughter cells. For a parent cell with 2n = 6, each daughter normally has six chromosomes and remains diploid. Mitosis supports growth, tissue repair and asexual reproduction.\n\nMeiosis has one round of DNA replication followed by two nuclear divisions. During prophase I, homologous chromosomes pair as bivalents and non-sister chromatids may exchange corresponding segments by crossing over. Homologous chromosomes separate in anaphase I while sister chromatids remain joined, producing two haploid cells. There is no DNA replication between meiosis I and meiosis II. In anaphase II, centromeres divide and sister chromatids separate. The process normally produces four haploid products, each with three chromosomes in this example. Crossing over and independent assortment contribute to genetic variation. Meiosis produces haploid gametes or spores and helps maintain the chromosome number of a species after fertilisation."
+        )
+
     )
 }
