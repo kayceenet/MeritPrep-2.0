@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Card
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.MaterialTheme
@@ -82,8 +83,8 @@ private fun WavePropagationAnimation() {
 @Composable
 private fun RefractionRayAnimation() {
     var incidence by remember { mutableFloatStateOf(40f) }
-    var refractiveIndex by remember { mutableFloatStateOf(1.5f) }
-    val sinR = sin(Math.toRadians(incidence.toDouble())) / refractiveIndex
+    var refractiveIndex by remember { mutableFloatStateOf(1.0f) }
+    val sinR = 1.5 * sin(Math.toRadians(incidence.toDouble())) / refractiveIndex
     val totalInternalReflection = sinR > 1.0
     val refraction = if (totalInternalReflection) 90.0 else Math.toDegrees(asin(sinR.coerceIn(-1.0, 1.0)))
     val primary = MaterialTheme.colorScheme.primary
@@ -111,11 +112,11 @@ private fun RefractionRayAnimation() {
             }
             Text("Angle of incidence: " + incidence.toInt() + "°")
             Slider(incidence, { incidence = it }, valueRange = 5f..85f)
-            Text("Refractive index of second medium: " + "%.2f".format(refractiveIndex))
-            Slider(refractiveIndex, { refractiveIndex = it }, valueRange = 1.0f..2.5f)
+            Text("Refractive index of second medium (n₂): " + "%.2f".format(refractiveIndex))
+            Slider(refractiveIndex, { refractiveIndex = it }, valueRange = 0.8f..1.5f)
             ScientificText("n_1\\\\sin i = n_2\\\\sin r", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
             Text(if (totalInternalReflection) "Total internal reflection condition reached for this simplified boundary model." else "Calculated refracted angle: " + "%.1f".format(refraction) + "°. The ray bends towards the normal when it enters the higher-index medium.", style = MaterialTheme.typography.bodySmall)
-            Text("The diagram is schematic. The calculation assumes light travels from air (n₁ ≈ 1.00) into the selected higher-index medium.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            Text("The diagram is schematic. The calculation assumes light travels from glass (n₁ = 1.50) into the selected second medium. The slider can reach the critical-angle condition.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
         }
     }
 }
