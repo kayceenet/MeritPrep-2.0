@@ -19,6 +19,14 @@ For each syllabus topic, the content team should assess whether one or more of t
 
 A media item must support a stated learning objective. Avoid decorative animation, motion that distracts from the concept, or animations that imply scientifically false mechanisms.
 
+## 2A. Current linked-resource catalogue
+
+The current `ScienceMediaCatalog` contains **41 curated resource records** across Biology, Chemistry and Physics. It includes PhET simulations for membrane transport, natural selection, gene expression, atomic structure, molecular geometry, acid–base chemistry, circuits, waves, optics, gas behaviour, reaction rates, projectile motion, gravity/orbits, induction, blackbody radiation, capacitance, pendulums, elasticity, friction, buoyancy and the photoelectric effect, alongside HHMI BioInteractive and LabXchange resources.
+
+These are external launch links with guided pre-/post-exploration prompts and offline alternatives. They are not packaged copies of the third-party simulations. Each resource record carries creator, licence, attribution and permitted-use metadata.
+
+**PhET licensing control:** Standard HTML simulations are CC BY-NC 4.0. Free classroom access does not grant permission for commercial use inside a paid, subscription-based, ad-supported or otherwise commercially advantageous product. PhET-iO/Studio presets have separate licensing. The app must obtain an appropriate commercial licence before embedding or distributing PhET content commercially; otherwise retain external links and native original alternatives. See the current [PhET licensing terms](https://phet.colorado.edu/en/licensing/).
+
 ## 2. Topic-to-media planning
 
 Each syllabus topic should have a media audit. For every topic, record:
