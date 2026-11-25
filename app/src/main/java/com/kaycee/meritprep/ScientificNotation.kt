@@ -140,6 +140,48 @@ object ScientificNotation {
     }
 }
 
+internal data class ScientificContentSegment(val prose: String? = null, val equation: String? = null)
+
+internal fun parseScientificContent(source: String): List<ScientificContentSegment> {
+    val pattern = Regex("""\$\$(.+?)\$\$|\\\[(.+?)\\\]""", setOf(RegexOption.DOT_MATCHES_ALL))
+    val segments = mutableListOf<ScientificContentSegment>()
+    var cursor = 0
+    pattern.findAll(source).forEach { match ->
+        if (match.range.first > cursor) {
+            val prose = source.substring(cursor, match.range.first).trim()
+            if (prose.isNotEmpty()) segments.add(ScientificContentSegment(prose = prose))
+        }
+        val equation = (match.groups[1]?.value ?: match.groups[2]?.value).orEmpty().trim()
+        if (equation.isNotEmpty()) segments.add(ScientificContentSegment(equation = equation))
+        cursor = match.range.last + 1
+    }
+    if (cursor < source.length) {
+        val prose = source.substring(cursor).trim()
+        if (prose.isNotEmpty()) segments.add(ScientificContentSegment(prose = prose))
+    }
+    return segments.ifEmpty { listOf(ScientificContentSegment(prose = source)) }
+}
+
+@Composable
+fun ScientificContent(
+    content: String,
+    modifier: Modifier = Modifier,
+    style: TextStyle = MaterialTheme.typography.bodyLarge
+) {
+    val segments = remember(content) { parseScientificContent(content) }
+    Column(modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+        segments.forEach { segment ->
+            when {
+                segment.equation != null -> EquationDisplayCard(
+                    formula = segment.equation,
+                    caption = "SCIENTIFIC EXPRESSION"
+                )
+                !segment.prose.isNullOrBlank() -> ScientificText(segment.prose, style = style)
+            }
+        }
+    }
+}
+
 @Composable
 fun ScientificText(
     text: String,
