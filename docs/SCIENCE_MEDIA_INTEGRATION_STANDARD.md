@@ -21,7 +21,7 @@ A media item must support a stated learning objective. Avoid decorative animatio
 
 ## 2A. Current linked-resource catalogue
 
-The current `ScienceMediaCatalog` contains **41 curated resource records** across Biology, Chemistry and Physics. It includes PhET simulations for membrane transport, natural selection, gene expression, atomic structure, molecular geometry, acid–base chemistry, circuits, waves, optics, gas behaviour, reaction rates, projectile motion, gravity/orbits, induction, blackbody radiation, capacitance, pendulums, elasticity, friction, buoyancy and the photoelectric effect, alongside HHMI BioInteractive and LabXchange resources.
+The current `ScienceMediaCatalog` contains **38 curated resource records** across Biology, Chemistry and Physics. It includes PhET simulations for membrane transport, natural selection, gene expression, atomic structure, molecular geometry, acid–base chemistry, circuits, waves, optics, gas behaviour, reaction rates, projectile motion, gravity/orbits, induction, blackbody radiation, capacitance, pendulums, elasticity, friction, buoyancy and the photoelectric effect, alongside HHMI BioInteractive and LabXchange resources.
 
 These are external launch links with guided pre-/post-exploration prompts and offline alternatives. They are not packaged copies of the third-party simulations. Each resource record carries creator, licence, attribution and permitted-use metadata.
 
