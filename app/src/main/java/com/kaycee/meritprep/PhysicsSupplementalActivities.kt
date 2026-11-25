@@ -171,9 +171,27 @@ internal val physicsSupplementalActivityTopicIds = setOf(
 )
 
 @Composable private fun PhysicsMissingTopicExplorer(topicId: String) {
- var a by remember(topicId) { mutableFloatStateOf(25f) }
- var b by remember(topicId) { mutableFloatStateOf(20f) }
- var c by remember(topicId) { mutableFloatStateOf(1f) }
+ var a by remember(topicId) { mutableFloatStateOf(when(topicId) {
+  "phy-temperature" -> 25f
+  "phy-heat-quantity" -> 1f
+  "phy-change-state" -> .5f
+  "phy-vapours" -> 3.2f
+  "phy-optical-instruments" -> 10f
+  "phy-dispersion" -> 550f
+  "phy-magnetism" -> 2f
+  "phy-conduction" -> .01f
+  else -> 1.2f
+ }) }
+ var b by remember(topicId) { mutableFloatStateOf(when(topicId) {
+  "phy-heat-quantity" -> 4200f
+  "phy-vapours" -> 60f
+  "phy-optical-instruments" -> 30f
+  "phy-magnetism" -> 800f
+  "phy-conduction" -> 40f
+  "phy-electronics" -> 220f
+  else -> 20f
+ }) }
+ var c by remember(topicId) { mutableFloatStateOf(if(topicId=="phy-conduction") .02f else 20f) }
  var material by remember(topicId) { mutableStateOf("Copper") }
  var phase by remember(topicId) { mutableStateOf("Fusion") }
  val title = when(topicId) {
