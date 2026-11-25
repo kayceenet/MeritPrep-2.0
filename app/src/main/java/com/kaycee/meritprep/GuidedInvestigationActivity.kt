@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.dp
 import kotlin.math.abs
 import kotlin.math.max
 
-private data class InvestigationProfile(
+internal data class InvestigationProfile(
     val title: String, val question: String, val apparatus: String,
     val independent: String, val dependent: String, val controls: String,
     val xUnit: String, val yUnit: String, val safety: String,
@@ -33,7 +33,7 @@ internal object InvestigationProfiles {
 
     fun supports(id: String): Boolean = find(id) != null
 
-    private fun find(id: String): InvestigationProfile? = when (id) {
+    fun find(id: String): InvestigationProfile? = when (id) {
         "bio-living" -> profile("Characteristics of living things", "How can observations be used to distinguish living from non-living material?",
             "Safe specimen images, hand lens and observation checklist", "Number of life-process indicators checked", "Evidence-based classification score", "Same observation criteria and sample set", "indicators", "score",
             "Do not handle unknown organisms; use approved images or safe classroom specimens.",
