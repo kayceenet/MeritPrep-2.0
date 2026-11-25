@@ -370,7 +370,7 @@ class BiologyQuestionBankTest {
     @Test
     fun completeBankHasNoDuplicatePromptsOrRepeatedOptionsWithinAnItem() {
         val questions = BiologyQuestionBank.all
-        assertEquals(260, questions.size)
+        assertEquals(264, questions.size)
         assertEquals(questions.size, questions.map { it.prompt.trim().lowercase() }.toSet().size)
         questions.forEach { question ->
             assertTrue(question.options.all { it.isNotBlank() })
