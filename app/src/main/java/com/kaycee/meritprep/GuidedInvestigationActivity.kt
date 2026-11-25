@@ -308,6 +308,30 @@ internal object InvestigationProfiles {
             "Use a current-limiting resistor and low voltage; observe diode polarity.",
             listOf("Identify anode and cathode", "Connect diode and current-limiting resistor in series", "Measure diode voltage and current", "Increase voltage gradually and plot the I–V curve"),
             "Simplified forward-bias exponential model with a current scale; real diode behaviour depends on type and temperature.", { x -> (0.05f * (kotlin.math.exp(5f * x) - 1f)).coerceAtLeast(0f) }, 0f, 1f, 0.5f)
+        "bio-ecology-factors" -> profile("Abiotic factors and organism distribution", "How does an environmental factor relate to the abundance of a chosen organism?",
+            "Light meter or thermometer, soil-moisture probe, quadrat, transect tape and recording sheet", "Measured abiotic factor", "Organism abundance or percentage cover", "Sampling area, quadrat size, time and identification method",
+            "relative units", "organisms m⁻²",
+            "Use safe field sites, avoid disturbing habitats and do not sample protected species.",
+            listOf("Choose one abiotic factor and a measurable response", "Select a representative sampling area", "Measure the factor at several sampling points", "Use quadrats to record abundance at each point", "Plot abundance against the measured factor"),
+            "Illustrative tolerance response only; real distributions may be affected by several interacting factors.", { x -> 100f * kotlin.math.exp(-((x - 50f) * (x - 50f)) / 700f) }, 0f, 100f, 50f)
+        "bio-habitats" -> profile("Habitat transect and microhabitat survey", "How does the distribution of a plant species change along a habitat gradient?",
+            "Transect tape, quadrat, identification guide, thermometer and light meter", "Distance along transect", "Plant abundance or percentage cover", "Transect route, quadrat size, sampling interval and identification criteria",
+            "m", "% cover",
+            "Stay on approved routes, avoid damaging vegetation and do not handle unknown organisms.",
+            listOf("Lay a transect across the habitat gradient", "Place quadrats at fixed intervals", "Identify and record the target species", "Measure one or more abiotic conditions", "Compare abundance with distance and conditions"),
+            "Illustrative gradient model; a real transect must be sampled and repeated in the field.", { x -> (80f - 0.8f * kotlin.math.abs(x - 50f)).coerceAtLeast(0f) }, 0f, 100f, 50f)
+        "bio-biomes" -> profile("Rainfall and vegetation structure", "How can annual rainfall be compared with vegetation cover across ecological zones?",
+            "Climate data table, rain gauge records, vegetation survey and map", "Annual rainfall", "Relative vegetation-cover index", "Data period, altitude band, survey method and land-use category",
+            "mm year⁻¹", "index",
+            "Use published climate data or approved field records; do not enter private land without permission.",
+            listOf("Select comparable ecological locations", "Obtain annual rainfall values for the same period", "Record vegetation structure or cover", "Plot vegetation measure against rainfall", "Discuss altitude, soil and human disturbance as confounding factors"),
+            "A deliberately simplified illustrative trend; rainfall alone does not determine biome or vegetation.", { x -> (x * 0.04f).coerceIn(0f, 100f) }, 0f, 2000f, 900f)
+        "bio-evolution-theory" -> profile("Natural selection using a model population", "How can repeated selection change the frequency of a heritable phenotype?",
+            "Two-colour paper or bead models, tray, forceps, timer and population tally sheet", "Number of selection rounds", "Frequency of the favoured phenotype", "Starting frequency, selection rule, sample size and number selected per round",
+            "rounds", "%",
+            "Use harmless model beads or paper shapes; do not capture or harm living organisms.",
+            listOf("Create a mixed model population with two heritable phenotypes", "Define a consistent selection pressure", "Remove or retain individuals using the stated rule", "Count phenotype frequencies after each round", "Repeat and compare the trend across replicate populations"),
+            "Illustrative selection curve, not a prediction for a named species; mutation, migration, drift and changing environments are omitted.", { x -> 100f / (1f + kotlin.math.exp(-0.25f * (x - 10f))) }, 0f, 20f, 5f)
         "chem-acids-bases" -> profile("Acid–base titration", "How does mean titre determine the concentration of an unknown acid in a 1:1 reaction?",
             "Burette, pipette, conical flask, indicator and standard solution", "Mean titre", "Unknown analyte concentration", "Standard concentration, aliquot volume and reaction stoichiometry", "cm³", "mol dm⁻³",
             "Wear goggles, use a pipette filler, clamp the burette securely and follow approved acid/alkali handling procedures.",
