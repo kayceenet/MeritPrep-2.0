@@ -965,6 +965,7 @@ private fun TopicEquationPanel(topicId: String) {
 private fun TopicVisualisationGallery(topicId: String) {
     Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
         TopicEquationPanel(topicId)
+        TopicScienceAnimation(topicId)
         when (topicId) {
             "bio-adaptation" -> AdaptationTypesCard()
             "bio-cell" -> CellDiagramCard()
