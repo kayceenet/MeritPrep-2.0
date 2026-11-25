@@ -825,6 +825,7 @@ fun LessonScreen(topicId: String) {
                                 Text((index + 1).toString().padStart(2, '0'), style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
                                 Text(section.first, style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
                                 ScientificText(section.second, style = MaterialTheme.typography.bodyLarge)
+                                TopicConceptInlineVisual(topicId, index)
                             }
                         }
                     }
@@ -987,6 +988,25 @@ fun LessonScreen(topicId: String) {
 }
 
 @Composable
+private fun TopicConceptInlineVisual(topicId: String, sectionIndex: Int) {
+    if (sectionIndex != 0) return
+    when (topicId) {
+        "bio-cell" -> CellDiagramCard()
+        "bio-nutrition" -> PhotosynthesisFlowCard()
+        "bio-respiration" -> RespirationComparisonCard()
+        "bio-transport" -> PlantTransportCard()
+        "bio-excretion" -> NephronFlowCard()
+        "bio-reproduction" -> FlowerReproductionCard()
+        "bio-heredity" -> PunnettSquareCard()
+        "bio-growth" -> CellDivisionLessonCard()
+        "bio-populations" -> BiologyPopulationSamplingCard()
+        "bio-soil" -> SoilWaterInvestigationCard()
+        "bio-evolution-theory" -> NaturalSelectionCard()
+        else -> TopicScienceAnimation(topicId)
+    }
+}
+
+@Composable
 private fun TopicWorkedExampleCard(topicId: String) {
     val example = when (topicId) {
         "bio-cell" -> "A cell image is 36 mm long. Its actual length is 0.18 mm. Magnification = image size ÷ actual size = 36 ÷ 0.18 = 200×."
@@ -1057,7 +1077,6 @@ private fun TopicEquationPanel(topicId: String) {
 private fun TopicVisualisationGallery(topicId: String) {
     Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
         TopicEquationPanel(topicId)
-        TopicScienceAnimation(topicId)
         when (topicId) {
             "bio-adaptation" -> AdaptationTypesCard()
             "bio-cell" -> CellDiagramCard()
