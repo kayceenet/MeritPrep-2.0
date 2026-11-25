@@ -63,15 +63,18 @@ fun CellDivisionDiagram(
             if (separatingSisters || separatingHomologues) {
                 repeat(perPole) { i ->
                     val offsetY = (i - (perPole - 1) / 2f) * cellHeight * 0.19f
-                    val color = if (i % 2 == 0) Color(0xFF2878B5) else Color(0xFFE18A35)
+                    val leftColor = if (i % 2 == 0) Color(0xFF2878B5) else Color(0xFFE18A35)
+                    val rightColor = if (separatingHomologues) {
+                        if (i % 2 == 0) Color(0xFFE18A35) else Color(0xFF2878B5)
+                    } else leftColor
                     val x1 = centerX - cellWidth * 0.27f
                     val x2 = centerX + cellWidth * 0.27f
                     if (separatingHomologues) {
-                        drawReplicatedChromosome(x1, centerY + offsetY, chromWidth, chromHeight, color)
-                        drawReplicatedChromosome(x2, centerY + offsetY, chromWidth, chromHeight, color)
+                        drawReplicatedChromosome(x1, centerY + offsetY, chromWidth, chromHeight, leftColor)
+                        drawReplicatedChromosome(x2, centerY + offsetY, chromWidth, chromHeight, rightColor)
                     } else {
-                        drawChromatid(x1, centerY + offsetY, chromHeight, color)
-                        drawChromatid(x2, centerY + offsetY, chromHeight, color)
+                        drawChromatid(x1, centerY + offsetY, chromHeight, leftColor)
+                        drawChromatid(x2, centerY + offsetY, chromHeight, rightColor)
                     }
                 }
             } else {
