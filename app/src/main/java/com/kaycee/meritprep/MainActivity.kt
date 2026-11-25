@@ -95,7 +95,7 @@ private fun MeritPrepApp() {
                         }
                     }
                     composable("lesson/{topicId}") { entry ->
-                        LessonScreen(entry.arguments?.getString("topicId").orEmpty())
+                        LessonScreen(entry.arguments?.getString("topicId").orEmpty(), onBack = { nav.popBackStack() }, onOpenCalculators = { nav.navigate("calculators") })
                     }
                     composable("practice") { PracticeScreenV2(onStartCbt = { nav.navigate("cbt") }, onStartWaecObjective = { nav.navigate("waec-objective") }, onStartTheory = { nav.navigate("waec-theory") }, onOpenMistakes = { nav.navigate("mistakes") }, onOpenStudyPlan = { nav.navigate("study-plan") }) }
                     composable("chemistry-practice") { ChemistryPracticeScreen() }
