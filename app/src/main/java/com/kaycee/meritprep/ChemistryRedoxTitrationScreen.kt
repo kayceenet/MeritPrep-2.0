@@ -11,7 +11,7 @@ import com.kaycee.meritprep.data.ChemistryRedoxTitrationEngine
 import com.kaycee.meritprep.data.RedoxTitrationResult
 
 @Composable
-fun ChemistryRedoxTitrationScreen() {
+fun ChemistryRedoxTitrationScreen(embedded: Boolean = false) {
     var permanganateConcentration by remember { mutableStateOf("0.0200") }
     var ironAliquot by remember { mutableStateOf("25.00") }
     val initial = remember { mutableStateListOf("0.00", "0.00", "0.00") }
@@ -20,7 +20,7 @@ fun ChemistryRedoxTitrationScreen() {
     var error by remember { mutableStateOf<String?>(null) }
 
     Column(
-        Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(18.dp),
+        (if (embedded) Modifier.fillMaxWidth() else Modifier.fillMaxSize().verticalScroll(rememberScrollState())).padding(18.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         Text("Redox titration · iron(II)", style = MaterialTheme.typography.headlineMedium)
