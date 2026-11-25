@@ -208,6 +208,7 @@ private fun WaveInquiry() {
     val result = remember(frequency, wavelength) { PhysicsWaveOpticsEngine.waveProperties(frequency.toDouble(), wavelength.toDouble()) }
     val transition = rememberInfiniteTransition(label = "wave-motion")
     val phase by transition.animateFloat(initialValue = 0f, targetValue = (2.0 * Math.PI).toFloat(), animationSpec = infiniteRepeatable(tween(1800, easing = LinearEasing)), label = "wave-phase")
+    val waveColor = MaterialTheme.colorScheme.primary
     Card(Modifier.fillMaxWidth()) { Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
         Text("Wave property simulator", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
         Text("Change frequency and wavelength. The wave equation v = fλ links frequency, wavelength and propagation speed.")
@@ -224,7 +225,7 @@ private fun WaveInquiry() {
                 val nextX = (x + 3f).coerceAtMost(size.width)
                 val y1 = centre + sin((2.0 * Math.PI * x / waveLengthPixels - phase).toDouble()).toFloat() * amplitude
                 val y2 = centre + sin((2.0 * Math.PI * nextX / waveLengthPixels - phase).toDouble()).toFloat() * amplitude
-                drawLine(MaterialTheme.colorScheme.primary, Offset(x, y1), Offset(nextX, y2), strokeWidth = 4f)
+                drawLine(waveColor, Offset(x, y1), Offset(nextX, y2), strokeWidth = 4f)
                 x = nextX
             }
         }
