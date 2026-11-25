@@ -743,11 +743,15 @@ fun LessonScreen(topicId: String) {
         mutableStateOf(
             buildSet {
                 val saved = restoredPillars.optJSONArray("completedStages")
-                if (saved != null) for (index in 0 until saved.length()) {
+                if (completed) addAll(LessonStage.entries) else if (saved != null) for (index in 0 until saved.length()) {
                     runCatching { LessonStage.valueOf(saved.optString(index)) }.getOrNull()?.let { add(it) }
                 }
             }
         )
+    }
+    fun isStageUnlocked(target: LessonStage): Boolean {
+        val targetIndex = stages.indexOf(target)
+        return stages.take(targetIndex).all { it in completedStages }
     }
     fun markStageComplete(target: LessonStage) {
         val updated = completedStages + target
@@ -755,6 +759,7 @@ fun LessonScreen(topicId: String) {
         val saved = JSONArray()
         stages.filter { it in updated }.forEach { saved.put(it.name) }
         database.saveNote(progressNoteId, topicId, topic.title + " classroom progress", JSONObject().put("completedStages", saved).toString())
+        if (stage == target) stage = stages.getOrNull(stages.indexOf(target) + 1) ?: target
     }
     val practiceQuestions = remember(topicId) {
         val bank = when (topic.subjectCode) {
@@ -809,11 +814,19 @@ fun LessonScreen(topicId: String) {
             stages.forEach { item ->
                 FilterChip(
                     selected = stage == item,
-                    onClick = { stage = item },
+                    onClick = { if (isStageUnlocked(item)) stage = item },
+                    enabled = isStageUnlocked(item),
                     label = { Text((if (item in completedStages) "✓  " else "") + item.label) }
                 )
             }
         }
+
+        Text(
+            "Complete each learning pillar to unlock the next. You can revisit any completed pillar.",
+            Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 4.dp),
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
 
         Column(
             Modifier.weight(1f).fillMaxWidth().verticalScroll(rememberScrollState()).padding(horizontal = 16.dp, vertical = 14.dp),
