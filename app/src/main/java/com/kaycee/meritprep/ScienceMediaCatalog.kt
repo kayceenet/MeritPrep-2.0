@@ -387,6 +387,9 @@ object ScienceMediaCatalog {
     fun find(resourceId: String): ScienceMediaResource? =
         resources.firstOrNull { it.id == resourceId }
 
+    fun forTopic(topicId: String): List<ScienceMediaResource> =
+        resources.filter { it.topicId == topicId }
+
     fun validate(): List<String> {
         val issues = mutableListOf<String>()
         if (resources.map { it.id }.distinct().size != resources.size) issues += "Resource IDs must be unique."
