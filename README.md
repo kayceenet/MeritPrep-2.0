@@ -34,6 +34,10 @@ The current alpha is a working Android app built with Kotlin, Jetpack Compose an
 - Per-topic personal lesson notes and a saved-lessons list, plus local recording of lesson completion, question attempts, revision schedules, theory responses, mistake-notebook entries and active CBT session answers.
 - Automated unit tests and a GitHub Actions debug-APK build.
 
+## Scientific animations, simulations and virtual labs
+
+Scientific media is a core course requirement, not an optional decoration. The development standard requires purposeful animations and GIFs, interactive diagrams, variable-driven simulations and guided virtual labs across Biology, Chemistry and Physics. The resource audit includes LabXchange, HHMI BioInteractive, PhET and other reputable university/public-science collections. Each asset must pass an individual licence and attribution check before embedding or redistribution; where reuse is not permitted, MeritPrep will link to the official resource with a guided activity or create an original simulation. Essential learning must have an offline fallback. See [the Science Media Integration Standard](docs/SCIENCE_MEDIA_INTEGRATION_STANDARD.md).
+
 ## Important academic limitations
 
 This is an actively developed alpha, not a completed or officially endorsed examination product.
