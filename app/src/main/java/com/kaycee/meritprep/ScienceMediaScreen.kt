@@ -68,8 +68,6 @@ fun ScienceMediaScreen(onOpenLabs: () -> Unit, onOpenLesson: (String) -> Unit) {
     var selectedAboParentTwoIndex by remember { mutableIntStateOf(3) }
     var selectedXLinkedMotherIndex by remember { mutableIntStateOf(1) }
     var selectedXLinkedFatherIndex by remember { mutableIntStateOf(0) }
-    var selectedDivisionIndex by remember { mutableIntStateOf(0) }
-    var divisionStageIndex by remember { mutableIntStateOf(0) }
     var selectedOsmosisCellIndex by remember { mutableIntStateOf(0) }
     var externalSolute by remember { mutableFloatStateOf(0.2f) }
     var internalSolute by remember { mutableFloatStateOf(0.6f) }
@@ -82,9 +80,6 @@ fun ScienceMediaScreen(onOpenLabs: () -> Unit, onOpenLesson: (String) -> Unit) {
     val xLinkedMotherGenotypes = XLinkedMotherGenotype.values()
     val xLinkedFatherGenotypes = XLinkedFatherGenotype.values()
     val xLinkedResult = XLinkedInheritanceSimulation.evaluate(xLinkedMotherGenotypes[selectedXLinkedMotherIndex], xLinkedFatherGenotypes[selectedXLinkedFatherIndex])
-    val divisionType = if (selectedDivisionIndex == 0) CellDivisionType.MITOSIS else CellDivisionType.MEIOSIS
-    val divisionLesson = CellDivisionSimulation.lesson(divisionType)
-    val currentDivisionStage = divisionLesson.stages[divisionStageIndex.coerceIn(0, divisionLesson.stages.lastIndex)]
     val osmosisCellType = if (selectedOsmosisCellIndex == 0) OsmosisCellType.PLANT else OsmosisCellType.ANIMAL
     val osmosisResult = OsmosisSimulation.evaluate(externalSolute.toDouble(), internalSolute.toDouble(), osmosisCellType)
     val diffusionResult = DiffusionSimulation.evaluate(DiffusionConditions(diffusionLeft.toDouble(), diffusionRight.toDouble(), diffusionPermeability.toDouble()))
@@ -146,41 +141,7 @@ fun ScienceMediaScreen(onOpenLabs: () -> Unit, onOpenLesson: (String) -> Unit) {
             item {
                 Card(modifier = Modifier.fillMaxWidth()) {
                     Column(Modifier.padding(15.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                        Card(modifier = Modifier.fillMaxWidth()) {
-                            Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                                Text("MeritPrep interactive model: mitosis and meiosis", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
-                                Text("Follow each stage in order. Chromosomes are counted by centromeres; a replicated chromosome still counts as one chromosome until its sister chromatids separate.")
-                                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                                    FilterChip(selected = selectedDivisionIndex == 0, onClick = { selectedDivisionIndex = 0; divisionStageIndex = 0 }, label = { Text("Mitosis") })
-                                    FilterChip(selected = selectedDivisionIndex == 1, onClick = { selectedDivisionIndex = 1; divisionStageIndex = 0 }, label = { Text("Meiosis") })
-                                }
-                                Text("Stage ${divisionStageIndex + 1} of ${divisionLesson.stages.size}", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary)
-                                CellDivisionDiagram(divisionType, divisionStageIndex)
-                                Text("Chromosome schematic · not to scale", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                                Text(currentDivisionStage.title, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
-                                Text(currentDivisionStage.description)
-                                Card(colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer)) {
-                                    Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(5.dp)) {
-                                        Text("Chromosome accounting", fontWeight = FontWeight.Bold)
-                                        Text("Chromosome sets: ${currentDivisionStage.chromosomeSetsPerCell}")
-                                        Text("Chromosomes in the cell: ${currentDivisionStage.chromosomeCountPerCell}")
-                                        Text("Chromatids in the cell: ${currentDivisionStage.chromatidCountPerCell}")
-                                        if (currentDivisionStage.daughterCellsAtEnd > 0) Text("Cells produced at this division: ${currentDivisionStage.daughterCellsAtEnd}")
-                                    }
-                                }
-                                Text("Key event: ${currentDivisionStage.keyEvent}")
-                                Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                                    OutlinedButton(onClick = { divisionStageIndex = (divisionStageIndex - 1).coerceAtLeast(0) }, enabled = divisionStageIndex > 0, modifier = Modifier.weight(1f)) { Text("Previous") }
-                                    Button(onClick = { divisionStageIndex = (divisionStageIndex + 1).coerceAtMost(divisionLesson.stages.lastIndex) }, enabled = divisionStageIndex < divisionLesson.stages.lastIndex, modifier = Modifier.weight(1f)) { Text("Next stage") }
-                                }
-                                if (divisionStageIndex == divisionLesson.stages.lastIndex) {
-                                    Text("Outcome: ${divisionLesson.finalDaughterCellCount} daughter cells · ${divisionLesson.finalChromosomeNumberPerDaughter} chromosomes per daughter · ${divisionLesson.finalPloidy}", fontWeight = FontWeight.Bold)
-                                    Text(divisionLesson.summary)
-                                    OutlinedButton(onClick = { divisionStageIndex = 0 }, modifier = Modifier.fillMaxWidth()) { Text("Restart model") }
-                                }
-                                Text("Simplified schematic model: real chromosome numbers vary by species. The model uses a default diploid number of 4 for clear counting.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                            }
-                        }
+                        CellDivisionLessonCard()
                         Card(modifier = Modifier.fillMaxWidth()) {
                             Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                         Text("MeritPrep interactive model: Mendelian inheritance", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
