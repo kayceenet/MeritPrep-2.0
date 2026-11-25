@@ -100,7 +100,7 @@ fun PhysicsWaecTheoryScreen() {
                                     saveMessage = ""
                                 }
                             )
-                            Text(point, modifier = Modifier.weight(1f).padding(top = 12.dp))
+                            ScientificText(point, modifier = Modifier.weight(1f).padding(top = 12.dp), style = MaterialTheme.typography.bodyMedium)
                         }
                     }
                     Text("${checkedPoints.size} of ${task.markingPoints.size} marking points identified", fontWeight = FontWeight.SemiBold)
