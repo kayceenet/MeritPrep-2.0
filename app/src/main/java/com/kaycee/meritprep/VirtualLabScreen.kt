@@ -7,12 +7,16 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import kotlin.math.roundToInt
 import com.kaycee.meritprep.data.ChemistryPracticalEngine
 import com.kaycee.meritprep.data.PhysicsPracticalEngine
 import com.kaycee.meritprep.data.PhysicsWaveOpticsEngine
+import com.kaycee.meritprep.data.MeritDatabase
+import org.json.JSONArray
+import org.json.JSONObject
 
 @Composable
 fun VirtualLabScreen() {
@@ -747,35 +751,148 @@ private fun BiologyDrawingLab() {
  
 @Composable
 private fun BiologyExperimentPlannerLab() {
-    var investigation by remember { mutableStateOf("How does light intensity affect the rate of photosynthesis?") }
-    var independent by remember { mutableStateOf("Light intensity (or distance from the lamp)") }
-    var dependent by remember { mutableStateOf("Number of oxygen bubbles released per minute") }
-    var controls by remember { mutableStateOf("Plant species and size, carbon dioxide concentration, temperature, and counting time") }
-    var method by remember { mutableStateOf("Allow the plant to equilibrate, change one light level at a time, count bubbles for the same time interval, repeat each level and calculate a mean.") }
+    val context = LocalContext.current
+    val database = remember(context) { MeritDatabase(context) }
+    val noteId = "biology-experiment-planner"
+    val restored = remember {
+        runCatching { JSONObject(database.getNoteBody(noteId) ?: "{}") }.getOrElse { JSONObject() }
+    }
+    var investigation by remember { mutableStateOf(restored.optString("investigation", "How does light intensity affect the rate of photosynthesis?")) }
+    var independent by remember { mutableStateOf(restored.optString("independent", "Light intensity (or distance from the lamp)")) }
+    var dependent by remember { mutableStateOf(restored.optString("dependent", "Number of oxygen bubbles released per minute")) }
+    var controls by remember { mutableStateOf(restored.optString("controls", "Plant species and size, carbon dioxide concentration, temperature, and counting time")) }
+    var method by remember { mutableStateOf(restored.optString("method", "Allow the plant to equilibrate, change one light level at a time, count bubbles for the same time interval, repeat each level and calculate a mean.")) }
+    var conclusion by remember { mutableStateOf(restored.optString("conclusion", "")) }
+    var evaluation by remember { mutableStateOf(restored.optString("evaluation", "")) }
+    var graphReview by remember { mutableStateOf(false) }
     var showReview by remember { mutableStateOf(false) }
+    var saved by remember { mutableStateOf(false) }
+    val resultRows = remember {
+        mutableStateListOf<Pair<String, String>>().apply {
+            val rows = restored.optJSONArray("results")
+            if (rows != null && rows.length() > 0) {
+                for (index in 0 until rows.length()) {
+                    val row = rows.optJSONObject(index) ?: continue
+                    add(row.optString("value") to row.optString("result"))
+                }
+            } else {
+                add("10 cm" to "")
+                add("20 cm" to "")
+                add("30 cm" to "")
+            }
+        }
+    }
+
+    fun savePlan() {
+        val rows = JSONArray()
+        resultRows.forEach { (value, result) ->
+            rows.put(JSONObject().put("value", value).put("result", result))
+        }
+        val payload = JSONObject()
+            .put("investigation", investigation)
+            .put("independent", independent)
+            .put("dependent", dependent)
+            .put("controls", controls)
+            .put("method", method)
+            .put("conclusion", conclusion)
+            .put("evaluation", evaluation)
+            .put("results", rows)
+        database.saveNote(noteId, "bio-experiment-planning", "Biology experiment plan", payload.toString())
+        saved = true
+    }
 
     Card(Modifier.fillMaxWidth()) {
         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
             Text("Plan a biological investigation", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
-            Text("Identify what is changed, what is measured, what is kept constant and how reliable results will be collected. Edit the example or use it as a guide.")
-            OutlinedTextField(value = investigation, onValueChange = { investigation = it; showReview = false }, label = { Text("Research question / aim") }, modifier = Modifier.fillMaxWidth(), minLines = 2)
-            OutlinedTextField(value = independent, onValueChange = { independent = it; showReview = false }, label = { Text("Independent variable - what you change") }, modifier = Modifier.fillMaxWidth(), minLines = 2)
-            OutlinedTextField(value = dependent, onValueChange = { dependent = it; showReview = false }, label = { Text("Dependent variable - what you measure") }, modifier = Modifier.fillMaxWidth(), minLines = 2)
-            OutlinedTextField(value = controls, onValueChange = { controls = it; showReview = false }, label = { Text("Control variables - what you keep constant") }, modifier = Modifier.fillMaxWidth(), minLines = 2)
-            OutlinedTextField(value = method, onValueChange = { method = it; showReview = false }, label = { Text("Method, repeats and recording") }, modifier = Modifier.fillMaxWidth(), minLines = 3)
+            Text("Build a fair test, record observations, interpret a graph and evaluate the quality of your evidence. Your work is saved on this device.")
+            OutlinedTextField(value = investigation, onValueChange = { investigation = it; saved = false; showReview = false }, label = { Text("Research question / aim") }, modifier = Modifier.fillMaxWidth(), minLines = 2)
+            OutlinedTextField(value = independent, onValueChange = { independent = it; saved = false; showReview = false }, label = { Text("Independent variable - what you change") }, modifier = Modifier.fillMaxWidth(), minLines = 2)
+            OutlinedTextField(value = dependent, onValueChange = { dependent = it; saved = false; showReview = false }, label = { Text("Dependent variable - what you measure") }, modifier = Modifier.fillMaxWidth(), minLines = 2)
+            OutlinedTextField(value = controls, onValueChange = { controls = it; saved = false; showReview = false }, label = { Text("Control variables - what you keep constant") }, modifier = Modifier.fillMaxWidth(), minLines = 2)
+            OutlinedTextField(value = method, onValueChange = { method = it; saved = false; showReview = false }, label = { Text("Method, repeats and recording") }, modifier = Modifier.fillMaxWidth(), minLines = 3)
             Button(onClick = { showReview = true }, enabled = investigation.isNotBlank() && independent.isNotBlank() && dependent.isNotBlank() && controls.isNotBlank() && method.isNotBlank(), modifier = Modifier.fillMaxWidth()) {
                 Text("Review my investigation plan")
             }
             if (showReview) {
                 HorizontalDivider()
                 Text("Plan checklist", fontWeight = FontWeight.Bold)
-                Text("A focused research question is stated.")
-                Text("The factor being changed is identified.")
-                Text("The outcome being measured is identified.")
-                Text("Other factors that could affect the result are controlled.")
-                Text("The method uses repeated measurements and a consistent time interval.")
-                Text("Before submission, check that your method names the apparatus, measurement units, range of values, recording method and how a mean or graph will be used. This checklist does not automatically prove that your variables or method are scientifically suitable.")
+                Text("• State a focused, testable question.")
+                Text("• Change one independent variable and measure a clearly defined dependent variable.")
+                Text("• Keep relevant control variables constant.")
+                Text("• Use a suitable range, consistent method, repeats and appropriate apparatus.")
+                Text("• Record measurements with units and calculate means where appropriate.")
+                Text("A completed checklist does not automatically prove that the method is scientifically suitable. Consider safety, measurement limits and whether the method actually tests the question.")
             }
         }
     }
+
+    Card(Modifier.fillMaxWidth()) {
+        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+            Text("Record your results", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+            Text("Enter the value of the independent variable and the measured outcome. Include units in your headings or values. Use repeated readings where the method requires them.")
+            Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                Text("Independent variable", modifier = Modifier.weight(1f), fontWeight = FontWeight.SemiBold)
+                Text("Measured result", modifier = Modifier.weight(1f), fontWeight = FontWeight.SemiBold)
+            }
+            resultRows.forEachIndexed { index, row ->
+                Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    OutlinedTextField(
+                        value = row.first,
+                        onValueChange = { resultRows[index] = it to row.second; saved = false },
+                        modifier = Modifier.weight(1f),
+                        label = { Text("Value \${index + 1}") },
+                        singleLine = true
+                    )
+                    OutlinedTextField(
+                        value = row.second,
+                        onValueChange = { resultRows[index] = row.first to it; saved = false },
+                        modifier = Modifier.weight(1f),
+                        label = { Text("Result \${index + 1}") },
+                        singleLine = true
+                    )
+                }
+            }
+            OutlinedButton(
+                onClick = { if (resultRows.size < 8) { resultRows.add("" to ""); saved = false } },
+                enabled = resultRows.size < 8,
+                modifier = Modifier.fillMaxWidth()
+            ) { Text("Add results row") }
+            Text("Graph skills", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+            Text("For a continuous independent variable, plot it on the horizontal (x) axis and the measured dependent variable on the vertical (y) axis. Label both axes with units, choose even scales, plot points accurately and draw a suitable line or curve of best fit. A bar chart is generally used for categories.")
+            OutlinedTextField(
+                value = if (graphReview) "Check: Are the axes correctly assigned and labelled? Are units shown? Does the pattern support a relationship? Are there anomalous points, and should they be investigated rather than silently removed?" else "",
+                onValueChange = {},
+                readOnly = true,
+                label = { Text("Graph interpretation guide") },
+                modifier = Modifier.fillMaxWidth(),
+                minLines = 3
+            )
+            OutlinedButton(onClick = { graphReview = !graphReview }, modifier = Modifier.fillMaxWidth()) {
+                Text(if (graphReview) "Hide graph guide" else "Show graph interpretation checklist")
+            }
+            OutlinedTextField(
+                value = conclusion,
+                onValueChange = { conclusion = it; saved = false },
+                label = { Text("Conclusion - what do the results show?") },
+                supportingText = { Text("Answer the research question and refer to the actual pattern or numerical evidence. Avoid claiming more than the data supports.") },
+                modifier = Modifier.fillMaxWidth(),
+                minLines = 3
+            )
+            OutlinedTextField(
+                value = evaluation,
+                onValueChange = { evaluation = it; saved = false },
+                label = { Text("Evaluation - limitations, errors and improvements") },
+                supportingText = { Text("Identify specific sources of error, explain their likely effect, then suggest a practical improvement. Distinguish random variation from systematic error.") },
+                modifier = Modifier.fillMaxWidth(),
+                minLines = 3
+            )
+            Button(onClick = { savePlan() }, modifier = Modifier.fillMaxWidth()) {
+                Text("Save experiment plan and results")
+            }
+            if (saved) {
+                Text("Saved on this device. Your entries will be restored when you reopen this practical.", color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.SemiBold)
+            }
+        }
+    }
+    Text("Teaching example: the photosynthesis investigation is a model for planning and recording. Bubble counts are an indirect estimate of oxygen production and are less precise than measuring gas volume. In a real investigation, use an appropriate supervised method and record its limitations.")
 }
