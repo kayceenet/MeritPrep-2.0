@@ -8,7 +8,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import kotlin.math.*
 
-@Composable
 internal object WaecPhysicsActivityRoutes {
     val supportedTopicIds = setOf(
         "phy-measurements", "phy-motion", "phy-gravity", "phy-elasticity",
@@ -17,6 +16,7 @@ internal object WaecPhysicsActivityRoutes {
     )
 }
 
+@Composable
 fun WaecPhysicsSupplementalActivity(topicId: String) {
     if (topicId !in WaecPhysicsActivityRoutes.supportedTopicIds) return
     when (topicId) {
