@@ -48,7 +48,7 @@ internal object InvestigationProfiles {
             "Prepared slide, microscope, calibrated eyepiece scale and stage micrometer", "Magnification", "Apparent image size", "Same specimen, objective and optical setup", "×", "mm",
             "Handle slides by their edges; begin with low power and use a coverslip.",
             listOf("Select and identify a prepared slide", "Focus under low power before changing objective", "Calibrate the scale against a stage micrometer", "Measure the same feature and repeat"),
-            "Illustrative direct-proportion model; actual calibration depends on the microscope.", { x -> 0.8f * x }, 1f, 100f, 25f)
+            "Illustrative direct-proportion model for a 0.08 mm specimen feature; actual calibration depends on the microscope.", { x -> 0.08f * x }, 1f, 100f, 25f)
         "bio-classification" -> profile("Classification by observable characters", "How can organisms be grouped using shared diagnostic features?",
             "Safe specimen images, hand lens, dichotomous key and recording sheet", "Diagnostic characters examined", "Consistent identification decisions", "Same specimens and identification key", "characters", "decisions",
             "Do not collect protected organisms or handle unknown, stinging or poisonous specimens.",
@@ -88,7 +88,7 @@ internal object InvestigationProfiles {
             "Comparable stems or straws, clamp, ruler and small masses", "Applied load", "Stem deflection", "Stem length, diameter, orientation and support points", "g", "mm",
             "Secure clamps and use small loads; keep faces clear of falling masses.",
             listOf("Select stems of similar length and diameter", "Support at fixed points", "Add small loads gradually", "Measure deflection and stop before unsafe failure"),
-            "Comparative model only; living stems vary and may not behave elastically.", { x -> 0.015f * x * x })
+            "Comparative model only; living stems vary and may not behave elastically.", { x -> 0.015f * x * x }, 0f, 20f, 5f)
         "bio-reproduction" -> profile("Conditions for seed germination", "How does water availability affect germination?",
             "Seeds, labelled dishes, cotton wool, measured water and ruler", "Water supplied", "Germination percentage", "Seed type, number, temperature, oxygen and observation period", "mL", "%",
             "Use clean seeds, wash hands and discard mouldy material safely.",
