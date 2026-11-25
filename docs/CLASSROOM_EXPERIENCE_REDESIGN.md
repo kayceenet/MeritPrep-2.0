@@ -61,3 +61,17 @@ The new classroom and notation work is committed to the MeritPrep 2.0 main branc
 - Review equations, symbols, units, assumptions and worked calculations with subject specialists.
 - Persist learner lab portfolios and add repeat trials, regression, uncertainty and downloadable data where appropriate.
 - Inspect screen density, text wrapping, scrolling, accessibility and low-end-device performance on physical Android devices.
+
+
+## App-wide visual and scientific presentation update
+
+The same reference-led design pass now extends to the entry screens:
+- a structured home dashboard with a learning-workspace hero, grouped quick actions and subject discovery;
+- reusable subject cards with clear hierarchy and restrained surface/border treatment;
+- a coordinated light/dark palette and consistent rounded surface shapes.
+
+Scientific notation is being applied beyond lesson paragraphs. Topic assessment prompts/options/explanations, Biology theory responses, Chemistry and Physics practice, WAEC theory guidance, qualitative analysis and practical calculation explanations now use the shared formatter where chemical symbols, powers, units or equations may appear.
+
+Display equations support vertically stacked fractions in addition to inline superscripts/subscripts, Greek symbols, operators and roots. The formatter remains a deliberately limited offline LaTeX subset rather than a full TeX engine.
+
+**Verification:** The redesigned home/theme and stacked-equation implementation passed unit tests and the Android debug APK workflow on commit `5cdd9786447fee6be0cd67c2e17b83b2b921a93a`. Further formatter integrations in practical/theory screens are committed after that SHA and remain subject to the latest CI run.
