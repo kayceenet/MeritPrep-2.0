@@ -101,3 +101,6 @@ Authenticated sync, teacher/admin CMS, analytics, backups, privacy and security 
 
 
 **Meiosis visual refinement:** the chromosome diagram now depicts paired homologous chromosomes as bivalents during prophase I and metaphase I, before showing homologous separation in anaphase I. This makes the difference between homologous-chromosome separation and sister-chromatid separation easier to see.
+
+
+**Cell-division retrieval practice:** the Biology growth lesson now includes a separate, sequential 12-question interactive check built from the original cell-division question bank. Learners select an answer, receive immediate correctness feedback and an explanation, then progress through the set to a final score with a retry option. The existing lesson-completion check and local lesson tracking remain unchanged.
