@@ -93,8 +93,8 @@ class LearningCatalogTest {
         assertTrue(content.contains("iᴬ"))
         assertTrue(content.contains("iᴮ"))
         assertTrue(content.contains("codominant"))
-        assertTrue(content.contains("blood group AB"))
-        assertTrue(content.contains("Rh(D)"))
+        assertTrue(content.contains("blood group ab"))
+        assertTrue(content.contains("rh(d)"))
     }
 
     @Test
