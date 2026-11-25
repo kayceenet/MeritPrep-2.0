@@ -11,9 +11,20 @@ import kotlin.math.max
 @Composable
 fun WaecBiologyNigeriaSupplementalActivity(topicId: String) {
     when (topicId) {
-        "bio-cell" -> WaecCellIrritabilityActivity()
-        "bio-nutrition" -> WaecFeedingModesActivity()
-        "bio-reproduction" -> WaecReproductionExtensionActivity()
+        "bio-cell" -> {
+            WaecCellIrritabilityActivity()
+            WaecBiologicalDrawingActivity()
+        }
+        "bio-classification" -> WaecDichotomousKeyActivity()
+        "bio-nutrition" -> {
+            WaecFeedingModesActivity()
+            WaecFoodTestActivity()
+        }
+        "bio-plant-anatomy" -> WaecPlantTissueActivity()
+        "bio-reproduction" -> {
+            WaecReproductionExtensionActivity()
+            WaecSeedGerminationActivity()
+        }
         "bio-interactions" -> WaecEnergyFlowActivity()
         "bio-ecology-factors" -> WaecToleranceRangeActivity()
         "bio-habitats" -> WaecHabitatAdaptationActivity()
@@ -21,7 +32,10 @@ fun WaecBiologyNigeriaSupplementalActivity(topicId: String) {
         "bio-environment" -> WaecMicroorganismsHealthActivity()
         "bio-variation" -> WaecVariationApplicationsActivity()
         "bio-adaptation" -> WaecAdaptationExtensionActivity()
-        "bio-soil" -> WaecAgricultureEcologyActivity()
+        "bio-soil" -> {
+            WaecAgricultureEcologyActivity()
+            WaecSoilPracticalActivity()
+        }
     }
 }
 
@@ -292,6 +306,134 @@ private fun WaecAgricultureEcologyActivity() {
             HorizontalDivider()
             Text(detail)
             Text("Evaluate agricultural practices by their effects on soil, water, biodiversity, crop yield and long-term ecosystem stability.", style = MaterialTheme.typography.bodySmall)
+        }
+    }
+}
+
+
+@Composable
+private fun WaecBiologicalDrawingActivity() {
+    var magnification by remember { mutableFloatStateOf(100f) }
+    val actualSize = 0.1f
+    Card(Modifier.fillMaxWidth()) {
+        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            Text("WAEC practical skill: biological drawing and microscopy", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+            Text("Assumed actual specimen dimension: " + actualSize + " mm")
+            Text("Magnification: " + magnification.toInt() + "×")
+            Slider(magnification, { magnification = it }, valueRange = 40f..400f)
+            Text("Expected image dimension: " + "%.1f".format(actualSize * magnification) + " mm", style = MaterialTheme.typography.headlineSmall)
+            Text("Magnification = image size ÷ actual size. Convert both measurements to the same unit before dividing.")
+            Text("Drawing checklist: large and centred; clear single lines; no shading or sketching; accurate proportions; a concise title; straight label lines that do not cross; labels placed outside the drawing.")
+            Text("For microscopy, begin with low power, focus carefully, use the fine adjustment at high power and record the objective/eyepiece magnification.", style = MaterialTheme.typography.bodySmall)
+        }
+    }
+}
+
+@Composable
+private fun WaecFoodTestActivity() {
+    var food by remember { mutableStateOf("Starch") }
+    val observation = when (food) {
+        "Starch" -> "Add iodine solution: yellow-brown changes to blue-black."
+        "Reducing sugar" -> "Warm with Benedict's solution in a hot-water bath: blue may form a green/yellow/orange/brick-red precipitate."
+        "Protein" -> "Add sodium hydroxide followed by a few drops of copper(II) sulfate (Biuret): violet/lilac colour."
+        "Lipid" -> "Shake with ethanol, then add water: a milky-white emulsion forms."
+        "Vitamin C" -> "Add sample to blue DCPIP: the dye is decolourised when sufficient vitamin C is present."
+        else -> "For a non-reducing sugar, first hydrolyse with dilute acid, cool and neutralise, then carry out Benedict's test."
+    }
+    Card(Modifier.fillMaxWidth()) {
+        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            Text("WAEC practical skill: food tests", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+            listOf("Starch", "Reducing sugar", "Protein", "Lipid", "Vitamin C", "Non-reducing sugar").forEach {
+                FilterChip(food == it, { food = it }, { Text(it) })
+            }
+            HorizontalDivider()
+            Text(observation)
+            Text("Use a separate clean sample for each test and record the actual colour change before making an inference. Ethanol is flammable; use a water bath for heating and follow teacher supervision.", style = MaterialTheme.typography.bodySmall)
+        }
+    }
+}
+
+@Composable
+private fun WaecDichotomousKeyActivity() {
+    var leaf by remember { mutableStateOf("Parallel venation") }
+    var structure by remember { mutableStateOf("Simple leaf") }
+    val identification = if (leaf == "Parallel venation") {
+        if (structure == "Simple leaf") "Likely a monocot leaf such as maize or grass; confirm using other diagnostic characters."
+        else "A compound leaf with parallel-veined leaflets is unusual; recheck the specimen and key choices."
+    } else {
+        if (structure == "Simple leaf") "Likely a dicot simple leaf such as mango; confirm margin, arrangement and other features."
+        else "Likely a dicot compound leaf such as flamboyant; confirm leaflet arrangement and other characters."
+    }
+    Card(Modifier.fillMaxWidth()) {
+        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            Text("WAEC practical skill: identification using a dichotomous key", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+            Text("Choose observable features, not a guessed name.")
+            listOf("Parallel venation", "Net-like venation").forEach {
+                FilterChip(leaf == it, { leaf = it }, { Text(it) })
+            }
+            listOf("Simple leaf", "Compound leaf").forEach {
+                FilterChip(structure == it, { structure = it }, { Text(it) })
+            }
+            Text(identification)
+            Text("A dichotomous key uses paired, mutually exclusive statements. Each choice should be based on a visible character, and each step should lead to another pair or a taxon.", style = MaterialTheme.typography.bodySmall)
+        }
+    }
+}
+
+@Composable
+private fun WaecPlantTissueActivity() {
+    var organ by remember { mutableStateOf("Root") }
+    val detail = when (organ) {
+        "Root" -> "The root cross-section shows an outer epidermis, cortex and central vascular tissue. Xylem and phloem arrangement helps distinguish root types."
+        "Stem" -> "The stem cross-section contains epidermis, cortex and vascular bundles. In many dicots, bundles form a ring; in many monocots, bundles are scattered."
+        else -> "The leaf cross-section includes upper/lower epidermis, mesophyll and vascular bundles. Palisade mesophyll is commonly rich in chloroplasts."
+    }
+    Card(Modifier.fillMaxWidth()) {
+        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            Text("WAEC practical skill: internal structure of flowering plants", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+            listOf("Root", "Stem", "Leaf").forEach {
+                FilterChip(organ == it, { organ = it }, { Text(it) })
+            }
+            Text(detail)
+            Text("When drawing a transverse section, orient the specimen correctly, draw only structures visible at the given magnification and label xylem, phloem and tissues only where they are actually present.", style = MaterialTheme.typography.bodySmall)
+        }
+    }
+}
+
+@Composable
+private fun WaecSeedGerminationActivity() {
+    var water by remember { mutableStateOf(true) }
+    var oxygen by remember { mutableStateOf(true) }
+    var warmth by remember { mutableStateOf(true) }
+    val germination = water && oxygen && warmth
+    Card(Modifier.fillMaxWidth()) {
+        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            Text("WAEC practical skill: conditions for seed germination", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+            Row(verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) { Checkbox(water, { water = it }); Text("Water available") }
+            Row(verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) { Checkbox(oxygen, { oxygen = it }); Text("Oxygen available") }
+            Row(verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) { Checkbox(warmth, { warmth = it }); Text("Suitable temperature") }
+            Text(if (germination) "The three basic external conditions are present in this simplified model." else "At least one essential external condition is absent; normal germination is inhibited.", fontWeight = FontWeight.Bold)
+            Text("Viability and species-specific requirements also matter. Some seeds require light, darkness, scarification or a period of dormancy-breaking treatment.", style = MaterialTheme.typography.bodySmall)
+        }
+    }
+}
+
+@Composable
+private fun WaecSoilPracticalActivity() {
+    var soil by remember { mutableStateOf("Sandy") }
+    val detail = when (soil) {
+        "Sandy" -> "Large particles and larger pore spaces usually give rapid drainage, good aeration and low water retention."
+        "Clayey" -> "Very small particles and fine pores usually give slow drainage and high water retention; aeration may be poor when waterlogged."
+        else -> "A balanced mixture of sand, silt, clay and organic matter often supports good drainage, aeration and nutrient retention."
+    }
+    Card(Modifier.fillMaxWidth()) {
+        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            Text("WAEC practical skill: soil texture and water retention", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+            listOf("Sandy", "Clayey", "Loamy").forEach {
+                FilterChip(soil == it, { soil = it }, { Text(it) })
+            }
+            Text(detail)
+            Text("A simple settling test separates particles by settling rate, but soil classification should use a recognised texture method. Soil structure and organic matter also influence field performance.", style = MaterialTheme.typography.bodySmall)
         }
     }
 }
