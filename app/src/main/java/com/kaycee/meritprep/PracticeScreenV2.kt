@@ -127,14 +127,14 @@ fun PracticeScreenV2(onStartCbt: () -> Unit = {}, onStartWaecObjective: () -> Un
                 progress = { (index + 1).toFloat() / questions.size },
                 modifier = Modifier.fillMaxWidth()
             )
-            Text(question.prompt, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
+            ScientificText(question.prompt, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
             question.options.forEachIndexed { optionIndex, option ->
                 OutlinedButton(
                     onClick = { if (!checked) selectedOption = optionIndex },
                     enabled = !checked,
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    Text((if (selectedOption == optionIndex) "✓  " else "") + option)
+                    ScientificText((if (selectedOption == optionIndex) "✓  " else "") + option, style = MaterialTheme.typography.bodyMedium)
                 }
             }
             if (checked) {
@@ -144,7 +144,7 @@ fun PracticeScreenV2(onStartCbt: () -> Unit = {}, onStartWaecObjective: () -> Un
                     color = if (correct) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.error,
                     fontWeight = FontWeight.Bold
                 )
-                Text(question.explanation)
+                ScientificText(question.explanation, style = MaterialTheme.typography.bodyMedium)
                 Button(
                     onClick = {
                         if (index == questions.lastIndex) {
