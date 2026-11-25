@@ -17,8 +17,11 @@ import kotlin.math.sin
 @Composable
 fun BiologyInteractiveLessonActivity(topicId: String) {
     when (topicId) {
-        "bio-transport" -> DiffusionAnimatedLessonActivity()
-        "bio-nutrition" -> PhotosynthesisInquiryActivity()
+        "bio-transport" -> Column(verticalArrangement = Arrangement.spacedBy(12.dp)) { DiffusionAnimatedLessonActivity(); OsmosisInquiryActivity() }
+        "bio-nutrition" -> Column(verticalArrangement = Arrangement.spacedBy(12.dp)) { PhotosynthesisInquiryActivity(); EnzymeInquiryActivity() }
+        "bio-growth" -> CellDivisionInquiryActivity()
+        "bio-heredity" -> MendelianCrossInquiryActivity()
+        "bio-evolution-theory" -> NaturalSelectionInquiryActivity()
     }
 }
 
@@ -108,4 +111,75 @@ private fun PhotosynthesisInquiryActivity() {
             Text("Model limit: response curves and optimum temperature are simplified teaching assumptions. This percentage is not a measured photosynthesis rate and does not represent every plant species.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
         }
     }
+}
+
+@Composable private fun OsmosisInquiryActivity() {
+ var outside by remember { mutableFloatStateOf(0.2f) }; var inside by remember { mutableFloatStateOf(0.6f) }; var plant by remember { mutableStateOf(true) }
+ val r = remember(outside,inside,plant) { OsmosisSimulation.evaluate(outside.toDouble(),inside.toDouble(),if(plant) OsmosisCellType.PLANT else OsmosisCellType.ANIMAL) }
+ Card(Modifier.fillMaxWidth()) { Column(Modifier.padding(16.dp),verticalArrangement=Arrangement.spacedBy(7.dp)) {
+ Text("Virtual investigation: osmosis",style=MaterialTheme.typography.titleLarge,fontWeight=FontWeight.Bold)
+ Text("Vary external and internal solute concentration. Osmosis is net water movement across a selectively permeable membrane down a water-potential gradient.")
+ Row { FilterChip(plant,{plant=true},{Text("Plant cell")}); Spacer(Modifier.width(8.dp)); FilterChip(!plant,{plant=false},{Text("Animal cell")}) }
+ Text("External solute: "+ "%.2f".format(outside)); Slider(outside,{outside=it},valueRange=0f..1.5f)
+ Text("Internal solute: "+ "%.2f".format(inside)); Slider(inside,{inside=it},valueRange=0f..1.5f)
+ Text(r.tonicity,fontWeight=FontWeight.Bold); Text("Water movement: "+r.waterMovement); Text("Cell response: "+r.response); Text(r.explanation)
+ Text("Predict the cell response when the external solution becomes more concentrated.",fontWeight=FontWeight.SemiBold)
+ Text("Model limit: qualitative direction and response only; no actual cell volume or water-potential calculation.",style=MaterialTheme.typography.bodySmall)
+ } }
+}
+@Composable private fun EnzymeInquiryActivity() {
+ var profile by remember { mutableIntStateOf(0) }; var temp by remember { mutableFloatStateOf(37f) }; var ph by remember { mutableFloatStateOf(7f) }
+ val enzyme=EnzymeProfile.values()[profile]; val r=remember(enzyme,temp,ph){EnzymeActivitySimulation.evaluate(EnzymeConditions(enzyme,temp.toDouble(),ph.toDouble()))}
+ Card(Modifier.fillMaxWidth()){Column(Modifier.padding(16.dp),verticalArrangement=Arrangement.spacedBy(7.dp)){
+ Text("Interactive enzyme investigation",style=MaterialTheme.typography.titleLarge,fontWeight=FontWeight.Bold)
+ EnzymeProfile.values().forEachIndexed{i,e->FilterChip(profile==i,{profile=i},{Text(e.displayName)})}
+ Text("Temperature: "+temp.toInt()+" °C"); Slider(temp,{temp=it},valueRange=0f..80f)
+ Text("pH: "+ "%.1f".format(ph)); Slider(ph,{ph=it},valueRange=0f..14f)
+ Text("Illustrative activity index: "+ "%.0f".format(r.activityIndexPercent)+"%",fontWeight=FontWeight.Bold)
+ Text("Limiting condition: "+r.limitingCondition); Text(r.explanation)
+ Text("Change one variable at a time. Why is this necessary for a fair test?",fontWeight=FontWeight.SemiBold)
+ Text("Model limit: illustrative response curves, not measured kinetic constants.",style=MaterialTheme.typography.bodySmall)
+}}
+}
+@Composable private fun CellDivisionInquiryActivity() {
+ var meiosis by remember { mutableStateOf(false) }; var stageIndex by remember { mutableIntStateOf(0) }
+ val type=if(meiosis) CellDivisionType.MEIOSIS else CellDivisionType.MITOSIS
+ val lesson=remember(type){CellDivisionSimulation.lesson(type,4)}; val stage=lesson.stages[stageIndex.coerceIn(0,lesson.stages.lastIndex)]
+ Card(Modifier.fillMaxWidth()){Column(Modifier.padding(16.dp),verticalArrangement=Arrangement.spacedBy(7.dp)){
+ Text("Step-through cell division model",style=MaterialTheme.typography.titleLarge,fontWeight=FontWeight.Bold)
+ Row { FilterChip(!meiosis,{meiosis=false;stageIndex=0},{Text("Mitosis")}); Spacer(Modifier.width(8.dp)); FilterChip(meiosis,{meiosis=true;stageIndex=0},{Text("Meiosis")}) }
+ LinearProgressIndicator(progress={(stageIndex+1).toFloat()/lesson.stages.size},modifier=Modifier.fillMaxWidth())
+ Text("Stage "+(stageIndex+1)+": "+stage.title,fontWeight=FontWeight.Bold); Text(stage.description); Text(stage.keyEvent)
+ Text("Chromosomes: "+stage.chromosomeCountPerCell+" | chromatids: "+stage.chromatidCountPerCell); Text("DNA content: "+stage.dnaContentPerCell)
+ Row(horizontalArrangement=Arrangement.spacedBy(8.dp)){OutlinedButton(onClick={stageIndex=(stageIndex-1).coerceAtLeast(0)},enabled=stageIndex>0){Text("Previous")}; Button(onClick={stageIndex=(stageIndex+1).coerceAtMost(lesson.stages.lastIndex)},enabled=stageIndex<lesson.stages.lastIndex){Text("Next stage")}}
+ Text(lesson.summary); Text("Explain why chromosome number and chromatid number are not interchangeable.",fontWeight=FontWeight.SemiBold)
+}}
+}
+@Composable private fun MendelianCrossInquiryActivity() {
+ var a by remember { mutableIntStateOf(1) }; var b by remember { mutableIntStateOf(1) }; val g=MendelianGenotype.values(); val r=remember(a,b){MendelianInheritanceSimulation.evaluate(g[a],g[b])}
+ Card(Modifier.fillMaxWidth()){Column(Modifier.padding(16.dp),verticalArrangement=Arrangement.spacedBy(7.dp)){
+ Text("Interactive genetics laboratory: Punnett square",style=MaterialTheme.typography.titleLarge,fontWeight=FontWeight.Bold)
+ Text("Choose parental genotypes. A is dominant; a is recessive. Assumes one gene, complete dominance and equal gamete probabilities.")
+ Text("Parent 1"); Row { g.forEachIndexed{i,v->FilterChip(a==i,{a=i},{Text(v.notation)})} }
+ Text("Parent 2"); Row { g.forEachIndexed{i,v->FilterChip(b==i,{b=i},{Text(v.notation)})} }
+ Text("Possible offspring: "+r.fourPossibleCombinations.joinToString("  |  "),fontWeight=FontWeight.Bold)
+ Text("Dominant phenotype: "+r.dominantPhenotypePercentage+"%"); Text("Recessive phenotype: "+r.recessivePhenotypePercentage+"%"); Text(r.explanation)
+ Text("Why is a probability not a guarantee for a particular family?",fontWeight=FontWeight.SemiBold)
+}}
+}
+@Composable private fun NaturalSelectionInquiryActivity() {
+ var light by remember { mutableFloatStateOf(50f) }; var dark by remember { mutableFloatStateOf(50f) }; var lightFit by remember { mutableFloatStateOf(45f) }; var darkFit by remember { mutableFloatStateOf(80f) }; var gens by remember { mutableFloatStateOf(5f) }
+ val r=remember(light,dark,lightFit,darkFit,gens){NaturalSelectionSimulation.evaluate(NaturalSelectionConditions(light.toInt(),dark.toInt(),lightFit.toDouble(),darkFit.toDouble(),gens.toInt().coerceIn(1,20)))}
+ Card(Modifier.fillMaxWidth()){Column(Modifier.padding(16.dp),verticalArrangement=Arrangement.spacedBy(7.dp)){
+ Text("Interactive natural selection investigation",style=MaterialTheme.typography.titleLarge,fontWeight=FontWeight.Bold)
+ Text("Change starting frequencies and relative survival. Observe how inherited trait frequencies shift over generations.")
+ Text("Initial light variant: "+light.toInt()); Slider(light,{light=it},valueRange=1f..100f)
+ Text("Initial dark variant: "+dark.toInt()); Slider(dark,{dark=it},valueRange=1f..100f)
+ Text("Light variant survival: "+lightFit.toInt()+"%"); Slider(lightFit,{lightFit=it},valueRange=1f..100f)
+ Text("Dark variant survival: "+darkFit.toInt()+"%"); Slider(darkFit,{darkFit=it},valueRange=1f..100f)
+ Text("Generations: "+gens.toInt()); Slider(gens,{gens=it},valueRange=1f..20f,steps=18)
+ r.generations.forEach{Text("Generation "+it.generation+": light "+ "%.1f".format(it.lightTraitFrequencyPercent)+"%; dark "+ "%.1f".format(it.darkTraitFrequencyPercent)+"%")}
+ Text("Favoured trait: "+r.moreFavouredTrait,fontWeight=FontWeight.Bold); Text(r.explanation)
+ Text("Model omits mutation, migration, genetic drift and changing population size.",style=MaterialTheme.typography.bodySmall)
+}}
 }
