@@ -89,3 +89,6 @@ Authenticated sync, teacher/admin CMS, analytics, backups, privacy and security 
 
 
 **X-linked inheritance explorer:** added a probability model for a single X-linked recessive allele, with selectable mother and father genotypes, gametes, offspring genotypes and sex-specific outcomes. Tests cover carrier mothers, affected mothers, affected fathers and probability totals. The model is explicitly limited to a simplified recessive example and is not a clinical risk calculator.
+
+
+**X-linked exam practice:** four new original questions cover the X chromosome's inheritance from each parent, why recessive X-linked alleles may be expressed in males, and conditional versus overall offspring probabilities. The additions preserve exact A–D answer balance across the 264-question Biology bank.
