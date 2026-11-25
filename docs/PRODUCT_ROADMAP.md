@@ -113,3 +113,6 @@ Authenticated sync, teacher/admin CMS, analytics, backups, privacy and security 
 
 
 **WAEC Chemistry theory expansion:** increased the original structured-response bank from 6 to 12 tasks. New marking-guided questions cover atomic structure and periodicity, Charles's law, collision theory and reaction rates, energy profiles, solubility and crystallisation, and iron extraction. Each task includes explicit marks, a stepwise marking guide and examiner-facing guidance. Regression tests check the expanded count, unique IDs, completeness and selected scientific details.
+
+
+**Chemistry answer-key quality:** re-ordered options in the 90-question JAMB-mapped Chemistry bank and 30-question WAEC-style Chemistry objective bank without changing the correct answer for any item. Correct positions are now distributed as 23/23/22/22 and 8/8/7/7 across A–D respectively. Regression tests enforce near-even answer-position balance in both banks.
