@@ -5,6 +5,11 @@ import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class PhysicsWaecObjectiveBankTest {
+    @Test fun correctAnswersAreBalancedAcrossAllFourPositions() {
+        val counts = (0..3).map { position -> PhysicsWaecObjectiveBank.all.count { it.correctOptionIndex == position } }
+        assertTrue(counts.maxOrNull()!! - counts.minOrNull()!! <= 1)
+    }
+
     @Test fun containsFiftyOriginalQuestionsAcrossAllThirtyNineTopics() {
         val questions = PhysicsWaecObjectiveBank.all
         assertEquals(50, questions.size)
