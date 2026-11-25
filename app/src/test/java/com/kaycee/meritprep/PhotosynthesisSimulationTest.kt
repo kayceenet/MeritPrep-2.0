@@ -18,10 +18,10 @@ class PhotosynthesisSimulationTest {
     @Test
     fun increasingTheLimitingInputRaisesTheIllustrativeRateUntilAnotherFactorLimits() {
         val lowLight = PhotosynthesisSimulation.evaluate(
-            PhotosynthesisConditions(10.0, 100.0, 30.0)
+            PhotosynthesisConditions(10.0, 50.0, 30.0)
         )
         val higherLight = PhotosynthesisSimulation.evaluate(
-            PhotosynthesisConditions(50.0, 100.0, 30.0)
+            PhotosynthesisConditions(50.0, 50.0, 30.0)
         )
         assertTrue(higherLight.relativeRatePercent > lowLight.relativeRatePercent)
         assertEquals("carbon dioxide availability", higherLight.limitingFactor)
