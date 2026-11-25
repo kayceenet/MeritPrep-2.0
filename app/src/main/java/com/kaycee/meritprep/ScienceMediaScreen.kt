@@ -20,6 +20,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.Slider
 import androidx.compose.runtime.Composable
@@ -32,10 +33,22 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.kaycee.meritprep.data.MeritDatabase
+import org.json.JSONObject
+
+
+private fun decodeScienceMediaProgress(raw: String?): Pair<Boolean, String> {
+    if (raw.isNullOrBlank()) return false to ""
+    return runCatching {
+        val record = JSONObject(raw)
+        record.optBoolean("opened", false) to record.optString("reflection", "")
+    }.getOrElse { false to raw }
+}
 
 @Composable
 fun ScienceMediaScreen(onOpenLabs: () -> Unit, onOpenLesson: (String) -> Unit) {
     val context = LocalContext.current
+    val database = remember(context) { MeritDatabase(context) }
     var selectedSubject by remember { mutableIntStateOf(0) }
     var lightIntensity by remember { mutableFloatStateOf(35f) }
     var carbonDioxideIndex by remember { mutableFloatStateOf(55f) }
@@ -186,6 +199,10 @@ fun ScienceMediaScreen(onOpenLabs: () -> Unit, onOpenLesson: (String) -> Unit) {
             }
         }
         items(resources, key = { it.id }) { resource ->
+            val noteId = "science-media-${resource.id}"
+            val restoredProgress = remember(resource.id) { decodeScienceMediaProgress(database.getNoteBody(noteId)) }
+            var resourceOpened by remember(resource.id) { mutableStateOf(restoredProgress.first) }
+            var reflection by remember(resource.id) { mutableStateOf(restoredProgress.second) }
             Card(modifier = Modifier.fillMaxWidth()) {
                 Column(Modifier.padding(15.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                     Text(resource.title, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
@@ -203,6 +220,34 @@ fun ScienceMediaScreen(onOpenLabs: () -> Unit, onOpenLesson: (String) -> Unit) {
                     Text("Attribution: ${resource.attributionText}", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                     Text("Rights: ${resource.licenceName}", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                     Text("Permitted use: ${resource.permittedUse}", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    OutlinedTextField(
+                        value = reflection,
+                        onValueChange = { reflection = it },
+                        label = { Text("Your observation and reflection") },
+                        placeholder = { Text("What did you observe? What evidence supports your explanation?") },
+                        minLines = 3,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                    Button(
+                        onClick = {
+                            val record = JSONObject()
+                                .put("opened", resourceOpened)
+                                .put("reflection", reflection)
+                            database.saveNote(
+                                noteId,
+                                resource.topicId,
+                                "Science media reflection · ${resource.title}",
+                                record.toString()
+                            )
+                        },
+                        enabled = reflection.isNotBlank(),
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text("Save reflection on this device")
+                    }
+                    if (resourceOpened) {
+                        Text("Original resource opened · reflection status: ${if (reflection.isBlank()) "not yet saved" else "saved when you tap Save"}", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary)
+                    }
                     if (linkedTopic != null) {
                         OutlinedButton(
                             onClick = { onOpenLesson(resource.topicId) },
@@ -213,6 +258,13 @@ fun ScienceMediaScreen(onOpenLabs: () -> Unit, onOpenLesson: (String) -> Unit) {
                     }
                     Button(
                         onClick = {
+                            resourceOpened = true
+                            database.saveNote(
+                                noteId,
+                                resource.topicId,
+                                "Science media reflection · ${resource.title}",
+                                JSONObject().put("opened", true).put("reflection", reflection).toString()
+                            )
                             try {
                                 context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(resource.sourceUrl)))
                             } catch (_: ActivityNotFoundException) {
