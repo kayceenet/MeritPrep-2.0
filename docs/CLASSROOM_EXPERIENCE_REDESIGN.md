@@ -105,3 +105,10 @@ The Biology visualisation pillar now includes 17 additional native, offline inte
 A curriculum-level regression test now checks that every Biology lesson mapping has an established or supplemental visual/interactive experience.
 
 The scientific notation renderer now recognises display-math delimiters (`\\[...\\]` and `$$...$$`) and separates prose from display equations. Display equations use structured equation cards with stacked fractions, while inline formula text supports common Greek symbols, operators, powers, subscripts, roots, chemical notation and mathematical accents. Core relationship panels have been expanded across Chemistry and Physics and are also visible in the concept pillar, not only in the visualisation gallery.
+
+
+## Guided investigation coverage across the three sciences
+
+The guided investigation profile catalogue now has a topic route for every mapped Biology, Chemistry and Physics syllabus entry. Biology includes microscopy, classification, plant and animal physiology, ecology, heredity, biotechnology and evolution investigations. Chemistry includes titration, redox, qualitative gas tests, metal displacement, equilibrium, ionic formula modelling and spectroscopy. Physics includes mechanics, heat, gas laws, optics, electricity, capacitors, magnetism, induction and semiconductor investigations.
+
+Each profile supplies a question, apparatus or model materials, independent/dependent/control variables, safety notes, a method, a response model and an explicit limitation. The route-coverage tests check all mapped topics; they do not replace expert review of every method, scientific model or examination syllabus statement.
