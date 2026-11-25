@@ -1082,10 +1082,6 @@ private fun TopicWorkedExampleCard(topicId: String) {
         "bio-cell" -> "A cell image is 36 mm long. Its actual length is 0.18 mm. Magnification = image size ÷ actual size = 36 ÷ 0.18 = 200×."
         "bio-populations" -> "A quadrat covers 0.25 m² and contains 8 plants. Density = 8 ÷ 0.25 = 32 plants m⁻². This is a sample estimate, not a complete census."
         "bio-nutrition" -> "If a plant releases 24 cm³ of oxygen in 6 minutes, its mean oxygen production rate is 24 ÷ 6 = 4 cm³ min⁻¹. Bubble counts alone are less reliable because bubble sizes vary."
-        "chem-separation" -> "R_f = \\frac{\\text{distance moved by solute}}{\\text{distance moved by solvent front}}",
-        "chem-redox" -> "\\text{Oxidation: } M \\rightarrow M^{n+} + ne^-",
-        "chem-metals" -> "M^{n+} + ne^- \\rightarrow M",
-        "chem-astro" -> "E = \\frac{hc}{\\lambda}",
         "chem-combination" -> "A sample contains 10.0 g of calcium carbonate, CaCO₃ (Mᵣ = 100.0). Amount = mass ÷ molar mass = 10.0 ÷ 100.0 = 0.100 mol."
         "chem-acids-bases" -> "For a strong monoprotic acid with [H⁺] = 1.0 × 10⁻³ mol dm⁻³, pH = −log₁₀[H⁺] = 3.00."
         "chem-rates" -> "If a product concentration rises from 0.10 to 0.34 mol dm⁻³ in 12 s, mean rate = Δ[product] ÷ Δt = (0.34 − 0.10) ÷ 12 = 0.020 mol dm⁻³ s⁻¹."
@@ -1122,6 +1118,10 @@ private fun TopicEquationPanel(topicId: String) {
         "chem-nuclear" -> "N = N_0(\\frac{1}{2})^{t/t_{1/2}}"
         "chem-organic" -> "C_nH_{2n+2} \\qquad C_nH_{2n} \\qquad C_nH_{2n-2}"
         "chem-industry" -> "N_2 + 3H_2 \\rightleftharpoons 2NH_3"
+        "chem-separation" -> "R_f = \\frac{\\text{distance moved by solute}}{\\text{distance moved by solvent front}}"
+        "chem-redox" -> "\\text{Oxidation: } M \\rightarrow M^{n+} + ne^-"
+        "chem-metals" -> "M^{n+} + ne^- \\rightarrow M"
+        "chem-astro" -> "E = \\frac{hc}{\\lambda}"
         "chem-combination" -> "n = \\frac{m}{M} \\qquad c = \\frac{n}{V} \\qquad N = nN_A"
         "chem-rates" -> "\\text{Rate} = \\frac{\\Delta[\\text{product}]}{\\Delta t}"
         "chem-acids-bases" -> "pH = -\\log_{10}[H^+]"
