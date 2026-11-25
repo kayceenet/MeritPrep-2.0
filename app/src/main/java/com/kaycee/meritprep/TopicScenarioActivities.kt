@@ -118,8 +118,8 @@ private object TopicScenarioLibrary {
 }
 
 @Composable
-fun TopicScenarioActivity(topicId: String) {
-    val scenario = remember(topicId) { TopicScenarioLibrary.find(topicId) } ?: return
+fun TopicScenarioActivity(topicId: String): Boolean {
+    val scenario = remember(topicId) { TopicScenarioLibrary.find(topicId) } ?: return false
     var selected by remember(topicId) { mutableIntStateOf(-1) }
     var revealed by remember(topicId) { mutableStateOf(false) }
     Card(Modifier.fillMaxWidth()) {
@@ -141,6 +141,38 @@ fun TopicScenarioActivity(topicId: String) {
             } else {
                 Button(onClick = { revealed = true }, enabled = selected >= 0, modifier = Modifier.fillMaxWidth()) { Text("Check reasoning") }
             }
+        }
+    }
+    return true
+}
+
+@Composable
+fun TopicScenarioReflectionCard(topicId: String, topicTitle: String) {
+    val context = androidx.compose.ui.platform.LocalContext.current
+    val database = remember(context) { com.kaycee.meritprep.data.MeritDatabase(context) }
+    val noteId = "scenario-reflection-" + topicId
+    var response by remember(topicId) { mutableStateOf(database.getNoteBody(noteId).orEmpty()) }
+    var saved by remember(topicId) { mutableStateOf(true) }
+    Card(Modifier.fillMaxWidth()) {
+        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(9.dp)) {
+            Text("Application challenge", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+            Text("Choose a real system in which " + topicTitle + " matters. Explain the scientific principle involved, predict what would happen if one relevant variable changed, and identify the evidence you would collect to test your prediction.")
+            OutlinedTextField(
+                value = response,
+                onValueChange = { response = it; saved = false },
+                modifier = Modifier.fillMaxWidth(),
+                minLines = 4,
+                label = { Text("Your applied explanation") }
+            )
+            Button(
+                onClick = {
+                    database.saveNote(noteId, topicId, topicTitle + " application challenge", response)
+                    saved = true
+                },
+                enabled = !saved && response.isNotBlank(),
+                modifier = Modifier.fillMaxWidth()
+            ) { Text("Save application response") }
+            Text(if (saved) "Response saved on this device." else "Unsaved response.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
         }
     }
 }
