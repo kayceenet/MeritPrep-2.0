@@ -41,12 +41,28 @@ class CellDivisionSimulationTest {
         assertTrue(stages[5].keyEvent.contains("No DNA replication"))
     }
 
+    @Test fun anaphaseChromosomeCountsAreExplicitlyModelled() {
+        val mitosis = CellDivisionSimulation.lesson(CellDivisionType.MITOSIS, 6)
+        assertEquals(12, mitosis.stages[4].chromosomeCountPerCell)
+        assertEquals(12, mitosis.stages[4].chromatidCountPerCell)
+        assertEquals(6, mitosis.stages[5].chromosomeCountPerCell)
+
+        val meiosis = CellDivisionSimulation.lesson(CellDivisionType.MEIOSIS, 6)
+        assertEquals(6, meiosis.stages[4].chromosomeCountPerCell)
+        assertEquals(12, meiosis.stages[4].chromatidCountPerCell)
+        assertEquals(6, meiosis.stages[7].chromosomeCountPerCell)
+        assertEquals(6, meiosis.stages[7].chromatidCountPerCell)
+    }
+
     @Test fun rejectsOddOrNonPositiveDiploidNumbers() {
         assertThrows(IllegalArgumentException::class.java) {
             CellDivisionSimulation.lesson(CellDivisionType.MEIOSIS, 5)
         }
         assertThrows(IllegalArgumentException::class.java) {
             CellDivisionSimulation.lesson(CellDivisionType.MITOSIS, 0)
+        }
+        assertThrows(IllegalArgumentException::class.java) {
+            CellDivisionSimulation.lesson(CellDivisionType.MITOSIS, Int.MAX_VALUE - 1)
         }
     }
 }
