@@ -71,7 +71,7 @@ private fun OhmsLawLab() {
             HorizontalDivider()
             Text("Calculated current: ${"%.2f".format(currentMilliAmps)} mA", style = MaterialTheme.typography.titleMedium)
             Text("Calculated power: ${"%.2f".format(powerMilliWatts)} mW")
-            Text("V = IR   |   I = V/R   |   P = V²/R", fontWeight = FontWeight.SemiBold)
+            ScientificText("V = IR   |   I = V/R   |   P = V²/R", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
         }
     }
     Text("Model assumptions: ideal DC source and fixed ohmic resistance. This is a mathematical simulation, not a real electrical circuit.")
@@ -128,7 +128,7 @@ private fun UniformMotionLab() {
             HorizontalDivider()
             Text("Final velocity: ${"%.2f".format(finalVelocity)} m/s", style = MaterialTheme.typography.titleMedium)
             Text("Displacement: ${"%.2f".format(displacement)} m")
-            Text("v = u + at     s = ut + ½at²", fontWeight = FontWeight.SemiBold)
+            ScientificText("v = u + at     s = ut + ½at²", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
         }
     }
     Text("Model assumptions: straight-line motion and constant acceleration. A negative acceleration is defined relative to the selected positive direction; it does not always mean the object is slowing down.")
@@ -152,7 +152,7 @@ private fun VectorAdditionLab() {
             HorizontalDivider()
             Text("Resultant magnitude: ${"%.2f".format(magnitude)} units", style = MaterialTheme.typography.titleMedium)
             Text("Direction: ${"%.1f".format(angle)}° north of east")
-            Text("R = √(E² + N²)", fontWeight = FontWeight.SemiBold)
+            ScientificText("R = √(E² + N²)", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
         }
     }
     Text("This model adds two perpendicular components only. It does not model non-perpendicular vectors or measurement uncertainty.")
@@ -210,7 +210,7 @@ private fun SimpleMachineLab() {
             HorizontalDivider()
             Text("Mechanical advantage: ${"%.2f".format(mechanicalAdvantage)}")
             Text("Efficiency: ${"%.1f".format(efficiency)}%", style = MaterialTheme.typography.titleMedium)
-            Text("MA = Load/Effort     Efficiency = (MA/VR) × 100%", fontWeight = FontWeight.SemiBold)
+            ScientificText("MA = Load/Effort     Efficiency = (MA/VR) × 100%", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
             if (efficiency > 100f) Text("This input combination gives efficiency above 100%. It is not physically possible for a passive machine; check the assumed load, effort and velocity ratio.", color = MaterialTheme.colorScheme.error)
         }
     }
@@ -235,7 +235,7 @@ private fun WavePropertiesLab() {
             HorizontalDivider()
             Text("Wave speed: ${"%.2f".format(speed)} m/s", style = MaterialTheme.typography.titleMedium)
             Text("Period: ${"%.3f".format(period)} s")
-            Text("v = fλ     T = 1/f", fontWeight = FontWeight.SemiBold)
+            ScientificText("v = fλ     T = 1/f", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
         }
     }
     Text("The model assumes a uniform medium and a constant wave speed for the selected frequency and wavelength. Changing medium may change wave speed.")
@@ -256,7 +256,7 @@ private fun EchoDistanceLab() {
             Slider(value = echoTime, onValueChange = { echoTime = it }, valueRange = 0.1f..4f)
             HorizontalDivider()
             Text("Distance to reflector: ${"%.2f".format(distance)} m", style = MaterialTheme.typography.titleMedium)
-            Text("d = vt/2", fontWeight = FontWeight.SemiBold)
+            ScientificText("d = vt/2", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
         }
     }
     Text("The calculation assumes a stationary reflector, a known uniform sound speed and a correctly measured round-trip time.")
@@ -274,7 +274,7 @@ private fun ReflectionLab() {
             Slider(value = incidentAngle, onValueChange = { incidentAngle = it }, valueRange = 0f..90f, steps = 89)
             HorizontalDivider()
             Text("Angle of reflection: ${"%.0f".format(reflectedAngle)}°", style = MaterialTheme.typography.titleMedium)
-            Text("i = r", fontWeight = FontWeight.SemiBold)
+            ScientificText("i = r", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
             Text("The incident ray, reflected ray and normal lie in the same plane.")
         }
     }
@@ -314,7 +314,7 @@ private fun SolutionConcentrationSimulation() {
             Slider(value = volume, onValueChange = { volume = it }, valueRange = 0.1f..2f)
             HorizontalDivider()
             Text("Molar concentration: ${"%.3f".format(molarity)} mol/L", style = MaterialTheme.typography.titleMedium)
-            Text("C = (mass ÷ molar mass) ÷ final solution volume; NaCl molar mass ≈ 58.44 g/mol.")
+            ScientificText("C = (mass ÷ molar mass) ÷ final solution volume; NaCl molar mass ≈ 58.44 g/mol.", style = MaterialTheme.typography.bodyMedium)
         }
     }
     Text("This simplified model assumes complete dissolution and the stated final solution volume. It does not model temperature or non-ideal solution behaviour.")
@@ -332,7 +332,7 @@ private fun AcidBaseTitrationSimulation() {
         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
             Text("HCl–NaOH titration", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
             Text("Enter the initial and final burette readings for up to three trials. The model selects the largest set of titres concordant within 0.20 cm³.")
-            Text("HCl + NaOH → NaCl + H₂O", fontWeight = FontWeight.SemiBold)
+            ScientificText("HCl + NaOH → NaCl + H₂O", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
             OutlinedTextField(value = acidConcentration, onValueChange = { acidConcentration = it; result = null }, label = { Text("HCl concentration (mol/dm³)") }, modifier = Modifier.fillMaxWidth(), singleLine = true)
             OutlinedTextField(value = baseAliquot, onValueChange = { baseAliquot = it; result = null }, label = { Text("NaOH aliquot (cm³)") }, modifier = Modifier.fillMaxWidth(), singleLine = true)
             labels.forEachIndexed { index, label ->
@@ -447,7 +447,7 @@ private fun MagnificationLab() {
             Slider(value = objective.toFloat(), onValueChange = { objective = it.roundToInt() }, valueRange = 4f..100f, steps = 95)
             HorizontalDivider()
             Text("Total magnification: ${eyepiece * objective}×", style = MaterialTheme.typography.titleMedium)
-            Text("Total magnification = eyepiece magnification × objective magnification.")
+            ScientificText("Total magnification = eyepiece magnification × objective magnification.", style = MaterialTheme.typography.bodyMedium)
         }
     }
     Text("The model calculates nominal magnification. Actual image quality also depends on resolution, illumination, alignment and specimen preparation.")
@@ -529,8 +529,8 @@ private fun FoodTestLab() {
                 Text("Expected procedure", fontWeight = FontWeight.SemiBold)
                 Text(result.procedure)
                 Text("Simulated observation", fontWeight = FontWeight.SemiBold)
-                Text(result.observation, color = if (result.positive) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface)
-                Text("Inference: ${result.inference}", fontWeight = FontWeight.SemiBold)
+                ScientificText(result.observation, color = if (result.positive) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface, style = MaterialTheme.typography.bodyMedium)
+                ScientificText("Inference: ${result.inference}", style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.SemiBold)
             }
         }
     }
