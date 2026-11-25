@@ -116,7 +116,7 @@ Each profile supplies a question, apparatus or model materials, independent/depe
 
 ## Guided classroom progression
 
-The six lesson pillars now follow a sequential mastery path: Learn → Examples → Scenario → Lab → Project → Exercise. A learner can open the first pillar immediately; each subsequent pillar unlocks only after the previous pillar is marked complete. Completed pillars remain available for revision, the notebook stores pillar progress locally, and a returning learner is taken to the next incomplete pillar. The Exercise pillar still requires the configured 80% threshold before the lesson can be marked mastered.
+The six lesson pillars now follow a sequential mastery path: Concepts & Theory → Worked Examples → Applications & Notes → Virtual Lab → Applied Project → Mastery Quiz. A learner can open the first pillar immediately; each subsequent pillar unlocks only after the previous pillar is marked complete. Completed pillars remain available for revision, the notebook stores pillar progress locally, and a returning learner is taken to the next incomplete pillar. The Exercise pillar still requires the configured 80% threshold before the lesson can be marked mastered.
 
 
 ## Dashboard navigation and discovery
