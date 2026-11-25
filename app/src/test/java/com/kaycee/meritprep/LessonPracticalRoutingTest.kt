@@ -8,7 +8,7 @@ class LessonPracticalRoutingTest {
     @Test
     fun routesChemistryPracticalTopics() {
         assertEquals(LessonPracticalKind.CHEMISTRY_REDOX, LessonPracticalRouting.forTopic("chem-redox"))
-        assertEquals(LessonPracticalKind.CHEMISTRY_REDOX, LessonPracticalRouting.forTopic("chem-acids-bases"))
+        assertEquals(LessonPracticalKind.CHEMISTRY_ACID_BASE_TITRATION, LessonPracticalRouting.forTopic("chem-acids-bases"))
         assertEquals(LessonPracticalKind.CHEMISTRY_QUALITATIVE, LessonPracticalRouting.forTopic("chem-metals"))
     }
 
