@@ -32,6 +32,16 @@ Uniformly accelerated motion; Hooke's law; pressure in liquids; gas laws; wave f
 
 Existing lesson activities continue to provide measurement, vector components, reflection, refraction, capacitors, induction, electrostatics, circuit networks, waves and other concept explorations.
 
+## Native concept animations
+
+The app now includes offline Compose animations for:
+- projectile trajectory, driven by the selected launch speed and angle;
+- satellite motion around Earth in a schematic circular orbit;
+- particle motion in a gas model, with animation amplitude linked to the selected temperature;
+- existing wave propagation, cell division, photosynthesis, osmosis, diffusion, enzyme activity and natural-selection experiences in their relevant lessons.
+
+Each animation includes a statement of its model boundary. Schematic animations are not presented as measured data or full physical simulations.
+
 ## WAEC-specific embedded extensions
 
 The lesson renderer also invokes examination-specific extensions:
