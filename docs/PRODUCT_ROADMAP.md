@@ -80,3 +80,6 @@ Authenticated sync, teacher/admin CMS, analytics, backups, privacy and security 
 
 
 **ABO inheritance explorer:** added a tested multiple-allele model for the ABO blood-group system and an interactive parent-genotype cross. It teaches the codominance of Iᴬ and Iᴮ, dominance of each over i, all six common genotypes and four phenotypes. The model explicitly excludes Rh(D), transfusion compatibility and rare variants.
+
+
+**ABO examination practice:** four new original objective questions test genotype-to-phenotype mapping, gamete transmission and offspring probabilities for ABO crosses. Their answer positions preserve the bank-wide A–D balance.
