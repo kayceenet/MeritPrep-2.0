@@ -197,3 +197,29 @@ A topic may not be labelled complete if any applicable critical item above is FA
 - Scope verified in this run: WAEC activity routes, Biology/Chemistry/Physics lesson extensions, native projectile/satellite/particle animations, guided investigation axis labels and repeat means, 38-resource science media catalogue and PhET licensing checks.
 - Not verified by CI: installation or interaction on a physical Android device, full academic sign-off, direct WAEC primary-PDF verification, or statement-level syllabus completion.
 
+
+
+---
+
+## Run record — classroom architecture and scientific notation redesign (25 November 2026)
+
+**Scope:** Reorganise the science lesson experience using the original Merit app's classroom interaction patterns. No lesson prose, question text, laboratory write-ups or course content was copied from the reference repository.
+
+| Check | Status | Evidence / limitation |
+|---|---|---|
+| Repository scope | PASS | Changes are in `kayceenet/MeritPrep-2.0`; original `kayceenet/Merit` was read-only. |
+| Reference structure inspected | PASS | Reviewed the reference classroom screen, six lesson pillars, section animation component, practical lab workspace, subject lab dispatchers, scientific formatter and diagram cards. |
+| One-pillar-at-a-time classroom | IMPLEMENTED | `LearningCatalog.kt`: Concept, Examples, Scenario, Lab, Project and Exercise stages. |
+| Original teaching content | PASS | New examples and scenarios are independently authored; reference course write-ups were not imported. |
+| Visual and simulation integration | IMPLEMENTED | Topic visual gallery, existing subject activities, plus native wave, refraction, current-flow and equilibrium animations. |
+| Guided practical workflow | IMPLEMENTED | Existing five-stage guided investigation remains in the Lab pillar; session persistence and uncertainty/regression remain future work. |
+| Topic practice integration | IMPLEMENTED | Exercise stage selects up to five topic-mapped questions, shuffles options, gives explanations and requires 80% for completion. `bio-living` currently falls back to the lesson check because it has no mapped bank item. |
+| Scientific notation | IMPLEMENTED, LIMITED SUBSET | `ScientificNotation.kt` supports common LaTeX operators, Greek symbols, powers, subscripts, fractions and roots. It is not a full TeX typesetter. |
+| Scientific notation unit tests | PASS ON BASELINE | The formatter tests and Android build passed on commit `4af7ff6363d21a942478c674d8be89180e03d3d4`. |
+| Latest animation/scenario additions | PENDING | Additional wave-model corrections, scenario activities and formatted answer options were committed after that successful run; the newest Actions run must pass before release. |
+| Physical-device visual review | NOT DONE | Screen density, font scaling, low-end performance, accessibility and visual polish still require an actual Android device review. |
+| Full syllabus academic sign-off | NOT DONE | This UI redesign does not prove statement-level JAMB/WAEC coverage or subject-specialist approval. |
+
+**Latest implementation areas:** `LearningCatalog.kt`, `ScientificNotation.kt`, `TopicScienceAnimations.kt`, `TopicScenarioActivities.kt`, `GuidedInvestigationActivity.kt`, and `docs/CLASSROOM_EXPERIENCE_REDESIGN.md`.
+
+**Release gate:** Do not distribute a replacement APK until the newest commit has passing unit tests, a successful debug APK build and uploaded artifact, followed by a visual review on a physical Android device.
