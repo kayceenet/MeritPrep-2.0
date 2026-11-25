@@ -825,7 +825,7 @@ fun LessonScreen(topicId: String) {
                                 Text((index + 1).toString().padStart(2, '0'), style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
                                 Text(section.first, style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
                                 ScientificText(section.second, style = MaterialTheme.typography.bodyLarge)
-                                TopicConceptInlineVisual(topicId, index)
+                                TopicConceptInlineVisual(topicId, index, section.first)
                             }
                         }
                     }
@@ -988,26 +988,30 @@ fun LessonScreen(topicId: String) {
 }
 
 @Composable
-private fun TopicConceptInlineVisual(topicId: String, sectionIndex: Int) {
-    if (sectionIndex != 0) return
-    when (topicId) {
-        "bio-adaptation" -> AdaptationTypesCard()
-        "bio-cell" -> CellDiagramCard()
-        "bio-interactions" -> FoodChainDiagramCard()
-        "bio-nutrition" -> PhotosynthesisFlowCard()
-        "bio-respiration" -> RespirationComparisonCard()
-        "bio-transport" -> PlantTransportCard()
-        "bio-excretion" -> NephronFlowCard()
-        "bio-reproduction" -> FlowerReproductionCard()
-        "bio-heredity" -> PunnettSquareCard()
-        "bio-growth" -> CellDivisionLessonCard()
-        "bio-populations" -> BiologyPopulationSamplingCard()
-        "bio-soil" -> SoilWaterInvestigationCard()
-        "bio-evolution-theory" -> NaturalSelectionCard()
-        "phy-motion" -> ProjectileMotionAnimation(speed = 25f, angleDegrees = 45f)
-        "phy-gravity" -> SatelliteOrbitAnimation()
-        "chem-kinetic-gas" -> ParticleKineticAnimation(temperatureKelvin = 300f)
-        else -> TopicScienceAnimation(topicId)
+private fun TopicConceptInlineVisual(topicId: String, sectionIndex: Int, sectionHeading: String) {
+    val heading = sectionHeading.lowercase()
+    when {
+        "adaptation" in heading -> AdaptationTypesCard()
+        "cell" in heading && topicId.startsWith("bio") -> CellDiagramCard()
+        "photosynthesis" in heading -> PhotosynthesisFlowCard()
+        "respiration" in heading -> RespirationComparisonCard()
+        ("osmosis" in heading || "transport" in heading) && topicId.startsWith("bio") -> PlantTransportCard()
+        ("nephron" in heading || "kidney" in heading || "excretion" in heading) -> NephronFlowCard()
+        ("flower" in heading || "reproduction" in heading) -> FlowerReproductionCard()
+        ("genetic" in heading || "inheritance" in heading || "heredity" in heading || "mendel" in heading) -> PunnettSquareCard()
+        ("growth" in heading || "mitosis" in heading || "meiosis" in heading || "cell division" in heading) -> CellDivisionLessonCard()
+        ("quadrat" in heading || "population" in heading || "sampling" in heading) -> BiologyPopulationSamplingCard()
+        "soil" in heading -> SoilWaterInvestigationCard()
+        ("natural selection" in heading || "evolution" in heading) -> NaturalSelectionCard()
+        ("food chain" in heading || "interaction" in heading || "trophic" in heading) -> FoodChainDiagramCard()
+        ("wave" in heading || "sound" in heading) && topicId.startsWith("phy") -> TopicScienceAnimation(topicId)
+        ("refraction" in heading || "optics" in heading || "lens" in heading) && topicId.startsWith("phy") -> TopicScienceAnimation(topicId)
+        ("current" in heading || "circuit" in heading || "ohm" in heading) && topicId.startsWith("phy") -> TopicScienceAnimation(topicId)
+        ("equilibrium" in heading || "haber" in heading) && topicId.startsWith("chem") -> TopicScienceAnimation(topicId)
+        ("projectile" in heading || "motion" in heading) && topicId.startsWith("phy") -> ProjectileMotionAnimation(speed = 25f, angleDegrees = 45f)
+        "gravitation" in heading && topicId.startsWith("phy") -> SatelliteOrbitAnimation()
+        ("gas" in heading || "kinetic theory" in heading) && (topicId.startsWith("phy") || topicId == "chem-kinetic-gas") -> ParticleKineticAnimation(temperatureKelvin = 300f)
+        else -> if (sectionIndex == 0) TopicScienceAnimation(topicId)
     }
 }
 
