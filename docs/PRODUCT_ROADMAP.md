@@ -71,3 +71,6 @@ Authenticated sync, teacher/admin CMS, analytics, backups, privacy and security 
 
 
 **Cell-division visual update:** the mitosis/meiosis lesson now includes a stage-responsive Compose chromosome schematic. It shows replicated chromosomes, chromatid separation, the two-cell intermediate after meiosis I, and the four haploid products after meiosis II. Anaphase counts and the diagram's representative chromosome counts were reviewed to distinguish homologous-chromosome separation from sister-chromatid separation. The drawing is explicitly labelled as schematic and not to scale.
+
+
+**Cell-division assessment coverage:** added 12 original, syllabus-linked objective questions covering chromosome/chromatid counting, mitosis, meiosis I and II, crossing over, independent assortment, the single DNA-replication cycle, human gamete chromosome number and fertilisation. A dedicated content test checks that all 12 items remain present and that the set covers the core concepts.
