@@ -48,7 +48,7 @@ internal object InvestigationProfiles {
             "Prepared slide, microscope, calibrated eyepiece scale and stage micrometer", "Magnification", "Apparent image size", "Same specimen, objective and optical setup", "×", "mm",
             "Handle slides by their edges; begin with low power and use a coverslip.",
             listOf("Select and identify a prepared slide", "Focus under low power before changing objective", "Calibrate the scale against a stage micrometer", "Measure the same feature and repeat"),
-            "Illustrative direct-proportion model; actual calibration depends on the microscope.", { x -> 0.8f * x })
+            "Illustrative direct-proportion model; actual calibration depends on the microscope.", { x -> 0.8f * x }, 1f, 100f, 25f)
         "bio-classification" -> profile("Classification by observable characters", "How can organisms be grouped using shared diagnostic features?",
             "Safe specimen images, hand lens, dichotomous key and recording sheet", "Diagnostic characters examined", "Consistent identification decisions", "Same specimens and identification key", "characters", "decisions",
             "Do not collect protected organisms or handle unknown, stinging or poisonous specimens.",
@@ -98,12 +98,12 @@ internal object InvestigationProfiles {
             "Seedlings, ruler, labels, water and growth record", "Time", "Seedling height", "Species, light, water, soil and temperature", "days", "cm",
             "Avoid mould and wash hands after handling soil.",
             listOf("Select seedlings at a similar stage", "Measure from a defined reference point", "Measure at the same time each day", "Repeat across seedlings and calculate a mean"),
-            "Illustrative early-growth curve; real growth varies with species and conditions.", { x -> 0.015f * x * x + 0.2f * x })
+            "Illustrative early-growth curve; real growth varies with species and conditions.", { x -> 0.015f * x * x + 0.2f * x }, 0f, 30f, 10f)
         "bio-coordination" -> profile("Response time and practice", "How does practice affect performance in a ruler-drop response test?",
             "Ruler-drop apparatus, recording sheet and calculator", "Practice trial", "Catch distance", "Participant, ruler, posture and release method", "trial", "cm",
             "Use a seated volunteer; participation must be voluntary and safe.",
             listOf("Explain the test and obtain consent", "Keep hand position and release method constant", "Record catch distance for each trial", "Compare early and later trials"),
-            "Illustrative trend; attention, fatigue and anticipation affect responses.", { x -> (32f - 1.2f * x + 0.025f * x * x).coerceAtLeast(0f) })
+            "Illustrative trend; attention, fatigue and anticipation affect responses.", { x -> 32f / (1f + 0.08f * x) })
         "bio-ecology-factors", "bio-habitats", "bio-biomes", "bio-environment" -> profile("Environmental gradient and distribution", "How does an environmental gradient relate to organism abundance?",
             "Quadrat, transect tape, thermometer or light meter and tally sheet", "Distance along transect", "Organisms per quadrat", "Quadrat size, sampling effort, time and identification method", "m", "organisms",
             "Avoid unsafe habitats and disturbance of protected species; follow fieldwork supervision.",
@@ -114,11 +114,11 @@ internal object InvestigationProfiles {
             "Use counters only; this is not an experiment on live animals.",
             listOf("Set equal starting conditions", "Change prey availability only", "Run the same number of time steps", "Record success and discuss assumptions"),
             "Simplified model omitting age structure, disease, migration and habitat complexity.", { x -> 0.1f * x })
-        "bio-populations" -> profile("Quadrat sampling and density", "How do quadrat counts support an estimate of population density?",
-            "Known-area quadrat, tape measure, tally sheet and calculator", "Number of samples", "Estimated mean density", "Quadrat area, sampling method and habitat", "samples", "individuals m⁻²",
+        "bio-populations" -> profile("Quadrat sampling and sampling uncertainty", "How does the relative uncertainty of a mean estimate change as independent samples increase?",
+            "Known-area quadrat, tape measure, tally sheet and calculator", "Number of samples", "Relative sampling uncertainty", "Quadrat area, sample variance and sampling method", "samples", "%",
             "Sample only safe sites and avoid damaging organisms or habitats.",
             listOf("Define the target organism and sampling area", "Place quadrats randomly or systematically", "Count individuals in every quadrat", "Calculate mean density and discuss uncertainty"),
-            "Illustrative sampling model; clustered distributions increase uncertainty.", { x -> 2.4f + 0.05f * x })
+            "Simplified inverse-square-root uncertainty model; actual uncertainty depends on variance and sampling design.", { x -> 100f / kotlin.math.sqrt(x.coerceAtLeast(1f)) }, 1f, 100f, 10f)
         "bio-soil" -> profile("Soil water retention", "How does soil type affect water retained after drainage?",
             "Equal soil masses, funnels, filter material, measuring cylinders and water", "Soil type index", "Water retained", "Dry soil mass, water volume, packing and drainage time", "index", "mL",
             "Avoid inhaling dry soil and wash hands after the practical.",
@@ -158,7 +158,7 @@ internal object InvestigationProfiles {
             "Dynamics trolley, runway, motion sensor or ticker timer and metre rule", "Elapsed time", "Displacement", "Initial velocity, acceleration and track gradient", "s", "m",
             "Secure the runway and keep hands clear of moving trolleys.",
             listOf("Set the runway and initial conditions", "Release the trolley consistently", "Record displacement at fixed times", "Plot displacement against time and interpret"),
-            "Illustrative constant-acceleration model; initial velocity also affects displacement.", { x -> 0.08f * x + 0.006f * x * x })
+            "Illustrative constant-acceleration model; initial velocity also affects displacement.", { x -> 0.08f * x + 0.006f * x * x }, 0f, 10f, 2.5f)
         "phy-elasticity" -> profile("Hooke's law", "How does extension depend on force within the elastic limit?",
             "Spring, clamp stand, mass hanger, slotted masses and ruler", "Applied force", "Extension", "Spring, initial length, temperature and reading method", "N", "cm",
             "Secure the clamp and keep feet clear of falling masses; do not exceed safe load.",
@@ -228,7 +228,7 @@ internal object InvestigationProfiles {
             "Low-voltage supply, conductor, magnet, ammeter and force sensor", "Current", "Magnetic force", "Field strength, conductor length and angle", "A", "N",
             "Use low voltage and limit current to prevent conductor heating.",
             listOf("Set conductor perpendicular to a uniform field", "Measure the zero-current baseline", "Increase current in controlled steps", "Record force and reverse current to check direction"),
-            "Ideal relation F = BIL sin θ; field and conductor geometry are assumed constant.", { x -> 0.08f * x })
+            "Ideal relation F = BIL sin θ at fixed field and conductor geometry.", { x -> 0.08f * x }, 0f, 10f, 2f)
         "phy-ac-circuits" -> profile("Alternating current and period", "How does frequency determine the period of an AC signal?",
             "Low-voltage signal generator and oscilloscope", "Frequency", "Period", "Waveform and measurement timebase", "Hz", "ms",
             "Use only low-voltage signal sources; never connect an oscilloscope to mains.",
@@ -290,15 +290,20 @@ internal object InvestigationProfiles {
             listOf("Set the two charge magnitudes", "Choose like or unlike charge signs", "Change separation only", "Compare force magnitude and direction"),
             "Inverse-square Coulomb model F ∝ 1/r²; point charges and a uniform medium are assumed.", { x -> 100f / (x.coerceAtLeast(1f) * x.coerceAtLeast(1f)) }, 1f, 100f, 10f)
         "phy-magnetism" -> profile("Magnetic field mapping", "How does the direction of a magnetic field vary around a bar magnet?",
-            "Bar magnet, plotting compass, paper and field-line recording sheet", "Position around magnet", "Compass direction angle", "Same magnet, compass and paper orientation", "position", "degrees",
+            "Bar magnet, plotting compass, paper and field-line recording sheet", "Polar position around an ideal dipole", "Magnetic field direction", "Same magnet axis and observation plane", "°", "°",
             "Keep magnets away from sensitive electronics and medical devices.",
             listOf("Place the magnet under the paper", "Mark the compass needle direction at several positions", "Move the compass in small steps", "Join direction marks to sketch field lines"),
-            "Schematic field-direction model; field strength and three-dimensional geometry are not quantified.", { x -> (x * 3.6f) % 360f })
+            "Ideal point-dipole field direction in the equatorial plane; a real bar magnet has finite geometry and the model does not calculate field strength.", { x ->
+                val theta = Math.toRadians(x.toDouble())
+                val bx = 3.0 * kotlin.math.cos(theta) * kotlin.math.cos(theta) - 1.0
+                val by = 3.0 * kotlin.math.sin(theta) * kotlin.math.cos(theta)
+                ((Math.toDegrees(kotlin.math.atan2(by, bx)) + 360.0) % 360.0).toFloat()
+            }, 0f, 360f, 90f)
         "phy-electronics" -> profile("Semiconductor diode characteristic", "How does current through a diode change with forward voltage?",
             "Low-voltage variable supply, diode, series resistor, ammeter and voltmeter", "Forward voltage", "Diode current", "Diode temperature, series resistor and circuit connections", "V", "mA",
             "Use a current-limiting resistor and low voltage; observe diode polarity.",
             listOf("Identify anode and cathode", "Connect diode and current-limiting resistor in series", "Measure diode voltage and current", "Increase voltage gradually and plot the I–V curve"),
-            "Qualitative forward-bias model; real diode behaviour depends on type and temperature.", { x -> (0.02f * (kotlin.math.exp(0.18f * x) - 1f)).coerceAtLeast(0f) })
+            "Simplified forward-bias exponential model with a current scale; real diode behaviour depends on type and temperature.", { x -> (2f * (kotlin.math.exp(5f * x) - 1f)).coerceAtLeast(0f) }, 0f, 1f, 0.5f)
         "chem-acids-bases" -> profile("Acid–base titration", "How does mean titre determine the concentration of an unknown acid in a 1:1 reaction?",
             "Burette, pipette, conical flask, indicator and standard solution", "Mean titre", "Unknown analyte concentration", "Standard concentration, aliquot volume and reaction stoichiometry", "cm³", "mol dm⁻³",
             "Wear goggles, use a pipette filler, clamp the burette securely and follow approved acid/alkali handling procedures.",
