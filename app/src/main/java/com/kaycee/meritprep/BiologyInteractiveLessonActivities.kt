@@ -193,14 +193,18 @@ private fun CellOrganisationExplorerActivity() {
     var level by remember { mutableStateOf("Cell") }
     var cellType by remember { mutableStateOf("Plant") }
     val levels = listOf("Cell", "Tissue", "Organ", "System", "Organism")
-    val description = when (level) {
+    val description = if (cellType == "Prokaryote" && level != "Cell" && level != "Organism") {
+        "A typical bacterial organism is unicellular and does not form true tissues, organs or organ systems."
+    } else when (level) {
         "Cell" -> "A cell is the smallest structural and functional unit of a living organism. Examples include a red blood cell, neurone and palisade cell."
         "Tissue" -> "A tissue is a group of similar cells working together for a particular function. Examples include xylem, phloem, muscle and epithelial tissue."
         "Organ" -> "An organ contains different tissues working together. Examples include a leaf, root, heart and kidney."
         "System" -> "An organ system is a group of organs coordinating a major function, such as digestion, transport or excretion."
         else -> "An organism is an individual living thing. It may be unicellular, such as Amoeba, or multicellular, such as a maize plant or human."
     }
-    val example = when (level) {
+    val example = if (cellType == "Prokaryote" && level != "Cell" && level != "Organism") {
+        "Return to the cell level: a bacterial cell performs the organism's life processes without specialised multicellular organisation."
+    } else when (level) {
         "Cell" -> if (cellType == "Plant") "Palisade cell: chloroplast-rich and specialised for photosynthesis." else if (cellType == "Animal") "Neurone: a specialised cell that transmits electrical impulses." else "Bacterial cell: prokaryotic, with no membrane-bound nucleus."
         "Tissue" -> if (cellType == "Plant") "Xylem tissue transports water and mineral ions and also supports the plant." else "Muscle tissue contracts; epithelial tissue covers and lines body surfaces."
         "Organ" -> if (cellType == "Plant") "A leaf contains epidermal, mesophyll and vascular tissues arranged for photosynthesis and exchange." else "The heart contains cardiac muscle, connective, nervous and epithelial tissues."
