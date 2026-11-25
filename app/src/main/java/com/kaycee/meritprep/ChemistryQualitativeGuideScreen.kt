@@ -1,12 +1,14 @@
 package com.kaycee.meritprep
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.kaycee.meritprep.data.ChemistryPracticalEngine
 
 data class QualitativeTest(
     val id: String,
@@ -40,29 +42,77 @@ object ChemistryQualitativeGuide {
 @Composable
 fun ChemistryQualitativeGuideScreen() {
     var selectedCategory by remember { mutableStateOf("Anions") }
+    var selectedCation by remember { mutableStateOf("Cu²⁺") }
+    var selectedReagent by remember { mutableStateOf("NaOH(aq)") }
+    var excessReagent by remember { mutableStateOf(false) }
+    var warmed by remember { mutableStateOf(false) }
     val entries = remember(selectedCategory) { ChemistryQualitativeGuide.tests.filter { it.category == selectedCategory } }
+    val cationObservation = remember(selectedCation, selectedReagent, excessReagent, warmed) {
+        runCatching {
+            ChemistryPracticalEngine.cationObservation(selectedCation, selectedReagent, excessReagent, warmed)
+        }.getOrElse { it.message ?: "This test combination is not modelled." }
+    }
     Column(
         Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(18.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         Text("Qualitative analysis guide", style = MaterialTheme.typography.headlineMedium)
-        Text("Use the observations to connect a test result to a chemical inference. These are reference notes, not instructions for unsupervised experiments.")
+        Text("Use observations to connect a test result to a chemical inference. These are reference notes, not instructions for unsupervised experiments.")
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            FilterChip(selected = selectedCategory == "Anions", onClick = { selectedCategory = "Anions" }, label = { Text("Anions") })
-            FilterChip(selected = selectedCategory == "Gases", onClick = { selectedCategory = "Gases" }, label = { Text("Gases") })
+            listOf("Anions", "Cations", "Gases").forEach { category ->
+                FilterChip(selected = selectedCategory == category, onClick = { selectedCategory = category }, label = { Text(category) })
+            }
         }
-        entries.forEach { item ->
+        if (selectedCategory == "Cations") {
             Card(Modifier.fillMaxWidth()) {
-                Column(Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(7.dp)) {
-                    Text(item.target, style = MaterialTheme.typography.titleMedium)
-                    Text("Test / reagent", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary)
-                    Text(item.reagentOrTest)
+                Column(Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(9.dp)) {
+                    Text("Select the ion", style = MaterialTheme.typography.titleMedium)
+                    Row(Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                        listOf("NH₄⁺", "Ca²⁺", "Pb²⁺", "Cu²⁺", "Fe²⁺", "Fe³⁺", "Al³⁺", "Zn²⁺").forEach { ion ->
+                            FilterChip(selected = selectedCation == ion, onClick = { selectedCation = ion }, label = { Text(ion) })
+                        }
+                    }
+                    Text("Add reagent", style = MaterialTheme.typography.titleMedium)
+                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                        FilterChip(selected = selectedReagent == "NaOH(aq)", onClick = { selectedReagent = "NaOH(aq)" }, label = { Text("NaOH(aq)") })
+                        FilterChip(selected = selectedReagent == "NH₃(aq)", onClick = { selectedReagent = "NH₃(aq)" }, label = { Text("NH₃(aq)") })
+                    }
+                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                        FilterChip(selected = !excessReagent, onClick = { excessReagent = false }, label = { Text("A few drops") })
+                        FilterChip(selected = excessReagent, onClick = { excessReagent = true }, label = { Text("Excess reagent") })
+                    }
+                    if (selectedCation == "NH₄⁺") {
+                        FilterChip(selected = warmed, onClick = { warmed = !warmed }, label = { Text(if (warmed) "Warmed" else "Warm gently to test gas") })
+                    }
+                    HorizontalDivider()
                     Text("Expected observation", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary)
-                    Text(item.observation)
+                    Text(cationObservation)
                     Text("Inference", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary)
-                    Text(item.inference)
-                    Text("Safety and limitations", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.error)
-                    Text(item.caution, style = MaterialTheme.typography.bodySmall)
+                    Text(
+                        when {
+                            selectedCation == "NH₄⁺" && selectedReagent == "NaOH(aq)" && warmed -> "Ammonia is evolved from an ammonium salt; damp red litmus turns blue."
+                            selectedCation == "NH₄⁺" && selectedReagent == "NaOH(aq)" -> "Warm gently and test any evolved gas with damp red litmus paper."
+                            selectedCation == "NH₄⁺" -> "The ammonium confirmation in this guide uses aqueous sodium hydroxide, not aqueous ammonia."
+                            else -> "Use the precipitate colour and its behaviour in excess reagent as evidence for the selected cation."
+                        }
+                    )
+                }
+            }
+            Text("These are simplified qualitative observations. Concentration, reagent condition and interfering ions can affect results.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        } else {
+            entries.forEach { item ->
+                Card(Modifier.fillMaxWidth()) {
+                    Column(Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(7.dp)) {
+                        Text(item.target, style = MaterialTheme.typography.titleMedium)
+                        Text("Test / reagent", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary)
+                        Text(item.reagentOrTest)
+                        Text("Expected observation", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary)
+                        Text(item.observation)
+                        Text("Inference", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary)
+                        Text(item.inference)
+                        Text("Safety and limitations", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.error)
+                        Text(item.caution, style = MaterialTheme.typography.bodySmall)
+                    }
                 }
             }
         }
