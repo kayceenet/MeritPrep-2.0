@@ -190,3 +190,8 @@ Keep the current Kotlin/Jetpack Compose architecture unless a documented design 
 
 ## 13. Required learning design principle
 The learner should repeatedly **see it, hear/read it, predict it, manipulate it, observe it, explain it, practise it, retrieve it and apply it**. The app must create understanding, not merely expose information.
+
+
+## Reference-repository boundary
+
+`kayceenet/Merit` is a read-only reference for user-interface structure and interaction architecture only. You may study and reproduce structural patterns such as lesson pillars, navigation, animation placement, illustration cards, practical-lab workspaces, activity flows, feedback patterns and visual hierarchy. **Never copy, import, paraphrase or adapt its course-content write-ups, explanations, worked examples, question wording, answers, scenarios, experiment instructions, marking points or other teaching prose.** All MeritPrep 2.0 academic content must be independently authored, scientifically checked and mapped to its own JAMB/WAEC syllabus evidence. Do not modify the reference repository.
