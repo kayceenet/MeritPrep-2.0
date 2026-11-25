@@ -101,7 +101,7 @@ private fun MeritPrepApp() {
                 composable("glossary") { BiologyGlossaryScreen(onOpenLesson = { nav.navigate("lesson/$it") }) }
                 composable("bookmarks") { BookmarksScreen(onOpenLesson = { nav.navigate("lesson/$it") }) }
                 composable("labs") { VirtualLabScreen() }
-                composable("science-media") { ScienceMediaScreen(onOpenLabs = { nav.navigate("labs") }) }
+                composable("science-media") { ScienceMediaScreen(onOpenLabs = { nav.navigate("labs") }, onOpenLesson = { nav.navigate("lesson/$it") }) }
                 composable("calculators") { CalculatorScreen() }
                 composable("profile") { ProfileScreen(navigationRevision) }
             }
