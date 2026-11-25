@@ -684,11 +684,11 @@ object LearningCatalog {
 
 private enum class LessonStage(val label: String, val subtitle: String) {
     CONCEPT("Learn", "Build the idea from first principles"),
-    VISUALISE("Visualise", "See structures, processes and relationships"),
-    EXPLORE("Explore", "Investigate scientific contexts and resources"),
-    LAB("Virtual lab", "Change variables, record observations and analyse"),
-    NOTES("Notebook", "Write, reflect and consolidate"),
-    PRACTICE("Test yourself", "Check understanding and correct misconceptions")
+    VISUALISE("Examples", "Study worked examples, diagrams and animations"),
+    EXPLORE("Scenario", "Apply the idea to a scientific context"),
+    LAB("Lab", "Investigate, record evidence and analyse results"),
+    NOTES("Project", "Apply the concept and build an evidence-based explanation"),
+    PRACTICE("Exercise", "Check understanding and correct misconceptions")
 }
 
 @Composable
@@ -845,15 +845,16 @@ fun LessonScreen(topicId: String) {
                 LessonStage.NOTES -> {
                     Card(Modifier.fillMaxWidth()) {
                         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
-                            Text("Learning notebook", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
-                            Text("Write a definition in your own words, explain a diagram, record a worked example or note a question you still have.")
+                            Text("Topic mastery project", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+                            Text("Produce a short evidence-based explanation of " + topic.title + ". Include a labelled sketch or model where useful, the governing principle, one worked example or observation, and a limitation or real-world application.")
+                            Text("Use the workspace below to plan your response, then refine it into a complete explanation.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                             OutlinedTextField(
                                 value = noteText,
                                 onValueChange = { noteText = it; noteSaved = false },
                                 modifier = Modifier.fillMaxWidth(),
                                 minLines = 6,
                                 maxLines = 14,
-                                label = { Text("Your notes for " + topic.title) }
+                                label = { Text("Project notes and final response") }
                             )
                             Button(onClick = {
                                 database.saveNote(noteId, topic.id, topic.title + " notes", noteText)
@@ -864,11 +865,11 @@ fun LessonScreen(topicId: String) {
                     }
                     Card(Modifier.fillMaxWidth()) {
                         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                            Text("Reflection prompts", fontWeight = FontWeight.Bold)
-                            Text("• What is the central scientific principle?")
-                            Text("• Which evidence or observation supports it?")
-                            Text("• What misconception can you now correct?")
-                            Text("• How would you explain this topic to a beginner?")
+                            Text("Project quality check", fontWeight = FontWeight.Bold)
+                            Text("• Is the scientific principle stated accurately and in your own words?")
+                            Text("• Are variables, symbols and units correct?")
+                            Text("• Does the evidence support the conclusion?")
+                            Text("• Have you stated an assumption, limitation or application?")
                         }
                     }
                 }
@@ -919,6 +920,34 @@ fun LessonScreen(topicId: String) {
         Row(Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp), horizontalArrangement = Arrangement.SpaceBetween) {
             OutlinedButton(onClick = { stage = stages[(stageIndex - 1).coerceAtLeast(0)] }, enabled = stageIndex > 0) { Text("Previous") }
             Button(onClick = { stage = stages[(stageIndex + 1).coerceAtMost(stages.lastIndex)] }, enabled = stageIndex < stages.lastIndex) { Text(if (stage == LessonStage.PRACTICE) "End of lesson" else "Continue") }
+        }
+    }
+}
+
+@Composable
+private fun TopicWorkedExampleCard(topicId: String) {
+    val example = when (topicId) {
+        "bio-cell" -> "A cell image is 36 mm long. Its actual length is 0.18 mm. Magnification = image size ÷ actual size = 36 ÷ 0.18 = 200×."
+        "bio-populations" -> "A quadrat covers 0.25 m² and contains 8 plants. Density = 8 ÷ 0.25 = 32 plants m⁻². This is a sample estimate, not a complete census."
+        "bio-nutrition" -> "If a plant releases 24 cm³ of oxygen in 6 minutes, its mean oxygen production rate is 24 ÷ 6 = 4 cm³ min⁻¹. Bubble counts alone are less reliable because bubble sizes vary."
+        "chem-combination" -> "A sample contains 10.0 g of calcium carbonate, CaCO₃ (Mᵣ = 100.0). Amount = mass ÷ molar mass = 10.0 ÷ 100.0 = 0.100 mol."
+        "chem-acids-bases" -> "For a strong monoprotic acid with [H⁺] = 1.0 × 10⁻³ mol dm⁻³, pH = −log₁₀[H⁺] = 3.00."
+        "chem-rates" -> "If a product concentration rises from 0.10 to 0.34 mol dm⁻³ in 12 s, mean rate = Δ[product] ÷ Δt = (0.34 − 0.10) ÷ 12 = 0.020 mol dm⁻³ s⁻¹."
+        "phy-motion" -> "A trolley starts from rest and accelerates uniformly at 2.0 m s⁻² for 5.0 s. v = u + at = 0 + (2.0 × 5.0) = 10 m s⁻¹; s = ut + ½at² = 25 m."
+        "phy-current-electricity", "phy-cells" -> "A 12 V supply is connected across a 4.0 Ω resistor. I = V ÷ R = 12 ÷ 4.0 = 3.0 A; P = VI = 36 W."
+        "phy-pressure" -> "A force of 120 N acts normally on an area of 0.020 m². Pressure = F ÷ A = 120 ÷ 0.020 = 6,000 Pa."
+        "phy-liquids-rest" -> "At 0.50 m depth in fresh water, p = ρgh = 1000 × 9.81 × 0.50 = 4.91 × 10³ Pa gauge pressure."
+        "phy-waves", "phy-sound-propagation" -> "A wave has frequency 50 Hz and wavelength 0.68 m. Wave speed v = fλ = 50 × 0.68 = 34 m s⁻¹."
+        "phy-machines" -> "A machine lifts a 300 N load with a 100 N effort. Mechanical advantage = load ÷ effort = 3.0. If velocity ratio is 4.0, efficiency = (3 ÷ 4) × 100 = 75%."
+        else -> ""
+    }
+    if (example.isNotBlank()) {
+        Card(Modifier.fillMaxWidth()) {
+            Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                Text("Worked example", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+                ScientificText(example, style = MaterialTheme.typography.bodyLarge)
+                Text("Method: identify the known quantities, select the governing relationship, substitute values with units, calculate, then interpret the result.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            }
         }
     }
 }
