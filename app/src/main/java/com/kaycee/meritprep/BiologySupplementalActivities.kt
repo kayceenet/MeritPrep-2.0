@@ -9,7 +9,6 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import kotlin.math.abs
 import kotlin.math.exp
 import kotlin.math.roundToInt
 
@@ -176,6 +175,8 @@ private fun EcologicalToleranceExplorer() {
     var factor by remember { mutableFloatStateOf(50f) }
     var optimum by remember { mutableFloatStateOf(55f) }
     val suitability = exp(-((factor - optimum) * (factor - optimum)) / 700f)
+    val curveColor = MaterialTheme.colorScheme.primary
+    val markerColor = MaterialTheme.colorScheme.tertiary
     BiologyModelCard("Ecological tolerance and distribution", "Move an environmental factor away from or towards the species' optimum and observe the modelled suitability.", "A Gaussian teaching curve, not measured data for a real species. Different species have different tolerance limits and response curves.") {
         ModelSlider("Environmental factor", factor, 0f..100f, "units") { factor = it }
         ModelSlider("Species optimum", optimum, 0f..100f, "units") { optimum = it }
@@ -187,9 +188,9 @@ private fun EcologicalToleranceExplorer() {
                 val y = exp(-((x - optimum) * (x - optimum)) / 700f)
                 Offset(size.width * x / 100f, mid - y * size.height * .82f)
             }
-            for (i in 0 until points.lastIndex) drawLine(MaterialTheme.colorScheme.primary, points[i], points[i + 1], 4f)
+            for (i in 0 until points.lastIndex) drawLine(curveColor, points[i], points[i + 1], 4f)
             val marker = points[factor.roundToInt().coerceIn(0, 100)]
-            drawCircle(MaterialTheme.colorScheme.tertiary, 7f, marker)
+            drawCircle(markerColor, 7f, marker)
         }
         Text("Name the factor being modelled (for example temperature, pH or salinity) before interpreting the curve.")
     }
@@ -258,12 +259,13 @@ private fun VariationExplorer() {
         Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
             listOf("Continuous", "Discontinuous").forEach { item -> FilterChip(type == item, { type = item }, { Text(item) }) }
         }
-        ModelSlider("Environmental influence (illustrative)", environment, 0f..100f, "%") { environment = it }
         if (type == "Continuous") {
+            ModelSlider("Nutrition index (illustrative)", environment, 0f..100f, "%") { environment = it }
+            Text("Illustrative nutrition setting: ${environment.roundToInt()}%. Nutrition can influence growth and the distribution of height, alongside many genes and other environmental factors.")
             Text("Example: human height is influenced by many genes and environmental factors such as nutrition. Values form a range and often show an approximately normal distribution in a large population.")
             Text("Record many measurements, choose equal class intervals and plot a frequency histogram.")
         } else {
-            Text("Example: ABO blood group has distinct categories (A, B, AB and O). A person belongs to a category rather than taking every intermediate value.")
+            Text("Example: ABO blood group has distinct categories (A, B, AB and O). A person's category is inherited; nutrition and ordinary environmental variation do not turn one ABO group into another.")
             Text("Count each category and display the frequencies in a bar chart. Do not treat categories as a continuous measurement.")
         }
     }
