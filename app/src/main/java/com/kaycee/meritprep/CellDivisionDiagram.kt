@@ -77,6 +77,21 @@ fun CellDivisionDiagram(
                         drawChromatid(x2, centerY + offsetY, chromHeight, rightColor)
                     }
                 }
+            } else if (!mitosis && stageIndex in 2..3) {
+                // Two visible homologous pairs (2n = 4) make bivalent formation clear.
+                repeat(2) { pairIndex ->
+                    val y = centerY + (pairIndex - 0.5f) * cellHeight * 0.3f
+                    val leftX = centerX - cellWidth * 0.12f
+                    val rightX = centerX + cellWidth * 0.12f
+                    drawReplicatedChromosome(leftX, y, chromWidth, chromHeight, Color(0xFF2878B5))
+                    drawReplicatedChromosome(rightX, y, chromWidth, chromHeight, Color(0xFFE18A35))
+                    drawLine(
+                        color = Color(0xFF687786),
+                        start = Offset(leftX + chromWidth * 0.65f, y),
+                        end = Offset(rightX - chromWidth * 0.65f, y),
+                        strokeWidth = 2f
+                    )
+                }
             } else {
                 val count = chromosomeNumber
                 repeat(count) { i ->
