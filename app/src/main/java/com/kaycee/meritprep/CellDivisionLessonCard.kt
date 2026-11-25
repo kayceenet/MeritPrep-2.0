@@ -52,6 +52,7 @@ fun CellDivisionLessonCard() {
                     Text("Chromosomes in the cell: ${stage.chromosomeCountPerCell}")
                     Text("Chromatids in the cell: ${stage.chromatidCountPerCell}")
                     Text("DNA content: ${stage.dnaContentPerCell}")
+                    Text("C is a relative measure of DNA amount. 1C represents one unreplicated haploid set; DNA content can double without the chromosome number doubling.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                     if (stage.daughterCellsAtEnd > 0) Text("Cells produced at this division: ${stage.daughterCellsAtEnd}")
                 }
             }
