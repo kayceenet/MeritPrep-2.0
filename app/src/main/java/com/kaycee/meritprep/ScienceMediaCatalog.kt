@@ -33,7 +33,7 @@ data class ScienceMediaResource(
             "PhET Interactive Simulations" -> "Simulation by PhET Interactive Simulations, University of Colorado Boulder, licensed under CC BY-NC 4.0 (https://phet.colorado.edu)."
             "HHMI BioInteractive" -> "Credit HHMI BioInteractive and follow the resource-specific HHMI terms and attribution instructions."
             "LabXchange" -> "Credit the individual creator shown on the original resource page; LabXchange is the hosting platform."
-            provider.startsWith("Wikimedia Commons — ") -> "Credit ${provider.substringAfter("—").trim()} via Wikimedia Commons, link the original file page and the stated Creative Commons licence."
+            provider.startsWith("Wikimedia Commons — ") -> "Credit ${provider.substringAfter("—").trim()} via Wikimedia Commons, link the original file page and the stated licence (${licenceName})."
             else -> "Credit the original creator and follow the source's current attribution instructions."
         }
 }
