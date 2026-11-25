@@ -42,6 +42,17 @@ class BiologyExperimentAnalysisTest {
     }
 
     @Test
+    fun describesIncreasingDecreasingConstantAndVariablePatterns() {
+        val increasing = listOf(BiologyExperimentPoint(1.0, 2.0, 1), BiologyExperimentPoint(2.0, 4.0, 1), BiologyExperimentPoint(3.0, 7.0, 1))
+        val decreasing = increasing.map { it.copy(meanResult = 10.0 - it.meanResult) }
+        val constant = increasing.map { it.copy(meanResult = 5.0) }
+        val variable = listOf(BiologyExperimentPoint(1.0, 2.0, 1), BiologyExperimentPoint(2.0, 7.0, 1), BiologyExperimentPoint(3.0, 4.0, 1))
+        assertEquals(true, BiologyExperimentAnalysis.describeTrend(increasing).contains("increases"))
+        assertEquals(true, BiologyExperimentAnalysis.describeTrend(decreasing).contains("decreases"))
+        assertEquals(true, BiologyExperimentAnalysis.describeTrend(constant).contains("constant"))
+        assertEquals(true, BiologyExperimentAnalysis.describeTrend(variable).contains("fluctuates"))
+    }
+    @Test
     fun returnsNullWhenNoReadingsHaveBeenEntered() {
         assertNull(BiologyExperimentAnalysis.summarizeReadings(""))
         assertNull(BiologyExperimentAnalysis.summarizeReadings("   "))
