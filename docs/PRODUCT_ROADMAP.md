@@ -74,3 +74,6 @@ Authenticated sync, teacher/admin CMS, analytics, backups, privacy and security 
 
 
 **Cell-division assessment coverage:** added 12 original, syllabus-linked objective questions covering chromosome/chromatid counting, mitosis, meiosis I and II, crossing over, independent assortment, the single DNA-replication cycle, human gamete chromosome number and fertilisation. A dedicated content test checks that all 12 items remain present and that the set covers the core concepts.
+
+
+**Structured-response practice:** added an eight-mark original WAEC-style theory task comparing mitosis and meiosis using a diploid example (2n = 6). Its eight marking points assess chromosome behaviour, crossing over, chromosome reduction, daughter-cell outcomes, genetic variation and biological importance. A regression test checks the task and marking guide.
