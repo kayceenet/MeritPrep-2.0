@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.*
 import com.kaycee.meritprep.data.MeritDatabase
@@ -42,63 +43,174 @@ private fun MeritPrepApp() {
     val nav = rememberNavController()
     val currentEntry = nav.currentBackStackEntryAsState().value
     var navigationRevision by remember { mutableIntStateOf(0) }
+    var launcherOpen by remember { mutableStateOf(false) }
     LaunchedEffect(currentEntry) { navigationRevision++ }
+    val route = currentEntry?.destination?.route.orEmpty()
+    val inLesson = route.startsWith("lesson/")
+    val isTablet = LocalConfiguration.current.screenWidthDp >= 720
     MeritPrepTheme {
         Scaffold(
             bottomBar = {
-                NavigationBar {
-                    listOf("Home" to "home", "Learn" to "learn", "Practice" to "practice", "Labs" to "labs", "Profile" to "profile").forEach { (label, route) ->
-                        NavigationBarItem(
-                            selected = currentEntry?.destination?.route == route,
-                            onClick = { nav.navigate(route) { launchSingleTop = true } },
-                            icon = { Icon(when(route) { "home" -> Icons.Default.Home; "learn" -> Icons.Default.MenuBook; "practice" -> Icons.Default.Quiz; "labs" -> Icons.Default.Science; else -> Icons.Default.Person }, contentDescription = label) },
-                            label = { Text(label) }
-                        )
-                    }
+                if (!inLesson && !isTablet) {
+                    StudioDockedBottomBar(
+                        selectedRoute = route,
+                        onNavigate = { destination -> nav.navigate(destination) { launchSingleTop = true } },
+                        onOpenLauncher = { launcherOpen = true }
+                    )
                 }
             }
         ) { padding ->
-            NavHost(navController = nav, startDestination = "home", modifier = Modifier.padding(padding)) {
-                composable("home") { HomeScreen(nav, navigationRevision) }
-                composable("learn") { LearnScreen(nav) }
-                composable("subject/{code}") { entry ->
-                    val code = entry.arguments?.getString("code").orEmpty()
-                    if (code == "BIO") {
-                        BiologyCourseScreen(onOpenLesson = { topicId -> nav.navigate("lesson/$topicId") }, onOpenGlossary = { nav.navigate("glossary") })
-                    } else {
-                        SubjectScreen(subjects.firstOrNull { it.code == code } ?: subjects.first(), nav)
+            Row(Modifier.fillMaxSize().padding(padding)) {
+                if (isTablet && !inLesson) {
+                    NavigationRail {
+                        listOf(
+                            Triple("Materials", "home", Icons.Default.Home),
+                            Triple("Syllabus", "learn", Icons.Default.MenuBook),
+                            Triple("Exam Lab", "practice", Icons.Default.Quiz),
+                            Triple("Notebook", "mistakes", Icons.Default.Bookmarks),
+                            Triple("Profile", "profile", Icons.Default.Person)
+                        ).forEach { (label, destination, icon) ->
+                            NavigationRailItem(
+                                selected = route == destination,
+                                onClick = { nav.navigate(destination) { launchSingleTop = true } },
+                                icon = { Icon(icon, contentDescription = label) },
+                                label = { Text(label) }
+                            )
+                        }
                     }
                 }
-                composable("lesson/{topicId}") { entry ->
-                    LessonScreen(entry.arguments?.getString("topicId").orEmpty())
+                NavHost(
+                    navController = nav,
+                    startDestination = "home",
+                    modifier = Modifier.weight(1f).fillMaxHeight()
+                ) {
+                    composable("home") { HomeScreen(nav, navigationRevision) }
+                    composable("learn") { LearnScreen(nav) }
+                    composable("subject/{code}") { entry ->
+                        val code = entry.arguments?.getString("code").orEmpty()
+                        if (code == "BIO") {
+                            BiologyCourseScreen(onOpenLesson = { topicId -> nav.navigate("lesson/$topicId") }, onOpenGlossary = { nav.navigate("glossary") })
+                        } else {
+                            SubjectScreen(subjects.firstOrNull { it.code == code } ?: subjects.first(), nav)
+                        }
+                    }
+                    composable("lesson/{topicId}") { entry ->
+                        LessonScreen(entry.arguments?.getString("topicId").orEmpty())
+                    }
+                    composable("practice") { PracticeScreenV2(onStartCbt = { nav.navigate("cbt") }, onStartWaecObjective = { nav.navigate("waec-objective") }, onStartTheory = { nav.navigate("waec-theory") }, onOpenMistakes = { nav.navigate("mistakes") }, onOpenStudyPlan = { nav.navigate("study-plan") }) }
+                    composable("chemistry-practice") { ChemistryPracticeScreen() }
+                    composable("physics-practice") { PhysicsPracticeScreen() }
+                    composable("mathematics-practice") { MathematicsPracticeScreen() }
+                    composable("mathematics-cbt") { CbtScreen(CbtMode.MATHEMATICS_UTME, MathematicsQuestionBank.all) }
+                    composable("physics-waec-practical") { PhysicsWaecPracticalScreen() }
+                    composable("physics-waec-theory") { PhysicsWaecTheoryScreen() }
+                    composable("physics-waec-objective") { CbtScreen(CbtMode.WAEC_PHYSICS_OBJECTIVE, PhysicsWaecObjectiveBank.all) }
+                    composable("chemistry-waec-theory") { ChemistryWaecTheoryScreen() }
+                    composable("chemistry-waec-objective") { ChemistryWaecObjectiveScreen() }
+                    composable("chemistry-qualitative") { ChemistryQualitativeGuideScreen() }
+                    composable("chemistry-redox-titration") { ChemistryRedoxTitrationScreen() }
+                    composable("placement") { PlacementAssessmentScreen(onOpenLesson = { nav.navigate("lesson/$it") }) }
+                    composable("cbt") { CbtScreen(CbtMode.JAMB_UTME) }
+                    composable("waec-objective") { CbtScreen(CbtMode.WAEC_OBJECTIVE) }
+                    composable("physics-cbt") { CbtScreen(CbtMode.PHYSICS_UTME, PhysicsQuestionBank.all) }
+                    composable("waec-theory") { BiologyTheoryScreen() }
+                    composable("review") { RevisionScreen() }
+                    composable("mistakes") { MistakeNotebookScreen() }
+                    composable("study-plan") { StudyPlanScreen(onOpenLesson = { nav.navigate("lesson/$it") }, onOpenPractice = { nav.navigate("practice") }, onOpenRevision = { nav.navigate("review") }) }
+                    composable("glossary") { BiologyGlossaryScreen(onOpenLesson = { nav.navigate("lesson/$it") }) }
+                    composable("bookmarks") { BookmarksScreen(onOpenLesson = { nav.navigate("lesson/$it") }) }
+                    composable("labs") { VirtualLabScreen() }
+                    composable("science-media") { ScienceMediaScreen(onOpenLabs = { nav.navigate("labs") }, onOpenLesson = { nav.navigate("lesson/$it") }) }
+                    composable("calculators") { CalculatorScreen() }
+                    composable("profile") { ProfileScreen(navigationRevision) }
                 }
-                composable("practice") { PracticeScreenV2(onStartCbt = { nav.navigate("cbt") }, onStartWaecObjective = { nav.navigate("waec-objective") }, onStartTheory = { nav.navigate("waec-theory") }, onOpenMistakes = { nav.navigate("mistakes") }, onOpenStudyPlan = { nav.navigate("study-plan") }) }
-                composable("chemistry-practice") { ChemistryPracticeScreen() }
-                composable("physics-practice") { PhysicsPracticeScreen() }
-                composable("mathematics-practice") { MathematicsPracticeScreen() }
-                composable("mathematics-cbt") { CbtScreen(CbtMode.MATHEMATICS_UTME, MathematicsQuestionBank.all) }
-                composable("physics-waec-practical") { PhysicsWaecPracticalScreen() }
-                composable("physics-waec-theory") { PhysicsWaecTheoryScreen() }
-                composable("physics-waec-objective") { CbtScreen(CbtMode.WAEC_PHYSICS_OBJECTIVE, PhysicsWaecObjectiveBank.all) }
-                composable("chemistry-waec-theory") { ChemistryWaecTheoryScreen() }
-                composable("chemistry-waec-objective") { ChemistryWaecObjectiveScreen() }
-                composable("chemistry-qualitative") { ChemistryQualitativeGuideScreen() }
-                composable("chemistry-redox-titration") { ChemistryRedoxTitrationScreen() }
-                composable("placement") { PlacementAssessmentScreen(onOpenLesson = { nav.navigate("lesson/$it") }) }
-                composable("cbt") { CbtScreen(CbtMode.JAMB_UTME) }
-                composable("waec-objective") { CbtScreen(CbtMode.WAEC_OBJECTIVE) }
-                composable("physics-cbt") { CbtScreen(CbtMode.PHYSICS_UTME, PhysicsQuestionBank.all) }
-                composable("waec-theory") { BiologyTheoryScreen() }
-                composable("review") { RevisionScreen() }
-                composable("mistakes") { MistakeNotebookScreen() }
-                composable("study-plan") { StudyPlanScreen(onOpenLesson = { nav.navigate("lesson/$it") }, onOpenPractice = { nav.navigate("practice") }, onOpenRevision = { nav.navigate("review") }) }
-                composable("glossary") { BiologyGlossaryScreen(onOpenLesson = { nav.navigate("lesson/$it") }) }
-                composable("bookmarks") { BookmarksScreen(onOpenLesson = { nav.navigate("lesson/$it") }) }
-                composable("labs") { VirtualLabScreen() }
-                composable("science-media") { ScienceMediaScreen(onOpenLabs = { nav.navigate("labs") }, onOpenLesson = { nav.navigate("lesson/$it") }) }
-                composable("calculators") { CalculatorScreen() }
-                composable("profile") { ProfileScreen(navigationRevision) }
             }
+        }
+        if (launcherOpen) {
+            ModalBottomSheet(onDismissRequest = { launcherOpen = false }) {
+                QuickStudyLauncherSheet(
+                    onChoose = { destination ->
+                        launcherOpen = false
+                        nav.navigate(destination) { launchSingleTop = true }
+                    }
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun StudioDockedBottomBar(
+    selectedRoute: String,
+    onNavigate: (String) -> Unit,
+    onOpenLauncher: () -> Unit
+) {
+    Surface(tonalElevation = 4.dp, shadowElevation = 8.dp) {
+        Row(
+            Modifier.fillMaxWidth().navigationBarsPadding().padding(horizontal = 8.dp, vertical = 5.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceAround
+        ) {
+            listOf(
+                Triple("Materials", "home", Icons.Default.Home),
+                Triple("Syllabus", "learn", Icons.Default.MenuBook)
+            ).forEach { (label, destination, icon) ->
+                NavigationBarItem(
+                    selected = selectedRoute == destination,
+                    onClick = { onNavigate(destination) },
+                    icon = { Icon(icon, contentDescription = label) },
+                    label = { Text(label) },
+                    alwaysShowLabel = true
+                )
+            }
+            FloatingActionButton(
+                onClick = onOpenLauncher,
+                modifier = Modifier.size(54.dp),
+                containerColor = MaterialTheme.colorScheme.primary,
+                contentColor = MaterialTheme.colorScheme.onPrimary
+            ) { Icon(Icons.Default.Bolt, contentDescription = "Quick study launcher") }
+            listOf(
+                Triple("Exam Lab", "practice", Icons.Default.Quiz),
+                Triple("Profile", "profile", Icons.Default.Person)
+            ).forEach { (label, destination, icon) ->
+                NavigationBarItem(
+                    selected = selectedRoute == destination,
+                    onClick = { onNavigate(destination) },
+                    icon = { Icon(icon, contentDescription = label) },
+                    label = { Text(label) },
+                    alwaysShowLabel = true
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun QuickStudyLauncherSheet(onChoose: (String) -> Unit) {
+    val tools = listOf(
+        Triple("Timed CBT", "A focused examination session", "cbt"),
+        Triple("180-question UTME", "Full-length four-subject practice", "cbt"),
+        Triple("Recall cards", "Review concepts due for retrieval", "review"),
+        Triple("Notebook", "Saved notes and mistakes", "mistakes"),
+        Triple("WAEC Paper 2", "Structured theory practice", "waec-theory"),
+        Triple("SS3 placement", "Check your starting level", "placement"),
+        Triple("Virtual laboratories", "Explore practical investigations", "labs"),
+        Triple("Scientific calculators", "Formula and calculation tools", "calculators")
+    )
+    Column(
+        Modifier.fillMaxWidth().padding(horizontal = 20.dp).padding(bottom = 28.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        Text("QUICK STUDY", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
+        Text("Choose what you want to work on", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+        tools.forEach { (title, description, destination) ->
+            ListItem(
+                headlineContent = { Text(title, fontWeight = FontWeight.SemiBold) },
+                supportingContent = { Text(description) },
+                leadingContent = { Icon(Icons.Default.ArrowForward, contentDescription = null) },
+                modifier = Modifier.fillMaxWidth()
+            )
+            TextButton(onClick = { onChoose(destination) }, modifier = Modifier.fillMaxWidth()) { Text("Open $title") }
         }
     }
 }
