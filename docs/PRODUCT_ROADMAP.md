@@ -98,3 +98,6 @@ Authenticated sync, teacher/admin CMS, analytics, backups, privacy and security 
 
 
 **Cell-division model validation:** the chromosome-count engine now rejects values that could overflow its integer arithmetic. Tests explicitly check chromosome and chromatid totals during mitotic anaphase, meiotic anaphase I and meiotic anaphase II, as well as invalid and excessively large starting chromosome numbers.
+
+
+**Meiosis visual refinement:** the chromosome diagram now depicts paired homologous chromosomes as bivalents during prophase I and metaphase I, before showing homologous separation in anaphase I. This makes the difference between homologous-chromosome separation and sister-chromatid separation easier to see.
