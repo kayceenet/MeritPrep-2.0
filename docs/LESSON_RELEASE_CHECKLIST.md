@@ -231,3 +231,12 @@ A topic may not be labelled complete if any applicable critical item above is FA
 - Added local persistence for investigation stage, prediction, reviewed method steps, selected model setting and recorded observations. A save control is visible in the lab workspace.
 - Added subject-specific practical routing for Chemistry and Physics topics, with acid-base and redox titration routed separately.
 - Latest code changes are under CI run `45671674413` (apparatus routing test) and follow-on run `45671584471` (notebook persistence). Do not release until the newest main-branch run completes successfully.
+
+
+### Final structure pass additions — 25 November 2026
+
+- Concept-stage diagrams/animations are now selected from each lesson section heading and placed directly after the relevant explanation.
+- Every lesson's Scenario pillar has either a topic-specific original case study or a saved applied-reflection fallback.
+- Six-pillar completion is persisted locally and shown in the stage navigation; assessment completion requires at least 80%.
+- Subject hubs now use the redesigned dashboard/catalog hierarchy and group their subject-specific practice and WAEC tools.
+- The successful pre-follow-on baseline at `f806f111` includes the redesigned home and subject hubs, and the successful lab baseline at `b8acd40a` includes persistent lab records and apparatus routing. The latest section-visual/scenario/pillar-progress additions are under the newest Actions run; do not release until the latest SHA passes tests and APK build.
