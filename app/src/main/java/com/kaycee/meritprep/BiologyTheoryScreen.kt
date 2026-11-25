@@ -120,7 +120,7 @@ fun BiologyTheoryScreen() {
                                     saved = false
                                 }
                             )
-                            Text(point, modifier = Modifier.weight(1f).padding(top = 11.dp))
+                            ScientificText(point, modifier = Modifier.weight(1f).padding(top = 11.dp), style = MaterialTheme.typography.bodyMedium)
                         }
                     }
                     HorizontalDivider()
