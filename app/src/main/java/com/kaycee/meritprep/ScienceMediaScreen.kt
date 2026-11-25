@@ -64,7 +64,12 @@ fun ScienceMediaScreen(onOpenLabs: () -> Unit, onOpenLesson: (String) -> Unit) {
     var selectionGenerations by remember { mutableFloatStateOf(5f) }
     var selectedParentOneIndex by remember { mutableIntStateOf(1) }
     var selectedParentTwoIndex by remember { mutableIntStateOf(1) }
+    var selectedOsmosisCellIndex by remember { mutableIntStateOf(0) }
+    var externalSolute by remember { mutableFloatStateOf(0.2f) }
+    var internalSolute by remember { mutableFloatStateOf(0.6f) }
     val parentGenotypes = MendelianGenotype.values()
+    val osmosisCellType = if (selectedOsmosisCellIndex == 0) OsmosisCellType.PLANT else OsmosisCellType.ANIMAL
+    val osmosisResult = OsmosisSimulation.evaluate(externalSolute.toDouble(), internalSolute.toDouble(), osmosisCellType)
     val mendelianResult = MendelianInheritanceSimulation.evaluate(parentGenotypes[selectedParentOneIndex], parentGenotypes[selectedParentTwoIndex])
     val selectionResult = NaturalSelectionSimulation.evaluate(
         NaturalSelectionConditions(
@@ -171,6 +176,32 @@ fun ScienceMediaScreen(onOpenLabs: () -> Unit, onOpenLesson: (String) -> Unit) {
                         }
                         Text("Investigate: set both survival values equally and observe the frequencies. Then increase one value while keeping the other fixed. Explain why the frequency changes across generations rather than an individual changing its inherited trait.")
                         Text("Model assumptions: this deterministic model assumes the trait is inherited and that the supplied survival values represent relative reproductive contribution. It excludes mutation, migration, genetic drift, population-size changes and other biological factors. It illustrates selection; it does not predict a real population.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    }
+                }
+            }
+        }
+        if (selectedSubject == 0 || selectedSubject == 1) {
+            item {
+                Card(modifier = Modifier.fillMaxWidth()) {
+                    Column(Modifier.padding(15.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                        Text("MeritPrep interactive model: osmosis", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+                        Text("Set the solute concentration outside and inside a cell. Water moves across a selectively permeable membrane from the more dilute solution towards the more concentrated solution.")
+                        Text("Cell type", fontWeight = FontWeight.SemiBold)
+                        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                            FilterChip(selected = selectedOsmosisCellIndex == 0, onClick = { selectedOsmosisCellIndex = 0 }, label = { Text("Plant cell") })
+                            FilterChip(selected = selectedOsmosisCellIndex == 1, onClick = { selectedOsmosisCellIndex = 1 }, label = { Text("Animal cell") })
+                        }
+                        Text("External solute concentration: ${"%.2f".format(externalSolute)} mol/L")
+                        Slider(value = externalSolute, onValueChange = { externalSolute = it }, valueRange = 0f..1.5f)
+                        Text("Internal solute concentration: ${"%.2f".format(internalSolute)} mol/L")
+                        Slider(value = internalSolute, onValueChange = { internalSolute = it }, valueRange = 0f..1.5f)
+                        Text("Model condition: ${osmosisResult.tonicity}", color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.SemiBold)
+                        Text("Net water movement: ${osmosisResult.waterMovement.name.lowercase().replace('_', ' ')}")
+                        Text("Predicted cell response: ${osmosisResult.response.name.lowercase().replace('_', ' ')}", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+                        Text(osmosisResult.explanation)
+                        Text("Investigation prompt", fontWeight = FontWeight.SemiBold)
+                        Text("Keep the internal concentration fixed and increase the external concentration gradually. Record when net water movement changes direction. Repeat for plant and animal cells.")
+                        Text("Model limitation: the calculation compares solute concentrations and predicts the direction of net water movement. It does not calculate the rate of osmosis, membrane permeability, pressure potential or changes in cell volume.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                     }
                 }
             }
