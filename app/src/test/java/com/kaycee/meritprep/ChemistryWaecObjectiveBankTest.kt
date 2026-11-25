@@ -6,6 +6,11 @@ import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class ChemistryWaecObjectiveBankTest {
+    @Test fun correctAnswersAreBalancedAcrossAllFourPositions() {
+        val counts = (0..3).map { position -> ChemistryWaecObjectiveBank.all.count { it.correctOptionIndex == position } }
+        assertTrue(counts.maxOrNull()!! - counts.minOrNull()!! <= 1)
+    }
+
     @Test fun containsThirtyUniqueOriginalItems() {
         assertEquals(30, ChemistryWaecObjectiveBank.all.size)
         assertEquals(30, ChemistryWaecObjectiveBank.all.map { it.id }.distinct().size)
