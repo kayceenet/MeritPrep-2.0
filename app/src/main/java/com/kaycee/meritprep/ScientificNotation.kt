@@ -152,6 +152,91 @@ fun ScientificText(
     Text(formatted, modifier = modifier, style = style, color = color, fontWeight = fontWeight)
 }
 
+private data class EquationSegment(
+    val plain: String? = null,
+    val numerator: String? = null,
+    val denominator: String? = null
+)
+
+private fun parseEquationSegments(source: String): List<EquationSegment> {
+    val parts = mutableListOf<EquationSegment>()
+    val plain = StringBuilder()
+    var index = 0
+    while (index < source.length) {
+        val command = when {
+            source.startsWith("\\dfrac", index) -> "\\dfrac"
+            source.startsWith("\\frac", index) -> "\\frac"
+            else -> null
+        }
+        if (command == null) {
+            plain.append(source[index])
+            index++
+            continue
+        }
+        val numeratorOpen = source.indexOf('{', index + command.length)
+        val numeratorEnd = if (numeratorOpen >= 0) findMatchingMathBrace(source, numeratorOpen) else -1
+        val denominatorOpen = if (numeratorEnd >= 0) source.indexOf('{', numeratorEnd + 1) else -1
+        val denominatorEnd = if (denominatorOpen >= 0) findMatchingMathBrace(source, denominatorOpen) else -1
+        if (numeratorOpen < 0 || numeratorEnd < 0 || denominatorOpen < 0 || denominatorEnd < 0) {
+            plain.append(source[index])
+            index++
+            continue
+        }
+        if (plain.isNotEmpty()) {
+            parts.add(EquationSegment(plain = plain.toString()))
+            plain.clear()
+        }
+        parts.add(
+            EquationSegment(
+                numerator = source.substring(numeratorOpen + 1, numeratorEnd),
+                denominator = source.substring(denominatorOpen + 1, denominatorEnd)
+            )
+        )
+        index = denominatorEnd + 1
+    }
+    if (plain.isNotEmpty()) parts.add(EquationSegment(plain = plain.toString()))
+    return parts
+}
+
+private fun findMatchingMathBrace(source: String, open: Int): Int {
+    var depth = 0
+    for (index in open until source.length) {
+        if (source[index] == '{') depth++
+        if (source[index] == '}') {
+            depth--
+            if (depth == 0) return index
+        }
+    }
+    return -1
+}
+
+@Composable
+private fun EquationExpression(
+    source: String,
+    modifier: Modifier = Modifier,
+    style: TextStyle = MaterialTheme.typography.headlineSmall
+) {
+    val parts = remember(source) { parseEquationSegments(source) }
+    Row(modifier = modifier, verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
+        parts.forEach { part ->
+            if (part.numerator != null && part.denominator != null) {
+                Column(
+                    horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.spacedBy(1.dp)
+                ) {
+                    EquationExpression(part.numerator, style = style.copy(fontSize = style.fontSize * 0.72f))
+                    androidx.compose.foundation.layout.Box(
+                        Modifier.fillMaxWidth().height(1.dp).background(MaterialTheme.colorScheme.onSurface)
+                    )
+                    EquationExpression(part.denominator, style = style.copy(fontSize = style.fontSize * 0.72f))
+                }
+            } else if (!part.plain.isNullOrEmpty()) {
+                ScientificText(part.plain, style = style)
+            }
+        }
+    }
+}
+
 @Composable
 fun EquationDisplayCard(
     formula: String,
@@ -170,7 +255,7 @@ fun EquationDisplayCard(
                 Text(caption, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
                 lines.forEach { line ->
                     Row(Modifier.fillMaxWidth().horizontalScroll(rememberScrollState())) {
-                        Text(ScientificNotation.annotated(line), style = MaterialTheme.typography.headlineSmall.copy(fontFamily = FontFamily.Serif, fontWeight = FontWeight.SemiBold), color = MaterialTheme.colorScheme.onSurface, maxLines = 1)
+                        EquationExpression(line, style = MaterialTheme.typography.headlineSmall.copy(fontFamily = FontFamily.Serif, fontWeight = FontWeight.SemiBold))
                     }
                 }
             }
