@@ -14,4 +14,15 @@ class BiologySupplementalActivityCoverageTest {
         )
         assertTrue(biologySupplementalActivityTopicIds.containsAll(required))
     }
+
+    @Test
+    fun everyBiologyCurriculumLessonHasAnInteractiveOrVisualExperience() {
+        val establishedInteractiveTopics = setOf(
+            "bio-cell", "bio-nutrition", "bio-transport", "bio-growth",
+            "bio-heredity", "bio-evolution-theory", "bio-populations"
+        )
+        val covered = establishedInteractiveTopics + biologySupplementalActivityTopicIds
+        val missing = BiologyCurriculum.units.mapNotNull { it.lessonId }.filterNot { it in covered }
+        assertTrue("Biology lesson topics without a visual or interactive experience: $missing", missing.isEmpty())
+    }
 }
