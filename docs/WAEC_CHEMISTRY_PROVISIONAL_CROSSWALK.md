@@ -10,7 +10,7 @@ This crosswalk is deliberately marked provisional. Confirm the source and exact 
 
 | WAEC topic | Main content to evidence | Existing lesson mapping | Gap / action |
 |---|---|---|---|
-| Introduction to Chemistry | Measurement of physical quantities, scientific measurement and scientific method. | `chem-separation`, practical foundations | Add a distinct Chemistry foundations lesson covering measurement, laboratory method, precision and safety. |
+| Introduction to Chemistry | Measurement of physical quantities, scientific measurement and scientific method. | `chem-separation`, practical foundations | A Chemistry foundations card now covers measurement, scientific method, precision and safety inside the separation/practical lesson; a separate WAEC navigation node remains pending. |
 | Structure of the atom | Atomic structure, proton/neutron number, isotopes, relative atomic/molecular mass, particulate matter, electron configuration, orbitals and filling rules. | `chem-atomic-bonding` | Ensure full orbital/electron-configuration practice, not only ionic formula construction. |
 | Standard separation techniques | Mixtures, separation techniques and criteria for purity. | `chem-separation` | Include melting-point purity, recrystallisation, chromatography and method selection. |
 | Periodic chemistry | Periodic law/trends, third-period gradation, halogens, transition series, reactions with acids and oxides. | `chem-atomic-bonding`, `chem-metals`, `chem-nonmetals` | Add an explicit periodic-trends investigation and comparative chemistry across Na–Ar, halogens and Sc–Zn. |
