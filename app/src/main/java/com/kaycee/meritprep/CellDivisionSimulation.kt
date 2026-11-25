@@ -27,6 +27,9 @@ object CellDivisionSimulation {
         require(diploidNumber > 0 && diploidNumber % 2 == 0) {
             "The starting diploid chromosome number must be a positive even number."
         }
+        require(diploidNumber <= Int.MAX_VALUE / 2) {
+            "The starting chromosome number is too large for this model."
+        }
         val haploid = diploidNumber / 2
         val stages = when (type) {
             CellDivisionType.MITOSIS -> listOf(
