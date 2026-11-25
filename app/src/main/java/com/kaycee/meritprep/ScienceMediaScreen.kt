@@ -66,6 +66,8 @@ fun ScienceMediaScreen(onOpenLabs: () -> Unit, onOpenLesson: (String) -> Unit) {
     var selectedParentTwoIndex by remember { mutableIntStateOf(1) }
     var selectedAboParentOneIndex by remember { mutableIntStateOf(1) }
     var selectedAboParentTwoIndex by remember { mutableIntStateOf(3) }
+    var selectedXLinkedMotherIndex by remember { mutableIntStateOf(1) }
+    var selectedXLinkedFatherIndex by remember { mutableIntStateOf(0) }
     var selectedDivisionIndex by remember { mutableIntStateOf(0) }
     var divisionStageIndex by remember { mutableIntStateOf(0) }
     var selectedOsmosisCellIndex by remember { mutableIntStateOf(0) }
@@ -77,6 +79,9 @@ fun ScienceMediaScreen(onOpenLabs: () -> Unit, onOpenLesson: (String) -> Unit) {
     val parentGenotypes = MendelianGenotype.values()
     val aboGenotypes = ABOGenotype.values()
     val aboResult = ABOInheritanceSimulation.evaluate(aboGenotypes[selectedAboParentOneIndex], aboGenotypes[selectedAboParentTwoIndex])
+    val xLinkedMotherGenotypes = XLinkedMotherGenotype.values()
+    val xLinkedFatherGenotypes = XLinkedFatherGenotype.values()
+    val xLinkedResult = XLinkedInheritanceSimulation.evaluate(xLinkedMotherGenotypes[selectedXLinkedMotherIndex], xLinkedFatherGenotypes[selectedXLinkedFatherIndex])
     val divisionType = if (selectedDivisionIndex == 0) CellDivisionType.MITOSIS else CellDivisionType.MEIOSIS
     val divisionLesson = CellDivisionSimulation.lesson(divisionType)
     val currentDivisionStage = divisionLesson.stages[divisionStageIndex.coerceIn(0, divisionLesson.stages.lastIndex)]
@@ -256,6 +261,47 @@ fun ScienceMediaScreen(onOpenLabs: () -> Unit, onOpenLesson: (String) -> Unit) {
                                 }
                                 Text(aboResult.explanation)
                                 Text("This model covers the ABO system only. It does not include the Rh(D) factor, transfusion compatibility or rare blood-group variants. Probabilities do not guarantee the exact outcome in a small family.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                            }
+                        }
+                        Card(modifier = Modifier.fillMaxWidth()) {
+                            Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                                Text("MeritPrep interactive model: X-linked recessive inheritance", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+                                Text("H represents the usual allele in this teaching model; h represents an X-linked recessive allele.")
+                                Text("Mother genotype", fontWeight = FontWeight.SemiBold)
+                                Row(horizontalArrangement = Arrangement.spacedBy(5.dp)) {
+                                    xLinkedMotherGenotypes.forEachIndexed { index, genotype ->
+                                        FilterChip(selected = selectedXLinkedMotherIndex == index, onClick = { selectedXLinkedMotherIndex = index }, label = { Text(genotype.notation) })
+                                    }
+                                }
+                                Text("Father genotype", fontWeight = FontWeight.SemiBold)
+                                Row(horizontalArrangement = Arrangement.spacedBy(5.dp)) {
+                                    xLinkedFatherGenotypes.forEachIndexed { index, genotype ->
+                                        FilterChip(selected = selectedXLinkedFatherIndex == index, onClick = { selectedXLinkedFatherIndex = index }, label = { Text(genotype.notation) })
+                                    }
+                                }
+                                Text("Mother's gametes: ${xLinkedMotherGenotypes[selectedXLinkedMotherIndex].gametes.joinToString(" or ")}")
+                                Text("Father's gametes: ${xLinkedFatherGenotypes[selectedXLinkedFatherIndex].gametes.joinToString(" or ")}")
+                                Text("Possible offspring combinations", fontWeight = FontWeight.SemiBold)
+                                Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                                    xLinkedResult.fourPossibleCombinations.take(2).forEach { genotype ->
+                                        Card(Modifier.weight(1f), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer)) {
+                                            Text(genotype, Modifier.padding(10.dp).fillMaxWidth(), style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+                                        }
+                                    }
+                                }
+                                Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                                    xLinkedResult.fourPossibleCombinations.drop(2).forEach { genotype ->
+                                        Card(Modifier.weight(1f), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer)) {
+                                            Text(genotype, Modifier.padding(10.dp).fillMaxWidth(), style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+                                        }
+                                    }
+                                }
+                                Text("Expected outcomes", fontWeight = FontWeight.SemiBold)
+                                xLinkedResult.outcomes.forEach { outcome ->
+                                    Text("${outcome.genotype}: ${outcome.phenotype} · ${outcome.percentage.toInt()}% of all offspring")
+                                }
+                                Text(xLinkedResult.explanation)
+                                Text("This is a simplified X-linked recessive probability model. It does not represent every sex-linked condition, variable expression, X-inactivation or clinical risk assessment.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                             }
                         }
                         Text("MeritPrep interactive model: natural selection", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
