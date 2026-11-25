@@ -19,12 +19,12 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 
-private enum class ApparatusDiagram {
+internal enum class ApparatusDiagram {
     MICROSCOPE, PLANT_LIGHT, QUADRAT, TITRATION, FILTRATION, ELECTROLYSIS,
     SPRING, TROLLEY, FLUID_COLUMN, CIRCUIT, WAVE_TANK, GAS_SYRINGE
 }
 
-private fun apparatusFor(topicId: String): ApparatusDiagram? = when (topicId) {
+internal fun apparatusFor(topicId: String): ApparatusDiagram? = when (topicId) {
     "bio-cell" -> ApparatusDiagram.MICROSCOPE
     "bio-nutrition", "bio-plant-anatomy", "bio-excretion", "bio-respiration" -> ApparatusDiagram.PLANT_LIGHT
     "bio-populations", "bio-habitats", "bio-biomes", "bio-environment", "bio-interactions" -> ApparatusDiagram.QUADRAT
