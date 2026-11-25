@@ -53,7 +53,7 @@ class LearningCatalogTest {
     @Test
     fun originalBiologyQuestionsCoverEverySyllabusUnit() {
         val questions = BiologyQuestionBank.all
-        assertEquals(260, questions.size)
+        assertEquals(264, questions.size)
         assertEquals(questions.size, questions.map { it.id }.toSet().size)
         val syllabusIds = BiologyCurriculum.units.mapNotNull { it.lessonId }.toSet()
         assertEquals(syllabusIds, questions.map { it.topicId }.toSet())
