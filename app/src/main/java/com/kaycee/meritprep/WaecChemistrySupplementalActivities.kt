@@ -9,7 +9,7 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 internal object WaecChemistryActivityRoutes {
-    val supportedTopicIds = setOf("chem-organic", "chem-separation", "chem-acids-bases", "chem-atomic-bonding")
+    val supportedTopicIds = setOf("chem-organic", "chem-separation", "chem-acids-bases", "chem-atomic-bonding", "chem-industry", "chem-metals")
 }
 
 fun WaecChemistrySupplementalActivity(topicId: String) {
@@ -19,6 +19,8 @@ fun WaecChemistrySupplementalActivity(topicId: String) {
         "chem-separation" -> WaecSeparationPracticalActivity()
         "chem-acids-bases" -> WaecStandardSolutionActivity()
         "chem-atomic-bonding" -> WaecPeriodicTrendsActivity()
+        "chem-industry" -> WaecIndustryProcessActivity()
+        "chem-metals" -> WaecMetalExtractionActivity()
     }
 }
 
@@ -126,6 +128,51 @@ private fun WaecPeriodicTrendsActivity() {
             HorizontalDivider()
             Text(detail)
             Text("Across Period 3, metallic character generally decreases and oxides change from strongly basic through amphoteric to acidic. Explain trends using nuclear charge, shielding and valence-electron structure; do not treat every property as a perfectly smooth trend.", style = MaterialTheme.typography.bodySmall)
+        }
+    }
+}
+
+
+@Composable
+private fun WaecIndustryProcessActivity() {
+    var process by remember { mutableStateOf("Haber process") }
+    val detail = when (process) {
+        "Haber process" -> "N₂ + 3H₂ ⇌ 2NH₃. Industrial conditions balance rate and equilibrium: moderate-high temperature (about 450 °C), high pressure (about 200 atm) and an iron catalyst. Hydrogen is commonly obtained from natural gas; nitrogen from air."
+        "Contact process" -> "2SO₂ + O₂ ⇌ 2SO₃. Use a vanadium(V) oxide catalyst near 450 °C and modest pressure; absorb SO₃ in concentrated sulfuric acid to form oleum before dilution."
+        "Petroleum refining" -> "Crude oil is separated by fractional distillation according to boiling ranges. Fractions are mixtures, not pure compounds; cracking converts larger hydrocarbons into smaller useful molecules."
+        "Soap manufacture" -> "Saponification hydrolyses fats/oils with hot alkali to form glycerol and salts of fatty acids (soap). Soap molecules have hydrophilic and hydrophobic regions."
+        else -> "Cement manufacture involves heating limestone and clay-containing materials to form clinker, then grinding with gypsum. The high-temperature process consumes energy and releases carbon dioxide."
+    }
+    Card(Modifier.fillMaxWidth()) {
+        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            Text("WAEC focus: chemical industry and process conditions", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+            listOf("Haber process", "Contact process", "Petroleum refining", "Soap manufacture", "Cement manufacture").forEach {
+                FilterChip(process == it, { process = it }, { Text(it) })
+            }
+            HorizontalDivider()
+            Text(detail)
+            Text("For each process, identify raw materials, balanced equations where relevant, operating conditions, catalyst, product separation and environmental considerations.", style = MaterialTheme.typography.bodySmall)
+        }
+    }
+}
+
+@Composable
+private fun WaecMetalExtractionActivity() {
+    var metal by remember { mutableStateOf("Iron") }
+    val detail = when (metal) {
+        "Iron" -> "Haematite (Fe₂O₃) is reduced in a blast furnace. Carbon monoxide is an important reducing agent: Fe₂O₃ + 3CO → 2Fe + 3CO₂. Limestone removes silica impurities into slag."
+        "Aluminium" -> "Aluminium is extracted by electrolysis of alumina dissolved in molten cryolite. The carbon anodes are consumed as oxygen reacts with carbon to form carbon oxides."
+        else -> "Cassiterite (SnO₂) is reduced by carbon at high temperature: SnO₂ + 2C → Sn + 2CO. Concentration of the ore precedes reduction."
+    }
+    Card(Modifier.fillMaxWidth()) {
+        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            Text("WAEC focus: extraction of metals", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+            listOf("Iron", "Aluminium", "Tin").forEach {
+                FilterChip(metal == it, { metal = it }, { Text(it) })
+            }
+            HorizontalDivider()
+            Text(detail)
+            Text("Compare ore, concentration, reducing agent or electrical method, energy demand, impurities, products and environmental impact. The method depends on metal reactivity and compound stability.", style = MaterialTheme.typography.bodySmall)
         }
     }
 }
