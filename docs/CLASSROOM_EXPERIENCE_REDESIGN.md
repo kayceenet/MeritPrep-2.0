@@ -127,3 +127,8 @@ The home dashboard now follows the reference application's structural pattern: a
 ## External science-media library
 
 The Explore pillar links to 47 curated external resources from PhET Interactive Simulations, HHMI BioInteractive and LabXchange: 30 interactive simulations, 7 virtual-lab resources and 10 animations. Each resource has a topic link, a before-you-start prompt, an after-you-explore task, attribution guidance and an offline alternative. These remain external resource links, not bundled media; their current licences and commercial-use restrictions must be checked before any embedding, caching, modification or redistribution.
+
+
+## Responsive classroom shell
+
+The lesson workspace now uses a six-pillar navigation component with two presentations: a compact, auto-collapsing mode selector on phones and a fixed 268 dp section sidebar on wide layouts. Pillar selection resets the shared lesson-body scroll position. The app shell also has a compact docked bottom navigation on phones, a navigation rail on wide screens, and a quick-study launcher sheet for high-frequency destinations. The classroom header keeps back navigation, scientific calculators and lesson bookmarking available without competing with the lesson content.
