@@ -12,6 +12,13 @@ import androidx.compose.ui.unit.dp
 import kotlin.math.exp
 import kotlin.math.roundToInt
 
+internal val biologySupplementalActivityTopicIds = setOf(
+    "bio-plant-anatomy", "bio-respiration", "bio-excretion", "bio-support",
+    "bio-reproduction", "bio-coordination", "bio-ecology-factors",
+    "bio-habitats", "bio-biomes", "bio-soil", "bio-environment",
+    "bio-variation", "bio-biotechnology", "bio-evolution-evidence"
+)
+
 @Composable
 fun BiologySupplementalLessonActivity(topicId: String) {
     when (topicId) {
