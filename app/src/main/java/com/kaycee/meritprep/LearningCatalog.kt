@@ -1055,25 +1055,13 @@ private fun TopicWorkedExampleCard(topicId: String) {
         "bio-cell" -> "A cell image is 36 mm long. Its actual length is 0.18 mm. Magnification = image size ÷ actual size = 36 ÷ 0.18 = 200×."
         "bio-populations" -> "A quadrat covers 0.25 m² and contains 8 plants. Density = 8 ÷ 0.25 = 32 plants m⁻². This is a sample estimate, not a complete census."
         "bio-nutrition" -> "If a plant releases 24 cm³ of oxygen in 6 minutes, its mean oxygen production rate is 24 ÷ 6 = 4 cm³ min⁻¹. Bubble counts alone are less reliable because bubble sizes vary."
-        "chem-atomic-bonding" -> "A = Z + N",
-        "chem-nuclear" -> "N = N_0(\\frac{1}{2})^{t/t_{1/2}}",
-        "chem-organic" -> "C_nH_{2n+2} \\qquad C_nH_{2n} \\qquad C_nH_{2n-2}",
-        "chem-industry" -> "N_2 + 3H_2 \\rightleftharpoons 2NH_3",
         "chem-combination" -> "A sample contains 10.0 g of calcium carbonate, CaCO₃ (Mᵣ = 100.0). Amount = mass ÷ molar mass = 10.0 ÷ 100.0 = 0.100 mol."
         "chem-acids-bases" -> "For a strong monoprotic acid with [H⁺] = 1.0 × 10⁻³ mol dm⁻³, pH = −log₁₀[H⁺] = 3.00."
         "chem-rates" -> "If a product concentration rises from 0.10 to 0.34 mol dm⁻³ in 12 s, mean rate = Δ[product] ÷ Δt = (0.34 − 0.10) ÷ 12 = 0.020 mol dm⁻³ s⁻¹."
-        "phy-measurements" -> "\\bar{x} = \\frac{\\sum x_i}{n}",
-        "phy-vectors" -> "A_x = A\\cos\\theta \\qquad A_y = A\\sin\\theta",
         "phy-motion" -> "A trolley starts from rest and accelerates uniformly at 2.0 m s⁻² for 5.0 s. v = u + at = 0 + (2.0 × 5.0) = 10 m s⁻¹; s = ut + ½at² = 25 m."
         "phy-current-electricity", "phy-cells" -> "A 12 V supply is connected across a 4.0 Ω resistor. I = V ÷ R = 12 ÷ 4.0 = 3.0 A; P = VI = 36 W."
-        "phy-temperature" -> "T(K) = \\theta(°C) + 273.15",
-        "phy-thermal-expansion" -> "\\Delta L = \\alpha L_0 \\Delta T",
-        "phy-heat-quantity" -> "Q = mc\\Delta T",
-        "phy-change-state" -> "Q = mL",
-        "phy-vapours" -> "RH = \\frac{p_v}{p_{sat}} \\times 100\\%",
         "phy-pressure" -> "A force of 120 N acts normally on an area of 0.020 m². Pressure = F ÷ A = 120 ÷ 0.020 = 6,000 Pa."
         "phy-liquids-rest" -> "At 0.50 m depth in fresh water, p = ρgh = 1000 × 9.81 × 0.50 = 4.91 × 10³ Pa gauge pressure."
-        "phy-heat-transfer", "phy-conduction" -> "\\frac{Q}{t} = \\frac{kA\\Delta T}{L}",
         "phy-waves", "phy-sound-propagation" -> "A wave has frequency 50 Hz and wavelength 0.68 m. Wave speed v = fλ = 50 × 0.68 = 34 m s⁻¹."
         "phy-machines" -> "A machine lifts a 300 N load with a 100 N effort. Mechanical advantage = load ÷ effort = 3.0. If velocity ratio is 4.0, efficiency = (3 ÷ 4) × 100 = 75%."
         else -> ""
@@ -1092,44 +1080,56 @@ private fun TopicWorkedExampleCard(topicId: String) {
 @Composable
 private fun TopicEquationPanel(topicId: String) {
     val formula = when (topicId) {
-        "bio-cell" -> "M = \\frac{\\text{image size}}{\\text{actual size}}"
-        "bio-nutrition" -> "6CO_2 + 6H_2O \\rightarrow C_6H_{12}O_6 + 6O_2"
-        "bio-respiration" -> "C_6H_{12}O_6 + 6O_2 \\rightarrow 6CO_2 + 6H_2O + \\text{energy}"
-        "bio-transport" -> "\\Psi = \\Psi_s + \\Psi_p \\qquad \\Psi_s = -iCRT"
-        "bio-populations" -> "D = \\frac{N}{A}"
-        "bio-heredity" -> "P: Bb \\times Bb \\qquad F_2 = 1:2:1"
-        "bio-biotechnology" -> "C_6H_{12}O_6 \\rightarrow 2C_2H_5OH + 2CO_2"
-        "chem-combination" -> "n = \\frac{m}{M} \\qquad c = \\frac{n}{V} \\qquad N = nN_A"
-        "chem-rates" -> "\\text{Rate} = \\frac{\\Delta[\\text{product}]}{\\Delta t}"
-        "chem-acids-bases" -> "pH = -\\log_{10}[H^+]"
-        "chem-electrolysis" -> "Q = It \\qquad m = \\frac{MIt}{zF}"
-        "chem-equilibrium" -> "K_c = \\frac{[C]^c[D]^d}{[A]^a[B]^b}"
-        "chem-kinetic-gas" -> "pV = nRT"
-        "chem-energy" -> "q = mc\\Delta T"
-        "chem-solubility" -> "S = \\frac{m_{\\text{solute}}}{m_{\\text{solvent}}} \\times 100"
-        "phy-motion" -> "v = u + at \\qquad s = ut + \\frac{1}{2}at^2"
+        "bio-cell" -> "M = \\frac{\\text{image size}}{\\text{actual size}}",
+        "bio-nutrition" -> "6CO_2 + 6H_2O \\rightarrow C_6H_{12}O_6 + 6O_2",
+        "bio-respiration" -> "C_6H_{12}O_6 + 6O_2 \\rightarrow 6CO_2 + 6H_2O + \\text{energy}",
+        "bio-transport" -> "\\Psi = \\Psi_s + \\Psi_p \\qquad \\Psi_s = -iCRT",
+        "bio-populations" -> "D = \\frac{N}{A}",
+        "bio-heredity" -> "P: Bb \\times Bb \\qquad F_2 = 1:2:1",
+        "bio-biotechnology" -> "C_6H_{12}O_6 \\rightarrow 2C_2H_5OH + 2CO_2",
+        "chem-atomic-bonding" -> "A = Z + N",
+        "chem-nuclear" -> "N = N_0(\\frac{1}{2})^{t/t_{1/2}}",
+        "chem-organic" -> "C_nH_{2n+2} \\qquad C_nH_{2n} \\qquad C_nH_{2n-2}",
+        "chem-industry" -> "N_2 + 3H_2 \\rightleftharpoons 2NH_3",
+        "chem-combination" -> "n = \\frac{m}{M} \\qquad c = \\frac{n}{V} \\qquad N = nN_A",
+        "chem-rates" -> "\\text{Rate} = \\frac{\\Delta[\\text{product}]}{\\Delta t}",
+        "chem-acids-bases" -> "pH = -\\log_{10}[H^+]",
+        "chem-electrolysis" -> "Q = It \\qquad m = \\frac{MIt}{zF}",
+        "chem-equilibrium" -> "K_c = \\frac{[C]^c[D]^d}{[A]^a[B]^b}",
+        "chem-kinetic-gas" -> "pV = nRT",
+        "chem-energy" -> "q = mc\\Delta T",
+        "chem-solubility" -> "S = \\frac{m_{\\text{solute}}}{m_{\\text{solvent}}} \\times 100",
+        "phy-measurements" -> "\\bar{x} = \\frac{\\sum x_i}{n}",
+        "phy-vectors" -> "A_x = A\\cos\\theta \\qquad A_y = A\\sin\\theta",
+        "phy-motion" -> "v = u + at \\qquad s = ut + \\frac{1}{2}at^2",
         "phy-equilibrium" -> "\\sum F_x = 0 \\qquad \\sum F_y = 0 \\qquad \\sum \\tau = 0",
         "phy-friction" -> "F_f \\leq \\mu R",
         "phy-elasticity" -> "F = kx \\qquad E = \\frac{1}{2}kx^2",
-        "phy-work-energy" -> "W = Fd\\cos\\theta \\qquad P = \\frac{W}{t}"
-        "phy-machines" -> "MA = \\frac{L}{E} \\qquad \\eta = \\frac{MA}{VR} \\times 100\\%"
-        "phy-pressure" -> "p = \\frac{F}{A}"
-        "phy-liquids-rest" -> "p = \\rho gh"
-        "phy-gas-laws" -> "pV = nRT \\qquad \\frac{V_1}{T_1} = \\frac{V_2}{T_2}"
-        "phy-waves", "phy-sound-propagation", "phy-sound-characteristics" -> "v = f\\lambda \\qquad T = \\frac{1}{f}"
-        "phy-cells", "phy-current-electricity" -> "V = IR \\qquad P = VI = I^2R = \\frac{V^2}{R}"
+        "phy-work-energy" -> "W = Fd\\cos\\theta \\qquad P = \\frac{W}{t}",
+        "phy-machines" -> "MA = \\frac{L}{E} \\qquad \\eta = \\frac{MA}{VR} \\times 100\\%",
+        "phy-temperature" -> "T(K) = \\theta(°C) + 273.15",
+        "phy-thermal-expansion" -> "\\Delta L = \\alpha L_0 \\Delta T",
+        "phy-heat-quantity" -> "Q = mc\\Delta T",
+        "phy-change-state" -> "Q = mL",
+        "phy-vapours" -> "RH = \\frac{p_v}{p_{sat}} \\times 100\\%",
+        "phy-pressure" -> "p = \\frac{F}{A}",
+        "phy-liquids-rest" -> "p = \\rho gh",
+        "phy-gas-laws" -> "pV = nRT \\qquad \\frac{V_1}{T_1} = \\frac{V_2}{T_2}",
+        "phy-heat-transfer", "phy-conduction" -> "\\frac{Q}{t} = \\frac{kA\\Delta T}{L}",
+        "phy-waves", "phy-sound-propagation", "phy-sound-characteristics" -> "v = f\\lambda \\qquad T = \\frac{1}{f}",
+        "phy-cells", "phy-current-electricity" -> "V = IR \\qquad P = VI = I^2R = \\frac{V^2}{R}",
         "phy-reflection" -> "i = r",
         "phy-optical-instruments" -> "\\frac{1}{f} = \\frac{1}{u} + \\frac{1}{v}",
-        "phy-gravity" -> "F = G\\frac{m_1m_2}{r^2} \\qquad g = \\frac{GM}{r^2}"
-        "phy-light-energy" -> "E = hf \\qquad c = f\\lambda"
-        "phy-refraction" -> "n = \\frac{c}{v} = \\frac{\\sin i}{\\sin r}"
-        "phy-electrostatics" -> "F = k\\frac{|q_1q_2|}{r^2}"
-        "phy-capacitors" -> "Q = CV \\qquad E = \\frac{1}{2}CV^2"
-        "phy-magnetism" -> "F = BIL",
+        "phy-gravity" -> "F = G\\frac{m_1m_2}{r^2} \\qquad g = \\frac{GM}{r^2}",
+        "phy-light-energy" -> "E = hf \\qquad c = f\\lambda",
+        "phy-refraction" -> "n = \\frac{c}{v} = \\frac{\\sin i}{\\sin r}",
+        "phy-electrostatics" -> "F = k\\frac{|q_1q_2|}{r^2}",
+        "phy-capacitors" -> "Q = CV \\qquad E = \\frac{1}{2}CV^2",
+        "phy-magnetism" -> "B = \\mu_0 nI",
         "phy-induction" -> "\\mathcal{E} = -N\\frac{\\Delta\\Phi}{\\Delta t}",
-        "phy-magnetic-force" -> "F = BIL\\sin\\theta"
-        "phy-ac-circuits" -> "V_{rms} = \\frac{V_0}{\\sqrt{2}}"
-        "phy-modern" -> "E = mc^2 \\qquad E = hf"
+        "phy-magnetic-force" -> "F = BIL\\sin\\theta",
+        "phy-ac-circuits" -> "V_{rms} = \\frac{V_0}{\\sqrt{2}}",
+        "phy-modern" -> "E = mc^2 \\qquad E = hf",
         else -> ""
     }
     if (formula.isNotBlank()) EquationDisplayCard(formula = formula, caption = "CORE RELATIONSHIPS")
