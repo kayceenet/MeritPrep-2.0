@@ -17,7 +17,7 @@ class ChemistryWaecTheoryBankTest {
         )
         assertTrue(required.all { it in tasks })
         assertTrue(tasks.getValue("waec-chem-theory-gas-08").guidance.contains("kelvin", ignoreCase = true))
-        assertTrue(tasks.getValue("waec-chem-theory-rates-09").guidance.contains("activation energy", ignoreCase = true))
+        assertTrue(tasks.getValue("waec-chem-theory-rates-09").markingPoints.any { it.contains("activation energy", ignoreCase = true) })
         assertTrue(tasks.getValue("waec-chem-theory-metals-12").markingPoints.any { it.contains("Fe₂O₃ + 3CO") })
     }
 
