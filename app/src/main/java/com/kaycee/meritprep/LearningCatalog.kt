@@ -861,7 +861,8 @@ fun LessonScreen(topicId: String) {
 
                 LessonStage.EXPLORE -> {
                     Text("Apply the idea to a realistic scientific situation. Decide what the evidence supports before revealing the explanation.", style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                    TopicScenarioActivity(topicId)
+                    val hasScenario = TopicScenarioActivity(topicId)
+                    if (!hasScenario) TopicScenarioReflectionCard(topicId, topic.title)
                     ScienceMediaTopicSection(topicId)
                 }
 
