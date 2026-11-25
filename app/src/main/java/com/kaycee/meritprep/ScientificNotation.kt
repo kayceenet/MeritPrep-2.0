@@ -52,7 +52,7 @@ object ScientificNotation {
         "\\pi" to "π", "\\alpha" to "α", "\\beta" to "β",
         "\\gamma" to "γ", "\\omega" to "ω", "\\Omega" to "Ω",
         "\\sigma" to "σ", "\\Sigma" to "Σ", "\\phi" to "φ",
-        "\\epsilon" to "ε", "\\infty" to "∞", "\\degree" to "°",
+        "\\epsilon" to "ε", "\\varepsilon" to "ϵ", "\\tau" to "τ", "\\nu" to "ν", "\\kappa" to "κ", "\\chi" to "χ", "\\zeta" to "ζ", "\\Gamma" to "Γ", "\\Theta" to "Θ", "\\Lambda" to "Λ", "\\Phi" to "Φ", "\\Pi" to "Π", "\\Xi" to "Ξ", "\\Upsilon" to "Υ", "\\nabla" to "∇", "\\partial" to "∂", "\\cdots" to "⋯", "\\ldots" to "…", "\\equiv" to "≡", "\\in" to "∈", "\\notin" to "∉", "\\subset" to "⊂", "\\cup" to "∪", "\\cap" to "∩", "\\infty" to "∞", "\\degree" to "°",
         "\\perp" to "⊥", "\\parallel" to "∥", "\\sum" to "Σ",
         "\\int" to "∫", "\\therefore" to "∴", "\\because" to "∵", "\\qquad" to "     ", "\\quad" to "   ", "\\log" to "log", "\\sin" to "sin", "\\cos" to "cos", "\\eta" to "η", "\\Psi" to "Ψ", "\\psi" to "ψ"
     )
@@ -67,7 +67,7 @@ object ScientificNotation {
         value = replaceBracedFunction(value, "\\frac") { a, b -> "($a)⁄($b)" }
         value = replaceBracedFunction(value, "\\dfrac") { a, b -> "($a)⁄($b)" }
         value = replaceBracedFunction(value, "\\sqrt") { a, _ -> "√($a)" }
-        listOf("\\mathrm", "\\text", "\\mathbf", "\\ce", "\\operatorname").forEach { cmd ->
+        listOf("\\mathrm", "\\text", "\\mathbf", "\\ce", "\\operatorname", "\\mathcal", "\\mathbb", "\\boldsymbol").forEach { cmd ->
             value = replaceSingleBraced(value, cmd)
         }
         commands.entries.sortedByDescending { it.key.length }.forEach { (key, replacement) -> value = value.replace(key, replacement) }
