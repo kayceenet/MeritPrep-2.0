@@ -203,6 +203,7 @@ fun ScienceMediaScreen(onOpenLabs: () -> Unit, onOpenLesson: (String) -> Unit) {
             val restoredProgress = remember(resource.id) { decodeScienceMediaProgress(database.getNoteBody(noteId)) }
             var resourceOpened by remember(resource.id) { mutableStateOf(restoredProgress.first) }
             var reflection by remember(resource.id) { mutableStateOf(restoredProgress.second) }
+            var reflectionSaved by remember(resource.id) { mutableStateOf(restoredProgress.second.isNotBlank()) }
             Card(modifier = Modifier.fillMaxWidth()) {
                 Column(Modifier.padding(15.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                     Text(resource.title, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
@@ -222,7 +223,7 @@ fun ScienceMediaScreen(onOpenLabs: () -> Unit, onOpenLesson: (String) -> Unit) {
                     Text("Permitted use: ${resource.permittedUse}", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                     OutlinedTextField(
                         value = reflection,
-                        onValueChange = { reflection = it },
+                        onValueChange = { reflection = it; reflectionSaved = false },
                         label = { Text("Your observation and reflection") },
                         placeholder = { Text("What did you observe? What evidence supports your explanation?") },
                         minLines = 3,
@@ -239,6 +240,7 @@ fun ScienceMediaScreen(onOpenLabs: () -> Unit, onOpenLesson: (String) -> Unit) {
                                 "Science media reflection · ${resource.title}",
                                 record.toString()
                             )
+                            reflectionSaved = true
                         },
                         enabled = reflection.isNotBlank(),
                         modifier = Modifier.fillMaxWidth()
@@ -246,7 +248,7 @@ fun ScienceMediaScreen(onOpenLabs: () -> Unit, onOpenLesson: (String) -> Unit) {
                         Text("Save reflection on this device")
                     }
                     if (resourceOpened) {
-                        Text("Original resource opened · reflection status: ${if (reflection.isBlank()) "not yet saved" else "saved when you tap Save"}", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary)
+                        Text("Original resource opened · reflection: ${if (reflectionSaved) "saved on this device" else "not yet saved"}", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary)
                     }
                     if (linkedTopic != null) {
                         OutlinedButton(
