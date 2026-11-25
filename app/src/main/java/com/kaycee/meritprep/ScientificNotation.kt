@@ -4,10 +4,14 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.IntrinsicSize
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
@@ -160,13 +164,13 @@ fun EquationDisplayCard(
         shape = RoundedCornerShape(16.dp),
         color = MaterialTheme.colorScheme.surface
     ) {
-        Row(Modifier.background(MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.25f))) {
-            androidx.compose.foundation.layout.Box(Modifier.padding(start = 4.dp).fillMaxWidth(0.012f).background(MaterialTheme.colorScheme.primary))
+        Row(Modifier.fillMaxWidth().height(IntrinsicSize.Min).background(MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.25f))) {
+            androidx.compose.foundation.layout.Box(Modifier.width(4.dp).fillMaxHeight().background(MaterialTheme.colorScheme.primary))
             Column(Modifier.weight(1f).padding(14.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 Text(caption, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
                 lines.forEach { line ->
                     Row(Modifier.fillMaxWidth().horizontalScroll(rememberScrollState())) {
-                        Text(ScientificNotation.format(line), style = MaterialTheme.typography.headlineSmall.copy(fontFamily = FontFamily.Serif, fontWeight = FontWeight.SemiBold), color = MaterialTheme.colorScheme.onSurface, maxLines = 1)
+                        Text(ScientificNotation.annotated(line), style = MaterialTheme.typography.headlineSmall.copy(fontFamily = FontFamily.Serif, fontWeight = FontWeight.SemiBold), color = MaterialTheme.colorScheme.onSurface, maxLines = 1)
                     }
                 }
             }
