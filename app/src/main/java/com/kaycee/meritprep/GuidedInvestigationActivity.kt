@@ -356,6 +356,7 @@ fun GuidedInvestigationActivity(topicId: String) {
                 0 -> {
                     Text("Investigative question", fontWeight = FontWeight.Bold); Text(profile.question)
                     Text("Apparatus and materials", fontWeight = FontWeight.Bold); Text(profile.apparatus)
+                    InvestigationApparatusIllustration(topicId)
                     Text("Safety and precautions", fontWeight = FontWeight.Bold); Text(profile.safety, color = MaterialTheme.colorScheme.error)
                     Text("Model scope", fontWeight = FontWeight.Bold); Text(profile.limitation)
                 }
