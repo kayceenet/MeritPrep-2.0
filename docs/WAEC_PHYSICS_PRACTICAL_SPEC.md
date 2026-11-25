@@ -88,7 +88,7 @@ Each task has a mark total, answer-writing space, indicative marking points and 
 ## Important limitations
 
 - The readings are simulated learning data, not observations from a physical experiment.
-- The five tasks are original MeritPrep exercises, not official WAEC past questions.
+- The nine tasks are original MeritPrep exercises, not official WAEC past questions.
 - The app does not automatically award marks to free-text answers.
 - The displayed graph is a worked visual aid. It does not assess the learner's ability to choose graph-paper scales and plot points manually.
 - The current set does not assess practical apparatus handling, formal measurement uncertainty, error bars or a complete Paper 3 examination. The datasets are illustrative and do not replace repeated physical measurements.
