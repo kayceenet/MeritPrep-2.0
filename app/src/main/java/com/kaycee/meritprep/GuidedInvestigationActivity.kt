@@ -447,6 +447,36 @@ internal object InvestigationProfiles {
             "Secure the magnet and coil; keep strong magnets away from sensitive electronics and medical devices.",
             listOf("Connect the coil to a sensitive galvanometer", "Move the magnet through the coil at controlled speeds", "Record deflection or induced voltage", "Repeat with different speeds and coil turns", "Relate induced emf to the rate of flux-linkage change"),
             "Faraday-law proportionality model; the sign gives direction and is not represented by the magnitude-only response.", { x -> 100f * x }, 0f, 0.05f, 0.02f)
+        "chem-atomic-bonding" -> profile("Ionic formula and charge balance", "How do ionic charges determine the simplest neutral formula unit?",
+            "Positive and negative ion cards, charge counters and formula worksheet", "Magnitude of cation charge", "Number of anions in the simplest formula unit", "Anion charge fixed at 2− and lowest whole-number ratio",
+            "charge units", "ions",
+            "A symbolic model only; do not mix unknown chemicals or infer bonding from formula alone.",
+            listOf("Write the cation and anion charges", "Find the smallest whole-number ratio that balances total charge", "Write the formula unit with correct subscripts", "Check that the net charge is zero", "Repeat with different ion charges"),
+            "Discrete charge-balance model for a fixed 2− anion; covalent bonding and polyatomic-ion structure are not represented.", { x -> if (x.roundToInt() == 2) 1f else 2f }, 1f, 3f, 1f)
+        "chem-nonmetals" -> profile("Qualitative gas identification", "How can independent chemical tests distinguish common laboratory gases?",
+            "Gas jars, damp litmus, glowing and lighted splints, limewater and approved small gas samples", "Number of independent diagnostic tests", "Evidence-strength index", "Sample identity, test conditions and reagent freshness",
+            "tests", "index",
+            "Use only teacher-prepared small samples in a well-ventilated laboratory. Never generate or inhale toxic gases; chlorine and sulfur dioxide require specialist controls.",
+            listOf("Observe the sample without directly inhaling it", "Select an appropriate confirmatory test", "Record the exact observation", "Compare the observation with the expected gas-test table", "Use a second independent test where safe and appropriate"),
+            "Evidence index is a teaching aid; real gas identification depends on specific observations and validated test procedures.", { x -> 25f * x }, 1f, 4f, 2f)
+        "chem-metals" -> profile("Metal displacement and reactivity", "How does the relative reactivity of a solid metal affect displacement of a less reactive metal ion?",
+            "Approved metal strips, dilute salt solutions, test tubes, forceps and observation sheet", "Relative reactivity rank of the solid metal", "Displacement tendency index", "Ion concentration, solution volume, temperature and surface condition",
+            "rank", "index",
+            "Wear goggles and gloves, use only dilute teacher-approved solutions and dispose of metal-ion waste correctly.",
+            listOf("Clean approved metal strips", "Place each metal in the specified salt solution", "Observe colour change or metal deposition", "Record which combinations react", "Arrange the tested metals in a justified reactivity order"),
+            "Ordinal teaching index only; actual displacement depends on the redox couple, concentration, passivation and reaction conditions.", { x -> 20f * x }, 1f, 5f, 3f)
+        "chem-industry" -> profile("Haber-process equilibrium model", "How does pressure influence the equilibrium position for ammonia synthesis?",
+            "Balanced-equation cards, pressure control simulation and equilibrium data sheet", "Relative pressure", "Illustrative equilibrium-yield index", "Temperature, feed ratio and catalyst condition",
+            "relative units", "index",
+            "This is a digital model only. Do not attempt high-pressure ammonia synthesis outside a licensed industrial facility.",
+            listOf("Write and balance N₂ + 3H₂ ⇌ 2NH₃", "Count gaseous molecules on each side", "Predict the effect of increasing pressure", "Compare the model's equilibrium direction", "Explain why temperature changes the equilibrium constant but a catalyst does not"),
+            "The displayed yield index is qualitative and not an industrial yield prediction; real yield depends on temperature, pressure, composition and process design.", { x -> 100f * x / (x + 100f) }, 10f, 500f, 100f)
+        "chem-astro" -> profile("Emission spectra and photon energy", "How does the wavelength of an emitted spectral line relate to photon energy?",
+            "Diffraction grating spectroscope, approved discharge-tube spectra or calibrated spectral images", "Emission wavelength", "Photon energy", "Spectroscope calibration, light source and spectral-line identification",
+            "nm", "eV",
+            "Use enclosed low-voltage discharge tubes under supervision. Never look directly at the Sun or an intense light source.",
+            listOf("Calibrate the wavelength scale", "Observe or inspect the emission spectrum", "Identify a characteristic line", "Record its wavelength", "Calculate photon energy using E = hc/λ and compare line patterns"),
+            "Photon-energy calculation uses E = hc/λ; line positions identify transitions but do not alone determine every property of a star.", { x -> 1239.84f / x }, 400f, 700f, 589f)
         else -> null
     }
 }
