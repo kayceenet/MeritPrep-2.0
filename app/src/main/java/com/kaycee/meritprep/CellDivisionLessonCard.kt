@@ -51,6 +51,7 @@ fun CellDivisionLessonCard() {
                     Text("Chromosome sets: ${stage.chromosomeSetsPerCell}")
                     Text("Chromosomes in the cell: ${stage.chromosomeCountPerCell}")
                     Text("Chromatids in the cell: ${stage.chromatidCountPerCell}")
+                    Text("DNA content: ${stage.dnaContentPerCell}")
                     if (stage.daughterCellsAtEnd > 0) Text("Cells produced at this division: ${stage.daughterCellsAtEnd}")
                 }
             }
