@@ -130,7 +130,11 @@ private fun WaecEnergyFlowActivity() {
 @Composable
 private fun WaecToleranceRangeActivity() {
     var factor by remember { mutableFloatStateOf(50f) }
-    val response = (100f - 2.5f * kotlin.math.abs(factor - 50f)).coerceAtLeast(0f)
+    val response = when {
+        factor <= 20f || factor >= 80f -> 0f
+        factor <= 50f -> (factor - 20f) / 30f * 100f
+        else -> (80f - factor) / 30f * 100f
+    }
     val zone = when {
         factor < 20f -> "Below the modelled minimum: the organism cannot maintain a viable population."
         factor > 80f -> "Above the modelled maximum: the condition exceeds the tolerance range."
