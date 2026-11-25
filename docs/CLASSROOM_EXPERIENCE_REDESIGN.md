@@ -122,3 +122,8 @@ The six lesson pillars now follow a sequential mastery path: Learn → Examples 
 ## Dashboard navigation and discovery
 
 The home dashboard now follows the reference application's structural pattern: a clear continue-learning destination, search across lesson titles/objectives/explanations, subject filters, progress and accuracy metrics, due-review count, and grouped quick actions for practice, virtual labs, revision, saved lessons, study planning and science media. The dashboard derives its progress from the implemented lesson set rather than counting syllabus-outline placeholders as completed lessons. No course explanations or lesson write-ups were taken from the reference repository.
+
+
+## External science-media library
+
+The Explore pillar links to 38 curated external resources from PhET Interactive Simulations, HHMI BioInteractive and LabXchange: 30 interactive simulations, 7 virtual-lab resources and 1 animation. Each resource has a topic link, a before-you-start prompt, an after-you-explore task, attribution guidance and an offline alternative. These remain external resource links, not bundled media; their current licences and commercial-use restrictions must be checked before any embedding, caching, modification or redistribution.
