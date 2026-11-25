@@ -232,6 +232,9 @@ fun ScienceMediaScreen(onOpenLabs: () -> Unit, onOpenLesson: (String) -> Unit) {
                                         FilterChip(selected = selectedAboParentTwoIndex == actualIndex, onClick = { selectedAboParentTwoIndex = actualIndex }, label = { Text(genotype.notation) })
                                     }
                                 }
+                                Text("Parent 1 gametes: ${aboGenotypes[selectedAboParentOneIndex].gametes.joinToString(" or ") { it.notation }}")
+                                Text("Parent 2 gametes: ${aboGenotypes[selectedAboParentTwoIndex].gametes.joinToString(" or ") { it.notation }}")
+                                Text("Each offspring receives one allele from each parent. The four boxes show equally likely combinations in this model.")
                                 Text("Possible offspring genotypes", fontWeight = FontWeight.SemiBold)
                                 Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                                     aboResult.fourPossibleCombinations.take(2).forEach { genotype ->
