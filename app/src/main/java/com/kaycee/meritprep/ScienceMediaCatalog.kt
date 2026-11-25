@@ -202,8 +202,7 @@ object ScienceMediaCatalog {
             beforeYouStart = "Predict how the acceleration of an object changes when the net force increases while mass remains constant.",
             afterYouExplore = "Use Newton's second law to explain the pattern you observed and identify the role of friction.",
             offlineAlternative = "Use MeritPrep's local uniformly accelerated motion and force lessons."
-        )
-
+        ),
         ScienceMediaResource(
             id = "bio-labxchange-osmosis",
             title = "Osmosis and medicine: why saline is used for IV fluids",
