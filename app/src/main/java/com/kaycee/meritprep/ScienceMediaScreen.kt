@@ -72,6 +72,29 @@ fun ScienceMediaScreen(onOpenLabs: () -> Unit) {
                 }
             }
         }
+        if (selectedSubject == 0 || selectedSubject == 1) {
+            item {
+                Card(modifier = Modifier.fillMaxWidth()) {
+                    Column(Modifier.padding(15.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                        Text("MeritPrep interactive model: photosynthesis", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+                        Text("Change one condition at a time and observe which factor limits the illustrative photosynthesis rate.")
+                        Text("Light intensity index: ${lightIntensity.toInt()}")
+                        Slider(value = lightIntensity, onValueChange = { lightIntensity = it }, valueRange = 0f..100f)
+                        Text("Carbon dioxide availability index: ${carbonDioxideIndex.toInt()}")
+                        Slider(value = carbonDioxideIndex, onValueChange = { carbonDioxideIndex = it }, valueRange = 0f..100f)
+                        Text("Temperature: ${temperatureCelsius.toInt()} °C")
+                        Slider(value = temperatureCelsius, onValueChange = { temperatureCelsius = it }, valueRange = 0f..45f)
+                        Text("Illustrative relative rate index: ${"%.1f".format(photosynthesis.relativeRatePercent)}%", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+                        Text("Limiting factor: ${photosynthesis.limitingFactor}", color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.SemiBold)
+                        Text("Light response: ${"%.1f".format(photosynthesis.lightResponsePercent)}% · CO₂ response: ${"%.1f".format(photosynthesis.carbonDioxideResponsePercent)}% · Temperature response: ${"%.1f".format(photosynthesis.temperatureResponsePercent)}%", style = MaterialTheme.typography.bodySmall)
+                        Text(photosynthesis.explanation)
+                        Text("Investigation prompt", fontWeight = FontWeight.SemiBold)
+                        Text("Keep two conditions fixed. Change the third in steps and record the relative index. When does increasing that factor stop increasing the modelled rate?")
+                        Text("Model limitation: this is a simplified limiting-factor demonstration. Its response curves and 30 °C illustrative optimum are not measured values and are not universal for all plant species or conditions.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    }
+                }
+            }
+        }
         items(resources, key = { it.id }) { resource ->
             Card(modifier = Modifier.fillMaxWidth()) {
                 Column(Modifier.padding(15.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
