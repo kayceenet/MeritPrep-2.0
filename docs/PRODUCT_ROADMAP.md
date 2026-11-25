@@ -77,3 +77,6 @@ Authenticated sync, teacher/admin CMS, analytics, backups, privacy and security 
 
 
 **Structured-response practice:** added an eight-mark original WAEC-style theory task comparing mitosis and meiosis using a diploid example (2n = 6). Its eight marking points assess chromosome behaviour, crossing over, chromosome reduction, daughter-cell outcomes, genetic variation and biological importance. A regression test checks the task and marking guide.
+
+
+**ABO inheritance explorer:** added a tested multiple-allele model for the ABO blood-group system and an interactive parent-genotype cross. It teaches the codominance of Iᴬ and Iᴮ, dominance of each over i, all six common genotypes and four phenotypes. The model explicitly excludes Rh(D), transfusion compatibility and rare variants.
