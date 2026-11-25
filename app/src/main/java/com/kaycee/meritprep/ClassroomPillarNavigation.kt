@@ -15,11 +15,11 @@ internal fun ClassroomPillarNavigation(
     stage: LessonStage,
     completed: Set<LessonStage>,
     bodyScroll: androidx.compose.foundation.ScrollState,
+    isTablet: Boolean,
     onSelect: (LessonStage) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    BoxWithConstraints(modifier.fillMaxWidth()) {
-        if (maxWidth >= 720.dp) {
+        if (isTablet) {
             Column(
                 Modifier.width(268.dp).fillMaxHeight().padding(start = 12.dp, end = 12.dp, top = 12.dp, bottom = 12.dp),
                 verticalArrangement = Arrangement.spacedBy(8.dp)
@@ -92,5 +92,4 @@ internal fun ClassroomPillarNavigation(
                 }
             }
         }
-    }
 }
