@@ -79,4 +79,13 @@ class ScienceMediaCatalogTest {
         assertTrue("Catalogue should contain a broad range of resources", ScienceMediaCatalog.resources.size >= 30)
     }
 
+
+    @Test
+    fun licensedCommonsGifsAreIncludedAsExternalAnimations() {
+        val commonsGifs = ScienceMediaCatalog.resources.filter { it.provider.startsWith("Wikimedia Commons — ") }
+        assertEquals(6, commonsGifs.size)
+        assertTrue(commonsGifs.all { it.mediaType == ScienceMediaType.ANIMATION })
+        assertTrue(commonsGifs.all { it.sourceUrl.startsWith("https://commons.wikimedia.org/wiki/File:") })
+        assertTrue(commonsGifs.all { it.licenceName.contains("Creative Commons") || it.licenceName.contains("CC0") })
+    }
 }
