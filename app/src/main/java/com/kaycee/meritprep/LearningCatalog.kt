@@ -924,7 +924,7 @@ fun LessonScreen(topicId: String) {
                                         enabled = !exerciseChecked,
                                         modifier = Modifier.fillMaxWidth(),
                                         colors = ButtonDefaults.outlinedButtonColors(containerColor = if (selectedIndex == index) MaterialTheme.colorScheme.secondaryContainer else MaterialTheme.colorScheme.surface)
-                                    ) { Text(('A' + index) + ".  " + option, modifier = Modifier.fillMaxWidth()) }
+                                    ) { ScientificText(('A' + index) + ".  " + option, modifier = Modifier.fillMaxWidth(), style = MaterialTheme.typography.bodyMedium) }
                                 }
                                 if (exerciseChecked) {
                                     val correct = selectedIndex == question.correctPresentedIndex
