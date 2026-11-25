@@ -29,6 +29,8 @@ class ScienceMediaCatalogTest {
             assertTrue(resource.id, resource.afterYouExplore.isNotBlank())
             assertTrue(resource.id, resource.offlineAlternative.isNotBlank())
             assertTrue(resource.id, resource.sourceUrl.startsWith("https://"))
+            assertTrue(resource.id, resource.creatorOrPublisher.isNotBlank())
+            assertTrue(resource.id, resource.attributionText.isNotBlank())
         }
     }
 
