@@ -376,42 +376,12 @@ internal object InvestigationProfiles {
             "Secure the force board and masses; keep feet clear of suspended loads.",
             listOf("Set two equal known forces", "Change the angle between their directions", "Determine the resultant using the force board", "Calculate the resultant using the cosine rule", "Compare graphical and calculated results"),
             "Ideal two-force model with equal 10 N forces; friction and pulley mass are neglected.", { x -> kotlin.math.sqrt(200f + 200f * kotlin.math.cos(Math.toRadians(x.toDouble()).toFloat())) }, 0f, 180f, 90f)
-        "phy-pressure" -> profile("Pressure and contact area", "How does contact area affect pressure when the applied force is constant?",
-            "Load, flat blocks with different face areas, balance and area-measuring tools", "Contact area", "Pressure", "Same load, surface and orientation",
-            "m²", "Pa",
-            "Use stable loads and keep hands clear when changing block orientation.",
-            listOf("Measure the contact area of each face", "Apply the same normal force", "Calculate pressure from force divided by area", "Repeat for each contact area", "Plot pressure against reciprocal area"),
-            "Ideal normal-force model; assumes the force is uniformly distributed over the contact face.", { x -> 100f / x }, 0.01f, 0.1f, 0.05f)
-        "phy-gas-laws" -> profile("Pressure and absolute temperature", "How does gas pressure vary with absolute temperature at constant volume?",
-            "Low-pressure gas vessel, pressure sensor, thermometer and controlled water bath", "Absolute temperature", "Gas pressure", "Gas amount, vessel volume and leak tightness",
-            "K", "relative kPa",
-            "Never heat a sealed rigid vessel in a classroom; use an approved low-pressure apparatus and teacher-supervised method.",
-            listOf("Record initial pressure and absolute temperature", "Change temperature in controlled steps", "Allow the gas to reach thermal equilibrium", "Record pressure at each temperature", "Plot pressure against kelvin temperature"),
-            "Ideal-gas proportionality at fixed volume; pressure is shown as a scaled model output.", { x -> 0.02f * x }, 100f, 500f, 300f)
         "phy-change-state" -> profile("Latent heat of fusion", "How does the mass of ice affect the energy required to melt it at its melting point?",
             "Crushed ice, insulated calorimeter, balance, thermometer and electrical heater or approved energy source", "Mass of ice", "Energy required for melting", "Initial temperature, pressure, insulation and ice condition",
             "kg", "J",
             "Keep electrical connections dry; use low-voltage equipment and handle meltwater safely.",
             listOf("Prepare ice at its melting point", "Measure the mass of ice", "Supply or estimate the energy needed for melting", "Record the mass melted", "Use Q = mL to determine specific latent heat"),
             "Uses the accepted approximate latent heat of fusion of pure ice; heat exchange with the surroundings is neglected.", { x -> 334000f * x }, 0.1f, 2f, 0.5f)
-        "phy-heat-transfer" -> profile("Steady thermal conduction", "How does temperature difference affect the rate of heat transfer through a slab?",
-            "Metal bar or slab, low-voltage heater, thermometers, insulation and stopwatch", "Temperature difference across the slab", "Heat-transfer rate", "Material, cross-sectional area, thickness and steady-state condition",
-            "K", "W",
-            "Use low-voltage heaters, avoid hot surfaces and allow the apparatus to cool before handling.",
-            listOf("Measure the slab dimensions", "Set up the heater and temperature sensors", "Wait for steady conditions", "Record temperature difference and energy transferred per unit time", "Compare rate with temperature difference"),
-            "One-dimensional steady conduction model with fixed material conductivity and negligible edge losses.", { x -> 100f * x }, 1f, 100f, 20f)
-        "phy-waves" -> profile("Wave frequency and wavelength", "How does wavelength change when frequency changes at constant wave speed?",
-            "Ripple tank or slinky, wave generator, ruler and frequency control", "Wave frequency", "Wavelength", "Wave medium and tension or water depth",
-            "Hz", "m",
-            "Keep water away from electrical equipment and secure the wave apparatus.",
-            listOf("Set a constant wave medium and depth", "Generate waves at a known frequency", "Measure the distance across several wavefronts", "Calculate the mean wavelength", "Repeat at different frequencies and compare fλ"),
-            "Uses a fixed illustrative wave speed of 2.0 m s⁻¹; real speed depends on the medium and wave conditions.", { x -> 2f / x }, 1f, 20f, 5f)
-        "phy-sound-propagation" -> profile("Echo and speed of sound", "How does echo time relate to the distance of a reflecting surface?",
-            "Echo timer or sound sensor, measured wall distance and stopwatch", "Round-trip echo time", "Distance to reflecting surface", "Air temperature, reflecting surface and sound source",
-            "s", "m",
-            "Use moderate sound levels and conduct the activity in a safe open area.",
-            listOf("Measure a known distance to a reflecting surface", "Produce a short sound pulse", "Measure the time for the echo to return", "Repeat and calculate the mean time", "Use distance = speed × time ÷ 2"),
-            "Assumes sound travels at 343 m s⁻¹ in air near room temperature; wind and temperature alter the speed.", { x -> 343f * x / 2f }, 0.01f, 0.5f, 0.1f)
         "phy-reflection" -> profile("Law of reflection", "How does the angle of reflection compare with the angle of incidence?",
             "Plane mirror, ray box, paper, ruler and protractor", "Angle of incidence", "Angle of reflection", "Mirror position, normal line and ray-box alignment",
             "degrees", "degrees",
@@ -430,18 +400,6 @@ internal object InvestigationProfiles {
             "Use a low-voltage supply, observe capacitor polarity and discharge the capacitor safely before handling.",
             listOf("Connect the resistor and capacitor in series", "Record the initial voltage", "Close the switch and start timing", "Record capacitor voltage at fixed intervals", "Plot voltage or charge against time"),
             "First-order RC charging model with a fixed 10 s time constant; leakage and component tolerances are omitted.", { x -> 100f * (1f - kotlin.math.exp(-x / 10f)) }, 0f, 50f, 10f)
-        "phy-current-electricity" -> profile("Ohm's law investigation", "How does current vary with potential difference across a fixed resistor?",
-            "Resistor, DC supply, ammeter, voltmeter, switch and connecting leads", "Potential difference", "Current", "Resistor temperature and resistance, circuit connections and supply stability",
-            "V", "A",
-            "Use a low-voltage supply and switch off between readings to limit resistor heating.",
-            listOf("Connect the ammeter in series and voltmeter in parallel", "Set a low potential difference", "Record current and voltage", "Increase voltage in safe increments", "Plot current against voltage and determine resistance"),
-            "Ohmic conductor model with a fixed 10 Ω resistance; heating can cause real resistance to change.", { x -> x / 10f }, 0f, 24f, 6f)
-        "phy-electrical-power" -> profile("Electrical power in a resistor", "How does power dissipated by a fixed resistor change with applied voltage?",
-            "Fixed resistor, DC supply, ammeter, voltmeter and connecting leads", "Potential difference", "Electrical power", "Resistance and resistor temperature",
-            "V", "W",
-            "Use a resistor with an adequate power rating and avoid overheating.",
-            listOf("Measure the resistor value", "Apply a low voltage", "Record voltage and current", "Calculate power using P = VI", "Compare the result with P = V²/R"),
-            "Ideal fixed-resistance model; thermal changes and supply internal resistance are neglected.", { x -> x * x / 10f }, 0f, 24f, 6f)
         "phy-induction" -> profile("Electromagnetic induction", "How does the rate of change of magnetic flux affect induced emf?",
             "Coil, bar magnet, galvanometer or voltage sensor and motion guide", "Rate of change of magnetic flux linkage", "Magnitude of induced emf", "Coil turns, magnet orientation and circuit resistance",
             "Wb s⁻¹", "V",
@@ -466,12 +424,6 @@ internal object InvestigationProfiles {
             "Wear goggles and gloves, use only dilute teacher-approved solutions and dispose of metal-ion waste correctly.",
             listOf("Clean approved metal strips", "Place each metal in the specified salt solution", "Observe colour change or metal deposition", "Record which combinations react", "Arrange the tested metals in a justified reactivity order"),
             "Ordinal teaching index only; actual displacement depends on the redox couple, concentration, passivation and reaction conditions.", { x -> 20f * x }, 1f, 5f, 3f)
-        "chem-industry" -> profile("Haber-process equilibrium model", "How does pressure influence the equilibrium position for ammonia synthesis?",
-            "Balanced-equation cards, pressure control simulation and equilibrium data sheet", "Relative pressure", "Illustrative equilibrium-yield index", "Temperature, feed ratio and catalyst condition",
-            "relative units", "index",
-            "This is a digital model only. Do not attempt high-pressure ammonia synthesis outside a licensed industrial facility.",
-            listOf("Write and balance N₂ + 3H₂ ⇌ 2NH₃", "Count gaseous molecules on each side", "Predict the effect of increasing pressure", "Compare the model's equilibrium direction", "Explain why temperature changes the equilibrium constant but a catalyst does not"),
-            "The displayed yield index is qualitative and not an industrial yield prediction; real yield depends on temperature, pressure, composition and process design.", { x -> 100f * x / (x + 100f) }, 10f, 500f, 100f)
         "chem-astro" -> profile("Emission spectra and photon energy", "How does the wavelength of an emitted spectral line relate to photon energy?",
             "Diffraction grating spectroscope, approved discharge-tube spectra or calibrated spectral images", "Emission wavelength", "Photon energy", "Spectroscope calibration, light source and spectral-line identification",
             "nm", "eV",
