@@ -240,3 +240,13 @@ A topic may not be labelled complete if any applicable critical item above is FA
 - Six-pillar completion is persisted locally and shown in the stage navigation; assessment completion requires at least 80%.
 - Subject hubs now use the redesigned dashboard/catalog hierarchy and group their subject-specific practice and WAEC tools.
 - The successful pre-follow-on baseline at `f806f111` includes the redesigned home and subject hubs, and the successful lab baseline at `b8acd40a` includes persistent lab records and apparatus routing. The latest section-visual/scenario/pillar-progress additions are under the newest Actions run; do not release until the latest SHA passes tests and APK build.
+
+
+### Cross-subject interactive and equation coverage — 25 November 2026
+
+- Added a regression test against the Biology curriculum map: every lesson topic must resolve to an established or supplemental visual/interactive experience.
+- Added Chemistry topic coverage test across the full 18-topic course map.
+- Added Physics topic coverage test across the full 39-topic course map.
+- Added 17 supplemental Biology investigations/explorers, 9 supplemental Physics model workspaces, and explicit Chemistry supplemental coverage checks. Existing subject-specific practical and visual activities remain integrated.
+- Added display-math parsing and structured equation cards, expanded symbol support, and extended core equation panels across Chemistry and Physics.
+- Verification gate: latest workflow after the code repairs is run `45718825275`; unit tests/build were still running at the time this note was written. Do not treat the newest source as release-ready until that run or a later main-branch run succeeds.
