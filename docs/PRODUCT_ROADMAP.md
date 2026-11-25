@@ -47,7 +47,7 @@ Authenticated sync, teacher/admin CMS, analytics, backups, privacy and security 
 - Biology syllabus map: 24 units represented; each unit resolves to an authored lesson draft.
 - Biology lessons: 24 beginner-oriented lesson drafts, mapped to the syllabus units; independent academic review is pending.
 - Biology content integrity: automated unit tests check all 24 syllabus-to-lesson mappings, required beginner-lesson teaching elements, valid formative answer keys, unique question IDs, question provenance, glossary uniqueness and glossary-to-lesson links.
-- Biology original objective practice: 244 items across the 24 units; items are explicitly marked as original and unverified.
+- Biology original objective practice: 264 items across the 24 units; items are explicitly marked as original and unverified.
 - WAEC-style theory: 15 original structured-response tasks with model responses, self-check points and locally saved responses; independent review is pending.
 - Practice: topic-focused sessions and a full Biology question-bank mode with shuffled question and option order.
 - Timed CBT: a 40-question, 30-minute Biology mock with topic-stratified question selection, shuffled options, answer navigation, flags, explanations and local active-session recovery logic.
@@ -122,3 +122,10 @@ Authenticated sync, teacher/admin CMS, analytics, backups, privacy and security 
 
 
 **WAEC Physics theory expansion:** increased the original structured-response bank from 6 to 12 tasks. New marking-guided questions cover measurement and density, Pascal's principle and hydraulic systems, Coulomb's law, force on a current-carrying conductor, simple harmonic motion, and Hooke's law with graph-gradient interpretation. Regression tests check the expanded bank and selected numerical results.
+
+
+## Cross-subject examination-bank status
+
+The current checked-in objective banks contain 264 original Biology questions, 90 JAMB-mapped Chemistry questions, 30 WAEC-style Chemistry objective questions, 195 JAMB-mapped Physics questions and 50 WAEC-style Physics objective questions. Automated tests check question identity and answer-key integrity; answer positions are also constrained to a near-even A–D distribution in all five banks. The Chemistry and Physics objective-bank counts and answer-position distributions are covered by dedicated regression tests.
+
+The WAEC-style structured-response banks currently contain 15 Biology tasks, 12 Chemistry tasks and 12 Physics tasks. These are original practice tasks with model responses or marking guidance, not official examination questions or official marking schemes. Independent subject review remains a release requirement.
