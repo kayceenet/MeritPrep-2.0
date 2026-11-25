@@ -115,7 +115,7 @@ private fun RefractionRayAnimation() {
             Text("Refractive index of second medium (n₂): " + "%.2f".format(refractiveIndex))
             Slider(refractiveIndex, { refractiveIndex = it }, valueRange = 0.8f..1.5f)
             ScientificText("n_1\\\\sin i = n_2\\\\sin r", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
-            Text(if (totalInternalReflection) "Total internal reflection condition reached for this simplified boundary model." else "Calculated refracted angle: " + "%.1f".format(refraction) + "°. The ray bends towards the normal when it enters the higher-index medium.", style = MaterialTheme.typography.bodySmall)
+            Text(if (totalInternalReflection) "Total internal reflection condition reached for this simplified boundary model." else "Calculated refracted angle: " + "%.1f".format(refraction) + "°. For n₂ < n₁, the ray bends away from the normal; at the critical angle the refracted ray travels along the boundary.", style = MaterialTheme.typography.bodySmall)
             Text("The diagram is schematic. The calculation assumes light travels from glass (n₁ = 1.50) into the selected second medium. The slider can reach the critical-angle condition.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
         }
     }
