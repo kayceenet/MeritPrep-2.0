@@ -47,6 +47,17 @@ class PhysicsWaecTheoryBankTest {
         assertTrue(tasks.getValue("waec-physics-theory-pressure-08").markingPoints.any { it.contains("3,000 N") })
     }
 
+    @Test fun perpendicularConductorUsesMaximumForceAndValidIncreaseFactors() {
+        val task = PhysicsWaecTheoryBank.tasks.single { it.id == "waec-physics-theory-magnetism-10" }
+        assertTrue(task.prompt.contains("at right angles"))
+        assertTrue(task.markingPoints.any { it.contains("sin 90° = 1") })
+        val increasePoint = task.markingPoints.single { it.startsWith("Names two valid changes:") }
+        assertTrue(increasePoint.contains("magnetic flux density"))
+        assertTrue(increasePoint.contains("current"))
+        assertTrue(increasePoint.contains("length of wire"))
+        assertTrue(!increasePoint.contains("larger angle toward 90°"))
+    }
+
     @Test fun tasksAreClearlyIdentifiedAsOriginalPracticeMaterial() {
         assertTrue(PhysicsWaecTheoryBank.tasks.all { it.id.startsWith("waec-physics-theory-") })
     }
