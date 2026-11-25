@@ -193,3 +193,38 @@ fun ScienceMediaScreen(onOpenLabs: () -> Unit, onOpenLesson: (String) -> Unit) {
         }
     }
 }
+
+@Composable
+fun ScienceMediaTopicSection(topicId: String) {
+    val context = LocalContext.current
+    val resources = remember(topicId) { ScienceMediaCatalog.forTopic(topicId) }
+    if (resources.isEmpty()) return
+
+    Card(modifier = Modifier.fillMaxWidth()) {
+        Column(Modifier.padding(15.dp), verticalArrangement = Arrangement.spacedBy(9.dp)) {
+            Text("Explore this topic", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+            Text("Use these guided animations and simulations alongside the lesson.")
+            resources.forEach { resource ->
+                Text(resource.title, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
+                Text(resource.summary)
+                Text("Before you explore: ${resource.beforeYouStart}", style = MaterialTheme.typography.bodySmall)
+                Text("After you explore: ${resource.afterYouExplore}", style = MaterialTheme.typography.bodySmall)
+                Text("Offline alternative: ${resource.offlineAlternative}", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                OutlinedButton(
+                    onClick = {
+                        try {
+                            context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(resource.sourceUrl)))
+                        } catch (_: ActivityNotFoundException) {
+                            Toast.makeText(context, "No browser is available to open this resource.", Toast.LENGTH_LONG).show()
+                        } catch (_: Exception) {
+                            Toast.makeText(context, "Unable to open this resource. Check your connection and try again.", Toast.LENGTH_LONG).show()
+                        }
+                    },
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text("Open ${resource.provider} resource")
+                }
+            }
+        }
+    }
+}
