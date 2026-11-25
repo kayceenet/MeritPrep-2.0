@@ -38,6 +38,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+@OptIn(androidx.compose.material3.ExperimentalMaterial3Api::class)
 @Composable
 private fun MeritPrepApp() {
     val nav = rememberNavController()
