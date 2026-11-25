@@ -5,9 +5,6 @@ import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Bookmark
-import androidx.compose.material.icons.outlined.BookmarkBorder
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -742,12 +739,10 @@ fun LessonScreen(topicId: String) {
                     Text(topic.subjectCode + "  •  MERITPREP CLASSROOM", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
                     Text(topic.title, style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold)
                 }
-                IconButton(onClick = {
+                TextButton(onClick = {
                     if (bookmarked) database.removeBookmark(topic.id) else database.bookmark(topic.id, "lesson")
                     bookmarked = !bookmarked
-                }) {
-                    Icon(if (bookmarked) androidx.compose.material.icons.Icons.Filled.Bookmark else androidx.compose.material.icons.Icons.Outlined.BookmarkBorder, contentDescription = "Bookmark lesson")
-                }
+                }) { Text(if (bookmarked) "★ Saved" else "☆ Save") }
             }
             Text(topic.introduction, style = MaterialTheme.typography.bodyLarge, color = MaterialTheme.colorScheme.onSurfaceVariant)
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
