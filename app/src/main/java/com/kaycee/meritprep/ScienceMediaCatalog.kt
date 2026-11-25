@@ -19,7 +19,23 @@ data class ScienceMediaResource(
     val afterYouExplore: String,
     val offlineAlternative: String,
     val approvalStatus: MediaApprovalStatus = MediaApprovalStatus.EXTERNAL_CANDIDATE
-)
+) {
+    val creatorOrPublisher: String
+        get() = when (provider) {
+            "PhET Interactive Simulations" -> "PhET Interactive Simulations, University of Colorado Boulder"
+            "HHMI BioInteractive" -> "HHMI BioInteractive"
+            "LabXchange" -> "The individual contributor named on the original LabXchange resource"
+            else -> provider
+        }
+
+    val attributionText: String
+        get() = when (provider) {
+            "PhET Interactive Simulations" -> "Credit PhET Interactive Simulations, University of Colorado Boulder, and follow the current PhET licence and attribution instructions."
+            "HHMI BioInteractive" -> "Credit HHMI BioInteractive and follow the resource-specific HHMI terms and attribution instructions."
+            "LabXchange" -> "Credit the individual creator shown on the original resource page; LabXchange is the hosting platform."
+            else -> "Credit the original creator and follow the source's current attribution instructions."
+        }
+}
 
 object ScienceMediaCatalog {
     const val BIOLOGY = "BIO"
@@ -399,7 +415,7 @@ object ScienceMediaCatalog {
             if (resource.subjectCode !in setOf(BIOLOGY, CHEMISTRY, PHYSICS)) issues += "${resource.id}: unsupported subject code."
             if (!resource.sourceUrl.startsWith("https://")) issues += "${resource.id}: source URL must use HTTPS."
             if (!resource.licenceUrl.startsWith("https://")) issues += "${resource.id}: licence/terms URL must use HTTPS."
-            if (resource.provider.isBlank() || resource.licenceName.isBlank() || resource.permittedUse.isBlank()) {
+            if (resource.provider.isBlank() || resource.creatorOrPublisher.isBlank() || resource.attributionText.isBlank() || resource.licenceName.isBlank() || resource.permittedUse.isBlank()) {
                 issues += "${resource.id}: provider, licence and permitted-use notes are required."
             }
             if (resource.beforeYouStart.isBlank() || resource.afterYouExplore.isBlank()) {
