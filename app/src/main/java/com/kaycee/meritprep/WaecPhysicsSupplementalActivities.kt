@@ -131,7 +131,7 @@ private fun WaecBlackbodyActivity() {
 private fun WaecFibreOpticsActivity() {
     var core by remember { mutableFloatStateOf(1.50f) }
     var cladding by remember { mutableFloatStateOf(1.40f) }
-    val critical = if (core > cladding) Math.toDegrees(asin((cladding / core).coerceIn(0.0, 1.0))) else Double.NaN
+    val critical = if (core > cladding) Math.toDegrees(asin((cladding.toDouble() / core.toDouble()).coerceIn(0.0, 1.0))) else Double.NaN
     Card(Modifier.fillMaxWidth()) {
         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
             Text("WAEC harmonised focus: fibre optics and total internal reflection", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
