@@ -27,7 +27,7 @@ Topic mastery based on repeated evidence, spaced retrieval, flashcards, mistake 
 ## F. Practical learning
 Inventory existing APK assets and lab logic; rebuild Biology, Chemistry and Physics simulations with safe, accessible controls and clear learning objectives.
 
-**Implemented prototypes:** Biology food-test interpretation with prediction feedback, osmosis, microscope magnification, quadrat-based ecological sampling and a dichotomous classification key, plus a biological drawing self-check checklist; introductory Physics Ohm's law and Chemistry concentration simulations. These are learning prototypes, not a complete WAEC practical examination system.
+**Implemented prototypes:** Biology food-test interpretation with prediction feedback, osmosis, microscope magnification, quadrat-based ecological sampling, a dichotomous classification key, a biological drawing self-check and a persistent experiment planner with results entry, graph-interpretation guidance, conclusion writing and evaluation of errors; introductory Physics Ohm's law and Chemistry concentration simulations. The experiment planner saves locally through the existing study-notes store. These are learning prototypes, not a complete WAEC practical examination system.
 
 ## G. Platform operations
 Authenticated sync, teacher/admin CMS, analytics, backups, privacy and security review.
@@ -47,7 +47,7 @@ Authenticated sync, teacher/admin CMS, analytics, backups, privacy and security 
 - Mistake notebook: offline capture of incorrect quick-practice answers and incorrect/unanswered CBT items, with review status.
 - Study planner: adaptive seven-day Biology schedule with configurable daily time target, offline activity completion and shortcuts into lessons, practice and revision.
 - Mastery indicator: objective-question evidence threshold of 10 attempts, 8 distinct questions, 2 study days and at least 80% correct; theory and practical evidence are not yet included.
-- Practical learning: seven Biology practical prototypes, including a quadrat population estimator with worked calculations and a controlled soil drainage/water-retention investigation, plus introductory Physics and Chemistry simulations.
+- Practical learning: seven Biology practical prototypes, including a quadrat population estimator with worked calculations, a controlled soil drainage/water-retention investigation and a locally saved experiment planner/results record. The planner captures variables, method, observations, conclusion and evaluation, and teaches graph interpretation; it does not automatically grade plans or generate plotted graphs. Introductory Physics and Chemistry simulations are also present.
 - Academic approval: pending independent subject review; no generated question is presented as an official past question.
 - Other subjects: starter lesson content only; full syllabus mapping and course development remain outstanding.
 
