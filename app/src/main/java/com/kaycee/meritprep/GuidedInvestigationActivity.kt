@@ -178,7 +178,7 @@ internal object InvestigationProfiles {
             "Ripple tank or signal generator, speaker, oscilloscope and ruler", "Frequency", "Wavelength", "Medium and wave speed", "Hz", "m",
             "Keep water away from electrical equipment and use safe sound levels.",
             listOf("Keep the medium constant", "Generate waves at a measured frequency", "Measure several wavelengths and find the mean", "Repeat and compare using v = fλ"),
-            "Illustrative inverse relation at constant wave speed; dispersion may change speed.", { x -> 20f / max(x, 1f) })
+            "Illustrative inverse relation at constant wave speed; dispersion may change speed.", { x -> 20f / x.coerceAtLeast(1f) }, 1f, 1000f, 100f)
         "phy-current-electricity", "phy-electrical-power", "phy-cells" -> profile("Ohm's law", "How does current depend on potential difference for an ohmic conductor?",
             "Low-voltage DC supply, resistor, ammeter, voltmeter and switch", "Potential difference", "Current", "Resistor temperature, connections and meter range", "V", "A",
             "Use low voltage only; switch off before changing connections and never use mains.",
@@ -303,7 +303,7 @@ internal object InvestigationProfiles {
             "Low-voltage variable supply, diode, series resistor, ammeter and voltmeter", "Forward voltage", "Diode current", "Diode temperature, series resistor and circuit connections", "V", "mA",
             "Use a current-limiting resistor and low voltage; observe diode polarity.",
             listOf("Identify anode and cathode", "Connect diode and current-limiting resistor in series", "Measure diode voltage and current", "Increase voltage gradually and plot the I–V curve"),
-            "Simplified forward-bias exponential model with a current scale; real diode behaviour depends on type and temperature.", { x -> (2f * (kotlin.math.exp(5f * x) - 1f)).coerceAtLeast(0f) }, 0f, 1f, 0.5f)
+            "Simplified forward-bias exponential model with a current scale; real diode behaviour depends on type and temperature.", { x -> (0.05f * (kotlin.math.exp(5f * x) - 1f)).coerceAtLeast(0f) }, 0f, 1f, 0.5f)
         "chem-acids-bases" -> profile("Acid–base titration", "How does mean titre determine the concentration of an unknown acid in a 1:1 reaction?",
             "Burette, pipette, conical flask, indicator and standard solution", "Mean titre", "Unknown analyte concentration", "Standard concentration, aliquot volume and reaction stoichiometry", "cm³", "mol dm⁻³",
             "Wear goggles, use a pipette filler, clamp the burette securely and follow approved acid/alkali handling procedures.",
