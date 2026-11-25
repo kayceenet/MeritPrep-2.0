@@ -100,7 +100,7 @@ The six lesson pillars now record completion locally. Completed pillars are mark
 
 ## Science simulations and mathematical typesetting — 25 November 2026
 
-The Biology visualisation pillar now includes additional native, offline interactive experiences for classification, adaptation, plant transpiration, respiration, kidney filtration, musculoskeletal levers, flowering-plant reproduction, reflex arcs, ecological tolerance, Nigerian habitats and biomes, soil properties, pollution pathways, variation, fermentation and comparative anatomy. Existing cell, photosynthesis, osmosis, diffusion, mitosis, inheritance, natural-selection and population-sampling activities remain in place. The new activities state their model assumptions and limitations rather than presenting illustrative outputs as experimental measurements.
+The Biology visualisation pillar now includes 17 additional native, offline interactive experiences for classification, adaptation, plant transpiration, respiration, kidney filtration, musculoskeletal levers, flowering-plant reproduction, reflex arcs, ecological tolerance, Nigerian habitats and biomes, soil properties, pollution pathways, variation, fermentation and comparative anatomy. Existing cell, photosynthesis, osmosis, diffusion, mitosis, inheritance, natural-selection and population-sampling activities remain in place. The new activities state their model assumptions and limitations rather than presenting illustrative outputs as experimental measurements.
 
 A curriculum-level regression test now checks that every Biology lesson mapping has an established or supplemental visual/interactive experience.
 
