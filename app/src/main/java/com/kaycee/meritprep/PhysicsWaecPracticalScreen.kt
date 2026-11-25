@@ -95,7 +95,7 @@ fun PhysicsWaecPracticalScreen() {
             Column(Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 Text(task.title, style = MaterialTheme.typography.titleLarge)
                 Text("Aim", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary)
-                Text(task.aim)
+                ScientificText(task.aim, style = MaterialTheme.typography.bodyMedium)
                 Text("Apparatus", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary)
                 Text(task.apparatus.joinToString(" · "))
                 Text("Independent variable: ${task.independentVariable}")
@@ -131,7 +131,7 @@ fun PhysicsWaecPracticalScreen() {
             }
         }
         Text("Your task", style = MaterialTheme.typography.titleLarge)
-        Text(task.taskPrompt)
+        ScientificText(task.taskPrompt, style = MaterialTheme.typography.bodyLarge)
         OutlinedTextField(
             value = learnerResponse,
             onValueChange = { learnerResponse = it; showWorkedAnalysis = false; saveMessage = "" },
@@ -163,10 +163,10 @@ fun PhysicsWaecPracticalScreen() {
                     Text("Vertical intercept: ${"%.4f".format(fit.intercept)}")
                     Text("R² for supplied readings: ${"%.4f".format(fit.coefficientOfDetermination)}")
                     Text("$derivedLabel: ${"%.3f".format(derivedValue)} $derivedUnit", style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.primary)
-                    Text(task.workedInterpretation)
+                    ScientificText(task.workedInterpretation, style = MaterialTheme.typography.bodyMedium)
                     HorizontalDivider()
                     Text("Examiner checklist", style = MaterialTheme.typography.titleMedium)
-                    task.examinerPoints.forEach { Text("• $it") }
+                    task.examinerPoints.forEach { ScientificText("• $it", style = MaterialTheme.typography.bodyMedium) }
                     Text("Self-assessment only: the app does not automatically award marks for free-text responses.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
             }
