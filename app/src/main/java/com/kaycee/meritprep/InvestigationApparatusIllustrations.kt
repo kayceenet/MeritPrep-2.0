@@ -20,13 +20,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 
 internal enum class ApparatusDiagram {
-    MICROSCOPE, PLANT_LIGHT, QUADRAT, TITRATION, FILTRATION, ELECTROLYSIS,
+    MICROSCOPE, PLANT_LIGHT, RESPIROMETER, KIDNEY, QUADRAT, TITRATION, FILTRATION, ELECTROLYSIS,
     SPRING, TROLLEY, FLUID_COLUMN, CIRCUIT, WAVE_TANK, GAS_SYRINGE
 }
 
 internal fun apparatusFor(topicId: String): ApparatusDiagram? = when (topicId) {
     "bio-cell" -> ApparatusDiagram.MICROSCOPE
-    "bio-nutrition", "bio-plant-anatomy", "bio-excretion", "bio-respiration" -> ApparatusDiagram.PLANT_LIGHT
+    "bio-nutrition", "bio-plant-anatomy" -> ApparatusDiagram.PLANT_LIGHT
+    "bio-respiration" -> ApparatusDiagram.RESPIROMETER
+    "bio-excretion" -> ApparatusDiagram.KIDNEY
     "bio-populations", "bio-habitats", "bio-biomes", "bio-environment", "bio-interactions" -> ApparatusDiagram.QUADRAT
     "chem-acids-bases", "chem-redox" -> ApparatusDiagram.TITRATION
     "chem-separation" -> ApparatusDiagram.FILTRATION
@@ -49,6 +51,8 @@ fun InvestigationApparatusIllustration(topicId: String) {
     val title = when (diagram) {
         ApparatusDiagram.MICROSCOPE -> "Microscope and prepared slide"
         ApparatusDiagram.PLANT_LIGHT -> "Plant material and light source"
+        ApparatusDiagram.RESPIROMETER -> "Respirometer for measuring oxygen uptake"
+        ApparatusDiagram.KIDNEY -> "Kidney and nephron filtration pathway"
         ApparatusDiagram.QUADRAT -> "Quadrat sampling frame"
         ApparatusDiagram.TITRATION -> "Burette, clamp and conical flask"
         ApparatusDiagram.FILTRATION -> "Filter funnel and receiving vessel"
@@ -96,6 +100,32 @@ fun InvestigationApparatusIllustration(topicId: String) {
                         line(w*.75f,h*.38f,w*.68f,h*.48f,secondary,4f)
                         line(w*.75f,h*.38f,w*.82f,h*.48f,secondary,4f)
                         line(w*.7f,h*.52f,w*.8f,h*.52f,secondary,3f)
+                    }
+                    ApparatusDiagram.RESPIROMETER -> {
+                        line(w*.12f,h*.24f,w*.36f,h*.24f,outline,4f)
+                        line(w*.12f,h*.24f,w*.12f,h*.36f,outline,4f)
+                        drawRect(primary,Offset(w*.36f,h*.18f),Size(w*.38f,h*.2f),style=Stroke(4f))
+                        line(w*.74f,h*.28f,w*.88f,h*.28f,primary,4f)
+                        line(w*.88f,h*.28f,w*.88f,h*.62f,primary,4f)
+                        line(w*.82f,h*.62f,w*.94f,h*.62f,secondary,4f)
+                        drawCircle(secondary,8f,Offset(w*.88f,h*.62f))
+                        drawRect(secondary.copy(alpha=.18f),Offset(w*.18f,h*.48f),Size(w*.64f,h*.32f))
+                        drawRect(secondary,Offset(w*.18f,h*.48f),Size(w*.64f,h*.32f),style=Stroke(2f))
+                        drawCircle(primary,12f,Offset(w*.5f,h*.64f),style=Stroke(3f))
+                    }
+                    ApparatusDiagram.KIDNEY -> {
+                        val kidney=Path().apply {
+                            moveTo(w*.48f,h*.12f); cubicTo(w*.18f,h*.05f,w*.16f,h*.45f,w*.34f,h*.62f)
+                            cubicTo(w*.47f,h*.76f,w*.64f,h*.58f,w*.58f,h*.43f)
+                            cubicTo(w*.54f,h*.33f,w*.68f,h*.22f,w*.48f,h*.12f); close()
+                        }
+                        drawPath(kidney,primary.copy(alpha=.16f))
+                        drawPath(kidney,primary,style=Stroke(4f))
+                        line(w*.58f,h*.42f,w*.76f,h*.52f,secondary,4f)
+                        line(w*.76f,h*.52f,w*.76f,h*.9f,secondary,4f)
+                        line(w*.36f,h*.58f,w*.66f,h*.72f,outline,3f)
+                        line(w*.66f,h*.72f,w*.66f,h*.9f,outline,3f)
+                        line(w*.44f,h*.23f,w*.54f,h*.34f,secondary,3f)
                     }
                     ApparatusDiagram.QUADRAT -> {
                         val left=w*.27f; val top=h*.13f; val side=h*.72f
