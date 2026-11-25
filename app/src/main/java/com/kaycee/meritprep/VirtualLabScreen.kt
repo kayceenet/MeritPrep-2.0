@@ -829,7 +829,7 @@ private fun BiologyExperimentPlannerLab() {
     Card(Modifier.fillMaxWidth()) {
         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
             Text("Record your results", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
-            Text("Enter the value of the independent variable and the measured outcome. Include units in your headings or values. Use repeated readings where the method requires them.")
+            Text("Enter the independent-variable value and measured outcome. For repeated trials at one setting, separate readings with commas or semicolons, for example: 12, 13, 11. Include units in the variable values or headings. The app calculates the mean and range for each row.")
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 Text("Independent variable", modifier = Modifier.weight(1f), fontWeight = FontWeight.SemiBold)
                 Text("Measured result", modifier = Modifier.weight(1f), fontWeight = FontWeight.SemiBold)
@@ -850,6 +850,18 @@ private fun BiologyExperimentPlannerLab() {
                         label = { Text("Result ${index + 1}") },
                         singleLine = true
                     )
+                }
+                val summary = runCatching { BiologyExperimentAnalysis.summarizeReadings(row.second) }.getOrNull()
+                if (row.second.isNotBlank()) {
+                    if (summary != null) {
+                        Text(
+                            "Mean: " + "%.2f".format(summary.mean) + " | Range: " + "%.2f".format(summary.range) + " | n = " + summary.count,
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.primary
+                        )
+                    } else {
+                        Text("Enter valid numbers separated by commas or semicolons.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.error)
+                    }
                 }
             }
             OutlinedButton(
