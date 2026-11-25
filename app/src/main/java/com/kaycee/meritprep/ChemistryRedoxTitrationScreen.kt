@@ -28,8 +28,8 @@ fun ChemistryRedoxTitrationScreen() {
         Card {
             Column(Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 Text("Balanced ionic equation", style = MaterialTheme.typography.titleMedium)
-                Text("MnO₄⁻ + 5Fe²⁺ + 8H⁺ → Mn²⁺ + 5Fe³⁺ + 4H₂O")
-                Text("The mole ratio is 1 mol permanganate : 5 mol iron(II).")
+                ScientificText("MnO₄⁻ + 5Fe²⁺ + 8H⁺ → Mn²⁺ + 5Fe³⁺ + 4H₂O", style = MaterialTheme.typography.titleMedium)
+                ScientificText("The mole ratio is 1 mol permanganate : 5 mol iron(II).", style = MaterialTheme.typography.bodyMedium)
             }
         }
         OutlinedTextField(
@@ -110,7 +110,7 @@ fun ChemistryRedoxTitrationScreen() {
                     Text("Mean concordant titre: %.3f cm³".format(calculated.meanTitreCm3))
                     Text("Moles of MnO₄⁻: %.6g mol".format(calculated.molesPermanganate))
                     Text("Moles of Fe²⁺: %.6g mol".format(calculated.molesIronIi))
-                    Text(calculated.calculation)
+                    ScientificText(calculated.calculation, style = MaterialTheme.typography.bodyMedium)
                 }
             }
         }
