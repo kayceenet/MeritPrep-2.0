@@ -31,3 +31,8 @@ At the start of EVERY run, read this file, `docs/ACADEMIC_LESSON_MASTERY_STANDAR
 10. Report what was actually completed, what remains, and the next target. Never claim 100% syllabus coverage prematurely.
 
 Do not claim physical-device testing unless performed. Do not invent sources, syllabus requirements, data, paths or artifact links. If an operation times out, inspect repository state before retrying to avoid duplicate commits. Every run must consult the standard and checklist, even for apparently small changes.
+
+
+## Reference-repository boundary
+
+`kayceenet/Merit` is a read-only reference for user-interface structure and interaction architecture only. You may study and reproduce structural patterns such as lesson pillars, navigation, animation placement, illustration cards, practical-lab workspaces, activity flows, feedback patterns and visual hierarchy. **Never copy, import, paraphrase or adapt its course-content write-ups, explanations, worked examples, question wording, answers, scenarios, experiment instructions, marking points or other teaching prose.** All MeritPrep 2.0 academic content must be independently authored, scientifically checked and mapped to its own JAMB/WAEC syllabus evidence. Do not modify the reference repository.
