@@ -43,6 +43,20 @@ fun ScienceMediaScreen(onOpenLabs: () -> Unit, onOpenLesson: (String) -> Unit) {
     var selectedEnzymeIndex by remember { mutableIntStateOf(0) }
     var enzymeTemperature by remember { mutableFloatStateOf(37f) }
     var enzymePh by remember { mutableFloatStateOf(7f) }
+    var initialLightCount by remember { mutableFloatStateOf(50f) }
+    var initialDarkCount by remember { mutableFloatStateOf(50f) }
+    var lightSurvival by remember { mutableFloatStateOf(45f) }
+    var darkSurvival by remember { mutableFloatStateOf(80f) }
+    var selectionGenerations by remember { mutableFloatStateOf(5f) }
+    val selectionResult = NaturalSelectionSimulation.evaluate(
+        NaturalSelectionConditions(
+            initialLightCount.toInt(),
+            initialDarkCount.toInt(),
+            lightSurvival.toDouble(),
+            darkSurvival.toDouble(),
+            selectionGenerations.toInt()
+        )
+    )
     val enzymeProfile = EnzymeProfile.values()[selectedEnzymeIndex]
     val enzymeActivity = EnzymeActivitySimulation.evaluate(
         EnzymeConditions(enzymeProfile, enzymeTemperature.toDouble(), enzymePh.toDouble())
@@ -84,6 +98,34 @@ fun ScienceMediaScreen(onOpenLabs: () -> Unit, onOpenLesson: (String) -> Unit) {
                         onClick = { selectedSubject = index },
                         label = { Text(label) }
                     )
+                }
+            }
+        }
+        if (selectedSubject == 0 || selectedSubject == 1) {
+            item {
+                Card(modifier = Modifier.fillMaxWidth()) {
+                    Column(Modifier.padding(15.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                        Text("MeritPrep interactive model: natural selection", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+                        Text("Model a heritable light/dark trait in a population. Change the starting frequencies and relative survival values, then follow the trait frequencies over generations.")
+                        Text("Starting light-trait individuals: ${initialLightCount.toInt()}")
+                        Slider(value = initialLightCount, onValueChange = { initialLightCount = it }, valueRange = 1f..100f)
+                        Text("Starting dark-trait individuals: ${initialDarkCount.toInt()}")
+                        Slider(value = initialDarkCount, onValueChange = { initialDarkCount = it }, valueRange = 1f..100f)
+                        Text("Light-trait survival/reproductive success index: ${lightSurvival.toInt()}%")
+                        Slider(value = lightSurvival, onValueChange = { lightSurvival = it }, valueRange = 0f..100f)
+                        Text("Dark-trait survival/reproductive success index: ${darkSurvival.toInt()}%")
+                        Slider(value = darkSurvival, onValueChange = { darkSurvival = it }, valueRange = 0f..100f)
+                        Text("Generations: ${selectionGenerations.toInt()}")
+                        Slider(value = selectionGenerations, onValueChange = { selectionGenerations = it }, valueRange = 1f..10f, steps = 8)
+                        Text("Trait with higher modelled success: ${selectionResult.moreFavouredTrait}", style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
+                        Text(selectionResult.explanation)
+                        Text("Generation-by-generation trait frequencies", fontWeight = FontWeight.SemiBold)
+                        selectionResult.generations.forEach { generation ->
+                            Text("Generation ${generation.generation}: light ${"%.1f".format(generation.lightTraitFrequencyPercent)}% · dark ${"%.1f".format(generation.darkTraitFrequencyPercent)}%")
+                        }
+                        Text("Investigate: set both survival values equally and observe the frequencies. Then increase one value while keeping the other fixed. Explain why the frequency changes across generations rather than an individual changing its inherited trait.")
+                        Text("Model assumptions: this deterministic model assumes the trait is inherited and that the supplied survival values represent relative reproductive contribution. It excludes mutation, migration, genetic drift, population-size changes and other biological factors. It illustrates selection; it does not predict a real population.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    }
                 }
             }
         }
