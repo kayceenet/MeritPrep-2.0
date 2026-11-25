@@ -84,6 +84,84 @@ object PhysicsWaecTheoryBank {
                 "States a valid diode use such as rectification, signal detection or reverse-polarity protection."
             ),
             "Show each half-life step or use A = A₀(½)ⁿ. Distinguish majority carriers from the minority carriers also present in a semiconductor."
+
+        ),
+        PhysicsTheoryTask(
+            "waec-physics-theory-measurement-07", "Measurements, units and density", 7,
+            "A metal block has mass 540 g and dimensions 6.0 cm × 3.0 cm × 2.0 cm. (a) Calculate its volume. (2 marks) (b) Calculate its density in g cm⁻³. (2 marks) (c) Convert the density to kg m⁻³. (2 marks) (d) State one precaution when measuring its dimensions. (1 mark)",
+            listOf(
+                "Calculates volume = 6.0 × 3.0 × 2.0 = 36.0 cm³.",
+                "Uses density = mass/volume = 540/36 = 15 g cm⁻³.",
+                "Uses 1 g cm⁻³ = 1,000 kg m⁻³.",
+                "Obtains 15,000 kg m⁻³ or 1.5 × 10⁴ kg m⁻³.",
+                "States a suitable precaution such as reading the scale at eye level, avoiding parallax or taking repeated readings."
+            ),
+            "Keep units consistent during each calculation. Since 1 g = 10⁻³ kg and 1 cm³ = 10⁻⁶ m³, 1 g cm⁻³ equals 1,000 kg m⁻³."
+        ),
+        PhysicsTheoryTask(
+            "waec-physics-theory-pressure-08", "Pressure and fluids", 7,
+            "A hydraulic lift has a small piston of area 0.020 m² and a large piston of area 0.50 m². A force of 120 N is applied to the small piston. (a) State Pascal's principle. (2 marks) (b) Calculate the pressure transmitted through the fluid. (2 marks) (c) Calculate the ideal output force on the large piston. (2 marks) (d) State one reason the actual output may be smaller. (1 mark)",
+            listOf(
+                "States that pressure applied to an enclosed fluid is transmitted equally and undiminished throughout the fluid.",
+                "Uses pressure = force/area = 120/0.020.",
+                "Obtains 6,000 Pa.",
+                "Uses output force = pressure × large piston area = 6,000 × 0.50.",
+                "Obtains 3,000 N.",
+                "Identifies friction, leakage or other mechanical losses as a reason for a lower actual output."
+            ),
+            "The ideal force multiplication equals the ratio of piston areas. Do not confuse pressure with force; their units are different."
+        ),
+        PhysicsTheoryTask(
+            "waec-physics-theory-electrostatics-09", "Electrostatics and electric fields", 7,
+            "Two point charges of +2.0 μC and +3.0 μC are separated by 0.30 m in air. Take k = 9.0 × 10⁹ N m² C⁻². (a) State Coulomb's law. (2 marks) (b) Calculate the magnitude of the electrostatic force. (3 marks) (c) State whether the force is attractive or repulsive and explain. (2 marks)",
+            listOf(
+                "States that the force between two point charges is proportional to the product of their charges and inversely proportional to the square of their separation.",
+                "Converts charges to coulombs: 2.0 × 10⁻⁶ C and 3.0 × 10⁻⁶ C.",
+                "Uses F = k|q₁q₂|/r².",
+                "Substitutes values consistently with r = 0.30 m.",
+                "Obtains F = 0.60 N.",
+                "Identifies the force as repulsive because both charges are positive."
+            ),
+            "Use the magnitude of the charges in the force calculation, then use the signs to determine whether the force is attractive or repulsive."
+        ),
+        PhysicsTheoryTask(
+            "waec-physics-theory-magnetism-10", "Magnetism and electromagnetic induction", 7,
+            "A straight wire of length 0.40 m carries a current of 3.0 A at right angles to a uniform magnetic field of flux density 0.50 T. (a) Calculate the magnetic force on the wire. (3 marks) (b) State Fleming's left-hand rule. (2 marks) (c) State two ways to increase the force. (2 marks)",
+            listOf(
+                "Uses F = BIL sin θ.",
+                "Recognises θ = 90° and sin 90° = 1.",
+                "Obtains F = 0.50 × 3.0 × 0.40 = 0.60 N.",
+                "States that the first finger indicates field, the second finger current and the thumb force or motion, all mutually perpendicular.",
+                "Names two valid changes: increase magnetic flux density, current or wire length in the field, or maintain a larger angle toward 90°."
+            ),
+            "The formula assumes a straight current-carrying conductor in a uniform magnetic field. The force is maximum when the wire is perpendicular to the field."
+        ),
+        PhysicsTheoryTask(
+            "waec-physics-theory-oscillations-11", "Oscillations and simple harmonic motion", 7,
+            "A simple pendulum completes 30 oscillations in 60 s. (a) Calculate its period. (2 marks) (b) Calculate its frequency. (2 marks) (c) State two conditions under which the pendulum's motion approximates simple harmonic motion. (2 marks) (d) State one factor that affects its period. (1 mark)",
+            listOf(
+                "Uses period = total time/number of oscillations.",
+                "Obtains T = 60/30 = 2.0 s.",
+                "Uses frequency = 1/T.",
+                "Obtains f = 0.50 Hz.",
+                "States small angular displacement and negligible air resistance or pivot friction.",
+                "Identifies pendulum length or gravitational field strength as a factor affecting period."
+            ),
+            "For small angular displacement, T = 2π√(L/g). The period is independent of bob mass in the ideal small-angle model."
+        ),
+        PhysicsTheoryTask(
+            "waec-physics-theory-practical-12", "Experimental skills and graph analysis", 8,
+            "In an experiment, the extension of a spring is measured for different loads. (a) State the relationship expected within the elastic limit. (2 marks) (b) Describe the graph of load against extension in this region. (2 marks) (c) Explain how the spring constant is obtained from the graph. (2 marks) (d) State two precautions for reliable readings. (2 marks)",
+            listOf(
+                "States that extension is directly proportional to applied force within the limit of proportionality.",
+                "Links the relationship to Hooke's law, F = kx.",
+                "Describes a straight line through the origin for load plotted against extension within the proportional region.",
+                "States that the gradient of load against extension is the spring constant k.",
+                "Uses consistent SI units so k is in N m⁻¹.",
+                "Gives two precautions such as reading the pointer at eye level, adding loads gently, waiting for oscillations to stop, avoiding loads beyond the elastic limit or repeating readings."
+            ),
+            "The gradient is k only when load (force) is plotted on the vertical axis against extension on the horizontal axis. If the axes are reversed, the gradient is 1/k."
+        )
         )
     )
 }
