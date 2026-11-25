@@ -13,6 +13,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.kaycee.meritprep.data.MeritDatabase
 import android.speech.tts.TextToSpeech
+import org.json.JSONArray
+import org.json.JSONObject
 import java.util.Locale
 
 data class LearningTopic(
@@ -733,6 +735,27 @@ fun LessonScreen(topicId: String) {
 
     val stages = LessonStage.entries
     val stageIndex = stages.indexOf(stage)
+    val progressNoteId = "lesson-pillar-progress-" + topicId
+    val restoredPillars = remember(topicId) {
+        runCatching { JSONObject(database.getNoteBody(progressNoteId) ?: "{}") }.getOrElse { JSONObject() }
+    }
+    var completedStages by remember(topicId) {
+        mutableStateOf(
+            buildSet {
+                val saved = restoredPillars.optJSONArray("completedStages")
+                if (saved != null) for (index in 0 until saved.length()) {
+                    runCatching { LessonStage.valueOf(saved.optString(index)) }.getOrNull()?.let { add(it) }
+                }
+            }
+        )
+    }
+    fun markStageComplete(target: LessonStage) {
+        val updated = completedStages + target
+        completedStages = updated
+        val saved = JSONArray()
+        stages.filter { it in updated }.forEach { saved.put(it.name) }
+        database.saveNote(progressNoteId, topicId, topic.title + " classroom progress", JSONObject().put("completedStages", saved).toString())
+    }
     val practiceQuestions = remember(topicId) {
         val bank = when (topic.subjectCode) {
             "BIO" -> BiologyQuestionBank.all.filter { it.topicId == topicId }
@@ -757,7 +780,7 @@ fun LessonScreen(topicId: String) {
     }
     val exerciseScore = practiceQuestions.count { exerciseSelections[it.questionId] == it.correctPresentedIndex }
     val exercisePercent = if (practiceQuestions.isEmpty()) 0 else exerciseScore * 100 / practiceQuestions.size
-    val completion = if (completed) 100 else if (exerciseComplete && exercisePercent >= 80) 85 else 15
+    val completion = if (completed) 100 else completedStages.size * 100 / stages.size
 
     Column(Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
         Column(Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 12.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -787,7 +810,7 @@ fun LessonScreen(topicId: String) {
                 FilterChip(
                     selected = stage == item,
                     onClick = { stage = item },
-                    label = { Text(item.label) }
+                    label = { Text((if (item in completedStages) "✓  " else "") + item.label) }
                 )
             }
         }
@@ -940,6 +963,7 @@ fun LessonScreen(topicId: String) {
                                                 exerciseChecked = false
                                             } else {
                                                 exerciseComplete = true
+                                                if (exercisePercent >= 80) markStageComplete(LessonStage.PRACTICE)
                                             }
                                         },
                                         modifier = Modifier.fillMaxWidth()
@@ -962,7 +986,7 @@ fun LessonScreen(topicId: String) {
                         }
                     }
                     Button(
-                        onClick = { database.markLessonCompleted(topic.id); completed = true },
+                        onClick = { markStageComplete(LessonStage.PRACTICE); database.markLessonCompleted(topic.id); completed = true },
                         enabled = !topic.isSyllabusOutline && !completed && exerciseComplete && exercisePercent >= 80,
                         modifier = Modifier.fillMaxWidth()
                     ) { Text(if (topic.isSyllabusOutline) "Full lesson in development" else if (completed) "Lesson completed" else "Complete lesson") }
@@ -981,6 +1005,13 @@ fun LessonScreen(topicId: String) {
             }
         }
 
+        if (stage != LessonStage.PRACTICE) {
+            OutlinedButton(
+                onClick = { markStageComplete(stage) },
+                enabled = stage !in completedStages,
+                modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp)
+            ) { Text(if (stage in completedStages) "Pillar completed" else "Mark " + stage.label + " complete") }
+        }
         Row(Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp), horizontalArrangement = Arrangement.SpaceBetween) {
             OutlinedButton(onClick = { stage = stages[(stageIndex - 1).coerceAtLeast(0)] }, enabled = stageIndex > 0) { Text("Previous") }
             Button(onClick = { stage = stages[(stageIndex + 1).coerceAtMost(stages.lastIndex)] }, enabled = stageIndex < stages.lastIndex) { Text(if (stage == LessonStage.PRACTICE) "End of lesson" else "Continue") }
