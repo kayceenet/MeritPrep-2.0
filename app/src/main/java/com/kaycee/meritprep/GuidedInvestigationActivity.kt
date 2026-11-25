@@ -22,7 +22,7 @@ private data class InvestigationProfile(
     val minX: Float = 0f, val maxX: Float = 100f, val initialX: Float = 25f
 )
 
-private object InvestigationProfiles {
+internal object InvestigationProfiles {
     private fun profile(
         title: String, question: String, apparatus: String, independent: String,
         dependent: String, controls: String, xUnit: String, yUnit: String,
@@ -31,7 +31,9 @@ private object InvestigationProfiles {
     ) = InvestigationProfile(title, question, apparatus, independent, dependent, controls,
         xUnit, yUnit, safety, method, limitation, response, minX, maxX, initialX)
 
-    fun find(id: String): InvestigationProfile? = when (id) {
+    fun supports(id: String): Boolean = find(id) != null
+
+    private fun find(id: String): InvestigationProfile? = when (id) {
         "bio-living" -> profile("Characteristics of living things", "How can observations be used to distinguish living from non-living material?",
             "Safe specimen images, hand lens and observation checklist", "Number of life-process indicators checked", "Evidence-based classification score", "Same observation criteria and sample set", "indicators", "score",
             "Do not handle unknown organisms; use approved images or safe classroom specimens.",
