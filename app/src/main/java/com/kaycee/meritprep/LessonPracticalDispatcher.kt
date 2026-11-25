@@ -39,8 +39,8 @@ fun LessonPracticalDispatcher(topicId: String) {
             }
         }
         when (topicId) {
-            "chem-acids-bases", "chem-redox" -> ChemistryRedoxTitrationScreen()
-            "chem-metals", "chem-nonmetals" -> ChemistryQualitativeGuideScreen()
+            "chem-acids-bases", "chem-redox" -> ChemistryRedoxTitrationScreen(embedded = true)
+            "chem-metals", "chem-nonmetals" -> ChemistryQualitativeGuideScreen(embedded = true)
             "phy-elasticity" -> PhysicsElasticityLab()
             "phy-pressure" -> PhysicsPressureLab()
             "phy-liquids-rest" -> PhysicsFluidsLab()
