@@ -65,4 +65,18 @@ class ScienceMediaCatalogTest {
         assertTrue(ScienceMediaCatalog.forTopic("topic-with-no-media").isEmpty())
     }
 
+    @Test
+    fun phetResourcesCarryNonCommercialAndCommercialUseRestrictions() {
+        ScienceMediaCatalog.resources.filter { it.provider == "PhET Interactive Simulations" }.forEach { resource ->
+            assertTrue(resource.id, resource.licenceName.contains("CC BY-NC 4.0"))
+            assertTrue(resource.id, resource.permittedUse.contains("commercial licence"))
+            assertTrue(resource.id, resource.attributionText.contains("University of Colorado Boulder"))
+        }
+    }
+
+    @Test
+    fun expandedCatalogueContainsMoreThanThirtyCuratedResources() {
+        assertTrue("Catalogue should contain a broad range of resources", ScienceMediaCatalog.resources.size >= 30)
+    }
+
 }
