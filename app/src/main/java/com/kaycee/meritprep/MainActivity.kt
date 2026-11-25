@@ -189,10 +189,10 @@ private fun StudioDockedBottomBar(
 private fun QuickStudyLauncherSheet(onChoose: (String) -> Unit) {
     val tools = listOf(
         Triple("Timed CBT", "A focused examination session", "cbt"),
-        Triple("180-question UTME", "Full-length four-subject practice", "cbt"),
+        Triple("Study plan", "Organise your weekly learning", "study-plan"),
         Triple("Recall cards", "Review concepts due for retrieval", "review"),
         Triple("Notebook", "Saved notes and mistakes", "mistakes"),
-        Triple("WAEC Paper 2", "Structured theory practice", "waec-theory"),
+        Triple("WAEC Biology theory", "Structured answer practice", "waec-theory"),
         Triple("SS3 placement", "Check your starting level", "placement"),
         Triple("Virtual laboratories", "Explore practical investigations", "labs"),
         Triple("Scientific calculators", "Formula and calculation tools", "calculators")
@@ -204,13 +204,17 @@ private fun QuickStudyLauncherSheet(onChoose: (String) -> Unit) {
         Text("QUICK STUDY", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
         Text("Choose what you want to work on", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
         tools.forEach { (title, description, destination) ->
-            ListItem(
-                headlineContent = { Text(title, fontWeight = FontWeight.SemiBold) },
-                supportingContent = { Text(description) },
-                leadingContent = { Icon(Icons.Default.ArrowForward, contentDescription = null) },
-                modifier = Modifier.fillMaxWidth()
-            )
-            TextButton(onClick = { onChoose(destination) }, modifier = Modifier.fillMaxWidth()) { Text("Open $title") }
+            Card(
+                onClick = { onChoose(destination) },
+                modifier = Modifier.fillMaxWidth(),
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
+            ) {
+                ListItem(
+                    headlineContent = { Text(title, fontWeight = FontWeight.SemiBold) },
+                    supportingContent = { Text(description) },
+                    leadingContent = { Icon(Icons.Default.PlayArrow, contentDescription = null) }
+                )
+            }
         }
     }
 }
