@@ -8,10 +8,10 @@ class LessonStageProgressionTest {
     @Test
     fun unlocksPillarsOnlyAfterEveryEarlierPillarIsComplete() {
         assertTrue(isLessonStageUnlocked(LessonStage.CONCEPT, emptySet()))
-        assertFalse(isLessonStageUnlocked(LessonStage.VISUALISE, emptySet()))
+        assertFalse(isLessonStageUnlocked(LessonStage.EXAMPLES, emptySet()))
         assertTrue(isLessonStageUnlocked(LessonStage.VISUALISE, setOf(LessonStage.CONCEPT)))
         assertFalse(isLessonStageUnlocked(LessonStage.LAB, setOf(LessonStage.CONCEPT, LessonStage.VISUALISE)))
-        assertTrue(isLessonStageUnlocked(LessonStage.LAB, setOf(LessonStage.CONCEPT, LessonStage.VISUALISE, LessonStage.EXPLORE)))
+        assertTrue(isLessonStageUnlocked(LessonStage.LAB, setOf(LessonStage.CONCEPT, LessonStage.VISUALISE, LessonStage.APPLICATIONS)))
     }
 
     @Test
