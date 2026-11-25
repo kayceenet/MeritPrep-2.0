@@ -117,3 +117,8 @@ Each profile supplies a question, apparatus or model materials, independent/depe
 ## Guided classroom progression
 
 The six lesson pillars now follow a sequential mastery path: Learn → Examples → Scenario → Lab → Project → Exercise. A learner can open the first pillar immediately; each subsequent pillar unlocks only after the previous pillar is marked complete. Completed pillars remain available for revision, the notebook stores pillar progress locally, and a returning learner is taken to the next incomplete pillar. The Exercise pillar still requires the configured 80% threshold before the lesson can be marked mastered.
+
+
+## Dashboard navigation and discovery
+
+The home dashboard now follows the reference application's structural pattern: a clear continue-learning destination, search across lesson titles/objectives/explanations, subject filters, progress and accuracy metrics, due-review count, and grouped quick actions for practice, virtual labs, revision, saved lessons, study planning and science media. The dashboard derives its progress from the implemented lesson set rather than counting syllabus-outline placeholders as completed lessons. No course explanations or lesson write-ups were taken from the reference repository.
