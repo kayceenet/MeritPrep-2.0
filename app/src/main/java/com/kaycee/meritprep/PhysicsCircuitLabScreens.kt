@@ -37,7 +37,7 @@ fun PhysicsResistorNetworkLab() {
             Text("Equivalent resistance: ${"%.2f".format(result.equivalentResistanceOhms)} Ω", style = MaterialTheme.typography.titleMedium)
             Text("Total current: ${"%.2f".format(result.totalCurrentAmps)} A")
             Text("Total power: ${"%.2f".format(result.totalPowerWatts)} W")
-            Text(if (series) "Rₜ = R₁ + R₂" else "1/Rₜ = 1/R₁ + 1/R₂")
+            ScientificText(if (series) "Rₜ = R₁ + R₂" else "1/Rₜ = 1/R₁ + 1/R₂", style = MaterialTheme.typography.titleMedium)
         }
     }
     Text("The model assumes ideal wires and a constant-voltage DC source. Real resistor values vary with tolerance and temperature; components must be selected within their power ratings.")
@@ -72,7 +72,7 @@ fun PhysicsCapacitorNetworkLab() {
             Text("Equivalent capacitance: ${"%.2f".format(result.equivalentCapacitanceFarads * 1e6)} μF", style = MaterialTheme.typography.titleMedium)
             Text("Stored charge: ${"%.2f".format(result.totalChargeCoulombs * 1e6)} μC")
             Text("Stored energy: ${"%.2f".format(result.storedEnergyJoules * 1e6)} μJ")
-            Text(if (series) "1/Cₜ = 1/C₁ + 1/C₂" else "Cₜ = C₁ + C₂")
+            ScientificText(if (series) "1/Cₜ = 1/C₁ + 1/C₂" else "Cₜ = C₁ + C₂", style = MaterialTheme.typography.titleMedium)
         }
     }
     Text("The calculation assumes ideal capacitors and a DC supply after the charging transient. Real capacitors have voltage ratings, leakage and dielectric limits; stored charge must be handled safely.")
