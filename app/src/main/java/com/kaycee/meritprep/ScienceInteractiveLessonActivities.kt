@@ -19,7 +19,8 @@ fun ChemistryInteractiveLessonActivity(topicId: String) {
         "chem-redox" -> ChemistryRedoxTitrationInquiry()
         "chem-combination" -> ChemistryStoichiometryInquiry()
         "chem-separation" -> ChemistrySeparationInquiry()
-        "chem-metals", "chem-nonmetals" -> ChemistryQualitativeInquiry()
+        "chem-metals" -> ChemistryQualitativeInquiry()
+        "chem-nonmetals" -> GasIdentificationInquiry()
         "chem-rates" -> ChemistryRateInquiry()
         "chem-energy" -> ChemistryCalorimetryInquiry()
         "chem-electrolysis" -> ElectrolysisConceptInquiry()
@@ -504,6 +505,36 @@ private fun ChemistryCalorimetryInquiry() {
             Text("Heat gained by water: " + "%.0f".format(energy) + " J", style = MaterialTheme.typography.headlineSmall)
             Text("Worked substitution: Q = (" + "%.3f".format(mass / 1000f) + " kg) × 4180 × " + "%.1f".format(rise) + " K.")
             Text("Ideal water-only calculation. A real calorimeter loses heat to surroundings and absorbs energy itself; those effects require correction.", style = MaterialTheme.typography.bodySmall)
+        }
+    }
+}
+
+
+@Composable
+private fun GasIdentificationInquiry() {
+    var gas by remember { mutableStateOf("Oxygen") }
+    val test = when (gas) {
+        "Hydrogen" -> "Bring a lighted splint to a small sample: hydrogen burns with a squeaky pop."
+        "Oxygen" -> "Insert a glowing splint: it relights because oxygen supports combustion."
+        "Carbon dioxide" -> "Bubble through limewater: it turns milky due to calcium carbonate formation."
+        "Ammonia" -> "Hold damp red litmus paper in the gas: it turns blue."
+        "Chlorine" -> "Damp blue litmus paper is first reddened and then bleached."
+        "Hydrogen chloride" -> "Damp blue litmus paper turns red; ammonia fumes can produce white ammonium chloride smoke."
+        "Sulfur dioxide" -> "Acidified potassium dichromate(VI) changes from orange to green."
+        else -> "Moist lead(II) ethanoate paper turns black due to lead sulfide."
+    }
+    Card(Modifier.fillMaxWidth()) {
+        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            Text("Identify common gases by chemical tests", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+            Text("Select a gas and examine the confirmatory test. Distinguish the test reagent, the visible observation and the inference.")
+            listOf("Hydrogen", "Oxygen", "Carbon dioxide", "Ammonia", "Chlorine", "Hydrogen chloride", "Sulfur dioxide", "Hydrogen sulfide").forEach {
+                FilterChip(gas == it, { gas = it }, { Text(it) })
+            }
+            HorizontalDivider()
+            Text("Test and expected observation", fontWeight = FontWeight.Bold)
+            Text(test)
+            Text("Record the observation before naming the gas. A test is only useful when the reagent is fresh, the procedure is correct and interfering gases are considered.")
+            Text("Safety: this is a paper simulation. Never prepare, smell or inhale these gases. Chlorine, sulfur dioxide, hydrogen sulfide and hydrogen chloride are hazardous; practical work requires a fume cupboard, trained supervision and approved microscale procedures.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.error)
         }
     }
 }
