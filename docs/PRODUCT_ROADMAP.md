@@ -86,3 +86,6 @@ Authenticated sync, teacher/admin CMS, analytics, backups, privacy and security 
 
 
 **Genetics glossary expansion:** added definitions and examples for the cell cycle, interphase, sister chromatids, homologous chromosomes, crossing over, haploid and diploid cells, codominance, multiple alleles and ABO blood groups. Regression coverage checks that these terms remain present, accurate and linked to the curriculum.
+
+
+**X-linked inheritance explorer:** added a probability model for a single X-linked recessive allele, with selectable mother and father genotypes, gametes, offspring genotypes and sex-specific outcomes. Tests cover carrier mothers, affected mothers, affected fathers and probability totals. The model is explicitly limited to a simplified recessive example and is not a clinical risk calculator.
