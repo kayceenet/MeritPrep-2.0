@@ -1028,12 +1028,12 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
             }
             if (isTablet) {
                 Row(Modifier.fillMaxSize()) {
-                    ClassroomPillarNavigation(stage, completedStages, lessonBodyScroll, true) { stage = it }
+                    ClassroomPillarNavigation(stage, completedStages, lessonBodyScroll, true, onSelect = { stage = it })
                     lessonContent(Modifier.weight(1f).fillMaxHeight())
                 }
             } else {
                 Column(Modifier.fillMaxSize()) {
-                    ClassroomPillarNavigation(stage, completedStages, lessonBodyScroll, false) { stage = it }
+                    ClassroomPillarNavigation(stage, completedStages, lessonBodyScroll, false, onSelect = { stage = it })
                     lessonContent(Modifier.weight(1f).fillMaxWidth())
                 }
             }
