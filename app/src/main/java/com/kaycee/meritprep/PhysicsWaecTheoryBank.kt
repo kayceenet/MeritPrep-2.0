@@ -132,7 +132,7 @@ object PhysicsWaecTheoryBank {
                 "Recognises θ = 90° and sin 90° = 1.",
                 "Obtains F = 0.50 × 3.0 × 0.40 = 0.60 N.",
                 "States that the first finger indicates field, the second finger current and the thumb force or motion, all mutually perpendicular.",
-                "Names two valid changes: increase magnetic flux density, current or wire length in the field, or maintain a larger angle toward 90°."
+                "Names two valid changes: increase magnetic flux density, current or the length of wire within the magnetic field. The wire is already perpendicular to the field, so its force is at the maximum for the stated field, current and length."
             ),
             "The formula assumes a straight current-carrying conductor in a uniform magnetic field. The force is maximum when the wire is perpendicular to the field."
         ),
