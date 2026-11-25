@@ -876,6 +876,8 @@ private fun BiologyExperimentPlannerLab() {
             if (graphPoints != null) {
                 Text("Results graph (mean of repeated readings)", style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.SemiBold)
                 BiologyResultsGraph(points = graphPoints)
+                Text(BiologyExperimentAnalysis.describeTrend(graphPoints), style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.primary)
+                Text("This describes the recorded pattern; it does not by itself prove causation. Consider repeats, uncertainty and other variables before drawing a conclusion.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 Text("The graph sorts numeric independent-variable values from lowest to highest. Each plotted point is the mean of the readings entered for that condition.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
             } else if (resultRows.any { it.first.isNotBlank() || it.second.isNotBlank() }) {
                 Text("A graph will appear when at least two complete rows have valid, distinct numeric x-values and valid numerical results.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
