@@ -52,6 +52,19 @@ class BiologyReferenceContentTest {
     }
 
     @Test
+    fun glossaryDefinesCellDivisionAndABOInheritanceTerms() {
+        val entries = BiologyGlossary.entries.associateBy { it.term }
+        val required = listOf(
+            "Cell cycle", "Interphase", "Sister chromatids", "Homologous chromosomes",
+            "Crossing over", "Haploid", "Diploid", "Codominance", "Multiple alleles", "ABO blood group"
+        )
+        assertTrue(required.all { it in entries })
+        assertTrue(entries.getValue("Crossing over").definition.contains("prophase I"))
+        assertTrue(entries.getValue("Codominance").example.contains("IᴬIᴮ"))
+        assertTrue(entries.getValue("Multiple alleles").definition.contains("diploid individual"))
+    }
+
+    @Test
     fun glossaryEntriesAreCompleteUniqueAndLinkedToLessons() {
         val entries = BiologyGlossary.entries
         val lessonIds = BiologyCurriculum.units.mapNotNull { it.lessonId }.toSet()
