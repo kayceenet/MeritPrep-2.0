@@ -86,6 +86,18 @@ class LearningCatalogTest {
     }
 
     @Test
+    fun heredityLessonTeachesABOMultipleAllelesAndCodominance() {
+        val lesson = LearningCatalog.topics.single { it.id == "bio-heredity" }
+        val content = lesson.sections.joinToString(" ") { it.first + " " + it.second }.lowercase()
+        assertTrue(lesson.objectives.any { it.contains("ABO", ignoreCase = true) })
+        assertTrue(content.contains("iᴬ"))
+        assertTrue(content.contains("iᴮ"))
+        assertTrue(content.contains("codominant"))
+        assertTrue(content.contains("blood group AB"))
+        assertTrue(content.contains("Rh(D)"))
+    }
+
+    @Test
     fun biologyLessonKnowledgeCheckAnswersAreBalancedAcrossAllFourPositions() {
         val lessons = LearningCatalog.topics.filter { it.subjectCode == "BIO" }
         val counts = lessons.groupingBy { it.correctOption }.eachCount()
