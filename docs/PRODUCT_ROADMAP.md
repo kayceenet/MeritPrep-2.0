@@ -119,3 +119,6 @@ Authenticated sync, teacher/admin CMS, analytics, backups, privacy and security 
 
 
 **Physics answer-key quality:** re-ordered options in the 195-question JAMB-mapped Physics bank and 50-question WAEC-style Physics objective bank without changing their keyed correct answers. Correct positions are now distributed 49/49/49/48 and 13/13/12/12 across A–D. Regression tests enforce near-even distribution in both banks.
+
+
+**WAEC Physics theory expansion:** increased the original structured-response bank from 6 to 12 tasks. New marking-guided questions cover measurement and density, Pascal's principle and hydraulic systems, Coulomb's law, force on a current-carrying conductor, simple harmonic motion, and Hooke's law with graph-gradient interpretation. Regression tests check the expanded bank and selected numerical results.
