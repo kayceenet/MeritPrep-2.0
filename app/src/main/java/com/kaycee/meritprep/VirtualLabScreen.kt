@@ -1,5 +1,6 @@
 package com.kaycee.meritprep
 
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -7,6 +8,8 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -869,6 +872,14 @@ private fun BiologyExperimentPlannerLab() {
                 enabled = resultRows.size < 8,
                 modifier = Modifier.fillMaxWidth()
             ) { Text("Add results row") }
+            val graphPoints = runCatching { BiologyExperimentAnalysis.graphPoints(resultRows.toList()) }.getOrNull()
+            if (graphPoints != null) {
+                Text("Results graph (mean of repeated readings)", style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.SemiBold)
+                BiologyResultsGraph(points = graphPoints)
+                Text("The graph sorts numeric independent-variable values from lowest to highest. Each plotted point is the mean of the readings entered for that condition.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            } else if (resultRows.any { it.first.isNotBlank() || it.second.isNotBlank() }) {
+                Text("A graph will appear when at least two complete rows have valid, distinct numeric x-values and valid numerical results.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            }
             Text("Graph skills", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
             Text("For a continuous independent variable, plot it on the horizontal (x) axis and the measured dependent variable on the vertical (y) axis. Label both axes with units, choose even scales, plot points accurately and draw a suitable line or curve of best fit. A bar chart is generally used for categories.")
             OutlinedButton(onClick = { graphReview = !graphReview }, modifier = Modifier.fillMaxWidth()) {
@@ -902,4 +913,55 @@ private fun BiologyExperimentPlannerLab() {
         }
     }
     Text("Teaching example: the photosynthesis investigation is a model for planning and recording. Bubble counts are an indirect estimate of oxygen production and are less precise than measuring gas volume. In a real investigation, use an appropriate supervised method and record its limitations.")
+}
+
+@Composable
+private fun BiologyResultsGraph(points: List<BiologyExperimentPoint>) {
+    val lineColor = MaterialTheme.colorScheme.primary
+    val axisColor = MaterialTheme.colorScheme.onSurfaceVariant
+    val gridColor = MaterialTheme.colorScheme.outlineVariant
+    val xValues = points.map { it.independentValue }
+    val yValues = points.map { it.meanResult }
+    val minX = xValues.minOrNull()!!
+    val maxX = xValues.maxOrNull()!!
+    val minY = yValues.minOrNull()!!
+    val maxY = yValues.maxOrNull()!!
+    val xSpan = (maxX - minX).takeIf { it > 0.0 } ?: 1.0
+    val ySpan = (maxY - minY).takeIf { it > 0.0 } ?: 1.0
+    Card(Modifier.fillMaxWidth()) {
+        Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+            Canvas(Modifier.fillMaxWidth().height(220.dp)) {
+                val left = 34f
+                val right = size.width - 12f
+                val top = 12f
+                val bottom = size.height - 28f
+                repeat(5) { index ->
+                    val fraction = index / 4f
+                    val y = top + (bottom - top) * fraction
+                    drawLine(gridColor, Offset(left, y), Offset(right, y), strokeWidth = 1f)
+                }
+                drawLine(axisColor, Offset(left, top), Offset(left, bottom), strokeWidth = 2f)
+                drawLine(axisColor, Offset(left, bottom), Offset(right, bottom), strokeWidth = 2f)
+                val plotted = points.map { point ->
+                    val x = left + (((point.independentValue - minX) / xSpan).toFloat() * (right - left))
+                    val y = bottom - (((point.meanResult - minY) / ySpan).toFloat() * (bottom - top))
+                    Offset(x, y)
+                }
+                if (plotted.size > 1) {
+                    val path = Path().apply {
+                        moveTo(plotted.first().x, plotted.first().y)
+                        plotted.drop(1).forEach { lineTo(it.x, it.y) }
+                    }
+                    drawPath(path, lineColor, style = androidx.compose.ui.graphics.drawscope.Stroke(width = 3f))
+                }
+                plotted.forEach { drawCircle(lineColor, radius = 6f, center = it) }
+            }
+            Text("X: independent variable     Y: mean measured result", style = MaterialTheme.typography.labelSmall)
+            Text(
+                "X range: " + "%.2f".format(minX) + " to " + "%.2f".format(maxX) + "    Y range: " + "%.2f".format(minY) + " to " + "%.2f".format(maxY),
+                style = MaterialTheme.typography.labelSmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+        }
+    }
 }
