@@ -733,6 +733,7 @@ fun LessonScreen(topicId: String) {
         GuidedInvestigationActivity(topicId)
         WaecBiologyNigeriaSupplementalActivity(topicId)
         WaecPhysicsSupplementalActivity(topicId)
+        WaecChemistrySupplementalActivity(topicId)
 
         ScienceMediaTopicSection(topicId)
 
