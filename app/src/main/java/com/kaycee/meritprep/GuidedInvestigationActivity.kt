@@ -399,6 +399,8 @@ fun GuidedInvestigationActivity(topicId: String) {
                             Text("Endpoint gradient: " + if (gradient.isFinite()) "%.4f".format(gradient) + " " + profile.yUnit + "/" + profile.xUnit else "undefined: identical x values")
                             Text("Explain the gradient in the context of the investigation.")
                         }
+                        Text("Horizontal axis: " + profile.independent + " (" + profile.xUnit + ")")
+                        Text("Vertical axis: " + profile.dependent + " (" + profile.yUnit + ")")
                         Canvas(Modifier.fillMaxWidth().height(170.dp)) {
                             drawLine(Color.Gray, Offset(24f, size.height - 16f), Offset(size.width - 8f, size.height - 16f), 2f)
                             drawLine(Color.Gray, Offset(24f, 8f), Offset(24f, size.height - 16f), 2f)
@@ -411,6 +413,7 @@ fun GuidedInvestigationActivity(topicId: String) {
                 }
                 else -> {
                     Text("Conclusion and evaluation", fontWeight = FontWeight.Bold)
+                    if (prediction.isNotBlank()) Text("Your recorded prediction: " + prediction)
                     if (readings.size >= 2) {
                         val a = readings.first(); val b = readings.last()
                         val trend = if (b.second > a.second) "increased" else if (b.second < a.second) "decreased" else "did not change"
