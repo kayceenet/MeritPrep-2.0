@@ -171,13 +171,13 @@ object PhysicsWaecPracticalBank {
         PhysicsWaecPracticalTask(
             id = "waec-physics-moments",
             title = "Principle of moments and a balanced rule",
-            aim = "Investigate how the balancing force depends on its distance from a pivot, and use the graph to determine the perpendicular distance of the known load.",
+            aim = "Investigate how moment depends on the balancing force at a fixed perpendicular distance from a pivot, and use the graph to determine that distance.",
             apparatus = listOf("Metre rule", "Knife edge or triangular prism pivot", "Mass hanger", "Slotted masses", "Thread and balance"),
             independentVariable = "Balancing force F (N)", dependentVariable = "Moment M (N m)",
-            controlledVariables = listOf("Keep the pivot position fixed", "Keep the known load and its distance from the pivot fixed", "Measure perpendicular distances from the pivot"),
+            controlledVariables = listOf("Keep the pivot position fixed", "Keep the force line of action at a perpendicular distance of 0.20 m", "Measure perpendicular distances from the pivot"),
             xAxisLabel = "Balancing force, F (N)", yAxisLabel = "Moment, M (N m)",
             readings = listOf(PracticalGraphPoint(1.0, 0.20), PracticalGraphPoint(2.0, 0.40), PracticalGraphPoint(3.0, 0.60), PracticalGraphPoint(4.0, 0.80), PracticalGraphPoint(5.0, 1.00)),
-            taskPrompt = "Calculate each moment using M = Fd and plot M against F. Determine the gradient and explain what it represents. State the conditions for rotational equilibrium and two precautions when balancing the rule.",
+            taskPrompt = "The balancing force acts at a perpendicular distance of 0.20 m from the pivot. Calculate each moment using M = Fd and plot M against F. Determine the gradient and explain what it represents. State the conditions for rotational equilibrium and two precautions when balancing the rule.",
             workedInterpretation = "Moment is force multiplied by the perpendicular distance from the pivot. Since M = Fd, the gradient of M against F is the perpendicular distance d. The supplied data give 0.20 m. At equilibrium, clockwise and anticlockwise moments balance and the resultant force is zero.",
             examinerPoints = listOf("Measure distances from the pivot to each line of action", "Use perpendicular distance, not distance along an inclined force", "Include the weight of the rule if its centre of gravity contributes", "Wait for the rule to become horizontal and stationary", "Record force in newtons and moment in newton metres", "Use a best-fit line and state the gradient unit", "Avoid parallax when reading the metre rule")
         ),
