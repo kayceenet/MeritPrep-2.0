@@ -14,7 +14,7 @@ class GuidedInvestigationRoutingTest {
             "bio-excretion", "bio-support", "bio-reproduction", "bio-growth",
             "bio-coordination", "bio-ecology-factors", "bio-habitats", "bio-biomes",
             "bio-environment", "bio-interactions", "bio-populations", "bio-soil",
-            "bio-variation", "bio-biotechnology", "bio-evolution-evidence",
+            "bio-variation", "bio-heredity", "bio-biotechnology", "bio-evolution-theory", "bio-evolution-evidence",
             "chem-separation", "chem-rates", "chem-solubility", "chem-electrolysis",
             "chem-acids-bases", "chem-redox", "chem-combination", "chem-energy", "chem-kinetic-gas",
             "chem-nuclear", "chem-industry", "chem-equilibrium", "chem-organic",
@@ -34,7 +34,7 @@ class GuidedInvestigationRoutingTest {
     @Test
     fun unknownAndNonInvestigationTopicsDoNotCreateAnActivity() {
         assertFalse(InvestigationProfiles.supports("not-a-real-topic"))
-        assertFalse(InvestigationProfiles.supports("bio-heredity"))
+        assertTrue(InvestigationProfiles.supports("bio-heredity"))
     }
     @Test
     fun representativeInvestigationModelsMatchHandCalculatedValues() {
