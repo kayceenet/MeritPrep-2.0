@@ -87,3 +87,12 @@ The guided lab notebook now saves the learner's selected stage, prediction, meth
 ## Home and subject discovery
 
 The home screen is now a learning dashboard rather than a list of navigation buttons. It groups the main learning actions, gives a direct path into the virtual labs and presents subjects as a clear next step. Subject hubs now show topic and objective counts, group the available exam/practice tools, and display the lesson sequence as distinct topic cards. This follows the reference app's dashboard/catalog structure without importing its lesson prose or course content.
+
+
+## Section-level visuals, scenario fallback and pillar progress
+
+Concept visuals are now resolved from each lesson section heading, so the relevant diagram or animation appears alongside the explanation instead of being isolated in a separate media catalogue. Examples remain available in their own pillar for deliberate revision.
+
+Every lesson has a Scenario stage. Topics with a specific original case study receive a multiple-choice decision and explanation; other topics receive a saved application challenge in which the learner identifies a real system, predicts a variable change and specifies evidence.
+
+The six lesson pillars now record completion locally. Completed pillars are marked in the navigation and the progress indicator reports the number completed. The Exercise pillar records completion only after the topic assessment reaches its 80% threshold. Learners can navigate between pillars freely; the current implementation tracks completion but does not lock later pillars.
