@@ -72,6 +72,20 @@ class LearningCatalogTest {
     }
 
     @Test
+    fun growthLessonTeachesCellCycleMitosisAndMeiosis() {
+        val lesson = LearningCatalog.topics.single { it.id == "bio-growth" }
+        val sectionText = lesson.sections.joinToString(" ") { it.first + " " + it.second }.lowercase()
+        assertTrue(lesson.objectives.any { it.contains("mitosis", ignoreCase = true) })
+        assertTrue(lesson.objectives.any { it.contains("meiosis", ignoreCase = true) })
+        assertTrue(sectionText.contains("g1"))
+        assertTrue(sectionText.contains("s phase"))
+        assertTrue(sectionText.contains("crossing over"))
+        assertTrue(sectionText.contains("homologous chromosomes"))
+        assertTrue(sectionText.contains("sister chromatids"))
+        assertTrue(sectionText.contains("23"))
+    }
+
+    @Test
     fun biologyLessonKnowledgeCheckAnswersAreBalancedAcrossAllFourPositions() {
         val lessons = LearningCatalog.topics.filter { it.subjectCode == "BIO" }
         val counts = lessons.groupingBy { it.correctOption }.eachCount()
