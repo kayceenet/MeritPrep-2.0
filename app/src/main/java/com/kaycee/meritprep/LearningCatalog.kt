@@ -791,7 +791,10 @@ fun LessonScreen(topicId: String) {
                 Text(section.second, style = MaterialTheme.typography.bodyLarge)
             }
         }
-        if (topic.id == "bio-growth") CellDivisionKnowledgeCheckCard()
+        if (topic.id == "bio-growth") {
+            CellDivisionLessonCard()
+            CellDivisionKnowledgeCheckCard()
+        }
         Card(Modifier.fillMaxWidth()) {
             Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 Text("My lesson notes", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
