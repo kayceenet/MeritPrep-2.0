@@ -686,7 +686,7 @@ object LearningCatalog {
             ?: PhysicsCourse.topics.firstOrNull { it.id == topicId }
 }
 
-private enum class LessonStage(val label: String, val subtitle: String) {
+internal enum class LessonStage(val label: String, val subtitle: String) {
     CONCEPT("Learn", "Build the idea from first principles"),
     VISUALISE("Examples", "Study worked examples, diagrams and animations"),
     EXPLORE("Scenario", "Apply the idea to a scientific context"),
