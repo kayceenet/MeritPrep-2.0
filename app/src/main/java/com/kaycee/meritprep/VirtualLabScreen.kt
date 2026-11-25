@@ -321,7 +321,7 @@ private fun SolutionConcentrationSimulation() {
 }
 
 @Composable
-private fun AcidBaseTitrationSimulation() {
+fun AcidBaseTitrationSimulation() {
     var acidConcentration by remember { mutableStateOf("0.100") }
     var baseAliquot by remember { mutableStateOf("25.00") }
     val readings = remember { mutableStateListOf("0.00", "24.80", "0.10", "24.85", "0.00", "25.40") }
