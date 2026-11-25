@@ -15,17 +15,23 @@ fun WaecBiologyNigeriaSupplementalActivity(topicId: String) {
             WaecCellIrritabilityActivity()
             WaecBiologicalDrawingActivity()
         }
+        "bio-excretion" -> WaecExcretoryHealthActivity()
+        "bio-coordination" -> WaecSenseOrgansActivity()
         "bio-classification" -> WaecDichotomousKeyActivity()
         "bio-nutrition" -> {
             WaecFeedingModesActivity()
             WaecFoodTestActivity()
+            WaecNitrogenCycleActivity()
         }
         "bio-plant-anatomy" -> WaecPlantTissueActivity()
         "bio-reproduction" -> {
             WaecReproductionExtensionActivity()
             WaecSeedGerminationActivity()
         }
-        "bio-interactions" -> WaecEnergyFlowActivity()
+        "bio-interactions" -> {
+            WaecEnergyFlowActivity()
+            WaecNutrientCycleActivity()
+        }
         "bio-ecology-factors" -> WaecToleranceRangeActivity()
         "bio-habitats" -> WaecHabitatAdaptationActivity()
         "bio-populations" -> WaecPopulationSamplingActivity()
@@ -434,6 +440,94 @@ private fun WaecSoilPracticalActivity() {
             }
             Text(detail)
             Text("A simple settling test separates particles by settling rate, but soil classification should use a recognised texture method. Soil structure and organic matter also influence field performance.", style = MaterialTheme.typography.bodySmall)
+        }
+    }
+}
+
+
+@Composable
+private fun WaecExcretoryHealthActivity() {
+    var condition by remember { mutableStateOf("Kidney stones") }
+    val detail = when (condition) {
+        "Nephritis" -> "Inflammation of kidney tissue can impair filtration and cause blood/protein in urine, swelling or reduced kidney function. Clinical assessment and cause-specific care are required."
+        "Kidney stones" -> "Mineral crystals form stones that may cause severe flank pain, blood in urine or urinary obstruction. Management depends on size, location and clinical assessment."
+        "Diuresis" -> "Increased urine production may follow increased fluid intake, diuretic substances or disease. Excessive diuresis can disturb water and electrolyte balance."
+        "Infective hepatitis" -> "Inflammation of the liver due to infection can impair liver function. Prevention depends on the virus and includes hygiene, safe practices and vaccination where available."
+        "Liver cancer" -> "Malignant growth in liver tissue can impair metabolism and other liver functions. Risk reduction and treatment require medical care."
+        else -> "Gallstones form from components of bile and may obstruct bile flow, causing pain or inflammation. Symptoms require clinical evaluation."
+    }
+    Card(Modifier.fillMaxWidth()) {
+        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            Text("WAEC Nigeria focus: kidney and liver disorders", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+            listOf("Nephritis", "Kidney stones", "Diuresis", "Infective hepatitis", "Liver cancer", "Gallstones").forEach {
+                FilterChip(condition == it, { condition = it }, { Text(it) })
+            }
+            HorizontalDivider()
+            Text(detail)
+            Text("This is syllabus-level biology, not a diagnostic or treatment guide. Suspected kidney or liver disease requires assessment by a qualified health professional.", style = MaterialTheme.typography.bodySmall)
+        }
+    }
+}
+
+@Composable
+private fun WaecSenseOrgansActivity() {
+    var organ by remember { mutableStateOf("Nose") }
+    val detail = when (organ) {
+        "Nose" -> "Olfactory receptor cells in the nasal epithelium detect dissolved airborne chemicals and transmit signals through the olfactory pathway."
+        "Tongue" -> "Taste receptor cells in taste buds detect dissolved chemicals associated with sweet, salty, sour, bitter and umami sensations."
+        else -> "The skin contains receptors for touch, pressure, vibration, temperature and pain. Different receptor endings respond to different stimuli."
+    }
+    Card(Modifier.fillMaxWidth()) {
+        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            Text("WAEC Nigeria focus: sense organs", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+            listOf("Nose", "Tongue", "Skin").forEach {
+                FilterChip(organ == it, { organ = it }, { Text(it) })
+            }
+            Text(detail)
+            Text("A receptor converts a stimulus into a signal that can be processed by the nervous system. Receptors have adequate stimuli and may adapt at different rates.", style = MaterialTheme.typography.bodySmall)
+        }
+    }
+}
+
+@Composable
+private fun WaecNitrogenCycleActivity() {
+    var process by remember { mutableStateOf("Nitrogen fixation") }
+    val detail = when (process) {
+        "Nitrogen fixation" -> "Nitrogen gas (N₂) is converted into ammonia/ammonium by nitrogen-fixing bacteria, some in legume root nodules, or by lightning and industrial processes."
+        "Nitrification" -> "Nitrifying bacteria oxidise ammonium first to nitrite and then nitrate under suitable aerobic conditions."
+        "Assimilation" -> "Plants absorb nitrate or ammonium and incorporate nitrogen into amino acids, proteins and nucleic acids. Animals obtain nitrogen by feeding."
+        "Ammonification" -> "Decomposers convert organic nitrogen in dead material and waste into ammonia/ammonium."
+        else -> "Denitrifying bacteria reduce nitrate to gaseous nitrogen forms, returning nitrogen to the atmosphere, commonly under low-oxygen conditions."
+    }
+    Card(Modifier.fillMaxWidth()) {
+        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            Text("WAEC Nigeria focus: nitrogen cycle", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+            listOf("Nitrogen fixation", "Nitrification", "Assimilation", "Ammonification", "Denitrification").forEach {
+                FilterChip(process == it, { process = it }, { Text(it) })
+            }
+            HorizontalDivider()
+            Text(detail)
+            Text("The cycle depends on soil conditions, oxygen, microbial communities and plant uptake. Nitrogen fixation and denitrification are not the same process.", style = MaterialTheme.typography.bodySmall)
+        }
+    }
+}
+
+@Composable
+private fun WaecNutrientCycleActivity() {
+    var cycle by remember { mutableStateOf("Carbon cycle") }
+    val detail = if (cycle == "Carbon cycle") {
+        "Photosynthesis removes carbon dioxide from the atmosphere; feeding transfers carbon through food chains; respiration, decomposition and combustion return carbon dioxide. Fossil fuel use changes the rate of transfer."
+    } else {
+        "Evaporation and transpiration move water to the atmosphere; condensation forms clouds; precipitation returns water to land and oceans; infiltration, runoff and groundwater flow redistribute it."
+    }
+    Card(Modifier.fillMaxWidth()) {
+        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            Text("WAEC Nigeria focus: nutrient cycles", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+            listOf("Carbon cycle", "Water cycle").forEach {
+                FilterChip(cycle == it, { cycle = it }, { Text(it) })
+            }
+            Text(detail)
+            Text("Distinguish a matter cycle from energy flow: atoms are recycled through ecosystems, while energy flows through trophic levels and is eventually dissipated as heat.", style = MaterialTheme.typography.bodySmall)
         }
     }
 }
