@@ -6,7 +6,7 @@ import org.junit.Test
 class ScientificNotationTest {
     @Test
     fun formatsCommonLatexOperatorsAndGreekLetters() {
-        assertEquals("ΔT → μ", ScientificNotation.format("\\Delta T \\rightarrow \\mu"))
+        assertEquals("Δ T → μ", ScientificNotation.format("\\Delta T \\rightarrow \\mu"))
     }
 
     @Test
