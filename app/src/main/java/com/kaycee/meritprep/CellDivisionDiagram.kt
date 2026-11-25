@@ -58,7 +58,7 @@ fun CellDivisionDiagram(
             val chromosomeScale = if (compact) 0.45f else 0.72f
             val chromHeight = cellHeight * 0.22f * chromosomeScale
             val chromWidth = cellWidth * 0.11f * chromosomeScale
-            val perPole = chromosomeNumber
+            val perPole = if (separatingHomologues) chromosomeNumber / 2 else chromosomeNumber
 
             if (separatingSisters || separatingHomologues) {
                 repeat(perPole) { i ->
@@ -75,7 +75,7 @@ fun CellDivisionDiagram(
                     }
                 }
             } else {
-                val count = if (replicated) chromosomeNumber else chromosomeNumber
+                val count = chromosomeNumber
                 repeat(count) { i ->
                     val cols = if (count <= 2) count else 2
                     val rows = (count + cols - 1) / cols
