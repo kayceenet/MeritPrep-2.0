@@ -1,5 +1,7 @@
 package com.kaycee.meritprep
 
+import androidx.compose.animation.AnimatedContent
+
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.horizontalScroll
@@ -846,7 +848,8 @@ fun LessonScreen(topicId: String) {
                 }
             }
 
-            when (stage) {
+            AnimatedContent(targetState = stage, label = "lesson-pillar-transition") { activeStage ->
+                when (activeStage) {
                 LessonStage.CONCEPT -> {
                     Card(Modifier.fillMaxWidth()) {
                         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(9.dp)) {
@@ -1022,6 +1025,7 @@ fun LessonScreen(topicId: String) {
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
+                }
                 }
             }
         }
