@@ -17,7 +17,7 @@ fun ChemistryInteractiveLessonActivity(topicId: String) {
     when (topicId) {
         "chem-acids-bases", "chem-redox", "chem-combination" -> ChemistryTitrationInquiry()
         "chem-metals", "chem-nonmetals", "chem-separation" -> ChemistryQualitativeInquiry()
-        "chem-rates", "chem-equilibrium", "chem-energy" -> ChemistryRateInquiry()
+        "chem-rates", "chem-energy" -> ChemistryRateInquiry()
         "chem-electrolysis" -> ElectrolysisConceptInquiry()
         "chem-kinetic-gas" -> GasLawInquiry()
         "chem-equilibrium" -> EquilibriumInquiry()
