@@ -16,7 +16,10 @@ fun WaecChemistrySupplementalActivity(topicId: String) {
     if (topicId !in WaecChemistryActivityRoutes.supportedTopicIds) return
     when (topicId) {
         "chem-organic" -> WaecOrganicTestsAndBiochemistryActivity()
-        "chem-separation" -> WaecSeparationPracticalActivity()
+        "chem-separation" -> {
+            WaecChemistryFoundationsActivity()
+            WaecSeparationPracticalActivity()
+        }
         "chem-acids-bases" -> WaecStandardSolutionActivity()
         "chem-atomic-bonding" -> WaecPeriodicTrendsActivity()
         "chem-industry" -> WaecIndustryProcessActivity()
@@ -173,6 +176,30 @@ private fun WaecMetalExtractionActivity() {
             HorizontalDivider()
             Text(detail)
             Text("Compare ore, concentration, reducing agent or electrical method, energy demand, impurities, products and environmental impact. The method depends on metal reactivity and compound stability.", style = MaterialTheme.typography.bodySmall)
+        }
+    }
+}
+
+
+@Composable
+private fun WaecChemistryFoundationsActivity() {
+    var quantity by remember { mutableStateOf("Mass") }
+    val detail = when (quantity) {
+        "Mass" -> "Use a balance. Record in g or kg, check zero, avoid weighing hot objects and do not exceed the instrument capacity."
+        "Volume" -> "Use a pipette or burette for accurate delivery and a measuring cylinder for less demanding measurements. Read the bottom of the meniscus at eye level for most aqueous solutions."
+        "Temperature" -> "Use a suitable thermometer or temperature probe. Allow the reading to stabilise and record the scale resolution."
+        else -> "Use a stopwatch or timer. Define the start and end event consistently and repeat timing where reaction onset is judged by eye."
+    }
+    Card(Modifier.fillMaxWidth()) {
+        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            Text("WAEC focus: chemistry laboratory foundations", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+            listOf("Mass", "Volume", "Temperature", "Time").forEach {
+                FilterChip(quantity == it, { quantity = it }, { Text(it) })
+            }
+            HorizontalDivider()
+            Text(detail)
+            Text("Scientific method: state a testable question; make a prediction; identify independent, dependent and controlled variables; choose apparatus; carry out a safe repeatable procedure; record raw observations with units; process data; conclude from evidence; evaluate limitations.")
+            Text("Use SI units where appropriate, report suitable significant figures and distinguish precision (repeatability) from accuracy (closeness to the accepted value).", style = MaterialTheme.typography.bodySmall)
         }
     }
 }
