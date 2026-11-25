@@ -126,4 +126,4 @@ The home dashboard now follows the reference application's structural pattern: a
 
 ## External science-media library
 
-The Explore pillar links to 44 curated external resources from PhET Interactive Simulations, HHMI BioInteractive and LabXchange: 30 interactive simulations, 7 virtual-lab resources and 7 animations. Each resource has a topic link, a before-you-start prompt, an after-you-explore task, attribution guidance and an offline alternative. These remain external resource links, not bundled media; their current licences and commercial-use restrictions must be checked before any embedding, caching, modification or redistribution.
+The Explore pillar links to 47 curated external resources from PhET Interactive Simulations, HHMI BioInteractive and LabXchange: 30 interactive simulations, 7 virtual-lab resources and 10 animations. Each resource has a topic link, a before-you-start prompt, an after-you-explore task, attribution guidance and an offline alternative. These remain external resource links, not bundled media; their current licences and commercial-use restrictions must be checked before any embedding, caching, modification or redistribution.
