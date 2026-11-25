@@ -19,6 +19,8 @@ fun ChemistryInteractiveLessonActivity(topicId: String) {
         "chem-metals", "chem-nonmetals", "chem-separation" -> ChemistryQualitativeInquiry()
         "chem-rates", "chem-equilibrium", "chem-energy" -> ChemistryRateInquiry()
         "chem-electrolysis" -> ElectrolysisConceptInquiry()
+        "chem-kinetic-gas" -> GasLawInquiry()
+        "chem-equilibrium" -> EquilibriumInquiry()
     }
 }
 
@@ -145,7 +147,10 @@ fun PhysicsInteractiveLessonActivity(topicId: String) {
         "phy-elasticity" -> HookesLawInquiry()
         "phy-thermal-expansion" -> ThermalExpansionInquiry()
         "phy-equilibrium", "phy-work-energy" -> MomentsInquiry()
-        "phy-reflection", "phy-refraction" -> ReflectionInquiry()
+        "phy-reflection" -> ReflectionInquiry()
+        "phy-refraction" -> RefractionInquiry()
+        "phy-electrostatics" -> ElectrostaticForceInquiry()
+        "phy-induction" -> InductionInquiry()
     }
 }
 
@@ -314,5 +319,95 @@ private fun ThermalExpansionInquiry() {
         Text("Increase in length: " + "%.3f".format(changeMetres * 1000f) + " mm", fontWeight = FontWeight.Bold)
         Text("The coefficient is assumed constant over the temperature interval. Real materials may expand non-linearly and have different coefficients along different directions.", style = MaterialTheme.typography.bodySmall)
         Text("Engineering connection: explain why bridges and long rails need expansion allowances.")
+    } }
+}
+
+@Composable
+private fun GasLawInquiry() {
+    var initialPressure by remember { mutableFloatStateOf(100f) }
+    var initialVolume by remember { mutableFloatStateOf(2f) }
+    var initialTemperature by remember { mutableFloatStateOf(300f) }
+    var finalVolume by remember { mutableFloatStateOf(1.5f) }
+    var finalTemperature by remember { mutableFloatStateOf(350f) }
+    val finalPressure = initialPressure * initialVolume * finalTemperature / (initialTemperature * finalVolume)
+    Card(Modifier.fillMaxWidth()) { Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+        Text("Combined gas law simulator", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+        Text("For a fixed amount of ideal gas, P₁V₁/T₁ = P₂V₂/T₂. Temperatures must be in kelvin.")
+        Text("Initial pressure: " + initialPressure.toInt() + " kPa"); Slider(initialPressure, { initialPressure = it }, valueRange = 50f..300f)
+        Text("Initial volume: " + "%.1f".format(initialVolume) + " L"); Slider(initialVolume, { initialVolume = it }, valueRange = 0.5f..5f)
+        Text("Initial temperature: " + initialTemperature.toInt() + " K"); Slider(initialTemperature, { initialTemperature = it }, valueRange = 200f..500f)
+        Text("Final volume: " + "%.1f".format(finalVolume) + " L"); Slider(finalVolume, { finalVolume = it }, valueRange = 0.5f..5f)
+        Text("Final temperature: " + finalTemperature.toInt() + " K"); Slider(finalTemperature, { finalTemperature = it }, valueRange = 200f..500f)
+        Text("Final pressure: " + "%.2f".format(finalPressure) + " kPa", style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold)
+        Text("Assumptions: fixed amount of gas, ideal-gas behaviour and equilibrium states. Real gases may deviate, especially at high pressure and low temperature.", style = MaterialTheme.typography.bodySmall)
+    } }
+}
+
+@Composable
+private fun EquilibriumInquiry() {
+    var forward by remember { mutableFloatStateOf(4f) }
+    var reverse by remember { mutableFloatStateOf(4f) }
+    val net = forward - reverse
+    Card(Modifier.fillMaxWidth()) { Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+        Text("Dynamic chemical equilibrium", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+        Text("At dynamic equilibrium in a closed system, forward and reverse reaction rates are equal. Both reactions continue; concentrations remain constant at the macroscopic level.")
+        Text("Forward rate index: " + "%.1f".format(forward)); Slider(forward, { forward = it }, valueRange = 0f..10f)
+        Text("Reverse rate index: " + "%.1f".format(reverse)); Slider(reverse, { reverse = it }, valueRange = 0f..10f)
+        Text(if (kotlin.math.abs(net) < 0.05) "Dynamic equilibrium: rates are equal" else if (net > 0) "Net change favours products" else "Net change favours reactants", fontWeight = FontWeight.Bold)
+        Text("Net rate index (forward − reverse): " + "%.2f".format(net))
+        Text("This is a conceptual rate-balance model. It does not calculate equilibrium constants or predict how a specific concentration, pressure or temperature change shifts a real reaction.", style = MaterialTheme.typography.bodySmall)
+        Text("Check: why is dynamic equilibrium not the same as a reaction stopping?")
+    } }
+}
+
+@Composable
+private fun RefractionInquiry() {
+    var incident by remember { mutableFloatStateOf(40f) }
+    var refractiveIndex by remember { mutableFloatStateOf(1.5f) }
+    val sine = kotlin.math.sin(Math.toRadians(incident.toDouble())) / refractiveIndex
+    val totalInternal = sine > 1.0
+    val refracted = if (totalInternal) null else Math.toDegrees(kotlin.math.asin(sine))
+    Card(Modifier.fillMaxWidth()) { Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+        Text("Refraction and Snell's law", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+        Text("Light changes direction when it crosses a boundary between media because its speed changes. Angles are measured from the normal.")
+        Text("Incident angle: " + incident.toInt() + "°"); Slider(incident, { incident = it }, valueRange = 0f..90f)
+        Text("Refractive index of second medium (n₂): " + "%.2f".format(refractiveIndex)); Slider(refractiveIndex, { refractiveIndex = it }, valueRange = 1f..2.5f)
+        if (totalInternal) Text("Total internal reflection condition in this model.", fontWeight = FontWeight.Bold) else Text("Refracted angle: " + "%.2f".format(refracted) + "°", fontWeight = FontWeight.Bold)
+        Text("Snell's law: n₁ sin i = n₂ sin r. This model assumes light starts in air (n₁ ≈ 1.00) and the boundary is flat.")
+    } }
+}
+
+@Composable
+private fun ElectrostaticForceInquiry() {
+    var q1 by remember { mutableFloatStateOf(2f) }
+    var q2 by remember { mutableFloatStateOf(-3f) }
+    var distance by remember { mutableFloatStateOf(0.20f) }
+    val force = 8.99e9 * kotlin.math.abs(q1 * 1e-6 * q2 * 1e-6) / (distance * distance)
+    Card(Modifier.fillMaxWidth()) { Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+        Text("Coulomb's law: force between charges", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+        Text("For stationary point charges in vacuum, F = k|q₁q₂|/r². Like charges repel; unlike charges attract.")
+        Text("Charge q₁: " + "%.1f".format(q1) + " μC"); Slider(q1, { q1 = it }, valueRange = -10f..10f)
+        Text("Charge q₂: " + "%.1f".format(q2) + " μC"); Slider(q2, { q2 = it }, valueRange = -10f..10f)
+        Text("Separation: " + "%.2f".format(distance) + " m"); Slider(distance, { distance = it }, valueRange = 0.05f..1f)
+        Text("Force magnitude: " + "%.4f".format(force) + " N", fontWeight = FontWeight.Bold)
+        Text(if (q1 * q2 < 0) "Direction: attractive" else if (q1 * q2 > 0) "Direction: repulsive" else "Direction: no electrostatic force when either charge is zero")
+        Text("Assumptions: point charges, electrostatic equilibrium and vacuum permittivity. Real charge distributions and dielectric materials require additional treatment.", style = MaterialTheme.typography.bodySmall)
+    } }
+}
+
+@Composable
+private fun InductionInquiry() {
+    var turns by remember { mutableFloatStateOf(100f) }
+    var fluxChange by remember { mutableFloatStateOf(0.02f) }
+    var time by remember { mutableFloatStateOf(0.1f) }
+    val inducedEmf = turns * fluxChange / time
+    Card(Modifier.fillMaxWidth()) { Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+        Text("Electromagnetic induction", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+        Text("Faraday's law: the magnitude of induced emf is N times the rate of change of magnetic flux linkage.")
+        Text("Coil turns: " + turns.toInt()); Slider(turns, { turns = it }, valueRange = 10f..500f)
+        Text("Change in flux per turn: " + "%.3f".format(fluxChange) + " Wb"); Slider(fluxChange, { fluxChange = it }, valueRange = 0.001f..0.1f)
+        Text("Time interval: " + "%.3f".format(time) + " s"); Slider(time, { time = it }, valueRange = 0.01f..1f)
+        Text("Induced emf magnitude: " + "%.3f".format(inducedEmf) + " V", fontWeight = FontWeight.Bold)
+        Text("The sign and direction depend on the direction of flux change and Lenz's law. This model calculates magnitude only and assumes the same flux change links every turn.", style = MaterialTheme.typography.bodySmall)
     } }
 }
