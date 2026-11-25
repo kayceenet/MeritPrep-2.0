@@ -59,6 +59,14 @@ class GuidedInvestigationRoutingTest {
         val population = InvestigationProfiles.find("bio-populations")!!
         assertEquals(10.0, population.response(100f).toDouble(), 0.01)
 
+        val microscopy = InvestigationProfiles.find("bio-cell")!!
+        assertEquals(2.0, microscopy.response(25f).toDouble(), 0.001)
+        assertTrue(25f in microscopy.minX..microscopy.maxX)
+
+        val support = InvestigationProfiles.find("bio-support")!!
+        assertEquals(6.0, support.response(20f).toDouble(), 0.001)
+        assertEquals(20f, support.maxX)
+
         val waves = InvestigationProfiles.find("phy-waves")!!
         assertEquals(0.2, waves.response(100f).toDouble(), 0.001)
 
