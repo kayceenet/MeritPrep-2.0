@@ -21,7 +21,10 @@ class GuidedInvestigationRoutingTest {
             "phy-sound-propagation", "phy-sound-characteristics", "phy-current-electricity",
             "phy-electrical-power", "phy-cells", "phy-friction", "phy-machines",
             "phy-thermal-expansion", "phy-heat-transfer", "phy-conduction",
-            "phy-magnetic-force", "phy-ac-circuits", "phy-modern"
+            "phy-magnetic-force", "phy-ac-circuits", "phy-modern", "phy-gravity",
+            "phy-equilibrium", "phy-work-energy", "phy-temperature", "phy-heat-quantity",
+            "phy-change-state", "phy-vapours", "phy-light-energy", "phy-optical-instruments",
+            "phy-dispersion", "phy-electrostatics", "phy-magnetism", "phy-electronics"
         )
         routes.forEach { id -> assertTrue("Missing guided investigation route: " + id, InvestigationProfiles.supports(id)) }
     }
