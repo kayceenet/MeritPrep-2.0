@@ -8,7 +8,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import kotlin.math.max
 
-@Composable
 internal object WaecBiologyActivityRoutes {
     val supportedTopicIds = setOf(
         "bio-cell", "bio-classification", "bio-nutrition", "bio-plant-anatomy",
@@ -18,6 +17,7 @@ internal object WaecBiologyActivityRoutes {
     )
 }
 
+@Composable
 fun WaecBiologyNigeriaSupplementalActivity(topicId: String) {
     if (topicId !in WaecBiologyActivityRoutes.supportedTopicIds) return
     when (topicId) {
