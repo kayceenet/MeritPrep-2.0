@@ -56,7 +56,8 @@ class BiologyReferenceContentTest {
         val entries = BiologyGlossary.entries.associateBy { it.term }
         val required = listOf(
             "Cell cycle", "Interphase", "Sister chromatids", "Homologous chromosomes",
-            "Crossing over", "Haploid", "Diploid", "Codominance", "Multiple alleles", "ABO blood group"
+            "Crossing over", "Haploid", "Diploid", "Codominance", "Multiple alleles", "ABO blood group",
+            "X-linked inheritance", "Carrier"
         )
         assertTrue(required.all { it in entries })
         assertTrue(entries.getValue("Crossing over").definition.contains("prophase I"))
