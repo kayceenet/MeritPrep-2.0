@@ -67,9 +67,13 @@ fun ScienceMediaScreen(onOpenLabs: () -> Unit, onOpenLesson: (String) -> Unit) {
     var selectedOsmosisCellIndex by remember { mutableIntStateOf(0) }
     var externalSolute by remember { mutableFloatStateOf(0.2f) }
     var internalSolute by remember { mutableFloatStateOf(0.6f) }
+    var diffusionLeft by remember { mutableFloatStateOf(1.0f) }
+    var diffusionRight by remember { mutableFloatStateOf(0.2f) }
+    var diffusionPermeability by remember { mutableFloatStateOf(80f) }
     val parentGenotypes = MendelianGenotype.values()
     val osmosisCellType = if (selectedOsmosisCellIndex == 0) OsmosisCellType.PLANT else OsmosisCellType.ANIMAL
     val osmosisResult = OsmosisSimulation.evaluate(externalSolute.toDouble(), internalSolute.toDouble(), osmosisCellType)
+    val diffusionResult = DiffusionSimulation.evaluate(DiffusionConditions(diffusionLeft.toDouble(), diffusionRight.toDouble(), diffusionPermeability.toDouble()))
     val mendelianResult = MendelianInheritanceSimulation.evaluate(parentGenotypes[selectedParentOneIndex], parentGenotypes[selectedParentTwoIndex])
     val selectionResult = NaturalSelectionSimulation.evaluate(
         NaturalSelectionConditions(
@@ -202,6 +206,28 @@ fun ScienceMediaScreen(onOpenLabs: () -> Unit, onOpenLesson: (String) -> Unit) {
                         Text("Investigation prompt", fontWeight = FontWeight.SemiBold)
                         Text("Keep the internal concentration fixed and increase the external concentration gradually. Record when net water movement changes direction. Repeat for plant and animal cells.")
                         Text("Model limitation: the calculation compares solute concentrations and predicts the direction of net water movement. It does not calculate the rate of osmosis, membrane permeability, pressure potential or changes in cell volume.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    }
+                }
+            }
+        }
+        if (selectedSubject == 0 || selectedSubject == 1) {
+            item {
+                Card(modifier = Modifier.fillMaxWidth()) {
+                    Column(Modifier.padding(15.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                        Text("MeritPrep interactive model: diffusion", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+                        Text("Explore how a concentration gradient and membrane permeability affect the net movement of particles.")
+                        Text("Left-side concentration: ${"%.2f".format(diffusionLeft)} relative units")
+                        Slider(value = diffusionLeft, onValueChange = { diffusionLeft = it }, valueRange = 0f..1.5f)
+                        Text("Right-side concentration: ${"%.2f".format(diffusionRight)} relative units")
+                        Slider(value = diffusionRight, onValueChange = { diffusionRight = it }, valueRange = 0f..1.5f)
+                        Text("Membrane permeability: ${diffusionPermeability.toInt()}%")
+                        Slider(value = diffusionPermeability, onValueChange = { diffusionPermeability = it }, valueRange = 0f..100f)
+                        Text("Net direction: ${if (diffusionResult.direction == DiffusionDirection.NO_NET_MOVEMENT) "No net movement" else "Higher concentration to lower concentration"}", style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
+                        Text("Concentration difference: ${"%.2f".format(diffusionResult.concentrationGradient)}")
+                        Text("Illustrative relative-rate index: ${"%.1f".format(diffusionResult.relativeRateIndexPercent)}%")
+                        Text(diffusionResult.explanation)
+                        Text("Investigate: keep the concentration difference constant and change permeability. Then equalise the concentrations. Explain why particles continue moving even when there is no net diffusion.")
+                        Text("Model limitation: this is a simplified proportional model. It does not calculate measured diffusion rates or represent temperature, particle size, diffusion distance, surface area or individual random particle motion.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                     }
                 }
             }
