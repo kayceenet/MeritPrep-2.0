@@ -20,6 +20,9 @@ fun PhysicsSupplementalLessonActivity(topicId: String) {
   "phy-magnetic-force" -> MagneticForceExplorer()
   "phy-ac-circuits" -> ACExplorer()
   "phy-modern" -> PhotonExplorer()
+  "phy-temperature", "phy-heat-quantity", "phy-change-state", "phy-vapours",
+  "phy-optical-instruments", "phy-dispersion", "phy-magnetism", "phy-conduction",
+  "phy-electronics" -> PhysicsMissingTopicExplorer(topicId)
  }
 }
 @Composable private fun MeasurementExplorer() {
@@ -155,4 +158,144 @@ fun PhysicsSupplementalLessonActivity(topicId: String) {
   Text("Photon energy E = hf = " + "%.3e".format(energy) + " J")
   Text("Higher-frequency photons carry more energy. At fixed frequency, greater intensity means more photons, not greater energy per photon.")
  } }
+}
+
+
+internal val physicsSupplementalActivityTopicIds = setOf(
+ "phy-measurements", "phy-vectors", "phy-friction", "phy-machines",
+ "phy-pressure", "phy-liquids-rest", "phy-gas-laws", "phy-kinetic-theory",
+ "phy-heat-transfer", "phy-magnetic-force", "phy-ac-circuits", "phy-modern",
+ "phy-temperature", "phy-heat-quantity", "phy-change-state", "phy-vapours",
+ "phy-optical-instruments", "phy-dispersion", "phy-magnetism", "phy-conduction",
+ "phy-electronics"
+)
+
+@Composable private fun PhysicsMissingTopicExplorer(topicId: String) {
+ var a by remember(topicId) { mutableFloatStateOf(25f) }
+ var b by remember(topicId) { mutableFloatStateOf(20f) }
+ var c by remember(topicId) { mutableFloatStateOf(1f) }
+ var material by remember(topicId) { mutableStateOf("Copper") }
+ var phase by remember(topicId) { mutableStateOf("Fusion") }
+ val title = when(topicId) {
+  "phy-temperature" -> "Temperature-scale explorer"
+  "phy-heat-quantity" -> "Specific heat capacity laboratory"
+  "phy-change-state" -> "Latent heat laboratory"
+  "phy-vapours" -> "Relative humidity explorer"
+  "phy-optical-instruments" -> "Converging-lens image model"
+  "phy-dispersion" -> "Dispersion and wavelength explorer"
+  "phy-magnetism" -> "Magnetic field inside a solenoid"
+  "phy-conduction" -> "Thermal conduction rate model"
+  else -> "Semiconductor diode switch"
+ }
+ val formula = when(topicId) {
+  "phy-temperature" -> "T(K) = \\\\theta(°C) + 273.15"
+  "phy-heat-quantity" -> "Q = mc\\\\Delta T"
+  "phy-change-state" -> "Q = mL"
+  "phy-vapours" -> "RH = \\\\frac{p_v}{p_{sat}} \\\\times 100\\\\%"
+  "phy-optical-instruments" -> "\\\\frac{1}{f} = \\\\frac{1}{u} + \\\\frac{1}{v}"
+  "phy-dispersion" -> "n(\\\\lambda) = A + \\\\frac{B}{\\\\lambda^2}"
+  "phy-magnetism" -> "B = \\\\mu_0 nI"
+  "phy-conduction" -> "\\\\frac{Q}{t} = \\\\frac{kA\\\\Delta T}{L}"
+  else -> "I \\\\approx \\\\frac{V - 0.7}{R}"
+ }
+ val output = when(topicId) {
+  "phy-temperature" -> "Absolute temperature = \${"%.2f".format(a+273.15f)} K"
+  "phy-heat-quantity" -> "Heat transferred = \${"%.0f".format(a*b*c)} J"
+  "phy-change-state" -> "Energy required = \${"%.0f".format(a * if(phase=="Fusion") 334000f else 2260000f)} J"
+  "phy-vapours" -> "Actual vapour pressure = \${"%.2f".format(a*b/100f)} kPa"
+  "phy-optical-instruments" -> {
+   val u=b.coerceAtLeast(a+1f)
+   "Image distance = \${"%.2f".format(a*u/(u-a))} cm; magnification = \${"%.2f".format((a*u/(u-a))/u)}"
+  }
+  "phy-dispersion" -> {
+   val micrometres=a/1000f
+   val n=1.5046f+0.0042f/(micrometres*micrometres)
+   "Approximate refractive index = \${"%.4f".format(n)}"
+  }
+  "phy-magnetism" -> "Flux density = \${"%.3f".format(4f*PI.toFloat()*1e-7f*a*b*1000f)} mT"
+  "phy-conduction" -> {
+   val k=when(material) { "Copper"->400f; "Aluminium"->205f; "Glass"->1f; else->.12f }
+   "Heat-transfer rate = \${"%.2f".format(k*a*b/c)} W"
+  }
+  else -> "Estimated forward current = \${"%.2f".format(if(a>.7f) (a-.7f)/b*1000f else 0f)} mA"
+ }
+ val primaryLabel = when(topicId) {
+  "phy-temperature" -> "Temperature in degrees Celsius"
+  "phy-heat-quantity" -> "Mass (kg)"
+  "phy-change-state" -> "Mass changing state (kg)"
+  "phy-vapours" -> "Saturated vapour pressure (kPa)"
+  "phy-optical-instruments" -> "Focal length (cm)"
+  "phy-dispersion" -> "Wavelength (nm)"
+  "phy-magnetism" -> "Current (A)"
+  "phy-conduction" -> "Cross-sectional area (m²)"
+  else -> "Applied voltage (V)"
+ }
+ val primaryRange = when(topicId) {
+  "phy-temperature" -> -100f..200f
+  "phy-heat-quantity" -> .1f..5f
+  "phy-change-state" -> .1f..2f
+  "phy-vapours" -> .5f..6f
+  "phy-optical-instruments" -> 5f..20f
+  "phy-dispersion" -> 400f..700f
+  "phy-magnetism" -> 0f..5f
+  "phy-conduction" -> .001f..0.05f
+  else -> -5f..5f
+ }
+ val secondLabel = when(topicId) {
+  "phy-heat-quantity" -> "Specific heat capacity (J kg⁻¹ K⁻¹)"
+  "phy-vapours" -> "Relative humidity (%)"
+  "phy-optical-instruments" -> "Object distance (cm)"
+  "phy-magnetism" -> "Turns per metre (m⁻¹)"
+  "phy-conduction" -> "Temperature difference (K)"
+  else -> "Series resistance (Ω)"
+ }
+ val secondRange = when(topicId) {
+  "phy-heat-quantity" -> 400f..4200f
+  "phy-vapours" -> 0f..100f
+  "phy-optical-instruments" -> 21f..100f
+  "phy-magnetism" -> 100f..2000f
+  "phy-conduction" -> 1f..100f
+  else -> 100f..1000f
+ }
+ Card(Modifier.fillMaxWidth()) {
+  Column(Modifier.padding(16.dp),verticalArrangement=Arrangement.spacedBy(8.dp)) {
+   Text(title,style=MaterialTheme.typography.titleLarge,fontWeight=FontWeight.Bold)
+   Text(primaryLabel + ": " + "%.2f".format(a))
+   Slider(a,{a=it},valueRange=primaryRange)
+   if(topicId in setOf("phy-heat-quantity","phy-vapours","phy-optical-instruments","phy-magnetism","phy-conduction","phy-electronics")) {
+    Text(secondLabel + ": " + "%.2f".format(b))
+    Slider(b,{b=it},valueRange=secondRange)
+   }
+   if(topicId=="phy-heat-quantity" || topicId=="phy-conduction") {
+    val label=if(topicId=="phy-heat-quantity") "Temperature change (K)" else "Thickness (m)"
+    val range=if(topicId=="phy-heat-quantity") 1f..100f else .005f..0.1f
+    Text(label + ": " + "%.3f".format(c))
+    Slider(c,{c=it},valueRange=range)
+   }
+   if(topicId=="phy-change-state") {
+    Row(horizontalArrangement=Arrangement.spacedBy(6.dp)) {
+     FilterChip(phase=="Fusion",{phase="Fusion"},{Text("Fusion")})
+     FilterChip(phase=="Vaporisation",{phase="Vaporisation"},{Text("Vaporisation")})
+    }
+   }
+   if(topicId=="phy-conduction") {
+    Row(horizontalArrangement=Arrangement.spacedBy(5.dp)) {
+     listOf("Copper","Aluminium","Glass","Wood").forEach { FilterChip(material==it,{material=it},{Text(it)}) }
+    }
+   }
+   EquationDisplayCard(formula,caption="GOVERNING RELATIONSHIP")
+   Text(output,style=MaterialTheme.typography.titleMedium,fontWeight=FontWeight.Bold,color=MaterialTheme.colorScheme.primary)
+   Text(when(topicId) {
+    "phy-temperature" -> "Kelvin is an absolute scale; an interval of 1 K equals an interval of 1 °C."
+    "phy-heat-quantity" -> "Assumes no phase change and negligible heat exchange with the surroundings."
+    "phy-change-state" -> "During a phase change at constant pressure, temperature remains approximately constant while latent energy changes the state."
+    "phy-vapours" -> "At fixed temperature, saturation vapour pressure is the equilibrium maximum."
+    "phy-optical-instruments" -> "Assumes a thin converging lens and an object beyond its focal point; sign conventions are suppressed."
+    "phy-dispersion" -> "The Cauchy constants are illustrative for transparent glass; actual refractive index depends on material and wavelength."
+    "phy-magnetism" -> "Assumes a long air-cored solenoid and a nearly uniform field near its centre."
+    "phy-conduction" -> "Assumes steady one-dimensional conduction and approximate material conductivity values."
+    else -> "Piecewise silicon-diode teaching model; reverse leakage, breakdown and the exponential diode equation are omitted."
+   },style=MaterialTheme.typography.bodySmall,color=MaterialTheme.colorScheme.onSurfaceVariant)
+  }
+ }
 }
