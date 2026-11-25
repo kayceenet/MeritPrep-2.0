@@ -21,9 +21,11 @@ import androidx.compose.material3.FilterChip
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
+import androidx.compose.material3.Slider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -35,6 +37,12 @@ import androidx.compose.ui.unit.dp
 fun ScienceMediaScreen(onOpenLabs: () -> Unit) {
     val context = LocalContext.current
     var selectedSubject by remember { mutableIntStateOf(0) }
+    var lightIntensity by remember { mutableFloatStateOf(35f) }
+    var carbonDioxideIndex by remember { mutableFloatStateOf(55f) }
+    var temperatureCelsius by remember { mutableFloatStateOf(25f) }
+    val photosynthesis = PhotosynthesisSimulation.evaluate(
+        PhotosynthesisConditions(lightIntensity.toDouble(), carbonDioxideIndex.toDouble(), temperatureCelsius.toDouble())
+    )
     val subjectCodes = listOf("ALL", "BIO", "CHEM", "PHY")
     val subjectLabels = listOf("All", "Biology", "Chemistry", "Physics")
     val resources = if (selectedSubject == 0) ScienceMediaCatalog.resources
