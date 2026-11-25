@@ -662,8 +662,16 @@ object LearningCatalog {
         )
     ) + ChemistryCourse.topics + PhysicsCourse.topics + MathematicsCourse.topics
 
-    fun forSubject(code: String): List<LearningTopic> = topics.filter { it.subjectCode == code }
-    fun find(topicId: String): LearningTopic? = topics.firstOrNull { it.id == topicId }
+    fun forSubject(code: String): List<LearningTopic> = when (code) {
+        "CHEM" -> ChemistryCourse.topics
+        "PHY" -> PhysicsCourse.topics
+        else -> topics.filter { it.subjectCode == code }
+    }
+
+    fun find(topicId: String): LearningTopic? =
+        topics.firstOrNull { it.id == topicId }
+            ?: ChemistryCourse.topics.firstOrNull { it.id == topicId }
+            ?: PhysicsCourse.topics.firstOrNull { it.id == topicId }
 }
 
 @Composable
