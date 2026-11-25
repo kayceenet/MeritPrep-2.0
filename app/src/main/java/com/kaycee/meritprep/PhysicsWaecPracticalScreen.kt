@@ -41,6 +41,10 @@ fun PhysicsWaecPracticalScreen() {
             "waec-physics-ohm" -> fit.gradient
             "waec-physics-density" -> fit.gradient
             "waec-physics-resistivity" -> fit.gradient * 0.50e-6
+            "waec-physics-moments" -> fit.gradient
+            "waec-physics-focal-length" -> 1.0 / fit.intercept
+            "waec-physics-specific-heat" -> fit.gradient / 0.20
+            "waec-physics-parallel-resistors" -> fit.gradient
             else -> fit.gradient
         }
     }
@@ -50,6 +54,10 @@ fun PhysicsWaecPracticalScreen() {
         "waec-physics-ohm" -> "Resistance, R"
         "waec-physics-density" -> "Density, ρ"
         "waec-physics-resistivity" -> "Resistivity, ρ"
+        "waec-physics-moments" -> "Perpendicular distance, d"
+        "waec-physics-focal-length" -> "Focal length, f"
+        "waec-physics-specific-heat" -> "Specific heat capacity, c"
+        "waec-physics-parallel-resistors" -> "Equivalent resistance, R"
         else -> "Gradient"
     }
     val derivedUnit = when (task.id) {
@@ -58,6 +66,10 @@ fun PhysicsWaecPracticalScreen() {
         "waec-physics-ohm" -> "Ω"
         "waec-physics-density" -> "g cm⁻³"
         "waec-physics-resistivity" -> "Ω m"
+        "waec-physics-moments" -> "m"
+        "waec-physics-focal-length" -> "cm"
+        "waec-physics-specific-heat" -> "J kg⁻¹ K⁻¹"
+        "waec-physics-parallel-resistors" -> "Ω"
         else -> ""
     }
 
