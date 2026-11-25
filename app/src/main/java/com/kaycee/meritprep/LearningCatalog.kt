@@ -686,13 +686,13 @@ object LearningCatalog {
             ?: PhysicsCourse.topics.firstOrNull { it.id == topicId }
 }
 
-internal enum class LessonStage(val label: String, val subtitle: String) {
-    CONCEPT("Learn", "Build the idea from first principles"),
-    VISUALISE("Examples", "Study worked examples, diagrams and animations"),
-    EXPLORE("Scenario", "Apply the idea to a scientific context"),
-    LAB("Lab", "Investigate, record evidence and analyse results"),
-    NOTES("Project", "Apply the concept and build an evidence-based explanation"),
-    PRACTICE("Exercise", "Check understanding and correct misconceptions")
+internal enum class LessonStage(val label: String, val subtitle: String, val shortLabel: String) {
+    CONCEPT("Concepts & Theory", "Build the idea from first principles", "Concepts"),
+    EXAMPLES("Worked Examples", "Study worked reasoning, diagrams and guided practice", "Examples"),
+    APPLICATIONS("Applications & Notes", "Connect the concept to real systems and consolidate learning", "Context"),
+    LAB("Virtual Lab", "Investigate, record evidence and analyse results", "Virtual Lab"),
+    PROJECT("Applied Project", "Produce and verify an evidence-based application", "Project"),
+    QUIZ("Mastery Quiz", "Demonstrate understanding and correct misconceptions", "Quiz")
 }
 
 internal fun isLessonStageUnlocked(target: LessonStage, completed: Set<LessonStage>): Boolean {
@@ -766,7 +766,7 @@ fun LessonScreen(topicId: String) {
         if (stage == target) stage = stages.getOrNull(stages.indexOf(target) + 1) ?: target
     }
     LaunchedEffect(topicId, completedStages) {
-        val firstIncomplete = stages.firstOrNull { it !in completedStages } ?: LessonStage.PRACTICE
+        val firstIncomplete = stages.firstOrNull { it !in completedStages } ?: LessonStage.QUIZ
         if (stage in completedStages || !isLessonStageUnlocked(stage, completedStages)) stage = firstIncomplete
     }
     val practiceQuestions = remember(topicId) {
@@ -895,7 +895,7 @@ fun LessonScreen(topicId: String) {
                     Text("Audio uses your device's text-to-speech voice. Offline playback depends on an installed voice.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
 
-                LessonStage.VISUALISE -> {
+                LessonStage.EXAMPLES -> {
                     TopicWorkedExampleCard(topicId)
                     TopicVisualisationGallery(topicId)
                     BiologyInteractiveLessonActivity(topicId)
@@ -906,7 +906,7 @@ fun LessonScreen(topicId: String) {
                     PhysicsSupplementalLessonActivity(topicId)
                 }
 
-                LessonStage.EXPLORE -> {
+                LessonStage.APPLICATIONS -> {
                     Text("Apply the idea to a realistic scientific situation. Decide what the evidence supports before revealing the explanation.", style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
                     val hasScenario = TopicScenarioActivity(topicId)
                     if (!hasScenario) TopicScenarioReflectionCard(topicId, topic.title)
@@ -922,7 +922,7 @@ fun LessonScreen(topicId: String) {
                     WaecChemistrySupplementalActivity(topicId)
                 }
 
-                LessonStage.NOTES -> {
+                LessonStage.PROJECT -> {
                     Card(Modifier.fillMaxWidth()) {
                         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
                             Text("Topic mastery project", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
@@ -954,7 +954,7 @@ fun LessonScreen(topicId: String) {
                     }
                 }
 
-                LessonStage.PRACTICE -> {
+                LessonStage.QUIZ -> {
                     Card(Modifier.fillMaxWidth()) {
                         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
                             Text("Topic assessment", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
@@ -987,7 +987,7 @@ fun LessonScreen(topicId: String) {
                                                 exerciseChecked = false
                                             } else {
                                                 exerciseComplete = true
-                                                if (exercisePercent >= 80) markStageComplete(LessonStage.PRACTICE)
+                                                if (exercisePercent >= 80) markStageComplete(LessonStage.QUIZ)
                                             }
                                         },
                                         modifier = Modifier.fillMaxWidth()
@@ -1010,7 +1010,7 @@ fun LessonScreen(topicId: String) {
                         }
                     }
                     Button(
-                        onClick = { markStageComplete(LessonStage.PRACTICE); database.markLessonCompleted(topic.id); completed = true },
+                        onClick = { markStageComplete(LessonStage.QUIZ); database.markLessonCompleted(topic.id); completed = true },
                         enabled = !topic.isSyllabusOutline && !completed && exerciseComplete && exercisePercent >= 80,
                         modifier = Modifier.fillMaxWidth()
                     ) { Text(if (topic.isSyllabusOutline) "Full lesson in development" else if (completed) "Lesson completed" else "Complete lesson") }
@@ -1030,7 +1030,7 @@ fun LessonScreen(topicId: String) {
             }
         }
 
-        if (stage != LessonStage.PRACTICE) {
+        if (stage != LessonStage.QUIZ) {
             OutlinedButton(
                 onClick = { markStageComplete(stage) },
                 enabled = stage !in completedStages,
@@ -1043,7 +1043,7 @@ fun LessonScreen(topicId: String) {
             Button(
                 onClick = { nextStage?.let { stage = it } },
                 enabled = nextStage != null && isLessonStageUnlocked(nextStage, completedStages)
-            ) { Text(if (stage == LessonStage.PRACTICE) "End of lesson" else "Continue") }
+            ) { Text(if (stage == LessonStage.QUIZ) "End of lesson" else "Continue") }
         }
     }
 }
