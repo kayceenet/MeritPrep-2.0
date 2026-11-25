@@ -701,8 +701,10 @@ fun LessonScreen(topicId: String) {
     val noteId = "lesson-note-" + topicId
     var noteText by remember(topicId) { mutableStateOf(database.getNoteBody(noteId).orEmpty()) }
     var noteSaved by remember(topicId) { mutableStateOf(false) }
-    var selected by remember(topicId) { mutableIntStateOf(-1) }
-    var checked by remember(topicId) { mutableStateOf(false) }
+    var exerciseIndex by remember(topicId) { mutableIntStateOf(0) }
+    var exerciseSelections by remember(topicId) { mutableStateOf<Map<String, Int>>(emptyMap()) }
+    var exerciseChecked by remember(topicId) { mutableStateOf(false) }
+    var exerciseComplete by remember(topicId) { mutableStateOf(false) }
     var stage by remember(topicId) { mutableStateOf(LessonStage.CONCEPT) }
     var speechReady by remember(topicId) { mutableStateOf(false) }
     var speechEngine by remember(topicId) { mutableStateOf<TextToSpeech?>(null) }
@@ -731,7 +733,31 @@ fun LessonScreen(topicId: String) {
 
     val stages = LessonStage.entries
     val stageIndex = stages.indexOf(stage)
-    val completion = if (completed) 100 else if (checked && selected == topic.correctOption) 85 else 15
+    val practiceQuestions = remember(topicId) {
+        val bank = when (topic.subjectCode) {
+            "BIO" -> BiologyQuestionBank.all.filter { it.topicId == topicId }
+            "CHEM" -> ChemistryQuestionBank.forTopic(topicId)
+            "PHY" -> PhysicsQuestionBank.forTopic(topicId)
+            else -> emptyList()
+        }
+        val chosen = bank.shuffled().take(5)
+        val source = if (chosen.isNotEmpty()) chosen else listOf(
+            com.kaycee.meritprep.data.AssessmentQuestion(
+                id = "lesson-check-" + topicId,
+                topicId = topicId,
+                prompt = topic.checkQuestion,
+                options = topic.checkOptions,
+                correctOptionIndex = topic.correctOption,
+                explanation = topic.explanation,
+                source = "Lesson understanding check",
+                isVerified = false
+            )
+        )
+        source.map { com.kaycee.meritprep.data.AssessmentEngine.present(it) }
+    }
+    val exerciseScore = practiceQuestions.count { exerciseSelections[it.questionId] == it.correctPresentedIndex }
+    val exercisePercent = if (practiceQuestions.isEmpty()) 0 else exerciseScore * 100 / practiceQuestions.size
+    val completion = if (completed) 100 else if (exerciseComplete && exercisePercent >= 80) 85 else 15
 
     Column(Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
         Column(Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 12.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -877,32 +903,63 @@ fun LessonScreen(topicId: String) {
                 LessonStage.PRACTICE -> {
                     Card(Modifier.fillMaxWidth()) {
                         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
-                            Text("Check your understanding", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
-                            Text(topic.checkQuestion, style = MaterialTheme.typography.titleMedium)
-                            topic.checkOptions.forEachIndexed { index, option ->
-                                OutlinedButton(
-                                    onClick = { if (!checked) selected = index },
-                                    enabled = !checked,
-                                    modifier = Modifier.fillMaxWidth(),
-                                    colors = ButtonDefaults.outlinedButtonColors(containerColor = if (selected == index) MaterialTheme.colorScheme.secondaryContainer else MaterialTheme.colorScheme.surface)
-                                ) { Text(('A' + index) + ".  " + option, modifier = Modifier.fillMaxWidth()) }
-                            }
-                            if (checked) {
-                                val correct = selected == topic.correctOption
-                                Text(if (correct) "Correct — concept understood" else "Not quite. Review the explanation and try again.", color = if (correct) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.error, fontWeight = FontWeight.Bold)
-                                ScientificText(topic.explanation, style = MaterialTheme.typography.bodyMedium)
-                                OutlinedButton(onClick = { selected = -1; checked = false }, modifier = Modifier.fillMaxWidth()) { Text("Try again") }
+                            Text("Topic assessment", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+                            Text("MeritPrep original practice • " + practiceQuestions.size + " questions • aim for at least 80%", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                            if (!exerciseComplete) {
+                                val question = practiceQuestions[exerciseIndex]
+                                val selectedIndex = exerciseSelections[question.questionId]
+                                Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+                                    Text("Question " + (exerciseIndex + 1) + " of " + practiceQuestions.size, fontWeight = FontWeight.SemiBold)
+                                    Text("Answered " + exerciseSelections.size + "/" + practiceQuestions.size, style = MaterialTheme.typography.labelMedium)
+                                }
+                                LinearProgressIndicator(progress = (exerciseIndex + 1f) / practiceQuestions.size, modifier = Modifier.fillMaxWidth())
+                                ScientificText(question.prompt, style = MaterialTheme.typography.titleMedium)
+                                question.options.forEachIndexed { index, option ->
+                                    OutlinedButton(
+                                        onClick = { if (!exerciseChecked) exerciseSelections = exerciseSelections + (question.questionId to index) },
+                                        enabled = !exerciseChecked,
+                                        modifier = Modifier.fillMaxWidth(),
+                                        colors = ButtonDefaults.outlinedButtonColors(containerColor = if (selectedIndex == index) MaterialTheme.colorScheme.secondaryContainer else MaterialTheme.colorScheme.surface)
+                                    ) { Text(('A' + index) + ".  " + option, modifier = Modifier.fillMaxWidth()) }
+                                }
+                                if (exerciseChecked) {
+                                    val correct = selectedIndex == question.correctPresentedIndex
+                                    Text(if (correct) "Correct" else "Review this explanation", color = if (correct) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.error, fontWeight = FontWeight.Bold)
+                                    ScientificText(question.explanation, style = MaterialTheme.typography.bodyMedium)
+                                    Button(
+                                        onClick = {
+                                            if (exerciseIndex < practiceQuestions.lastIndex) {
+                                                exerciseIndex++
+                                                exerciseChecked = false
+                                            } else {
+                                                exerciseComplete = true
+                                            }
+                                        },
+                                        modifier = Modifier.fillMaxWidth()
+                                    ) { Text(if (exerciseIndex == practiceQuestions.lastIndex) "Finish assessment" else "Next question") }
+                                } else {
+                                    Button(onClick = { exerciseChecked = true }, enabled = selectedIndex != null, modifier = Modifier.fillMaxWidth()) { Text("Check answer") }
+                                }
                             } else {
-                                Button(onClick = { checked = true }, enabled = selected >= 0, modifier = Modifier.fillMaxWidth()) { Text("Check answer") }
+                                Text("Assessment result", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+                                Text(exerciseScore.toString() + " / " + practiceQuestions.size + " correct", style = MaterialTheme.typography.headlineMedium, color = if (exercisePercent >= 80) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.error)
+                                Text("Score: " + exercisePercent + "%")
+                                Text(if (exercisePercent >= 80) "You have met the lesson practice threshold. Review any missed explanations before moving on." else "You are not at the mastery threshold yet. Revisit the concept and repeat the assessment.")
+                                OutlinedButton(onClick = {
+                                    exerciseIndex = 0
+                                    exerciseSelections = emptyMap()
+                                    exerciseChecked = false
+                                    exerciseComplete = false
+                                }, modifier = Modifier.fillMaxWidth()) { Text("Retake assessment") }
                             }
                         }
                     }
                     Button(
                         onClick = { database.markLessonCompleted(topic.id); completed = true },
-                        enabled = !topic.isSyllabusOutline && !completed && checked && selected == topic.correctOption,
+                        enabled = !topic.isSyllabusOutline && !completed && exerciseComplete && exercisePercent >= 80,
                         modifier = Modifier.fillMaxWidth()
                     ) { Text(if (topic.isSyllabusOutline) "Full lesson in development" else if (completed) "Lesson completed" else "Complete lesson") }
-                    if (!completed) Text("A correct answer is required to complete this lesson. You can retry after reviewing the explanation.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    if (!completed) Text("Complete the topic assessment with at least 80% to mark this lesson complete.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                     Text(
                         when {
                             topic.isSyllabusOutline -> "Academic status: syllabus outline only. It cannot be marked as a completed lesson."
