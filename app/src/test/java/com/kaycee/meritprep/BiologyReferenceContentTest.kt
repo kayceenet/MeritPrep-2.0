@@ -39,6 +39,19 @@ class BiologyReferenceContentTest {
     }
 
     @Test
+    fun aboPracticeIncludesGenotypeAndOffspringProbabilityQuestions() {
+        val questions = BiologyQuestionBank.all.associateBy { it.id }
+        val ids = (11..14).map { "bio-var-${it.toString().padStart(3, '0')}" }
+        assertTrue(ids.all { it in questions })
+        val content = ids.mapNotNull { questions[it]?.prompt + " " + questions[it]?.explanation }.joinToString(" ").lowercase()
+        assertTrue(content.contains("blood group o"))
+        assertTrue(content.contains("25%"))
+        assertTrue(content.contains("iᴬi"))
+        assertTrue(content.contains("iᴮi"))
+        assertTrue(content.contains("genotype iᴬiᴮ"))
+    }
+
+    @Test
     fun glossaryEntriesAreCompleteUniqueAndLinkedToLessons() {
         val entries = BiologyGlossary.entries
         val lessonIds = BiologyCurriculum.units.mapNotNull { it.lessonId }.toSet()
