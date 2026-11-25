@@ -7,6 +7,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import kotlin.math.pow
 
+internal val chemistrySupplementalActivityTopicIds = setOf(
+    "chem-atomic-bonding", "chem-nuclear", "chem-solubility",
+    "chem-organic", "chem-industry", "chem-pollution", "chem-astro"
+)
+
 @Composable
 fun ChemistrySupplementalLessonActivity(topicId: String) {
     when(topicId) {
