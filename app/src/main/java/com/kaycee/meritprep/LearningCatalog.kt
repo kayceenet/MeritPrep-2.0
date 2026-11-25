@@ -848,7 +848,15 @@ fun LessonScreen(topicId: String) {
                     Text("Audio uses your device's text-to-speech voice. Offline playback depends on an installed voice.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
 
-                LessonStage.VISUALISE -> TopicVisualisationGallery(topicId)
+                LessonStage.VISUALISE -> {
+                    TopicWorkedExampleCard(topicId)
+                    TopicVisualisationGallery(topicId)
+                    BiologyInteractiveLessonActivity(topicId)
+                    ChemistryInteractiveLessonActivity(topicId)
+                    ChemistrySupplementalLessonActivity(topicId)
+                    PhysicsInteractiveLessonActivity(topicId)
+                    PhysicsSupplementalLessonActivity(topicId)
+                }
 
                 LessonStage.EXPLORE -> {
                     Text("Use these resources to extend the lesson. External material is optional; the core lesson remains available offline.", style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
@@ -857,11 +865,6 @@ fun LessonScreen(topicId: String) {
 
                 LessonStage.LAB -> {
                     Text("Predict first. Change one variable at a time. Record observations, inspect the graph and evaluate the model.", style = MaterialTheme.typography.bodyMedium)
-                    BiologyInteractiveLessonActivity(topicId)
-                    ChemistryInteractiveLessonActivity(topicId)
-                    ChemistrySupplementalLessonActivity(topicId)
-                    PhysicsInteractiveLessonActivity(topicId)
-                    PhysicsSupplementalLessonActivity(topicId)
                     GuidedInvestigationActivity(topicId)
                     WaecBiologyNigeriaSupplementalActivity(topicId)
                     WaecPhysicsSupplementalActivity(topicId)
