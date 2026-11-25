@@ -1145,9 +1145,9 @@ private fun TopicEquationPanel(topicId: String) {
         "phy-vapours" -> "RH = \\frac{p_v}{p_{sat}} \\times 100\\%"
         "phy-pressure" -> "p = \\frac{F}{A}"
         "phy-liquids-rest" -> "p = \\rho gh"
-        "phy-kinetic-theory" -> "pV = \\frac{1}{3}Nm c_{rms}^2",
-        "phy-dispersion" -> "n(\\lambda) = A + \\frac{B}{\\lambda^2}",
-        "phy-electronics" -> "I \\approx \\frac{V - 0.7}{R}",
+        "phy-kinetic-theory" -> "pV = \\frac{1}{3}Nm c_{rms}^2"
+        "phy-dispersion" -> "n(\\lambda) = A + \\frac{B}{\\lambda^2}"
+        "phy-electronics" -> "I \\approx \\frac{V - 0.7}{R}"
         "phy-gas-laws" -> "pV = nRT \\qquad \\frac{V_1}{T_1} = \\frac{V_2}{T_2}"
         "phy-heat-transfer", "phy-conduction" -> "\\frac{Q}{t} = \\frac{kA\\Delta T}{L}"
         "phy-waves", "phy-sound-propagation", "phy-sound-characteristics" -> "v = f\\lambda \\qquad T = \\frac{1}{f}"
