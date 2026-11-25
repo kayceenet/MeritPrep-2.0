@@ -59,7 +59,7 @@ private fun MeritPrepApp() {
             }
         ) { padding ->
             NavHost(navController = nav, startDestination = "home", modifier = Modifier.padding(padding)) {
-                composable("home") { HomeScreen(nav) }
+                composable("home") { HomeScreen(nav, navigationRevision) }
                 composable("learn") { LearnScreen(nav) }
                 composable("subject/{code}") { entry ->
                     val code = entry.arguments?.getString("code").orEmpty()
@@ -104,17 +104,102 @@ private fun MeritPrepApp() {
 }
 
 @Composable
-private fun HomeScreen(nav: NavHostController) {
+private fun HomeScreen(nav: NavHostController, navigationRevision: Int = 0) {
+    val context = LocalContext.current
+    val database = remember(context) { MeritDatabase(context) }
+    val allTopics = remember { subjects.flatMap { LearningCatalog.forSubject(it.code) } }
+    val completedCount = remember(navigationRevision, allTopics) {
+        allTopics.count { database.isLessonCompleted(it.id) }
+    }
+    val attempts = remember(navigationRevision) { database.getQuestionAttemptCount() }
+    val correct = remember(navigationRevision) { database.getCorrectAnswerCount() }
+    val dueReviews = remember(navigationRevision) { database.getDueRevisionCards().size }
+    val accuracy = if (attempts == 0) 0 else (correct * 100 / attempts).coerceIn(0, 100)
+    val progress = if (allTopics.isEmpty()) 0f else completedCount.toFloat() / allTopics.size
+    val nextTopic = remember(navigationRevision, allTopics) {
+        allTopics.firstOrNull { !database.isLessonCompleted(it.id) }
+    }
+    var search by remember { mutableStateOf("") }
+    var subjectFilter by remember { mutableStateOf("All") }
+    val query = search.trim()
+    val searchResults = remember(query, allTopics) {
+        if (query.length < 2) emptyList()
+        else allTopics.filter { topic ->
+            topic.title.contains(query, ignoreCase = true) ||
+                topic.id.contains(query, ignoreCase = true) ||
+                topic.objectives.any { it.contains(query, ignoreCase = true) } ||
+                topic.sections.any { it.first.contains(query, ignoreCase = true) || it.second.contains(query, ignoreCase = true) }
+        }.take(6)
+    }
+    val filteredSubjects = remember(query, subjectFilter) {
+        subjects.filter { subject ->
+            val categoryMatches = when (subjectFilter) {
+                "Science" -> subject.code in setOf("BIO", "CHEM", "PHY", "MATH")
+                "Other" -> subject.code in setOf("ENG", "ECO", "GOV")
+                else -> true
+            }
+            val textMatches = query.isBlank() ||
+                subject.name.contains(query, ignoreCase = true) ||
+                subject.description.contains(query, ignoreCase = true)
+            categoryMatches && textMatches
+        }
+    }
+
     LazyColumn(
         Modifier.fillMaxSize(),
         contentPadding = PaddingValues(horizontal = 18.dp, vertical = 18.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+        verticalArrangement = Arrangement.spacedBy(15.dp)
     ) {
         item {
-            Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                Text("MERITPREP  /  LEARNING STUDIO", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
-                Text("Learn with clarity.\nPrepare with confidence.", style = MaterialTheme.typography.headlineLarge, fontWeight = FontWeight.Bold)
-                Text("Build understanding from the foundations, explore scientific ideas and practise for your examinations.", style = MaterialTheme.typography.bodyLarge, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween) {
+                Column(verticalArrangement = Arrangement.spacedBy(5.dp), modifier = Modifier.weight(1f)) {
+                    Text("MERITPREP  /  LEARNING STUDIO", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
+                    Text("Your study space", style = MaterialTheme.typography.headlineLarge, fontWeight = FontWeight.Bold)
+                    Text("Learn the concepts, investigate the science and prepare for your exams.", style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                }
+                Surface(color = MaterialTheme.colorScheme.secondaryContainer, shape = MaterialTheme.shapes.large) {
+                    Icon(Icons.Default.School, contentDescription = "Learning studio", modifier = Modifier.padding(13.dp), tint = MaterialTheme.colorScheme.onSecondaryContainer)
+                }
+            }
+        }
+        item {
+            OutlinedTextField(
+                value = search,
+                onValueChange = { search = it },
+                modifier = Modifier.fillMaxWidth(),
+                singleLine = true,
+                placeholder = { Text("Search subjects, topics or concepts") },
+                leadingIcon = { Icon(Icons.Default.Search, contentDescription = null) },
+                trailingIcon = {
+                    if (search.isNotBlank()) IconButton(onClick = { search = "" }) {
+                        Icon(Icons.Default.Close, contentDescription = "Clear search")
+                    }
+                }
+            )
+        }
+        if (query.length >= 2) {
+            item {
+                Text("Matching lessons", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+            }
+            if (searchResults.isEmpty()) {
+                item { Text("No matching topic found. Try a broader term.", color = MaterialTheme.colorScheme.onSurfaceVariant) }
+            } else {
+                items(searchResults) { topic ->
+                    Card(
+                        onClick = { nav.navigate("lesson/" + topic.id) },
+                        modifier = Modifier.fillMaxWidth(),
+                        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+                        border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant)
+                    ) {
+                        Row(Modifier.padding(14.dp), verticalAlignment = Alignment.CenterVertically) {
+                            Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(3.dp)) {
+                                Text(topic.title, fontWeight = FontWeight.SemiBold)
+                                Text(topic.subjectCode + " · " + topic.objectives.size + " learning objectives", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                            }
+                            Icon(Icons.Default.ChevronRight, contentDescription = "Open lesson", tint = MaterialTheme.colorScheme.primary)
+                        }
+                    }
+                }
             }
         }
         item {
@@ -123,12 +208,33 @@ private fun HomeScreen(nav: NavHostController) {
                 colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer)
             ) {
                 Column(Modifier.padding(18.dp), verticalArrangement = Arrangement.spacedBy(9.dp)) {
-                    Text("Your learning workspace", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onPrimaryContainer)
-                    Text("Continue with a subject, enter a virtual laboratory or test what you already know.", color = MaterialTheme.colorScheme.onPrimaryContainer)
-                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                        Button(onClick = { nav.navigate("learn") }, modifier = Modifier.weight(1f)) { Text("Explore lessons") }
-                        OutlinedButton(onClick = { nav.navigate("labs") }, modifier = Modifier.weight(1f)) { Text("Open labs") }
+                    Text("Continue learning", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onPrimaryContainer)
+                    if (nextTopic != null) {
+                        Text(nextTopic.title, style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onPrimaryContainer)
+                        Text("Next topic in your course sequence", style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onPrimaryContainer)
+                        Button(onClick = { nav.navigate("lesson/" + nextTopic.id) }, modifier = Modifier.fillMaxWidth()) {
+                            Text("Resume lesson")
+                            Spacer(Modifier.width(6.dp))
+                            Icon(Icons.AutoMirrored.Filled.ArrowForward, contentDescription = null)
+                        }
+                    } else {
+                        Text("You have completed all currently mapped lesson topics.", color = MaterialTheme.colorScheme.onPrimaryContainer)
+                        OutlinedButton(onClick = { nav.navigate("learn") }, modifier = Modifier.fillMaxWidth()) { Text("Review courses") }
                     }
+                }
+            }
+        }
+        item {
+            Column(verticalArrangement = Arrangement.spacedBy(7.dp)) {
+                Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
+                    Text("Your progress", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+                    Text(completedCount.toString() + " / " + allTopics.size, style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
+                }
+                LinearProgressIndicator(progress = { progress }, modifier = Modifier.fillMaxWidth())
+                Row(horizontalArrangement = Arrangement.spacedBy(9.dp)) {
+                    DashboardMetric(attempts.toString(), "QUESTIONS", Modifier.weight(1f))
+                    DashboardMetric(accuracy.toString() + "%", "ACCURACY", Modifier.weight(1f))
+                    DashboardMetric(dueReviews.toString(), "DUE REVIEWS", Modifier.weight(1f))
                 }
             }
         }
@@ -136,7 +242,7 @@ private fun HomeScreen(nav: NavHostController) {
         item {
             Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                 HomeQuickAction("Practice", "JAMB and WAEC", "TEST", Modifier.weight(1f)) { nav.navigate("practice") }
-                HomeQuickAction("Study plan", "Organise your work", "PLAN", Modifier.weight(1f)) { nav.navigate("study-plan") }
+                HomeQuickAction("Virtual labs", "Experiments and models", "LAB", Modifier.weight(1f)) { nav.navigate("labs") }
             }
         }
         item {
@@ -145,16 +251,40 @@ private fun HomeScreen(nav: NavHostController) {
                 HomeQuickAction("Saved lessons", "Return to bookmarks", "SAVED", Modifier.weight(1f)) { nav.navigate("bookmarks") }
             }
         }
-        item { Text("Choose a subject", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold) }
-        items(subjects) { subject -> SubjectCard(subject) { nav.navigate("subject/${subject.code}") } }
+        item {
+            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                Text("Explore subjects", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+                Row(horizontalArrangement = Arrangement.spacedBy(7.dp)) {
+                    listOf("All", "Science", "Other").forEach { filter ->
+                        FilterChip(subjectFilter == filter, { subjectFilter = filter }, { Text(filter) })
+                    }
+                }
+            }
+        }
+        items(filteredSubjects) { subject ->
+            SubjectCard(subject) { nav.navigate("subject/" + subject.code) }
+        }
+        if (filteredSubjects.isEmpty()) {
+            item { Text("No subjects match this search and filter.", color = MaterialTheme.colorScheme.onSurfaceVariant) }
+        }
         item {
             Card(colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)) {
                 Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                    Text("Need a starting point?", fontWeight = FontWeight.Bold)
+                    Text("Find your starting level", fontWeight = FontWeight.Bold)
                     Text("Take a placement check to identify topics that need attention.")
                     OutlinedButton(onClick = { nav.navigate("placement") }, modifier = Modifier.fillMaxWidth()) { Text("Start placement check") }
                 }
             }
+        }
+    }
+}
+
+@Composable
+private fun DashboardMetric(value: String, label: String, modifier: Modifier = Modifier) {
+    Card(modifier, colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)) {
+        Column(Modifier.fillMaxWidth().padding(11.dp), verticalArrangement = Arrangement.spacedBy(3.dp)) {
+            Text(value, style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary)
+            Text(label, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant, fontWeight = FontWeight.Bold)
         }
     }
 }
