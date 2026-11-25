@@ -821,7 +821,7 @@ fun LessonScreen(topicId: String) {
                 FilterChip(
                     selected = stage == item,
                     onClick = { if (isLessonStageUnlocked(item, completedStages)) stage = item },
-                    enabled = isStageUnlocked(item),
+                    enabled = isLessonStageUnlocked(item, completedStages),
                     label = { Text((if (item in completedStages) "✓  " else "") + item.label) }
                 )
             }
