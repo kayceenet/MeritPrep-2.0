@@ -859,7 +859,8 @@ fun LessonScreen(topicId: String) {
                 }
 
                 LessonStage.EXPLORE -> {
-                    Text("Use these resources to extend the lesson. External material is optional; the core lesson remains available offline.", style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    Text("Apply the idea to a realistic scientific situation. Decide what the evidence supports before revealing the explanation.", style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    TopicScenarioActivity(topicId)
                     ScienceMediaTopicSection(topicId)
                 }
 
