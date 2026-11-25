@@ -886,6 +886,13 @@ private fun BiologyExperimentPlannerLab() {
                 Text("Results graph (mean of repeated readings)", style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.SemiBold)
                 BiologyResultsGraph(points = graphPoints)
                 Text(BiologyExperimentAnalysis.describeTrend(graphPoints), style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.primary)
+                val firstPoint = graphPoints.first()
+                val lastPoint = graphPoints.last()
+                Text(
+                    "Evidence prompt: at ${"%.2f".format(firstPoint.independentValue)}, the mean result is ${"%.2f".format(firstPoint.meanResult)}; at ${"%.2f".format(lastPoint.independentValue)}, it is ${"%.2f".format(lastPoint.meanResult)}. Describe the change and support your statement with these values.",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
                 Text("This describes the recorded pattern; it does not by itself prove causation. Consider repeats, uncertainty and other variables before drawing a conclusion.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 Text("The graph sorts numeric independent-variable values from lowest to highest. Each plotted point is the mean of the readings entered for that condition; points are joined in x-order to show the observed pattern. For a formal graph, consider whether a straight or curved best-fit line is scientifically appropriate.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
             } else if (resultRows.any { it.first.isNotBlank() || it.second.isNotBlank() }) {
