@@ -24,6 +24,10 @@ Topic mastery based on repeated evidence, spaced retrieval, flashcards, mistake 
 
 **Implemented in the current alpha:** local revision-card storage, a four-rating spaced-retrieval scheduler, 198 Biology revision cards spanning the mapped Biology topics, a revision screen and unit-tested scheduling rules. The objective-practice mastery indicator requires at least 10 attempts, 8 distinct questions, 2 distinct study days and 80% correct. It is deliberately not presented as proof of mastery across theory or practical work. The mistake notebook captures incorrect and unanswered Biology practice items with the selected answer, correction and explanation; learners can mark items reviewed. The seven-day Biology planner prioritises weaker, unattempted and less recently studied topics using a transparent evidence-based heuristic, stores progress offline and supports daily targets from 60 to 150 minutes.
 
+## C2. Scientific animation and interactive media
+
+**New cross-subject requirement:** audit every Biology, Chemistry and Physics syllabus topic for purposeful scientific animations, short GIF sequences, interactive diagrams, simulations, virtual labs and authentic microscopy/video. Build original Android-friendly models for core concepts where practical; use approved third-party embeds only when exact rights permit; otherwise open the provider's official resource with a guided MeritPrep task. Essential learning must have an offline explanation or approved media fallback. Record asset provenance, licence, attribution, review status, file size and offline availability. LabXchange, HHMI BioInteractive and PhET are discovery sources, not blanket redistribution permissions. The detailed policy and initial Biology topic priorities are in [SCIENCE_MEDIA_INTEGRATION_STANDARD.md](SCIENCE_MEDIA_INTEGRATION_STANDARD.md).
+
 ## F. Practical learning
 Inventory existing APK assets and lab logic; rebuild Biology, Chemistry and Physics simulations with safe, accessible controls and clear learning objectives.
 
