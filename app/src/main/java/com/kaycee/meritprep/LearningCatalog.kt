@@ -992,7 +992,6 @@ private fun TopicConceptInlineVisual(topicId: String, sectionIndex: Int, section
     val heading = sectionHeading.lowercase()
     when {
         "adaptation" in heading -> AdaptationTypesCard()
-        "cell" in heading && topicId.startsWith("bio") -> CellDiagramCard()
         "photosynthesis" in heading -> PhotosynthesisFlowCard()
         "respiration" in heading -> RespirationComparisonCard()
         ("osmosis" in heading || "transport" in heading) && topicId.startsWith("bio") -> PlantTransportCard()
@@ -1001,6 +1000,7 @@ private fun TopicConceptInlineVisual(topicId: String, sectionIndex: Int, section
         ("genetic" in heading || "inheritance" in heading || "heredity" in heading || "mendel" in heading) -> PunnettSquareCard()
         ("growth" in heading || "mitosis" in heading || "meiosis" in heading || "cell division" in heading) -> CellDivisionLessonCard()
         ("quadrat" in heading || "population" in heading || "sampling" in heading) -> BiologyPopulationSamplingCard()
+        "cell" in heading && topicId.startsWith("bio") -> CellDiagramCard()
         "soil" in heading -> SoilWaterInvestigationCard()
         ("natural selection" in heading || "evolution" in heading) -> NaturalSelectionCard()
         ("food chain" in heading || "interaction" in heading || "trophic" in heading) -> FoodChainDiagramCard()
