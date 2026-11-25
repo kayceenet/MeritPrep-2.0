@@ -68,3 +68,6 @@ Authenticated sync, teacher/admin CMS, analytics, backups, privacy and security 
 
 
 **Cell-division learning model added:** a staged mitosis/meiosis explorer now teaches chromosome and chromatid accounting, DNA replication, homologous chromosome pairing and separation, crossing over, independent assortment and the final daughter-cell outcomes. It uses a configurable pure-Kotlin model with a default diploid number of 4 for teaching clarity; the automated tests also check a human diploid count of 46. The learner advances stage by stage and can compare mitosis with meiosis. The model is a simplified schematic, not a biological microscopy animation.
+
+
+**Cell-division visual update:** the mitosis/meiosis lesson now includes a stage-responsive Compose chromosome schematic. It shows replicated chromosomes, chromatid separation, the two-cell intermediate after meiosis I, and the four haploid products after meiosis II. Anaphase counts and the diagram's representative chromosome counts were reviewed to distinguish homologous-chromosome separation from sister-chromatid separation. The drawing is explicitly labelled as schematic and not to scale.
