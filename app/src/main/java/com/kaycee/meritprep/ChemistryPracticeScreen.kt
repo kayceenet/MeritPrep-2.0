@@ -57,10 +57,10 @@ fun ChemistryPracticeScreen() {
             val question = questions[index]
             Text("Question ${index + 1} of ${questions.size}", style = MaterialTheme.typography.labelLarge)
             LinearProgressIndicator(progress = { (index + 1).toFloat() / questions.size }, modifier = Modifier.fillMaxWidth())
-            Text(question.prompt, style = MaterialTheme.typography.titleMedium)
+            ScientificText(question.prompt, style = MaterialTheme.typography.titleMedium)
             question.options.forEachIndexed { optionIndex, option ->
                 OutlinedButton(onClick = { if (!checked) selected = optionIndex }, enabled = !checked, modifier = Modifier.fillMaxWidth()) {
-                    Text((if (selected == optionIndex) "✓  " else "") + option)
+                    ScientificText((if (selected == optionIndex) "✓  " else "") + option, style = MaterialTheme.typography.bodyMedium)
                 }
             }
             if (!checked) {
@@ -78,7 +78,7 @@ fun ChemistryPracticeScreen() {
             } else {
                 val correct = selected == question.correctPresentedIndex
                 Text(if (correct) "Correct" else "Not quite", color = if (correct) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.error, style = MaterialTheme.typography.titleMedium)
-                Text(question.explanation)
+                ScientificText(question.explanation, style = MaterialTheme.typography.bodyMedium)
                 Button(onClick = {
                     if (index == questions.lastIndex) completed = true
                     else { index++; selected = -1; checked = false }
