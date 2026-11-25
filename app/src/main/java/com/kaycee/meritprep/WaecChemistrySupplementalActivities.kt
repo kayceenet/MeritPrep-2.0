@@ -8,7 +8,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 
 @Composable
+internal object WaecChemistryActivityRoutes {
+    val supportedTopicIds = setOf("chem-organic", "chem-separation", "chem-acids-bases", "chem-atomic-bonding")
+}
+
 fun WaecChemistrySupplementalActivity(topicId: String) {
+    if (topicId !in WaecChemistryActivityRoutes.supportedTopicIds) return
     when (topicId) {
         "chem-organic" -> WaecOrganicTestsAndBiochemistryActivity()
         "chem-separation" -> WaecSeparationPracticalActivity()
