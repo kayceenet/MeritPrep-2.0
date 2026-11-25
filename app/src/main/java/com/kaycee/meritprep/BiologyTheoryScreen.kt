@@ -72,7 +72,7 @@ fun BiologyTheoryScreen() {
         Card(Modifier.fillMaxWidth()) {
             Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 Text("QUESTION · ${task.marks} MARKS", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
-                Text(task.instruction, style = MaterialTheme.typography.bodyLarge)
+                ScientificText(task.instruction, style = MaterialTheme.typography.bodyLarge)
             }
         }
         OutlinedTextField(
@@ -131,7 +131,7 @@ fun BiologyTheoryScreen() {
                         color = MaterialTheme.colorScheme.primary
                     )
                     Text("Model response", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
-                    Text(task.modelAnswer, style = MaterialTheme.typography.bodyLarge)
+                    ScientificText(task.modelAnswer, style = MaterialTheme.typography.bodyLarge)
                     TextButton(onClick = { checkedPoints = emptySet() }) { Text("Reset self-check") }
                 }
             }
