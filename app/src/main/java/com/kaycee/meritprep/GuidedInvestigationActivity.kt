@@ -17,6 +17,7 @@ import com.kaycee.meritprep.data.MeritDatabase
 import androidx.compose.ui.unit.dp
 import kotlin.math.abs
 import kotlin.math.max
+import kotlin.math.roundToInt
 
 internal data class InvestigationProfile(
     val title: String, val question: String, val apparatus: String,
