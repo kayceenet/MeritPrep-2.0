@@ -68,7 +68,7 @@ private fun WavePropagationAnimation() {
                 drawLine(Color.Gray, Offset(0f, mid), Offset(size.width, mid), 1.5f)
                 drawPath(path, primary, style = Stroke(width = 4f, cap = StrokeCap.Round))
                 val particleX = size.width * 0.5f
-                val particleY = mid - sin(2f * PI.toFloat() * frequency - phase) * amplitude * size.height * 0.32f
+                val particleY = mid - sin(PI.toFloat() * frequency - phase) * amplitude * size.height * 0.32f
                 drawCircle(secondary, 7f, Offset(particleX, particleY))
             }
             Text("Frequency: " + "%.1f".format(frequency) + " Hz")
