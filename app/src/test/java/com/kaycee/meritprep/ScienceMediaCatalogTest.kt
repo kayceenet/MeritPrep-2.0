@@ -55,4 +55,12 @@ class ScienceMediaCatalogTest {
         assertEquals(39, LearningCatalog.forSubject("PHY").size)
     }
 
+    @Test
+    fun topicLookupReturnsOnlyResourcesMappedToThatTopic() {
+        val osmosis = ScienceMediaCatalog.forTopic("bio-transport")
+        assertTrue(osmosis.isNotEmpty())
+        assertTrue(osmosis.all { it.topicId == "bio-transport" })
+        assertTrue(ScienceMediaCatalog.forTopic("topic-with-no-media").isEmpty())
+    }
+
 }
