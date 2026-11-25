@@ -28,7 +28,7 @@ class WaecScienceActivityRoutingTest {
 
     @Test
     fun chemistryWaecPracticalAndContentRoutesAreDeclared() {
-        val expected = setOf("chem-organic", "chem-separation", "chem-acids-bases", "chem-atomic-bonding")
+        val expected = setOf("chem-organic", "chem-separation", "chem-acids-bases", "chem-atomic-bonding", "chem-industry", "chem-metals")
         assertEquals(expected, WaecChemistryActivityRoutes.supportedTopicIds)
     }
 
