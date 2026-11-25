@@ -47,7 +47,7 @@ Required practical coverage to map and test:
 
 - The app already has a Chemistry qualitative guide for cations, anions and gases, with safety notes and confirmatory-test cautions.
 - A guided acid–base titration model and a stoichiometrically balanced acidic permanganate/iron(II) redox model are embedded in lessons.
-- A separate chemistry separation-method selector, mole-ratio/limiting-reagent exploration and calorimetry calculation are present.
+- A separate chemistry separation-method selector, mole-ratio/limiting-reagent exploration, calorimetry calculation, periodic-trend selector, industrial-process comparison and metal-extraction comparison are present.
 - The lesson activities are not yet proof that every practical skill has a complete apparatus-to-evaluation virtual lab.
 - A gas test shown in a simulation must never encourage a learner to prepare or inhale hazardous gases.
 
