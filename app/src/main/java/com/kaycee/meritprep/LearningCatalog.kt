@@ -761,6 +761,10 @@ fun LessonScreen(topicId: String) {
         database.saveNote(progressNoteId, topicId, topic.title + " classroom progress", JSONObject().put("completedStages", saved).toString())
         if (stage == target) stage = stages.getOrNull(stages.indexOf(target) + 1) ?: target
     }
+    LaunchedEffect(topicId, completedStages) {
+        val firstIncomplete = stages.firstOrNull { it !in completedStages } ?: LessonStage.PRACTICE
+        if (stage in completedStages || !isStageUnlocked(stage)) stage = firstIncomplete
+    }
     val practiceQuestions = remember(topicId) {
         val bank = when (topic.subjectCode) {
             "BIO" -> BiologyQuestionBank.all.filter { it.topicId == topicId }
