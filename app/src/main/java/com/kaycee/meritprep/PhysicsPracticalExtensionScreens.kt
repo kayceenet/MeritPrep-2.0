@@ -23,7 +23,7 @@ fun PhysicsElasticityLab() {
             HorizontalDivider()
             Text("Restoring-force magnitude: ${"%.2f".format(result.restoringForceMagnitudeN)} N", style = MaterialTheme.typography.titleMedium)
             Text("Elastic potential energy: ${"%.3f".format(result.elasticPotentialEnergyJ)} J")
-            Text("F = kx     E = ½kx²", fontWeight = androidx.compose.ui.text.font.FontWeight.SemiBold)
+            ScientificText("F = kx     E = ½kx²", style = MaterialTheme.typography.titleMedium, fontWeight = androidx.compose.ui.text.font.FontWeight.SemiBold)
         }
     }
     Text("This is an ideal linear-spring model. Real materials may become non-linear or permanently deformed beyond their proportional or elastic limits.")
@@ -44,7 +44,7 @@ fun PhysicsPressureLab() {
             Slider(value = area, onValueChange = { area = it }, valueRange = 0.001f..0.1f)
             HorizontalDivider()
             Text("Pressure: ${"%.0f".format(pressure)} Pa", style = MaterialTheme.typography.titleLarge)
-            Text("p = F/A", fontWeight = androidx.compose.ui.text.font.FontWeight.SemiBold)
+            ScientificText("p = F/A", style = MaterialTheme.typography.titleMedium, fontWeight = androidx.compose.ui.text.font.FontWeight.SemiBold)
         }
     }
     Text("The model uses the force component perpendicular to the surface and assumes uniform pressure over the stated contact area.")
@@ -78,7 +78,7 @@ fun PhysicsFluidsLab() {
             Text("Object density: ${"%.1f".format(result.densityKgPerM3)} kg/m³")
             Text("Liquid gauge pressure: ${"%.0f".format(result.gaugePressurePa)} Pa")
             Text("Upthrust: ${"%.3f".format(result.upthrustN)} N", style = MaterialTheme.typography.titleMedium)
-            Text("ρ = m/V     p = ρgh     U = ρgV(displaced)", fontWeight = androidx.compose.ui.text.font.FontWeight.SemiBold)
+            ScientificText("ρ = m/V     p = ρgh     U = ρgV(displaced)", style = MaterialTheme.typography.titleMedium, fontWeight = androidx.compose.ui.text.font.FontWeight.SemiBold)
         }
     }
     Text("The displaced volume is an independent input. For a fully submerged rigid object it equals the object's volume; for a floating object it is the submerged volume. Gauge pressure excludes atmospheric pressure.")
@@ -103,11 +103,11 @@ fun PhysicsHeatLab() {
             Slider(value = temperatureChange, onValueChange = { temperatureChange = it }, valueRange = -20f..100f)
             HorizontalDivider()
             Text("Sensible heat transfer: ${"%.0f".format(sensible)} J", style = MaterialTheme.typography.titleMedium)
-            Text("Q = mcΔT")
+            ScientificText("Q = mcΔT", style = MaterialTheme.typography.titleMedium)
             Text("Specific latent heat (fusion example): ${"%.0f".format(latentHeat)} J/kg")
             Slider(value = latentHeat, onValueChange = { latentHeat = it }, valueRange = 100000f..500000f)
             Text("Energy for phase change: ${"%.0f".format(latent)} J", style = MaterialTheme.typography.titleMedium)
-            Text("Q = mL")
+            ScientificText("Q = mL", style = MaterialTheme.typography.titleMedium)
         }
     }
     Text("The sensible-heat equation assumes no phase change and approximately constant specific heat capacity. The latent-heat calculation assumes the substance is already at its phase-change temperature.")
@@ -139,7 +139,7 @@ fun PhysicsGasLawsLab() {
                     val result = PhysicsPracticalExtension.boylesLawFinalPressure(pressure.toDouble(), initialVolume.toDouble(), finalVolume.toDouble())
                     HorizontalDivider()
                     Text("Final pressure: ${"%.0f".format(result.finalPressurePa)} Pa", style = MaterialTheme.typography.titleLarge)
-                    Text("p₁V₁ = p₂V₂")
+                    ScientificText("p₁V₁ = p₂V₂", style = MaterialTheme.typography.titleMedium)
                 } else {
                     Text("Initial temperature: ${"%.0f".format(initialTemperature)} K")
                     Slider(value = initialTemperature, onValueChange = { initialTemperature = it }, valueRange = 200f..500f)
