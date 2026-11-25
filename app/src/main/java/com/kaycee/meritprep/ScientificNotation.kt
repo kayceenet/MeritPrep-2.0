@@ -64,7 +64,6 @@ object ScientificNotation {
             .replace("\\(", "").replace("\\)", "")
             .replace("\\[", "").replace("\\]", "")
             .replace("$", "")
-            .replace("\\left", "").replace("\\right", "")
         value = replaceBracedFunction(value, "\\frac") { a, b -> "($a)⁄($b)" }
         value = replaceBracedFunction(value, "\\dfrac") { a, b -> "($a)⁄($b)" }
         value = replaceBracedFunction(value, "\\sqrt") { a, _ -> "√($a)" }
@@ -72,6 +71,7 @@ object ScientificNotation {
             value = replaceSingleBraced(value, cmd)
         }
         commands.entries.sortedByDescending { it.key.length }.forEach { (key, replacement) -> value = value.replace(key, replacement) }
+        value = value.replace("\\left", "").replace("\\right", "")
         value = value.replace(Regex("""\^\{([^{}]+)}""")) { m -> m.groupValues[1].map { superscript[it] ?: it }.joinToString("") }
         value = value.replace(Regex("""_\{([^{}]+)}""")) { m -> m.groupValues[1].map { subscript[it] ?: it }.joinToString("") }
         value = value.replace(Regex("""\^([A-Za-z0-9+\-=])""")) { m -> superscript[m.groupValues[1][0]]?.toString() ?: m.value }
