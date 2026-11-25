@@ -157,6 +157,8 @@ fun ScienceMediaScreen(onOpenLabs: () -> Unit, onOpenLesson: (String) -> Unit) {
                     Text(resource.afterYouExplore, style = MaterialTheme.typography.bodyMedium)
                     Text("Offline alternative", fontWeight = FontWeight.SemiBold)
                     Text(resource.offlineAlternative, style = MaterialTheme.typography.bodySmall)
+                    Text("Creator/publisher: ${resource.creatorOrPublisher}", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    Text("Attribution: ${resource.attributionText}", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                     Text("Rights: ${resource.licenceName}", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                     Text("Use: ${resource.permittedUse}", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                     if (linkedTopic != null) {
@@ -210,6 +212,9 @@ fun ScienceMediaTopicSection(topicId: String) {
                 Text("Before you explore: ${resource.beforeYouStart}", style = MaterialTheme.typography.bodySmall)
                 Text("After you explore: ${resource.afterYouExplore}", style = MaterialTheme.typography.bodySmall)
                 Text("Offline alternative: ${resource.offlineAlternative}", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                Text("Creator/publisher: ${resource.creatorOrPublisher}", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                Text("Attribution: ${resource.attributionText}", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                Text("Rights: ${resource.licenceName}", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 OutlinedButton(
                     onClick = {
                         try {
