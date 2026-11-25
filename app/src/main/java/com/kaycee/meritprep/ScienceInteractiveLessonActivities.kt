@@ -1,6 +1,10 @@
 package com.kaycee.meritprep
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.Canvas
+import androidx.compose.animation.core.*
+import androidx.compose.ui.geometry.Offset
+import kotlin.math.sin
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -202,6 +206,8 @@ private fun WaveInquiry() {
     var frequency by remember { mutableFloatStateOf(4f) }
     var wavelength by remember { mutableFloatStateOf(2f) }
     val result = remember(frequency, wavelength) { PhysicsWaveOpticsEngine.waveProperties(frequency.toDouble(), wavelength.toDouble()) }
+    val transition = rememberInfiniteTransition(label = "wave-motion")
+    val phase by transition.animateFloat(initialValue = 0f, targetValue = (2.0 * Math.PI).toFloat(), animationSpec = infiniteRepeatable(tween(1800, easing = LinearEasing)), label = "wave-phase")
     Card(Modifier.fillMaxWidth()) { Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
         Text("Wave property simulator", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
         Text("Change frequency and wavelength. The wave equation v = fλ links frequency, wavelength and propagation speed.")
@@ -209,6 +215,19 @@ private fun WaveInquiry() {
         Text("Wavelength: " + "%.2f".format(wavelength) + " m"); Slider(wavelength, { wavelength = it }, valueRange = 0.1f..10f)
         Text("Wave speed: " + "%.2f".format(result.speedMetresPerSecond) + " m/s", fontWeight = FontWeight.Bold)
         Text("Period: " + "%.3f".format(result.periodSeconds) + " s")
+        Canvas(Modifier.fillMaxWidth().height(120.dp)) {
+            val centre = size.height / 2f
+            val amplitude = size.height * 0.32f
+            val waveLengthPixels = size.width / 2f
+            var x = 0f
+            while (x < size.width) {
+                val nextX = (x + 3f).coerceAtMost(size.width)
+                val y1 = centre + sin((2.0 * Math.PI * x / waveLengthPixels - phase).toDouble()).toFloat() * amplitude
+                val y2 = centre + sin((2.0 * Math.PI * nextX / waveLengthPixels - phase).toDouble()).toFloat() * amplitude
+                drawLine(MaterialTheme.colorScheme.primary, Offset(x, y1), Offset(nextX, y2), strokeWidth = 4f)
+                x = nextX
+            }
+        }
         Text("At fixed wave speed, increasing frequency must reduce wavelength. Here speed is recalculated from your chosen values; this does not represent a wave travelling in a specified medium.", style = MaterialTheme.typography.bodySmall)
     } }
 }
