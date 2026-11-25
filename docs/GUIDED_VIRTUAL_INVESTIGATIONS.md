@@ -32,6 +32,15 @@ Uniformly accelerated motion; Hooke's law; pressure in liquids; gas laws; wave f
 
 Existing lesson activities continue to provide measurement, vector components, reflection, refraction, capacitors, induction, electrostatics, circuit networks, waves and other concept explorations.
 
+## WAEC-specific embedded extensions
+
+The lesson renderer also invokes examination-specific extensions:
+- **Biology (Nigeria Section C):** cell theory and irritability, taxis/nastic responses, courtship and housefly metamorphosis, specialised feeding, energy transfer, tolerance ranges, habitat adaptation, population sampling, public health, ABO compatibility limitations, agriculture/ecology and practical skills in biological drawing, microscopy, food tests, dichotomous keys, plant sections, germination and soil.
+- **Chemistry:** functional-group and food-substance test references, separation-method selection, standard-solution dilution, periodic trends, titration/redox calculations, qualitative cation/anion/gas references and safe simulated gas identification.
+- **Physics (WAEC harmonised topics):** dimensional analysis, projectile motion, satellite orbits, Young's modulus, blackbody radiation, fibre optics, LASER types/safety, magnetic materials, diode rectification and photoelectric effect.
+
+These are separate from the JAMB syllabus crosswalk. The WAEC pages currently used for crosswalk drafts are secondary reproductions and are marked provisional until their exact contents are checked against direct WAEC PDFs.
+
 ## Model integrity
 
 - Every generated reading is explicitly described as simulated or illustrative.
