@@ -162,6 +162,5 @@ object PhysicsWaecTheoryBank {
             ),
             "The gradient is k only when load (force) is plotted on the vertical axis against extension on the horizontal axis. If the axes are reversed, the gradient is 1/k."
         )
-        )
     )
 }
