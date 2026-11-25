@@ -65,3 +65,6 @@ Authenticated sync, teacher/admin CMS, analytics, backups, privacy and security 
 - Store source, rights/licence, reviewer, approval status and content version.
 - Core downloaded content should remain usable offline.
 - Never promise a particular examination score.
+
+
+**Cell-division learning model added:** a staged mitosis/meiosis explorer now teaches chromosome and chromatid accounting, DNA replication, homologous chromosome pairing and separation, crossing over, independent assortment and the final daughter-cell outcomes. It uses a configurable pure-Kotlin model with a default diploid number of 4 for teaching clarity; the automated tests also check a human diploid count of 46. The learner advances stage by stage and can compare mitosis with meiosis. The model is a simplified schematic, not a biological microscopy animation.
