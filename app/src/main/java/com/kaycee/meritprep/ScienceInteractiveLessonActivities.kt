@@ -85,8 +85,12 @@ private fun ChemistryRateInquiry() {
     var temperature by remember { mutableFloatStateOf(25f) }
     var concentration by remember { mutableFloatStateOf(1f) }
     var surface by remember { mutableFloatStateOf(1f) }
-    val temperatureFactor = (1.0 + (temperature - 25.0) * 0.025).coerceAtLeast(0.1)
-    val relativeRate = temperatureFactor * concentration * surface
+    var activationEnergy by remember { mutableFloatStateOf(40f) }
+    val gasConstant = 8.314
+    val temperatureKelvin = temperature.toDouble() + 273.15
+    val referenceKelvin = 298.15
+    val arrheniusFactor = kotlin.math.exp(-(activationEnergy * 1000.0 / gasConstant) * (1.0 / temperatureKelvin - 1.0 / referenceKelvin))
+    val relativeRate = arrheniusFactor * concentration * surface
     Card(Modifier.fillMaxWidth()) {
         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
             Text("Investigating factors affecting reaction rate", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
@@ -97,9 +101,11 @@ private fun ChemistryRateInquiry() {
             Slider(concentration, { concentration = it }, valueRange = 0.2f..2f)
             Text("Relative exposed surface area: " + "%.1f".format(surface))
             Slider(surface, { surface = it }, valueRange = 0.2f..2f)
+            Text("Activation energy: " + activationEnergy.toInt() + " kJ mol⁻¹")
+            Slider(activationEnergy, { activationEnergy = it }, valueRange = 20f..80f)
             HorizontalDivider()
             Text("Illustrative relative-rate index: " + "%.2f".format(relativeRate), style = MaterialTheme.typography.headlineSmall)
-            Text("This index is a teaching aid, not an experimentally calibrated rate law. The temperature factor is deliberately simplified and must not be used to predict real reaction rates.", style = MaterialTheme.typography.bodySmall)
+            Text("Arrhenius temperature dependence is used for a single assumed reaction pathway; concentration and exposed surface are treated as first-order scaling factors. Real reaction orders, mechanisms and surface behaviour must be measured, so this is a controlled model rather than experimental data.", style = MaterialTheme.typography.bodySmall)
             Text("Investigation: reset to the same starting conditions, change only temperature, and describe the trend. Then repeat for concentration and surface area.", fontWeight = FontWeight.SemiBold)
         }
     }
@@ -107,16 +113,13 @@ private fun ChemistryRateInquiry() {
 
 @Composable
 private fun ElectrolysisConceptInquiry() {
-    var voltage by remember { mutableFloatStateOf(6f) }
-    var time by remember { mutableFloatStateOf(10f) }
+       var time by remember { mutableFloatStateOf(10f) }
     var current by remember { mutableFloatStateOf(0.5f) }
     val charge = current * time * 60f
     Card(Modifier.fillMaxWidth()) {
         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
             Text("Electrolysis: charge passed through an electrolyte", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
             Text("An external power supply drives a non-spontaneous redox reaction. Current measures charge flow per second: Q = It.")
-            Text("Supply voltage: " + "%.1f".format(voltage) + " V")
-            Slider(voltage, { voltage = it }, valueRange = 1f..12f)
             Text("Current: " + "%.2f".format(current) + " A")
             Slider(current, { current = it }, valueRange = 0.1f..2f)
             Text("Time: " + time.toInt() + " min")
@@ -135,6 +138,8 @@ fun PhysicsInteractiveLessonActivity(topicId: String) {
         "phy-capacitors" -> CapacitorInquiry()
         "phy-waves", "phy-sound-propagation", "phy-sound-characteristics", "phy-light-energy" -> WaveInquiry()
         "phy-motion", "phy-gravity" -> MotionInquiry()
+        "phy-elasticity" -> HookesLawInquiry()
+        "phy-thermal-expansion" -> ThermalExpansionInquiry()
         "phy-equilibrium", "phy-work-energy" -> MomentsInquiry()
         "phy-reflection", "phy-refraction" -> ReflectionInquiry()
     }
@@ -253,5 +258,41 @@ private fun ReflectionInquiry() {
         Text("Angle of reflection: " + reflected.toInt() + "°", fontWeight = FontWeight.Bold)
         Text("The incident ray, reflected ray and normal lie in one plane. The angle of incidence equals the angle of reflection.")
         Text("Do not measure either angle from the mirror surface; doing so gives the complementary angle.", style = MaterialTheme.typography.bodySmall)
+    } }
+}
+
+@Composable
+private fun HookesLawInquiry() {
+    var springConstant by remember { mutableFloatStateOf(20f) }
+    var extension by remember { mutableFloatStateOf(0.10f) }
+    val force = springConstant * extension
+    val energy = 0.5f * springConstant * extension * extension
+    Card(Modifier.fillMaxWidth()) { Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+        Text("Hooke's law: stretch a spring", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+        Text("Within the limit of proportionality, the applied force is proportional to extension: F = kx.")
+        Text("Spring constant: " + springConstant.toInt() + " N/m"); Slider(springConstant, { springConstant = it }, valueRange = 5f..100f)
+        Text("Extension: " + "%.3f".format(extension) + " m"); Slider(extension, { extension = it }, valueRange = 0.01f..0.30f)
+        Text("Required force: " + "%.2f".format(force) + " N", fontWeight = FontWeight.Bold)
+        Text("Elastic potential energy: " + "%.3f".format(energy) + " J")
+        Text("The model assumes an ideal linear spring and that the extension remains below the proportional limit. Real springs may deform permanently if overloaded.", style = MaterialTheme.typography.bodySmall)
+        Text("Investigation: double the extension while keeping k constant. What happens to force and stored energy?")
+    } }
+}
+
+@Composable
+private fun ThermalExpansionInquiry() {
+    var alpha by remember { mutableFloatStateOf(12f) }
+    var length by remember { mutableFloatStateOf(2f) }
+    var temperatureChange by remember { mutableFloatStateOf(50f) }
+    val changeMetres = alpha * 1e-6f * length * temperatureChange
+    Card(Modifier.fillMaxWidth()) { Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+        Text("Thermal expansion of a solid rod", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+        Text("For a small temperature change and an isotropic solid, ΔL = αL₀ΔT.")
+        Text("Linear expansion coefficient: " + alpha.toInt() + " × 10⁻⁶ K⁻¹"); Slider(alpha, { alpha = it }, valueRange = 5f..30f)
+        Text("Original length: " + "%.2f".format(length) + " m"); Slider(length, { length = it }, valueRange = 0.5f..10f)
+        Text("Temperature rise: " + temperatureChange.toInt() + " K"); Slider(temperatureChange, { temperatureChange = it }, valueRange = 0f..150f)
+        Text("Increase in length: " + "%.3f".format(changeMetres * 1000f) + " mm", fontWeight = FontWeight.Bold)
+        Text("The coefficient is assumed constant over the temperature interval. Real materials may expand non-linearly and have different coefficients along different directions.", style = MaterialTheme.typography.bodySmall)
+        Text("Engineering connection: explain why bridges and long rails need expansion allowances.")
     } }
 }
