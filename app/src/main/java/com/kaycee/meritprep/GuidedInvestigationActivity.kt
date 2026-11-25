@@ -268,7 +268,7 @@ internal object InvestigationProfiles {
             "Approved safe substance, thermometer, controlled heater, timer and heat-resistant vessel", "Heating time", "Temperature", "Substance mass, heating power and pressure", "min", "°C",
             "Use only teacher-approved substances and heating equipment; avoid burns and fumes.",
             listOf("Record the starting temperature", "Heat at a controlled rate", "Record temperature at equal time intervals", "Identify any plateau and explain latent heat"),
-            "Schematic heating curve; real plateaux depend on purity, pressure and heating rate.", { x -> if (x in 35f..65f) 70f else 20f + 1.4f * x })
+            "Schematic heating curve; real plateaux depend on purity, pressure and heating rate.", { x -> if (x < 35f) 20f + 1.4f * x else if (x <= 65f) 69f else 69f + 1.4f * (x - 65f) })
         "phy-light-energy" -> profile("Photon energy and electromagnetic radiation", "How does photon energy depend on radiation frequency?",
             "Spectrum reference chart, frequency data and calculator", "Frequency", "Photon energy", "Planck constant and unit conversion", "10¹⁴ Hz", "10⁻¹⁹ J",
             "No ionising-radiation source is used; this is a calculation activity.",
@@ -278,12 +278,12 @@ internal object InvestigationProfiles {
             "Convex lens, lens holder, illuminated object, screen and metre rule", "Object distance", "Image distance", "Same lens, alignment and object height", "cm", "cm",
             "Never look directly at the Sun through a lens; secure the lens and screen.",
             listOf("Align object, lens and screen on one optical axis", "Form a sharp real image", "Measure u and v from the lens centre", "Calculate f using 1/f = 1/u + 1/v and repeat"),
-            "Thin-lens approximation; lens thickness and measurement uncertainty are ignored.", { x -> 20f * x / (x - 20f).coerceAtLeast(1f) })
+            "Thin-lens approximation; lens thickness and measurement uncertainty are ignored. Object distance is kept greater than focal length.", { x -> 20f * x / (x - 20f) }, 30f, 100f, 50f)
         "phy-dispersion" -> profile("Dispersion of white light", "How does a prism separate white light into component colours?",
             "Glass prism, narrow light source, screen and angle-measuring scale", "Wavelength", "Relative refractive index", "Prism material, prism angle and temperature", "nm", "index",
             "Do not look directly into intense light sources; secure the prism on a stable surface.",
             listOf("Direct a narrow beam into the prism", "Observe the emergent spectrum on a screen", "Identify the order of colours", "Compare deviation for different wavelengths"),
-            "Qualitative dispersion model; refractive index varies with wavelength and material.", { x -> 1.52f + 0.00008f * (700f - x) })
+            "Qualitative dispersion model; refractive index varies with wavelength and material.", { x -> 1.52f + 0.00008f * (700f - x) }, 400f, 700f, 550f)
         "phy-electrostatics" -> profile("Electrostatic force and separation", "How does electrostatic force vary with distance for fixed charges?",
             "Electrostatic force model, charge values and distance scale", "Charge separation", "Relative force", "Charge magnitudes and medium", "relative distance", "relative force",
             "Use a computer model only; do not create high-voltage static discharges.",
