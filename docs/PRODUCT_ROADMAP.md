@@ -107,3 +107,6 @@ Authenticated sync, teacher/admin CMS, analytics, backups, privacy and security 
 
 
 **Lesson integration:** extracted the stage-by-stage mitosis/meiosis model into a reusable Compose card and embedded it directly in the Biology growth lesson, alongside the 12-question retrieval check. The same model remains available in the Science Media area; the two entry points now share the same implementation rather than maintaining separate copies.
+
+
+**DNA-content accounting:** the mitosis/meiosis stage model now tracks DNA content in C units alongside chromosome and chromatid counts. It distinguishes the 2C starting state, 4C state after S phase, the intermediate DNA content in each meiotic cell after meiosis I, and the 1C haploid products after meiosis II. Tests verify the key transitions.
