@@ -848,6 +848,7 @@ fun LessonScreen(topicId: String) {
                                 Text((index + 1).toString().padStart(2, '0'), style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
                                 Text(section.first, style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
                                 ScientificContent(section.second, style = MaterialTheme.typography.bodyLarge)
+                                if (index == 0) TopicEquationPanel(topicId)
                                 TopicConceptInlineVisual(topicId, index, section.first)
                             }
                         }
