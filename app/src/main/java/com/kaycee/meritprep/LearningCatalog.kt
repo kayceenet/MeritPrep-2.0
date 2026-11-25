@@ -725,6 +725,8 @@ fun LessonScreen(topicId: String) {
         Text(topic.title, style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
         Text(topic.introduction, style = MaterialTheme.typography.bodyLarge)
 
+        BiologyInteractiveLessonActivity(topicId)
+
         ScienceMediaTopicSection(topicId)
 
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
