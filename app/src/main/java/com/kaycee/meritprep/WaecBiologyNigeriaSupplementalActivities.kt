@@ -563,12 +563,12 @@ private fun WaecNutrientCycleActivity() {
 private fun WaecBiomeComparisonActivity() {
     var biome by remember { mutableStateOf("Tropical rainforest") }
     val detail = when (biome) {
-        "Tropical rainforest" -> "High annual rainfall, humid conditions and layered evergreen vegetation. Species show competition for light, climbing habits and shade adaptations."
-        "Southern Guinea savanna" -> "Distinct wet and dry seasons, tall grasses and scattered trees. Fire and grazing influence vegetation structure."
-        "Northern Guinea savanna" -> "Lower rainfall and a shorter wet season than the southern zone, with more open grassland and drought-tolerant trees."
-        "Sudan savanna" -> "Shorter grasses, widely spaced drought-resistant trees and a longer dry season."
-        "Montane" -> "High altitude produces cooler conditions and specialised montane forest or grassland communities."
-        else -> "Very low rainfall, sparse vegetation and strong water limitation. Plants may reduce leaf area, store water or develop deep roots."
+        "Tropical rainforest" -> "High annual rainfall, humid conditions and layered evergreen vegetation in parts of Cross River, Edo, Ondo and the southern belt. Species show competition for light, climbing habits and shade adaptations."
+        "Southern Guinea savanna" -> "Distinct wet and dry seasons, tall grasses and scattered trees across parts of the Middle Belt, including Niger, Kogi and Benue. Fire and grazing influence vegetation structure."
+        "Northern Guinea savanna" -> "Lower rainfall and a shorter wet season than the southern zone, with more open grassland and drought-tolerant trees in areas such as Kaduna, Bauchi and Plateau."
+        "Sudan savanna" -> "Shorter grasses, widely spaced drought-resistant trees and a longer dry season in the far north, including parts of Sokoto, Katsina, Kano and Borno."
+        "Montane" -> "High altitude produces cooler conditions and specialised montane forest or grassland communities, including the Mambilla and Obudu plateaux."
+        else -> "The far north-east grades into a semi-arid Sahelian environment with sparse vegetation and strong water limitation; Nigeria has a semi-arid fringe rather than a true hyper-arid desert. Plants may reduce leaf area, store water or develop deep roots."
     }
     Card(Modifier.fillMaxWidth()) {
         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
