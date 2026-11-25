@@ -275,7 +275,7 @@ internal object InvestigationProfiles {
             "Use low-voltage equipment; hot blocks can burn and must cool before handling.",
             listOf("Measure the block mass", "Record initial temperature", "Supply measured electrical energy", "Record temperature rise and estimate c = E/(mΔT)"),
             "Ideal energy balance; heat losses and heater efficiency are neglected.", { x -> 0.025f * x })
-        "phy-change-state", "phy-vapours" -> profile("Heating and cooling during change of state", "How does temperature change as a substance is heated through a phase change?",
+        "phy-vapours" -> profile("Heating and cooling during change of state", "How does temperature change as a substance is heated through a phase change?",
             "Approved safe substance, thermometer, controlled heater, timer and heat-resistant vessel", "Heating time", "Temperature", "Substance mass, heating power and pressure", "min", "°C",
             "Use only teacher-approved substances and heating equipment; avoid burns and fumes.",
             listOf("Record the starting temperature", "Heat at a controlled rate", "Record temperature at equal time intervals", "Identify any plateau and explain latent heat"),
