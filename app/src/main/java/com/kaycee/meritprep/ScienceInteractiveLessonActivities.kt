@@ -363,17 +363,17 @@ private fun EquilibriumInquiry() {
 @Composable
 private fun RefractionInquiry() {
     var incident by remember { mutableFloatStateOf(40f) }
-    var refractiveIndex by remember { mutableFloatStateOf(1.5f) }
-    val sine = kotlin.math.sin(Math.toRadians(incident.toDouble())) / refractiveIndex
+    var refractiveIndex by remember { mutableFloatStateOf(1.0f) }
+    val sine = 1.5 * kotlin.math.sin(Math.toRadians(incident.toDouble())) / refractiveIndex
     val totalInternal = sine > 1.0
     val refracted = if (totalInternal) null else Math.toDegrees(kotlin.math.asin(sine))
     Card(Modifier.fillMaxWidth()) { Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
         Text("Refraction and Snell's law", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
         Text("Light changes direction when it crosses a boundary between media because its speed changes. Angles are measured from the normal.")
         Text("Incident angle: " + incident.toInt() + "°"); Slider(incident, { incident = it }, valueRange = 0f..90f)
-        Text("Refractive index of second medium (n₂): " + "%.2f".format(refractiveIndex)); Slider(refractiveIndex, { refractiveIndex = it }, valueRange = 1f..2.5f)
+        Text("First medium n₁ = 1.50 (glass); second medium n₂: " + "%.2f".format(refractiveIndex)); Slider(refractiveIndex, { refractiveIndex = it }, valueRange = 0.7f..2.5f)
         if (totalInternal) Text("Total internal reflection condition in this model.", fontWeight = FontWeight.Bold) else Text("Refracted angle: " + "%.2f".format(refracted) + "°", fontWeight = FontWeight.Bold)
-        Text("Snell's law: n₁ sin i = n₂ sin r. This model assumes light starts in air (n₁ ≈ 1.00) and the boundary is flat.")
+        Text("Snell's law: n₁ sin i = n₂ sin r. This model assumes light starts in a medium with n₁ = 1.50 and meets a flat boundary. Total internal reflection is possible only when light travels from higher to lower refractive index.")
     } }
 }
 
