@@ -363,6 +363,90 @@ internal object InvestigationProfiles {
             "Never heat a sealed rigid vessel in a practical classroom; this is a low-pressure model only.",
             listOf("Set a fixed gas amount and volume", "Record pressure at a known absolute temperature", "Change temperature in controlled increments", "Plot pressure against kelvin temperature"),
             "Ideal-gas proportionality at fixed volume; displayed pressure is a scaled model index.", { x -> 0.01f * x }, 100f, 800f, 300f)
+        "phy-measurements" -> profile("Instrument resolution and uncertainty", "How does the smallest scale division affect the estimated reading uncertainty?",
+            "Metre rule, vernier caliper, micrometer screw gauge and repeated-reading sheet", "Smallest scale division", "Estimated reading uncertainty", "Same instrument type, object and reading method",
+            "mm", "mm",
+            "Check instrument zero before use; handle the micrometer ratchet gently and avoid overtightening.",
+            listOf("Identify the instrument and its least count", "Check for zero error", "Measure the same object several times", "Estimate uncertainty from resolution and repeatability", "Report a value with a sensible uncertainty"),
+            "Half a scale division is a common analogue estimate, not a universal rule for every instrument or measurement.", { x -> x / 2f }, 0.01f, 1f, 0.1f)
+        "phy-vectors" -> profile("Resultant of two forces", "How does the angle between two equal forces affect their resultant?",
+            "Force board, pulleys, slotted masses, strings and vector scale diagram", "Angle between two forces", "Resultant force magnitude", "Equal force magnitudes and calibrated masses",
+            "degrees", "N",
+            "Secure the force board and masses; keep feet clear of suspended loads.",
+            listOf("Set two equal known forces", "Change the angle between their directions", "Determine the resultant using the force board", "Calculate the resultant using the cosine rule", "Compare graphical and calculated results"),
+            "Ideal two-force model with equal 10 N forces; friction and pulley mass are neglected.", { x -> kotlin.math.sqrt(200f + 200f * kotlin.math.cos(Math.toRadians(x.toDouble()).toFloat())) }, 0f, 180f, 90f)
+        "phy-pressure" -> profile("Pressure and contact area", "How does contact area affect pressure when the applied force is constant?",
+            "Load, flat blocks with different face areas, balance and area-measuring tools", "Contact area", "Pressure", "Same load, surface and orientation",
+            "m²", "Pa",
+            "Use stable loads and keep hands clear when changing block orientation.",
+            listOf("Measure the contact area of each face", "Apply the same normal force", "Calculate pressure from force divided by area", "Repeat for each contact area", "Plot pressure against reciprocal area"),
+            "Ideal normal-force model; assumes the force is uniformly distributed over the contact face.", { x -> 100f / x }, 0.01f, 0.1f, 0.05f)
+        "phy-gas-laws" -> profile("Pressure and absolute temperature", "How does gas pressure vary with absolute temperature at constant volume?",
+            "Low-pressure gas vessel, pressure sensor, thermometer and controlled water bath", "Absolute temperature", "Gas pressure", "Gas amount, vessel volume and leak tightness",
+            "K", "relative kPa",
+            "Never heat a sealed rigid vessel in a classroom; use an approved low-pressure apparatus and teacher-supervised method.",
+            listOf("Record initial pressure and absolute temperature", "Change temperature in controlled steps", "Allow the gas to reach thermal equilibrium", "Record pressure at each temperature", "Plot pressure against kelvin temperature"),
+            "Ideal-gas proportionality at fixed volume; pressure is shown as a scaled model output.", { x -> 0.02f * x }, 100f, 500f, 300f)
+        "phy-change-state" -> profile("Latent heat of fusion", "How does the mass of ice affect the energy required to melt it at its melting point?",
+            "Crushed ice, insulated calorimeter, balance, thermometer and electrical heater or approved energy source", "Mass of ice", "Energy required for melting", "Initial temperature, pressure, insulation and ice condition",
+            "kg", "J",
+            "Keep electrical connections dry; use low-voltage equipment and handle meltwater safely.",
+            listOf("Prepare ice at its melting point", "Measure the mass of ice", "Supply or estimate the energy needed for melting", "Record the mass melted", "Use Q = mL to determine specific latent heat"),
+            "Uses the accepted approximate latent heat of fusion of pure ice; heat exchange with the surroundings is neglected.", { x -> 334000f * x }, 0.1f, 2f, 0.5f)
+        "phy-heat-transfer" -> profile("Steady thermal conduction", "How does temperature difference affect the rate of heat transfer through a slab?",
+            "Metal bar or slab, low-voltage heater, thermometers, insulation and stopwatch", "Temperature difference across the slab", "Heat-transfer rate", "Material, cross-sectional area, thickness and steady-state condition",
+            "K", "W",
+            "Use low-voltage heaters, avoid hot surfaces and allow the apparatus to cool before handling.",
+            listOf("Measure the slab dimensions", "Set up the heater and temperature sensors", "Wait for steady conditions", "Record temperature difference and energy transferred per unit time", "Compare rate with temperature difference"),
+            "One-dimensional steady conduction model with fixed material conductivity and negligible edge losses.", { x -> 100f * x }, 1f, 100f, 20f)
+        "phy-waves" -> profile("Wave frequency and wavelength", "How does wavelength change when frequency changes at constant wave speed?",
+            "Ripple tank or slinky, wave generator, ruler and frequency control", "Wave frequency", "Wavelength", "Wave medium and tension or water depth",
+            "Hz", "m",
+            "Keep water away from electrical equipment and secure the wave apparatus.",
+            listOf("Set a constant wave medium and depth", "Generate waves at a known frequency", "Measure the distance across several wavefronts", "Calculate the mean wavelength", "Repeat at different frequencies and compare fλ"),
+            "Uses a fixed illustrative wave speed of 2.0 m s⁻¹; real speed depends on the medium and wave conditions.", { x -> 2f / x }, 1f, 20f, 5f)
+        "phy-sound-propagation" -> profile("Echo and speed of sound", "How does echo time relate to the distance of a reflecting surface?",
+            "Echo timer or sound sensor, measured wall distance and stopwatch", "Round-trip echo time", "Distance to reflecting surface", "Air temperature, reflecting surface and sound source",
+            "s", "m",
+            "Use moderate sound levels and conduct the activity in a safe open area.",
+            listOf("Measure a known distance to a reflecting surface", "Produce a short sound pulse", "Measure the time for the echo to return", "Repeat and calculate the mean time", "Use distance = speed × time ÷ 2"),
+            "Assumes sound travels at 343 m s⁻¹ in air near room temperature; wind and temperature alter the speed.", { x -> 343f * x / 2f }, 0.01f, 0.5f, 0.1f)
+        "phy-reflection" -> profile("Law of reflection", "How does the angle of reflection compare with the angle of incidence?",
+            "Plane mirror, ray box, paper, ruler and protractor", "Angle of incidence", "Angle of reflection", "Mirror position, normal line and ray-box alignment",
+            "degrees", "degrees",
+            "Do not look directly into a bright ray source; use a low-intensity ray box.",
+            listOf("Draw a normal to the mirror surface", "Direct a narrow incident ray at the mirror", "Mark the reflected ray", "Measure both angles from the normal", "Repeat for several incident angles"),
+            "Ideal plane-mirror model; small errors arise from ray width and alignment.", { x -> x }, 0f, 80f, 30f)
+        "phy-refraction" -> profile("Refraction through a transparent block", "How does the angle of refraction depend on the angle of incidence?",
+            "Rectangular glass block, ray box, paper, ruler and protractor", "Angle of incidence", "Angle of refraction", "Block material, wavelength and normal alignment",
+            "degrees", "degrees",
+            "Avoid direct viewing of bright beams and handle glass blocks carefully.",
+            listOf("Trace the outline of the block", "Draw a normal at the point of incidence", "Direct a ray at a measured incident angle", "Mark the emergent ray and trace the path", "Measure the refracted angle and test Snell's law"),
+            "Illustrative air-to-glass model with refractive index 1.50; dispersion and surface imperfections are ignored.", { x -> Math.toDegrees(kotlin.math.asin((kotlin.math.sin(Math.toRadians(x.toDouble())) / 1.5).coerceIn(-1.0, 1.0))).toFloat() }, 0f, 80f, 40f)
+        "phy-capacitors" -> profile("Charging a capacitor", "How does capacitor charge change with time in a simple RC circuit?",
+            "Capacitor, resistor, low-voltage DC supply, switch, voltmeter and stopwatch", "Time after closing the switch", "Charge fraction or capacitor voltage", "Resistance, capacitance, supply voltage and initial charge",
+            "s", "% of final value",
+            "Use a low-voltage supply, observe capacitor polarity and discharge the capacitor safely before handling.",
+            listOf("Connect the resistor and capacitor in series", "Record the initial voltage", "Close the switch and start timing", "Record capacitor voltage at fixed intervals", "Plot voltage or charge against time"),
+            "First-order RC charging model with a fixed 10 s time constant; leakage and component tolerances are omitted.", { x -> 100f * (1f - kotlin.math.exp(-x / 10f)) }, 0f, 50f, 10f)
+        "phy-current-electricity" -> profile("Ohm's law investigation", "How does current vary with potential difference across a fixed resistor?",
+            "Resistor, DC supply, ammeter, voltmeter, switch and connecting leads", "Potential difference", "Current", "Resistor temperature and resistance, circuit connections and supply stability",
+            "V", "A",
+            "Use a low-voltage supply and switch off between readings to limit resistor heating.",
+            listOf("Connect the ammeter in series and voltmeter in parallel", "Set a low potential difference", "Record current and voltage", "Increase voltage in safe increments", "Plot current against voltage and determine resistance"),
+            "Ohmic conductor model with a fixed 10 Ω resistance; heating can cause real resistance to change.", { x -> x / 10f }, 0f, 24f, 6f)
+        "phy-electrical-power" -> profile("Electrical power in a resistor", "How does power dissipated by a fixed resistor change with applied voltage?",
+            "Fixed resistor, DC supply, ammeter, voltmeter and connecting leads", "Potential difference", "Electrical power", "Resistance and resistor temperature",
+            "V", "W",
+            "Use a resistor with an adequate power rating and avoid overheating.",
+            listOf("Measure the resistor value", "Apply a low voltage", "Record voltage and current", "Calculate power using P = VI", "Compare the result with P = V²/R"),
+            "Ideal fixed-resistance model; thermal changes and supply internal resistance are neglected.", { x -> x * x / 10f }, 0f, 24f, 6f)
+        "phy-induction" -> profile("Electromagnetic induction", "How does the rate of change of magnetic flux affect induced emf?",
+            "Coil, bar magnet, galvanometer or voltage sensor and motion guide", "Rate of change of magnetic flux linkage", "Magnitude of induced emf", "Coil turns, magnet orientation and circuit resistance",
+            "Wb s⁻¹", "V",
+            "Secure the magnet and coil; keep strong magnets away from sensitive electronics and medical devices.",
+            listOf("Connect the coil to a sensitive galvanometer", "Move the magnet through the coil at controlled speeds", "Record deflection or induced voltage", "Repeat with different speeds and coil turns", "Relate induced emf to the rate of flux-linkage change"),
+            "Faraday-law proportionality model; the sign gives direction and is not represented by the magnitude-only response.", { x -> 100f * x }, 0f, 0.05f, 0.02f)
         else -> null
     }
 }
