@@ -877,6 +877,7 @@ fun LessonScreen(topicId: String) {
                     TopicWorkedExampleCard(topicId)
                     TopicVisualisationGallery(topicId)
                     BiologyInteractiveLessonActivity(topicId)
+                    BiologySupplementalLessonActivity(topicId)
                     ChemistryInteractiveLessonActivity(topicId)
                     ChemistrySupplementalLessonActivity(topicId)
                     PhysicsInteractiveLessonActivity(topicId)
