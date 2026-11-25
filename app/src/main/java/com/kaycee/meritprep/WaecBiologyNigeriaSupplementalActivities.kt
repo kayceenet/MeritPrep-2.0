@@ -209,7 +209,6 @@ private fun WaecHabitatAdaptationActivity() {
 }
 
 @Composable
-@Composable
 private fun WaecPopulationSamplingActivity() {
     var countA by remember { mutableFloatStateOf(18f) }
     var countB by remember { mutableFloatStateOf(12f) }
