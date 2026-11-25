@@ -816,14 +816,11 @@ fun LessonScreen(topicId: String) {
         }
 
         val lessonBodyScroll = rememberScrollState()
-        BoxWithConstraints(Modifier.weight(1f).fillMaxWidth()) {
-            if (maxWidth >= 720.dp) {
-                Row(Modifier.fillMaxSize()) {
-                    ClassroomPillarNavigation(stage, completedStages, lessonBodyScroll, true, { stage = it })
-                    Column(
-                        Modifier.weight(1f).fillMaxHeight().verticalScroll(lessonBodyScroll).padding(horizontal = 20.dp, vertical = 14.dp),
-                        verticalArrangement = Arrangement.spacedBy(14.dp)
-                    ) {
+        ClassroomPillarNavigation(stage, completedStages, lessonBodyScroll, false, { stage = it })
+        Column(
+            Modifier.weight(1f).fillMaxWidth().verticalScroll(lessonBodyScroll).padding(horizontal = 16.dp, vertical = 14.dp),
+            verticalArrangement = Arrangement.spacedBy(14.dp)
+        ) {
             Card(Modifier.fillMaxWidth(), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.55f))) {
                 Column(Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
                     Text(stage.label.uppercase(), style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
@@ -1010,11 +1007,6 @@ fun LessonScreen(topicId: String) {
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
-                }
-            }
-        }
-
-                    }
                 }
             }
         }
