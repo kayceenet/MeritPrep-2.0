@@ -30,7 +30,7 @@ class ScientificNotationTest {
 
     @Test
     fun splitsDisplayLatexFromSurroundingLessonProse() {
-        val segments = parseScientificContent("The force is defined by\\n\\[F = ma\\]\\nwhere m is mass.")
+        val segments = parseScientificContent("The force is defined by\n\\[F = ma\\]\nwhere m is mass.")
         assertEquals(3, segments.size)
         assertEquals("The force is defined by", segments[0].prose)
         assertEquals("F = ma", segments[1].equation)
