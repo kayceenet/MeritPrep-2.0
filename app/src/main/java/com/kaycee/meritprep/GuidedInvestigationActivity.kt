@@ -171,6 +171,61 @@ private object InvestigationProfiles {
             "Use low voltage only; switch off before changing connections and never use mains.",
             listOf("Connect ammeter in series and voltmeter in parallel", "Begin at the lowest supply setting", "Record voltage and current pairs", "Plot I against V and assess linearity"),
             "Ideal ohmic conductor at constant temperature; heating can change resistance.", { x -> 0.02f * x })
+        "chem-nuclear" -> profile("Radioactive decay and half-life", "How does the expected number of undecayed nuclei change with time?",
+            "Radioactive-decay simulation, timer and data table", "Elapsed time", "Expected parent nuclei remaining", "Initial sample size and isotope", "half-lives", "% remaining",
+            "This is a computer model; never obtain or handle radioactive material for this activity.",
+            listOf("Set an initial population", "Choose a half-life", "Advance time in equal intervals", "Record the expected fraction remaining and plot the decay curve"),
+            "Statistical expectation for a large population; individual decay events are random.", { x -> 100f * kotlin.math.exp(-0.693147f * x / 20f) })
+        "chem-industry", "chem-equilibrium" -> profile("Equilibrium and industrial conditions", "How do pressure and temperature changes affect a gaseous equilibrium?",
+            "Equilibrium model, temperature control and pressure display", "Pressure setting", "Qualitative ammonia-favouring index", "Reaction equation, gas composition and catalyst", "relative", "index",
+            "Concept model only; no high-pressure equipment or reactive gases are used.",
+            listOf("Write and balance the reversible reaction", "Count gaseous mole coefficients on each side", "Identify whether the forward reaction is exothermic", "Predict the shift for a pressure or temperature change"),
+            "Qualitative Le Chatelier model, not a numerical yield prediction.", { x -> 0.5f + 0.01f * x })
+        "chem-organic" -> profile("Homologous series and molecular formula", "How does carbon-chain length affect the molecular formula of an alkane?",
+            "Molecular model kit, formula cards and periodic table", "Number of carbon atoms", "Number of hydrogen atoms", "Hydrocarbon family and acyclic structure", "C atoms", "H atoms",
+            "Use model kits safely; small parts must be kept away from young children.",
+            listOf("Select the homologous series", "Count carbon atoms in successive members", "Build or draw the structures", "Compare formula differences between adjacent members"),
+            "Alkane formula model CnH2n+2; rings and unsaturation require different formulae.", { x -> 2f * x + 2f })
+        "chem-pollution" -> profile("Water pollution and eutrophication", "How can nutrient enrichment affect dissolved oxygen in a water body?",
+            "Water samples, approved nitrate test, dissolved-oxygen meter and sampling bottles", "Nutrient concentration", "Illustrative oxygen-stress index", "Temperature, flow, sampling depth and time", "mg L⁻¹", "index",
+            "Do not sample polluted water without supervision, PPE and an approved field protocol.",
+            listOf("Choose safe sampling points and label bottles", "Measure nutrient concentration and dissolved oxygen", "Record temperature and sampling conditions", "Compare sites and discuss alternative explanations"),
+            "Hypothetical relationship for reasoning; real oxygen dynamics depend on many factors.", { x -> (100f - 0.7f * x).coerceAtLeast(0f) })
+        "phy-friction" -> profile("Friction and normal reaction", "How does maximum static friction depend on normal reaction?",
+            "Wooden block, spring balance, adjustable surface and masses", "Normal reaction", "Maximum static friction", "Surface pair, contact condition and pull direction", "N", "N",
+            "Use a stable bench and small loads; keep the block away from table edges.",
+            listOf("Place the block on the test surface", "Increase pulling force gradually until motion is imminent", "Record limiting friction and normal reaction", "Repeat with several normal loads"),
+            "Illustrative proportional model for one fixed surface pair; coefficient varies by condition.", { x -> 0.4f * x })
+        "phy-machines" -> profile("Mechanical advantage and efficiency", "How do load and effort determine mechanical advantage?",
+            "Pulley or lever model, load, spring balance and metre rule", "Effort force", "Mechanical advantage", "Load, machine geometry and friction condition", "N", "ratio",
+            "Secure the apparatus and keep feet clear of suspended loads.",
+            listOf("Set up the machine and identify load and effort", "Measure load and effort forces", "Calculate MA = load/effort", "Measure distances moved to determine velocity ratio and efficiency"),
+            "Efficiency is MA/VR × 100%; a passive real machine cannot exceed 100%.", { x -> 300f / max(x, 1f) })
+        "phy-thermal-expansion" -> profile("Linear thermal expansion", "How does temperature rise affect the length of a metal rod?",
+            "Expansion apparatus, metal rod, heater, thermometer and micrometer", "Temperature rise", "Length increase", "Rod material, initial length and heating method", "°C", "mm",
+            "Hot metal can burn; use heat-resistant gloves and allow apparatus to cool.",
+            listOf("Measure initial rod length", "Record initial temperature", "Heat gradually and measure expansion", "Compare the ratio ΔL/(L₀ΔT) across readings"),
+            "Illustrative linear model for a fixed material and modest temperature range.", { x -> 0.0012f * x })
+        "phy-heat-transfer", "phy-conduction" -> profile("Thermal conduction", "How does temperature difference affect heat-transfer rate through a material?",
+            "Thermal conductivity apparatus, heater, thermometers and timer", "Temperature difference", "Relative heat-transfer rate", "Material, cross-sectional area, length and insulation", "°C", "index",
+            "Use low-voltage heaters and avoid touching hot metal; allow equipment to cool.",
+            listOf("Set up the same material and geometry", "Establish a measured temperature difference", "Record energy transfer or temperature change over time", "Repeat with controlled conditions"),
+            "Simple proportional model; actual rate depends on conductivity and geometry.", { x -> 0.8f * x })
+        "phy-magnetic-force" -> profile("Force on a current-carrying conductor", "How does current affect magnetic force at fixed field and geometry?",
+            "Low-voltage supply, conductor, magnet, ammeter and force sensor", "Current", "Magnetic force", "Field strength, conductor length and angle", "A", "N",
+            "Use low voltage and limit current to prevent conductor heating.",
+            listOf("Set conductor perpendicular to a uniform field", "Measure the zero-current baseline", "Increase current in controlled steps", "Record force and reverse current to check direction"),
+            "Ideal relation F = BIL sin θ; field and conductor geometry are assumed constant.", { x -> 0.08f * x })
+        "phy-ac-circuits" -> profile("Alternating current and period", "How does frequency determine the period of an AC signal?",
+            "Low-voltage signal generator and oscilloscope", "Frequency", "Period", "Waveform and measurement timebase", "Hz", "ms",
+            "Use only low-voltage signal sources; never connect an oscilloscope to mains.",
+            listOf("Set a sinusoidal signal at low amplitude", "Display several cycles", "Measure one or more cycle durations", "Calculate T = 1/f and compare with the display"),
+            "Ideal sinusoidal signal model; distortion and instrument resolution are ignored.", { x -> 1000f / max(x, 1f) })
+        "phy-modern" -> profile("Photon energy and frequency", "How does photon energy depend on electromagnetic frequency?",
+            "Frequency data, calculator and electromagnetic spectrum chart", "Frequency", "Photon energy", "Planck constant and unit conversion", "10¹⁴ Hz", "10⁻¹⁹ J",
+            "No ionising-radiation source is used; this is a calculation activity.",
+            listOf("Identify the radiation frequency", "Convert frequency to hertz", "Apply E = hf using Planck's constant", "Compare energy across the spectrum"),
+            "Energy per photon; intensity depends on photon number as well as photon energy.", { x -> 0.6626f * x })
         else -> null
     }
 }
