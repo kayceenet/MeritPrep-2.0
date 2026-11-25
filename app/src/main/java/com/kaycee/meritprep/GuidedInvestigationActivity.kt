@@ -133,6 +133,12 @@ internal object InvestigationProfiles {
             "Use non-hazardous samples and clean tools between specimens.",
             listOf("Define one measurable characteristic", "Select specimens without choosing only extremes", "Measure consistently and record precision", "Calculate mean and range and plot a frequency distribution"),
             "Synthetic pattern for practising analysis, not a real population survey.", { x -> 12f + 0.18f * (x - 50f) })
+        "bio-heredity" -> profile("Mendelian inheritance model", "How does the expected dominant phenotype count change with model offspring sample size?",
+            "Allele cards, Punnett-square grid, counters and tally sheet", "Number of model offspring", "Expected dominant-phenotype count", "Parental genotypes, dominance relationship and equal segregation",
+            "offspring", "expected offspring",
+            "This is a probability model; no human or animal breeding experiment is involved.",
+            listOf("Write the parental genotypes and possible gametes", "Construct the Punnett square", "Determine genotype and phenotype ratios", "Calculate expected counts for the chosen sample size", "Compare simulated counts with the expected ratio and explain random variation"),
+            "Single-gene model with complete dominance and independent segregation; many real traits are polygenic or influenced by environment.", { x -> 0.75f * x }, 0f, 100f, 20f)
         "bio-biotechnology" -> profile("Yeast fermentation", "How does sugar concentration affect carbon dioxide production by yeast?",
             "Yeast, sugar solutions, warm water, fermentation vessel and gas syringe", "Sugar concentration", "CO₂ production rate", "Yeast mass, temperature, pH, volume and time", "%", "mL min⁻¹",
             "Never ingest mixtures or tightly seal a gas-producing vessel.",
