@@ -215,8 +215,6 @@ private fun HomeScreen(nav: NavHostController, navigationRevision: Int = 0) {
                         Text("Next topic in your course sequence", style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onPrimaryContainer)
                         Button(onClick = { nav.navigate("lesson/" + nextTopic.id) }, modifier = Modifier.fillMaxWidth()) {
                             Text("Resume lesson")
-                            Spacer(Modifier.width(6.dp))
-                            Icon(Icons.Default.ArrowForward, contentDescription = null)
                         }
                     } else {
                         Text("You have completed all currently mapped lesson topics.", color = MaterialTheme.colorScheme.onPrimaryContainer)
