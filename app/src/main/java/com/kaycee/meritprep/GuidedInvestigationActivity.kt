@@ -109,7 +109,7 @@ internal object InvestigationProfiles {
             "Use a seated volunteer; participation must be voluntary and safe.",
             listOf("Explain the test and obtain consent", "Keep hand position and release method constant", "Record catch distance for each trial", "Compare early and later trials"),
             "Illustrative trend; attention, fatigue and anticipation affect responses.", { x -> 32f / (1f + 0.08f * x) })
-        "bio-ecology-factors", "bio-habitats", "bio-biomes", "bio-environment" -> profile("Environmental gradient and distribution", "How does an environmental gradient relate to organism abundance?",
+        "bio-environment" -> profile("Environmental gradient and distribution", "How does an environmental gradient relate to organism abundance?",
             "Quadrat, transect tape, thermometer or light meter and tally sheet", "Distance along transect", "Organisms per quadrat", "Quadrat size, sampling effort, time and identification method", "m", "organisms",
             "Avoid unsafe habitats and disturbance of protected species; follow fieldwork supervision.",
             listOf("Choose a safe representative transect", "Place quadrats at fixed intervals", "Record organisms and environmental conditions", "Repeat transects and compare patterns"),
