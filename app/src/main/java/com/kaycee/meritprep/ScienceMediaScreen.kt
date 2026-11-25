@@ -40,6 +40,13 @@ fun ScienceMediaScreen(onOpenLabs: () -> Unit, onOpenLesson: (String) -> Unit) {
     var lightIntensity by remember { mutableFloatStateOf(35f) }
     var carbonDioxideIndex by remember { mutableFloatStateOf(55f) }
     var temperatureCelsius by remember { mutableFloatStateOf(25f) }
+    var selectedEnzymeIndex by remember { mutableIntStateOf(0) }
+    var enzymeTemperature by remember { mutableFloatStateOf(37f) }
+    var enzymePh by remember { mutableFloatStateOf(7f) }
+    val enzymeProfile = EnzymeProfile.values()[selectedEnzymeIndex]
+    val enzymeActivity = EnzymeActivitySimulation.evaluate(
+        EnzymeConditions(enzymeProfile, enzymeTemperature.toDouble(), enzymePh.toDouble())
+    )
     val photosynthesis = PhotosynthesisSimulation.evaluate(
         PhotosynthesisConditions(lightIntensity.toDouble(), carbonDioxideIndex.toDouble(), temperatureCelsius.toDouble())
     )
@@ -99,6 +106,39 @@ fun ScienceMediaScreen(onOpenLabs: () -> Unit, onOpenLesson: (String) -> Unit) {
                         Text("Investigation prompt", fontWeight = FontWeight.SemiBold)
                         Text("Keep two conditions fixed. Change the third in steps and record the relative index. When does increasing that factor stop increasing the modelled rate?")
                         Text("Model limitation: this is a simplified limiting-factor demonstration. Its response curves and 30 °C illustrative optimum are not measured values and are not universal for all plant species or conditions.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    }
+                }
+            }
+        }
+        if (selectedSubject == 0 || selectedSubject == 1) {
+            item {
+                Card(modifier = Modifier.fillMaxWidth()) {
+                    Column(Modifier.padding(15.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                        Text("MeritPrep interactive model: enzyme activity", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+                        Text("Choose a digestive enzyme, then investigate how temperature and pH affect its modelled activity.")
+                        Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                            EnzymeProfile.values().forEachIndexed { index, profile ->
+                                FilterChip(
+                                    selected = selectedEnzymeIndex == index,
+                                    onClick = {
+                                        selectedEnzymeIndex = index
+                                        enzymePh = profile.illustrativeOptimumPh.toFloat()
+                                    },
+                                    label = { Text(profile.displayName) }
+                                )
+                            }
+                        }
+                        Text("Temperature: ${enzymeTemperature.toInt()} °C")
+                        Slider(value = enzymeTemperature, onValueChange = { enzymeTemperature = it }, valueRange = 0f..70f)
+                        Text("pH: ${"%.1f".format(enzymePh)}")
+                        Slider(value = enzymePh, onValueChange = { enzymePh = it }, valueRange = 0f..14f, steps = 27)
+                        Text("Illustrative activity index: ${"%.1f".format(enzymeActivity.activityIndexPercent)}%", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+                        Text("Most limiting condition: ${enzymeActivity.limitingCondition}", color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.SemiBold)
+                        Text("Temperature response: ${"%.1f".format(enzymeActivity.temperatureResponsePercent)}% · pH response: ${"%.1f".format(enzymeActivity.pHResponsePercent)}%", style = MaterialTheme.typography.bodySmall)
+                        Text(enzymeActivity.explanation)
+                        Text("Investigation prompt", fontWeight = FontWeight.SemiBold)
+                        Text("Keep pH fixed while changing temperature. Then keep temperature fixed and change pH. Compare the patterns for amylase, pepsin and trypsin.")
+                        Text("Model limitation: the 37 °C temperature optimum and enzyme-specific pH optima are approximate teaching values. Actual enzyme activity depends on the enzyme source, preparation and experimental conditions; this is not a measured kinetic curve.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                     }
                 }
             }
