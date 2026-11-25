@@ -818,9 +818,11 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
         }
 
         val lessonBodyScroll = rememberScrollState()
-        ClassroomPillarNavigation(stage, completedStages, lessonBodyScroll, false, { stage = it })
-        Column(
-            Modifier.weight(1f).fillMaxWidth().verticalScroll(lessonBodyScroll).padding(horizontal = 16.dp, vertical = 14.dp),
+        BoxWithConstraints(Modifier.weight(1f).fillMaxWidth()) {
+            val isTablet = maxWidth >= 720.dp
+            val lessonContent: @Composable (Modifier) -> Unit = { contentModifier ->
+            Column(
+                contentModifier.fillMaxWidth().verticalScroll(lessonBodyScroll).padding(horizontal = 16.dp, vertical = 14.dp),
             verticalArrangement = Arrangement.spacedBy(14.dp)
         ) {
             Card(Modifier.fillMaxWidth(), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.55f))) {
@@ -1018,7 +1020,19 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
                 }
             }
         }
-
+            }
+            if (isTablet) {
+                Row(Modifier.fillMaxSize()) {
+                    ClassroomPillarNavigation(stage, completedStages, lessonBodyScroll, true) { stage = it }
+                    lessonContent(Modifier.weight(1f).fillMaxHeight())
+                }
+            } else {
+                Column(Modifier.fillMaxSize()) {
+                    ClassroomPillarNavigation(stage, completedStages, lessonBodyScroll, false) { stage = it }
+                    lessonContent(Modifier.weight(1f).fillMaxWidth())
+                }
+            }
+        }
         if (stage != LessonStage.QUIZ) {
             OutlinedButton(
                 onClick = { markStageComplete(stage) },
