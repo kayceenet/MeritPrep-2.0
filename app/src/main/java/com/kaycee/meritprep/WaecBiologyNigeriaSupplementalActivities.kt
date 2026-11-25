@@ -604,7 +604,8 @@ private fun WaecBiotechnologyActivity() {
             }
             Text(stages[step].first, style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.primary)
             Text(stages[step].second)
-            Text("Biosafety and quality control: recombinant organisms are handled in approved containment systems; the final medicine must be purified and tested for identity, potency, purity and safety.", style = MaterialTheme.typography.bodySmall)
+            Text("Other applications include recombinant interferons and industrial enzymes. Genetically modified organisms may improve useful traits, but require assessment of gene flow, ecological effects, resistance and food safety. Gene therapy aims to alter genetic material in target cells; somatic and germline interventions raise different ethical issues.", style = MaterialTheme.typography.bodySmall)
+            Text("Biosafety and quality control: recombinant organisms are handled in approved containment systems; the final medicine must be purified and tested for identity, potency, purity and safety. Industrial insulin production may use different expression and processing routes.", style = MaterialTheme.typography.bodySmall)
         }
     }
 }
