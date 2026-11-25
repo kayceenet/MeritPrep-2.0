@@ -15,6 +15,7 @@ class GuidedInvestigationRoutingTest {
             "bio-environment", "bio-interactions", "bio-populations", "bio-soil",
             "bio-variation", "bio-biotechnology", "bio-evolution-evidence",
             "chem-separation", "chem-rates", "chem-solubility", "chem-electrolysis",
+            "chem-acids-bases", "chem-redox", "chem-combination", "chem-energy", "chem-kinetic-gas",
             "chem-nuclear", "chem-industry", "chem-equilibrium", "chem-organic",
             "chem-pollution", "phy-motion", "phy-elasticity", "phy-pressure",
             "phy-liquids-rest", "phy-gas-laws", "phy-kinetic-theory", "phy-waves",
