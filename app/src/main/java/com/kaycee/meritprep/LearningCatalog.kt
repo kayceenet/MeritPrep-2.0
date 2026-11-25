@@ -1,9 +1,13 @@
 package com.kaycee.meritprep
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Bookmark
+import androidx.compose.material.icons.outlined.BookmarkBorder
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -680,6 +684,15 @@ object LearningCatalog {
             ?: PhysicsCourse.topics.firstOrNull { it.id == topicId }
 }
 
+private enum class LessonStage(val label: String, val subtitle: String) {
+    CONCEPT("Learn", "Build the idea from first principles"),
+    VISUALISE("Visualise", "See structures, processes and relationships"),
+    EXPLORE("Explore", "Investigate scientific contexts and resources"),
+    LAB("Virtual lab", "Change variables, record observations and analyse"),
+    NOTES("Notebook", "Write, reflect and consolidate"),
+    PRACTICE("Test yourself", "Check understanding and correct misconceptions")
+}
+
 @Composable
 fun LessonScreen(topicId: String) {
     val topic = LearningCatalog.find(topicId)
@@ -687,14 +700,15 @@ fun LessonScreen(topicId: String) {
     val database = remember(context) { MeritDatabase(context) }
     var completed by remember(topicId) { mutableStateOf(database.isLessonCompleted(topicId)) }
     var bookmarked by remember(topicId) { mutableStateOf(database.isBookmarked(topicId)) }
-    val noteId = "lesson-note-$topicId"
+    val noteId = "lesson-note-" + topicId
     var noteText by remember(topicId) { mutableStateOf(database.getNoteBody(noteId).orEmpty()) }
     var noteSaved by remember(topicId) { mutableStateOf(false) }
     var selected by remember(topicId) { mutableIntStateOf(-1) }
     var checked by remember(topicId) { mutableStateOf(false) }
-
+    var stage by remember(topicId) { mutableStateOf(LessonStage.CONCEPT) }
     var speechReady by remember(topicId) { mutableStateOf(false) }
     var speechEngine by remember(topicId) { mutableStateOf<TextToSpeech?>(null) }
+
     DisposableEffect(topicId, context) {
         val engine = TextToSpeech(context.applicationContext) { status ->
             speechReady = status == TextToSpeech.SUCCESS
@@ -710,176 +724,238 @@ fun LessonScreen(topicId: String) {
     }
 
     if (topic == null) {
-        Column(Modifier.fillMaxSize().padding(24.dp)) {
-            Text("Lesson not available", style = MaterialTheme.typography.headlineSmall)
-            Text("This lesson has not yet been added to the current learning catalogue.")
+        Column(Modifier.fillMaxSize().padding(24.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            Text("Lesson unavailable", style = MaterialTheme.typography.headlineSmall)
+            Text("This topic is not currently in the learning catalogue.")
         }
         return
     }
 
-    Column(
-        Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(20.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
-    ) {
-        Text(topic.subjectCode, style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
-        Text(topic.title, style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
-        Text(topic.introduction, style = MaterialTheme.typography.bodyLarge)
+    val stages = LessonStage.entries
+    val stageIndex = stages.indexOf(stage)
+    val completion = if (completed) 100 else if (checked && selected == topic.correctOption) 85 else 15
 
-        BiologyInteractiveLessonActivity(topicId)
-        ChemistryInteractiveLessonActivity(topicId)
-        ChemistrySupplementalLessonActivity(topicId)
-        if (topicId == "chem-kinetic-gas") ParticleKineticAnimation(temperatureKelvin = 300f)
-        PhysicsInteractiveLessonActivity(topicId)
-        PhysicsSupplementalLessonActivity(topicId)
-        GuidedInvestigationActivity(topicId)
-        WaecBiologyNigeriaSupplementalActivity(topicId)
-        WaecPhysicsSupplementalActivity(topicId)
-        WaecChemistrySupplementalActivity(topicId)
+    Column(Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
+        Column(Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 12.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
+                Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(3.dp)) {
+                    Text(topic.subjectCode + "  •  MERITPREP CLASSROOM", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
+                    Text(topic.title, style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold)
+                }
+                IconButton(onClick = {
+                    if (bookmarked) database.removeBookmark(topic.id) else database.bookmark(topic.id, "lesson")
+                    bookmarked = !bookmarked
+                }) {
+                    Icon(if (bookmarked) androidx.compose.material.icons.Icons.Filled.Bookmark else androidx.compose.material.icons.Icons.Outlined.BookmarkBorder, contentDescription = "Bookmark lesson")
+                }
+            }
+            Text(topic.introduction, style = MaterialTheme.typography.bodyLarge, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+                Text(if (completed) "Lesson mastered" else "Learning progress", style = MaterialTheme.typography.labelMedium)
+                Text(completion.toString() + "%", style = MaterialTheme.typography.labelMedium, fontWeight = FontWeight.Bold)
+            }
+            LinearProgressIndicator(progress = { completion / 100f }, modifier = Modifier.fillMaxWidth())
+        }
 
-        ScienceMediaTopicSection(topicId)
-
-        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            Button(
-                onClick = {
-                    val narration = buildString {
-                        append(topic.title).append(". ")
-                        append(topic.introduction).append(". ")
-                        topic.objectives.forEach { append(it).append(". ") }
-                        topic.sections.forEach { append(it.first).append(". ").append(it.second).append(". ") }
-                        append("Check your understanding. ").append(topic.checkQuestion)
-                    }
-                    speechEngine?.language = Locale.UK
-                    speechEngine?.speak(narration, TextToSpeech.QUEUE_FLUSH, null, "lesson-${topic.id}")
-                },
-                enabled = speechReady,
-                modifier = Modifier.weight(1f)
-            ) { Text(if (speechReady) "Listen to lesson" else "Preparing audio…") }
-            OutlinedButton(onClick = { speechEngine?.stop() }, enabled = speechReady) {
-                Text("Stop")
+        Row(
+            Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()).padding(horizontal = 12.dp),
+            horizontalArrangement = Arrangement.spacedBy(7.dp)
+        ) {
+            stages.forEach { item ->
+                FilterChip(
+                    selected = stage == item,
+                    onClick = { stage = item },
+                    label = { Text(item.label) }
+                )
             }
         }
-        Text(
-            "Audio uses your device's text-to-speech voice and works offline when a compatible voice is installed.",
-            style = MaterialTheme.typography.bodySmall,
-            color = MaterialTheme.colorScheme.onSurfaceVariant
-        )
-        OutlinedButton(
-            onClick = {
-                if (bookmarked) database.removeBookmark(topic.id)
-                else database.bookmark(topic.id, "lesson")
-                bookmarked = !bookmarked
+
+        Column(
+            Modifier.weight(1f).fillMaxWidth().verticalScroll(rememberScrollState()).padding(horizontal = 16.dp, vertical = 14.dp),
+            verticalArrangement = Arrangement.spacedBy(14.dp)
+        ) {
+            Card(Modifier.fillMaxWidth(), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.55f))) {
+                Column(Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                    Text(stage.label.uppercase(), style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
+                    Text(stage.subtitle, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
+                    Text("Part " + (stageIndex + 1) + " of " + stages.size, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                }
             }
-        ) { Text(if (bookmarked) "Saved to bookmarks" else "Save this lesson") }
-        when (topic.id) {
+
+            when (stage) {
+                LessonStage.CONCEPT -> {
+                    Card(Modifier.fillMaxWidth()) {
+                        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(9.dp)) {
+                            Text("What you will learn", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+                            topic.objectives.forEachIndexed { index, objective ->
+                                Row(horizontalArrangement = Arrangement.spacedBy(9.dp), verticalAlignment = androidx.compose.ui.Alignment.Top) {
+                                    Surface(color = MaterialTheme.colorScheme.secondaryContainer, shape = MaterialTheme.shapes.small) {
+                                        Text((index + 1).toString(), Modifier.padding(horizontal = 8.dp, vertical = 4.dp), fontWeight = FontWeight.Bold)
+                                    }
+                                    Text(objective, Modifier.weight(1f), style = MaterialTheme.typography.bodyMedium)
+                                }
+                            }
+                        }
+                    }
+                    topic.sections.forEachIndexed { index, section ->
+                        Card(Modifier.fillMaxWidth()) {
+                            Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                                Text((index + 1).toString().padStart(2, '0'), style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
+                                Text(section.first, style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+                                ScientificText(section.second, style = MaterialTheme.typography.bodyLarge)
+                            }
+                        }
+                    }
+                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                        Button(
+                            onClick = {
+                                val narration = buildString {
+                                    append(topic.title).append(". ")
+                                    append(topic.introduction).append(". ")
+                                    topic.objectives.forEach { append(it).append(". ") }
+                                    topic.sections.forEach { append(it.first).append(". ").append(it.second).append(". ") }
+                                }
+                                speechEngine?.language = Locale.UK
+                                speechEngine?.speak(narration, TextToSpeech.QUEUE_FLUSH, null, "lesson-" + topic.id)
+                            },
+                            enabled = speechReady,
+                            modifier = Modifier.weight(1f)
+                        ) { Text(if (speechReady) "Listen to lesson" else "Preparing audio…") }
+                        OutlinedButton(onClick = { speechEngine?.stop() }, enabled = speechReady) { Text("Stop") }
+                    }
+                    Text("Audio uses your device's text-to-speech voice. Offline playback depends on an installed voice.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                }
+
+                LessonStage.VISUALISE -> TopicVisualisationGallery(topicId)
+
+                LessonStage.EXPLORE -> {
+                    Text("Use these resources to extend the lesson. External material is optional; the core lesson remains available offline.", style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    ScienceMediaTopicSection(topicId)
+                }
+
+                LessonStage.LAB -> {
+                    Text("Predict first. Change one variable at a time. Record observations, inspect the graph and evaluate the model.", style = MaterialTheme.typography.bodyMedium)
+                    BiologyInteractiveLessonActivity(topicId)
+                    ChemistryInteractiveLessonActivity(topicId)
+                    ChemistrySupplementalLessonActivity(topicId)
+                    PhysicsInteractiveLessonActivity(topicId)
+                    PhysicsSupplementalLessonActivity(topicId)
+                    GuidedInvestigationActivity(topicId)
+                    WaecBiologyNigeriaSupplementalActivity(topicId)
+                    WaecPhysicsSupplementalActivity(topicId)
+                    WaecChemistrySupplementalActivity(topicId)
+                }
+
+                LessonStage.NOTES -> {
+                    Card(Modifier.fillMaxWidth()) {
+                        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                            Text("Learning notebook", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+                            Text("Write a definition in your own words, explain a diagram, record a worked example or note a question you still have.")
+                            OutlinedTextField(
+                                value = noteText,
+                                onValueChange = { noteText = it; noteSaved = false },
+                                modifier = Modifier.fillMaxWidth(),
+                                minLines = 6,
+                                maxLines = 14,
+                                label = { Text("Your notes for " + topic.title) }
+                            )
+                            Button(onClick = {
+                                database.saveNote(noteId, topic.id, topic.title + " notes", noteText)
+                                noteSaved = true
+                            }, modifier = Modifier.fillMaxWidth()) { Text("Save notes on this device") }
+                            if (noteSaved) Text("Notes saved locally.", color = MaterialTheme.colorScheme.primary, style = MaterialTheme.typography.bodySmall)
+                        }
+                    }
+                    Card(Modifier.fillMaxWidth()) {
+                        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                            Text("Reflection prompts", fontWeight = FontWeight.Bold)
+                            Text("• What is the central scientific principle?")
+                            Text("• Which evidence or observation supports it?")
+                            Text("• What misconception can you now correct?")
+                            Text("• How would you explain this topic to a beginner?")
+                        }
+                    }
+                }
+
+                LessonStage.PRACTICE -> {
+                    Card(Modifier.fillMaxWidth()) {
+                        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                            Text("Check your understanding", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+                            Text(topic.checkQuestion, style = MaterialTheme.typography.titleMedium)
+                            topic.checkOptions.forEachIndexed { index, option ->
+                                OutlinedButton(
+                                    onClick = { if (!checked) selected = index },
+                                    enabled = !checked,
+                                    modifier = Modifier.fillMaxWidth(),
+                                    colors = ButtonDefaults.outlinedButtonColors(containerColor = if (selected == index) MaterialTheme.colorScheme.secondaryContainer else MaterialTheme.colorScheme.surface)
+                                ) { Text(('A' + index) + ".  " + option, modifier = Modifier.fillMaxWidth()) }
+                            }
+                            if (checked) {
+                                val correct = selected == topic.correctOption
+                                Text(if (correct) "Correct — concept understood" else "Not quite. Review the explanation and try again.", color = if (correct) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.error, fontWeight = FontWeight.Bold)
+                                ScientificText(topic.explanation, style = MaterialTheme.typography.bodyMedium)
+                                OutlinedButton(onClick = { selected = -1; checked = false }, modifier = Modifier.fillMaxWidth()) { Text("Try again") }
+                            } else {
+                                Button(onClick = { checked = true }, enabled = selected >= 0, modifier = Modifier.fillMaxWidth()) { Text("Check answer") }
+                            }
+                        }
+                    }
+                    Button(
+                        onClick = { database.markLessonCompleted(topic.id); completed = true },
+                        enabled = !topic.isSyllabusOutline && !completed && checked && selected == topic.correctOption,
+                        modifier = Modifier.fillMaxWidth()
+                    ) { Text(if (topic.isSyllabusOutline) "Full lesson in development" else if (completed) "Lesson completed" else "Complete lesson") }
+                    if (!completed) Text("A correct answer is required to complete this lesson. You can retry after reviewing the explanation.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    Text(
+                        when {
+                            topic.isSyllabusOutline -> "Academic status: syllabus outline only. It cannot be marked as a completed lesson."
+                            topic.subjectCode == "BIO" -> "Academic status: Biology teaching draft mapped to its syllabus topic. Independent subject review is still required."
+                            topic.subjectCode == "PHY" -> "Academic status: Physics teaching draft mapped to its syllabus topic. Independent subject review is still required."
+                            else -> "Academic status: teaching draft. Full syllabus mapping and independent subject review are still required."
+                        },
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
+            }
+        }
+
+        Row(Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp), horizontalArrangement = Arrangement.SpaceBetween) {
+            OutlinedButton(onClick = { stage = stages[(stageIndex - 1).coerceAtLeast(0)] }, enabled = stageIndex > 0) { Text("Previous") }
+            Button(onClick = { stage = stages[(stageIndex + 1).coerceAtMost(stages.lastIndex)] }, enabled = stageIndex < stages.lastIndex) { Text(if (stage == LessonStage.PRACTICE) "End of lesson" else "Continue") }
+        }
+    }
+}
+
+@Composable
+private fun TopicVisualisationGallery(topicId: String) {
+    Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+        when (topicId) {
             "bio-adaptation" -> AdaptationTypesCard()
             "bio-cell" -> CellDiagramCard()
             "bio-nutrition" -> PhotosynthesisFlowCard()
             "bio-respiration" -> RespirationComparisonCard()
             "bio-interactions" -> FoodChainDiagramCard()
-            "bio-populations" -> {
-                BiologyPopulationSamplingCard()
-                EcologicalSuccessionCard()
-            }
+            "bio-populations" -> { BiologyPopulationSamplingCard(); EcologicalSuccessionCard() }
             "bio-heredity" -> PunnettSquareCard()
-            "bio-transport" -> {
-                PlantTransportCard()
-                DoubleCirculationCard()
-            }
+            "bio-transport" -> { PlantTransportCard(); DoubleCirculationCard() }
             "bio-excretion" -> NephronFlowCard()
             "bio-soil" -> SoilWaterInvestigationCard()
             "bio-reproduction" -> FlowerReproductionCard()
             "bio-evolution-theory" -> NaturalSelectionCard()
+            "bio-growth" -> { CellDivisionLessonCard(); CellDivisionKnowledgeCheckCard() }
         }
-        Card {
-            Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                Text("By the end of this lesson, you should be able to", fontWeight = FontWeight.SemiBold)
-                topic.objectives.forEach { objective -> Text("• $objective", style = MaterialTheme.typography.bodyMedium) }
-            }
-        }
-        topic.sections.forEachIndexed { index, section ->
-            Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                Text("${index + 1}. ${section.first}", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.SemiBold)
-                Text(section.second, style = MaterialTheme.typography.bodyLarge)
-            }
-        }
-        if (topic.id == "bio-growth") {
-            CellDivisionLessonCard()
-            CellDivisionKnowledgeCheckCard()
+        when (topicId) {
+            "phy-projectile", "phy-motion" -> ProjectileMotionAnimation(speed = 25f, angleDegrees = 45f)
+            "phy-gravitation", "phy-satellites" -> SatelliteOrbitAnimation()
+            "chem-kinetic-gas", "chem-gas-laws" -> ParticleKineticAnimation(temperatureKelvin = 300f)
         }
         Card(Modifier.fillMaxWidth()) {
-            Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                Text("My lesson notes", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
-                Text("Write your own summary, questions or examples. Notes are saved locally on this device.")
-                OutlinedTextField(
-                    value = noteText,
-                    onValueChange = { noteText = it; noteSaved = false },
-                    modifier = Modifier.fillMaxWidth(),
-                    minLines = 3,
-                    maxLines = 8,
-                    label = { Text("Your notes for this topic") }
-                )
-                Button(
-                    onClick = {
-                        database.saveNote(noteId, topic.id, "${topic.title} notes", noteText)
-                        noteSaved = true
-                    },
-                    modifier = Modifier.fillMaxWidth()
-                ) { Text("Save lesson notes") }
-                if (noteSaved) Text("Notes saved on this device.", color = MaterialTheme.colorScheme.primary, style = MaterialTheme.typography.bodySmall)
+            Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                Text("Read the visual scientifically", fontWeight = FontWeight.Bold)
+                Text("Identify each labelled part, describe what changes, explain why it changes, and connect the visual to the governing principle and its units.")
+                Text("Schematic drawings are not to scale unless explicitly stated.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
         }
-        HorizontalDivider()
-        Text("Check your understanding", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
-        Text(topic.checkQuestion, style = MaterialTheme.typography.titleMedium)
-        topic.checkOptions.forEachIndexed { index, option ->
-            OutlinedButton(
-                onClick = { if (!checked) selected = index },
-                enabled = !checked,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text((if (selected == index) "✓  " else "") + option)
-            }
-        }
-        if (checked) {
-            val correct = selected == topic.correctOption
-            Text(
-                if (correct) "Correct" else "Review this concept",
-                color = if (correct) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.error,
-                fontWeight = FontWeight.Bold
-            )
-            Text(topic.explanation)
-            OutlinedButton(onClick = { selected = -1; checked = false }) { Text("Try again") }
-        } else {
-            Button(onClick = { checked = true }, enabled = selected >= 0, modifier = Modifier.fillMaxWidth()) {
-                Text("Check answer")
-            }
-        }
-        Button(
-            onClick = {
-                database.markLessonCompleted(topic.id)
-                completed = true
-            },
-            enabled = !topic.isSyllabusOutline && !completed && checked && selected == topic.correctOption,
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Text(if (topic.isSyllabusOutline) "Lesson in development" else if (completed) "Lesson completed" else "Complete lesson")
-        }
-        if (!completed) {
-            Text(
-                "To complete this lesson, answer the understanding check correctly. You can retry after reading the explanation.",
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
-            )
-        }
-        Text(
-            when {
-                topic.isSyllabusOutline -> "Academic status: syllabus outline only. Full lesson development is in progress; this outline cannot be marked as a completed lesson."
-                topic.subjectCode == "BIO" -> "Academic status: beginner-focused Biology teaching draft mapped to its syllabus topic. Independent subject review is still required before formal approval."
-                topic.subjectCode == "PHY" -> "Academic status: beginner-focused Physics teaching draft mapped to the JAMB IBASS topic. Independent Physics-teacher review is still required before formal approval."
-                else -> "Academic status: starter teaching content. Full syllabus mapping and independent subject review are still required."
-            },
-            style = MaterialTheme.typography.bodySmall,
-            color = MaterialTheme.colorScheme.onSurfaceVariant
-        )
     }
 }
