@@ -18,7 +18,8 @@ private data class InvestigationProfile(
     val title: String, val question: String, val apparatus: String,
     val independent: String, val dependent: String, val controls: String,
     val xUnit: String, val yUnit: String, val safety: String,
-    val method: List<String>, val limitation: String, val response: (Float) -> Float
+    val method: List<String>, val limitation: String, val response: (Float) -> Float,
+    val minX: Float = 0f, val maxX: Float = 100f, val initialX: Float = 25f
 )
 
 private object InvestigationProfiles {
@@ -26,11 +27,21 @@ private object InvestigationProfiles {
         title: String, question: String, apparatus: String, independent: String,
         dependent: String, controls: String, xUnit: String, yUnit: String,
         safety: String, method: List<String>, limitation: String,
-        response: (Float) -> Float
+        response: (Float) -> Float, minX: Float = 0f, maxX: Float = 100f, initialX: Float = 25f
     ) = InvestigationProfile(title, question, apparatus, independent, dependent, controls,
-        xUnit, yUnit, safety, method, limitation, response)
+        xUnit, yUnit, safety, method, limitation, response, minX, maxX, initialX)
 
     fun find(id: String): InvestigationProfile? = when (id) {
+        "bio-living" -> profile("Characteristics of living things", "How can observations be used to distinguish living from non-living material?",
+            "Safe specimen images, hand lens and observation checklist", "Number of life-process indicators checked", "Evidence-based classification score", "Same observation criteria and sample set", "indicators", "score",
+            "Do not handle unknown organisms; use approved images or safe classroom specimens.",
+            listOf("Observe movement, nutrition, respiration, growth and response evidence", "Look for reproduction and excretion evidence where observable", "Record evidence rather than relying on appearance", "Explain why one indicator alone may be insufficient"),
+            "Observation framework, not a diagnostic test for life in every biological edge case.", { x -> 0.7f * x })
+        "bio-evolution-evidence" -> profile("Comparative anatomy and evolutionary evidence", "How can homologous structures support an inference about common ancestry?",
+            "Labelled forelimb diagrams, measuring grid and comparison table", "Number of structural features compared", "Shared structural pattern score", "Same anatomical landmarks and scoring rule", "features", "score",
+            "Use educational diagrams; no specimen dissection is required.",
+            listOf("Identify corresponding bones in each forelimb", "Compare position and relative arrangement", "Separate structural homology from superficial similarity", "State what the evidence supports and what it cannot prove alone"),
+            "A scoring aid for comparing structures; ancestry inference uses multiple independent evidence sources.", { x -> 0.8f * x })
         "bio-cell" -> profile("Microscopy and magnification", "How does magnification affect the apparent size of a specimen?",
             "Prepared slide, microscope, calibrated eyepiece scale and stage micrometer", "Magnification", "Apparent image size", "Same specimen, objective and optical setup", "×", "mm",
             "Handle slides by their edges; begin with low power and use a coverslip.",
@@ -160,7 +171,7 @@ private object InvestigationProfiles {
             "Gas syringe, pressure control, thermometer and water bath", "Absolute temperature", "Gas volume", "Gas amount, pressure and apparatus dead volume", "K", "cm³",
             "Use low pressure only; never heat a sealed rigid vessel.",
             listOf("Measure a fixed amount of gas in a movable syringe", "Maintain approximately constant pressure", "Change temperature using a water bath", "Record volume after thermal equilibrium"),
-            "Illustrative ideal-gas proportionality at constant pressure.", { x -> 0.08f * x })
+            "Illustrative ideal-gas proportionality at constant pressure.", { x -> 0.08f * x }, 100f, 800f, 300f)
         "phy-waves", "phy-sound-propagation", "phy-sound-characteristics" -> profile("Wave frequency and wavelength", "How does wavelength change with frequency in a fixed medium?",
             "Ripple tank or signal generator, speaker, oscilloscope and ruler", "Frequency", "Wavelength", "Medium and wave speed", "Hz", "m",
             "Keep water away from electrical equipment and use safe sound levels.",
@@ -175,7 +186,7 @@ private object InvestigationProfiles {
             "Radioactive-decay simulation, timer and data table", "Elapsed time", "Expected parent nuclei remaining", "Initial sample size and isotope", "half-lives", "% remaining",
             "This is a computer model; never obtain or handle radioactive material for this activity.",
             listOf("Set an initial population", "Choose a half-life", "Advance time in equal intervals", "Record the expected fraction remaining and plot the decay curve"),
-            "Statistical expectation for a large population; individual decay events are random.", { x -> 100f * kotlin.math.exp(-0.693147f * x / 20f) })
+            "Statistical expectation for a large population; individual decay events are random.", { x -> 100f * kotlin.math.exp(-0.693147f * x) })
         "chem-industry", "chem-equilibrium" -> profile("Equilibrium and industrial conditions", "How do pressure and temperature changes affect a gaseous equilibrium?",
             "Equilibrium model, temperature control and pressure display", "Pressure setting", "Qualitative ammonia-favouring index", "Reaction equation, gas composition and catalyst", "relative", "index",
             "Concept model only; no high-pressure equipment or reactive gases are used.",
@@ -220,7 +231,7 @@ private object InvestigationProfiles {
             "Low-voltage signal generator and oscilloscope", "Frequency", "Period", "Waveform and measurement timebase", "Hz", "ms",
             "Use only low-voltage signal sources; never connect an oscilloscope to mains.",
             listOf("Set a sinusoidal signal at low amplitude", "Display several cycles", "Measure one or more cycle durations", "Calculate T = 1/f and compare with the display"),
-            "Ideal sinusoidal signal model; distortion and instrument resolution are ignored.", { x -> 1000f / max(x, 1f) })
+            "Ideal sinusoidal signal model; distortion and instrument resolution are ignored.", { x -> 1000f / x.coerceAtLeast(1f) }, 1f, 1000f, 50f)
         "phy-modern" -> profile("Photon energy and frequency", "How does photon energy depend on electromagnetic frequency?",
             "Frequency data, calculator and electromagnetic spectrum chart", "Frequency", "Photon energy", "Planck constant and unit conversion", "10¹⁴ Hz", "10⁻¹⁹ J",
             "No ionising-radiation source is used; this is a calculation activity.",
@@ -234,7 +245,7 @@ private object InvestigationProfiles {
 fun GuidedInvestigationActivity(topicId: String) {
     val profile = remember(topicId) { InvestigationProfiles.find(topicId) } ?: return
     var stage by remember(topicId) { mutableIntStateOf(0) }
-    var x by remember(topicId) { mutableFloatStateOf(25f) }
+    var x by remember(topicId) { mutableFloatStateOf(profile.initialX) }
     var prediction by remember(topicId) { mutableStateOf("") }
     val readings = remember(topicId) { mutableStateListOf<Pair<Float, Float>>() }
     val completedSteps = remember(topicId) { mutableStateListOf<Int>() }
@@ -272,7 +283,7 @@ fun GuidedInvestigationActivity(topicId: String) {
                 }
                 2 -> {
                     Text(profile.independent + ": " + "%.1f".format(x) + " " + profile.xUnit)
-                    Slider(x, { x = it }, valueRange = 0f..100f)
+                    Slider(x, { x = it }, valueRange = profile.minX..profile.maxX)
                     Text(profile.dependent + ": " + "%.2f".format(y) + " " + profile.yUnit, style = MaterialTheme.typography.headlineSmall)
                     Text("Select a setting and record the model output. Repeat at different settings.")
                     Button(onClick = { readings.add(x to y) }, modifier = Modifier.fillMaxWidth()) { Text("Record observation") }
