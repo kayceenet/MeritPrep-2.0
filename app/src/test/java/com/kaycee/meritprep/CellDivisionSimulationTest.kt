@@ -30,7 +30,7 @@ class CellDivisionSimulationTest {
     @Test fun meiosisSeparatesHomologuesBeforeSisterChromatids() {
         val stages = CellDivisionSimulation.lesson(CellDivisionType.MEIOSIS, 6).stages
         assertTrue(stages[4].keyEvent.contains("Homologous chromosomes separate"))
-        assertTrue(stages[7].keyEvent.contains("sister chromatids separate"))
+        assertTrue(stages[7].description.contains("sister chromatids separate"))
         assertEquals(3, stages[5].chromosomeCountPerCell)
         assertEquals(6, stages[5].chromatidCountPerCell)
     }
@@ -38,7 +38,7 @@ class CellDivisionSimulationTest {
     @Test fun crossingOverOccursInProphaseOneAndReplicationOccursOnlyOnce() {
         val stages = CellDivisionSimulation.lesson(CellDivisionType.MEIOSIS, 6).stages
         assertTrue(stages[2].keyEvent.contains("crossing over"))
-        assertTrue(stages[5].description.contains("No DNA replication"))
+        assertTrue(stages[5].keyEvent.contains("No DNA replication"))
     }
 
     @Test fun rejectsOddOrNonPositiveDiploidNumbers() {
