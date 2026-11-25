@@ -82,3 +82,8 @@ Display equations support vertically stacked fractions in addition to inline sup
 The guided investigation briefing now includes original, labelled schematic layouts for common Biology, Chemistry and Physics apparatus: microscopes, plant/light arrangements, quadrats, titration glassware, filtration, electrolysis, springs, dynamics trolleys, liquid-pressure columns, circuits, ripple tanks and gas syringes. These are explicitly marked as schematic and not to scale; the written method and safety controls remain authoritative.
 
 The guided lab notebook now saves the learner's selected stage, prediction, method checklist, current model setting and recorded observations to the app's local notes database. Learners can explicitly save changes and resume a topic investigation later. This is local persistence, not cloud synchronisation.
+
+
+## Home and subject discovery
+
+The home screen is now a learning dashboard rather than a list of navigation buttons. It groups the main learning actions, gives a direct path into the virtual labs and presents subjects as a clear next step. Subject hubs now show topic and objective counts, group the available exam/practice tools, and display the lesson sequence as distinct topic cards. This follows the reference app's dashboard/catalog structure without importing its lesson prose or course content.
