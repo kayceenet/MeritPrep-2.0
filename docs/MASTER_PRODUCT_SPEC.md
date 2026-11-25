@@ -188,6 +188,14 @@ These are alpha implementations. Biology content is pending independent academic
 - Design and implement the teacher/admin CMS and authenticated sync service.
 - Complete privacy, child-safety, security, backup and operational reviews before production release.
 
+## Science animation, simulation and virtual-lab standard
+
+Scientific media is a core requirement across Biology, Chemistry and Physics. Lessons must use purposeful scientific animations, GIF sequences, interactive diagrams, variable-driven simulations, virtual labs and selected real-world microscopy/video wherever these improve understanding or practical reasoning. Learners should predict, manipulate, observe, record, analyse, evaluate and reflect rather than passively watch.
+
+MeritPrep must systematically discover and assess reputable free resources, including LabXchange, HHMI BioInteractive, PhET and university/public-science collections. Free access does not automatically grant permission to embed, download, modify or redistribute. Every asset requires individual provenance and rights review. PhET standard simulations are CC BY-NC 4.0; commercial or monetised distribution requires separate licensing. Where reuse is not permitted, link to the official resource with a MeritPrep activity guide, or build an original model. Never scrape, rehost or remove attribution from third-party media.
+
+Every essential lesson must remain understandable offline. Provide an approved local animation/key-frame sequence, diagram or text fallback; load optional media on demand and keep assets lightweight for mobile data constraints. Virtual labs must include prediction, exploration, observation, recording, analysis, graph interpretation and evaluation. Original simulation logic must be separated from UI and unit-tested. See [Science Media Integration Standard](SCIENCE_MEDIA_INTEGRATION_STANDARD.md) for the resource catalogue, licensing, accessibility, technical and acceptance requirements.
+
 ## 11. Non-negotiable quality rules
 
 - Never sacrifice scientific accuracy for simplified wording.
