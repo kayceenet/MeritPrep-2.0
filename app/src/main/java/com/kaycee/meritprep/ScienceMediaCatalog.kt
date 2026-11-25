@@ -394,7 +394,7 @@ object ScienceMediaCatalog {
             beforeYouStart = "Identify the principal focus and predict how the image changes when an object moves relative to a converging lens.",
             afterYouExplore = "Describe image position, orientation and size for the object positions you tested.",
             offlineAlternative = "Use MeritPrep's refraction lesson and the local ray-diagram practical."
-        )
+        ),
         ScienceMediaResource(
             id = "bio-neuron-phet",
             title = "Neuron",
