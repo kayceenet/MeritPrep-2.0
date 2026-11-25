@@ -40,7 +40,7 @@ fun CellDivisionDiagram(
         }
         val separatingSisters = (mitosis && stageIndex == 4) || (!mitosis && stageIndex == 7)
         val separatingHomologues = !mitosis && stageIndex == 4
-        val chromosomeNumber = if (mitosis) 4 else 2
+        val chromosomeNumber = if (mitosis || stageIndex <= 4) 4 else 2
         val daughterCells = cellCount
 
         repeat(daughterCells) { cellIndex ->
@@ -58,7 +58,7 @@ fun CellDivisionDiagram(
             val chromosomeScale = if (compact) 0.45f else 0.72f
             val chromHeight = cellHeight * 0.22f * chromosomeScale
             val chromWidth = cellWidth * 0.11f * chromosomeScale
-            val perPole = if (separatingSisters) chromosomeNumber else chromosomeNumber / 2
+            val perPole = chromosomeNumber
 
             if (separatingSisters || separatingHomologues) {
                 repeat(perPole) { i ->
