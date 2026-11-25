@@ -43,13 +43,7 @@ private fun MeritPrepApp() {
     val currentEntry = nav.currentBackStackEntryAsState().value
     var navigationRevision by remember { mutableIntStateOf(0) }
     LaunchedEffect(currentEntry) { navigationRevision++ }
-    MaterialTheme(
-        colorScheme = lightColorScheme(
-            primary = androidx.compose.ui.graphics.Color(0xFF155EEF),
-            secondary = androidx.compose.ui.graphics.Color(0xFF0F766E),
-            background = androidx.compose.ui.graphics.Color(0xFFF7F8FA)
-        )
-    ) {
+    MeritPrepTheme {
         Scaffold(
             bottomBar = {
                 NavigationBar {
@@ -111,42 +105,89 @@ private fun MeritPrepApp() {
 
 @Composable
 private fun HomeScreen(nav: NavHostController) {
-    LazyColumn(Modifier.fillMaxSize().padding(20.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
+    LazyColumn(
+        Modifier.fillMaxSize(),
+        contentPadding = PaddingValues(horizontal = 18.dp, vertical = 18.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
         item {
-            Text("MERITPREP", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
-            Text("Your learning journey starts here.", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
-            Text("Prepare with understanding. Practise with purpose. Improve with evidence.", color = MaterialTheme.colorScheme.onSurfaceVariant)
+            Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                Text("MERITPREP  /  LEARNING STUDIO", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
+                Text("Learn with clarity.\nPrepare with confidence.", style = MaterialTheme.typography.headlineLarge, fontWeight = FontWeight.Bold)
+                Text("Build understanding from the foundations, explore scientific ideas and practise for your examinations.", style = MaterialTheme.typography.bodyLarge, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            }
         }
         item {
-            Card(colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer)) {
-                Column(Modifier.padding(18.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                    Text("Your study workspace", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
-                    Text("Continue learning, review difficult topics and practise for your examinations.")
-                    Button(onClick = { nav.navigate("learn") }) { Text("Explore subjects") }
-                    OutlinedButton(onClick = { nav.navigate("review") }) { Text("Start Biology revision") }
-                    OutlinedButton(onClick = { nav.navigate("mistakes") }) { Text("Review mistakes") }
-                    OutlinedButton(onClick = { nav.navigate("study-plan") }) { Text("Build a Biology study plan") }
-                    OutlinedButton(onClick = { nav.navigate("cbt") }) { Text("Start timed Biology mock") }
-                    OutlinedButton(onClick = { nav.navigate("placement") }) { Text("Take Biology placement check") }
-                    OutlinedButton(onClick = { nav.navigate("glossary") }) { Text("Search Biology glossary") }
-                    OutlinedButton(onClick = { nav.navigate("bookmarks") }) { Text("Saved lessons") }
-                    OutlinedButton(onClick = { nav.navigate("calculators") }) { Text("Open scientific calculators") }
+            Card(
+                Modifier.fillMaxWidth(),
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer)
+            ) {
+                Column(Modifier.padding(18.dp), verticalArrangement = Arrangement.spacedBy(9.dp)) {
+                    Text("Your learning workspace", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onPrimaryContainer)
+                    Text("Continue with a subject, enter a virtual laboratory or test what you already know.", color = MaterialTheme.colorScheme.onPrimaryContainer)
+                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                        Button(onClick = { nav.navigate("learn") }, modifier = Modifier.weight(1f)) { Text("Explore lessons") }
+                        OutlinedButton(onClick = { nav.navigate("labs") }, modifier = Modifier.weight(1f)) { Text("Open labs") }
+                    }
                 }
             }
         }
-        item { Text("Study areas", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold) }
-        items(subjects) { subject ->
-            SubjectCard(subject) { nav.navigate("subject/${subject.code}") }
+        item { Text("Quick access", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold) }
+        item {
+            Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                HomeQuickAction("Practice", "JAMB and WAEC", "TEST") { nav.navigate("practice") }
+                HomeQuickAction("Study plan", "Organise your work", "PLAN") { nav.navigate("study-plan") }
+            }
+        }
+        item {
+            Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                HomeQuickAction("Revision", "Review key ideas", "REVISE") { nav.navigate("review") }
+                HomeQuickAction("Saved lessons", "Return to bookmarks", "SAVED") { nav.navigate("bookmarks") }
+            }
+        }
+        item { Text("Choose a subject", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold) }
+        items(subjects) { subject -> SubjectCard(subject) { nav.navigate("subject/${subject.code}") } }
+        item {
+            Card(colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)) {
+                Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                    Text("Need a starting point?", fontWeight = FontWeight.Bold)
+                    Text("Take a placement check to identify topics that need attention.")
+                    OutlinedButton(onClick = { nav.navigate("placement") }, modifier = Modifier.fillMaxWidth()) { Text("Start placement check") }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun HomeQuickAction(title: String, subtitle: String, tag: String, onClick: () -> Unit) {
+    Card(
+        onClick = onClick,
+        modifier = Modifier.weight(1f),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+        border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant)
+    ) {
+        Column(Modifier.fillMaxWidth().padding(14.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+            Surface(color = MaterialTheme.colorScheme.secondaryContainer, shape = MaterialTheme.shapes.small) {
+                Text(tag, Modifier.padding(horizontal = 8.dp, vertical = 5.dp), style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSecondaryContainer, fontWeight = FontWeight.Bold)
+            }
+            Text(title, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+            Text(subtitle, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
         }
     }
 }
 
 @Composable
 private fun LearnScreen(nav: NavHostController) {
-    LazyColumn(Modifier.fillMaxSize().padding(20.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+    LazyColumn(
+        Modifier.fillMaxSize(),
+        contentPadding = PaddingValues(18.dp),
+        verticalArrangement = Arrangement.spacedBy(12.dp)
+    ) {
         item {
-            Text("Learn", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
-            Text("Choose a subject to explore its topics and lessons.")
+            Text("LEARNING LIBRARY", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
+            Text("Choose your subject", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
+            Text("Open a course to follow its topics and lessons.", color = MaterialTheme.colorScheme.onSurfaceVariant)
         }
         items(subjects) { subject -> SubjectCard(subject) { nav.navigate("subject/${subject.code}") } }
     }
@@ -154,17 +195,22 @@ private fun LearnScreen(nav: NavHostController) {
 
 @Composable
 private fun SubjectCard(subject: Subject, onClick: () -> Unit) {
-    Card(onClick = onClick, modifier = Modifier.fillMaxWidth()) {
+    Card(
+        onClick = onClick,
+        modifier = Modifier.fillMaxWidth(),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+        border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant)
+    ) {
         Row(Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
             Surface(color = MaterialTheme.colorScheme.secondaryContainer, shape = MaterialTheme.shapes.large) {
-                Text(subject.code, Modifier.padding(12.dp), fontWeight = FontWeight.Bold)
+                Text(subject.code, Modifier.padding(horizontal = 12.dp, vertical = 11.dp), fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onSecondaryContainer)
             }
             Spacer(Modifier.width(14.dp))
-            Column(Modifier.weight(1f)) {
-                Text(subject.name, fontWeight = FontWeight.SemiBold)
+            Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(3.dp)) {
+                Text(subject.name, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
                 Text(subject.description, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
-            Icon(Icons.Default.ChevronRight, contentDescription = "Open subject")
+            Icon(Icons.Default.ChevronRight, contentDescription = "Open subject", tint = MaterialTheme.colorScheme.primary)
         }
     }
 }
