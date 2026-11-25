@@ -10,6 +10,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.platform.LocalContext
+import org.json.JSONArray
+import org.json.JSONObject
 import androidx.compose.ui.unit.dp
 import kotlin.math.abs
 import kotlin.math.max
@@ -336,11 +339,50 @@ internal object InvestigationProfiles {
 @Composable
 fun GuidedInvestigationActivity(topicId: String) {
     val profile = remember(topicId) { InvestigationProfiles.find(topicId) } ?: return
-    var stage by remember(topicId) { mutableIntStateOf(0) }
-    var x by remember(topicId) { mutableFloatStateOf(profile.initialX) }
-    var prediction by remember(topicId) { mutableStateOf("") }
-    val readings = remember(topicId) { mutableStateListOf<Pair<Float, Float>>() }
-    val completedSteps = remember(topicId) { mutableStateListOf<Int>() }
+    val context = LocalContext.current
+    val database = remember(context) { MeritDatabase(context) }
+    val noteId = "guided-investigation-" + topicId
+    val restored = remember(topicId) {
+        runCatching { JSONObject(database.getNoteBody(noteId) ?: "{}") }.getOrElse { JSONObject() }
+    }
+    var stage by remember(topicId) { mutableIntStateOf(restored.optInt("stage", 0).coerceIn(0, 4)) }
+    var x by remember(topicId) { mutableFloatStateOf(restored.optDouble("x", profile.initialX.toDouble()).toFloat().coerceIn(profile.minX, profile.maxX)) }
+    var prediction by remember(topicId) { mutableStateOf(restored.optString("prediction", "")) }
+    var saved by remember(topicId) { mutableStateOf(true) }
+    val readings = remember(topicId) {
+        mutableStateListOf<Pair<Float, Float>>().apply {
+            val rows = restored.optJSONArray("readings")
+            if (rows != null) for (index in 0 until rows.length()) {
+                val row = rows.optJSONObject(index) ?: continue
+                val readingX = row.optDouble("x", Double.NaN).toFloat()
+                val readingY = row.optDouble("y", Double.NaN).toFloat()
+                if (readingX.isFinite() && readingY.isFinite()) add(readingX to readingY)
+            }
+        }
+    }
+    val completedSteps = remember(topicId) {
+        mutableStateListOf<Int>().apply {
+            val steps = restored.optJSONArray("completedSteps")
+            if (steps != null) for (index in 0 until steps.length()) {
+                val step = steps.optInt(index, -1)
+                if (step in profile.method.indices) add(step)
+            }
+        }
+    }
+    fun saveLabRecord() {
+        val rows = JSONArray()
+        readings.forEach { reading -> rows.put(JSONObject().put("x", reading.first).put("y", reading.second)) }
+        val steps = JSONArray()
+        completedSteps.forEach { steps.put(it) }
+        val body = JSONObject()
+            .put("stage", stage)
+            .put("x", x.toDouble())
+            .put("prediction", prediction)
+            .put("readings", rows)
+            .put("completedSteps", steps)
+        database.saveNote(noteId, topicId, profile.title + " investigation", body.toString())
+        saved = true
+    }
     val y = profile.response(x).coerceAtLeast(0f)
     val stages = listOf("Brief", "Plan", "Run", "Analyse", "Evaluate")
 
@@ -349,7 +391,7 @@ fun GuidedInvestigationActivity(topicId: String) {
             Text("Guided virtual investigation", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
             Text(profile.title, style = MaterialTheme.typography.titleMedium)
             Row(Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(5.dp)) {
-                stages.forEachIndexed { i, name -> FilterChip(stage == i, { stage = i }, { Text(name) }) }
+                stages.forEachIndexed { i, name -> FilterChip(stage == i, { stage = i; saveLabRecord() }, { Text(name) }) }
             }
             HorizontalDivider()
             when (stage) {
@@ -364,11 +406,11 @@ fun GuidedInvestigationActivity(topicId: String) {
                     Text("Independent variable: " + profile.independent)
                     Text("Dependent variable: " + profile.dependent)
                     Text("Controlled variables: " + profile.controls)
-                    OutlinedTextField(prediction, { prediction = it }, label = { Text("Predict the trend and explain why") }, modifier = Modifier.fillMaxWidth(), minLines = 2)
+                    OutlinedTextField(prediction, { prediction = it; saved = false }, label = { Text("Predict the trend and explain why") }, modifier = Modifier.fillMaxWidth(), minLines = 2)
                     Text("Method checklist", fontWeight = FontWeight.Bold)
                     profile.method.forEachIndexed { i, item ->
                         Row(verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
-                            Checkbox(i in completedSteps, { checked -> if (checked) completedSteps.add(i) else completedSteps.remove(i) })
+                            Checkbox(i in completedSteps, { checked -> if (checked) completedSteps.add(i) else completedSteps.remove(i); saved = false })
                             Text(item)
                         }
                     }
@@ -376,16 +418,16 @@ fun GuidedInvestigationActivity(topicId: String) {
                 }
                 2 -> {
                     Text(profile.independent + ": " + "%.1f".format(x) + " " + profile.xUnit)
-                    Slider(x, { x = it }, valueRange = profile.minX..profile.maxX)
+                    Slider(x, { x = it; saved = false }, valueRange = profile.minX..profile.maxX)
                     Text(profile.dependent + ": " + "%.2f".format(y) + " " + profile.yUnit, style = MaterialTheme.typography.headlineSmall)
                     Text("Select a setting and record the model output. Repeat at different settings.")
-                    Button(onClick = { readings.add(x to y) }, modifier = Modifier.fillMaxWidth()) { Text("Record observation") }
+                    Button(onClick = { readings.add(x to y); saveLabRecord() }, modifier = Modifier.fillMaxWidth()) { Text("Record observation") }
                     if (readings.isNotEmpty()) {
                         Text("Readings recorded: " + readings.size)
                         readings.takeLast(6).forEachIndexed { i, pair ->
                             Text((i + 1).toString() + ". " + "%.1f".format(pair.first) + " " + profile.xUnit + " → " + "%.2f".format(pair.second) + " " + profile.yUnit)
                         }
-                        TextButton(onClick = { readings.clear() }) { Text("Clear readings") }
+                        TextButton(onClick = { readings.clear(); saveLabRecord() }) { Text("Clear readings") }
                     }
                 }
                 3 -> {
@@ -429,9 +471,10 @@ fun GuidedInvestigationActivity(topicId: String) {
                     Text("All outputs are simulated teaching values, not measurements from a physical laboratory.", style = MaterialTheme.typography.bodySmall)
                 }
             }
+            Text(if (saved) "Lab notebook saved on this device." else "Changes not yet saved. Continue to another stage or record a reading to save.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-                OutlinedButton(onClick = { stage = (stage - 1).coerceAtLeast(0) }, enabled = stage > 0) { Text("Previous") }
-                Button(onClick = { stage = (stage + 1).coerceAtMost(stages.lastIndex) }, enabled = stage < stages.lastIndex) { Text("Next stage") }
+                OutlinedButton(onClick = { stage = (stage - 1).coerceAtLeast(0); saveLabRecord() }, enabled = stage > 0) { Text("Previous") }
+                Button(onClick = { stage = (stage + 1).coerceAtMost(stages.lastIndex); saveLabRecord() }, enabled = stage < stages.lastIndex) { Text("Next stage") }
             }
         }
     }
