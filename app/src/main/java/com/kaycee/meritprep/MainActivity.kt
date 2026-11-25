@@ -108,16 +108,17 @@ private fun HomeScreen(nav: NavHostController, navigationRevision: Int = 0) {
     val context = LocalContext.current
     val database = remember(context) { MeritDatabase(context) }
     val allTopics = remember { subjects.flatMap { LearningCatalog.forSubject(it.code) } }
-    val completedCount = remember(navigationRevision, allTopics) {
-        allTopics.count { database.isLessonCompleted(it.id) }
+    val studyTopics = remember(allTopics) { allTopics.filterNot { it.isSyllabusOutline } }
+    val completedCount = remember(navigationRevision, studyTopics) {
+        studyTopics.count { database.isLessonCompleted(it.id) }
     }
     val attempts = remember(navigationRevision) { database.getQuestionAttemptCount() }
     val correct = remember(navigationRevision) { database.getCorrectAnswerCount() }
     val dueReviews = remember(navigationRevision) { database.getDueRevisionCards().size }
     val accuracy = if (attempts == 0) 0 else (correct * 100 / attempts).coerceIn(0, 100)
-    val progress = if (allTopics.isEmpty()) 0f else completedCount.toFloat() / allTopics.size
-    val nextTopic = remember(navigationRevision, allTopics) {
-        allTopics.firstOrNull { !database.isLessonCompleted(it.id) }
+    val progress = if (studyTopics.isEmpty()) 0f else completedCount.toFloat() / studyTopics.size
+    val nextTopic = remember(navigationRevision, studyTopics) {
+        studyTopics.firstOrNull { !database.isLessonCompleted(it.id) }
     }
     var search by remember { mutableStateOf("") }
     var subjectFilter by remember { mutableStateOf("All") }
@@ -134,7 +135,7 @@ private fun HomeScreen(nav: NavHostController, navigationRevision: Int = 0) {
     val filteredSubjects = remember(query, subjectFilter) {
         subjects.filter { subject ->
             val categoryMatches = when (subjectFilter) {
-                "Science" -> subject.code in setOf("BIO", "CHEM", "PHY", "MATH")
+                "STEM" -> subject.code in setOf("BIO", "CHEM", "PHY", "MATH")
                 "Other" -> subject.code in setOf("ENG", "ECO", "GOV")
                 else -> true
             }
@@ -215,7 +216,7 @@ private fun HomeScreen(nav: NavHostController, navigationRevision: Int = 0) {
                         Button(onClick = { nav.navigate("lesson/" + nextTopic.id) }, modifier = Modifier.fillMaxWidth()) {
                             Text("Resume lesson")
                             Spacer(Modifier.width(6.dp))
-                            Icon(Icons.AutoMirrored.Filled.ArrowForward, contentDescription = null)
+                            Icon(Icons.Default.ArrowForward, contentDescription = null)
                         }
                     } else {
                         Text("You have completed all currently mapped lesson topics.", color = MaterialTheme.colorScheme.onPrimaryContainer)
@@ -228,7 +229,7 @@ private fun HomeScreen(nav: NavHostController, navigationRevision: Int = 0) {
             Column(verticalArrangement = Arrangement.spacedBy(7.dp)) {
                 Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
                     Text("Your progress", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
-                    Text(completedCount.toString() + " / " + allTopics.size, style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
+                    Text(completedCount.toString() + " / " + studyTopics.size, style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
                 }
                 LinearProgressIndicator(progress = { progress }, modifier = Modifier.fillMaxWidth())
                 Row(horizontalArrangement = Arrangement.spacedBy(9.dp)) {
@@ -255,7 +256,7 @@ private fun HomeScreen(nav: NavHostController, navigationRevision: Int = 0) {
             Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 Text("Explore subjects", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
                 Row(horizontalArrangement = Arrangement.spacedBy(7.dp)) {
-                    listOf("All", "Science", "Other").forEach { filter ->
+                    listOf("All", "STEM", "Other").forEach { filter ->
                         FilterChip(subjectFilter == filter, { subjectFilter = filter }, { Text(filter) })
                     }
                 }
