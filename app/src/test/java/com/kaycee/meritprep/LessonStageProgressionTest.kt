@@ -19,6 +19,7 @@ class LessonStageProgressionTest {
         val completed = setOf(LessonStage.CONCEPT, LessonStage.VISUALISE)
         assertTrue(isLessonStageUnlocked(LessonStage.CONCEPT, completed))
         assertTrue(isLessonStageUnlocked(LessonStage.VISUALISE, completed))
-        assertFalse(isLessonStageUnlocked(LessonStage.EXPLORE, completed))
+        assertTrue(isLessonStageUnlocked(LessonStage.EXPLORE, completed))
+        assertFalse(isLessonStageUnlocked(LessonStage.LAB, completed))
     }
 }
