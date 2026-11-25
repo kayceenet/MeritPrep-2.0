@@ -215,11 +215,11 @@ A topic may not be labelled complete if any applicable critical item above is FA
 | Guided practical workflow | IMPLEMENTED | Existing five-stage guided investigation remains in the Lab pillar; session persistence and uncertainty/regression remain future work. |
 | Topic practice integration | IMPLEMENTED | Exercise stage selects up to five topic-mapped questions, shuffles options, gives explanations and requires 80% for completion. `bio-living` currently falls back to the lesson check because it has no mapped bank item. |
 | Scientific notation | IMPLEMENTED, LIMITED SUBSET | `ScientificNotation.kt` supports common LaTeX operators, Greek symbols, powers, subscripts, fractions and roots. It is not a full TeX typesetter. |
-| Scientific notation unit tests | PASS ON BASELINE | The formatter tests and Android build passed on commit `4af7ff6363d21a942478c674d8be89180e03d3d4`. |
-| Latest animation/scenario additions | PENDING | Additional wave-model corrections, scenario activities and formatted answer options were committed after that successful run; the newest Actions run must pass before release. |
+| Scientific notation unit tests | PASS | Formatter tests, stacked equation cards, dashboard/theme, lesson stages, scenarios and animations passed on commit `5cdd9786447fee6be0cd67c2e17b83b2b921a93a`. |
+| Latest practical/theory notation integration | PENDING | Scientific formatting was extended to Biology, Chemistry and Physics question/practical/theory screens after the successful `5cdd9786` run. Verify the newest Actions run. |
 | Physical-device visual review | NOT DONE | Screen density, font scaling, low-end performance, accessibility and visual polish still require an actual Android device review. |
 | Full syllabus academic sign-off | NOT DONE | This UI redesign does not prove statement-level JAMB/WAEC coverage or subject-specialist approval. |
 
-**Latest implementation areas:** `LearningCatalog.kt`, `ScientificNotation.kt`, `TopicScienceAnimations.kt`, `TopicScenarioActivities.kt`, `GuidedInvestigationActivity.kt`, and `docs/CLASSROOM_EXPERIENCE_REDESIGN.md`.
+**Latest implementation areas:** `MainActivity.kt`, `MeritPrepTheme.kt`, `LearningCatalog.kt`, `ScientificNotation.kt`, `TopicScienceAnimations.kt`, `TopicScenarioActivities.kt`, `GuidedInvestigationActivity.kt`, question/practical/theory screens, and `docs/CLASSROOM_EXPERIENCE_REDESIGN.md`.
 
 **Release gate:** Do not distribute a replacement APK until the newest commit has passing unit tests, a successful debug APK build and uploaded artifact, followed by a visual review on a physical Android device.
