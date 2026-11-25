@@ -1034,8 +1034,12 @@ fun LessonScreen(topicId: String) {
             ) { Text(if (stage in completedStages) "Pillar completed" else "Mark " + stage.label + " complete") }
         }
         Row(Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp), horizontalArrangement = Arrangement.SpaceBetween) {
-            OutlinedButton(onClick = { stage = stages[(stageIndex - 1).coerceAtLeast(0)] }, enabled = stageIndex > 0) { Text("Previous") }
-            Button(onClick = { stage = stages[(stageIndex + 1).coerceAtMost(stages.lastIndex)] }, enabled = stageIndex < stages.lastIndex) { Text(if (stage == LessonStage.PRACTICE) "End of lesson" else "Continue") }
+            val nextStage = stages.getOrNull(stageIndex + 1)
+            OutlinedButton(onClick = { stage = stages[stageIndex - 1] }, enabled = stageIndex > 0) { Text("Previous") }
+            Button(
+                onClick = { nextStage?.let { stage = it } },
+                enabled = nextStage != null && isLessonStageUnlocked(nextStage, completedStages)
+            ) { Text(if (stage == LessonStage.PRACTICE) "End of lesson" else "Continue") }
         }
     }
 }
