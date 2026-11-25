@@ -728,6 +728,7 @@ fun LessonScreen(topicId: String) {
         BiologyInteractiveLessonActivity(topicId)
         ChemistryInteractiveLessonActivity(topicId)
         ChemistrySupplementalLessonActivity(topicId)
+        if (topicId == "chem-kinetic-gas") ParticleKineticAnimation(temperatureKelvin = 300f)
         PhysicsInteractiveLessonActivity(topicId)
         PhysicsSupplementalLessonActivity(topicId)
         GuidedInvestigationActivity(topicId)
