@@ -209,7 +209,7 @@ A topic may not be labelled complete if any applicable critical item above is FA
 |---|---|---|
 | Repository scope | PASS | Changes are in `kayceenet/MeritPrep-2.0`; original `kayceenet/Merit` was read-only. |
 | Reference structure inspected | PASS | Reviewed the reference classroom screen, six lesson pillars, section animation component, practical lab workspace, subject lab dispatchers, scientific formatter and diagram cards. |
-| One-pillar-at-a-time classroom | IMPLEMENTED | `LearningCatalog.kt`: Concept, Examples, Scenario, Lab, Project and Exercise stages. |
+| One-pillar-at-a-time classroom | IMPLEMENTED | `LearningCatalog.kt` and `ClassroomPillarNavigation.kt`: Concepts & Theory, Worked Examples, Applications & Notes, Virtual Lab, Applied Project and Mastery Quiz; compact mobile navigation and a 268 dp tablet sidebar. |
 | Original teaching content | PASS | New examples and scenarios are independently authored; reference course write-ups were not imported. |
 | Visual and simulation integration | IMPLEMENTED | Topic visual gallery, existing subject activities, plus native wave, refraction, current-flow and equilibrium animations. |
 | Guided practical workflow | IMPLEMENTED | Existing five-stage guided investigation remains in the Lab pillar; session persistence and uncertainty/regression remain future work. |
