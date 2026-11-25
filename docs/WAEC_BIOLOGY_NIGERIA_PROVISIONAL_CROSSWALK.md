@@ -44,7 +44,7 @@ A WAEC Nigeria-specific activity layer has been embedded in relevant Biology les
 - ecological tolerance range with explicit minimum, optimum and maximum;
 - aquatic/terrestrial habitat conditions and adaptations;
 - population size, dominance and density from sample counts and area;
-- microorganisms, food/water hygiene, vectors and public health; kidney/liver disease awareness and sense-organ function;
+- microorganisms, food/water hygiene, vectors and public health; kidney/liver disease awareness and sense-organ function; recombinant insulin production sequence;
 - ABO red-cell compatibility with Rh/crossmatch and paternity limitations;
 - structural adaptation, colouration and competition; biological drawing/magnification, food tests, dichotomous keys, plant tissue sections, seed germination and soil practical activities;
 - agricultural practices and ecological consequences; nitrogen, carbon and water cycle process selectors;
