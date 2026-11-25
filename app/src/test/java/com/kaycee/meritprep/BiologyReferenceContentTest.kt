@@ -74,7 +74,7 @@ class BiologyReferenceContentTest {
         assertTrue(content.contains("x-linked recessive"))
         assertTrue(content.contains("affected son"))
         assertTrue(content.contains("25%"))
-        assertTrue(content.contains("50%"))
+        assertTrue(content.contains("half of her sons"))
     }
 
     @Test
