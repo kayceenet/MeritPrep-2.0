@@ -69,7 +69,7 @@ fun ChemistryQualitativeGuideScreen() {
                     Text("Select the ion", style = MaterialTheme.typography.titleMedium)
                     Row(Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                         listOf("NH₄⁺", "Ca²⁺", "Pb²⁺", "Cu²⁺", "Fe²⁺", "Fe³⁺", "Al³⁺", "Zn²⁺").forEach { ion ->
-                            FilterChip(selected = selectedCation == ion, onClick = { selectedCation = ion }, label = { Text(ion) })
+                            FilterChip(selected = selectedCation == ion, onClick = { selectedCation = ion }, label = { ScientificText(ion, style = MaterialTheme.typography.bodyMedium) })
                         }
                     }
                     Text("Add reagent", style = MaterialTheme.typography.titleMedium)
@@ -86,9 +86,9 @@ fun ChemistryQualitativeGuideScreen() {
                     }
                     HorizontalDivider()
                     Text("Expected observation", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary)
-                    Text(cationObservation)
+                    ScientificText(cationObservation, style = MaterialTheme.typography.bodyMedium)
                     Text("Inference", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary)
-                    Text(
+                    ScientificText(
                         when {
                             selectedCation == "NH₄⁺" && selectedReagent == "NaOH(aq)" && warmed -> "Ammonia is evolved from an ammonium salt; damp red litmus turns blue."
                             selectedCation == "NH₄⁺" && selectedReagent == "NaOH(aq)" -> "Warm gently and test any evolved gas with damp red litmus paper."
@@ -103,15 +103,15 @@ fun ChemistryQualitativeGuideScreen() {
             entries.forEach { item ->
                 Card(Modifier.fillMaxWidth()) {
                     Column(Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(7.dp)) {
-                        Text(item.target, style = MaterialTheme.typography.titleMedium)
+                        ScientificText(item.target, style = MaterialTheme.typography.titleMedium)
                         Text("Test / reagent", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary)
-                        Text(item.reagentOrTest)
+                        ScientificText(item.reagentOrTest, style = MaterialTheme.typography.bodyMedium)
                         Text("Expected observation", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary)
-                        Text(item.observation)
+                        ScientificText(item.observation, style = MaterialTheme.typography.bodyMedium)
                         Text("Inference", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary)
-                        Text(item.inference)
+                        ScientificText(item.inference, style = MaterialTheme.typography.bodyMedium)
                         Text("Safety and limitations", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.error)
-                        Text(item.caution, style = MaterialTheme.typography.bodySmall)
+                        ScientificText(item.caution, style = MaterialTheme.typography.bodySmall)
                     }
                 }
             }
