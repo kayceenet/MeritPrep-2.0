@@ -64,6 +64,8 @@ fun ScienceMediaScreen(onOpenLabs: () -> Unit, onOpenLesson: (String) -> Unit) {
     var selectionGenerations by remember { mutableFloatStateOf(5f) }
     var selectedParentOneIndex by remember { mutableIntStateOf(1) }
     var selectedParentTwoIndex by remember { mutableIntStateOf(1) }
+    var selectedAboParentOneIndex by remember { mutableIntStateOf(1) }
+    var selectedAboParentTwoIndex by remember { mutableIntStateOf(3) }
     var selectedDivisionIndex by remember { mutableIntStateOf(0) }
     var divisionStageIndex by remember { mutableIntStateOf(0) }
     var selectedOsmosisCellIndex by remember { mutableIntStateOf(0) }
@@ -73,6 +75,8 @@ fun ScienceMediaScreen(onOpenLabs: () -> Unit, onOpenLesson: (String) -> Unit) {
     var diffusionRight by remember { mutableFloatStateOf(0.2f) }
     var diffusionPermeability by remember { mutableFloatStateOf(80f) }
     val parentGenotypes = MendelianGenotype.values()
+    val aboGenotypes = ABOGenotype.values()
+    val aboResult = ABOInheritanceSimulation.evaluate(aboGenotypes[selectedAboParentOneIndex], aboGenotypes[selectedAboParentTwoIndex])
     val divisionType = if (selectedDivisionIndex == 0) CellDivisionType.MITOSIS else CellDivisionType.MEIOSIS
     val divisionLesson = CellDivisionSimulation.lesson(divisionType)
     val currentDivisionStage = divisionLesson.stages[divisionStageIndex.coerceIn(0, divisionLesson.stages.lastIndex)]
@@ -198,6 +202,57 @@ fun ScienceMediaScreen(onOpenLabs: () -> Unit, onOpenLesson: (String) -> Unit) {
                         Text(mendelianResult.explanation)
                         Text("Try Aa by Aa, then Aa by aa. Compare genotype and phenotype ratios. Probability describes expected proportions over many offspring; it does not guarantee the exact outcome of a small family.")
                         Text("Model limitation: this is a single-gene model. Real traits may involve incomplete dominance, codominance, multiple genes, environmental effects or sex linkage.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                            }
+                        }
+                        Card(modifier = Modifier.fillMaxWidth()) {
+                            Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                                Text("MeritPrep interactive model: ABO blood-group inheritance", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+                                Text("Choose the inherited ABO genotype of each parent. Iᴬ and Iᴮ are codominant, while both are dominant over i.")
+                                Text("Parent 1 genotype", fontWeight = FontWeight.SemiBold)
+                                Row(horizontalArrangement = Arrangement.spacedBy(5.dp)) {
+                                    aboGenotypes.take(3).forEachIndexed { index, genotype ->
+                                        FilterChip(selected = selectedAboParentOneIndex == index, onClick = { selectedAboParentOneIndex = index }, label = { Text(genotype.notation) })
+                                    }
+                                }
+                                Row(horizontalArrangement = Arrangement.spacedBy(5.dp)) {
+                                    aboGenotypes.drop(3).forEachIndexed { index, genotype ->
+                                        val actualIndex = index + 3
+                                        FilterChip(selected = selectedAboParentOneIndex == actualIndex, onClick = { selectedAboParentOneIndex = actualIndex }, label = { Text(genotype.notation) })
+                                    }
+                                }
+                                Text("Parent 2 genotype", fontWeight = FontWeight.SemiBold)
+                                Row(horizontalArrangement = Arrangement.spacedBy(5.dp)) {
+                                    aboGenotypes.take(3).forEachIndexed { index, genotype ->
+                                        FilterChip(selected = selectedAboParentTwoIndex == index, onClick = { selectedAboParentTwoIndex = index }, label = { Text(genotype.notation) })
+                                    }
+                                }
+                                Row(horizontalArrangement = Arrangement.spacedBy(5.dp)) {
+                                    aboGenotypes.drop(3).forEachIndexed { index, genotype ->
+                                        val actualIndex = index + 3
+                                        FilterChip(selected = selectedAboParentTwoIndex == actualIndex, onClick = { selectedAboParentTwoIndex = actualIndex }, label = { Text(genotype.notation) })
+                                    }
+                                }
+                                Text("Possible offspring genotypes", fontWeight = FontWeight.SemiBold)
+                                Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                                    aboResult.fourPossibleCombinations.take(2).forEach { genotype ->
+                                        Card(Modifier.weight(1f), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer)) {
+                                            Text(genotype, Modifier.padding(10.dp).fillMaxWidth(), style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+                                        }
+                                    }
+                                }
+                                Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                                    aboResult.fourPossibleCombinations.drop(2).forEach { genotype ->
+                                        Card(Modifier.weight(1f), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer)) {
+                                            Text(genotype, Modifier.padding(10.dp).fillMaxWidth(), style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+                                        }
+                                    }
+                                }
+                                Text("Expected blood-group probabilities", fontWeight = FontWeight.SemiBold)
+                                aboResult.outcomes.forEach { outcome ->
+                                    Text("Group ${outcome.phenotype}: ${outcome.countOutOfFour}/4 = ${outcome.percentage.toInt()}%")
+                                }
+                                Text(aboResult.explanation)
+                                Text("This model covers the ABO system only. It does not include the Rh(D) factor, transfusion compatibility or rare blood-group variants. Probabilities do not guarantee the exact outcome in a small family.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                             }
                         }
                         Text("MeritPrep interactive model: natural selection", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
