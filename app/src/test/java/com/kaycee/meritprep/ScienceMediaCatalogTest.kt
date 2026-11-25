@@ -1,6 +1,7 @@
 package com.kaycee.meritprep
 
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
@@ -39,4 +40,19 @@ class ScienceMediaCatalogTest {
         assertTrue(ScienceMediaCatalog.forSubject("PHY").all { it.subjectCode == "PHY" })
         assertTrue(ScienceMediaCatalog.forSubject("UNKNOWN").isEmpty())
     }
+    @Test
+    fun everyMediaEntryResolvesToItsMappedSubjectLesson() {
+        ScienceMediaCatalog.resources.forEach { resource ->
+            val topic = LearningCatalog.find(resource.topicId)
+            assertNotNull("Missing mapped topic for ${resource.id}: ${resource.topicId}", topic)
+            assertEquals(resource.subjectCode, topic?.subjectCode)
+        }
+    }
+
+    @Test
+    fun fullChemistryAndPhysicsCourseMapsAreAvailableThroughLearningCatalog() {
+        assertEquals(18, LearningCatalog.forSubject("CHEM").size)
+        assertEquals(39, LearningCatalog.forSubject("PHY").size)
+    }
+
 }
