@@ -84,6 +84,5 @@ object ChemistryWaecTheoryBank {
             listOf("Identifies haematite as iron(III) oxide, Fe₂O₃.", "States that coke burns to provide heat and forms carbon monoxide.", "States that carbon monoxide acts as a reducing agent.", "States that limestone decomposes to calcium oxide, which reacts with silica impurity.", "Writes Fe₂O₃ + 3CO → 2Fe + 3CO₂.", "Identifies calcium silicate as the main slag formed when CaO reacts with SiO₂."),
             "Limestone decomposes: CaCO₃ → CaO + CO₂. The CaO removes acidic silica impurity by forming calcium silicate slag."
         )
-        )
     )
 }
