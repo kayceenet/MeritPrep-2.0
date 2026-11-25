@@ -30,6 +30,21 @@ object BiologyExperimentAnalysis {
         }
         return points
     }
+    /** Describes the observed sequence without claiming that the independent variable caused it. */
+    fun describeTrend(points: List<BiologyExperimentPoint>): String {
+        require(points.size >= 2) { "At least two points are needed to describe a trend." }
+        val values = points.sortedBy { it.independentValue }.map { it.meanResult }
+        val tolerance = maxOf(values.maxOf { kotlin.math.abs(it) }, 1.0) * 0.01
+        val spread = values.maxOrNull()!! - values.minOrNull()!!
+        return when {
+            spread <= tolerance -> "The measured result remains approximately constant across the tested range."
+            values.zipWithNext().all { (a, b) -> b >= a - tolerance } ->
+                "The measured result generally increases as the independent-variable value increases."
+            values.zipWithNext().all { (a, b) -> b <= a + tolerance } ->
+                "The measured result generally decreases as the independent-variable value increases."
+            else -> "The measured result fluctuates; there is no single consistent direction across the tested range."
+        }
+    }
     /** Readings are comma- or semicolon-separated. Invalid entries are never silently ignored. */
     fun summarizeReadings(raw: String): BiologyReadingSummary? {
         if (raw.isBlank()) return null
