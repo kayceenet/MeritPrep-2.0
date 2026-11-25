@@ -78,6 +78,21 @@ class BiologyReferenceContentTest {
     }
 
     @Test
+    fun cellDivisionGlossaryExplainsTheStructuresAndEventsLearnersMustDistinguish() {
+        val entries = BiologyGlossary.entries.associateBy { it.term }
+        val required = listOf(
+            "Chromosome", "Chromatid", "Centromere", "Cytokinesis",
+            "Bivalent", "Spindle fibre", "Independent assortment"
+        )
+        assertTrue(required.all { it in entries })
+        assertTrue(entries.getValue("Bivalent").definition.contains("four chromatids"))
+        assertTrue(entries.getValue("Centromere").definition.contains("sister chromatids"))
+        assertTrue(entries.getValue("Independent assortment").definition.contains("metaphase I"))
+        assertEquals("bio-growth", entries.getValue("Mitosis").topicId)
+        assertEquals("bio-growth", entries.getValue("Meiosis").topicId)
+    }
+
+    @Test
     fun glossaryEntriesAreCompleteUniqueAndLinkedToLessons() {
         val entries = BiologyGlossary.entries
         val lessonIds = BiologyCurriculum.units.mapNotNull { it.lessonId }.toSet()
