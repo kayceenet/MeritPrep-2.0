@@ -1,6 +1,6 @@
 # Mandatory MeritPrep 2.0 instructions
 
-At the start of EVERY run, read this file, `docs/ACADEMIC_LESSON_MASTERY_STANDARD.md`, and `docs/LESSON_RELEASE_CHECKLIST.md`. These are mandatory acceptance requirements, not optional guidance.
+At the start of EVERY run, read this file, `docs/ACADEMIC_LESSON_MASTERY_STANDARD.md`, `docs/LESSON_RELEASE_CHECKLIST.md` and `docs/OFFICIAL_SYLLABUS_SOURCE_REGISTER.md`. Before editing a subject, read its current JAMB and WAEC crosswalk documents in `docs/`. These are mandatory acceptance requirements, not optional guidance.
 
 ## Scope
 - Work only in `kayceenet/MeritPrep-2.0`; never modify the separate original `kayceenet/Merit` repository.
@@ -9,7 +9,7 @@ At the start of EVERY run, read this file, `docs/ACADEMIC_LESSON_MASTERY_STANDAR
 - “Continue” means continue hands-on implementation, not provide only a plan.
 
 ## Academic requirements
-- Map every current official JAMB and WAEC syllabus statement individually to teaching, visualisation, activity, practical competence where relevant, and assessment evidence.
+- Map every current official JAMB and WAEC syllabus statement individually to teaching, visualisation, activity, practical competence where relevant, and assessment evidence. A secondary WAEC syllabus mirror is a provisional working source only; verify against a direct WAEC source before academic sign-off.
 - Teach from zero assumed knowledge to independent examination-level application: prerequisites, plain explanation, formal scientific treatment, worked examples, diagrams/animations, misconception correction, retrieval, transfer and exam practice.
 - Integrate relevant activities inside the correct lessons. Links are supplementary, never substitutes for original learning experiences.
 - Build original offline-capable animations, simulations, diagrams and virtual labs where appropriate free/licensed resources are unavailable. Respect copyright and licence terms.
