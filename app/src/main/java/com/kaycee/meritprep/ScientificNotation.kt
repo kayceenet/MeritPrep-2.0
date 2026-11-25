@@ -67,6 +67,8 @@ object ScientificNotation {
         value = replaceBracedFunction(value, "\\frac") { a, b -> "($a)⁄($b)" }
         value = replaceBracedFunction(value, "\\dfrac") { a, b -> "($a)⁄($b)" }
         value = replaceBracedFunction(value, "\\sqrt") { a, _ -> "√($a)" }
+        value = replaceBracedFunction(value, "\\bar") { a, _ -> "$a\u0304" }
+        value = replaceBracedFunction(value, "\\overline") { a, _ -> "$a\u0305" }
         listOf("\\mathrm", "\\text", "\\mathbf", "\\ce", "\\operatorname", "\\mathcal", "\\mathbb", "\\boldsymbol").forEach { cmd ->
             value = replaceSingleBraced(value, cmd)
         }
