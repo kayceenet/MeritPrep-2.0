@@ -13,7 +13,10 @@ data class OsmosisResult(
 
 object OsmosisSimulation {
     fun evaluate(externalSoluteMolarity: Double, internalSoluteMolarity: Double, cellType: OsmosisCellType): OsmosisResult {
-        require(externalSoluteMolarity >= 0.0 && internalSoluteMolarity >= 0.0)
+        require(
+            externalSoluteMolarity.isFinite() && internalSoluteMolarity.isFinite() &&
+                externalSoluteMolarity >= 0.0 && internalSoluteMolarity >= 0.0
+        ) { "Solute concentrations must be finite, non-negative values." }
         val movement = when {
             externalSoluteMolarity < internalSoluteMolarity -> WaterMovement.INTO_CELL
             externalSoluteMolarity > internalSoluteMolarity -> WaterMovement.OUT_OF_CELL
