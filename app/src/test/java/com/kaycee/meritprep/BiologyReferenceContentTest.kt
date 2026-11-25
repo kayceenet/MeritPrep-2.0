@@ -25,6 +25,20 @@ class BiologyReferenceContentTest {
     }
 
     @Test
+    fun cellDivisionPracticeCoversTheCoreMitosisAndMeiosisConcepts() {
+        val questions = BiologyQuestionBank.all.associateBy { it.id }
+        val requiredIds = (11..22).map { "bio-grow-${it.toString().padStart(3, '0')}" }
+
+        assertTrue("The bank must include a dedicated set of cell-division questions.", requiredIds.all { it in questions })
+        val prompts = requiredIds.mapNotNull { questions[it]?.prompt }.joinToString(" ").lowercase()
+        assertTrue(prompts.contains("mitosis"))
+        assertTrue(prompts.contains("meiosis"))
+        assertTrue(prompts.contains("sister chromatids"))
+        assertTrue(prompts.contains("crossing over"))
+        assertTrue(prompts.contains("fertilisation"))
+    }
+
+    @Test
     fun glossaryEntriesAreCompleteUniqueAndLinkedToLessons() {
         val entries = BiologyGlossary.entries
         val lessonIds = BiologyCurriculum.units.mapNotNull { it.lessonId }.toSet()
