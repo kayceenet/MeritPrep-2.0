@@ -75,3 +75,10 @@ Scientific notation is being applied beyond lesson paragraphs. Topic assessment 
 Display equations support vertically stacked fractions in addition to inline superscripts/subscripts, Greek symbols, operators and roots. The formatter remains a deliberately limited offline LaTeX subset rather than a full TeX engine.
 
 **Verification:** The redesigned home/theme and stacked-equation implementation passed unit tests and the Android debug APK workflow on commit `5cdd9786447fee6be0cd67c2e17b83b2b921a93a`. Further formatter integrations in practical/theory screens are committed after that SHA and remain subject to the latest CI run.
+
+
+## Apparatus visuals and persistent lab notebooks
+
+The guided investigation briefing now includes original, labelled schematic layouts for common Biology, Chemistry and Physics apparatus: microscopes, plant/light arrangements, quadrats, titration glassware, filtration, electrolysis, springs, dynamics trolleys, liquid-pressure columns, circuits, ripple tanks and gas syringes. These are explicitly marked as schematic and not to scale; the written method and safety controls remain authoritative.
+
+The guided lab notebook now saves the learner's selected stage, prediction, method checklist, current model setting and recorded observations to the app's local notes database. Learners can explicitly save changes and resume a topic investigation later. This is local persistence, not cloud synchronisation.
