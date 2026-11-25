@@ -7,7 +7,7 @@ class BiologySupplementalActivityCoverageTest {
     @Test
     fun everyRemainingBiologyCourseUnitHasASupplementalInteractive() {
         val required = setOf(
-            "bio-classification", "bio-plant-anatomy", "bio-respiration", "bio-excretion", "bio-support",
+            "bio-classification", "bio-adaptation", "bio-interactions", "bio-plant-anatomy", "bio-respiration", "bio-excretion", "bio-support",
             "bio-reproduction", "bio-coordination", "bio-ecology-factors",
             "bio-habitats", "bio-biomes", "bio-soil", "bio-environment",
             "bio-variation", "bio-biotechnology", "bio-evolution-evidence"
