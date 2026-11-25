@@ -68,7 +68,7 @@ fun CellDivisionKnowledgeCheckCard() {
                 val question = questions[questionIndex]
                 Text("Question ${questionIndex + 1} of ${questions.size}", color = MaterialTheme.colorScheme.primary)
                 LinearProgressIndicator(
-                    progress = { (questionIndex + 1).toFloat() / questions.size },
+                    progress = (questionIndex + 1).toFloat() / questions.size,
                     modifier = Modifier.fillMaxWidth()
                 )
                 Text(question.prompt, style = MaterialTheme.typography.titleMedium)
