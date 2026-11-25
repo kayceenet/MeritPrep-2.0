@@ -5,7 +5,7 @@ import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class PhysicsWaecTheoryBankTest {
-    @Test fun containsSixOriginalStructuredTheoryTasks() {
+    @Test fun containsTwelveOriginalStructuredTheoryTasks() {
         val tasks = PhysicsWaecTheoryBank.tasks
         assertEquals(12, tasks.size)
         assertEquals(tasks.size, tasks.map { it.id }.distinct().size)
