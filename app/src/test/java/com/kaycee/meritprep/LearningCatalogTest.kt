@@ -98,6 +98,17 @@ class LearningCatalogTest {
     }
 
     @Test
+    fun heredityLessonExplainsXLinkedTransmissionByEachParent() {
+        val lesson = LearningCatalog.topics.single { it.id == "bio-heredity" }
+        val content = lesson.sections.joinToString(" ") { it.first + " " + it.second }.lowercase()
+        assertTrue(content.contains("x-linked inheritance"))
+        assertTrue(content.contains("carrier mother"))
+        assertTrue(content.contains("father passes his x chromosome to daughters"))
+        assertTrue(content.contains("y chromosome to sons"))
+        assertTrue(content.contains("affected sons"))
+    }
+
+    @Test
     fun biologyLessonKnowledgeCheckAnswersAreBalancedAcrossAllFourPositions() {
         val lessons = LearningCatalog.topics.filter { it.subjectCode == "BIO" }
         val counts = lessons.groupingBy { it.correctOption }.eachCount()
