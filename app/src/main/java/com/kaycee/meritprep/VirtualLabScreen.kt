@@ -840,14 +840,14 @@ private fun BiologyExperimentPlannerLab() {
                         value = row.first,
                         onValueChange = { resultRows[index] = it to row.second; saved = false },
                         modifier = Modifier.weight(1f),
-                        label = { Text("Value \${index + 1}") },
+                        label = { Text("Value ${index + 1}") },
                         singleLine = true
                     )
                     OutlinedTextField(
                         value = row.second,
                         onValueChange = { resultRows[index] = row.first to it; saved = false },
                         modifier = Modifier.weight(1f),
-                        label = { Text("Result \${index + 1}") },
+                        label = { Text("Result ${index + 1}") },
                         singleLine = true
                     )
                 }
