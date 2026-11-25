@@ -110,3 +110,6 @@ Authenticated sync, teacher/admin CMS, analytics, backups, privacy and security 
 
 
 **DNA-content accounting:** the mitosis/meiosis stage model now tracks DNA content in C units alongside chromosome and chromatid counts. It distinguishes the 2C starting state, 4C state after S phase, the intermediate DNA content in each meiotic cell after meiosis I, and the 1C haploid products after meiosis II. Tests verify the key transitions.
+
+
+**WAEC Chemistry theory expansion:** increased the original structured-response bank from 6 to 12 tasks. New marking-guided questions cover atomic structure and periodicity, Charles's law, collision theory and reaction rates, energy profiles, solubility and crystallisation, and iron extraction. Each task includes explicit marks, a stepwise marking guide and examiner-facing guidance. Regression tests check the expanded count, unique IDs, completeness and selected scientific details.
