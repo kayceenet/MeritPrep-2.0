@@ -217,25 +217,25 @@ internal val physicsSupplementalActivityTopicIds = setOf(
   else -> "I \\\\approx \\\\frac{V - 0.7}{R}"
  }
  val output = when(topicId) {
-  "phy-temperature" -> "Absolute temperature = \${"%.2f".format(a+273.15f)} K"
-  "phy-heat-quantity" -> "Heat transferred = \${"%.0f".format(a*b*c)} J"
-  "phy-change-state" -> "Energy required = \${"%.0f".format(a * if(phase=="Fusion") 334000f else 2260000f)} J"
-  "phy-vapours" -> "Actual vapour pressure = \${"%.2f".format(a*b/100f)} kPa"
+  "phy-temperature" -> "Absolute temperature = ${"%.2f".format(a+273.15f)} K"
+  "phy-heat-quantity" -> "Heat transferred = ${"%.0f".format(a*b*c)} J"
+  "phy-change-state" -> "Energy required = ${"%.0f".format(a * if(phase=="Fusion") 334000f else 2260000f)} J"
+  "phy-vapours" -> "Actual vapour pressure = ${"%.2f".format(a*b/100f)} kPa"
   "phy-optical-instruments" -> {
    val u=b.coerceAtLeast(a+1f)
-   "Image distance = \${"%.2f".format(a*u/(u-a))} cm; magnification = \${"%.2f".format((a*u/(u-a))/u)}"
+   "Image distance = ${"%.2f".format(a*u/(u-a))} cm; magnification = ${"%.2f".format((a*u/(u-a))/u)}"
   }
   "phy-dispersion" -> {
    val micrometres=a/1000f
    val n=1.5046f+0.0042f/(micrometres*micrometres)
-   "Approximate refractive index = \${"%.4f".format(n)}"
+   "Approximate refractive index = ${"%.4f".format(n)}"
   }
-  "phy-magnetism" -> "Flux density = \${"%.3f".format(4f*PI.toFloat()*1e-7f*a*b*1000f)} mT"
+  "phy-magnetism" -> "Flux density = ${"%.3f".format(4f*PI.toFloat()*1e-7f*a*b*1000f)} mT"
   "phy-conduction" -> {
    val k=when(material) { "Copper"->400f; "Aluminium"->205f; "Glass"->1f; else->.12f }
-   "Heat-transfer rate = \${"%.2f".format(k*a*b/c)} W"
+   "Heat-transfer rate = ${"%.2f".format(k*a*b/c)} W"
   }
-  else -> "Estimated forward current = \${"%.2f".format(if(a>.7f) (a-.7f)/b*1000f else 0f)} mA"
+  else -> "Estimated forward current = ${"%.2f".format(if(a>.7f) (a-.7f)/b*1000f else 0f)} mA"
  }
  val primaryLabel = when(topicId) {
   "phy-temperature" -> "Temperature in degrees Celsius"
