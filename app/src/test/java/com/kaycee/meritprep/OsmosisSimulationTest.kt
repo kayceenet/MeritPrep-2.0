@@ -1,6 +1,7 @@
 package com.kaycee.meritprep
 
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertThrows
 import org.junit.Test
 
 class OsmosisSimulationTest {
@@ -26,4 +27,27 @@ class OsmosisSimulationTest {
         assertEquals(WaterMovement.NO_NET_MOVEMENT, result.waterMovement)
         assertEquals(CellResponse.FLACCID, result.response)
     }
+    @Test fun animalAndPlantCellsRespondDifferentlyWhenWaterLeaves() {
+        val plant = OsmosisSimulation.evaluate(0.6, 0.3, OsmosisCellType.PLANT)
+        val animal = OsmosisSimulation.evaluate(0.6, 0.3, OsmosisCellType.ANIMAL)
+        assertEquals(CellResponse.PLASMOLYSED, plant.response)
+        assertEquals(CellResponse.SHRINKING, animal.response)
+        assertEquals(plant.waterMovement, animal.waterMovement)
+    }
+
+    @Test fun rejectsNonFiniteConcentrations() {
+        assertThrows(IllegalArgumentException::class.java) {
+            OsmosisSimulation.evaluate(Double.POSITIVE_INFINITY, 0.3, OsmosisCellType.PLANT)
+        }
+        assertThrows(IllegalArgumentException::class.java) {
+            OsmosisSimulation.evaluate(0.3, Double.NaN, OsmosisCellType.ANIMAL)
+        }
+    }
+
+    @Test fun rejectsNegativeConcentrations() {
+        assertThrows(IllegalArgumentException::class.java) {
+            OsmosisSimulation.evaluate(-0.1, 0.3, OsmosisCellType.PLANT)
+        }
+    }
+
 }
