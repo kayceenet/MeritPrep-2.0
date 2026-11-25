@@ -235,7 +235,8 @@ private fun WaecPhotoelectricActivity() {
     var workFunction by remember { mutableFloatStateOf(3f) }
     val planck = 4.136e-15
     val photonEnergy = planck * frequency * 1e14
-    val maximumKinetic = max(0.0, photonEnergy - workFunction)
+    val emissionOccurs = photonEnergy >= workFunction
+    val maximumKinetic = if (emissionOccurs) photonEnergy - workFunction else 0.0
     val threshold = workFunction / (planck * 1e14)
     Card(Modifier.fillMaxWidth()) {
         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -245,8 +246,9 @@ private fun WaecPhotoelectricActivity() {
             Text("Work function: " + "%.1f".format(workFunction) + " eV")
             Slider(workFunction, { workFunction = it }, valueRange = 1f..6f)
             Text("Threshold frequency: " + "%.2f".format(threshold) + " × 10¹⁴ Hz")
-            Text("Maximum photoelectron kinetic energy: " + "%.2f".format(maximumKinetic) + " eV", style = MaterialTheme.typography.headlineSmall)
-            Text("Einstein equation: Kmax = hf − φ. Emission occurs only when photon energy exceeds the work function. Intensity changes the number of emitted electrons, not the maximum kinetic energy at fixed frequency.", style = MaterialTheme.typography.bodySmall)
+            if (emissionOccurs) Text("Maximum photoelectron kinetic energy: " + "%.2f".format(maximumKinetic) + " eV", style = MaterialTheme.typography.headlineSmall)
+            else Text("No photoemission: each photon has less energy than the work function.", color = MaterialTheme.colorScheme.error, fontWeight = FontWeight.Bold)
+            Text("Einstein equation: Kmax = hf − φ. Emission occurs only when photon energy reaches or exceeds the work function. Intensity changes the number of emitted electrons, not the maximum kinetic energy at fixed frequency.", style = MaterialTheme.typography.bodySmall)
         }
     }
 }
