@@ -146,6 +146,8 @@ fun ScienceMediaScreen(onOpenLabs: () -> Unit, onOpenLesson: (String) -> Unit) {
                                     FilterChip(selected = selectedDivisionIndex == 1, onClick = { selectedDivisionIndex = 1; divisionStageIndex = 0 }, label = { Text("Meiosis") })
                                 }
                                 Text("Stage ${divisionStageIndex + 1} of ${divisionLesson.stages.size}", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary)
+                                CellDivisionDiagram(divisionType, divisionStageIndex)
+                                Text("Chromosome schematic · not to scale", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                                 Text(currentDivisionStage.title, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
                                 Text(currentDivisionStage.description)
                                 Card(colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer)) {
