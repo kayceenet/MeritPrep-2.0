@@ -223,3 +223,11 @@ A topic may not be labelled complete if any applicable critical item above is FA
 **Latest implementation areas:** `MainActivity.kt`, `MeritPrepTheme.kt`, `LearningCatalog.kt`, `ScientificNotation.kt`, `TopicScienceAnimations.kt`, `TopicScenarioActivities.kt`, `GuidedInvestigationActivity.kt`, question/practical/theory screens, and `docs/CLASSROOM_EXPERIENCE_REDESIGN.md`.
 
 **Release gate:** Do not distribute a replacement APK until the newest commit has passing unit tests, a successful debug APK build and uploaded artifact, followed by a visual review on a physical Android device.
+
+
+### Follow-on virtual lab enhancement — 25 November 2026
+
+- Added topic-specific apparatus schematics to the guided investigation briefing. Coverage routing is unit-tested in `InvestigationApparatusRoutingTest`.
+- Added local persistence for investigation stage, prediction, reviewed method steps, selected model setting and recorded observations. A save control is visible in the lab workspace.
+- Added subject-specific practical routing for Chemistry and Physics topics, with acid-base and redox titration routed separately.
+- Latest code changes are under CI run `45671674413` (apparatus routing test) and follow-on run `45671584471` (notebook persistence). Do not release until the newest main-branch run completes successfully.
