@@ -104,3 +104,6 @@ Authenticated sync, teacher/admin CMS, analytics, backups, privacy and security 
 
 
 **Cell-division retrieval practice:** the Biology growth lesson now includes a separate, sequential 12-question interactive check built from the original cell-division question bank. Learners select an answer, receive immediate correctness feedback and an explanation, then progress through the set to a final score with a retry option. The existing lesson-completion check and local lesson tracking remain unchanged.
+
+
+**Lesson integration:** extracted the stage-by-stage mitosis/meiosis model into a reusable Compose card and embedded it directly in the Biology growth lesson, alongside the 12-question retrieval check. The same model remains available in the Science Media area; the two entry points now share the same implementation rather than maintaining separate copies.
