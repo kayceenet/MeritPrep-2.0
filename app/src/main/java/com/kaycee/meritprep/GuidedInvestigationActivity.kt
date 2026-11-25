@@ -299,6 +299,31 @@ internal object InvestigationProfiles {
             "Use a current-limiting resistor and low voltage; observe diode polarity.",
             listOf("Identify anode and cathode", "Connect diode and current-limiting resistor in series", "Measure diode voltage and current", "Increase voltage gradually and plot the I–V curve"),
             "Qualitative forward-bias model; real diode behaviour depends on type and temperature.", { x -> (0.02f * (kotlin.math.exp(0.18f * x) - 1f)).coerceAtLeast(0f) })
+        "chem-acids-bases" -> profile("Acid–base titration", "How does mean titre determine the concentration of an unknown acid in a 1:1 reaction?",
+            "Burette, pipette, conical flask, indicator and standard solution", "Mean titre", "Unknown analyte concentration", "Standard concentration, aliquot volume and reaction stoichiometry", "cm³", "mol dm⁻³",
+            "Wear goggles, use a pipette filler, clamp the burette securely and follow approved acid/alkali handling procedures.",
+            listOf("Rinse and fill the burette with standard solution", "Pipette a measured aliquot into a conical flask", "Add a suitable indicator", "Titrate to the endpoint and repeat for concordant titres"),
+            "Illustrative 1:1 calculation using 0.100 mol dm⁻³ titrant and 25.0 cm³ analyte; actual indicator and equation depend on the reagents.", { x -> 0.1f * x / 25f }, 5f, 40f, 25f)
+        "chem-redox" -> profile("Redox titration stoichiometry", "How does permanganate titre determine iron(II) concentration in acid solution?",
+            "Burette, pipette, conical flask, acidified permanganate and iron(II) sample", "Mean permanganate titre", "Iron(II) concentration", "Permanganate concentration, aliquot and balanced equation", "cm³", "mol dm⁻³",
+            "Wear goggles and use the prescribed dilute acid; follow the teacher-approved redox practical method.",
+            listOf("Pipette a measured iron(II) aliquot", "Fill the burette with standard permanganate", "Titrate to a persistent pale-pink endpoint", "Repeat and use concordant titres"),
+            "Specific acidic permanganate reaction with 1 mol MnO₄⁻ : 5 mol Fe²⁺; model uses 0.020 mol dm⁻³ titrant and 25.0 cm³ aliquot.", { x -> 5f * 0.02f * x / 25f }, 5f, 40f, 20f)
+        "chem-combination" -> profile("Mole ratios and limiting reactants", "How does the amount of hydrogen limit water formation when oxygen is in excess?",
+            "Balanced equation cards, molecular models and calculator", "Hydrogen available", "Water formed", "Balanced equation and excess oxygen availability", "mol", "mol",
+            "This is a calculation/model activity; no gas reaction is carried out.",
+            listOf("Write 2H₂ + O₂ → 2H₂O", "Identify the coefficient ratio", "Convert known amounts to moles", "Identify the limiting reactant and calculate product amount"),
+            "Ideal stoichiometric model with oxygen fixed in excess; assumes complete reaction.", { x -> x }, 0f, 10f, 2f)
+        "chem-energy" -> profile("Calorimetry and heat change", "How does temperature rise determine heat gained by a known mass of water?",
+            "Insulated calorimeter, thermometer, balance and heater or approved reaction system", "Temperature rise", "Heat gained", "Water mass, specific heat capacity and heat losses", "K", "J",
+            "Use an insulated vessel and safe low-voltage heater; hot solutions require eye protection and supervision.",
+            listOf("Measure the water mass", "Record initial temperature", "Supply a known energy or perform the approved reaction", "Record final temperature and calculate Q = mcΔT"),
+            "Water-only calculation for 100 g and c = 4180 J kg⁻¹ K⁻¹; calorimeter heat capacity and losses are omitted.", { x -> 418f * x }, 0f, 50f, 10f)
+        "chem-kinetic-gas" -> profile("Gas laws and absolute temperature", "How does gas pressure vary with absolute temperature at fixed volume?",
+            "Gas pressure sensor, thermometer and sealed low-pressure rigid vessel", "Absolute temperature", "Pressure", "Gas amount, vessel volume and leak tightness", "K", "relative kPa",
+            "Never heat a sealed rigid vessel in a practical classroom; this is a low-pressure model only.",
+            listOf("Set a fixed gas amount and volume", "Record pressure at a known absolute temperature", "Change temperature in controlled increments", "Plot pressure against kelvin temperature"),
+            "Ideal-gas proportionality at fixed volume; displayed pressure is a scaled model index.", { x -> 0.01f * x }, 100f, 800f, 300f)
         else -> null
     }
 }
