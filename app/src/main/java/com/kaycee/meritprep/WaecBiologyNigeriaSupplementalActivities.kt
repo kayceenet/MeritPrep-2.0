@@ -209,20 +209,35 @@ private fun WaecHabitatAdaptationActivity() {
 }
 
 @Composable
+@Composable
 private fun WaecPopulationSamplingActivity() {
-    var count by remember { mutableFloatStateOf(18f) }
+    var countA by remember { mutableFloatStateOf(18f) }
+    var countB by remember { mutableFloatStateOf(12f) }
     var area by remember { mutableFloatStateOf(2f) }
-    val density = count / area.coerceAtLeast(0.1f)
+    var habitatArea by remember { mutableFloatStateOf(40f) }
+    val densityA = countA / area.coerceAtLeast(0.1f)
+    val densityB = countB / area.coerceAtLeast(0.1f)
+    val estimatedA = densityA * habitatArea
+    val estimatedB = densityB * habitatArea
+    val dominant = if (densityA > densityB) "Species A" else if (densityB > densityA) "Species B" else "Neither; equal sampled density"
     Card(Modifier.fillMaxWidth()) {
         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-            Text("WAEC Nigeria focus: population studies by sampling", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
-            Text("Organisms counted: " + count.toInt())
-            Slider(count, { count = it }, valueRange = 0f..100f)
+            Text("WAEC Nigeria focus: population size, dominance and density", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+            Text("Species A counted: " + countA.toInt())
+            Slider(countA, { countA = it }, valueRange = 0f..100f)
+            Text("Species B counted: " + countB.toInt())
+            Slider(countB, { countB = it }, valueRange = 0f..100f)
             Text("Sampled area: " + "%.1f".format(area) + " m²")
             Slider(area, { area = it }, valueRange = 0.5f..10f)
-            Text("Observed density: " + "%.2f".format(density) + " organisms m⁻²", style = MaterialTheme.typography.headlineSmall)
-            Text("Density = number of individuals ÷ sampled area. For a population estimate, use representative random/systematic samples and multiply mean density by the total habitat area.")
-            Text("Sampling uncertainty rises with patchy distribution, small sample size, poor placement and inconsistent identification.", style = MaterialTheme.typography.bodySmall)
+            Text("Total habitat area: " + "%.0f".format(habitatArea) + " m²")
+            Slider(habitatArea, { habitatArea = it }, valueRange = 1f..200f)
+            HorizontalDivider()
+            Text("Species A density: " + "%.2f".format(densityA) + " m⁻²")
+            Text("Species B density: " + "%.2f".format(densityB) + " m⁻²")
+            Text("Estimated A population: " + "%.0f".format(estimatedA))
+            Text("Estimated B population: " + "%.0f".format(estimatedB))
+            Text("Dominant in the sample: " + dominant, style = MaterialTheme.typography.headlineSmall)
+            Text("Density = count ÷ sampled area. Estimated population = mean density × habitat area. A representative sampling design and repeated quadrats are needed; clumped distributions and uneven sampling can bias estimates.", style = MaterialTheme.typography.bodySmall)
         }
     }
 }
