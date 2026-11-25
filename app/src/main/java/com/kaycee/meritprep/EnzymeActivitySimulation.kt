@@ -39,11 +39,13 @@ object EnzymeActivitySimulation {
         require(conditions.temperatureCelsius.isFinite() && conditions.temperatureCelsius in 0.0..80.0)
         require(conditions.pH.isFinite() && conditions.pH in 0.0..14.0)
 
-        val temperatureResponse = if (conditions.temperatureCelsius <= HUMAN_BODY_TEMPERATURE_OPTIMUM_C) {
+        val temperatureResponseRaw = if (conditions.temperatureCelsius <= HUMAN_BODY_TEMPERATURE_OPTIMUM_C) {
             conditions.temperatureCelsius / HUMAN_BODY_TEMPERATURE_OPTIMUM_C
         } else {
-            exp(-0.5 * ((conditions.temperatureCelsius - HUMAN_BODY_TEMPERATURE_OPTIMUM_C) / TEMPERATURE_DECLINE_WIDTH_C).let { it * it })
-        }.coerceIn(0.0, 1.0)
+            val distanceFromOptimum = (conditions.temperatureCelsius - HUMAN_BODY_TEMPERATURE_OPTIMUM_C) / TEMPERATURE_DECLINE_WIDTH_C
+            exp(-0.5 * distanceFromOptimum * distanceFromOptimum)
+        }
+        val temperatureResponse = temperatureResponseRaw.coerceIn(0.0, 1.0)
 
         val pHDifference = (conditions.pH - conditions.profile.illustrativeOptimumPh) / PH_RESPONSE_WIDTH
         val pHResponse = exp(-0.5 * pHDifference * pHDifference).coerceIn(0.0, 1.0)
