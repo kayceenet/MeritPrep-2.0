@@ -733,20 +733,20 @@ object ScienceMediaCatalog {
             offlineAlternative = "Use MeritPrep's adjustable wave animation and frequency-wavelength explorer."
         ),
         ScienceMediaResource(
-            id = "phy-wave-equation-gif",
-            title = "Vibrating-string wave animation",
+            id = "phy-wave-machine-gif",
+            title = "Shive wave-machine animation",
             subjectCode = PHYSICS,
             topicId = "phy-waves",
             mediaType = ScienceMediaType.ANIMATION,
-            provider = "Wikimedia Commons — Ilya Voyager",
-            summary = "A compact CC0 animated GIF of wave propagation on a string, useful for visualising the travelling-wave model.",
-            sourceUrl = "https://commons.wikimedia.org/wiki/File:Propagation_of_the_wave.gif",
-            licenceName = "CC0 1.0 Universal Public Domain Dedication",
-            licenceUrl = "https://creativecommons.org/publicdomain/zero/1.0/",
-            permittedUse = "This is a second lesson mapping to the same CC0 source asset. Keep the source credit and do not imply that the animation is a measurement of a real string.",
-            beforeYouStart = "Identify one point on the string and predict its motion over one complete cycle.",
-            afterYouExplore = "Explain how a wave can transfer energy without transporting the medium as a whole.",
-            offlineAlternative = "Use MeritPrep's native wave-pulse and oscillation model."
+            provider = "Wikimedia Commons — Lookang and Wolfgang Christian",
+            summary = "An animated model of a Shive wave machine showing a transverse disturbance travelling through linked rods. The original model was created by Wolfgang Christian and remixed by Lookang.",
+            sourceUrl = "https://commons.wikimedia.org/wiki/File:Wavemachine.gif",
+            licenceName = "Creative Commons Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0)",
+            licenceUrl = "https://creativecommons.org/licenses/by-sa/3.0/",
+            permittedUse = "This entry links to the original file page. If copying, modifying or bundling the GIF, credit Wolfgang Christian and Lookang and comply with the CC BY-SA 3.0 share-alike terms.",
+            beforeYouStart = "Predict how changing the length of the rods affects the speed of a disturbance in the model.",
+            afterYouExplore = "Explain how the disturbance travels along the machine while each rod oscillates about its equilibrium position.",
+            offlineAlternative = "Use MeritPrep's native transverse-wave and wave-speed explorer."
         )
     )
 
