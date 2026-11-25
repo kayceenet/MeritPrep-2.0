@@ -17,6 +17,7 @@ import kotlin.math.sin
 @Composable
 fun BiologyInteractiveLessonActivity(topicId: String) {
     when (topicId) {
+        "bio-cell" -> CellOrganisationExplorerActivity()
         "bio-transport" -> Column(verticalArrangement = Arrangement.spacedBy(12.dp)) { DiffusionAnimatedLessonActivity(); OsmosisInquiryActivity() }
         "bio-nutrition" -> Column(verticalArrangement = Arrangement.spacedBy(12.dp)) { PhotosynthesisInquiryActivity(); EnzymeInquiryActivity() }
         "bio-growth" -> CellDivisionInquiryActivity()
@@ -182,4 +183,45 @@ private fun PhotosynthesisInquiryActivity() {
  Text("Favoured trait: "+r.moreFavouredTrait,fontWeight=FontWeight.Bold); Text(r.explanation)
  Text("Model omits mutation, migration, genetic drift and changing population size.",style=MaterialTheme.typography.bodySmall)
 }}
+}
+
+
+@Composable
+private fun CellOrganisationExplorerActivity() {
+    var level by remember { mutableStateOf("Cell") }
+    var cellType by remember { mutableStateOf("Plant") }
+    val levels = listOf("Cell", "Tissue", "Organ", "System", "Organism")
+    val description = when (level) {
+        "Cell" -> "A cell is the smallest structural and functional unit of a living organism. Examples include a red blood cell, neurone and palisade cell."
+        "Tissue" -> "A tissue is a group of similar cells working together for a particular function. Examples include xylem, phloem, muscle and epithelial tissue."
+        "Organ" -> "An organ contains different tissues working together. Examples include a leaf, root, heart and kidney."
+        "System" -> "An organ system is a group of organs coordinating a major function, such as digestion, transport or excretion."
+        else -> "An organism is an individual living thing. It may be unicellular, such as Amoeba, or multicellular, such as a maize plant or human."
+    }
+    val example = when (level) {
+        "Cell" -> if (cellType == "Plant") "Palisade cell: chloroplast-rich and specialised for photosynthesis." else if (cellType == "Animal") "Neurone: a specialised cell that transmits electrical impulses." else "Bacterial cell: prokaryotic, with no membrane-bound nucleus."
+        "Tissue" -> if (cellType == "Plant") "Xylem tissue transports water and mineral ions and also supports the plant." else "Muscle tissue contracts; epithelial tissue covers and lines body surfaces."
+        "Organ" -> if (cellType == "Plant") "A leaf contains epidermal, mesophyll and vascular tissues arranged for photosynthesis and exchange." else "The heart contains cardiac muscle, connective, nervous and epithelial tissues."
+        "System" -> if (cellType == "Plant") "The shoot system includes stems, leaves, buds and flowers; the root system anchors and absorbs." else "The human digestive system includes the alimentary canal and accessory organs."
+        else -> if (cellType == "Plant") "A maize plant is a multicellular photosynthetic organism." else "A human is a multicellular organism with specialised tissues and organ systems."
+    }
+    Card(Modifier.fillMaxWidth()) {
+        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            Text("Interactive cell structure and levels of organisation", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+            Text("Move from the cell to the whole organism. At each level, identify the structure and explain how it contributes to the next level.")
+            Row(horizontalArrangement = Arrangement.spacedBy(5.dp)) {
+                listOf("Plant", "Animal", "Prokaryote").forEach {
+                    FilterChip(cellType == it, { cellType = it }, { Text(it) })
+                }
+            }
+            Row(Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(5.dp)) {
+                levels.forEach { FilterChip(level == it, { level = it }, { Text(it) }) }
+            }
+            Text(level, style = MaterialTheme.typography.headlineSmall, color = MaterialTheme.colorScheme.primary)
+            Text(description)
+            Text(example, fontWeight = FontWeight.SemiBold)
+            Text("Check the boundary: cells form tissues in multicellular organisms, tissues form organs, organs form systems, and systems contribute to the organism. A unicellular organism carries out all life processes within one cell.", style = MaterialTheme.typography.bodySmall)
+            Text("Cell-type distinction: plant and animal cells are eukaryotic; bacterial cells are prokaryotic. A bacterial cell wall is not made of cellulose.", style = MaterialTheme.typography.bodySmall)
+        }
+    }
 }
