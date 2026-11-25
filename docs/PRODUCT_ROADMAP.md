@@ -92,3 +92,6 @@ Authenticated sync, teacher/admin CMS, analytics, backups, privacy and security 
 
 
 **X-linked exam practice:** four new original questions cover the X chromosome's inheritance from each parent, why recessive X-linked alleles may be expressed in males, and conditional versus overall offspring probabilities. The additions preserve exact A–D answer balance across the 264-question Biology bank.
+
+
+**Cell-division glossary:** expanded the learner reference with chromosome, chromatid, centromere, cytokinesis, bivalent, spindle fibre and independent assortment. Mitosis and meiosis entries now link to the growth lesson and explicitly distinguish the single DNA-replication round from the two meiotic divisions. Regression tests check the new terms and key definitions.
