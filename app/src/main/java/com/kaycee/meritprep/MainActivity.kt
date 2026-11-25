@@ -253,6 +253,12 @@ private fun HomeScreen(nav: NavHostController, navigationRevision: Int = 0) {
             }
         }
         item {
+            Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                HomeQuickAction("Study plan", "Organise your learning", "PLAN", Modifier.weight(1f)) { nav.navigate("study-plan") }
+                HomeQuickAction("Science media", "Simulations and animations", "EXPLORE", Modifier.weight(1f)) { nav.navigate("science-media") }
+            }
+        }
+        item {
             Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 Text("Explore subjects", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
                 Row(horizontalArrangement = Arrangement.spacedBy(7.dp)) {
