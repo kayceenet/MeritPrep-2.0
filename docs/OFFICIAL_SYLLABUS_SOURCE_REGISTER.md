@@ -26,7 +26,16 @@ Official WAEC Nigeria pages confirm that examination syllabuses are made availab
 - WAEC FAQ / examination information: https://www.waecnigeria.org/index.php/node/9
 - WASSCE entry regulations: https://www.waecnigeria.org/node/102
 
-**Important limitation:** The exact current WAEC Biology, Chemistry and Physics syllabus documents have not yet been individually retrieved and version-checked in this register. The existing Biology curriculum's reference to WAEC Biology Section C is not, by itself, evidence of a complete WAEC crosswalk. Chemistry and Physics WAEC coverage must likewise be verified against the actual current documents before being marked audited.
+**Primary-source limitation:** WAEC Nigeria's official FAQ confirms that subject syllabuses are made available on the Council's website, but the direct current PDFs were not located on the official WAEC domain during this review.
+
+**Provisional secondary copies located:** The independent website [waecsyllabus.com](https://waecsyllabus.com/) publishes 2026/2027 syllabus pages and links to PDFs it describes as official. These are useful working copies, not primary WAEC sources. Their pages report:
+- [Biology 2026/2027](https://waecsyllabus.com/biology/) — 13 sections and 69 topics.
+- [Chemistry 2026/2027](https://waecsyllabus.com/chemistry/) — 4 sections and 30 topics, including Section C for Nigeria, Sierra Leone, Liberia and The Gambia.
+- [Physics 2026/2027](https://waecsyllabus.com/physics/) — 6 sections and 42 topics, including harmonised topics for short structured questions.
+
+The Chemistry page provides detailed topic and practical-skill text, including quantitative analysis, qualitative analysis, redox titrations, cation/anion tests, halogen displacement, gas tests and organic functional-group tests. It also describes the Nigerian Section C scope. The Physics page includes harmonised short-structured-question topics beyond the main syllabus sections. These differences must be retained in the course mapping.
+
+**Required next verification:** Obtain the exact 2026/2027 PDFs from WAEC or confirm their contents with the official WAEC e-learning/registration syllabus documents. Until that primary-source check is complete, any crosswalk derived from waecsyllabus.com must be marked provisional and must not be represented as officially verified.
 
 ## Required syllabus-audit workflow
 
