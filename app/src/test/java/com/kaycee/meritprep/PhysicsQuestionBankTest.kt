@@ -6,6 +6,11 @@ import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class PhysicsQuestionBankTest {
+    @Test fun correctAnswersAreBalancedAcrossAllFourPositions() {
+        val counts = (0..3).map { position -> PhysicsQuestionBank.all.count { it.correctOptionIndex == position } }
+        assertTrue(counts.maxOrNull()!! - counts.minOrNull()!! <= 1)
+    }
+
     @Test fun containsOneHundredNinetyFiveOriginalQuestionsAcrossThirtyNineDevelopedTopics() {
         assertEquals(195, PhysicsQuestionBank.all.size)
         assertEquals(39, PhysicsCourse.topics.count { !it.isSyllabusOutline })
