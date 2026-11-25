@@ -25,4 +25,10 @@ class BiologySupplementalActivityCoverageTest {
         val missing = BiologyCurriculum.units.mapNotNull { it.lessonId }.filterNot { it in covered }
         assertTrue("Biology lesson topics without a visual or interactive experience: $missing", missing.isEmpty())
     }
+
+    @Test
+    fun everyBiologyCurriculumLessonHasAGuidedInvestigationProfile() {
+        val missing = BiologyCurriculum.units.mapNotNull { it.lessonId }.filterNot { InvestigationProfiles.supports(it) }
+        assertTrue("Biology lessons without a guided investigation profile: $missing", missing.isEmpty())
+    }
 }
