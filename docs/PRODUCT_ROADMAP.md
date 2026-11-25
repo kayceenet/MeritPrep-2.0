@@ -116,3 +116,6 @@ Authenticated sync, teacher/admin CMS, analytics, backups, privacy and security 
 
 
 **Chemistry answer-key quality:** re-ordered options in the 90-question JAMB-mapped Chemistry bank and 30-question WAEC-style Chemistry objective bank without changing the correct answer for any item. Correct positions are now distributed as 23/23/22/22 and 8/8/7/7 across A–D respectively. Regression tests enforce near-even answer-position balance in both banks.
+
+
+**Physics answer-key quality:** re-ordered options in the 195-question JAMB-mapped Physics bank and 50-question WAEC-style Physics objective bank without changing their keyed correct answers. Correct positions are now distributed 49/49/49/48 and 13/13/12/12 across A–D. Regression tests enforce near-even distribution in both banks.
