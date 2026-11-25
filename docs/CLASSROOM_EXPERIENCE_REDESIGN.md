@@ -96,3 +96,12 @@ Concept visuals are now resolved from each lesson section heading, so the releva
 Every lesson has a Scenario stage. Topics with a specific original case study receive a multiple-choice decision and explanation; other topics receive a saved application challenge in which the learner identifies a real system, predicts a variable change and specifies evidence.
 
 The six lesson pillars now record completion locally. Completed pillars are marked in the navigation and the progress indicator reports the number completed. The Exercise pillar records completion only after the topic assessment reaches its 80% threshold. Learners can navigate between pillars freely; the current implementation tracks completion but does not lock later pillars.
+
+
+## Science simulations and mathematical typesetting — 25 November 2026
+
+The Biology visualisation pillar now includes additional native, offline interactive experiences for classification, adaptation, plant transpiration, respiration, kidney filtration, musculoskeletal levers, flowering-plant reproduction, reflex arcs, ecological tolerance, Nigerian habitats and biomes, soil properties, pollution pathways, variation, fermentation and comparative anatomy. Existing cell, photosynthesis, osmosis, diffusion, mitosis, inheritance, natural-selection and population-sampling activities remain in place. The new activities state their model assumptions and limitations rather than presenting illustrative outputs as experimental measurements.
+
+A curriculum-level regression test now checks that every Biology lesson mapping has an established or supplemental visual/interactive experience.
+
+The scientific notation renderer now recognises display-math delimiters (`\\[...\\]` and `$$...$$`) and separates prose from display equations. Display equations use structured equation cards with stacked fractions, while inline formula text supports common Greek symbols, operators, powers, subscripts, roots, chemical notation and mathematical accents. Core relationship panels have been expanded across Chemistry and Physics and are also visible in the concept pillar, not only in the visualisation gallery.
