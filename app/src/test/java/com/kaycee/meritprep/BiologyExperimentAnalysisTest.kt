@@ -53,6 +53,30 @@ class BiologyExperimentAnalysisTest {
         assertEquals(true, BiologyExperimentAnalysis.describeTrend(variable).contains("fluctuates"))
     }
     @Test
+    fun flagsPossibleOutliersWithoutDeletingOriginalReadings() {
+        assertEquals(
+            listOf(100.0),
+            BiologyExperimentAnalysis.possibleOutliers("10, 11, 10, 12, 11, 100")
+        )
+        assertEquals(emptyList<Double>(), BiologyExperimentAnalysis.possibleOutliers("10, 11, 10, 12"))
+        assertEquals(
+            listOf(100.0),
+            BiologyExperimentAnalysis.possibleOutliers("10; 11; 10; 12; 11; 100")
+        )
+    }
+
+    @Test
+    fun doesNotFlagWhenSpreadIsZeroAndRejectsInvalidOutlierInput() {
+        assertEquals(emptyList<Double>(), BiologyExperimentAnalysis.possibleOutliers("5, 5, 5, 5, 5"))
+        assertThrows(IllegalArgumentException::class.java) {
+            BiologyExperimentAnalysis.possibleOutliers("1, 2, , 4, 5")
+        }
+        assertThrows(IllegalArgumentException::class.java) {
+            BiologyExperimentAnalysis.possibleOutliers("1, 2, 3, 4, NaN")
+        }
+    }
+
+    @Test
     fun returnsNullWhenNoReadingsHaveBeenEntered() {
         assertNull(BiologyExperimentAnalysis.summarizeReadings(""))
         assertNull(BiologyExperimentAnalysis.summarizeReadings("   "))
