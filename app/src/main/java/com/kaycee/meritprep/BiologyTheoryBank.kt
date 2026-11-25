@@ -247,8 +247,7 @@ object BiologyTheoryBank {
                 "Soil suitability also depends on structure, organic matter, pH, climate and the crop being grown."
             ),
             "Sandy soil contains relatively large particles with large pore spaces, so water drains quickly and little water or dissolved nutrient is retained. Clayey soil has very small particles and pore spaces; it holds more water but drains slowly and can become waterlogged and poorly aerated. Loam contains a mixture of sand, silt and clay and often organic matter. It can provide a useful balance of drainage, water retention, aeration and nutrient-holding capacity. The best soil for a crop also depends on soil structure, pH, organic matter, climate and the crop's requirements."
-        )
-
+        ),
         BiologyTheoryTask(
             "theory-growth-16", "bio-growth", "Comparing mitosis and meiosis",
             "A diploid cell has 2n = 6 chromosomes. (a) Describe the main events of mitosis. (b) Describe the two meiotic divisions, including the behaviour of homologous chromosomes and sister chromatids. (c) State the number and chromosome complement of the products of each process. (d) Explain one biological importance of each process.",
