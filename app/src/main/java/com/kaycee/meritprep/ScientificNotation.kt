@@ -25,6 +25,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.BaselineShift
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
 
 /**
@@ -36,34 +37,34 @@ import androidx.compose.ui.unit.sp
  */
 object ScientificNotation {
     private val commands = linkedMapOf(
-        "\\\\times" to "×", "\\\\cdot" to "·", "\\\\div" to "÷",
-        "\\\\pm" to "±", "\\\\neq" to "≠", "\\\\approx" to "≈",
-        "\\\\leq" to "≤", "\\\\geq" to "≥", "\\\\propto" to "∝",
-        "\\\\rightarrow" to "→", "\\\\longrightarrow" to "⟶",
-        "\\\\leftarrow" to "←", "\\\\leftrightarrow" to "↔",
-        "\\\\Rightarrow" to "⇒", "\\\\rightleftharpoons" to "⇌",
-        "\\\\Delta" to "Δ", "\\\\delta" to "δ", "\\\\theta" to "θ",
-        "\\\\lambda" to "λ", "\\\\mu" to "μ", "\\\\rho" to "ρ",
-        "\\\\pi" to "π", "\\\\alpha" to "α", "\\\\beta" to "β",
-        "\\\\gamma" to "γ", "\\\\omega" to "ω", "\\\\Omega" to "Ω",
-        "\\\\sigma" to "σ", "\\\\Sigma" to "Σ", "\\\\phi" to "φ",
-        "\\\\epsilon" to "ε", "\\\\infty" to "∞", "\\\\degree" to "°",
-        "\\\\perp" to "⊥", "\\\\parallel" to "∥", "\\\\sum" to "Σ",
-        "\\\\int" to "∫", "\\\\therefore" to "∴", "\\\\because" to "∵"
+        "\\times" to "×", "\\cdot" to "·", "\\div" to "÷",
+        "\\pm" to "±", "\\neq" to "≠", "\\approx" to "≈",
+        "\\leq" to "≤", "\\geq" to "≥", "\\propto" to "∝",
+        "\\rightarrow" to "→", "\\longrightarrow" to "⟶",
+        "\\leftarrow" to "←", "\\leftrightarrow" to "↔",
+        "\\Rightarrow" to "⇒", "\\rightleftharpoons" to "⇌",
+        "\\Delta" to "Δ", "\\delta" to "δ", "\\theta" to "θ",
+        "\\lambda" to "λ", "\\mu" to "μ", "\\rho" to "ρ",
+        "\\pi" to "π", "\\alpha" to "α", "\\beta" to "β",
+        "\\gamma" to "γ", "\\omega" to "ω", "\\Omega" to "Ω",
+        "\\sigma" to "σ", "\\Sigma" to "Σ", "\\phi" to "φ",
+        "\\epsilon" to "ε", "\\infty" to "∞", "\\degree" to "°",
+        "\\perp" to "⊥", "\\parallel" to "∥", "\\sum" to "Σ",
+        "\\int" to "∫", "\\therefore" to "∴", "\\because" to "∵"
     )
     private val superscript = mapOf('0' to '⁰','1' to '¹','2' to '²','3' to '³','4' to '⁴','5' to '⁵','6' to '⁶','7' to '⁷','8' to '⁸','9' to '⁹','+' to '⁺','-' to '⁻','=' to '⁼','(' to '⁽',')' to '⁾','n' to 'ⁿ','i' to 'ⁱ')
     private val subscript = mapOf('0' to '₀','1' to '₁','2' to '₂','3' to '₃','4' to '₄','5' to '₅','6' to '₆','7' to '₇','8' to '₈','9' to '₉','+' to '₊','-' to '₋','=' to '₌','(' to '₍',')' to '₎','i' to 'ᵢ','n' to 'ₙ')
 
     fun format(source: String): String {
         var value = source
-            .replace("\\\\(", "").replace("\\\\)", "")
-            .replace("\\\\[", "").replace("\\\\]", "")
+            .replace("\\(", "").replace("\\)", "")
+            .replace("\\[", "").replace("\\]", "")
             .replace("$", "")
-            .replace("\\\\left", "").replace("\\\\right", "")
-        value = replaceBracedFunction(value, "\\\\frac") { a, b -> "($a)⁄($b)" }
-        value = replaceBracedFunction(value, "\\\\dfrac") { a, b -> "($a)⁄($b)" }
-        value = replaceBracedFunction(value, "\\\\sqrt") { a, _ -> "√($a)" }
-        listOf("\\\\mathrm", "\\\\text", "\\\\mathbf", "\\\\ce", "\\\\operatorname").forEach { cmd ->
+            .replace("\\left", "").replace("\\right", "")
+        value = replaceBracedFunction(value, "\\frac") { a, b -> "($a)⁄($b)" }
+        value = replaceBracedFunction(value, "\\dfrac") { a, b -> "($a)⁄($b)" }
+        value = replaceBracedFunction(value, "\\sqrt") { a, _ -> "√($a)" }
+        listOf("\\mathrm", "\\text", "\\mathbf", "\\ce", "\\operatorname").forEach { cmd ->
             value = replaceSingleBraced(value, cmd)
         }
         commands.entries.sortedByDescending { it.key.length }.forEach { (key, replacement) -> value = value.replace(key, replacement) }
@@ -71,7 +72,7 @@ object ScientificNotation {
         value = value.replace(Regex("""_\{([^{}]+)}""")) { m -> m.groupValues[1].map { subscript[it] ?: it }.joinToString("") }
         value = value.replace(Regex("""\^([A-Za-z0-9+\-=])""")) { m -> superscript[m.groupValues[1][0]]?.toString() ?: m.value }
         value = value.replace(Regex("""_([A-Za-z0-9+\-=])""")) { m -> subscript[m.groupValues[1][0]]?.toString() ?: m.value }
-        value = value.replace("\\\\ ", " ").replace("\\\\%", "%")
+        value = value.replace("\\ ", " ").replace("\\%", "%")
         return value.replace("{", "").replace("}", "").replace("  ", " ").trim()
     }
 
@@ -85,7 +86,7 @@ object ScientificNotation {
             if (firstOpen < 0) break
             val firstEnd = matchingBrace(result, firstOpen)
             if (firstEnd < 0) break
-            val secondOpen = if (command == "\\\\sqrt") -1 else result.indexOf('{', firstEnd + 1)
+            val secondOpen = if (command == "\\sqrt") -1 else result.indexOf('{', firstEnd + 1)
             val secondEnd = if (secondOpen >= 0) matchingBrace(result, secondOpen) else -1
             val a = result.substring(firstOpen + 1, firstEnd)
             val b = if (secondOpen >= 0 && secondEnd >= 0) result.substring(secondOpen + 1, secondEnd) else ""
