@@ -815,31 +815,15 @@ fun LessonScreen(topicId: String) {
             LinearProgressIndicator(progress = { completion / 100f }, modifier = Modifier.fillMaxWidth())
         }
 
-        Row(
-            Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()).padding(horizontal = 12.dp),
-            horizontalArrangement = Arrangement.spacedBy(7.dp)
-        ) {
-            stages.forEach { item ->
-                FilterChip(
-                    selected = stage == item,
-                    onClick = { if (isLessonStageUnlocked(item, completedStages)) stage = item },
-                    enabled = isLessonStageUnlocked(item, completedStages),
-                    label = { Text((if (item in completedStages) "✓  " else "") + item.label) }
-                )
-            }
-        }
-
-        Text(
-            "Complete each learning pillar to unlock the next. You can revisit any completed pillar.",
-            Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 4.dp),
-            style = MaterialTheme.typography.bodySmall,
-            color = MaterialTheme.colorScheme.onSurfaceVariant
-        )
-
-        Column(
-            Modifier.weight(1f).fillMaxWidth().verticalScroll(rememberScrollState()).padding(horizontal = 16.dp, vertical = 14.dp),
-            verticalArrangement = Arrangement.spacedBy(14.dp)
-        ) {
+        val lessonBodyScroll = rememberScrollState()
+        BoxWithConstraints(Modifier.weight(1f).fillMaxWidth()) {
+            if (maxWidth >= 720.dp) {
+                Row(Modifier.fillMaxSize()) {
+                    ClassroomPillarNavigation(stage, completedStages, lessonBodyScroll, true, { stage = it })
+                    Column(
+                        Modifier.weight(1f).fillMaxHeight().verticalScroll(lessonBodyScroll).padding(horizontal = 20.dp, vertical = 14.dp),
+                        verticalArrangement = Arrangement.spacedBy(14.dp)
+                    ) {
             Card(Modifier.fillMaxWidth(), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.55f))) {
                 Column(Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
                     Text(stage.label.uppercase(), style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
@@ -1026,6 +1010,11 @@ fun LessonScreen(topicId: String) {
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
+                }
+            }
+        }
+
+                    }
                 }
             }
         }
