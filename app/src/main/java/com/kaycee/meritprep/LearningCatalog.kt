@@ -702,7 +702,7 @@ internal fun isLessonStageUnlocked(target: LessonStage, completed: Set<LessonSta
 }
 
 @Composable
-fun LessonScreen(topicId: String) {
+fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: () -> Unit = {}) {
     val topic = LearningCatalog.find(topicId)
     val context = LocalContext.current
     val database = remember(context) { MeritDatabase(context) }
@@ -797,17 +797,19 @@ fun LessonScreen(topicId: String) {
 
     Column(Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
         Column(Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 12.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-            Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
+            Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp), verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
+                IconButton(onClick = onBack) { Icon(Icons.Default.ArrowBack, contentDescription = "Back to syllabus") }
                 Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(3.dp)) {
-                    Text(topic.subjectCode + "  •  MERITPREP CLASSROOM", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
-                    Text(topic.title, style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold)
+                    Text(topic.subjectCode + "  •  JAMB / WAEC CLASSROOM", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
+                    Text(topic.title, style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold, maxLines = 2)
+                    Text((stageIndex + 1).toString() + " / " + stages.size + " learning pillars", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
-                TextButton(onClick = {
+                IconButton(onClick = onOpenCalculators) { Icon(Icons.Default.Calculate, contentDescription = "Scientific calculator") }
+                IconButton(onClick = {
                     if (bookmarked) database.removeBookmark(topic.id) else database.bookmark(topic.id, "lesson")
                     bookmarked = !bookmarked
-                }) { Text(if (bookmarked) "★ Saved" else "☆ Save") }
+                }) { Icon(if (bookmarked) Icons.Default.Bookmark else Icons.Default.BookmarkBorder, contentDescription = if (bookmarked) "Remove bookmark" else "Save lesson") }
             }
-            ScientificContent(topic.introduction, style = MaterialTheme.typography.bodyLarge)
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
                 Text(if (completed) "Lesson mastered" else completedStages.size.toString() + " of " + stages.size + " pillars completed", style = MaterialTheme.typography.labelMedium)
                 Text(completion.toString() + "%", style = MaterialTheme.typography.labelMedium, fontWeight = FontWeight.Bold)
@@ -832,6 +834,12 @@ fun LessonScreen(topicId: String) {
             AnimatedContent(targetState = stage, label = "lesson-pillar-transition") { activeStage ->
                 when (activeStage) {
                 LessonStage.CONCEPT -> {
+                    Card(Modifier.fillMaxWidth()) {
+                        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                            Text("START HERE", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
+                            ScientificContent(topic.introduction, style = MaterialTheme.typography.bodyLarge)
+                        }
+                    }
                     Card(Modifier.fillMaxWidth()) {
                         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(9.dp)) {
                             Text("What you will learn", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
