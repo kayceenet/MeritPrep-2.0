@@ -265,5 +265,5 @@ A topic may not be labelled complete if any applicable critical item above is FA
 ### Dashboard and external media update — 25 November 2026
 
 - Home dashboard now has topic search, resume-learning card, progress/accuracy/due-review metrics, STEM/Other subject filters, and quick actions for practice, labs, revision, bookmarks, study plan and science media.
-- External media catalogue contains 38 curated links (30 interactive simulations, 7 virtual-lab resources, 1 animation) from PhET, HHMI BioInteractive and LabXchange. These are external candidates with source-specific rights restrictions; they are not packaged or embedded in the APK.
+- External media catalogue contains 44 curated links (30 interactive simulations, 7 virtual-lab resources, 1 animation) from PhET, HHMI BioInteractive and LabXchange. These are external candidates with source-specific rights restrictions; they are not packaged or embedded in the APK.
 - The latest dashboard build must pass CI on the current main commit before distribution. User visual acceptance on a real Android device is still required; CI cannot confirm that the interface is appealing on the user's device.
