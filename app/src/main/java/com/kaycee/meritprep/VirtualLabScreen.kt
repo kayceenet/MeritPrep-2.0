@@ -862,6 +862,15 @@ private fun BiologyExperimentPlannerLab() {
                             style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.primary
                         )
+                        val unusualReadings = BiologyExperimentAnalysis.possibleOutliers(row.second)
+                        if (unusualReadings.isNotEmpty()) {
+                            Text(
+                                "Possible unusual reading(s): " + unusualReadings.joinToString { "%.2f".format(it) } +
+                                    ". Check the original record and method; do not remove a value without a justified reason.",
+                                style = MaterialTheme.typography.bodySmall,
+                                color = MaterialTheme.colorScheme.tertiary
+                            )
+                        }
                     } else {
                         Text("Enter valid numbers separated by commas or semicolons.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.error)
                     }
