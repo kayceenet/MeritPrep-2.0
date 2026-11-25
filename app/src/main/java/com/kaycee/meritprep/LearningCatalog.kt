@@ -867,6 +867,7 @@ fun LessonScreen(topicId: String) {
                 LessonStage.LAB -> {
                     Text("Predict first. Change one variable at a time. Record observations, inspect the graph and evaluate the model.", style = MaterialTheme.typography.bodyMedium)
                     GuidedInvestigationActivity(topicId)
+                    LessonPracticalDispatcher(topicId)
                     WaecBiologyNigeriaSupplementalActivity(topicId)
                     WaecPhysicsSupplementalActivity(topicId)
                     WaecChemistrySupplementalActivity(topicId)
