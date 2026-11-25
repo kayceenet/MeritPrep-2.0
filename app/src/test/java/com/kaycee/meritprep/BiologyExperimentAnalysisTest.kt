@@ -17,6 +17,31 @@ class BiologyExperimentAnalysisTest {
     }
 
     @Test
+    fun sortsGraphPointsAndUsesMeanOfRepeatedReadings() {
+        val points = BiologyExperimentAnalysis.graphPoints(
+            listOf("20" to "4, 6", "10" to "2, 4", "30" to "8, 10")
+        )
+        assertEquals(10.0, points[0].independentValue, 0.000001)
+        assertEquals(3.0, points[0].meanResult, 0.000001)
+        assertEquals(2, points[0].readingCount)
+        assertEquals(20.0, points[1].independentValue, 0.000001)
+        assertEquals(5.0, points[1].meanResult, 0.000001)
+    }
+
+    @Test
+    fun rejectsIncompleteDuplicateOrNonNumericGraphRows() {
+        assertThrows(IllegalArgumentException::class.java) {
+            BiologyExperimentAnalysis.graphPoints(listOf("10" to "2", "20" to ""))
+        }
+        assertThrows(IllegalArgumentException::class.java) {
+            BiologyExperimentAnalysis.graphPoints(listOf("10" to "2", "10" to "3"))
+        }
+        assertThrows(IllegalArgumentException::class.java) {
+            BiologyExperimentAnalysis.graphPoints(listOf("ten" to "2", "20" to "3"))
+        }
+    }
+
+    @Test
     fun returnsNullWhenNoReadingsHaveBeenEntered() {
         assertNull(BiologyExperimentAnalysis.summarizeReadings(""))
         assertNull(BiologyExperimentAnalysis.summarizeReadings("   "))
