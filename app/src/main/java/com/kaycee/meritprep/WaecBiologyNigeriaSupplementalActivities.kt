@@ -13,7 +13,7 @@ internal object WaecBiologyActivityRoutes {
         "bio-cell", "bio-classification", "bio-nutrition", "bio-plant-anatomy",
         "bio-reproduction", "bio-interactions", "bio-ecology-factors", "bio-habitats",
         "bio-populations", "bio-environment", "bio-variation", "bio-adaptation",
-        "bio-soil", "bio-excretion", "bio-coordination"
+        "bio-soil", "bio-excretion", "bio-coordination", "bio-biomes", "bio-biotechnology"
     )
 }
 
@@ -44,6 +44,8 @@ fun WaecBiologyNigeriaSupplementalActivity(topicId: String) {
         }
         "bio-ecology-factors" -> WaecToleranceRangeActivity()
         "bio-habitats" -> WaecHabitatAdaptationActivity()
+        "bio-biomes" -> WaecBiomeComparisonActivity()
+        "bio-biotechnology" -> WaecBiotechnologyActivity()
         "bio-populations" -> WaecPopulationSamplingActivity()
         "bio-environment" -> WaecMicroorganismsHealthActivity()
         "bio-variation" -> WaecVariationApplicationsActivity()
@@ -552,6 +554,57 @@ private fun WaecNutrientCycleActivity() {
             }
             Text(detail)
             Text("Distinguish a matter cycle from energy flow: atoms are recycled through ecosystems, while energy flows through trophic levels and is eventually dissipated as heat.", style = MaterialTheme.typography.bodySmall)
+        }
+    }
+}
+
+
+@Composable
+private fun WaecBiomeComparisonActivity() {
+    var biome by remember { mutableStateOf("Tropical rainforest") }
+    val detail = when (biome) {
+        "Tropical rainforest" -> "High annual rainfall, humid conditions and layered evergreen vegetation. Species show competition for light, climbing habits and shade adaptations."
+        "Southern Guinea savanna" -> "Distinct wet and dry seasons, tall grasses and scattered trees. Fire and grazing influence vegetation structure."
+        "Northern Guinea savanna" -> "Lower rainfall and a shorter wet season than the southern zone, with more open grassland and drought-tolerant trees."
+        "Sudan savanna" -> "Shorter grasses, widely spaced drought-resistant trees and a longer dry season."
+        "Montane" -> "High altitude produces cooler conditions and specialised montane forest or grassland communities."
+        else -> "Very low rainfall, sparse vegetation and strong water limitation. Plants may reduce leaf area, store water or develop deep roots."
+    }
+    Card(Modifier.fillMaxWidth()) {
+        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            Text("WAEC Nigeria focus: compare Nigerian biomes", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+            listOf("Tropical rainforest", "Southern Guinea savanna", "Northern Guinea savanna", "Sudan savanna", "Montane", "Desert").forEach {
+                FilterChip(biome == it, { biome = it }, { Text(it) })
+            }
+            HorizontalDivider()
+            Text(detail)
+            Text("Compare rainfall seasonality, temperature, vegetation structure, soil and characteristic adaptations. Biome boundaries are gradual and local conditions vary.", style = MaterialTheme.typography.bodySmall)
+        }
+    }
+}
+
+@Composable
+private fun WaecBiotechnologyActivity() {
+    var step by remember { mutableIntStateOf(0) }
+    val stages = listOf(
+        "Identify and isolate the gene" to "The DNA sequence coding for human insulin is identified and obtained using an appropriate molecular method.",
+        "Prepare a vector" to "A bacterial plasmid is isolated and cut at a specific recognition site using a restriction enzyme.",
+        "Join gene and vector" to "The insulin gene is joined to the plasmid using DNA ligase, producing recombinant DNA.",
+        "Transform and select host cells" to "The recombinant plasmid is introduced into suitable bacterial cells; selection identifies cells carrying the vector.",
+        "Express and harvest product" to "Selected cells are cultured under controlled conditions. Insulin is expressed, then harvested and purified to pharmaceutical standards."
+    )
+    Card(Modifier.fillMaxWidth()) {
+        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            Text("Biotechnology: recombinant insulin production", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+            Text("Follow the stages in order. This is a conceptual process model, not a laboratory protocol.")
+            Row(horizontalArrangement = Arrangement.spacedBy(5.dp)) {
+                stages.forEachIndexed { index, pair ->
+                    FilterChip(step == index, { step = index }, { Text((index + 1).toString()) })
+                }
+            }
+            Text(stages[step].first, style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.primary)
+            Text(stages[step].second)
+            Text("Biosafety and quality control: recombinant organisms are handled in approved containment systems; the final medicine must be purified and tested for identity, potency, purity and safety.", style = MaterialTheme.typography.bodySmall)
         }
     }
 }
