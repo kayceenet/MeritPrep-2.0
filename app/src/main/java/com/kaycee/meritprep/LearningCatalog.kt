@@ -794,9 +794,9 @@ fun LessonScreen(topicId: String) {
                     bookmarked = !bookmarked
                 }) { Text(if (bookmarked) "★ Saved" else "☆ Save") }
             }
-            Text(topic.introduction, style = MaterialTheme.typography.bodyLarge, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            ScientificContent(topic.introduction, style = MaterialTheme.typography.bodyLarge)
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-                Text(if (completed) "Lesson mastered" else "Learning progress", style = MaterialTheme.typography.labelMedium)
+                Text(if (completed) "Lesson mastered" else completedStages.size.toString() + " of " + stages.size + " pillars completed", style = MaterialTheme.typography.labelMedium)
                 Text(completion.toString() + "%", style = MaterialTheme.typography.labelMedium, fontWeight = FontWeight.Bold)
             }
             LinearProgressIndicator(progress = { completion / 100f }, modifier = Modifier.fillMaxWidth())
@@ -847,7 +847,7 @@ fun LessonScreen(topicId: String) {
                             Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                                 Text((index + 1).toString().padStart(2, '0'), style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
                                 Text(section.first, style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
-                                ScientificText(section.second, style = MaterialTheme.typography.bodyLarge)
+                                ScientificContent(section.second, style = MaterialTheme.typography.bodyLarge)
                                 TopicConceptInlineVisual(topicId, index, section.first)
                             }
                         }
@@ -943,7 +943,7 @@ fun LessonScreen(topicId: String) {
                                     Text("Answered " + exerciseSelections.size + "/" + practiceQuestions.size, style = MaterialTheme.typography.labelMedium)
                                 }
                                 LinearProgressIndicator(progress = (exerciseIndex + 1f) / practiceQuestions.size, modifier = Modifier.fillMaxWidth())
-                                ScientificText(question.prompt, style = MaterialTheme.typography.titleMedium)
+                                ScientificContent(question.prompt, style = MaterialTheme.typography.titleMedium)
                                 question.options.forEachIndexed { index, option ->
                                     OutlinedButton(
                                         onClick = { if (!exerciseChecked) exerciseSelections = exerciseSelections + (question.questionId to index) },
@@ -955,7 +955,7 @@ fun LessonScreen(topicId: String) {
                                 if (exerciseChecked) {
                                     val correct = selectedIndex == question.correctPresentedIndex
                                     Text(if (correct) "Correct" else "Review this explanation", color = if (correct) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.error, fontWeight = FontWeight.Bold)
-                                    ScientificText(question.explanation, style = MaterialTheme.typography.bodyMedium)
+                                    ScientificContent(question.explanation, style = MaterialTheme.typography.bodyMedium)
                                     Button(
                                         onClick = {
                                             if (exerciseIndex < practiceQuestions.lastIndex) {
