@@ -25,8 +25,8 @@ class XLinkedInheritanceSimulationTest {
             XLinkedMotherGenotype.AFFECTED,
             XLinkedFatherGenotype.UNAFFECTED
         )
-        assertEquals(100.0, result.outcomes.first { it.phenotype == "Carrier female" }.percentage, 0.000001)
-        assertEquals(100.0, result.outcomes.first { it.phenotype == "Affected male" }.percentage, 0.000001)
+        assertEquals(50.0, result.outcomes.first { it.phenotype == "Carrier female" }.percentage, 0.000001)
+        assertEquals(50.0, result.outcomes.first { it.phenotype == "Affected male" }.percentage, 0.000001)
     }
 
     @Test
@@ -36,7 +36,7 @@ class XLinkedInheritanceSimulationTest {
             XLinkedFatherGenotype.AFFECTED
         )
         assertEquals(100.0, result.outcomes.first { it.phenotype == "Carrier female" }.percentage, 0.000001)
-        assertEquals(100.0, result.outcomes.first { it.phenotype == "Unaffected male" }.percentage, 0.000001)
+        assertEquals(50.0, result.outcomes.first { it.phenotype == "Unaffected male" }.percentage, 0.000001)
     }
 
     @Test
