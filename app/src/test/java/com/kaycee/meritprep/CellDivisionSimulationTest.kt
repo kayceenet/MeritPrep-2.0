@@ -41,6 +41,20 @@ class CellDivisionSimulationTest {
         assertTrue(stages[5].keyEvent.contains("No DNA replication"))
     }
 
+    @Test fun dnaContentDoublesOnceBeforeDivisionAndHalvesAcrossTheProducts() {
+        val mitosis = CellDivisionSimulation.lesson(CellDivisionType.MITOSIS, 6).stages
+        assertEquals("2C", mitosis[0].dnaContentPerCell)
+        assertEquals("4C", mitosis[1].dnaContentPerCell)
+        assertEquals("4C", mitosis[3].dnaContentPerCell)
+        assertEquals("2C per daughter", mitosis[5].dnaContentPerCell)
+
+        val meiosis = CellDivisionSimulation.lesson(CellDivisionType.MEIOSIS, 6).stages
+        assertEquals("4C", meiosis[2].dnaContentPerCell)
+        assertEquals("2C per haploid cell", meiosis[5].dnaContentPerCell)
+        assertEquals("2C per haploid cell", meiosis[6].dnaContentPerCell)
+        assertEquals("1C per haploid product", meiosis[8].dnaContentPerCell)
+    }
+
     @Test fun anaphaseChromosomeCountsAreExplicitlyModelled() {
         val mitosis = CellDivisionSimulation.lesson(CellDivisionType.MITOSIS, 6)
         assertEquals(12, mitosis.stages[4].chromosomeCountPerCell)
