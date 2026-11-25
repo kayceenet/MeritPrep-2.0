@@ -693,6 +693,12 @@ private enum class LessonStage(val label: String, val subtitle: String) {
     PRACTICE("Exercise", "Check understanding and correct misconceptions")
 }
 
+internal fun isLessonStageUnlocked(target: LessonStage, completed: Set<LessonStage>): Boolean {
+    val stages = LessonStage.entries
+    val targetIndex = stages.indexOf(target)
+    return stages.take(targetIndex).all { it in completed }
+}
+
 @Composable
 fun LessonScreen(topicId: String) {
     val topic = LearningCatalog.find(topicId)
@@ -749,10 +755,6 @@ fun LessonScreen(topicId: String) {
             }
         )
     }
-    fun isStageUnlocked(target: LessonStage): Boolean {
-        val targetIndex = stages.indexOf(target)
-        return stages.take(targetIndex).all { it in completedStages }
-    }
     fun markStageComplete(target: LessonStage) {
         val updated = completedStages + target
         completedStages = updated
@@ -763,7 +765,7 @@ fun LessonScreen(topicId: String) {
     }
     LaunchedEffect(topicId, completedStages) {
         val firstIncomplete = stages.firstOrNull { it !in completedStages } ?: LessonStage.PRACTICE
-        if (stage in completedStages || !isStageUnlocked(stage)) stage = firstIncomplete
+        if (stage in completedStages || !isLessonStageUnlocked(stage, completedStages)) stage = firstIncomplete
     }
     val practiceQuestions = remember(topicId) {
         val bank = when (topic.subjectCode) {
@@ -818,7 +820,7 @@ fun LessonScreen(topicId: String) {
             stages.forEach { item ->
                 FilterChip(
                     selected = stage == item,
-                    onClick = { if (isStageUnlocked(item)) stage = item },
+                    onClick = { if (isLessonStageUnlocked(item, completedStages)) stage = item },
                     enabled = isStageUnlocked(item),
                     label = { Text((if (item in completedStages) "✓  " else "") + item.label) }
                 )
