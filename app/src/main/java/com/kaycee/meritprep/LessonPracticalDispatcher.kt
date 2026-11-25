@@ -12,13 +12,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.runtime.Composable
 
 enum class LessonPracticalKind {
-    CHEMISTRY_REDOX, CHEMISTRY_QUALITATIVE, PHYSICS_ELASTICITY, PHYSICS_PRESSURE,
+    CHEMISTRY_REDOX, CHEMISTRY_ACID_BASE_TITRATION, CHEMISTRY_QUALITATIVE, PHYSICS_ELASTICITY, PHYSICS_PRESSURE,
     PHYSICS_FLUIDS, PHYSICS_HEAT, PHYSICS_GAS_LAWS, PHYSICS_CAPACITORS, PHYSICS_RESISTOR_NETWORK
 }
 
 object LessonPracticalRouting {
     fun forTopic(topicId: String): LessonPracticalKind? = when (topicId) {
-        "chem-acids-bases", "chem-redox" -> LessonPracticalKind.CHEMISTRY_REDOX
+        "chem-acids-bases" -> LessonPracticalKind.CHEMISTRY_ACID_BASE_TITRATION
+        "chem-redox" -> LessonPracticalKind.CHEMISTRY_REDOX
         "chem-metals", "chem-nonmetals" -> LessonPracticalKind.CHEMISTRY_QUALITATIVE
         "phy-elasticity" -> LessonPracticalKind.PHYSICS_ELASTICITY
         "phy-pressure" -> LessonPracticalKind.PHYSICS_PRESSURE
@@ -36,6 +37,7 @@ fun LessonPracticalDispatcher(topicId: String) {
     val kind = LessonPracticalRouting.forTopic(topicId) ?: return
     val title = when (kind) {
         LessonPracticalKind.CHEMISTRY_REDOX -> "Quantitative analysis: redox titration"
+        LessonPracticalKind.CHEMISTRY_ACID_BASE_TITRATION -> "Acid–base titration"
         LessonPracticalKind.CHEMISTRY_QUALITATIVE -> "Qualitative chemical analysis"
         LessonPracticalKind.PHYSICS_ELASTICITY -> "Spring extension and Hooke's law"
         LessonPracticalKind.PHYSICS_PRESSURE -> "Pressure and contact area"
@@ -56,6 +58,7 @@ fun LessonPracticalDispatcher(topicId: String) {
         }
         when (kind) {
             LessonPracticalKind.CHEMISTRY_REDOX -> ChemistryRedoxTitrationScreen(embedded = true)
+            LessonPracticalKind.CHEMISTRY_ACID_BASE_TITRATION -> AcidBaseTitrationSimulation()
             LessonPracticalKind.CHEMISTRY_QUALITATIVE -> ChemistryQualitativeGuideScreen(embedded = true)
             LessonPracticalKind.PHYSICS_ELASTICITY -> PhysicsElasticityLab()
             LessonPracticalKind.PHYSICS_PRESSURE -> PhysicsPressureLab()
