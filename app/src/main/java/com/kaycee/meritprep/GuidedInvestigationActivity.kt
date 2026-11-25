@@ -239,6 +239,66 @@ internal object InvestigationProfiles {
             "No ionising-radiation source is used; this is a calculation activity.",
             listOf("Identify the radiation frequency", "Convert frequency to hertz", "Apply E = hf using Planck's constant", "Compare energy across the spectrum"),
             "Energy per photon; intensity depends on photon number as well as photon energy.", { x -> 0.6626f * x })
+        "phy-gravity" -> profile("Simple pendulum and gravitational acceleration", "How does pendulum length affect its period?",
+            "Retort stand, string, bob, metre rule and stopwatch", "Pendulum length", "Period", "Bob mass, release angle and timing method", "m", "s",
+            "Secure the stand and keep the swinging bob clear of people and fragile objects.",
+            listOf("Measure length from pivot to bob centre", "Displace the bob by a small angle", "Time several complete oscillations", "Repeat and calculate the mean period"),
+            "Small-angle model T = 2π√(L/g); air resistance and pivot friction are neglected.", { x -> 2f * Math.PI.toFloat() * kotlin.math.sqrt(x.coerceAtLeast(0.01f) / 9.81f) }, 0.1f, 2f, 1f)
+        "phy-equilibrium" -> profile("Principle of moments", "Under what condition does a horizontal beam balance?",
+            "Metre rule, pivot, slotted masses, mass hangers and balance", "Effort arm", "Balancing load moment", "Load, pivot position and force direction", "m", "N m",
+            "Secure the pivot and keep feet clear of falling masses.",
+            listOf("Balance the rule and locate its centre of gravity", "Place the pivot at a measured position", "Apply known loads at measured distances", "Compare clockwise and anticlockwise moments"),
+            "Ideal moment relation τ = Fd for perpendicular forces; apparatus mass and friction may matter.", { x -> 10f * x })
+        "phy-work-energy" -> profile("Work done by a constant force", "How does work done depend on displacement in the force direction?",
+            "Dynamics trolley, spring balance, track and metre rule", "Displacement", "Work done", "Applied force and angle between force and displacement", "m", "J",
+            "Use a stable track and avoid sudden pulls on the spring balance.",
+            listOf("Measure the applied force", "Pull the trolley through known distances", "Keep force direction parallel to motion", "Calculate W = Fs and compare readings"),
+            "Constant-force model with force parallel to displacement.", { x -> 2f * x })
+        "phy-temperature" -> profile("Thermometer calibration", "How does a thermometric property vary with temperature?",
+            "Laboratory thermometer or sensor, ice-water bath, warm-water bath and reference thermometer", "Reference temperature", "Thermometric reading", "Same sensor, immersion depth and equilibration time", "°C", "°C",
+            "Use warm water rather than boiling water; handle glass thermometers carefully.",
+            listOf("Identify the thermometric property", "Record the sensor reading in an ice-water bath", "Record readings at controlled reference temperatures", "Plot sensor reading against reference temperature"),
+            "Illustrative linear calibration; real sensors may have offset and non-linearity.", { x -> 1.02f * x + 1.5f })
+        "phy-heat-quantity" -> profile("Specific heat capacity", "How does supplied energy relate to temperature rise?",
+            "Heater, insulated metal block, thermometer, balance, joulemeter and timer", "Energy supplied", "Temperature rise", "Block mass, material and heat loss", "J", "°C",
+            "Use low-voltage equipment; hot blocks can burn and must cool before handling.",
+            listOf("Measure the block mass", "Record initial temperature", "Supply measured electrical energy", "Record temperature rise and estimate c = E/(mΔT)"),
+            "Ideal energy balance; heat losses and heater efficiency are neglected.", { x -> 0.025f * x })
+        "phy-change-state", "phy-vapours" -> profile("Heating and cooling during change of state", "How does temperature change as a substance is heated through a phase change?",
+            "Approved safe substance, thermometer, controlled heater, timer and heat-resistant vessel", "Heating time", "Temperature", "Substance mass, heating power and pressure", "min", "°C",
+            "Use only teacher-approved substances and heating equipment; avoid burns and fumes.",
+            listOf("Record the starting temperature", "Heat at a controlled rate", "Record temperature at equal time intervals", "Identify any plateau and explain latent heat"),
+            "Schematic heating curve; real plateaux depend on purity, pressure and heating rate.", { x -> if (x in 35f..65f) 70f else 20f + 1.4f * x })
+        "phy-light-energy" -> profile("Photon energy and electromagnetic radiation", "How does photon energy depend on radiation frequency?",
+            "Spectrum reference chart, frequency data and calculator", "Frequency", "Photon energy", "Planck constant and unit conversion", "10¹⁴ Hz", "10⁻¹⁹ J",
+            "No ionising-radiation source is used; this is a calculation activity.",
+            listOf("Identify the radiation frequency", "Convert frequency to hertz", "Apply E = hf", "Compare energy per photon across spectral regions"),
+            "Energy per photon; intensity also depends on photon number.", { x -> 0.6626f * x })
+        "phy-optical-instruments" -> profile("Convex lens focal length", "How can the focal length of a converging lens be estimated?",
+            "Convex lens, lens holder, illuminated object, screen and metre rule", "Object distance", "Image distance", "Same lens, alignment and object height", "cm", "cm",
+            "Never look directly at the Sun through a lens; secure the lens and screen.",
+            listOf("Align object, lens and screen on one optical axis", "Form a sharp real image", "Measure u and v from the lens centre", "Calculate f using 1/f = 1/u + 1/v and repeat"),
+            "Thin-lens approximation; lens thickness and measurement uncertainty are ignored.", { x -> 20f * x / (x - 20f).coerceAtLeast(1f) })
+        "phy-dispersion" -> profile("Dispersion of white light", "How does a prism separate white light into component colours?",
+            "Glass prism, narrow light source, screen and angle-measuring scale", "Wavelength", "Relative refractive index", "Prism material, prism angle and temperature", "nm", "index",
+            "Do not look directly into intense light sources; secure the prism on a stable surface.",
+            listOf("Direct a narrow beam into the prism", "Observe the emergent spectrum on a screen", "Identify the order of colours", "Compare deviation for different wavelengths"),
+            "Qualitative dispersion model; refractive index varies with wavelength and material.", { x -> 1.52f + 0.00008f * (700f - x) })
+        "phy-electrostatics" -> profile("Electrostatic force and separation", "How does electrostatic force vary with distance for fixed charges?",
+            "Electrostatic force model, charge values and distance scale", "Charge separation", "Relative force", "Charge magnitudes and medium", "relative distance", "relative force",
+            "Use a computer model only; do not create high-voltage static discharges.",
+            listOf("Set the two charge magnitudes", "Choose like or unlike charge signs", "Change separation only", "Compare force magnitude and direction"),
+            "Inverse-square Coulomb model F ∝ 1/r²; point charges and a uniform medium are assumed.", { x -> 100f / (x.coerceAtLeast(1f) * x.coerceAtLeast(1f)) }, 1f, 100f, 10f)
+        "phy-magnetism" -> profile("Magnetic field mapping", "How does the direction of a magnetic field vary around a bar magnet?",
+            "Bar magnet, plotting compass, paper and field-line recording sheet", "Position around magnet", "Compass direction angle", "Same magnet, compass and paper orientation", "position", "degrees",
+            "Keep magnets away from sensitive electronics and medical devices.",
+            listOf("Place the magnet under the paper", "Mark the compass needle direction at several positions", "Move the compass in small steps", "Join direction marks to sketch field lines"),
+            "Schematic field-direction model; field strength and three-dimensional geometry are not quantified.", { x -> (x * 3.6f) % 360f })
+        "phy-electronics" -> profile("Semiconductor diode characteristic", "How does current through a diode change with forward voltage?",
+            "Low-voltage variable supply, diode, series resistor, ammeter and voltmeter", "Forward voltage", "Diode current", "Diode temperature, series resistor and circuit connections", "V", "mA",
+            "Use a current-limiting resistor and low voltage; observe diode polarity.",
+            listOf("Identify anode and cathode", "Connect diode and current-limiting resistor in series", "Measure diode voltage and current", "Increase voltage gradually and plot the I–V curve"),
+            "Qualitative forward-bias model; real diode behaviour depends on type and temperature.", { x -> (0.02f * (kotlin.math.exp(0.18f * x) - 1f)).coerceAtLeast(0f) })
         else -> null
     }
 }
