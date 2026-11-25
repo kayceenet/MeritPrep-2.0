@@ -1,0 +1,42 @@
+package com.kaycee.meritprep
+
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
+import org.junit.Test
+
+class ScienceMediaCatalogTest {
+    @Test
+    fun resourceIdsAreUniqueAndEveryEntryHasRequiredRightsAndLearningMetadata() {
+        assertTrue(ScienceMediaCatalog.validate().joinToString("\n"), ScienceMediaCatalog.validate().isEmpty())
+        assertEquals(
+            ScienceMediaCatalog.resources.size,
+            ScienceMediaCatalog.resources.map { it.id }.distinct().size
+        )
+    }
+
+    @Test
+    fun catalogueContainsAllThreeCoreScienceSubjects() {
+        assertTrue(ScienceMediaCatalog.forSubject(ScienceMediaCatalog.BIOLOGY).isNotEmpty())
+        assertTrue(ScienceMediaCatalog.forSubject(ScienceMediaCatalog.CHEMISTRY).isNotEmpty())
+        assertTrue(ScienceMediaCatalog.forSubject(ScienceMediaCatalog.PHYSICS).isNotEmpty())
+    }
+
+    @Test
+    fun everyExternalResourceHasPredictionReflectionAndOfflineAlternative() {
+        ScienceMediaCatalog.resources.forEach { resource ->
+            assertTrue(resource.id, resource.beforeYouStart.isNotBlank())
+            assertTrue(resource.id, resource.afterYouExplore.isNotBlank())
+            assertTrue(resource.id, resource.offlineAlternative.isNotBlank())
+            assertTrue(resource.id, resource.sourceUrl.startsWith("https://"))
+        }
+    }
+
+    @Test
+    fun lookupAndSubjectFilteringReturnExpectedResources() {
+        assertEquals("Membrane transport", ScienceMediaCatalog.find("bio-membrane-transport-phet")?.title)
+        assertTrue(ScienceMediaCatalog.forSubject("BIO").all { it.subjectCode == "BIO" })
+        assertTrue(ScienceMediaCatalog.forSubject("CHEM").all { it.subjectCode == "CHEM" })
+        assertTrue(ScienceMediaCatalog.forSubject("PHY").all { it.subjectCode == "PHY" })
+        assertTrue(ScienceMediaCatalog.forSubject("UNKNOWN").isEmpty())
+    }
+}
