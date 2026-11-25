@@ -33,6 +33,7 @@ data class ScienceMediaResource(
             "PhET Interactive Simulations" -> "Simulation by PhET Interactive Simulations, University of Colorado Boulder, licensed under CC BY-NC 4.0 (https://phet.colorado.edu)."
             "HHMI BioInteractive" -> "Credit HHMI BioInteractive and follow the resource-specific HHMI terms and attribution instructions."
             "LabXchange" -> "Credit the individual creator shown on the original resource page; LabXchange is the hosting platform."
+            provider.startsWith("Wikimedia Commons — ") -> "Credit ${provider.substringAfter("—").trim()} via Wikimedia Commons, link the original file page and the stated Creative Commons licence."
             else -> "Credit the original creator and follow the source's current attribution instructions."
         }
 }
@@ -650,6 +651,102 @@ object ScienceMediaCatalog {
             beforeYouStart = "Predict why increasing light intensity cannot eject electrons if the photon frequency is below the threshold frequency.",
             afterYouExplore = "Use Einstein's photoelectric equation to explain threshold frequency and maximum kinetic energy.",
             offlineAlternative = "Use MeritPrep's photoelectric-effect calculation and modern-physics lesson."
+        ),
+        ScienceMediaResource(
+            id = "bio-mitosis-process-gif",
+            title = "Mitosis process animation",
+            subjectCode = BIOLOGY,
+            topicId = "bio-growth",
+            mediaType = ScienceMediaType.ANIMATION,
+            provider = "Wikimedia Commons — Tekksavvy",
+            summary = "A looping animated GIF showing the main stages of mitosis. Use it to trace chromosome behaviour and the sequence of nuclear division.",
+            sourceUrl = "https://commons.wikimedia.org/wiki/File:Mitosis_process.gif",
+            licenceName = "Creative Commons Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0)",
+            licenceUrl = "https://creativecommons.org/licenses/by-sa/3.0/",
+            permittedUse = "This entry links to the original file page. If copying, modifying or bundling the GIF, attribute Tekksavvy and comply with the CC BY-SA 3.0 share-alike terms.",
+            beforeYouStart = "Predict what happens to chromosome number and chromatid arrangement during each stage.",
+            afterYouExplore = "Identify prophase, metaphase, anaphase and telophase, then explain why daughter cells retain the chromosome number.",
+            offlineAlternative = "Use MeritPrep's native cell-division animation and chromosome-stage model."
+        ),
+        ScienceMediaResource(
+            id = "bio-meiosis-animation-gif",
+            title = "Meiosis animation",
+            subjectCode = BIOLOGY,
+            topicId = "bio-reproduction",
+            mediaType = ScienceMediaType.ANIMATION,
+            provider = "Wikimedia Commons — SadiesBurrow",
+            summary = "A short looping animation of meiosis in a cell with six chromosomes. The source animation has no stage labels, so learners should annotate it while watching.",
+            sourceUrl = "https://commons.wikimedia.org/wiki/File:MeiosisAnimation.gif",
+            licenceName = "Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)",
+            licenceUrl = "https://creativecommons.org/licenses/by-sa/4.0/",
+            permittedUse = "This entry links to the original file page. If copying, modifying or bundling the GIF, attribute SadiesBurrow and comply with the CC BY-SA 4.0 share-alike terms.",
+            beforeYouStart = "Predict how homologous chromosomes behave differently in meiosis I and sister chromatids in meiosis II.",
+            afterYouExplore = "Annotate the two divisions and explain how the chromosome number is halved.",
+            offlineAlternative = "Use MeritPrep's native meiosis model and chromosome-count activity."
+        ),
+        ScienceMediaResource(
+            id = "bio-photosynthesis-animation-gif",
+            title = "Photosynthesis animated sequence",
+            subjectCode = BIOLOGY,
+            topicId = "bio-nutrition",
+            mediaType = ScienceMediaType.ANIMATION,
+            provider = "Wikimedia Commons — Left & Right Brains",
+            summary = "An animated overview of photosynthesis, including light capture, water splitting, electron transfer and carbon fixation. Treat it as an overview and verify terminology against the lesson.",
+            sourceUrl = "https://commons.wikimedia.org/wiki/File:Photosynthesis_(animated).gif",
+            licenceName = "Creative Commons Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0)",
+            licenceUrl = "https://creativecommons.org/licenses/by-sa/3.0/",
+            permittedUse = "This entry links to the original file page. If copying, modifying or bundling the GIF, attribute Left & Right Brains and comply with the CC BY-SA 3.0 share-alike terms.",
+            beforeYouStart = "Predict where the oxygen released during photosynthesis originates.",
+            afterYouExplore = "Trace the roles of light, water, carbon dioxide, ATP and NADPH; distinguish the light-dependent reactions from carbon fixation.",
+            offlineAlternative = "Use MeritPrep's photosynthesis flow model and limiting-factor simulation."
+        ),
+        ScienceMediaResource(
+            id = "phy-total-internal-reflection-gif",
+            title = "Total internal reflection animation",
+            subjectCode = PHYSICS,
+            topicId = "phy-refraction",
+            mediaType = ScienceMediaType.ANIMATION,
+            provider = "Wikimedia Commons — MikeRun",
+            summary = "A looping ray animation illustrating total internal reflection at a boundary. Use it to identify the critical-angle condition.",
+            sourceUrl = "https://commons.wikimedia.org/wiki/File:Internal-reflection.gif",
+            licenceName = "Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)",
+            licenceUrl = "https://creativecommons.org/licenses/by-sa/4.0/",
+            permittedUse = "This entry links to the original file page. If copying, modifying or bundling the GIF, attribute MikeRun and comply with the CC BY-SA 4.0 share-alike terms.",
+            beforeYouStart = "Predict what happens to the refracted ray as the angle of incidence increases beyond the critical angle.",
+            afterYouExplore = "Explain why total internal reflection requires light to travel from an optically denser to a less dense medium.",
+            offlineAlternative = "Use MeritPrep's refraction and critical-angle interactive model."
+        ),
+        ScienceMediaResource(
+            id = "phy-wave-propagation-gif",
+            title = "Wave propagation animation",
+            subjectCode = PHYSICS,
+            topicId = "phy-waves",
+            mediaType = ScienceMediaType.ANIMATION,
+            provider = "Wikimedia Commons — Ilya Voyager",
+            summary = "A CC0 animated wave-propagation GIF showing a travelling wave. Use it to distinguish the direction of energy transfer from particle displacement.",
+            sourceUrl = "https://commons.wikimedia.org/wiki/File:Propagation_of_the_wave.gif",
+            licenceName = "CC0 1.0 Universal Public Domain Dedication",
+            licenceUrl = "https://creativecommons.org/publicdomain/zero/1.0/",
+            permittedUse = "The creator dedicated this file to the public domain under CC0 1.0. Attribution is appreciated even though CC0 does not require it; verify the source page before redistribution.",
+            beforeYouStart = "Predict whether particles in a transverse wave travel with the wave or oscillate about equilibrium positions.",
+            afterYouExplore = "Sketch the direction of propagation and particle displacement, then relate frequency, wavelength and speed.",
+            offlineAlternative = "Use MeritPrep's adjustable wave animation and frequency-wavelength explorer."
+        ),
+        ScienceMediaResource(
+            id = "phy-wave-equation-gif",
+            title = "Vibrating-string wave animation",
+            subjectCode = PHYSICS,
+            topicId = "phy-waves",
+            mediaType = ScienceMediaType.ANIMATION,
+            provider = "Wikimedia Commons — Ilya Voyager",
+            summary = "A compact CC0 animated GIF of wave propagation on a string, useful for visualising the travelling-wave model.",
+            sourceUrl = "https://commons.wikimedia.org/wiki/File:Propagation_of_the_wave.gif",
+            licenceName = "CC0 1.0 Universal Public Domain Dedication",
+            licenceUrl = "https://creativecommons.org/publicdomain/zero/1.0/",
+            permittedUse = "This is a second lesson mapping to the same CC0 source asset. Keep the source credit and do not imply that the animation is a measurement of a real string.",
+            beforeYouStart = "Identify one point on the string and predict its motion over one complete cycle.",
+            afterYouExplore = "Explain how a wave can transfer energy without transporting the medium as a whole.",
+            offlineAlternative = "Use MeritPrep's native wave-pulse and oscillation model."
         )
     )
 
