@@ -471,7 +471,8 @@ fun GuidedInvestigationActivity(topicId: String) {
                     Text("All outputs are simulated teaching values, not measurements from a physical laboratory.", style = MaterialTheme.typography.bodySmall)
                 }
             }
-            Text(if (saved) "Lab notebook saved on this device." else "Changes not yet saved. Continue to another stage or record a reading to save.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            Button(onClick = { saveLabRecord() }, enabled = !saved, modifier = Modifier.fillMaxWidth()) { Text("Save lab notebook") }
+            Text(if (saved) "Lab notebook saved on this device." else "Unsaved changes. Save your prediction, method review and current settings before leaving.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
                 OutlinedButton(onClick = { stage = (stage - 1).coerceAtLeast(0); saveLabRecord() }, enabled = stage > 0) { Text("Previous") }
                 Button(onClick = { stage = (stage + 1).coerceAtMost(stages.lastIndex); saveLabRecord() }, enabled = stage < stages.lastIndex) { Text("Next stage") }
