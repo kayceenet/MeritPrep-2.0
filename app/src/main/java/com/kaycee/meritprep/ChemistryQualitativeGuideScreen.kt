@@ -40,7 +40,7 @@ object ChemistryQualitativeGuide {
 }
 
 @Composable
-fun ChemistryQualitativeGuideScreen() {
+fun ChemistryQualitativeGuideScreen(embedded: Boolean = false) {
     var selectedCategory by remember { mutableStateOf("Anions") }
     var selectedCation by remember { mutableStateOf("Cu²⁺") }
     var selectedReagent by remember { mutableStateOf("NaOH(aq)") }
@@ -53,7 +53,7 @@ fun ChemistryQualitativeGuideScreen() {
         }.getOrElse { it.message ?: "This test combination is not modelled." }
     }
     Column(
-        Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(18.dp),
+        (if (embedded) Modifier.fillMaxWidth() else Modifier.fillMaxSize().verticalScroll(rememberScrollState())).padding(18.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         Text("Qualitative analysis guide", style = MaterialTheme.typography.headlineMedium)
