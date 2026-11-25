@@ -34,7 +34,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun ScienceMediaScreen(onOpenLabs: () -> Unit) {
+fun ScienceMediaScreen(onOpenLabs: () -> Unit, onOpenLesson: (String) -> Unit) {
     val context = LocalContext.current
     var selectedSubject by remember { mutableIntStateOf(0) }
     var lightIntensity by remember { mutableFloatStateOf(35f) }
@@ -109,6 +109,8 @@ fun ScienceMediaScreen(onOpenLabs: () -> Unit) {
                     Text(resource.title, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
                     Text("${resource.provider} · ${resource.mediaType.name.lowercase().replace('_', ' ')}", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.primary)
                     Text(resource.summary)
+                    val linkedTopic = LearningCatalog.find(resource.topicId)
+                    Text("Course topic: ${linkedTopic?.title ?: resource.topicId}", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
                     Text("Before you explore", fontWeight = FontWeight.SemiBold)
                     Text(resource.beforeYouStart, style = MaterialTheme.typography.bodyMedium)
                     Text("After you explore", fontWeight = FontWeight.SemiBold)
@@ -117,6 +119,14 @@ fun ScienceMediaScreen(onOpenLabs: () -> Unit) {
                     Text(resource.offlineAlternative, style = MaterialTheme.typography.bodySmall)
                     Text("Rights: ${resource.licenceName}", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                     Text("Use: ${resource.permittedUse}", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    if (linkedTopic != null) {
+                        OutlinedButton(
+                            onClick = { onOpenLesson(resource.topicId) },
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            Text("Open related MeritPrep lesson")
+                        }
+                    }
                     Button(
                         onClick = {
                             try {
