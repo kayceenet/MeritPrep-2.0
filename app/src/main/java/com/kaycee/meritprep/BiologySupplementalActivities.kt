@@ -13,7 +13,7 @@ import kotlin.math.exp
 import kotlin.math.roundToInt
 
 internal val biologySupplementalActivityTopicIds = setOf(
-    "bio-plant-anatomy", "bio-respiration", "bio-excretion", "bio-support",
+    "bio-classification", "bio-plant-anatomy", "bio-respiration", "bio-excretion", "bio-support",
     "bio-reproduction", "bio-coordination", "bio-ecology-factors",
     "bio-habitats", "bio-biomes", "bio-soil", "bio-environment",
     "bio-variation", "bio-biotechnology", "bio-evolution-evidence"
@@ -22,6 +22,7 @@ internal val biologySupplementalActivityTopicIds = setOf(
 @Composable
 fun BiologySupplementalLessonActivity(topicId: String) {
     when (topicId) {
+        "bio-classification" -> ClassificationExplorer()
         "bio-plant-anatomy" -> TranspirationExplorer()
         "bio-respiration" -> RespirationExplorer()
         "bio-excretion" -> NephronExplorer()
@@ -59,6 +60,45 @@ private fun ModelSlider(label: String, value: Float, range: ClosedFloatingPointR
             Text("${value.roundToInt()} $unit", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary)
         }
         Slider(value = value, onValueChange = onChange, valueRange = range)
+    }
+}
+
+@Composable
+private fun ClassificationExplorer() {
+    var specimen by remember { mutableStateOf("Mushroom") }
+    var step by remember { mutableIntStateOf(0) }
+    val profiles = mapOf(
+        "Bacterium" to listOf(false, false, false),
+        "Fern" to listOf(true, true, false),
+        "Mushroom" to listOf(true, false, true),
+        "Grasshopper" to listOf(true, false, false)
+    )
+    val questions = listOf(
+        "Does the organism have a membrane-bound nucleus?",
+        "Does it contain chlorophyll and photosynthesise?",
+        "Does it obtain nutrients by absorption from organic material?"
+    )
+    val features = profiles[specimen].orEmpty()
+    val outcome = when {
+        !features[0] -> "Prokaryote: Bacteria"
+        features[1] -> "Photosynthetic eukaryote: Plantae in this example"
+        features[2] -> "Fungus"
+        else -> "Animal"
+    }
+    BiologyModelCard("Interactive classification key", "Follow observable or testable characteristics in sequence. Each answer narrows the possible group.", "This is a teaching key for four example organisms, not a complete taxonomic key. Modern classification uses evolutionary relationships and molecular evidence.") {
+        Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+            profiles.keys.forEach { item -> FilterChip(specimen == item, { specimen = item; step = 0 }, { Text(item) }) }
+        }
+        Text("Key question ${step + 1} of 3", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
+        Text(questions[step], style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
+        val answer = features[step]
+        Text("For the selected specimen: ${if (answer) "Yes" else "No"}", fontWeight = FontWeight.Bold)
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            OutlinedButton(onClick = { step = (step - 1).coerceAtLeast(0) }, enabled = step > 0) { Text("Previous") }
+            Button(onClick = { step = (step + 1).coerceAtMost(questions.lastIndex) }, enabled = step < questions.lastIndex) { Text("Next characteristic") }
+        }
+        Text("Classification reached: $outcome", color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
+        Text("Explain why the characteristic is useful, then state one limitation of using a single visible feature to classify an organism.")
     }
 }
 
