@@ -95,3 +95,6 @@ Authenticated sync, teacher/admin CMS, analytics, backups, privacy and security 
 
 
 **Cell-division glossary:** expanded the learner reference with chromosome, chromatid, centromere, cytokinesis, bivalent, spindle fibre and independent assortment. Mitosis and meiosis entries now link to the growth lesson and explicitly distinguish the single DNA-replication round from the two meiotic divisions. Regression tests check the new terms and key definitions.
+
+
+**Cell-division model validation:** the chromosome-count engine now rejects values that could overflow its integer arithmetic. Tests explicitly check chromosome and chromatid totals during mitotic anaphase, meiotic anaphase I and meiotic anaphase II, as well as invalid and excessively large starting chromosome numbers.
