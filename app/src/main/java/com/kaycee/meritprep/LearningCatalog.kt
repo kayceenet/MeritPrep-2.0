@@ -727,6 +727,7 @@ fun LessonScreen(topicId: String) {
 
         BiologyInteractiveLessonActivity(topicId)
         ChemistryInteractiveLessonActivity(topicId)
+        ChemistrySupplementalLessonActivity(topicId)
         PhysicsInteractiveLessonActivity(topicId)
 
         ScienceMediaTopicSection(topicId)
