@@ -185,3 +185,15 @@ A topic may not be labelled complete if any applicable critical item above is FA
 - [ ] BLOCKED — unresolved critical issue prevents safe/accurate release.
 
 **Required reporting rule:** state what was actually implemented, what was tested, exact CI status, known limitations and remaining work. Never report an unverified build, fabricated coverage percentage or unsupported 100% mastery claim.
+
+
+## Latest verification record — 25 November 2026
+
+- Commit: `d7e34996e2250ddc5c3c43580e9eafafe99f32d4`
+- GitHub Actions run: [45661633907](https://github.com/kayceenet/MeritPrep-2.0/actions/runs/45661633907)
+- Result: **success** — unit tests, debug APK build and artifact upload completed.
+- APK artifact: `MeritPrep-debug-apk` (17,788,171 bytes; expires 9 December 2026).
+- SHA-256: `a1adabc55903f696d83d6e4f4652c2d7081badd070f9de5d6bbe1bd232f9e8e9`.
+- Scope verified in this run: WAEC activity routes, Biology/Chemistry/Physics lesson extensions, native projectile/satellite/particle animations, guided investigation axis labels and repeat means, 38-resource science media catalogue and PhET licensing checks.
+- Not verified by CI: installation or interaction on a physical Android device, full academic sign-off, direct WAEC primary-PDF verification, or statement-level syllabus completion.
+
