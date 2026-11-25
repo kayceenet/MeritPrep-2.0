@@ -747,6 +747,54 @@ object ScienceMediaCatalog {
             beforeYouStart = "Predict how changing the length of the rods affects the speed of a disturbance in the model.",
             afterYouExplore = "Explain how the disturbance travels along the machine while each rod oscillates about its equilibrium position.",
             offlineAlternative = "Use MeritPrep's native transverse-wave and wave-speed explorer."
+        ),
+        ScienceMediaResource(
+            id = "phy-four-wave-sources-gif",
+            title = "Four wave sources and interference",
+            subjectCode = PHYSICS,
+            topicId = "phy-waves",
+            mediaType = ScienceMediaType.ANIMATION,
+            provider = "Wikimedia Commons — Roman Boldyrev",
+            summary = "An animated visualisation of wave oscillations from four sources, useful for discussing superposition and interference patterns.",
+            sourceUrl = "https://commons.wikimedia.org/wiki/File:4_wave_sources.gif",
+            licenceName = "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+            licenceUrl = "https://creativecommons.org/licenses/by/4.0/",
+            permittedUse = "This entry links to the original file page. If copying or modifying the GIF, credit Roman Boldyrev, link the CC BY 4.0 licence and indicate changes.",
+            beforeYouStart = "Predict where constructive and destructive interference will occur when several coherent sources overlap.",
+            afterYouExplore = "Identify regions of reinforcement and cancellation and relate them to phase difference.",
+            offlineAlternative = "Use MeritPrep's wave-pulse and superposition activity."
+        ),
+        ScienceMediaResource(
+            id = "phy-huygens-fresnel-gif",
+            title = "Huygens–Fresnel wavefront animation",
+            subjectCode = PHYSICS,
+            topicId = "phy-refraction",
+            mediaType = ScienceMediaType.ANIMATION,
+            provider = "Wikimedia Commons — Lookang",
+            summary = "A short animated illustration of Huygens–Fresnel secondary wavelets and the construction of a new wavefront.",
+            sourceUrl = "https://commons.wikimedia.org/wiki/File:Huygens_Fresnel_Principle2.gif",
+            licenceName = "Creative Commons Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0)",
+            licenceUrl = "https://creativecommons.org/licenses/by-sa/3.0/",
+            permittedUse = "This entry links to the original file page. If copying, modifying or bundling the GIF, credit Lookang and comply with the CC BY-SA 3.0 share-alike terms.",
+            beforeYouStart = "Predict how secondary wavelets can be used to construct the next position of a wavefront.",
+            afterYouExplore = "Connect the wavefront construction to the laws of reflection, refraction and diffraction.",
+            offlineAlternative = "Use MeritPrep's native wavefront and refraction visualisation."
+        ),
+        ScienceMediaResource(
+            id = "phy-huygens-principle-gif",
+            title = "Huygens' principle animation",
+            subjectCode = PHYSICS,
+            topicId = "phy-waves",
+            mediaType = ScienceMediaType.ANIMATION,
+            provider = "Wikimedia Commons — Mariusz Panak",
+            summary = "A compact public-domain animated illustration of Huygens' principle.",
+            sourceUrl = "https://commons.wikimedia.org/wiki/File:Huygens.gif",
+            licenceName = "Public domain dedication",
+            licenceUrl = "https://commons.wikimedia.org/wiki/File:Huygens.gif",
+            permittedUse = "The creator released the work into the public domain. Attribution is appreciated; check the source page before redistributing the file.",
+            beforeYouStart = "Predict how every point on a wavefront can act as a source of secondary wavelets.",
+            afterYouExplore = "Explain how the envelope of secondary wavelets forms the new wavefront.",
+            offlineAlternative = "Use MeritPrep's wavefront animation and lesson diagram."
         )
     )
 
