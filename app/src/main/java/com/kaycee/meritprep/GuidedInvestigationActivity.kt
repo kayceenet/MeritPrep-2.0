@@ -393,6 +393,10 @@ fun GuidedInvestigationActivity(topicId: String) {
                     else {
                         Text(profile.independent + " (" + profile.xUnit + ")     " + profile.dependent + " (" + profile.yUnit + ")", fontWeight = FontWeight.SemiBold)
                         readings.forEach { pair -> Text("%.2f".format(pair.first) + "                         " + "%.2f".format(pair.second)) }
+                        readings.groupBy { it.first }.filterValues { it.size > 1 }.forEach { (setting, repeats) ->
+                            val mean = repeats.map { it.second }.average()
+                            Text("Mean of " + repeats.size + " repeats at " + "%.2f".format(setting) + " " + profile.xUnit + ": " + "%.2f".format(mean) + " " + profile.yUnit)
+                        }
                         if (readings.size >= 2) {
                             val first = readings.first(); val last = readings.last()
                             val gradient = if (abs(last.first - first.first) > 0.0001f) (last.second - first.second) / (last.first - first.first) else Float.NaN
