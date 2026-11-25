@@ -218,96 +218,122 @@ private fun SubjectCard(subject: Subject, onClick: () -> Unit) {
 @Composable
 private fun SubjectScreen(subject: Subject, nav: NavHostController) {
     val topics = LearningCatalog.forSubject(subject.code)
-    LazyColumn(Modifier.fillMaxSize().padding(20.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+    val objectiveCount = topics.sumOf { it.objectives.size }
+    val summary = when (subject.code) {
+        "BIO" -> "Start with cell foundations, build your understanding of living systems, then connect each topic to practical Biology and examination questions."
+        "CHEM" -> "Follow the mapped Chemistry topics from particles and bonding through reactions, quantitative chemistry, organic chemistry and industry. Subject-specialist review remains outstanding."
+        "PHY" -> "Build from measurement and motion through fields, waves, electricity and modern physics. The practical workspaces are linked to the relevant lessons."
+        "MATH" -> "Build mathematical fluency through the mapped topic sequence, worked methods and timed examination practice. Independent Mathematics-teacher review remains outstanding."
+        else -> subject.description
+    }
+    val actions = when (subject.code) {
+        "MATH" -> listOf(
+            Triple("Mathematics practice", "115 topic questions", "mathematics-practice"),
+            Triple("Timed JAMB CBT", "40 questions", "mathematics-cbt")
+        )
+        "PHY" -> listOf(
+            Triple("Physics practice", "195 topic questions", "physics-practice"),
+            Triple("WAEC practical", "Graphs and data analysis", "physics-waec-practical"),
+            Triple("WAEC theory", "Structured answers", "physics-waec-theory"),
+            Triple("WAEC objective", "50-question practice", "physics-waec-objective"),
+            Triple("Timed JAMB CBT", "40 questions", "physics-cbt")
+        )
+        "CHEM" -> listOf(
+            Triple("Chemistry practice", "90 topic questions", "chemistry-practice"),
+            Triple("WAEC theory", "Structured answers", "chemistry-waec-theory"),
+            Triple("WAEC objective", "30-question practice", "chemistry-waec-objective"),
+            Triple("Qualitative analysis", "Anions, cations and gases", "chemistry-qualitative"),
+            Triple("Redox titration", "Iron(II) calculations", "chemistry-redox-titration")
+        )
+        "BIO" -> listOf(
+            Triple("JAMB practice", "Biology topic questions", "cbt"),
+            Triple("WAEC theory", "Structured responses", "waec-theory"),
+            Triple("WAEC objective", "Objective practice", "waec-objective"),
+            Triple("Virtual laboratories", "Practical investigations", "labs")
+        )
+        else -> listOf(
+            Triple("JAMB practice", "Topic questions", "cbt"),
+            Triple("WAEC theory", "Structured responses", "waec-theory"),
+            Triple("WAEC objective", "Objective practice", "waec-objective")
+        )
+    }
+
+    LazyColumn(
+        Modifier.fillMaxSize(),
+        contentPadding = PaddingValues(horizontal = 18.dp, vertical = 18.dp),
+        verticalArrangement = Arrangement.spacedBy(12.dp)
+    ) {
         item {
-            Text(subject.name, style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
-            Text(if (subject.code == "CHEM") "18 JAMB Chemistry topics are mapped from the IBASS syllabus. All 18 JAMB topics now have beginner-oriented lesson drafts and 90 original practice questions. Content still requires independent subject-teacher review and separate WAEC alignment." else "Start with a structured lesson. This is an initial content set, not yet a complete official syllabus map.")
-        }
-        if (subject.code == "MATH") {
-            item {
-                Text("JAMB Mathematics map: 23 numbered topics from the IBASS syllabus. All twenty-three topics now have beginner-focused lesson drafts and 115 original practice questions. Independent Mathematics-teacher review is outstanding.")
-            }
-            item {
-                Button(onClick = { nav.navigate("mathematics-practice") }, modifier = Modifier.fillMaxWidth()) {
-                    Text("Practise Mathematics · 115 questions")
-                }
-            }
-            item {
-                OutlinedButton(onClick = { nav.navigate("mathematics-cbt") }, modifier = Modifier.fillMaxWidth()) {
-                    Text("Timed Mathematics JAMB-style CBT · 40 questions")
-                }
-            }
-        }
-        if (subject.code == "PHY") {
-            item {
-                Text("JAMB Physics map: 39 numbered topics from the IBASS syllabus. All 39 topics now have beginner-focused lesson drafts and 195 original practice questions. Independent Physics-teacher review is still outstanding.")
-            }
-            item {
-                Button(onClick = { nav.navigate("physics-practice") }, modifier = Modifier.fillMaxWidth()) {
-                    Text("Practise Physics · 195 questions")
-                }
-            }
-            item {
-                OutlinedButton(onClick = { nav.navigate("physics-waec-practical") }, modifier = Modifier.fillMaxWidth()) {
-                    Text("WAEC Physics practical · graph and data analysis")
-                }
-            }
-            item {
-                OutlinedButton(onClick = { nav.navigate("physics-waec-theory") }, modifier = Modifier.fillMaxWidth()) {
-                    Text("WAEC Physics theory · structured answers")
-                }
-            }
-            item {
-                OutlinedButton(onClick = { nav.navigate("physics-waec-objective") }, modifier = Modifier.fillMaxWidth()) {
-                    Text("WAEC Physics objective · 50-question practice")
-                }
-            }
-            item {
-                OutlinedButton(onClick = { nav.navigate("physics-cbt") }, modifier = Modifier.fillMaxWidth()) {
-                    Text("Start timed Physics CBT · 40 questions")
+            Card(
+                Modifier.fillMaxWidth(),
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer)
+            ) {
+                Row(Modifier.padding(18.dp), verticalAlignment = Alignment.CenterVertically) {
+                    Surface(color = MaterialTheme.colorScheme.surface, shape = MaterialTheme.shapes.large) {
+                        Text(subject.code, Modifier.padding(horizontal = 13.dp, vertical = 12.dp), fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary)
+                    }
+                    Spacer(Modifier.width(14.dp))
+                    Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(5.dp)) {
+                        Text(subject.name, style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onPrimaryContainer)
+                        Text(summary, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onPrimaryContainer)
+                    }
                 }
             }
         }
-        if (subject.code == "CHEM") {
-            item {
-                Button(onClick = { nav.navigate("chemistry-practice") }, modifier = Modifier.fillMaxWidth()) {
-                    Text("Practise Chemistry · 90 questions")
-                }
+        item {
+            Row(horizontalArrangement = Arrangement.spacedBy(9.dp)) {
+                SubjectMetric(topics.size.toString(), "TOPICS", Modifier.weight(1f))
+                SubjectMetric(objectiveCount.toString(), "LEARNING OBJECTIVES", Modifier.weight(1f))
             }
-            item {
-                OutlinedButton(onClick = { nav.navigate("chemistry-waec-theory") }, modifier = Modifier.fillMaxWidth()) {
-                    Text("WAEC Chemistry theory practice")
+        }
+        item { Text("Study tools", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold) }
+        items(actions.chunked(2)) { pair ->
+            Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                pair.forEach { action ->
+                    HomeQuickAction(action.first, action.second, "OPEN", Modifier.weight(1f)) { nav.navigate(action.third) }
                 }
+                if (pair.size == 1) Spacer(Modifier.weight(1f))
             }
-            item {
-                OutlinedButton(onClick = { nav.navigate("chemistry-waec-objective") }, modifier = Modifier.fillMaxWidth()) {
-                    Text("Timed WAEC Chemistry objective · 30 questions")
-                }
-            }
-            item {
-                OutlinedButton(onClick = { nav.navigate("chemistry-qualitative") }, modifier = Modifier.fillMaxWidth()) {
-                    Text("Qualitative analysis · anions and gases")
-                }
-            }
-            item {
-                OutlinedButton(onClick = { nav.navigate("chemistry-redox-titration") }, modifier = Modifier.fillMaxWidth()) {
-                    Text("Redox titration · iron(II) calculation")
-                }
+        }
+        item {
+            Column(verticalArrangement = Arrangement.spacedBy(3.dp)) {
+                Text("Topic sequence", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+                Text("Start at the beginning or open a topic you need to revise. Each lesson has its own examples, visualisations, scenarios, practical work and assessment.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
         }
         if (topics.isEmpty()) {
             item { Text("Lessons are being prepared for this subject.") }
-        }
-        items(topics) { topic ->
-            Card(onClick = { nav.navigate("lesson/" + topic.id) }, modifier = Modifier.fillMaxWidth()) {
-                Row(Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
-                    Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                        Text(topic.title, fontWeight = FontWeight.SemiBold)
-                        Text("Lesson · " + topic.objectives.size + " learning objectives", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        } else {
+            items(topics) { topic ->
+                Card(
+                    onClick = { nav.navigate("lesson/" + topic.id) },
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+                    border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant)
+                ) {
+                    Row(Modifier.padding(15.dp), verticalAlignment = Alignment.CenterVertically) {
+                        Surface(color = MaterialTheme.colorScheme.secondaryContainer, shape = MaterialTheme.shapes.medium) {
+                            Text((topics.indexOf(topic) + 1).toString().padStart(2, '0'), Modifier.padding(horizontal = 10.dp, vertical = 9.dp), color = MaterialTheme.colorScheme.onSecondaryContainer, fontWeight = FontWeight.Bold)
+                        }
+                        Spacer(Modifier.width(12.dp))
+                        Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                            Text(topic.title, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
+                            Text(topic.objectives.size.toString() + " learning objectives · " + topic.sections.size + " teaching sections", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                        }
+                        Icon(Icons.Default.ChevronRight, contentDescription = "Open lesson", tint = MaterialTheme.colorScheme.primary)
                     }
-                    Icon(Icons.Default.ChevronRight, contentDescription = "Open lesson")
                 }
             }
+        }
+    }
+}
+
+@Composable
+private fun SubjectMetric(value: String, label: String, modifier: Modifier = Modifier) {
+    Card(modifier, colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)) {
+        Column(Modifier.fillMaxWidth().padding(14.dp), verticalArrangement = Arrangement.spacedBy(3.dp)) {
+            Text(value, style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary)
+            Text(label, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant, fontWeight = FontWeight.Bold)
         }
     }
 }
