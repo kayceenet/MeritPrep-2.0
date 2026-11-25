@@ -55,6 +55,18 @@ class GuidedInvestigationRoutingTest {
 
         val lens = InvestigationProfiles.find("phy-optical-instruments")!!
         assertEquals(33.333, lens.response(50f).toDouble(), 0.01)
+
+        val population = InvestigationProfiles.find("bio-populations")!!
+        assertEquals(10.0, population.response(100f).toDouble(), 0.01)
+
+        val waves = InvestigationProfiles.find("phy-waves")!!
+        assertEquals(0.2, waves.response(100f).toDouble(), 0.001)
+
+        val dipole = InvestigationProfiles.find("phy-magnetism")!!
+        assertEquals(180.0, dipole.response(90f).toDouble(), 0.01)
+
+        val diode = InvestigationProfiles.find("phy-electronics")!!
+        assertEquals(7.37, diode.response(1f).toDouble(), 0.1)
     }
 
     @Test
