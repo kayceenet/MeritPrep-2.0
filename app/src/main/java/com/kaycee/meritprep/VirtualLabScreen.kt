@@ -859,16 +859,11 @@ private fun BiologyExperimentPlannerLab() {
             ) { Text("Add results row") }
             Text("Graph skills", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
             Text("For a continuous independent variable, plot it on the horizontal (x) axis and the measured dependent variable on the vertical (y) axis. Label both axes with units, choose even scales, plot points accurately and draw a suitable line or curve of best fit. A bar chart is generally used for categories.")
-            OutlinedTextField(
-                value = if (graphReview) "Check: Are the axes correctly assigned and labelled? Are units shown? Does the pattern support a relationship? Are there anomalous points, and should they be investigated rather than silently removed?" else "",
-                onValueChange = {},
-                readOnly = true,
-                label = { Text("Graph interpretation guide") },
-                modifier = Modifier.fillMaxWidth(),
-                minLines = 3
-            )
             OutlinedButton(onClick = { graphReview = !graphReview }, modifier = Modifier.fillMaxWidth()) {
                 Text(if (graphReview) "Hide graph guide" else "Show graph interpretation checklist")
+            }
+            if (graphReview) {
+                Text("Check that axes are correctly assigned and labelled, units are shown, scales are even and points are plotted accurately. Describe the pattern using data. Look for anomalies and investigate possible causes rather than silently removing unusual results.")
             }
             OutlinedTextField(
                 value = conclusion,
