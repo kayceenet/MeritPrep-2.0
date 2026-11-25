@@ -44,4 +44,11 @@ class ScientificNotationTest {
         assertEquals("Energy:", segments[0].prose)
         assertEquals("\\frac{1}{2}mv^2", segments[1].equation)
     }
+
+    @Test
+    fun formatsMeasurementAveragesAndCalligraphicSymbols() {
+        assertEquals("x̄", ScientificNotation.format("\\bar{x}"))
+        assertEquals("E", ScientificNotation.format("\\mathcal{E}"))
+        assertEquals("∇ × B", ScientificNotation.format("\\nabla \\times B"))
+    }
 }
