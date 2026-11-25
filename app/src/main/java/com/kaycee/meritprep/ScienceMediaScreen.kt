@@ -123,6 +123,8 @@ fun ScienceMediaScreen(onOpenLabs: () -> Unit, onOpenLesson: (String) -> Unit) {
             item {
                 Card(modifier = Modifier.fillMaxWidth()) {
                     Column(Modifier.padding(15.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                        Card(modifier = Modifier.fillMaxWidth()) {
+                            Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                         Text("MeritPrep interactive model: Mendelian inheritance", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
                         Text("Choose each parent genotype. A is dominant and a is recessive. This model assumes one gene, complete dominance and equal gamete probabilities.")
                         Text("Parent 1 genotype", fontWeight = FontWeight.SemiBold)
@@ -147,6 +149,8 @@ fun ScienceMediaScreen(onOpenLabs: () -> Unit, onOpenLesson: (String) -> Unit) {
                         Text(mendelianResult.explanation)
                         Text("Try Aa by Aa, then Aa by aa. Compare genotype and phenotype ratios. Probability describes expected proportions over many offspring; it does not guarantee the exact outcome of a small family.")
                         Text("Model limitation: this is a single-gene model. Real traits may involve incomplete dominance, codominance, multiple genes, environmental effects or sex linkage.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                            }
+                        }
                         Text("MeritPrep interactive model: natural selection", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
                         Text("Model a heritable light/dark trait in a population. Change the starting frequencies and relative survival values, then follow the trait frequencies over generations.")
                         Text("Starting light-trait individuals: ${initialLightCount.toInt()}")
