@@ -35,7 +35,7 @@ fun ChemistryWaecTheoryScreen() {
             Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
                 Text(task.topic, style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
                 Text("${task.marks} marks", color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.SemiBold)
-                Text(task.prompt, style = MaterialTheme.typography.bodyLarge)
+                ScientificText(task.prompt, style = MaterialTheme.typography.bodyLarge)
                 OutlinedTextField(
                     value = answer,
                     onValueChange = { answer = it },
@@ -68,7 +68,7 @@ fun ChemistryWaecTheoryScreen() {
                     Text("${checkedPoints.size} of ${task.markingPoints.size} marking points identified", fontWeight = FontWeight.SemiBold)
                     HorizontalDivider()
                     Text("Examiner guidance", fontWeight = FontWeight.Bold)
-                    Text(task.guidance)
+                    ScientificText(task.guidance, style = MaterialTheme.typography.bodyMedium)
                 }
             }
         }
