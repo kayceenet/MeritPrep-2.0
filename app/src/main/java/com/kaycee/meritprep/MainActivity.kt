@@ -135,14 +135,14 @@ private fun HomeScreen(nav: NavHostController) {
         item { Text("Quick access", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold) }
         item {
             Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                HomeQuickAction("Practice", "JAMB and WAEC", "TEST") { nav.navigate("practice") }
-                HomeQuickAction("Study plan", "Organise your work", "PLAN") { nav.navigate("study-plan") }
+                HomeQuickAction("Practice", "JAMB and WAEC", "TEST", Modifier.weight(1f)) { nav.navigate("practice") }
+                HomeQuickAction("Study plan", "Organise your work", "PLAN", Modifier.weight(1f)) { nav.navigate("study-plan") }
             }
         }
         item {
             Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                HomeQuickAction("Revision", "Review key ideas", "REVISE") { nav.navigate("review") }
-                HomeQuickAction("Saved lessons", "Return to bookmarks", "SAVED") { nav.navigate("bookmarks") }
+                HomeQuickAction("Revision", "Review key ideas", "REVISE", Modifier.weight(1f)) { nav.navigate("review") }
+                HomeQuickAction("Saved lessons", "Return to bookmarks", "SAVED", Modifier.weight(1f)) { nav.navigate("bookmarks") }
             }
         }
         item { Text("Choose a subject", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold) }
@@ -160,10 +160,10 @@ private fun HomeScreen(nav: NavHostController) {
 }
 
 @Composable
-private fun HomeQuickAction(title: String, subtitle: String, tag: String, onClick: () -> Unit) {
+private fun HomeQuickAction(title: String, subtitle: String, tag: String, modifier: Modifier = Modifier, onClick: () -> Unit) {
     Card(
         onClick = onClick,
-        modifier = Modifier.weight(1f),
+        modifier = modifier,
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
         border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant)
     ) {
