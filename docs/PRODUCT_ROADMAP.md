@@ -83,3 +83,6 @@ Authenticated sync, teacher/admin CMS, analytics, backups, privacy and security 
 
 
 **ABO examination practice:** four new original objective questions test genotype-to-phenotype mapping, gamete transmission and offspring probabilities for ABO crosses. Their answer positions preserve the bank-wide A–D balance.
+
+
+**Genetics glossary expansion:** added definitions and examples for the cell cycle, interphase, sister chromatids, homologous chromosomes, crossing over, haploid and diploid cells, codominance, multiple alleles and ABO blood groups. Regression coverage checks that these terms remain present, accurate and linked to the curriculum.
