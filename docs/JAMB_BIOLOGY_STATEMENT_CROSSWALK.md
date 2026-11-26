@@ -50,3 +50,19 @@ The official PDF organises Biology into Variety of Organisms, Form and Functions
 - Academic subject-matter sign-off: pending.
 
 Do not mark Biology 100% syllabus-complete until each listed statement has linked lesson and assessment evidence and has passed academic review.
+
+
+## Classification micro-lesson — internal atomic teaching map
+
+The JAMB A2 source row above is decomposed below into stable **MeritPrep teaching-idea IDs** for stage-level instruction and assessment. These IDs are internal traceability keys, not official JAMB statement numbers. The current IBASS PDF's exact wording and page-level statement capture still require the source audit described in this document.
+
+| Internal idea ID | JAMB syllabus scope represented | App evidence |
+|---|---|---|
+| `bio-classification-purpose` | Classification, identification and scientific naming as methods for studying organism diversity. | Separate concept, worked-example and context checks. |
+| `bio-taxonomic-hierarchy` | Taxonomic ranks and species grouping. | Rank-order and specificity checks; species concept is taught with its limitations. |
+| `bio-binomial-nomenclature` | Correct two-part scientific names and writing conventions. | Capitalisation, italics and handwritten underlining checks. |
+| `bio-five-kingdoms` | Monera, Protista, Fungi, Plantae and Animalia and their distinguishing characteristics. | Multi-feature kingdom comparisons and misconception checks. |
+| `bio-plant-divisions` | Major plant divisions, including non-vascular, spore-bearing vascular, gymnosperm and angiosperm groups. | Diagnostic-feature comparisons and plant-key practical. |
+| `bio-animal-groups` | Major vertebrate classes and broad vertebrate/invertebrate distinction. | Diagnostic-feature checks and animal-key practical. |
+
+All six ideas have a dedicated check in Concepts, Examples and Context. Each check requires an initial response and a fresh transfer response. The linked practical uses explicit specimen clues and a sequential paired-choice key.
