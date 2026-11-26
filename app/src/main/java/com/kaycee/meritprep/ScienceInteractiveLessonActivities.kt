@@ -15,6 +15,7 @@ import com.kaycee.meritprep.data.*
 @Composable
 fun ChemistryInteractiveLessonActivity(topicId: String) {
     when (topicId) {
+        "chem-atomic" -> AtomicStructureInquiry()
         "chem-acids-bases" -> ChemistryTitrationInquiry()
         "chem-redox" -> ChemistryRedoxTitrationInquiry()
         "chem-combination" -> ChemistryStoichiometryInquiry()
