@@ -1291,6 +1291,7 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
                             LessonStage.CONCEPT -> MicroLessonEngine.checks(topicId, LessonStage.CONCEPT).isEmpty() || conceptChecksPassed
                             LessonStage.EXAMPLES -> MicroLessonEngine.checks(topicId, LessonStage.EXAMPLES).isEmpty() || exampleChecksPassed
                             LessonStage.APPLICATIONS -> MicroLessonEngine.checks(topicId, LessonStage.APPLICATIONS).isEmpty() || contextChecksPassed
+                            LessonStage.LAB -> !requiresBiologyLabEvidence(topicId) || labEvidencePassed
                             else -> true
                         },
                         modifier = Modifier.weight(1.35f).heightIn(min = 48.dp),
