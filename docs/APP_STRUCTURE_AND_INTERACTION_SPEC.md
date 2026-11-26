@@ -450,7 +450,7 @@ The virtual laboratory workspace has been reorganised so that a guided investiga
 - The Physics topics previously routed to the generic PhysicsMissingTopicExplorer now have dedicated visual laboratories: thermometer and temperature-scale exploration, specific-heat comparison, phase-change particle animation, relative-humidity and dew-point model, converging-lens ray diagram, prism dispersion, solenoid magnetic field, thermal-conduction animation and semiconductor diode I–V characteristic.
 - The Biology population topic now opens the quadrat-sampling and ecological-succession activities in the Virtual Lab.
 - Atomic structure now has an interactive atom builder. Learners change proton, neutron and electron counts and see element identity, isotope mass, shell arrangement and ionic charge update together. Its simplified Bohr-style representation is explicitly labelled as a teaching model, not a literal electron orbit.
-- The PhET Build an Atom resource is mapped to **Atomic Structure**, while molecular-shape resources remain under **Atomic Bonding**. This corrects a previous topic mismatch.
+- The PhET Build an Atom resource and the molecule-shape explorer are both mapped to the existing **Atomic Structure and Bonding** syllabus topic. The interactive lab presents the atom builder alongside the bonding activity rather than inventing a second, unmapped lesson ID.
 
 #### External media and virtual-lab catalogue
 
