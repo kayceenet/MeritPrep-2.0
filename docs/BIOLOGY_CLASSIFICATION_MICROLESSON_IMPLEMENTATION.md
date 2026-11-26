@@ -58,3 +58,15 @@ The project asks learners to create a local-organism identification guide with t
 - The app's wider Biology syllabus and other subjects remain in development.
 
 Release status: **PARTIAL / IN DEVELOPMENT**. Do not represent the entire classification syllabus block, Biology course or WAEC pathway as academically verified.
+
+
+## Expanded specimen-key and visual coverage
+
+The interactive practical now keeps specimen identities hidden behind neutral specimen labels until the learner completes the key. It includes:
+- Plant specimens representing bryophytes, pteridophytes, gymnosperms and angiosperms.
+- Invertebrate examples representing Porifera, Cnidaria, Platyhelminthes, Nematoda, Annelida, Arthropoda, Mollusca and Echinodermata.
+- Vertebrate examples representing fish, amphibians, reptiles, birds and mammals.
+
+The animal key first separates vertebrates from invertebrates, then follows the appropriate diagnostic branch. The full decision path is displayed and saved with the learner's practical record. An incorrect choice cannot produce an identification; each step must match the recorded specimen feature.
+
+The concept visual now presents the taxonomic hierarchy, plant divisions, major invertebrate phyla, vertebrate classes and the five-kingdom teaching model. The project brief now requires learners to construct a key for the major invertebrate phyla as well as the vertebrate classes.
