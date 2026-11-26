@@ -425,3 +425,17 @@ The following source changes have been committed to the Android application:
 **Test updated:** `LessonStageProgressionTest.kt` now verifies that every pillar is accessible before and after completion evidence.
 
 **Verification status:** GitHub Actions Android CI has been triggered for these commits. Do not consider the implementation build-verified until the latest run for the final code commit completes successfully. UI behaviour still requires device testing on phone and tablet sizes.
+
+### 2026-11-26 — Guided investigation analysis improvements
+
+The guided investigation now analyses recorded observations by experimental setting rather than treating every repeat as a separate independent x-value:
+
+- Repeated readings at the same setting are averaged for the plotted point, while the original observations remain in the notebook table.
+- The analysis stage reports the observed direction of change from the ordered mean values and explicitly distinguishes a descriptive pattern from proof of causation.
+- The graph now uses the observed minimum and maximum on both axes. This avoids the earlier zero-origin scaling error for profiles whose independent variable or response does not start at zero, and it plots the mean for each setting.
+- Where at least five repeats exist at one setting, the notebook flags possible outliers using the existing 1.5 × IQR method. A flagged value is never deleted automatically; learners are told to inspect the original observation and method.
+
+**Source changed:** `GuidedInvestigationActivity.kt`.  
+**Analysis engine reused:** `BiologyExperimentAnalysis.kt`; existing unit tests cover repeated-reading summaries, graph-point ordering, trend descriptions, and non-destructive outlier flags.
+
+**Verification:** the earlier classroom navigation and note-editor commit passed Android CI. CI for the investigation-analysis changes is running; do not mark this new analysis pass build-verified until the run for its final commit succeeds. Device testing of the graph and notebook persistence remains outstanding.
