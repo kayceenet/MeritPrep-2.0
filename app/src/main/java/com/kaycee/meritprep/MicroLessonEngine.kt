@@ -55,8 +55,8 @@ internal data class MicroLessonCheckEvidence(
 }
 
 internal object MicroLessonEngine {
-    private const val JAMB_CELL = "JAMB-BIO-2026-A1-OBJ-001"
-    private const val WAEC_CELL = "WAEC-NG-BIO-2026-A1-001"
+    private const val JAMB_CELL = "JAMB-BIO-A1-CELL-STRUCTURE-001"
+    private const val WAEC_CELL = "WAEC-NG-BIO-A-CELL-STRUCTURE-001"
 
     private data class Idea(
         val id: String,
@@ -239,7 +239,7 @@ private fun MicroLessonCheckItem(
         if (firstSubmitted || evidence.firstPassed) {
             Text(
                 if (evidence.firstPassed) check.explanation
-                else check.misconceptionFeedback[firstSelection] ?: check.explanation,
+                else firstSelection?.let { check.misconceptionFeedback[it] } ?: check.explanation,
                 color = if (evidence.firstPassed) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.error,
                 style = MaterialTheme.typography.bodySmall
             )
