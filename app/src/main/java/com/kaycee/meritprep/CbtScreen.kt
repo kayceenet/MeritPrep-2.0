@@ -290,6 +290,9 @@ fun CbtScreen(mode: CbtMode = CbtMode.JAMB_UTME, questionPool: List<AssessmentQu
                     Text(mode.resultTitle, style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
                     Text("Question ${currentIndex + 1} of ${questions.size}", style = MaterialTheme.typography.bodySmall)
                 }
+                IconButton(onClick = onOpenCalculator) {
+                    Icon(Icons.Default.Calculate, contentDescription = "Open scientific calculator")
+                }
                 Surface(color = if (remainingSeconds <= 300) MaterialTheme.colorScheme.errorContainer else MaterialTheme.colorScheme.secondaryContainer, shape = MaterialTheme.shapes.medium) {
                     Text(formatCbtTime(remainingSeconds), Modifier.padding(horizontal = 12.dp, vertical = 8.dp), fontWeight = FontWeight.Bold)
                 }
