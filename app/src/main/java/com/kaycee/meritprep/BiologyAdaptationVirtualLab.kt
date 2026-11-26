@@ -69,7 +69,7 @@ internal data class AdaptationSelectionConditions(
 }
 
 @Composable
-internal fun BiologyAdaptationVirtualLab() {
+internal fun BiologyAdaptationVirtualLab(onEvidenceChanged: (Boolean) -> Unit = {}) {
     val context = LocalContext.current
     val database = remember(context) { MeritDatabase(context) }
     val noteId = "micro-lab-session-bio-adaptation"
