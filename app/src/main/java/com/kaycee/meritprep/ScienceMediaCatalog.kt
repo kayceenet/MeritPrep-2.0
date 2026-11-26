@@ -128,7 +128,7 @@ object ScienceMediaCatalog {
             id = "chem-atom-phet",
             title = "Build an atom",
             subjectCode = CHEMISTRY,
-            topicId = "chem-atomic",
+            topicId = "chem-atomic-bonding",
             mediaType = ScienceMediaType.INTERACTIVE_SIMULATION,
             provider = "PhET Interactive Simulations",
             summary = "Add or remove protons, neutrons and electrons to investigate atomic number, mass number, charge and isotopes.",
