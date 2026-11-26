@@ -439,3 +439,40 @@ The guided investigation now analyses recorded observations by experimental sett
 **Analysis engine reused:** `BiologyExperimentAnalysis.kt`; existing unit tests cover repeated-reading summaries, graph-point ordering, trend descriptions, and non-destructive outlier flags.
 
 **Verification:** the earlier classroom navigation and note-editor commit passed Android CI. CI for the investigation-analysis changes is running; do not mark this new analysis pass build-verified until the run for its final commit succeeds. Device testing of the graph and notebook persistence remains outstanding.
+
+
+### 2026-11-26 — Virtual laboratory redesign and topic coverage pass
+
+The virtual laboratory workspace has been reorganised so that a guided investigation is no longer presented as if it were the complete simulation experience.
+
+- The lab now opens on **Interactive Lab** by default. The four distinct work areas are **Interactive Lab**, **Investigation**, **Challenge** and **External Labs**.
+- Topic-specific Biology, Chemistry and Physics activities, visual models and practical dispatchers are now routed into the Interactive Lab. The structured predict/plan/run/record/analyse/evaluate notebook is kept in its own Investigation area.
+- The Physics topics previously routed to the generic PhysicsMissingTopicExplorer now have dedicated visual laboratories: thermometer and temperature-scale exploration, specific-heat comparison, phase-change particle animation, relative-humidity and dew-point model, converging-lens ray diagram, prism dispersion, solenoid magnetic field, thermal-conduction animation and semiconductor diode I–V characteristic.
+- The Biology population topic now opens the quadrat-sampling and ecological-succession activities in the Virtual Lab.
+- Atomic structure now has an interactive atom builder. Learners change proton, neutron and electron counts and see element identity, isotope mass, shell arrangement and ionic charge update together. Its simplified Bohr-style representation is explicitly labelled as a teaching model, not a literal electron orbit.
+- The PhET Build an Atom resource is mapped to **Atomic Structure**, while molecular-shape resources remain under **Atomic Bonding**. This corrects a previous topic mismatch.
+
+#### External media and virtual-lab catalogue
+
+The external catalogue now contains **128 curated resource entries mapped across all 81 Biology, Chemistry and Physics syllabus topic IDs**:
+
+- Biology: 24 topics
+- Chemistry: 18 topics
+- Physics: 39 topics
+
+Sources include PhET Interactive Simulations, LabXchange, HHMI BioInteractive, The Lab Games, K2 Physics and the Concord Consortium. Resource entries include a topic-specific summary, a prediction prompt, a post-exploration question, source attribution, licensing/usage restrictions and an offline MeritPrep alternative.
+
+The catalogue deliberately links learners to the original provider pages instead of copying or embedding third-party simulations. This matters because the providers have different terms: standard PhET HTML simulations use CC BY-NC 4.0, LabXchange ordinary hosted-resource use is restricted by its Terms of Service, Concord hosted services have integration restrictions, and The Lab Games/K2 Physics retain their own content rights. The legacy PhET semiconductor activity is marked separately because its Java/CheerpJ compatibility may vary by device. External availability and device compatibility must not be represented as guaranteed.
+
+#### Coverage and verification tests
+
+- Biology coverage tests require every curriculum lesson to have a visual/interactive experience and a guided investigation profile.
+- Chemistry coverage tests require every Chemistry course topic to be represented by a topic-aligned interactive or supplemental activity and keep atomic structure distinct from atomic bonding.
+- Physics coverage tests require every Physics course topic to have a topic-aligned interactive or supplemental route; the nine formerly generic topics are explicitly required to use the new visual laboratories.
+- Science media tests require at least one curated external resource for every Biology, Chemistry and Physics syllabus topic, validate unique resource IDs and required attribution/usage metadata, and check that each resource resolves to its mapped lesson.
+
+**Key source files changed:** LessonVirtualLabWorkspace.kt, AtomicStructureExplorer.kt, BiologyInteractiveLessonActivities.kt, ScienceInteractiveLessonActivities.kt, PhysicsTopicVirtualLabs.kt, PhysicsSupplementalActivities.kt, ScienceMediaCatalog.kt.
+
+**Tests added/updated:** ChemistryInteractiveActivityCoverageTest.kt, PhysicsTopicVirtualLabCoverageTest.kt, ScienceMediaCatalogTest.kt; existing Biology coverage tests retained.
+
+**Verification status:** GitHub Actions for the latest virtual-lab and 128-resource catalogue commit is still running. Earlier failures were traced to a missing resource separator, an unsupported media enum value, and duplicate resource IDs; those issues have been corrected in subsequent commits. Do not mark this pass build-verified until CI for the latest commit completes. Physical device testing, external-link compatibility checks on Android, and academic review of every external resource remain outstanding.
