@@ -401,7 +401,7 @@ private fun SemiconductorDiodeLaboratory() {
                 for (i in 0..120) {
                     val v = -1.0 + i * 1.9 / 120.0
                     val amps = saturationCurrent * (exp((v / (2.0 * thermalVoltage)).coerceIn(-40.0, 20.0)) - 1.0) * 1000.0
-                    val x = left + (v + 1.0) / 1.9 * (right - left)
+                    val x = left + ((v + 1.0) / 1.9).toFloat() * (right - left)
                     val y = (zeroY - amps.toFloat() * 2500f).coerceIn(top, bottom)
                     if (i == 0) curve.moveTo(x, y) else curve.lineTo(x, y)
                 }
