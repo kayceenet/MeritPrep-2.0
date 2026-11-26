@@ -101,6 +101,7 @@ internal fun BiologyClassificationKeyPractical() {
     var completedSteps by remember { mutableStateOf(saved.optInt("completedSteps", 0).coerceAtLeast(0)) }
     var selectedYes by remember { mutableStateOf<Boolean?>(null) }
     var feedback by remember { mutableStateOf("") }
+    var feedbackIsError by remember { mutableStateOf(false) }
     var observationRecord by remember { mutableStateOf(saved.optString("observationRecord")) }
     val specimen = remember(track, specimenId) {
         ClassificationKeyModel.specimens(track).firstOrNull { it.id == specimenId }
@@ -130,6 +131,7 @@ internal fun BiologyClassificationKeyPractical() {
                             completedSteps = 0
                             selectedYes = null
                             feedback = ""
+                            feedbackIsError = false
                         },
                         label = { Text(option.label) }
                     )
@@ -143,6 +145,7 @@ internal fun BiologyClassificationKeyPractical() {
                             completedSteps = 0
                             selectedYes = null
                             feedback = ""
+                            feedbackIsError = false
                         },
                         label = { Text(item.name) }
                     )
@@ -157,24 +160,26 @@ internal fun BiologyClassificationKeyPractical() {
                     Text("Decision ${completedSteps + 1} of ${specimen.decisions.size}", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
                     Text(steps[stepIndex].prompt)
                     Text("Choose the statement that matches the specimen:", style = MaterialTheme.typography.bodySmall)
-                    FilterChip(selected = selectedYes == true, onClick = { selectedYes = true; feedback = "" }, label = { Text(steps[stepIndex].yesMeaning) })
-                    FilterChip(selected = selectedYes == false, onClick = { selectedYes = false; feedback = "" }, label = { Text(steps[stepIndex].noMeaning) })
+                    FilterChip(selected = selectedYes == true, onClick = { selectedYes = true; feedback = ""; feedbackIsError = false }, label = { Text(steps[stepIndex].yesMeaning) })
+                    FilterChip(selected = selectedYes == false, onClick = { selectedYes = false; feedback = ""; feedbackIsError = false }, label = { Text(steps[stepIndex].noMeaning) })
                     Button(
                         onClick = {
                             val expected = ClassificationKeyModel.expectedDecision(specimen.id, completedSteps)
                             if (selectedYes == expected) {
                                 completedSteps += 1
                                 feedback = "Correct. Your choice follows the diagnostic feature stated in the key."
+                                feedbackIsError = false
                                 selectedYes = null
                             } else {
                                 feedback = "Recheck the specimen observations. A dichotomous key must follow the feature actually present, not the habitat or your first guess."
+                                feedbackIsError = true
                             }
                         },
                         enabled = selectedYes != null,
                         modifier = Modifier.fillMaxWidth()
                     ) { Text("Check this decision") }
-                    if (feedback.isNotBlank()) Text(feedback, color = MaterialTheme.colorScheme.primary, style = MaterialTheme.typography.bodySmall)
-                    OutlinedButton(onClick = { completedSteps = 0; selectedYes = null; feedback = "" }, modifier = Modifier.fillMaxWidth()) { Text("Restart this specimen") }
+                    if (feedback.isNotBlank()) Text(feedback, color = if (feedbackIsError) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary, style = MaterialTheme.typography.bodySmall)
+                    OutlinedButton(onClick = { completedSteps = 0; selectedYes = null; feedback = ""; feedbackIsError = false }, modifier = Modifier.fillMaxWidth()) { Text("Restart this specimen") }
                 }
             }
         } else {
