@@ -176,8 +176,12 @@ internal fun BiologyAdaptationVirtualLab(onEvidenceChanged: (Boolean) -> Unit = 
                             .put("conclusion", conclusion)
                             .put("hasRun", hasRun)
                             .put("simulatedRows", rows)
-                        runCatching { database.saveNote(noteId, "bio-adaptation", "Natural selection virtual investigation", body.toString()) }
-                    }, modifier = Modifier.fillMaxWidth()) { Text("Save investigation record on this device") }
+                        val savedSuccessfully = runCatching {
+                            database.saveNote(noteId, "bio-adaptation", "Natural selection virtual investigation", body.toString())
+                            true
+                        }.getOrDefault(false)
+                        onEvidenceChanged(savedSuccessfully && hasRun && prediction.isNotBlank() && conclusion.isNotBlank())
+                    }, enabled = hasRun && prediction.isNotBlank() && conclusion.isNotBlank(), modifier = Modifier.fillMaxWidth()) { Text("Save completed investigation record on this device") }
                 }
             }
         }
