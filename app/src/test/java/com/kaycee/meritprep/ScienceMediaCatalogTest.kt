@@ -71,7 +71,7 @@ class ScienceMediaCatalogTest {
 
     @Test
     fun atomicStructureAndPopulationEcologyResourcesAreMappedToTheirExactSyllabusTopics() {
-        assertEquals("chem-atomic", ScienceMediaCatalog.find("chem-atom-phet")?.topicId)
+        assertEquals("chem-atomic-bonding", ScienceMediaCatalog.find("chem-atom-phet")?.topicId)
         val populationResources = ScienceMediaCatalog.forTopic("bio-populations")
         assertTrue(populationResources.any { it.id == "bio-population-dynamics-hhmi" })
         assertTrue(populationResources.any { it.id == "bio-population-survey-methods-hhmi" })
