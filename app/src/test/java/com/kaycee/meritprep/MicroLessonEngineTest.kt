@@ -107,6 +107,41 @@ class MicroLessonEngineTest {
         assertTrue(MicroLessonEngine.hasCompleteEvidence("bio-classification", LessonStage.CONCEPT, complete))
     }
 
+
+    @Test
+    fun adaptationMicroLessonChecksAllSevenIdeasInEveryTeachingStage() {
+        val stages = listOf(LessonStage.CONCEPT, LessonStage.EXAMPLES, LessonStage.APPLICATIONS)
+        val stageChecks = stages.map { MicroLessonEngine.checks("bio-adaptation", it) }
+        assertEquals(7, stageChecks[0].size)
+        val expectedIdeas = stageChecks.first().map { it.ideaId }.toSet()
+        stages.forEachIndexed { index, _ ->
+            assertEquals(expectedIdeas, stageChecks[index].map { it.ideaId }.toSet())
+            assertEquals(7, stageChecks[index].map { it.id }.toSet().size)
+            stageChecks[index].forEach { check ->
+                assertTrue(check.syllabusRefs.contains("JAMB-BIO-A3-ADAPTATION-001"))
+                assertTrue(check.syllabusRefs.contains("WAEC-NG-BIO-A7-ADAPTATION-001"))
+                assertTrue(check.prompt.isNotBlank())
+                assertTrue(check.options.size >= 2)
+                assertTrue(check.correctOption in check.options.indices)
+                assertTrue(check.hint.isNotBlank())
+                assertTrue(check.transferPrompt.isNotBlank())
+                assertTrue(check.transferOptions.size >= 2)
+                assertTrue(check.transferCorrectOption in check.transferOptions.indices)
+                assertTrue(check.transferExplanation.isNotBlank())
+            }
+        }
+    }
+
+    @Test
+    fun adaptationChecksUseDistinctTasksForConceptExampleAndContext() {
+        val concept = MicroLessonEngine.checks("bio-adaptation", LessonStage.CONCEPT).first()
+        val example = MicroLessonEngine.checks("bio-adaptation", LessonStage.EXAMPLES).first()
+        val context = MicroLessonEngine.checks("bio-adaptation", LessonStage.APPLICATIONS).first()
+        assertNotEquals(concept.prompt, example.prompt)
+        assertNotEquals(example.prompt, context.prompt)
+        assertNotEquals(concept.transferPrompt, context.transferPrompt)
+    }
+
     @Test
     fun unrelatedTopicsDoNotReceiveUnmappedChecks() {
         assertTrue(MicroLessonEngine.checks("bio-adaptation", LessonStage.CONCEPT).isEmpty())
