@@ -2270,6 +2270,38 @@ object ScienceMediaCatalog {
             beforeYouStart = "Predict why a rotating coil in a magnetic field produces an alternating emf.",
             afterYouExplore = "Explain how rotation changes magnetic flux linkage and why the induced emf alternates.",
             offlineAlternative = "Use MeritPrep's AC generator lesson and sketch one cycle of induced emf against time."
+        ),
+        ScienceMediaResource(
+            id = "bio-characteristics-life-lucidstem",
+            title = "Characteristics of life: eight interactive simulations",
+            subjectCode = BIOLOGY,
+            topicId = "bio-living",
+            mediaType = ScienceMediaType.INTERACTIVE_SIMULATION,
+            provider = "TheLucidSTEM",
+            summary = "Test living and non-living objects against MRS GREN, then explore cells, species, dichotomous keys and organism groups using interactive 2D and 3D models.",
+            sourceUrl = "https://thelucidstem.com/sims/lab/bio-classification/",
+            licenceName = "Copyright © 2026 Nodus Technologies Pvt Ltd; free for personal study and classroom teaching",
+            licenceUrl = "https://thelucidstem.com/terms/",
+            permittedUse = "TheLucidSTEM expressly permits linking to its pages and using them for personal study and classroom teaching. MeritPrep opens the original page externally; do not copy, embed, republish, scrape or use the site's content in a paid product without written permission.",
+            beforeYouStart = "Predict which characteristics distinguish living organisms from fire, crystals and machines.",
+            afterYouExplore = "Use evidence from all seven life processes to justify a classification; explain why a single characteristic is not enough.",
+            offlineAlternative = "Use MeritPrep's living-things observation activity and complete a claim-evidence-reasoning table for three contrasting examples."
+        ),
+        ScienceMediaResource(
+            id = "bio-classification-lucidstem",
+            title = "Classification and dichotomous keys: interactive 3D lab",
+            subjectCode = BIOLOGY,
+            topicId = "bio-classification",
+            mediaType = ScienceMediaType.INTERACTIVE_SIMULATION,
+            provider = "TheLucidSTEM",
+            summary = "Explore species relationships, dichotomous keys, vertebrate and arthropod groups, kingdoms, plant groups and DNA-based classification.",
+            sourceUrl = "https://thelucidstem.com/sims/lab/bio-classification/",
+            licenceName = "Copyright © 2026 Nodus Technologies Pvt Ltd; free for personal study and classroom teaching",
+            licenceUrl = "https://thelucidstem.com/terms/",
+            permittedUse = "TheLucidSTEM expressly permits linking to its pages and using them for personal study and classroom teaching. MeritPrep opens the original page externally; do not copy, embed, republish, scrape or use the site's content in a paid product without written permission.",
+            beforeYouStart = "Predict which observable features can distinguish two organisms reliably.",
+            afterYouExplore = "Use a key step by step, compare homologous features and explain how DNA evidence can refine classification.",
+            offlineAlternative = "Use MeritPrep's classification activity to construct a dichotomous key for a set of organisms."
         )
     )
 
