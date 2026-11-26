@@ -64,7 +64,7 @@ class ScienceMediaCatalogTest {
                 ChemistryCourse.topics.map { it.id } +
                 PhysicsCourse.topics.map { it.id }
             ).toSet()
-        val resourceTopics = ScienceMediaCatalog.all.map { it.topicId }.toSet()
+        val resourceTopics = ScienceMediaCatalog.resources.map { it.topicId }.toSet()
         val missing = syllabusTopics - resourceTopics
         assertTrue("Science syllabus topics without a curated external resource: $missing", missing.isEmpty())
     }
