@@ -202,7 +202,9 @@ private fun QuickStudyLauncherSheet(onChoose: (String) -> Unit) {
         Triple("Study plan", "Organise your weekly learning", "study-plan"),
         Triple("Recall cards", "Review concepts due for retrieval", "review"),
         Triple("Notebook", "Saved notes, lessons and mistakes", "notebook"),
-        Triple("WAEC Biology theory", "Structured answer practice", "waec-theory"),
+        Triple("WAEC Biology Paper 2", "Structured theory practice", "waec-theory"),
+        Triple("WAEC Chemistry Paper 2", "Structured theory practice", "chemistry-waec-theory"),
+        Triple("WAEC Physics Paper 2", "Structured theory practice", "physics-waec-theory"),
         Triple("SS3 placement", "Check your starting level", "placement"),
         Triple("Virtual laboratories", "Explore practical investigations", "labs"),
         Triple("Scientific calculators", "Formula and calculation tools", "calculators")
