@@ -795,7 +795,7 @@ object ScienceMediaCatalog {
             beforeYouStart = "Predict how every point on a wavefront can act as a source of secondary wavelets.",
             afterYouExplore = "Explain how the envelope of secondary wavelets forms the new wavefront.",
             offlineAlternative = "Use MeritPrep's wavefront animation and lesson diagram."
-        )
+        ),
         ScienceMediaResource(
             id = "bio-population-dynamics-hhmi",
             title = "Population dynamics: exponential and logistic growth",
