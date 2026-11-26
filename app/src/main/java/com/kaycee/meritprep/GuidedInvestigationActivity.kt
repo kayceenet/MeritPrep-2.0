@@ -544,8 +544,18 @@ fun GuidedInvestigationActivity(topicId: String) {
                     else {
                         Text(profile.independent + " (" + profile.xUnit + ")     " + profile.dependent + " (" + profile.yUnit + ")", fontWeight = FontWeight.SemiBold)
                         readings.forEach { pair -> Text("%.2f".format(pair.first) + "                         " + "%.2f".format(pair.second)) }
-                        analysedPoints.filter { it.readingCount > 1 }.forEach { point ->
-                            Text("Mean of ${point.readingCount} repeats at " + "%.2f".format(point.independentValue) + " " + profile.xUnit + ": " + "%.2f".format(point.meanResult) + " " + profile.yUnit)
+                        readings.groupBy { it.first }.forEach { (setting, repeats) ->
+                            if (repeats.size > 1) {
+                                val mean = repeats.map { it.second.toDouble() }.average()
+                                Text("Mean of ${repeats.size} repeats at " + "%.2f".format(setting) + " " + profile.xUnit + ": " + "%.2f".format(mean) + " " + profile.yUnit)
+                            }
+                            if (repeats.size >= 5) {
+                                val unusual = BiologyExperimentAnalysis.possibleOutliers(repeats.joinToString(",") { it.second.toString() })
+                                if (unusual.isNotEmpty()) {
+                                    Text("Review possible unusual reading(s) at " + "%.2f".format(setting) + " " + profile.xUnit + ": " + unusual.joinToString(), color = MaterialTheme.colorScheme.tertiary)
+                                    Text("These values are flagged for investigation, not deleted. Check the original observation and method before deciding what to do.", style = MaterialTheme.typography.bodySmall)
+                                }
+                            }
                         }
                         if (observedTrend != null) {
                             Text("Observed pattern", fontWeight = FontWeight.Bold)
