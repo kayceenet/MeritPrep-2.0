@@ -38,6 +38,7 @@ import kotlin.math.PI
 import kotlin.math.cos
 import kotlin.math.exp
 import kotlin.math.sin
+import kotlin.math.ln
 
 /** Topic-specific visual laboratories for Physics syllabus areas previously shown as generic calculators. */
 @Composable
@@ -45,7 +46,8 @@ fun PhysicsTopicVirtualLab(topicId: String) {
     when (topicId) {
         "phy-temperature" -> TemperatureScaleLaboratory()
         "phy-heat-quantity" -> SpecificHeatLaboratory()
-        "phy-change-state", "phy-vapours" -> PhaseChangeLaboratory(vapourTopic = topicId == "phy-vapours")
+        "phy-change-state" -> PhaseChangeLaboratory()
+        "phy-vapours" -> HumidityLaboratory()
         "phy-optical-instruments" -> ConvergingLensLaboratory()
         "phy-dispersion" -> DispersionLaboratory()
         "phy-magnetism" -> SolenoidFieldLaboratory()
@@ -126,19 +128,20 @@ private fun SpecificHeatLaboratory() {
 }
 
 @Composable
-private fun PhaseChangeLaboratory(vapourTopic: Boolean) {
-    var energy by remember { mutableFloatStateOf(if (vapourTopic) 900f else 180f) }
+private fun PhaseChangeLaboratory() {
+    var energy by remember { mutableFloatStateOf(500f) }
     val phase = when {
-        energy < 334f -> "Solid ice warming"
-        energy < 334f + 2260f -> "Liquid water warming"
-        else -> "Water vapour"
+        energy < 334f -> "Melting: solid and liquid coexist"
+        energy < 752f -> "Liquid water warming"
+        energy < 3009f -> "Boiling: liquid and vapour coexist"
+        else -> "Steam warming"
     }
     val transition = rememberInfiniteTransition(label = "phase-particles")
     val time by transition.animateFloat(0f, 1f, infiniteRepeatable(tween(2600, easing = LinearEasing), RepeatMode.Restart), label = "phase-motion")
     Card(Modifier.fillMaxWidth()) {
         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-            Text(if (vapourTopic) "Evaporation, boiling and vapour formation" else "Heating curve and change of state", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
-            Text("Add energy to one kilogram of water. Watch the particle arrangement change as the substance moves through its states.")
+            Text("Heating curve: melting and boiling of water", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+            Text("Add energy to one kilogram of water initially at 0 °C. Follow the melting plateau, liquid warming and boiling plateau.")
             Canvas(Modifier.fillMaxWidth().height(170.dp)) {
                 val solid = energy < 334f
                 val gas = energy >= 2594f
@@ -161,11 +164,53 @@ private fun PhaseChangeLaboratory(vapourTopic: Boolean) {
                 }
             }
             Text("Energy supplied per kilogram: ${energy.toInt()} kJ")
-            Slider(energy, { energy = it }, valueRange = 0f..2800f)
+            Slider(energy, { energy = it }, valueRange = 0f..3200f)
             Text("Model state: $phase", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
-            Text("Energy for fusion: 334 kJ kg⁻¹  |  Energy for vaporisation: 2260 kJ kg⁻¹")
+            Text("Fusion: 334 kJ kg⁻¹  |  Heating water from 0 °C to 100 °C: about 418 kJ kg⁻¹  |  Vaporisation: about 2257 kJ kg⁻¹")
             Text("During a phase change at constant pressure, added energy changes the arrangement and separation of particles while temperature remains approximately constant.")
             Text("This simplified model shows the major latent-heat plateaux but does not calculate the full temperature of each phase.", style = MaterialTheme.typography.bodySmall)
+        }
+    }
+}
+
+@Composable
+private fun HumidityLaboratory() {
+    var temperature by remember { mutableFloatStateOf(25f) }
+    var relativeHumidity by remember { mutableFloatStateOf(60f) }
+    val saturationPressure = 0.6108 * exp(17.27 * temperature / (temperature + 237.3))
+    val actualPressure = saturationPressure * relativeHumidity / 100.0
+    val gamma = ln((relativeHumidity / 100.0).coerceAtLeast(0.001)) + 17.27 * temperature / (237.3 + temperature)
+    val dewPoint = 237.3 * gamma / (17.27 - gamma)
+    val transition = rememberInfiniteTransition(label = "water-vapour")
+    val phase by transition.animateFloat(0f, 1f, infiniteRepeatable(tween(2600, easing = LinearEasing), RepeatMode.Restart), label = "vapour-motion")
+    Card(Modifier.fillMaxWidth()) {
+        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            Text("Water vapour and relative humidity", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+            Text("Change air temperature and relative humidity. The chamber illustrates invisible water vapour and the conditions at which condensation can begin.")
+            Canvas(Modifier.fillMaxWidth().height(150.dp)) {
+                drawRoundRect(Color(0xFFE3F2FD), Offset(8f, 8f), Size(size.width - 16f, size.height - 16f), cornerRadius = androidx.compose.ui.geometry.CornerRadius(14f))
+                val count = (relativeHumidity / 100f * 34f).toInt().coerceIn(2, 34)
+                repeat(count) { index ->
+                    val x = 20f + ((index * 53f + phase * 45f) % (size.width - 40f))
+                    val y = 18f + ((index * 29f + sin(phase * 2f * PI.toFloat() + index) * 8f) % (size.height - 36f))
+                    drawCircle(Color(0xFF039BE5).copy(alpha = 0.7f), 3.5f, Offset(x, y))
+                }
+                if (relativeHumidity > 90f) {
+                    repeat(7) { index ->
+                        val x = size.width * (0.18f + index * 0.1f)
+                        drawCircle(Color(0xFF0288D1), 4f, Offset(x, size.height - 16f))
+                    }
+                }
+            }
+            Text("Air temperature: ${temperature.toInt()} °C")
+            Slider(temperature, { temperature = it }, valueRange = 0f..40f)
+            Text("Relative humidity: ${relativeHumidity.toInt()}%")
+            Slider(relativeHumidity, { relativeHumidity = it }, valueRange = 10f..100f)
+            Text("Saturation vapour pressure: ${"%.3f".format(saturationPressure)} kPa")
+            Text("Actual vapour pressure: ${"%.3f".format(actualPressure)} kPa", fontWeight = FontWeight.SemiBold)
+            Text("Approximate dew point: ${"%.1f".format(dewPoint)} °C", style = MaterialTheme.typography.titleMedium)
+            Text("Relative humidity = (actual vapour pressure ÷ saturation vapour pressure) × 100%. Cooling air without changing its water-vapour content raises relative humidity; at the dew point, condensation can begin.")
+            Text("The chamber is illustrative. Saturation pressure uses the Magnus approximation over ordinary atmospheric temperatures; it is not a full weather model.", style = MaterialTheme.typography.bodySmall)
         }
     }
 }
