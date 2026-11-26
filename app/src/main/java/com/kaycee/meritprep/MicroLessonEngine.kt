@@ -66,7 +66,7 @@ internal object MicroLessonEngine {
 
     private val ideas = listOf(
         Idea("bio-cell-theory", "Cell theory", listOf(JAMB_CELL, WAEC_CELL)),
-        Idea("bio-cell-membrane", "Cell membrane and exchange", listOf(JAMB_CELL, "JAMB-BIO-2026-B3-OBJ-001", WAEC_CELL)),
+        Idea("bio-cell-membrane", "Cell membrane and exchange", listOf(JAMB_CELL, "JAMB-BIO-B3-TRANSPORT-001", WAEC_CELL)),
         Idea("bio-cell-organelles", "Organelles and their functions", listOf(JAMB_CELL, WAEC_CELL)),
         Idea("bio-cell-types", "Plant and animal cell differences", listOf(JAMB_CELL, WAEC_CELL)),
         Idea("bio-prokaryote-eukaryote", "Prokaryotic and eukaryotic cells", listOf(JAMB_CELL, WAEC_CELL)),
