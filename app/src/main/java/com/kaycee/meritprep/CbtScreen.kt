@@ -212,6 +212,21 @@ fun CbtScreen(mode: CbtMode = CbtMode.JAMB_UTME, questionPool: List<AssessmentQu
                 SummaryTile("Accuracy", "${summary.percentage}%", Modifier.weight(1f))
                 SummaryTile("Unanswered", summary.unanswered.toString(), Modifier.weight(1f))
             }
+            if (mode == CbtMode.UTME_SCIENCE_COMBO) {
+                Text("Subject breakdown", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+                listOf("eng" to "Use of English", "bio" to "Biology", "chem" to "Chemistry", "phy" to "Physics").forEach { (prefix, label) ->
+                    val subjectQuestions = questions.filter { it.topicId.startsWith(prefix) }
+                    val subjectCorrect = subjectQuestions.count { answers[it.questionId] == it.correctPresentedIndex }
+                    val percent = if (subjectQuestions.isEmpty()) 0 else subjectCorrect * 100 / subjectQuestions.size
+                    Card(Modifier.fillMaxWidth()) {
+                        Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(5.dp)) {
+                            Text(label, fontWeight = FontWeight.SemiBold)
+                            Text("$subjectCorrect/${subjectQuestions.size} correct · $percent%")
+                            LinearProgressIndicator(progress = { percent / 100f }, modifier = Modifier.fillMaxWidth())
+                        }
+                    }
+                }
+            }
             val topicPerformance = CbtSessionEngine.topicPerformance(questions, answers)
             Text("Topic performance", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
             Text("Use this breakdown to choose what to revise next. Unanswered questions count as not correct.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
@@ -280,6 +295,22 @@ fun CbtScreen(mode: CbtMode = CbtMode.JAMB_UTME, questionPool: List<AssessmentQu
                 Text("Answered $answeredCount/${questions.size}", style = MaterialTheme.typography.labelMedium)
                 Text("Flagged $flaggedCount", style = MaterialTheme.typography.labelMedium)
             }
+            if (mode == CbtMode.UTME_SCIENCE_COMBO) {
+                Row(Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(7.dp)) {
+                    listOf(
+                        Triple("English", 0, 59),
+                        Triple("Biology", 60, 99),
+                        Triple("Chemistry", 100, 139),
+                        Triple("Physics", 140, 179)
+                    ).forEach { section ->
+                        FilterChip(
+                            selected = currentIndex in section.second..section.third,
+                            onClick = { currentIndex = section.second },
+                            label = { Text(section.first) }
+                        )
+                    }
+                }
+            }
             Text("Question navigator", style = MaterialTheme.typography.labelLarge, fontWeight = FontWeight.SemiBold)
             Row(Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                 questions.forEachIndexed { index, item ->
@@ -304,6 +335,9 @@ fun CbtScreen(mode: CbtMode = CbtMode.JAMB_UTME, questionPool: List<AssessmentQu
             }
             Card(Modifier.fillMaxWidth()) {
                 Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                    if (mode == CbtMode.UTME_SCIENCE_COMBO) {
+                        Text(utmeSubjectLabel(question.topicId).uppercase(), style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
+                    }
                     Text("QUESTION ${currentIndex + 1}", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
                     Text(question.prompt, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
                     question.options.forEachIndexed { optionIndex, option ->
@@ -359,6 +393,14 @@ fun CbtScreen(mode: CbtMode = CbtMode.JAMB_UTME, questionPool: List<AssessmentQu
             dismissButton = { TextButton(onClick = { showSubmitDialog = false }) { Text("Continue mock") } }
         )
     }
+}
+
+private fun utmeSubjectLabel(topicId: String): String = when {
+    topicId.startsWith("eng") -> "Use of English"
+    topicId.startsWith("bio") -> "Biology"
+    topicId.startsWith("chem") -> "Chemistry"
+    topicId.startsWith("phy") -> "Physics"
+    else -> "Subject"
 }
 
 @Composable
