@@ -194,6 +194,7 @@ fun CbtScreen(mode: CbtMode = CbtMode.JAMB_UTME, questionPool: List<AssessmentQu
                     answers.clear()
                     flags.clear()
                     currentIndex = 0
+                    paused = false
                     remainingSeconds = mode.durationSeconds
                     endsAtMillis = now + mode.durationSeconds * 1000L
                     sessionId = newSessionId
