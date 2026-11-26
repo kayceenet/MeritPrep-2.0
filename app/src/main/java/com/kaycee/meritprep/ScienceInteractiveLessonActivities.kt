@@ -12,13 +12,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.kaycee.meritprep.data.*
 
-@Composable
 internal val chemistryInteractiveActivityTopicIds = setOf(
     "chem-atomic", "chem-acids-bases", "chem-redox", "chem-combination",
     "chem-separation", "chem-metals", "chem-nonmetals", "chem-rates",
     "chem-energy", "chem-electrolysis", "chem-kinetic-gas", "chem-equilibrium"
 )
 
+@Composable
 fun ChemistryInteractiveLessonActivity(topicId: String) {
     when (topicId) {
         "chem-atomic" -> AtomicStructureInquiry()
@@ -149,7 +149,6 @@ private fun ElectrolysisConceptInquiry() {
     }
 }
 
-@Composable
 internal val physicsInteractiveActivityTopicIds = setOf(
     "phy-current-electricity", "phy-electrical-power", "phy-cells", "phy-capacitors",
     "phy-waves", "phy-sound-propagation", "phy-sound-characteristics", "phy-light-energy",
@@ -158,6 +157,7 @@ internal val physicsInteractiveActivityTopicIds = setOf(
     "phy-electrostatics", "phy-induction"
 )
 
+@Composable
 fun PhysicsInteractiveLessonActivity(topicId: String) {
     when (topicId) {
         "phy-current-electricity", "phy-electrical-power", "phy-cells" -> ResistorCircuitInquiry()
