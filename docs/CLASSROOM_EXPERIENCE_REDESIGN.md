@@ -148,3 +148,11 @@ The implementation now follows the six-pillar classroom model:
 The classroom shell retains a fixed title/progress header, responsive tablet sidebar and phone mode selector that collapses on scroll. A fixed bottom navigation row now provides Previous, Complete/Verify and Next controls on non-quiz pillars. The quiz retains its own assessment/lesson-completion controls.
 
 This is a structural alignment milestone, not a claim that every syllabus topic already has all six pillars at the same academic depth. Topic-specific project briefs, full misconception banks, examiner guidance, verified portal coverage, per-topic audio controls, adaptive spaced review and deeper project rubrics remain staged work. The generic project verification checks scientific reasoning process and must not be represented as a topic-specific assessment of mastery.
+
+
+## Home dashboard and learner workspace alignment — 26 November 2026
+
+- The Materials home dashboard now presents a two-column subject grid with a distinct restrained gradient for each subject, a true resume/next-topic hero, due active-recall banner, quick actions and a daily study-session plan.
+- The dashboard records the most recently opened unfinished topic and offers it as the resume destination. The classroom stores the active pillar and completed-pillar list locally so the learner can return to the same point in a lesson.
+- The visual system now uses a cohesive deep-teal, slate-blue and warm-neutral palette in light and dark modes.
+- A unified Notebook screen is available from the tablet navigation rail and phone quick-study launcher. It separates saved notes, bookmarked lessons and outstanding mistakes; saved notes can be searched, opened in context and deleted with confirmation.
