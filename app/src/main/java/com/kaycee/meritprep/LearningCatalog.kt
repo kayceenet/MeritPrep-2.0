@@ -722,6 +722,7 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
     var exerciseComplete by remember(topicId) { mutableStateOf(false) }
     var projectChecksPassed by remember(topicId) { mutableStateOf(false) }
     var stage by remember(topicId) { mutableStateOf(LessonStage.CONCEPT) }
+    LaunchedEffect(topicId) { database.recordTopicOpened(topicId) }
     var speechReady by remember(topicId) { mutableStateOf(false) }
     var speechEngine by remember(topicId) { mutableStateOf<TextToSpeech?>(null) }
 
