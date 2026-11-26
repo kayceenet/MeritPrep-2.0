@@ -710,4 +710,58 @@ A micro-lesson cannot be marked release-ready if any applicable pillar is empty,
 - Offline use, checkpoint persistence, syllabus traceability or academic review is missing.
 
 A subject may use different media and response modes, but the six-pillar teaching standard remains consistent across all subjects and all micro-lessons. The quality and form of each pillar must fit the discipline; the standard must never be reduced to six empty headings.
+### 17.10 Mandatory concept checks for every examinable idea
 
+Every examinable idea introduced, explained, demonstrated or applied within **Concepts, Examples and Context** must have an explicitly authored, syllabus-mapped concept check. This is a non-negotiable requirement for every micro-lesson and subtopic.
+
+A concept check is a short, purposeful interaction that asks the learner to demonstrate the exact understanding needed for that idea. It is not a decorative “Did you understand?” prompt and it is not satisfied by the learner pressing Continue.
+
+#### Coverage rule
+
+- Break each syllabus statement into its examinable ideas, skills, relationships, processes, definitions, classifications, conditions and applications.
+- Give each examinable idea a stable idea ID linked to its atomic JAMB/WAEC syllabus statement ID(s) and learning outcome(s).
+- Maintain a coverage map showing where each idea is taught in Concepts, demonstrated in Examples, applied in Context and checked.
+- **Concepts:** after an idea has been taught, ask the learner to recall, explain, identify, distinguish, predict or interpret it before moving on.
+- **Examples:** after demonstrating the relevant method or reasoning, ask the learner to complete a step, identify the principle used, explain why a step is valid or solve a fresh parallel example.
+- **Context:** after applying the idea to a real or examination-relevant situation, ask the learner to recognise the idea, select or justify an action, interpret evidence or transfer the principle to a new situation.
+- Where a stage presents multiple distinct examinable ideas, provide a separate check for each idea. A single broad question must not be used to claim coverage of several ideas unless its response genuinely tests each one and the rubric records that evidence.
+- If an idea is revisited in more than one stage, checks must test the appropriate level of understanding at that stage: understanding, demonstrated method and contextual transfer. Repeating the same recall question three times does not satisfy this rule.
+
+#### Check design and feedback
+
+Each concept check must specify:
+- check_id, idea_id, stage (CONCEPTS, EXAMPLES or CONTEXT) and linked syllabus statement ID(s);
+- the precise skill or misconception being tested;
+- prompt and permitted response type;
+- correct answer, worked reasoning or scoring rubric;
+- plausible misconceptions or error categories;
+- response-specific feedback explaining why the response is correct, incomplete or incorrect;
+- hint/remediation route to the relevant explanation or worked example;
+- a fresh retry or transfer item where the learner needs another attempt;
+- evidence recorded: attempted, supported correct, independently correct, partially correct or incorrect.
+
+Use varied response forms appropriate to the discipline: explain in one's own words, identify, label, classify, compare, order, predict, calculate, interpret a diagram/table/graph, complete a worked step, justify a decision or analyse a short scenario. Do not rely on multiple choice alone.
+
+#### Adaptive progression
+
+- A correct answer with sound reasoning can unlock the next step or a more demanding application.
+- A correct answer that appears guessed must trigger a brief justification or a fresh equivalent check before it counts as independent evidence.
+- A partially correct answer must identify the specific missing part and give targeted support.
+- An incorrect answer must identify the misconception, revisit the relevant teaching point and offer a different example or representation.
+- Repeated difficulty must trigger prerequisite remediation, not endless repetition of the same question.
+- Learners may continue exploring where appropriate, but unchecked ideas remain visibly unverified and cannot be marked mastered.
+
+Concept checks are formative evidence and must not be confused with the closing Quiz. The Quiz samples and integrates learning across the micro-lesson; concept checks verify each examinable idea at the point it is taught and applied. Both are required.
+
+#### Data, reporting and release gate
+
+The content model and authoring workflow must make it possible to audit:
+- every examinable idea in the micro-lesson;
+- its Concepts, Examples and Context teaching references;
+- the corresponding check or justified stage-level N/A;
+- the learner's response and feedback path;
+- whether the idea has been demonstrated independently and transferred.
+
+A micro-lesson fails academic release if any examinable idea in Concepts, Examples or Context has no mapped concept check, if a check does not actually test the stated idea, or if the learner can progress to a mastery claim without sufficient evidence. A check may be marked not applicable only when that stage genuinely does not teach, demonstrate or apply the idea; the reason must be recorded and reviewed. There is no blanket exemption for an entire micro-lesson.
+
+**Governing rule:** no examinable idea is considered taught merely because the app displayed an explanation. The learner must actively demonstrate understanding at the point of learning, practise the relevant reasoning, and apply it in context.
