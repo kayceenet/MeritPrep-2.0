@@ -51,6 +51,20 @@ internal fun BiologyClassificationVisual() {
         }
         Card(Modifier.fillMaxWidth()) {
             Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                Text("Major invertebrate phyla", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+                ClassificationVisualRow("Porous body; canal system; no true tissues", "Porifera", "Sponges")
+                ClassificationVisualRow("Stinging cells; tentacles; often radial symmetry", "Cnidaria", "Hydra, jellyfish and corals")
+                ClassificationVisualRow("Dorsoventrally flattened body", "Platyhelminthes", "Flatworms")
+                ClassificationVisualRow("Cylindrical, unsegmented body", "Nematoda", "Roundworms")
+                ClassificationVisualRow("Segmented body", "Annelida", "Earthworms and leeches")
+                ClassificationVisualRow("Jointed appendages; chitinous exoskeleton", "Arthropoda", "Insects, arachnids and crustaceans")
+                ClassificationVisualRow("Muscular foot and mantle", "Mollusca", "Snails, clams and octopuses")
+                ClassificationVisualRow("Water-vascular system; tube feet", "Echinodermata", "Starfish and sea urchins")
+                Text("Use combinations of features. A single characteristic may not be sufficient for every specimen.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            }
+        }
+        Card(Modifier.fillMaxWidth()) {
+            Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 Text("Vertebrate classes: use diagnostic evidence", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
                 ClassificationVisualRow("Fins and gills in adult aquatic life", "Fish", "For example, tilapia")
                 ClassificationVisualRow("Moist skin; life cycle linked to water", "Amphibians", "For example, frogs")
