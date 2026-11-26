@@ -471,7 +471,7 @@ The catalogue deliberately links learners to the original provider pages instead
 - Physics coverage tests require every Physics course topic to have a topic-aligned interactive or supplemental route; the nine formerly generic topics are explicitly required to use the new visual laboratories.
 - Science media tests require at least one curated external resource for every Biology, Chemistry and Physics syllabus topic, validate unique resource IDs and required attribution/usage metadata, and check that each resource resolves to its mapped lesson.
 
-**Key source files changed:** LessonVirtualLabWorkspace.kt, AtomicStructureExplorer.kt, BiologyInteractiveLessonActivities.kt, ScienceInteractiveLessonActivities.kt, PhysicsTopicVirtualLabs.kt, PhysicsSupplementalActivities.kt, ScienceMediaCatalog.kt.
+**Key source files changed:** LessonVirtualLabWorkspace.kt, AtomicStructureExplorer.kt, BiologyInteractiveLessonActivities.kt, ScienceInteractiveLessonActivities.kt, PhysicsTopicVirtualLabs.kt, PhysicsSupplementalActivities.kt, ScienceMediaCatalog.kt, ScienceMediaScreen.kt, app/build.gradle.kts and AndroidManifest.xml.
 
 **Tests added/updated:** ChemistryInteractiveActivityCoverageTest.kt, PhysicsTopicVirtualLabCoverageTest.kt, ScienceMediaCatalogTest.kt; existing Biology coverage tests retained.
 
