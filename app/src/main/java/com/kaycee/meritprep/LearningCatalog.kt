@@ -739,32 +739,32 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
     var speechReady by remember(topicId) { mutableStateOf(false) }
     var speechEngine by remember(topicId) { mutableStateOf<TextToSpeech?>(null) }
 
-    DisposableEffect(topicId, context) {
-        // Speech is an optional accessibility enhancement. Some Android builds
-        // (including devices without an installed TTS engine) cannot initialise
-        // it; that must never prevent the lesson itself from opening.
-        var disposed = false
+    // Do not bind the Android TTS service while opening a lesson. Some
+    // devices have a broken/missing speech engine and can fail asynchronously
+    // during service binding. Audio is initialised only after an explicit tap.
+    fun prepareLessonSpeech() {
+        if (speechEngine != null) return
         val engine = runCatching {
             TextToSpeech(context.applicationContext) { status ->
-                if (!disposed) {
-                    speechReady = status == TextToSpeech.SUCCESS
-                    if (status == TextToSpeech.SUCCESS) {
-                        speechEngine?.let { readyEngine ->
-                            runCatching { readyEngine.language = Locale.UK }
-                        }
+                speechReady = status == TextToSpeech.SUCCESS
+                if (status == TextToSpeech.SUCCESS) {
+                    speechEngine?.let { readyEngine ->
+                        runCatching { readyEngine.language = Locale.UK }
                     }
                 }
             }
         }.getOrNull()
         speechEngine = engine
-        if (engine == null) speechReady = false
+        speechReady = false
+    }
+
+    DisposableEffect(context) {
         onDispose {
-            disposed = true
-            engine?.let { safeEngine ->
-                runCatching { safeEngine.stop() }
-                runCatching { safeEngine.shutdown() }
+            speechEngine?.let { engine ->
+                runCatching { engine.stop() }
+                runCatching { engine.shutdown() }
             }
-            if (speechEngine === engine) speechEngine = null
+            speechEngine = null
             speechReady = false
         }
     }
@@ -942,7 +942,7 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
                         listOf(0.6f, 0.8f, 1f, 1.2f, 1.5f).forEach { rate ->
                             FilterChip(
                                 selected = speechRate == rate,
-                                onClick = { speechRate = rate; speechEngine?.setSpeechRate(rate) },
+                                onClick = { speechRate = rate; runCatching { speechEngine?.setSpeechRate(rate) } },
                                 label = { Text(rate.toString() + "×") }
                             )
                         }
@@ -969,11 +969,16 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
                                 Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
                                     TextButton(
                                         onClick = {
-                                            speechEngine?.setSpeechRate(speechRate)
-                                            speechEngine?.speak(section.first + ". " + section.second, TextToSpeech.QUEUE_FLUSH, null, "section-" + topic.id + "-" + index)
-                                        },
-                                        enabled = speechReady
-                                    ) { Text("Listen to this section") }
+                                            if (!speechReady) {
+                                                prepareLessonSpeech()
+                                            } else {
+                                                runCatching {
+                                                    speechEngine?.setSpeechRate(speechRate)
+                                                    speechEngine?.speak(section.first + ". " + section.second, TextToSpeech.QUEUE_FLUSH, null, "section-" + topic.id + "-" + index)
+                                                }
+                                            }
+                                        }
+                                    ) { Text(if (speechReady) "Listen to this section" else "Prepare audio") }
                                 }
                                 if (index == 0) { TopicEquationPanel(topicId); TopicConceptQuickCheck(topic) }
                                 TopicConceptInlineVisual(topicId, index, section.first)
@@ -983,19 +988,24 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
                     Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                         Button(
                             onClick = {
-                                val narration = buildString {
-                                    append(topic.title).append(". ")
-                                    append(topic.introduction).append(". ")
-                                    topic.objectives.forEach { append(it).append(". ") }
-                                    topic.sections.forEach { append(it.first).append(". ").append(it.second).append(". ") }
+                                if (!speechReady) {
+                                    prepareLessonSpeech()
+                                } else {
+                                    val narration = buildString {
+                                        append(topic.title).append(". ")
+                                        append(topic.introduction).append(". ")
+                                        topic.objectives.forEach { append(it).append(". ") }
+                                        topic.sections.forEach { append(it.first).append(". ").append(it.second).append(". ") }
+                                    }
+                                    runCatching {
+                                        speechEngine?.language = Locale.UK
+                                        speechEngine?.setSpeechRate(speechRate)
+                                        speechEngine?.speak(narration, TextToSpeech.QUEUE_FLUSH, null, "lesson-" + topic.id)
+                                    }
                                 }
-                                speechEngine?.language = Locale.UK
-                                speechEngine?.setSpeechRate(speechRate)
-                                speechEngine?.speak(narration, TextToSpeech.QUEUE_FLUSH, null, "lesson-" + topic.id)
                             },
-                            enabled = speechReady,
                             modifier = Modifier.weight(1f)
-                        ) { Text(if (speechReady) "Listen to lesson" else "Preparing audio…") }
+                        ) { Text(if (speechReady) "Listen to lesson" else "Prepare audio") }
                         OutlinedButton(onClick = { speechEngine?.stop() }, enabled = speechReady) { Text("Stop") }
                     }
                     Text("Audio uses your device's text-to-speech voice. Offline playback depends on an installed voice.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
