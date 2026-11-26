@@ -162,6 +162,13 @@ private fun PhaseChangeLaboratory() {
                     }
                     drawCircle(if (index % 2 == 0) Color(0xFF1976D2) else Color(0xFF26A69A), 5f, Offset(x, y))
                 }
+                if (energy in 752f..3009f) {
+                    repeat(6) { index ->
+                        val x = size.width * (0.28f + index * 0.075f)
+                        val y = size.height * 0.78f - ((time * 42f + index * 19f) % (size.height * 0.48f))
+                        drawCircle(Color(0xFF4FC3F7), 4f, Offset(x, y))
+                    }
+                }
             }
             Text("Energy supplied per kilogram: ${energy.toInt()} kJ")
             Slider(energy, { energy = it }, valueRange = 0f..3200f)
@@ -273,10 +280,11 @@ private fun DispersionLaboratory() {
                 val prism = Path().apply { moveTo(apex.x, apex.y); lineTo(lowerLeft.x, lowerLeft.y); lineTo(lowerRight.x, lowerRight.y); close() }
                 drawPath(prism, Color(0xFF80DEEA).copy(alpha = 0.28f))
                 drawPath(prism, Color(0xFF00838F), style = Stroke(3f))
-                drawLine(Color.White, Offset(8f, size.height * 0.45f), Offset(size.width * 0.39f, size.height * 0.45f), 5f)
+                drawLine(Color.LightGray, Offset(8f, size.height * 0.45f), Offset(size.width * 0.39f, size.height * 0.45f), 5f)
+                val selectedBand = ((700f - wavelength) / 300f * 6f).toInt().coerceIn(0, 6)
                 colours.forEachIndexed { index, colour ->
                     val spread = (index - 3) * 11f
-                    drawLine(colour, Offset(size.width * 0.57f, size.height * 0.52f), Offset(size.width - 8f, size.height * 0.52f + spread), 4f)
+                    drawLine(colour, Offset(size.width * 0.57f, size.height * 0.52f), Offset(size.width - 8f, size.height * 0.52f + spread), if (index == selectedBand) 7f else 2.5f)
                 }
             }
             Text("Illustrative refractive index at selected wavelength: ${"%.4f".format(refractiveIndex)}")
@@ -306,8 +314,9 @@ private fun SolenoidFieldLaboratory() {
                 }
                 drawLine(Color(0xFF1565C0), Offset(left, top), Offset(right, top), 3f)
                 drawLine(Color(0xFF1565C0), Offset(left, bottom), Offset(right, bottom), 3f)
-                for (i in 0..3) {
-                    val y = top + 10f + i * (bottom - top - 20f) / 3f
+                val fieldLines = (current * 1.2f).toInt().coerceIn(0, 6)
+                repeat(fieldLines) { i ->
+                    val y = top + 10f + i * (bottom - top - 20f) / fieldLines.coerceAtLeast(1).toFloat()
                     drawLine(Color(0xFF00897B), Offset(left + 12f, y), Offset(right - 12f, y), 2.5f)
                     drawLine(Color(0xFF00897B), Offset(right - 22f, y - 6f), Offset(right - 12f, y), 2.5f)
                     drawLine(Color(0xFF00897B), Offset(right - 22f, y + 6f), Offset(right - 12f, y), 2.5f)
@@ -393,12 +402,12 @@ private fun SemiconductorDiodeLaboratory() {
                     val v = -1.0 + i * 1.9 / 120.0
                     val amps = saturationCurrent * (exp((v / (2.0 * thermalVoltage)).coerceIn(-40.0, 20.0)) - 1.0) * 1000.0
                     val x = left + (v + 1.0) / 1.9 * (right - left)
-                    val y = (zeroY - amps.toFloat() * 18f).coerceIn(top, bottom)
+                    val y = (zeroY - amps.toFloat() * 2500f).coerceIn(top, bottom)
                     if (i == 0) curve.moveTo(x, y) else curve.lineTo(x, y)
                 }
                 drawPath(curve, Color(0xFF1565C0), style = Stroke(3f))
                 val pointX = left + (voltage + 1f) / 1.9f * (right - left)
-                val pointY = (zeroY - currentMilliAmp.toFloat() * 18f).coerceIn(top, bottom)
+                val pointY = (zeroY - currentMilliAmp.toFloat() * 2500f).coerceIn(top, bottom)
                 drawCircle(Color(0xFFE65100), 6f, Offset(pointX, pointY))
             }
             Text("Applied voltage: ${"%.2f".format(voltage)} V")
