@@ -1081,39 +1081,66 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
 }
 
 
+
 @Composable
 private fun TopicMasteryProjectVerification(topicId: String, onVerified: (Boolean) -> Unit) {
-    val prompts = listOf(
-        "My explanation states the governing scientific principle accurately.",
-        "My method identifies variables, units and relevant controls.",
-        "My conclusion refers to evidence and acknowledges a limitation."
-    )
-    var checks by remember(topicId) { mutableStateOf(setOf<Int>()) }
+    val questions = remember(topicId) {
+        listOf(
+            Triple("A scientific claim is strongest when it is:", listOf("Supported by a relevant principle and evidence", "Repeated several times", "Based only on personal opinion", "Presented without qualification"), 0),
+            Triple("To investigate the effect of one factor on a result, you should:", listOf("Change every factor together", "Change the independent variable and control relevant factors", "Ignore measurement units", "Record only expected outcomes"), 1),
+            Triple("A responsible conclusion should:", listOf("Hide conflicting observations", "Claim the model has no limitations", "Refer to evidence and state a limitation", "Avoid explaining uncertainty"), 2)
+        )
+    }
+    var answers by remember(topicId) { mutableStateOf<Map<Int, Int>>(emptyMap()) }
+    var submitted by remember(topicId) { mutableStateOf(false) }
     var showModel by remember(topicId) { mutableStateOf(false) }
-    val passed = checks.size == prompts.size
+    val score = questions.indices.count { answers[it] == questions[it].third }
+    val passed = submitted && score == questions.size
     LaunchedEffect(passed) { onVerified(passed) }
     Card(Modifier.fillMaxWidth()) {
         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(9.dp)) {
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
                 Text("Project verification", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
-                Text(checks.size.toString() + "/3", color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
+                Text(score.toString() + "/" + questions.size, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
             }
-            Text("Review your project against each scientific standard. All three checks are required before this pillar can be completed.")
-            prompts.forEachIndexed { index, prompt ->
-                Row(verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
-                    Checkbox(checked = index in checks, onCheckedChange = { checked ->
-                        checks = if (checked) checks + index else checks - index
-                    })
-                    Text(prompt, modifier = Modifier.weight(1f), style = MaterialTheme.typography.bodyMedium)
+            Text("Answer all three checks correctly to verify the scientific reasoning in your project.")
+            questions.forEachIndexed { index, question ->
+                Text((index + 1).toString() + ". " + question.first, fontWeight = FontWeight.SemiBold)
+                question.second.forEachIndexed { optionIndex, option ->
+                    val selected = answers[index] == optionIndex
+                    OutlinedButton(
+                        onClick = { if (!submitted) answers = answers + (index to optionIndex) },
+                        enabled = !submitted,
+                        modifier = Modifier.fillMaxWidth(),
+                        colors = ButtonDefaults.outlinedButtonColors(containerColor = if (selected) MaterialTheme.colorScheme.secondaryContainer else MaterialTheme.colorScheme.surface),
+                        contentPadding = PaddingValues(horizontal = 10.dp, vertical = 7.dp)
+                    ) {
+                        Text(('A' + optionIndex).toString() + ". " + option, modifier = Modifier.fillMaxWidth())
+                    }
+                }
+                if (submitted) {
+                    Text(
+                        if (answers[index] == question.third) "Correct" else "Correct answer: " + question.second[question.third],
+                        color = if (answers[index] == question.third) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.error,
+                        style = MaterialTheme.typography.bodySmall
+                    )
                 }
             }
-            if (passed) {
-                Text("Project verification passed.", color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.SemiBold)
+            if (!submitted) {
+                Button(onClick = { submitted = true }, enabled = answers.size == questions.size, modifier = Modifier.fillMaxWidth()) {
+                    Text("Submit project checks")
+                }
+            } else if (!passed) {
+                OutlinedButton(onClick = { answers = emptyMap(); submitted = false; onVerified(false) }, modifier = Modifier.fillMaxWidth()) {
+                    Text("Retry project checks")
+                }
+            } else {
+                Text("All project checks passed. The project pillar can now be verified.", color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.SemiBold)
                 OutlinedButton(onClick = { showModel = !showModel }, modifier = Modifier.fillMaxWidth()) {
                     Text(if (showModel) "Hide model structure" else "Show model structure")
                 }
                 if (showModel) {
-                    Text("A strong " + topicId + " project should present a clear question, explain the governing principle, define variables and units, show evidence, justify its conclusion and identify a limitation.")
+                    Text("A strong " + topicId + " project should state a clear question, explain the governing principle, define variables and units, present evidence, justify its conclusion and identify a limitation.")
                 }
             }
         }
