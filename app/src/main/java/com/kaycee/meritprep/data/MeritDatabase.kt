@@ -255,6 +255,16 @@ class MeritDatabase(context: Context) : SQLiteOpenHelper(context, "meritprep_loc
         }
     }
 
+    fun recordTopicOpened(topicId: String, studiedAt: Long = System.currentTimeMillis()) {
+        incrementTopicProgress(writableDatabase, topicId, studiedAt = studiedAt)
+    }
+
+    fun getMostRecentlyStudiedTopicId(): String? =
+        readableDatabase.rawQuery(
+            "SELECT topic_id FROM topic_progress WHERE last_studied > 0 ORDER BY last_studied DESC LIMIT 1",
+            null
+        ).use { cursor -> if (cursor.moveToFirst()) cursor.getString(0) else null }
+
     fun recordQuestionAttempt(topicId: String, isCorrect: Boolean, questionId: String? = null, studiedAt: Long = System.currentTimeMillis()) {
         val db = writableDatabase
         db.beginTransaction()
