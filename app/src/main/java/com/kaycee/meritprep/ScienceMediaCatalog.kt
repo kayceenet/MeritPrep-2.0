@@ -2302,6 +2302,21 @@ object ScienceMediaCatalog {
             beforeYouStart = "Predict which observable features can distinguish two organisms reliably.",
             afterYouExplore = "Use a key step by step, compare homologous features and explain how DNA evidence can refine classification.",
             offlineAlternative = "Use MeritPrep's classification activity to construct a dichotomous key for a set of organisms."
+        ScienceMediaResource(
+            id = "chem-periodic-table-nonmetals-tlg",
+            title = "Periodic table explorer: non-metals and their trends",
+            subjectCode = CHEMISTRY,
+            topicId = "chem-nonmetals",
+            mediaType = ScienceMediaType.INTERACTIVE_SIMULATION,
+            provider = "The Lab Games",
+            summary = "Explore non-metal elements and compare their physical properties, electron arrangements and periodic trends with those of metals.",
+            sourceUrl = "https://thelabgames.org/physical-science/periodic-table-explorer",
+            licenceName = "Copyright © Timothy Jackson; free access on The Lab Games website",
+            licenceUrl = "https://thelabgames.org/schools/terms",
+            permittedUse = "Open the original activity on The Lab Games. The site is free to use without an account, but its simulations, art and text remain copyrighted. MeritPrep links out only; do not copy, embed, download, rehost or redistribute the content without permission.",
+            beforeYouStart = "Predict how electrical conductivity, malleability and typical ion formation differ between metals and non-metals.",
+            afterYouExplore = "Use electron arrangement and periodic position to explain why non-metals commonly gain or share electrons and form covalent compounds.",
+            offlineAlternative = "Use MeritPrep's periodicity and bonding activities to compare selected metals and non-metals."
         )
     )
 
