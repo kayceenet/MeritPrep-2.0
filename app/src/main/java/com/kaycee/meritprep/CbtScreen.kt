@@ -7,6 +7,8 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Calculate
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -66,7 +68,7 @@ enum class CbtMode(
 }
 
 @Composable
-fun CbtScreen(mode: CbtMode = CbtMode.JAMB_UTME, questionPool: List<AssessmentQuestion> = BiologyQuestionBank.all) {
+fun CbtScreen(mode: CbtMode = CbtMode.JAMB_UTME, questionPool: List<AssessmentQuestion> = BiologyQuestionBank.all, onOpenCalculator: () -> Unit = {}) {
     val context = LocalContext.current
     val database = remember(context) { MeritDatabase(context) }
     var questions by remember { mutableStateOf(emptyList<PresentedQuestion>()) }
