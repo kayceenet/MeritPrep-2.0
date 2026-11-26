@@ -49,6 +49,7 @@ fun LessonVirtualLabWorkspace(topicId: String, subjectCode: String, onLabEvidenc
                         BiologyInteractiveLessonActivity(topicId)
                         BiologySupplementalLessonActivity(topicId)
                         if (topicId == "bio-cell") BiologyCellMicroscopyVirtualLab(onLabEvidenceChanged)
+                        if (topicId == "bio-classification") BiologyClassificationKeyPractical(onLabEvidenceChanged)
                         if (topicId == "bio-adaptation") BiologyAdaptationVirtualLab(onLabEvidenceChanged)
                         WaecBiologyNigeriaSupplementalActivity(topicId)
                     }
