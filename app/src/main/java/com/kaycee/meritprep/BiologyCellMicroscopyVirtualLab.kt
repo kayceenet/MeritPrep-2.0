@@ -179,8 +179,12 @@ internal fun BiologyCellMicroscopyVirtualLab(onEvidenceChanged: (Boolean) -> Uni
                             .put("hasRun", hasRun)
                             .put("observationNotes", observationNotes)
                             .put("conclusion", conclusion)
-                        runCatching { database.saveNote(noteId, "bio-cell", "Cell microscopy virtual lab record", body.toString()) }
-                    }, modifier = Modifier.fillMaxWidth()) { Text("Save lab record on this device") }
+                        val savedSuccessfully = runCatching {
+                            database.saveNote(noteId, "bio-cell", "Cell microscopy virtual lab record", body.toString())
+                            true
+                        }.getOrDefault(false)
+                        onEvidenceChanged(savedSuccessfully && hasRun && safetyReviewed && prediction.isNotBlank() && observationNotes.isNotBlank() && conclusion.isNotBlank())
+                    }, enabled = hasRun && safetyReviewed && prediction.isNotBlank() && observationNotes.isNotBlank() && conclusion.isNotBlank(), modifier = Modifier.fillMaxWidth()) { Text("Save completed lab record on this device") }
                 }
             }
         }
