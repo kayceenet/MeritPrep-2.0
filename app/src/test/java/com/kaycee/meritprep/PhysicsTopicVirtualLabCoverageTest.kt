@@ -5,6 +5,15 @@ import org.junit.Test
 
 class PhysicsTopicVirtualLabCoverageTest {
     @Test
+    fun everyJambPhysicsTopicHasATopicAlignedInteractiveOrVirtualLabRoute() {
+        val covered = physicsInteractiveActivityTopicIds +
+            physicsSupplementalActivityTopicIds +
+            physicsTopicVirtualLabIds
+        val missing = PhysicsCourse.topics.map { it.id }.filterNot { it in covered }
+        assertTrue("Physics syllabus topics without a topic-aligned lab route: $missing", missing.isEmpty())
+    }
+
+    @Test
     fun everyDedicatedVisualPhysicsLaboratoryMatchesARealSyllabusTopic() {
         val syllabusIds = PhysicsCourse.topics.map { it.id }.toSet()
         assertTrue(
