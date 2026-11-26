@@ -2302,6 +2302,7 @@ object ScienceMediaCatalog {
             beforeYouStart = "Predict which observable features can distinguish two organisms reliably.",
             afterYouExplore = "Use a key step by step, compare homologous features and explain how DNA evidence can refine classification.",
             offlineAlternative = "Use MeritPrep's classification activity to construct a dichotomous key for a set of organisms."
+        ),
         ScienceMediaResource(
             id = "chem-periodic-table-nonmetals-tlg",
             title = "Periodic table explorer: non-metals and their trends",
