@@ -700,11 +700,13 @@ internal enum class LessonStage(val label: String, val subtitle: String, val sho
     QUIZ("Mastery Quiz", "Demonstrate understanding and correct misconceptions", "Quiz")
 }
 
-internal fun isLessonStageUnlocked(target: LessonStage, completed: Set<LessonStage>): Boolean {
-    val stages = LessonStage.entries
-    val targetIndex = stages.indexOf(target)
-    return stages.take(targetIndex).all { it in completed }
-}
+/**
+ * Lesson pillars are open for exploration and revision. Completion evidence is
+ * still recorded independently; project verification and mastery assessment
+ * remain the gates for their own outcomes, not for accessing learning content.
+ */
+@Suppress("UNUSED_PARAMETER")
+internal fun isLessonStageUnlocked(target: LessonStage, completed: Set<LessonStage>): Boolean = true
 
 @Composable
 fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: () -> Unit = {}) {
@@ -793,16 +795,20 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
     }
     LaunchedEffect(topicId, completedStages) {
         val firstIncomplete = stages.firstOrNull { it !in completedStages } ?: LessonStage.QUIZ
-        if (stage in completedStages || !isLessonStageUnlocked(stage, completedStages)) stage = firstIncomplete
+        if (!isLessonStageUnlocked(stage, completedStages)) stage = firstIncomplete
     }
-    val practiceQuestions = remember(topicId) {
+    var quizQuestionCount by remember(topicId) { mutableIntStateOf(5) }
+    val practiceQuestions = remember(topicId, quizQuestionCount) {
         val bank = when (topic.subjectCode) {
             "BIO" -> BiologyQuestionBank.all.filter { it.topicId == topicId }
             "CHEM" -> ChemistryQuestionBank.forTopic(topicId)
             "PHY" -> PhysicsQuestionBank.forTopic(topicId)
+            "MATH" -> MathematicsQuestionBank.all.filter { it.topicId == topicId }
+            "ENG" -> EnglishQuestionBank.all.filter { it.topicId == topicId }
             else -> emptyList()
         }
-        val chosen = bank.shuffled().take(5)
+        val shuffled = bank.shuffled()
+        val chosen = if (quizQuestionCount <= 0) shuffled else shuffled.take(quizQuestionCount)
         val source = if (chosen.isNotEmpty()) chosen else listOf(
             com.kaycee.meritprep.data.AssessmentQuestion(
                 id = "lesson-check-" + topicId,
@@ -983,6 +989,26 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
                         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
                             Text("Topic assessment", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
                             Text("MeritPrep original practice • " + practiceQuestions.size + " questions • aim for at least 80%", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                            Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                                listOf(5, 10, 20, 0).forEach { count ->
+                                    FilterChip(
+                                        selected = quizQuestionCount == count,
+                                        onClick = {
+                                            quizQuestionCount = count
+                                            exerciseIndex = 0
+                                            exerciseSelections = emptyMap()
+                                            exerciseChecked = false
+                                            exerciseComplete = false
+                                        },
+                                        label = { Text(if (count == 0) "All" else count.toString()) }
+                                    )
+                                }
+                            }
+                            Text(
+                                if (quizQuestionCount == 0) "Using the full available topic question bank." else "Choose a short or extended practice set. You can always return and practise again.",
+                                style = MaterialTheme.typography.bodySmall,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
                             if (!exerciseComplete) {
                                 val question = practiceQuestions[exerciseIndex]
                                 val selectedIndex = exerciseSelections[question.questionId]
