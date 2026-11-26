@@ -298,7 +298,7 @@ internal fun MicroLessonStageChecks(
                 style = MaterialTheme.typography.titleLarge,
                 fontWeight = FontWeight.Bold
             )
-            Text("Six syllabus-linked ideas • each check includes a fresh transfer question. One correct guess is not enough to verify understanding.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            Text("${checks.size} syllabus-linked ideas • each check includes a fresh transfer question. One correct guess is not enough to verify understanding.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
             checks.forEachIndexed { index, check ->
                 MicroLessonCheckItem(
                     number = index + 1,
@@ -319,8 +319,8 @@ internal fun MicroLessonStageChecks(
                 )
             }
             Text(
-                if (allPassed) "All six ideas have passed the initial and transfer checks. This stage can now be verified."
-                else "Stage verification: ${evidence.values.count { it.complete }} of six ideas demonstrated.",
+                if (allPassed) "All ${checks.size} ideas have passed the initial and transfer checks. This stage can now be verified."
+                else "Stage verification: ${evidence.values.count { it.complete }} of ${checks.size} ideas demonstrated.",
                 color = if (allPassed) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant,
                 style = MaterialTheme.typography.labelMedium,
                 fontWeight = FontWeight.SemiBold
