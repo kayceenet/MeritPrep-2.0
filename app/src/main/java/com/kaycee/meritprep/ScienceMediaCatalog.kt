@@ -2078,6 +2078,7 @@ object ScienceMediaCatalog {
             beforeYouStart = "Predict how adding donor or acceptor impurities changes the charge carriers in a semiconductor.",
             afterYouExplore = "Explain how the depletion region and energy-level structure produce rectifying behaviour in a p–n junction.",
             offlineAlternative = "Use MeritPrep's local semiconductor diode I–V laboratory and explain the difference between forward and reverse bias."
+        ),
         ScienceMediaResource(
             id = "phy-thermal-expansion-k2",
             title = "Thermal expansion of solids virtual lab",
