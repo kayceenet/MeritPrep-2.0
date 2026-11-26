@@ -34,6 +34,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.layout.ContentScale
+import coil3.compose.AsyncImage
 import com.kaycee.meritprep.data.MeritDatabase
 import org.json.JSONObject
 
@@ -403,6 +405,14 @@ fun ScienceMediaScreen(onOpenLabs: () -> Unit, onOpenLesson: (String) -> Unit) {
                 Column(Modifier.padding(15.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                     Text(resource.title, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
                     Text("${resource.provider} · ${resource.mediaType.name.lowercase().replace('_', ' ')}", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.primary)
+                    resource.previewUrl?.let { preview ->
+                        AsyncImage(
+                            model = preview,
+                            contentDescription = "Animated scientific illustration: ${resource.title}",
+                            modifier = Modifier.fillMaxWidth().height(190.dp),
+                            contentScale = ContentScale.Fit
+                        )
+                    }
                     Text(resource.summary)
                     val linkedTopic = LearningCatalog.find(resource.topicId)
                     Text("Course topic: ${linkedTopic?.title ?: resource.topicId}", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
@@ -500,6 +510,14 @@ fun ScienceMediaTopicSection(topicId: String) {
             Text("Use these guided animations and simulations alongside the lesson.")
             resources.forEach { resource ->
                 Text(resource.title, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
+                resource.previewUrl?.let { preview ->
+                    AsyncImage(
+                        model = preview,
+                        contentDescription = "Animated scientific illustration: ${resource.title}",
+                        modifier = Modifier.fillMaxWidth().height(180.dp),
+                        contentScale = ContentScale.Fit
+                    )
+                }
                 Text(resource.summary)
                 Text("Before you explore: ${resource.beforeYouStart}", style = MaterialTheme.typography.bodySmall)
                 Text("After you explore: ${resource.afterYouExplore}", style = MaterialTheme.typography.bodySmall)
@@ -507,6 +525,7 @@ fun ScienceMediaTopicSection(topicId: String) {
                 Text("Creator/publisher: ${resource.creatorOrPublisher}", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 Text("Attribution: ${resource.attributionText}", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 Text("Rights: ${resource.licenceName}", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                Text("Permitted use: ${resource.permittedUse}", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 OutlinedButton(
                     onClick = {
                         try {
