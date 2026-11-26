@@ -718,6 +718,7 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
     val noteId = "lesson-note-" + topicId
     var noteText by remember(topicId) { mutableStateOf(database.getNoteBody(noteId).orEmpty()) }
     var noteSaved by remember(topicId) { mutableStateOf(false) }
+    var noteEditorOpen by remember(topicId) { mutableStateOf(false) }
     var exerciseIndex by remember(topicId) { mutableIntStateOf(0) }
     var exerciseSelections by remember(topicId) { mutableStateOf<Map<String, Int>>(emptyMap()) }
     var exerciseChecked by remember(topicId) { mutableStateOf(false) }
@@ -837,6 +838,9 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
                     Text((stageIndex + 1).toString() + " / " + stages.size + " learning pillars", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
                 IconButton(onClick = onOpenCalculators) { Icon(Icons.Default.Calculate, contentDescription = "Scientific calculator") }
+                IconButton(onClick = { noteEditorOpen = true }) {
+                    Icon(Icons.Default.NoteAdd, contentDescription = "Save or edit lesson note")
+                }
                 IconButton(onClick = {
                     if (bookmarked) database.removeBookmark(topic.id) else database.bookmark(topic.id, "lesson")
                     bookmarked = !bookmarked
@@ -847,6 +851,36 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
                 Text(completion.toString() + "%", style = MaterialTheme.typography.labelMedium, fontWeight = FontWeight.Bold)
             }
             LinearProgressIndicator(progress = { completion / 100f }, modifier = Modifier.fillMaxWidth())
+        }
+
+        if (noteEditorOpen) {
+            AlertDialog(
+                onDismissRequest = { noteEditorOpen = false },
+                title = { Text("Lesson note · " + topic.title) },
+                text = {
+                    Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                        Text("Capture a question, explanation or revision reminder. Notes are stored on this device.")
+                        OutlinedTextField(
+                            value = noteText,
+                            onValueChange = { noteText = it; noteSaved = false },
+                            modifier = Modifier.fillMaxWidth(),
+                            minLines = 4,
+                            maxLines = 9,
+                            label = { Text("Your note") }
+                        )
+                    }
+                },
+                confirmButton = {
+                    TextButton(onClick = {
+                        database.saveNote(noteId, topic.id, topic.title + " notes", noteText)
+                        noteSaved = true
+                        noteEditorOpen = false
+                    }) { Text("Save note") }
+                },
+                dismissButton = {
+                    TextButton(onClick = { noteEditorOpen = false }) { Text("Cancel") }
+                }
+            )
         }
 
         val lessonBodyScroll = rememberScrollState()
@@ -876,7 +910,7 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
                     }
                     Row(Modifier.fillMaxWidth(), verticalAlignment = androidx.compose.ui.Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                         Text("Audio speed", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                        listOf(0.7f, 1f, 1.3f).forEach { rate ->
+                        listOf(0.6f, 0.8f, 1f, 1.2f, 1.5f).forEach { rate ->
                             FilterChip(
                                 selected = speechRate == rate,
                                 onClick = { speechRate = rate; speechEngine?.setSpeechRate(rate) },
