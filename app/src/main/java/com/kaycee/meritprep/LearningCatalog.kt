@@ -867,7 +867,7 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
                                 Text((index + 1).toString().padStart(2, '0'), style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
                                 Text(section.first, style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
                                 ScientificContent(section.second, style = MaterialTheme.typography.bodyLarge)
-                                if (index == 0) TopicEquationPanel(topicId)
+                                if (index == 0) { TopicEquationPanel(topicId); TopicConceptQuickCheck(topic) }
                                 TopicConceptInlineVisual(topicId, index, section.first)
                             }
                         }
@@ -1081,6 +1081,43 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
 }
 
 
+
+
+@Composable
+private fun TopicConceptQuickCheck(topic: LearningTopic) {
+    var selected by remember(topic.id) { mutableIntStateOf(-1) }
+    var checked by remember(topic.id) { mutableStateOf(false) }
+    Card(
+        Modifier.fillMaxWidth(),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.28f))
+    ) {
+        Column(Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            Text("QUICK CONCEPT CHECK", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
+            ScientificContent(topic.checkQuestion, style = MaterialTheme.typography.titleMedium)
+            topic.checkOptions.forEachIndexed { index, option ->
+                OutlinedButton(
+                    onClick = { if (!checked) selected = index },
+                    enabled = !checked,
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = ButtonDefaults.outlinedButtonColors(containerColor = if (selected == index) MaterialTheme.colorScheme.secondaryContainer else MaterialTheme.colorScheme.surface),
+                    contentPadding = PaddingValues(horizontal = 12.dp, vertical = 8.dp)
+                ) {
+                    ScientificText(('A' + index).toString() + ". " + option, modifier = Modifier.fillMaxWidth(), style = MaterialTheme.typography.bodyMedium)
+                }
+            }
+            if (checked) {
+                Text(
+                    if (selected == topic.correctOption) "Correct. " + topic.explanation else "Not quite. " + topic.explanation,
+                    color = if (selected == topic.correctOption) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.error,
+                    style = MaterialTheme.typography.bodyMedium
+                )
+                TextButton(onClick = { selected = -1; checked = false }) { Text("Try again") }
+            } else {
+                Button(onClick = { checked = true }, enabled = selected >= 0, modifier = Modifier.fillMaxWidth()) { Text("Check answer") }
+            }
+        }
+    }
+}
 
 @Composable
 private fun TopicMasteryProjectVerification(topicId: String, onVerified: (Boolean) -> Unit) {
