@@ -97,9 +97,9 @@ class MicroLessonEngineTest {
     @Test
     fun classificationStageEvidenceRequiresEveryIdeaAndBothResponses() {
         val checks = MicroLessonEngine.checks("bio-classification", LessonStage.CONCEPT)
-        val partial = checks.associateIndexed { index, check ->
+        val partial = checks.mapIndexed { index, check ->
             check.id to MicroLessonCheckEvidence(firstPassed = true, transferPassed = index < checks.lastIndex)
-        }
+        }.toMap()
         assertFalse(MicroLessonEngine.hasCompleteEvidence("bio-classification", LessonStage.CONCEPT, partial))
         val complete = checks.associate { check ->
             check.id to MicroLessonCheckEvidence(firstPassed = true, transferPassed = true)
