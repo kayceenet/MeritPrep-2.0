@@ -115,6 +115,9 @@ internal fun BiologyClassificationKeyPractical() {
     val identifiedResult = ClassificationKeyModel.identify(specimen.id, specimen.decisions.take(completedSteps))
     val finished = identifiedResult != null
     val stepIndex = completedSteps.coerceAtMost((steps.size - 1).coerceAtLeast(0))
+    val decisionPath = steps.take(completedSteps).mapIndexed { index, step ->
+        "${index + 1}. ${step.prompt} — ${if (specimen.decisions[index]) "Yes" else "No"}"
+    }
 
     Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
         Card(Modifier.fillMaxWidth()) {
@@ -193,6 +196,8 @@ internal fun BiologyClassificationKeyPractical() {
                     Text("Identification reached", style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
                     Text(identifiedResult.orEmpty(), style = MaterialTheme.typography.headlineSmall)
                     Text(specimen.explanation)
+                    Text("Decision path", fontWeight = FontWeight.Bold)
+                    decisionPath.forEach { Text(it, style = MaterialTheme.typography.bodySmall) }
                     Text("The identification is only as reliable as the observed diagnostic features. If a specimen is damaged, immature or atypical, use additional evidence and an appropriate key rather than forcing an uncertain identification.", style = MaterialTheme.typography.bodySmall)
                     Button(onClick = { completedSteps = 0; selectedYes = null; feedback = "" }, modifier = Modifier.fillMaxWidth()) { Text("Identify this specimen again") }
                 }
@@ -214,6 +219,7 @@ internal fun BiologyClassificationKeyPractical() {
                         .put("track", track.name)
                         .put("specimenId", specimen.id)
                         .put("completedSteps", completedSteps)
+                        .put("decisionPath", decisionPath.joinToString("\n"))
                         .put("observationRecord", observationRecord)
                         .put("identified", finished)
                     runCatching { database.saveNote(noteId, "bio-classification", "Dichotomous key practical record", body.toString()) }
