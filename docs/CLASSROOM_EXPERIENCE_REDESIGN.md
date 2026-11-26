@@ -156,3 +156,11 @@ This is a structural alignment milestone, not a claim that every syllabus topic 
 - The dashboard records the most recently opened unfinished topic and offers it as the resume destination. The classroom stores the active pillar and completed-pillar list locally so the learner can return to the same point in a lesson.
 - The visual system now uses a cohesive deep-teal, slate-blue and warm-neutral palette in light and dark modes.
 - A unified Notebook screen is available from the tablet navigation rail and phone quick-study launcher. It separates saved notes, bookmarked lessons and outstanding mistakes; saved notes can be searched, opened in context and deleted with confirmation.
+
+
+## Exam Lab and practical-workspace structure — 26 November 2026
+
+- Added an original 180-question Science UTME combination: 60 Use of English, 40 Biology, 40 Chemistry and 40 Physics. It is explicitly labelled a fixed science combination, not a selectable arbitrary four-subject combination. The bank is deterministic across app restarts so an active session can restore its question IDs; each new sitting randomises question order within the four subject blocks and shuffles answer options.
+- Added subject switcher chips, a compact 10-column question navigator, pause/resume, finish-session confirmation and a scientific-calculator shortcut. Results include per-subject and per-topic breakdowns.
+- Lesson Virtual Lab now has three modes: Bench (guided notebook, apparatus, topic practical and WAEC supplemental work), Challenge (replayable three-question challenge where sufficient topic questions exist, otherwise a clearly labelled shorter check), and Explore (rights-checked external resources).
+- The learner profile now includes a native Canvas comparison of practice accuracy and demonstrated topic mastery, selectable subject filters, and evidence-based strong/weak topic lists. It deliberately does not predict university admission readiness without verified cut-off data and a selected target course/university.
