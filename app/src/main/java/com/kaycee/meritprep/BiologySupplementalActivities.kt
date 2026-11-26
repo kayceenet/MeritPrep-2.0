@@ -20,9 +20,9 @@ internal val biologySupplementalActivityTopicIds = setOf(
 )
 
 @Composable
-fun BiologySupplementalLessonActivity(topicId: String) {
+fun BiologySupplementalLessonActivity(topicId: String, onLabEvidenceChanged: (Boolean) -> Unit = {}) {
     when (topicId) {
-        "bio-classification" -> ClassificationExplorer()
+        "bio-classification" -> BiologyClassificationKeyPractical(onLabEvidenceChanged)
         "bio-adaptation" -> AdaptationExplorer()
         "bio-interactions" -> FoodWebExplorer()
         "bio-plant-anatomy" -> TranspirationExplorer()

@@ -58,3 +58,35 @@ A WAEC Nigeria-specific activity layer has been embedded in relevant Biology les
 - Obtain independent Biology academic sign-off.
 
 **Release decision:** the Nigerian Section C learning activities are now present, but WAEC Biology is not yet certified syllabus-complete.
+
+
+## Classification micro-lesson — internal atomic teaching map
+
+The provisional Section A Topic 1 ("Concept of Living") row above is decomposed below into internal teaching-idea IDs. These are MeritPrep traceability keys, not official WAEC statement numbers. This mapping remains **PROVISIONAL** because the direct current WAEC Nigeria syllabus PDF has not yet been verified.
+
+| Internal idea ID | WAEC working syllabus scope represented | App evidence |
+|---|---|---|
+| `bio-classification-purpose` | Classification and identification of living organisms. | Stage-specific concept, worked-example and contextual checks. |
+| `bio-taxonomic-hierarchy` | Classification into increasingly specific groups. | Hierarchy and specificity checks. |
+| `bio-binomial-nomenclature` | Scientific names and correct binomial format. | Naming and writing-convention checks. |
+| `bio-five-kingdoms` | Five-kingdom classification and distinguishing characteristics. | Kingdom comparison checks. |
+| `bio-plant-divisions` | Major plant groups and diagnostic characteristics. | Plant division checks and interactive key. |
+| `bio-animal-groups` | Major animal groups and vertebrate classes. | Animal group checks and interactive key. |
+
+This does not establish complete WAEC practical or examination coverage. The interactive key is a MeritPrep practice activity, not an official WAEC practical specimen list or marking scheme.
+
+## Adaptation micro-lesson — internal atomic teaching map
+
+The provisional WAEC Nigeria Section A adaptation topic and relevant Section C evolution/adaptation area are decomposed into MeritPrep teaching-idea IDs below. These are not official WAEC statement numbers. Mapping remains provisional until the current direct WAEC Nigeria syllabus PDF is checked.
+
+| Internal idea ID | WAEC working scope represented | App evidence |
+|---|---|---|
+| `bio-adaptation-definition` | Adaptation and survival in a particular environment. | Three-stage concept checks. |
+| `bio-structural-adaptation` | Structural adaptation in plants and animals. | Checks, examples and visuals. |
+| `bio-physiological-adaptation` | Physiological processes that improve survival. | Checks and applied examples. |
+| `bio-behavioural-adaptation` | Behavioural adaptation and seasonal survival strategies. | Checks and hibernation/aestivation explanations. |
+| `bio-adaptive-colouration` | Adaptive colouration, camouflage and mimicry. | Checks, visual and selection simulation. |
+| `bio-social-insect-castes` | Social behaviour and division of labour in termites and bees. | Checks and caste-role visual. |
+| `bio-adaptation-functions` | Feeding, defence, mate attraction, temperature regulation and water balance. | Checks, worked examples and project. |
+
+The natural-selection simulator is a MeritPrep teaching model. It is not an official WAEC practical, marking scheme or source of empirical survival rates.

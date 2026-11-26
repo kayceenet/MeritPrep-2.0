@@ -20,7 +20,7 @@ private enum class LessonLabMode(val label: String) {
 }
 
 @Composable
-fun LessonVirtualLabWorkspace(topicId: String, subjectCode: String) {
+fun LessonVirtualLabWorkspace(topicId: String, subjectCode: String, onLabEvidenceChanged: (Boolean) -> Unit = {}) {
     var mode by remember(topicId) { mutableStateOf(LessonLabMode.INTERACTIVE) }
     Column(Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(12.dp)) {
         Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
@@ -47,7 +47,9 @@ fun LessonVirtualLabWorkspace(topicId: String, subjectCode: String) {
                 when (subjectCode) {
                     "BIO" -> {
                         BiologyInteractiveLessonActivity(topicId)
-                        BiologySupplementalLessonActivity(topicId)
+                        BiologySupplementalLessonActivity(topicId, onLabEvidenceChanged)
+                        if (topicId == "bio-cell") BiologyCellMicroscopyVirtualLab(onLabEvidenceChanged)
+                        if (topicId == "bio-adaptation") BiologyAdaptationVirtualLab(onLabEvidenceChanged)
                         WaecBiologyNigeriaSupplementalActivity(topicId)
                     }
                     "CHEM" -> {

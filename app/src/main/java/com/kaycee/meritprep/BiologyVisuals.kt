@@ -451,6 +451,15 @@ fun AdaptationTypesCard() {
 
             Text("Do not confuse adaptation with acclimatisation", fontWeight = FontWeight.Bold)
             Text("Adaptation is an inherited population-level feature shaped over generations. Acclimatisation is an adjustment made by an individual during its lifetime and is usually reversible; it does not, by itself, change the genes passed to offspring.")
+            HorizontalDivider()
+            Text("ADAPTIVE COLOURATION", fontWeight = FontWeight.Bold)
+            Text("Camouflage reduces detection against a background. Warning colouration advertises a defence. Mimicry is resemblance to another organism or object; a harmless hoverfly resembling a stinging wasp is an example of Batesian mimicry.")
+            HorizontalDivider()
+            Text("SEASONAL SURVIVAL STRATEGIES", fontWeight = FontWeight.Bold)
+            Text("Hibernation is dormancy associated with cold conditions in some animals. Aestivation is dormancy during hot or dry unfavourable conditions; some African lungfish survive drought in a moist mud chamber.")
+            HorizontalDivider()
+            Text("SOCIAL INSECT CASTES", fontWeight = FontWeight.Bold)
+            Text("Termite colonies commonly include workers (nest maintenance and food), soldiers (defence) and reproductives. Honeybee colonies include a queen, workers and drones, with different reproductive and colony-maintenance roles.")
         }
     }
 }

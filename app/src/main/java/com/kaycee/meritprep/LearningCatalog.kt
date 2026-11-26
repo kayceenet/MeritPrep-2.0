@@ -78,6 +78,10 @@ object LearningCatalog {
                 "The five traditional kingdoms" to "In the traditional five-kingdom scheme, Monera includes prokaryotic organisms such as bacteria; they lack a membrane-bound nucleus. Protista includes diverse mainly unicellular eukaryotes such as Amoeba and many algae. Fungi are eukaryotes that absorb nutrients, commonly have chitin in their cell walls and reproduce by spores. Plantae are multicellular photosynthetic organisms with cellulose cell walls. Animalia are multicellular consumers whose cells lack cell walls. This is a syllabus-level framework; modern biology also uses domain-level classification and has revised the placement of some groups.",
                 "How to compare organisms" to "Do not classify an organism from one superficial feature alone. Compare several useful characteristics: cell type, number of cells, cell-wall composition, mode of nutrition, movement, body organisation and reproduction. For example, a mushroom is not a plant: it does not photosynthesise, obtains nutrients by absorption and has chitin-containing cell walls. A bacterium is not a tiny animal: it is prokaryotic and has no membrane-bound nucleus.",
                 "A first look at plant and animal diversity" to "Plants may be grouped by features such as vascular tissue, seeds and flowers. Mosses are non-vascular and reproduce by spores; ferns have vascular tissue but no seeds; conifers produce naked seeds, commonly in cones; flowering plants produce flowers and seeds enclosed in fruits. Animals are often introduced through major invertebrate groups and vertebrates. Invertebrates lack a vertebral column; vertebrates possess a backbone and include fish, amphibians, reptiles, birds and mammals. Use diagnostic features rather than size or habitat alone.",
+                "Major plant divisions: use diagnostic features" to "A useful introductory comparison uses vascular tissue, seeds and flowers. Bryophytes such as mosses are small non-vascular plants; they lack true xylem and phloem, have rhizoids rather than true roots and reproduce by spores. They usually need a moist surface for successful fertilisation because the motile male gametes require water. Pteridophytes such as ferns have true roots, stems and leaves with vascular tissue, but they do not produce seeds; spores are formed in sporangia, often grouped in sori on the underside of fronds. Gymnosperms such as pines are vascular seed plants whose seeds are not enclosed in an ovary-derived fruit; many bear cones. Angiosperms are flowering plants; their ovules are enclosed in an ovary and seeds develop inside fruits. Many angiosperms are introduced as monocotyledons and dicotyledons: compare one versus two cotyledons, leaf venation, floral-part patterns and typical root systems, while remembering that these are teaching-level generalisations with exceptions.",
+                "Major animal groups: compare body organisation" to "Invertebrates lack a vertebral column and include several distinct phyla. Porifera (sponges) have porous bodies and lack true tissues; Cnidaria (Hydra, jellyfish and corals) have stinging cells and radial symmetry; Platyhelminthes (flatworms) have flattened bodies; Nematoda (roundworms) have cylindrical, unsegmented bodies; Annelida (earthworms and leeches) have segmented bodies; Mollusca (snails, clams and octopuses) typically have a muscular foot, visceral mass and mantle; Arthropoda (insects, spiders, crabs and centipedes) have jointed appendages, segmented bodies and a chitinous exoskeleton; Echinodermata (starfish and sea urchins) are marine animals with a water-vascular system and adult radial organisation. Vertebrates possess a vertebral column. Fish generally have fins and gills; amphibians commonly have moist skin and a life cycle linked to water; reptiles have dry keratinised scales; birds have feathers; mammals have hair and mammary glands. These are diagnostic patterns, not a rule that every member has an identical appearance. For example, whales are mammals despite living in water, and bats are mammals despite flying.",
+                "How to use evidence in a classification key" to "A dichotomous key presents paired alternatives at each step. Choose alternatives that are mutually exclusive and based on observable features, such as presence or absence of vascular tissue, seeds, feathers or a vertebral column. Start with a broad distinction, follow only the branch supported by the specimen, and record the feature that justifies each decision. Do not identify an organism from colour, habitat or size alone when a more reliable structural feature is available. If a specimen is immature, damaged or atypical, state that the identification is uncertain and seek another diagnostic feature. In practical work, describe what you observe before interpreting it.",
+                "Structural diversity and evolutionary interpretation" to "Different plant and animal groups show different combinations of body structures, reproductive methods and ways of obtaining resources. Vascular tissue allows efficient transport and support in larger land plants; seeds protect the embryo and provide stored food; pollen allows fertilisation without free water being required for sperm movement. In animals, structures such as lungs, waterproof coverings and limbs can support life on land, while gills and streamlined bodies suit many aquatic organisms. Do not describe living groups as a simple ladder in which one modern group turns into another. Mosses, ferns, conifers, flowering plants and modern animal classes have their own evolutionary histories; comparisons help identify adaptations and patterns, not a fixed ranking of worth or progress.",
                 "Viruses and the boundary of life" to "Viruses are acellular infectious agents: they are not made of cells and cannot reproduce independently. They contain genetic material (DNA or RNA) inside a protein coat, and some have an outer envelope. They replicate only inside suitable host cells using host machinery. For this reason, viruses are not placed in any of the five traditional kingdoms. Avoid calling a virus a bacterium or describing it as a cell.",
                 "How to answer classification questions" to "Read the question for the feature it asks about, then compare the options using that feature. If asked to identify a prokaryote, look for the absence of a membrane-bound nucleus. If asked to distinguish fungi from green plants, consider nutrition and cell-wall composition. For a naming question, check the two-part format and capitalisation. In a practical examination, describe visible evidence first and make an identification only when the evidence supports it."
             ),
@@ -99,7 +103,13 @@ object LearningCatalog {
                 "Structural adaptations: body form and parts" to "Structural adaptations are physical features of an organism. A fish has a streamlined body that reduces resistance as it moves through water, and gills that provide a large, moist surface for gas exchange. A duck's webbed feet help it push against water. A cactus has a thick water-storing stem and a reduced leaf surface in the form of spines, which helps reduce water loss. Mangrove roots may include pneumatophores that project above waterlogged soil and assist gas exchange.",
                 "Physiological adaptations: internal processes" to "Physiological adaptations are inherited ways the body functions. Some desert mammals produce very concentrated urine and dry faeces, conserving water. Some plants use photosynthetic pathways that reduce water loss under hot, dry conditions. Salt-tolerant mangroves use mechanisms that limit salt entry, store salt or remove excess salt. The exact mechanism differs among species, so do not assume every mangrove uses the same strategy.",
                 "Behavioural adaptations: what organisms do" to "Behavioural adaptations are patterns of activity that can improve survival or reproduction. Nocturnal animals are active mainly at night, which can reduce exposure to daytime heat. Some animals shelter during the hottest part of the day. Seasonal migration can help animals reach food, breeding sites or favourable climates. Social insects such as termites and honeybees show coordinated behaviours and division of labour that support colony survival.",
+                "Hibernation and aestivation: surviving unfavourable seasons" to "Hibernation is a prolonged state of reduced activity and metabolism associated with cold conditions or seasonal food shortage in some animals. Aestivation is dormancy during hot or dry unfavourable conditions. These states are not ordinary sleep: physiological activity is reduced and the animal may rely on stored energy and water. Some African lungfish survive drought by becoming dormant in a moist mud chamber. Do not confuse aestivation with migration: a migrating animal moves to another area, while an aestivating animal remains in a dormant state.",
+                "Social behaviour and caste systems in insects" to "Social insects such as termites and honeybees live in organised colonies with division of labour. In termites, workers maintain the nest, gather and process food and care for young; soldiers defend the colony; reproductives produce offspring. Honeybee colonies commonly contain a queen, workers and drones: the queen is the main egg-layer, workers forage and care for brood, and drones are males involved in reproduction. These roles are examples of social organisation and behavioural adaptation. The details of caste development differ between termites and bees; do not assume their castes are identical.",
+
                 "Protection, feeding and reproduction" to "Camouflage makes an organism less conspicuous against its background; it may help prey avoid predators or help a predator approach prey. Warning colouration can advertise that an organism is toxic, distasteful or otherwise dangerous. Mimicry occurs when one organism resembles another organism or object in a way that affects interactions. Beak shapes, teeth and feeding structures are often related to diet. Flowers, fruits, pollination structures and courtship behaviours can improve reproductive success.",
+                "Adaptive colouration: camouflage, warning and mimicry" to "Camouflage reduces detection by making an organism blend with its surroundings; it may protect prey or help a predator approach prey. Warning colouration is conspicuous and advertises a defence such as toxicity, distastefulness or a sting. Mimicry is resemblance to another organism or object that changes how other organisms respond. In Batesian mimicry, a relatively harmless species resembles a defended species; in Müllerian mimicry, two or more defended species share warning signals. A harmless hoverfly that resembles a stinging wasp is a familiar example of the first pattern. Do not use camouflage, warning colouration and mimicry as interchangeable terms.",
+                "Link each adaptation to its function" to "A biological explanation should identify the feature, the challenge and the function. Beak and tooth shapes can improve access to particular foods; claws, shells, spines and chemical secretions can deter predators; courtship colours, calls and displays can increase mate attraction; fur, feathers, body shape and counter-current heat exchange can reduce heat loss; nocturnality, concentrated urine, reduced leaf area and waxy cuticles can help limit water loss or heat exposure. The same feature can have more than one effect, and its value depends on the environment. A thick coat may conserve heat in a cold climate but increase heat stress in a hot one.",
+
                 "Adaptations depend on the environment" to "A thick coat may help an animal conserve heat in a cold environment but create a heat burden in a hot one. Broad floating leaves may be useful for a water plant but unsuitable for a dry terrestrial habitat. In Nigerian habitats, mangrove plants face waterlogged, saline coastal conditions; rainforest organisms experience high moisture and dense vegetation; savanna organisms experience seasonal rainfall and open grassland. Link every example to the challenge it helps address.",
                 "Adaptation is not the same as acclimatisation" to "An adaptation is an inherited population characteristic shaped over generations. Acclimatisation is a change within an individual's lifetime, such as a temporary physiological response to a change in temperature or altitude. A person sweating more in hot weather is acclimatising; it is not a new inherited adaptation. Natural selection acts on heritable variation across generations, not on a conscious effort by an organism to change.",
                 "Exam reasoning: feature, challenge and advantage" to "For an adaptation question, use a three-step explanation: name the feature, identify the environmental challenge, and explain how the feature helps. Example: a fish's streamlined body reduces water resistance, allowing efficient movement through water. Avoid vague answers such as 'it helps the fish survive' without explaining the mechanism. A good answer links structure or behaviour to a specific function."
@@ -709,12 +719,46 @@ internal enum class LessonStage(val label: String, val subtitle: String, val sho
 @Suppress("UNUSED_PARAMETER")
 internal fun isLessonStageUnlocked(target: LessonStage, completed: Set<LessonStage>): Boolean = true
 
+private fun requiresBiologyLabEvidence(topicId: String): Boolean =
+    topicId in setOf("bio-cell", "bio-classification", "bio-adaptation")
+
+private fun hasBiologyLabEvidence(topicId: String, database: MeritDatabase): Boolean {
+    val noteId = when (topicId) {
+        "bio-cell" -> "micro-lab-session-bio-cell"
+        "bio-classification" -> "micro-lab-session-bio-classification"
+        "bio-adaptation" -> "micro-lab-session-bio-adaptation"
+        else -> return true
+    }
+    return runCatching {
+        val saved = JSONObject(database.getNoteBody(noteId) ?: "{}")
+        when (topicId) {
+            "bio-cell" -> saved.optBoolean("hasRun") &&
+                saved.optBoolean("safetyReviewed") &&
+                saved.optString("prediction").isNotBlank() &&
+                saved.optString("observationNotes").isNotBlank() &&
+                saved.optString("conclusion").isNotBlank()
+            "bio-classification" -> saved.optBoolean("identified") &&
+                saved.optString("decisionPath").isNotBlank() &&
+                saved.optString("observationRecord").isNotBlank()
+            "bio-adaptation" -> saved.optBoolean("hasRun") &&
+                saved.optString("prediction").isNotBlank() &&
+                saved.optString("conclusion").isNotBlank()
+            else -> true
+        }
+    }.getOrDefault(false)
+}
+
 @Composable
 fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: () -> Unit = {}) {
     val topic = LearningCatalog.find(topicId)
     val context = LocalContext.current
     val database = remember(context) { MeritDatabase(context) }
-    var completed by remember(topicId) { mutableStateOf(runCatching { database.isLessonCompleted(topicId) }.getOrDefault(false)) }
+    val savedMicroLessonEvidence = remember(topicId) { runCatching { database.getNoteBody("micro-lesson-evidence-" + topicId) }.getOrNull() }
+    val requiredMicroLessonStages = listOf(LessonStage.CONCEPT, LessonStage.EXAMPLES, LessonStage.APPLICATIONS)
+    val savedCompletionHasCurrentEvidence = requiredMicroLessonStages.all { MicroLessonEngine.hasCompleteEvidence(topicId, it, savedMicroLessonEvidence) }
+    val savedBiologyLabEvidence = remember(topicId) { hasBiologyLabEvidence(topicId, database) }
+    var labEvidencePassed by remember(topicId) { mutableStateOf(savedBiologyLabEvidence) }
+    var completed by remember(topicId) { mutableStateOf(runCatching { database.isLessonCompleted(topicId) && savedCompletionHasCurrentEvidence && savedBiologyLabEvidence }.getOrDefault(false)) }
     var bookmarked by remember(topicId) { mutableStateOf(runCatching { database.isBookmarked(topicId) }.getOrDefault(false)) }
     val noteId = "lesson-note-" + topicId
     var noteText by remember(topicId) { mutableStateOf(runCatching { database.getNoteBody(noteId).orEmpty() }.getOrDefault("")) }
@@ -725,6 +769,9 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
     var exerciseChecked by remember(topicId) { mutableStateOf(false) }
     var exerciseComplete by remember(topicId) { mutableStateOf(false) }
     var projectChecksPassed by remember(topicId) { mutableStateOf(false) }
+    var conceptChecksPassed by remember(topicId) { mutableStateOf(false) }
+    var exampleChecksPassed by remember(topicId) { mutableStateOf(false) }
+    var contextChecksPassed by remember(topicId) { mutableStateOf(false) }
     var stage by remember(topicId) {
         mutableStateOf(
             runCatching {
@@ -788,7 +835,9 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
             buildSet {
                 val saved = restoredPillars.optJSONArray("completedStages")
                 if (completed) addAll(LessonStage.entries) else if (saved != null) for (index in 0 until saved.length()) {
-                    runCatching { LessonStage.valueOf(saved.optString(index)) }.getOrNull()?.let { add(it) }
+                    runCatching { LessonStage.valueOf(saved.optString(index)) }.getOrNull()?.let { restoredStage ->
+                        if (MicroLessonEngine.hasCompleteEvidence(topicId, restoredStage, savedMicroLessonEvidence) && (restoredStage != LessonStage.LAB || !requiresBiologyLabEvidence(topicId) || labEvidencePassed)) add(restoredStage)
+                    }
                 }
             }
         )
@@ -806,6 +855,14 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
         }
     }
     fun markStageComplete(target: LessonStage) {
+        val requiredChecksPassed = when (target) {
+            LessonStage.CONCEPT -> MicroLessonEngine.checks(topicId, LessonStage.CONCEPT).isEmpty() || conceptChecksPassed
+            LessonStage.EXAMPLES -> MicroLessonEngine.checks(topicId, LessonStage.EXAMPLES).isEmpty() || exampleChecksPassed
+            LessonStage.APPLICATIONS -> MicroLessonEngine.checks(topicId, LessonStage.APPLICATIONS).isEmpty() || contextChecksPassed
+            LessonStage.LAB -> !requiresBiologyLabEvidence(topicId) || labEvidencePassed
+            else -> true
+        }
+        if (!requiredChecksPassed) return
         val updated = completedStages + target
         completedStages = updated
         val saved = JSONArray()
@@ -988,6 +1045,7 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
                             }
                         }
                     }
+                    MicroLessonStageChecks(topicId, LessonStage.CONCEPT, database) { conceptChecksPassed = it }
                     Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                         Button(
                             onClick = {
@@ -1023,6 +1081,7 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
                     ChemistrySupplementalLessonActivity(topicId)
                     PhysicsInteractiveLessonActivity(topicId)
                     PhysicsSupplementalLessonActivity(topicId)
+                    MicroLessonStageChecks(topicId, LessonStage.EXAMPLES, database) { exampleChecksPassed = it }
                 }
 
                 LessonStage.APPLICATIONS -> {
@@ -1030,13 +1089,50 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
                     val hasScenario = TopicScenarioActivity(topicId)
                     if (!hasScenario) TopicScenarioReflectionCard(topicId, topic.title)
                     ScienceMediaTopicSection(topicId)
+                    MicroLessonStageChecks(topicId, LessonStage.APPLICATIONS, database) { contextChecksPassed = it }
                 }
 
                 LessonStage.LAB -> {
-                    LessonVirtualLabWorkspace(topicId, topic.subjectCode)
+                    LessonVirtualLabWorkspace(topicId, topic.subjectCode) { labEvidencePassed = it }
                 }
 
                 LessonStage.PROJECT -> {
+                    if (topic.id == "bio-adaptation") {
+                        Card(Modifier.fillMaxWidth(), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer)) {
+                            Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                                Text("BIOLOGY PROJECT · ADAPTATION FIELD GUIDE", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
+                                Text("Create an illustrated field guide explaining how organisms meet survival and reproductive challenges in different environments.", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+                                Text("Include: (1) one structural, one physiological and one behavioural adaptation; (2) a Nigerian habitat example such as a mangrove, rainforest or savanna organism; (3) a comparison of camouflage, warning colouration and mimicry; (4) an explanation of hibernation versus aestivation; (5) a labelled caste-role diagram for termites or honeybees; (6) examples of adaptations for feeding, defence, mate attraction, temperature regulation and water conservation; and (7) a paragraph distinguishing inherited adaptation from individual acclimatisation.")
+                                Text("Assessment rubric", fontWeight = FontWeight.Bold)
+                                Text("Scientific accuracy and inheritance/evolution explanation (30%); feature–challenge–function links (25%); correct examples and classification (20%); quality of evidence and limitations (15%); clear diagrams and communication (10%).")
+                                Text("Extension: explain how a change in environmental conditions can alter which inherited variant has the highest reproductive success.", style = MaterialTheme.typography.bodySmall)
+                            }
+                        }
+                    }
+                    if (topic.id == "bio-classification") {
+                        Card(Modifier.fillMaxWidth(), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer)) {
+                            Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                                Text("BIOLOGY PROJECT · BUILD A LOCAL ORGANISM IDENTIFICATION GUIDE", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
+                                Text("Create a field guide that helps a JSS student classify six familiar organisms using observable evidence, not guesswork.", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+                                Text("Include: (1) a dichotomous key for moss, fern, pine and hibiscus; (2) an animal key that first separates vertebrates from invertebrates, then distinguishes the eight major invertebrate phyla and the five vertebrate classes; (3) a comparison of the five traditional kingdoms using cell type, organisation, nutrition and cell-wall features; (4) three correctly formatted binomial names; (5) a note explaining why viruses are acellular and are not placed in the five kingdoms; and (6) a short explanation of why classification can change when new evidence becomes available.")
+                                Text("Assessment rubric", fontWeight = FontWeight.Bold)
+                                Text("Correct diagnostic choices and key logic (30%); scientific accuracy of kingdom and group comparisons (30%); correct naming and terminology (15%); clear evidence-based explanations (15%); readable layout and source acknowledgement (10%).")
+                                Text("Extension: explain why the five-kingdom scheme is useful for introductory study but is not the only classification framework used in modern biology.", style = MaterialTheme.typography.bodySmall)
+                            }
+                        }
+                    }
+                    if (topic.id == "bio-cell") {
+                        Card(Modifier.fillMaxWidth(), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer)) {
+                            Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                                Text("BIOLOGY PROJECT · BUILD A CELL FIELD GUIDE", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
+                                Text("Create a two-page field guide that teaches a beginner how to recognise and compare a typical plant cell, an animal cell and a bacterial cell.", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+                                Text("Your guide must include: (1) clearly labelled plant and animal cell diagrams; (2) a comparison table for cell wall, membrane, nucleus, mitochondria, ribosomes, chloroplasts and vacuole; (3) a short explanation of the three central statements of cell theory; (4) a prokaryote/eukaryote comparison; (5) one example showing cells → tissue → organ → organ system → organism; and (6) a note explaining why a root hair cell usually lacks chloroplasts.")
+                                Text("Success criteria", fontWeight = FontWeight.Bold)
+                                Text("Scientific accuracy (40%); correct labels and structure/function links (25%); clear comparisons (20%); explanation of limits and common misconceptions (15%).")
+                                Text("Extension: explain why an onion bulb epidermal cell is a plant cell even though it is not normally photosynthetic.", style = MaterialTheme.typography.bodySmall)
+                            }
+                        }
+                    }
                     Card(Modifier.fillMaxWidth()) {
                         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
                             Text("Topic mastery project", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
@@ -1139,7 +1235,7 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
                             markStageComplete(LessonStage.QUIZ)
                             completed = runCatching { database.markLessonCompleted(topic.id) }.isSuccess
                         },
-                        enabled = !topic.isSyllabusOutline && !completed && exerciseComplete && exercisePercent >= 80,
+                        enabled = !topic.isSyllabusOutline && !completed && exerciseComplete && exercisePercent >= 80 && completedStages.containsAll(stages.filter { it != LessonStage.QUIZ }),
                         modifier = Modifier.fillMaxWidth()
                     ) { Text(if (topic.isSyllabusOutline) "Full lesson in development" else if (completed) "Lesson completed" else "Complete lesson") }
                     if (!completed) Text("Complete the topic assessment with at least 80% to mark this lesson complete.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
@@ -1190,7 +1286,13 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
                     ) { Text("← Prev", maxLines = 1) }
                     Button(
                         onClick = { markStageComplete(stage) },
-                        enabled = stage !in completedStages && (stage != LessonStage.PROJECT || projectChecksPassed),
+                        enabled = stage !in completedStages && (stage != LessonStage.PROJECT || projectChecksPassed) && when (stage) {
+                            LessonStage.CONCEPT -> MicroLessonEngine.checks(topicId, LessonStage.CONCEPT).isEmpty() || conceptChecksPassed
+                            LessonStage.EXAMPLES -> MicroLessonEngine.checks(topicId, LessonStage.EXAMPLES).isEmpty() || exampleChecksPassed
+                            LessonStage.APPLICATIONS -> MicroLessonEngine.checks(topicId, LessonStage.APPLICATIONS).isEmpty() || contextChecksPassed
+                            LessonStage.LAB -> !requiresBiologyLabEvidence(topicId) || labEvidencePassed
+                            else -> true
+                        },
                         modifier = Modifier.weight(1.35f).heightIn(min = 48.dp),
                         contentPadding = PaddingValues(horizontal = 8.dp)
                     ) {
@@ -1347,7 +1449,9 @@ private fun TopicConceptInlineVisual(topicId: String, sectionIndex: Int, section
         ("projectile" in heading || "motion" in heading) && topicId.startsWith("phy") -> ProjectileMotionAnimation(speed = 25f, angleDegrees = 45f)
         "gravitation" in heading && topicId.startsWith("phy") -> SatelliteOrbitAnimation()
         ("gas" in heading || "kinetic theory" in heading) && (topicId.startsWith("phy") || topicId == "chem-kinetic-gas") -> ParticleKineticAnimation(temperatureKelvin = 300f)
-        else -> if (sectionIndex == 0) TopicScienceAnimation(topicId)
+        else -> if (sectionIndex == 0) {
+            if (topicId == "bio-classification") BiologyClassificationVisual() else TopicScienceAnimation(topicId)
+        }
     }
 }
 
@@ -1355,6 +1459,8 @@ private fun TopicConceptInlineVisual(topicId: String, sectionIndex: Int, section
 private fun TopicWorkedExampleCard(topicId: String) {
     val example = when (topicId) {
         "bio-cell" -> "A cell image is 36 mm long. Its actual length is 0.18 mm. Magnification = image size ÷ actual size = 36 ÷ 0.18 = 200×."
+        "bio-classification" -> "An unknown plant has vascular tissue and produces seeds, but it has no flowers or fruits. Follow the key: vascular tissue present → seeds present → flowers/fruits absent. The best classification is a gymnosperm, such as a conifer. The decision is based on observable reproductive structures, not simply on the plant being tall or woody."
+        "bio-adaptation" -> "A population of insects has heritable light and dark colour variants. On dark tree bark, birds detect more light insects, so dark insects leave more offspring on average. Across generations, the dark variant may become more frequent. Individual insects do not change colour because they need to; selection acts on inherited variation already present in the population."
         "bio-populations" -> "A quadrat covers 0.25 m² and contains 8 plants. Density = 8 ÷ 0.25 = 32 plants m⁻². This is a sample estimate, not a complete census."
         "bio-nutrition" -> "If a plant releases 24 cm³ of oxygen in 6 minutes, its mean oxygen production rate is 24 ÷ 6 = 4 cm³ min⁻¹. Bubble counts alone are less reliable because bubble sizes vary."
         "chem-combination" -> "A sample contains 10.0 g of calcium carbonate, CaCO₃ (Mᵣ = 100.0). Amount = mass ÷ molar mass = 10.0 ÷ 100.0 = 0.100 mol."
@@ -1451,6 +1557,7 @@ private fun TopicVisualisationGallery(topicId: String) {
         when (topicId) {
             "bio-adaptation" -> AdaptationTypesCard()
             "bio-cell" -> CellDiagramCard()
+            "bio-classification" -> BiologyClassificationVisual()
             "bio-nutrition" -> PhotosynthesisFlowCard()
             "bio-respiration" -> RespirationComparisonCard()
             "bio-interactions" -> FoodChainDiagramCard()
