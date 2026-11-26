@@ -107,6 +107,7 @@ class ScienceMediaCatalogTest {
         assertEquals(20, commonsGifs.size)
         assertTrue(commonsGifs.all { it.mediaType == ScienceMediaType.ANIMATION })
         assertTrue(commonsGifs.all { it.sourceUrl.startsWith("https://commons.wikimedia.org/wiki/File:") })
+        assertTrue(commonsGifs.all { it.previewUrl?.startsWith("https://commons.wikimedia.org/wiki/Special:Redirect/file/") == true })
         assertTrue(commonsGifs.all { it.licenceName.contains("Creative Commons") || it.licenceName.contains("CC0") || it.licenceName.contains("Public domain") })
     }
 }
