@@ -26,7 +26,7 @@ fun LessonVirtualLabWorkspace(topicId: String, subjectCode: String) {
         Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
             Text("PRACTICAL LAB WORKSPACE", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
             Text("Choose how you want to investigate", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
-            Text("Use the bench for a guided investigation, test your understanding in a short challenge, or explore a verified external resource.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            Text("Open a topic-matched interactive simulator, run a structured investigation with a lab notebook, test your understanding in a challenge, or launch a curated external virtual lab.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
         }
         Row(
             Modifier.fillMaxWidth().horizontalScroll(androidx.compose.foundation.rememberScrollState()),
