@@ -1,25 +1,30 @@
 package com.kaycee.meritprep
 
-import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class LessonStageProgressionTest {
     @Test
-    fun unlocksPillarsOnlyAfterEveryEarlierPillarIsComplete() {
-        assertTrue(isLessonStageUnlocked(LessonStage.CONCEPT, emptySet()))
-        assertFalse(isLessonStageUnlocked(LessonStage.EXAMPLES, emptySet()))
-        assertTrue(isLessonStageUnlocked(LessonStage.EXAMPLES, setOf(LessonStage.CONCEPT)))
-        assertFalse(isLessonStageUnlocked(LessonStage.LAB, setOf(LessonStage.CONCEPT, LessonStage.EXAMPLES)))
-        assertTrue(isLessonStageUnlocked(LessonStage.LAB, setOf(LessonStage.CONCEPT, LessonStage.EXAMPLES, LessonStage.APPLICATIONS)))
+    fun everyLessonPillarIsAccessibleBeforeAnyCompletionEvidence() {
+        LessonStage.entries.forEach { stage ->
+            assertTrue("$stage should be available for exploration", isLessonStageUnlocked(stage, emptySet()))
+        }
     }
 
     @Test
-    fun completedPillarsRemainAvailableForRevision() {
+    fun completedPillarsRemainAccessibleForRevision() {
         val completed = setOf(LessonStage.CONCEPT, LessonStage.EXAMPLES)
-        assertTrue(isLessonStageUnlocked(LessonStage.CONCEPT, completed))
-        assertTrue(isLessonStageUnlocked(LessonStage.EXAMPLES, completed))
-        assertTrue(isLessonStageUnlocked(LessonStage.APPLICATIONS, completed))
-        assertFalse(isLessonStageUnlocked(LessonStage.LAB, completed))
+        LessonStage.entries.forEach { stage ->
+            assertTrue("$stage should remain accessible for review", isLessonStageUnlocked(stage, completed))
+        }
+    }
+
+    @Test
+    fun projectAndMasteryVerificationRemainSeparateCompletionRequirements() {
+        // Navigation access is intentionally independent from completion.
+        // Project checks and quiz pass criteria are enforced by their own
+        // lesson workflows, not by hiding the learning pillars.
+        assertTrue(isLessonStageUnlocked(LessonStage.PROJECT, emptySet()))
+        assertTrue(isLessonStageUnlocked(LessonStage.QUIZ, emptySet()))
     }
 }
