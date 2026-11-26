@@ -13,6 +13,12 @@ import androidx.compose.ui.unit.dp
 import com.kaycee.meritprep.data.*
 
 @Composable
+internal val chemistryInteractiveActivityTopicIds = setOf(
+    "chem-atomic", "chem-acids-bases", "chem-redox", "chem-combination",
+    "chem-separation", "chem-metals", "chem-nonmetals", "chem-rates",
+    "chem-energy", "chem-electrolysis", "chem-kinetic-gas", "chem-equilibrium"
+)
+
 fun ChemistryInteractiveLessonActivity(topicId: String) {
     when (topicId) {
         "chem-atomic" -> AtomicStructureInquiry()
