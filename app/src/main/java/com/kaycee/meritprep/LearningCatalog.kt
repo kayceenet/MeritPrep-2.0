@@ -1050,6 +1050,18 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
                 }
 
                 LessonStage.PROJECT -> {
+                    if (topic.id == "bio-cell") {
+                        Card(Modifier.fillMaxWidth(), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer)) {
+                            Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                                Text("BIOLOGY PROJECT · BUILD A CELL FIELD GUIDE", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
+                                Text("Create a two-page field guide that teaches a beginner how to recognise and compare a typical plant cell, an animal cell and a bacterial cell.", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+                                Text("Your guide must include: (1) clearly labelled plant and animal cell diagrams; (2) a comparison table for cell wall, membrane, nucleus, mitochondria, ribosomes, chloroplasts and vacuole; (3) a short explanation of the three central statements of cell theory; (4) a prokaryote/eukaryote comparison; (5) one example showing cells → tissue → organ → organ system → organism; and (6) a note explaining why a root hair cell usually lacks chloroplasts.")
+                                Text("Success criteria", fontWeight = FontWeight.Bold)
+                                Text("Scientific accuracy (40%); correct labels and structure/function links (25%); clear comparisons (20%); explanation of limits and common misconceptions (15%).")
+                                Text("Extension: explain why an onion bulb epidermal cell is a plant cell even though it is not normally photosynthetic.", style = MaterialTheme.typography.bodySmall)
+                            }
+                        }
+                    }
                     Card(Modifier.fillMaxWidth()) {
                         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
                             Text("Topic mastery project", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
