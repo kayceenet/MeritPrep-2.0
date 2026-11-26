@@ -198,7 +198,6 @@ internal fun BiologyClassificationKeyPractical(onEvidenceChanged: (Boolean) -> U
                             val correct = selectedYes?.let { ClassificationKeyModel.isCorrectDecision(specimen.id, completedSteps, it) } == true
                             if (correct) {
                                 completedSteps += 1
-                                if (ClassificationKeyModel.isComplete(specimen.id, completedSteps)) onComplete(true)
                                 feedback = "Correct. Your choice follows the diagnostic feature stated in the key."
                                 feedbackIsError = false
                                 selectedYes = null
@@ -211,7 +210,7 @@ internal fun BiologyClassificationKeyPractical(onEvidenceChanged: (Boolean) -> U
                         modifier = Modifier.fillMaxWidth()
                     ) { Text("Check this decision") }
                     if (feedback.isNotBlank()) Text(feedback, color = if (feedbackIsError) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary, style = MaterialTheme.typography.bodySmall)
-                    OutlinedButton(onClick = { completedSteps = 0; selectedYes = null; feedback = ""; feedbackIsError = false; onComplete(false) }, modifier = Modifier.fillMaxWidth()) { Text("Restart this specimen") }
+                    OutlinedButton(onClick = { completedSteps = 0; selectedYes = null; feedback = ""; feedbackIsError = false }, modifier = Modifier.fillMaxWidth()) { Text("Restart this specimen") }
                 }
             }
         } else {
