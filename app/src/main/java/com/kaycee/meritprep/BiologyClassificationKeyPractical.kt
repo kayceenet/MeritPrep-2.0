@@ -116,7 +116,7 @@ internal object ClassificationKeyModel {
 }
 
 @Composable
-internal fun BiologyClassificationKeyPractical() {
+internal fun BiologyClassificationKeyPractical(onEvidenceChanged: (Boolean) -> Unit = {}) {
     val context = LocalContext.current
     val database = remember(context) { MeritDatabase(context) }
     val noteId = "micro-lab-session-bio-classification"
