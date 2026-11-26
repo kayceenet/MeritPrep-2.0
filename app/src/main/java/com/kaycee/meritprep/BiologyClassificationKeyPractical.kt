@@ -50,12 +50,23 @@ internal object ClassificationKeyModel {
         ClassificationKeyStep("Does it produce seeds?", "Yes, seeds are produced", "No, it reproduces by spores"),
         ClassificationKeyStep("Are its seeds enclosed within fruits formed from flowers?", "Yes, flowers and fruits are present", "No, seeds are exposed, commonly on cone scales")
     )
-    private val animalSteps = listOf(
+    private val vertebrateSteps = listOf(
         ClassificationKeyStep("Does the specimen have a vertebral column (backbone)?", "Yes, a vertebral column is present", "No, a vertebral column is absent"),
         ClassificationKeyStep("Does it have feathers?", "Yes, feathers are present", "No, feathers are absent"),
         ClassificationKeyStep("Does it have hair and mammary glands that produce milk?", "Yes, hair and mammary glands are present", "No, these mammalian features are absent"),
         ClassificationKeyStep("Does it have fins and gills for aquatic respiration throughout adult life?", "Yes, fins and gills are present", "No, this combination is absent"),
         ClassificationKeyStep("Does it have moist, permeable skin and a life cycle commonly linked to water?", "Yes, these amphibian features are present", "No, it has dry, keratinised scales typical of the reptile example in this key")
+    )
+    private val invertebrateSteps = listOf(
+        ClassificationKeyStep("Does the specimen have a vertebral column (backbone)?", "Yes, a vertebral column is present", "No, a vertebral column is absent"),
+        ClassificationKeyStep("Does it have a porous body with a canal system and no true tissues?", "Yes, these sponge-like features are present", "No, these features are absent"),
+        ClassificationKeyStep("Does it have tentacles with specialised stinging cells?", "Yes, stinging cells are present", "No, stinging cells are absent"),
+        ClassificationKeyStep("Is the body dorsoventrally flattened?", "Yes, the body is flattened", "No, the body is not flattened"),
+        ClassificationKeyStep("Is the body cylindrical and unsegmented?", "Yes, the body is cylindrical and unsegmented", "No, it is not"),
+        ClassificationKeyStep("Is the body visibly segmented into repeated units?", "Yes, repeated body segments are present", "No, repeated body segments are absent"),
+        ClassificationKeyStep("Does it have jointed appendages and a chitinous exoskeleton?", "Yes, jointed appendages and an exoskeleton are present", "No, this combination is absent"),
+        ClassificationKeyStep("Does it have a muscular foot and a mantle?", "Yes, a muscular foot and mantle are present", "No, these features are absent"),
+        ClassificationKeyStep("Does it have spiny skin and a water-vascular system?", "Yes, these echinoderm features are present", "No, these features are absent")
     )
 
     private val specimens = listOf(
@@ -63,16 +74,28 @@ internal object ClassificationKeyModel {
         ClassificationKeySpecimen("fern", "Plant specimen B", ClassificationKeyTrack.PLANTS, "Has true roots, stems and leaves with vascular tissue; reproduces by spores; no seeds.", listOf(true, false), "Pteridophyte (fern)", "Ferns have vascular tissue but do not produce seeds. Their reproduction involves spores."),
         ClassificationKeySpecimen("pine", "Plant specimen C", ClassificationKeyTrack.PLANTS, "Woody vascular plant; produces seeds on cone scales; no flowers or fruits.", listOf(true, true, false), "Gymnosperm (conifer)", "Conifers are gymnosperms. Their seeds are not enclosed within an ovary-derived fruit."),
         ClassificationKeySpecimen("hibiscus", "Plant specimen D", ClassificationKeyTrack.PLANTS, "Vascular plant with flowers; seeds develop inside fruits.", listOf(true, true, true), "Angiosperm (flowering plant)", "Angiosperms produce flowers and seeds enclosed within fruits."),
-        ClassificationKeySpecimen("earthworm", "Animal specimen A", ClassificationKeyTrack.ANIMALS, "Soft, segmented body; no internal vertebral column.", listOf(false), "Invertebrate", "Earthworms are annelid invertebrates. They have no vertebral column."),
-        ClassificationKeySpecimen("pigeon", "Animal specimen B", ClassificationKeyTrack.ANIMALS, "Backbone present; body covered with feathers; forelimbs form wings.", listOf(true, true), "Vertebrate — bird (Aves)", "Feathers are the diagnostic feature used here for birds. Wings alone would not be sufficient because bats also have wings."),
-        ClassificationKeySpecimen("bat", "Animal specimen C", ClassificationKeyTrack.ANIMALS, "Backbone present; body has hair; females feed young with milk; forelimbs form wings.", listOf(true, false, true), "Vertebrate — mammal (Mammalia)", "Hair and mammary glands identify mammals. Flight does not make a bat a bird."),
-        ClassificationKeySpecimen("tilapia", "Animal specimen D", ClassificationKeyTrack.ANIMALS, "Backbone present; fins and gills function in aquatic life throughout adulthood.", listOf(true, false, false, true), "Vertebrate — fish", "Tilapia is a fish: it has fins and uses gills for aquatic respiration throughout adult life."),
-        ClassificationKeySpecimen("frog", "Animal specimen E", ClassificationKeyTrack.ANIMALS, "Backbone present; no feathers or hair; adult has moist skin; reproduction and early development are linked to water.", listOf(true, false, false, false, true), "Vertebrate — amphibian (Amphibia)", "Frogs are amphibians. Their moist skin and life cycle linked to water distinguish the example from the reptile in this key."),
-        ClassificationKeySpecimen("lizard", "Animal specimen F", ClassificationKeyTrack.ANIMALS, "Backbone present; no feathers or hair; no fins and gills; dry keratinised scales.", listOf(true, false, false, false, false), "Vertebrate — reptile (Reptilia)", "Lizards are reptiles. Dry, keratinised scales help reduce water loss.")
+        ClassificationKeySpecimen("sponge", "Animal specimen A", ClassificationKeyTrack.ANIMALS, "Aquatic body with many pores and a canal system; no true tissues.", listOf(false, true), "Invertebrate — Porifera", "Sponges belong to Porifera. Their porous body and canal system support filter feeding."),
+        ClassificationKeySpecimen("hydra", "Animal specimen B", ClassificationKeyTrack.ANIMALS, "Aquatic body with tentacles around the mouth and specialised stinging cells.", listOf(false, false, true), "Invertebrate — Cnidaria", "Hydra belongs to Cnidaria. Cnidocytes contain specialised stinging structures used in prey capture and defence."),
+        ClassificationKeySpecimen("planarian", "Animal specimen C", ClassificationKeyTrack.ANIMALS, "Soft, flattened, unsegmented body.", listOf(false, false, false, true), "Invertebrate — Platyhelminthes", "Planarians are flatworms in Platyhelminthes."),
+        ClassificationKeySpecimen("roundworm", "Animal specimen D", ClassificationKeyTrack.ANIMALS, "Cylindrical, unsegmented body with tapered ends.", listOf(false, false, false, false, true), "Invertebrate — Nematoda", "Roundworms belong to Nematoda and have cylindrical, unsegmented bodies."),
+        ClassificationKeySpecimen("earthworm", "Animal specimen E", ClassificationKeyTrack.ANIMALS, "Soft body divided into repeated ring-like segments.", listOf(false, false, false, false, false, true), "Invertebrate — Annelida", "Earthworms are segmented annelids."),
+        ClassificationKeySpecimen("grasshopper", "Animal specimen F", ClassificationKeyTrack.ANIMALS, "Segmented body, jointed legs and a hard external skeleton.", listOf(false, false, false, false, false, false, true), "Invertebrate — Arthropoda", "Grasshoppers are arthropods. Jointed appendages and a chitinous exoskeleton are key features."),
+        ClassificationKeySpecimen("snail", "Animal specimen G", ClassificationKeyTrack.ANIMALS, "Soft body with a muscular foot and mantle; many land species have a shell.", listOf(false, false, false, false, false, false, false, true), "Invertebrate — Mollusca", "Snails are molluscs. A muscular foot and mantle are characteristic features."),
+        ClassificationKeySpecimen("starfish", "Animal specimen H", ClassificationKeyTrack.ANIMALS, "Marine animal with spiny skin and a water-vascular system.", listOf(false, false, false, false, false, false, false, false, true), "Invertebrate — Echinodermata", "Starfish are echinoderms with a water-vascular system and tube feet."),
+        ClassificationKeySpecimen("tilapia", "Animal specimen I", ClassificationKeyTrack.ANIMALS, "Backbone present; fins and gills function in aquatic life throughout adulthood.", listOf(true, false, false, true), "Vertebrate — fish", "Tilapia is a fish: it has fins and uses gills for aquatic respiration throughout adult life."),
+        ClassificationKeySpecimen("frog", "Animal specimen J", ClassificationKeyTrack.ANIMALS, "Backbone present; no feathers or hair; adult has moist skin; reproduction and early development are linked to water.", listOf(true, false, false, false, true), "Vertebrate — amphibian (Amphibia)", "Frogs are amphibians. Their moist skin and life cycle linked to water distinguish the example from the reptile in this key."),
+        ClassificationKeySpecimen("lizard", "Animal specimen K", ClassificationKeyTrack.ANIMALS, "Backbone present; no feathers or hair; no fins and gills; dry keratinised scales.", listOf(true, false, false, false, false), "Vertebrate — reptile (Reptilia)", "Lizards are reptiles. Dry, keratinised scales help reduce water loss."),
+        ClassificationKeySpecimen("pigeon", "Animal specimen L", ClassificationKeyTrack.ANIMALS, "Backbone present; body covered with feathers; forelimbs form wings.", listOf(true, true), "Vertebrate — bird (Aves)", "Feathers are the diagnostic feature used here for birds. Wings alone would not be sufficient because bats also have wings."),
+        ClassificationKeySpecimen("bat", "Animal specimen M", ClassificationKeyTrack.ANIMALS, "Backbone present; body has hair; females feed young with milk; forelimbs form wings.", listOf(true, false, true), "Vertebrate — mammal (Mammalia)", "Hair and mammary glands identify mammals. Flight does not make a bat a bird.")
     )
 
-    fun steps(track: ClassificationKeyTrack): List<ClassificationKeyStep> =
-        if (track == ClassificationKeyTrack.PLANTS) plantSteps else animalSteps
+    fun stepsFor(specimenId: String): List<ClassificationKeyStep> {
+        val specimen = specimen(specimenId) ?: return emptyList()
+        return when (specimen.track) {
+            ClassificationKeyTrack.PLANTS -> plantSteps
+            ClassificationKeyTrack.ANIMALS -> if (specimen.decisions.firstOrNull() == true) vertebrateSteps else invertebrateSteps
+        }
+    }
 
     fun specimens(track: ClassificationKeyTrack): List<ClassificationKeySpecimen> =
         specimens.filter { it.track == track }
@@ -111,7 +134,7 @@ internal fun BiologyClassificationKeyPractical() {
         ClassificationKeyModel.specimens(track).firstOrNull { it.id == specimenId }
             ?: ClassificationKeyModel.specimens(track).first()
     }
-    val steps = remember(track) { ClassificationKeyModel.steps(track) }
+    val steps = remember(track, specimen.id) { ClassificationKeyModel.stepsFor(specimen.id) }
     val identifiedResult = ClassificationKeyModel.identify(specimen.id, specimen.decisions.take(completedSteps))
     val finished = identifiedResult != null
     val stepIndex = completedSteps.coerceAtMost((steps.size - 1).coerceAtLeast(0))
