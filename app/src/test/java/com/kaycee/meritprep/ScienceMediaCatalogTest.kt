@@ -104,7 +104,7 @@ class ScienceMediaCatalogTest {
     @Test
     fun licensedCommonsGifsAreIncludedAsExternalAnimations() {
         val commonsGifs = ScienceMediaCatalog.resources.filter { it.provider.startsWith("Wikimedia Commons — ") }
-        assertEquals(9, commonsGifs.size)
+        assertEquals(20, commonsGifs.size)
         assertTrue(commonsGifs.all { it.mediaType == ScienceMediaType.ANIMATION })
         assertTrue(commonsGifs.all { it.sourceUrl.startsWith("https://commons.wikimedia.org/wiki/File:") })
         assertTrue(commonsGifs.all { it.licenceName.contains("Creative Commons") || it.licenceName.contains("CC0") || it.licenceName.contains("Public domain") })
