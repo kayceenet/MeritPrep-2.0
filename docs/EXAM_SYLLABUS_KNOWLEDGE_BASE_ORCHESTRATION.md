@@ -573,3 +573,141 @@ A micro-lesson fails review if:
 
 A module fails if the learner can finish it by tapping through without demonstrating the stated outcomes. Completion is a navigation event; mastery is an evidence-based academic decision.
 
+## 17. Mandatory six-pillar micro-lesson framework
+
+Every micro-lesson and every teachable subtopic must use the same six-pillar instructional framework:
+
+**Concepts → Examples → Context → Virtual Lab → Project → Quiz.**
+
+These are not six disconnected tabs or a checklist of empty content cards. They form one continuous NetAcad-inspired tutorial. The tutor introduces an idea, demonstrates it, connects it to a meaningful situation, lets the learner investigate or practise it, asks the learner to produce something independently, and checks whether the learning outcome has been achieved.
+
+The six pillars are mandatory as instructional design requirements. Their implementation must be proportionate to the subject and learning outcome. Where a pillar is genuinely unsuitable (for example, a wet-lab simulation for a purely literary language skill), provide an equivalent authentic interactive activity and record the rationale. Do not insert a decorative or scientifically invalid virtual lab merely to fill a slot.
+
+### 17.1 Concepts — teach the idea properly
+
+- Begin with what the learner already knows or can observe; state the question the concept answers.
+- Explain from zero assumed knowledge, defining every new term before relying on it.
+- Move from familiar language to formal subject terminology and precise syllabus-level treatment.
+- Explain what, how and why; include mechanisms, relationships, conditions, classifications, causes, effects, exceptions and limitations where required.
+- Use progressive chunks, labelled visuals and short retrieval prompts. Do not compress a substantial topic into a few generic sentences.
+- Make the explanation sufficiently complete for the mapped JAMB and/or WAEC demand, and link each teaching segment to its atomic syllabus statement IDs.
+- End with a learner response that reveals understanding, not just a passive “Next” tap.
+
+**Acceptance test:** a beginner can explain the central idea in their own words and correctly use the essential terminology before proceeding.
+
+### 17.2 Examples — demonstrate and scaffold
+
+- Include at least one carefully worked example whenever the concept involves a process, calculation, classification, interpretation, practical decision or constructed response.
+- Show every meaningful reasoning step and explain why it is taken.
+- Use more than one representation when it improves understanding: labelled diagram, analogy, table, equation, specimen, worked calculation, model answer or annotated source.
+- Progress from a fully worked demonstration to a partially completed example, then guided practice and an independent fresh task.
+- Include a contrasting or non-example where it helps distinguish commonly confused ideas.
+- Explain common wrong approaches and how to recognise them.
+
+**Acceptance test:** the learner can reproduce the method on a new but equivalent example without copying the displayed answer.
+
+### 17.3 Context — make the knowledge meaningful
+
+- Connect the concept to a real-life, Nigerian, scientific, technological, environmental, health, community, historical, economic or examination context appropriate to the subject.
+- Explain why the concept matters and where it is used; do not add unrelated stories for decoration.
+- Include unfamiliar contexts that require transfer, not just repetition of the teaching example.
+- Distinguish established facts from simplified analogies, hypothetical scenarios and illustrative data.
+- Use context to develop interpretation, reasoning and explanation skills required by the syllabus.
+
+**Acceptance test:** the learner can identify the concept in a new situation and explain how the knowledge applies.
+
+### 17.4 Virtual Lab — investigate, manipulate and interpret
+
+For subjects and outcomes that support experimental or simulated investigation, provide an interactive virtual lab linked directly to the concept. It must be an investigation, not a video pretending to be a lab.
+
+A suitable lab includes, as applicable:
+- A clear scientific question and learning objectives.
+- Apparatus/materials with interactive identification of names and functions.
+- Safety information, hazards, precautions and disposal where relevant.
+- Independent, dependent and controlled variables.
+- A prediction and reason before the learner starts.
+- A manipulable setup with meaningful choices and controls.
+- Scientifically coherent model behaviour, visible observations and learner-recorded readings.
+- Repeats, data tables, units, graphs and calculations where appropriate.
+- Interpretation, evidence-based conclusion, errors, limitations and improvements.
+- Targeted feedback on method, observation, data handling and reasoning.
+
+Every simulation must document its equations/rules, assumptions, units, valid input ranges, initial conditions, boundary behaviour, expected limiting cases and known limitations. Label generated readings **SIMULATED**. A virtual lab must never claim to replace physical apparatus skills where those are required.
+
+For non-laboratory subjects, use the closest authentic interactive equivalent: source investigation, map/data exploration, language workshop, economic model, civic case simulation, design task or structured analytical exercise. Label it accurately rather than calling it a laboratory.
+
+**Acceptance test:** learner actions affect the activity in a meaningful way; the learner predicts, observes, records and interprets evidence rather than merely watching.
+
+### 17.5 Project — apply learning independently
+
+- Give the learner a small, achievable product, investigation, explanation, model, solution or evidence-based recommendation.
+- State the task, purpose, constraints, available materials/data, expected output and success criteria.
+- Require application of the current micro-lesson's outcome and, where appropriate, retrieval of earlier concepts.
+- Include staged hints and checkpoints without giving away the finished work.
+- Assess the process and reasoning as well as the final output using a clear rubric or model criteria.
+- Offer an extension for learners who demonstrate mastery and a scaffolded route for learners who need support.
+- Keep projects proportionate: a micro-lesson project may take a few minutes; larger projects can span a module.
+
+**Acceptance test:** the learner creates or solves something that demonstrates transfer beyond selecting a multiple-choice answer.
+
+### 17.6 Quiz — diagnose, teach and decide what happens next
+
+- Include short embedded checks during teaching and a closing checkpoint for the micro-lesson.
+- Use varied response types appropriate to the outcome: multiple choice, short answer, ordering, matching, labelling, calculation, graph interpretation, explanation, diagram or practical decision.
+- Map every item to one or more learning outcomes and atomic syllabus statement IDs.
+- Provide a defensible key or rubric, difficulty rationale, and specific feedback for each meaningful response pathway.
+- For objective questions, explain why the correct option is correct and why each distractor is wrong or tempting.
+- For constructed responses, identify missing points, inaccurate reasoning, weak evidence and terminology issues against the rubric.
+- Use fresh equivalent items for retries; do not teach memorisation of one repeated answer.
+- Distinguish completion, correctness, confidence, supported success and independent mastery.
+- Route errors to the relevant concept/example/lab segment, then return the learner to a fresh check.
+- Record mastery only after sufficient independent evidence; one guessed answer or one easy question is not enough.
+
+**Acceptance test:** the quiz changes the next teaching action based on the learner's demonstrated understanding and leaves an auditable record of the evidence.
+
+### 17.7 The one-to-one orchestration loop across all six pillars
+
+The tutor should guide the learner through a connected sequence:
+
+1. **Diagnose and orient:** establish the learner's starting point and explain the goal.
+2. **Concepts:** teach a manageable idea and ask the learner to predict, explain or identify something.
+3. **Examples:** demonstrate the reasoning, then invite the learner to complete a similar step.
+4. **Context:** present a relevant situation and ask the learner to apply the idea.
+5. **Virtual Lab:** where applicable, let the learner investigate, make decisions and interpret outcomes; otherwise use an authentic subject-specific interactive activity.
+6. **Project:** ask the learner to produce an independent response or solution using the new knowledge.
+7. **Quiz:** assess the outcome with response-specific feedback and a fresh retry where needed.
+8. **Adapt:** remediate prerequisites or misconceptions, or provide an extension when mastery is demonstrated.
+9. **Close:** summarise the skill demonstrated, the evidence still missing and the next recommended micro-lesson.
+
+The sequence may loop. For example, an incorrect lab interpretation can return the learner to the relevant concept and worked example; a successful project can unlock a more demanding transfer task. Do not force the learner through all six stages linearly when evidence shows a better teaching route, but do not silently omit required learning evidence.
+
+### 17.8 Authoring and implementation contract
+
+Every micro-lesson data record must explicitly provide:
+- Six-pillar presence/status: complete, in progress, not applicable with rationale, or blocked.
+- The concept teaching script and linked syllabus statement IDs.
+- Worked examples, expected reasoning and misconception notes.
+- Context scenario and intended transfer outcome.
+- Virtual lab or equivalent activity specification, model rules and offline fallback.
+- Project prompt, expected artefact/response and assessment rubric.
+- Quiz items, keys/rubrics, item mappings and response-specific feedback.
+- Branching rules connecting learner responses to remediation, replay, extension and mastery.
+- Asset licences/provenance, accessibility and offline availability.
+- Academic author, independent reviewer, review date and approval status.
+
+The Android implementation must represent these as structured, testable lesson content and activities, not hard-coded decorative labels. Preserve the existing Compose architecture and lesson interface foundations. Persist the learner's answers, activity state, project progress and exact checkpoint so a lesson can be resumed safely offline.
+
+### 17.9 Micro-lesson release gate
+
+A micro-lesson cannot be marked release-ready if any applicable pillar is empty, superficial, unlinked to the learning outcome or merely decorative. It also fails if:
+- Concepts are too brief to teach the stated outcome.
+- Examples show answers without reasoning.
+- Context is unrelated or does not require application.
+- A virtual lab has no meaningful learner control, invalid model behaviour or undisclosed simulated data.
+- A project has no clear expected output or assessment criteria.
+- A quiz provides only generic right/wrong feedback or allows guessing to establish mastery.
+- The six pillars do not connect through the one-to-one tutorial state and feedback flow.
+- Offline use, checkpoint persistence, syllabus traceability or academic review is missing.
+
+A subject may use different media and response modes, but the six-pillar teaching standard remains consistent across all subjects and all micro-lessons. The quality and form of each pillar must fit the discipline; the standard must never be reduced to six empty headings.
+
