@@ -714,10 +714,10 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
     val topic = LearningCatalog.find(topicId)
     val context = LocalContext.current
     val database = remember(context) { MeritDatabase(context) }
-    var completed by remember(topicId) { mutableStateOf(database.isLessonCompleted(topicId)) }
-    var bookmarked by remember(topicId) { mutableStateOf(database.isBookmarked(topicId)) }
+    var completed by remember(topicId) { mutableStateOf(runCatching { database.isLessonCompleted(topicId) }.getOrDefault(false)) }
+    var bookmarked by remember(topicId) { mutableStateOf(runCatching { database.isBookmarked(topicId) }.getOrDefault(false)) }
     val noteId = "lesson-note-" + topicId
-    var noteText by remember(topicId) { mutableStateOf(database.getNoteBody(noteId).orEmpty()) }
+    var noteText by remember(topicId) { mutableStateOf(runCatching { database.getNoteBody(noteId).orEmpty() }.getOrDefault("")) }
     var noteSaved by remember(topicId) { mutableStateOf(false) }
     var noteEditorOpen by remember(topicId) { mutableStateOf(false) }
     var exerciseIndex by remember(topicId) { mutableIntStateOf(0) }
@@ -729,12 +729,12 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
         mutableStateOf(
             runCatching {
                 LessonStage.valueOf(
-                    JSONObject(database.getNoteBody("lesson-pillar-progress-" + topicId) ?: "{}").optString("activeStage")
+                    JSONObject(runCatching { database.getNoteBody("lesson-pillar-progress-" + topicId) }.getOrNull() ?: "{}").optString("activeStage")
                 )
             }.getOrDefault(LessonStage.CONCEPT)
         )
     }
-    LaunchedEffect(topicId) { database.recordTopicOpened(topicId) }
+    LaunchedEffect(topicId) { runCatching { database.recordTopicOpened(topicId) } }
     var speechRate by remember(topicId) { mutableFloatStateOf(1f) }
     var speechReady by remember(topicId) { mutableStateOf(false) }
     var speechEngine by remember(topicId) { mutableStateOf<TextToSpeech?>(null) }
@@ -796,19 +796,21 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
     LaunchedEffect(topicId, stage, completedStages) {
         val saved = JSONArray()
         stages.filter { it in completedStages }.forEach { saved.put(it.name) }
-        database.saveNote(
-            progressNoteId,
-            topicId,
-            topic.title + " classroom progress",
-            JSONObject().put("completedStages", saved).put("activeStage", stage.name).toString()
-        )
+        runCatching {
+            database.saveNote(
+                progressNoteId,
+                topicId,
+                topic.title + " classroom progress",
+                JSONObject().put("completedStages", saved).put("activeStage", stage.name).toString()
+            )
+        }
     }
     fun markStageComplete(target: LessonStage) {
         val updated = completedStages + target
         completedStages = updated
         val saved = JSONArray()
         stages.filter { it in updated }.forEach { saved.put(it.name) }
-        database.saveNote(progressNoteId, topicId, topic.title + " classroom progress", JSONObject().put("completedStages", saved).toString())
+        runCatching { database.saveNote(progressNoteId, topicId, topic.title + " classroom progress", JSONObject().put("completedStages", saved).toString()) }
         if (stage == target) stage = stages.getOrNull(stages.indexOf(target) + 1) ?: target
     }
     LaunchedEffect(topicId, completedStages) {
@@ -866,8 +868,10 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
                     Icon(Icons.Default.Edit, contentDescription = "Save or edit lesson note")
                 }
                 IconButton(onClick = {
-                    if (bookmarked) database.removeBookmark(topic.id) else database.bookmark(topic.id, "lesson")
-                    bookmarked = !bookmarked
+                    val saved = runCatching {
+                        if (bookmarked) database.removeBookmark(topic.id) else database.bookmark(topic.id, "lesson")
+                    }.isSuccess
+                    if (saved) bookmarked = !bookmarked
                 }) { Icon(if (bookmarked) Icons.Default.Bookmark else Icons.Default.BookmarkBorder, contentDescription = if (bookmarked) "Remove bookmark" else "Save lesson") }
             }
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
@@ -896,8 +900,7 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
                 },
                 confirmButton = {
                     TextButton(onClick = {
-                        database.saveNote(noteId, topic.id, topic.title + " notes", noteText)
-                        noteSaved = true
+                        noteSaved = runCatching { database.saveNote(noteId, topic.id, topic.title + " notes", noteText) }.isSuccess
                         noteEditorOpen = false
                     }) { Text("Save note") }
                 },
@@ -1048,8 +1051,7 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
                                 label = { Text("Project notes and final response") }
                             )
                             Button(onClick = {
-                                database.saveNote(noteId, topic.id, topic.title + " notes", noteText)
-                                noteSaved = true
+                                noteSaved = runCatching { database.saveNote(noteId, topic.id, topic.title + " notes", noteText) }.isSuccess
                             }, modifier = Modifier.fillMaxWidth()) { Text("Save notes on this device") }
                             if (noteSaved) Text("Notes saved locally.", color = MaterialTheme.colorScheme.primary, style = MaterialTheme.typography.bodySmall)
                         }
@@ -1133,7 +1135,10 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
                         }
                     }
                     Button(
-                        onClick = { markStageComplete(LessonStage.QUIZ); database.markLessonCompleted(topic.id); completed = true },
+                        onClick = {
+                            markStageComplete(LessonStage.QUIZ)
+                            completed = runCatching { database.markLessonCompleted(topic.id) }.isSuccess
+                        },
                         enabled = !topic.isSyllabusOutline && !completed && exerciseComplete && exercisePercent >= 80,
                         modifier = Modifier.fillMaxWidth()
                     ) { Text(if (topic.isSyllabusOutline) "Full lesson in development" else if (completed) "Lesson completed" else "Complete lesson") }
