@@ -261,7 +261,7 @@ class MeritDatabase(context: Context) : SQLiteOpenHelper(context, "meritprep_loc
 
     fun getMostRecentlyStudiedTopicId(): String? =
         readableDatabase.rawQuery(
-            "SELECT topic_id FROM topic_progress WHERE last_studied > 0 ORDER BY last_studied DESC LIMIT 1",
+            "SELECT topic_id FROM topic_progress WHERE last_studied > 0 AND topic_id NOT IN (SELECT topic_id FROM completed_lessons) ORDER BY last_studied DESC LIMIT 1",
             null
         ).use { cursor -> if (cursor.moveToFirst()) cursor.getString(0) else null }
 
