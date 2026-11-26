@@ -245,8 +245,12 @@ internal fun BiologyClassificationKeyPractical(onEvidenceChanged: (Boolean) -> U
                         .put("decisionPath", decisionPath.joinToString("\n"))
                         .put("observationRecord", observationRecord)
                         .put("identified", finished)
-                    runCatching { database.saveNote(noteId, "bio-classification", "Dichotomous key practical record", body.toString()) }
-                }, modifier = Modifier.fillMaxWidth()) { Text("Save practical record on this device") }
+                    val savedSuccessfully = runCatching {
+                        database.saveNote(noteId, "bio-classification", "Dichotomous key practical record", body.toString())
+                        true
+                    }.getOrDefault(false)
+                    onEvidenceChanged(savedSuccessfully && finished && decisionPath.isNotEmpty() && observationRecord.isNotBlank())
+                }, enabled = finished && decisionPath.isNotEmpty() && observationRecord.isNotBlank(), modifier = Modifier.fillMaxWidth()) { Text("Save completed practical record on this device") }
             }
         }
     }
