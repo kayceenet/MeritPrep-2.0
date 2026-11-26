@@ -1066,6 +1066,18 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
                 }
 
                 LessonStage.PROJECT -> {
+                    if (topic.id == "bio-adaptation") {
+                        Card(Modifier.fillMaxWidth(), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer)) {
+                            Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                                Text("BIOLOGY PROJECT · ADAPTATION FIELD GUIDE", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
+                                Text("Create an illustrated field guide explaining how organisms meet survival and reproductive challenges in different environments.", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+                                Text("Include: (1) one structural, one physiological and one behavioural adaptation; (2) a Nigerian habitat example such as a mangrove, rainforest or savanna organism; (3) a comparison of camouflage, warning colouration and mimicry; (4) an explanation of hibernation versus aestivation; (5) a labelled caste-role diagram for termites or honeybees; (6) examples of adaptations for feeding, defence, mate attraction, temperature regulation and water conservation; and (7) a paragraph distinguishing inherited adaptation from individual acclimatisation.")
+                                Text("Assessment rubric", fontWeight = FontWeight.Bold)
+                                Text("Scientific accuracy and inheritance/evolution explanation (30%); feature–challenge–function links (25%); correct examples and classification (20%); quality of evidence and limitations (15%); clear diagrams and communication (10%).")
+                                Text("Extension: explain how a change in environmental conditions can alter which inherited variant has the highest reproductive success.", style = MaterialTheme.typography.bodySmall)
+                            }
+                        }
+                    }
                     if (topic.id == "bio-classification") {
                         Card(Modifier.fillMaxWidth(), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer)) {
                             Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -1416,6 +1428,7 @@ private fun TopicWorkedExampleCard(topicId: String) {
     val example = when (topicId) {
         "bio-cell" -> "A cell image is 36 mm long. Its actual length is 0.18 mm. Magnification = image size ÷ actual size = 36 ÷ 0.18 = 200×."
         "bio-classification" -> "An unknown plant has vascular tissue and produces seeds, but it has no flowers or fruits. Follow the key: vascular tissue present → seeds present → flowers/fruits absent. The best classification is a gymnosperm, such as a conifer. The decision is based on observable reproductive structures, not simply on the plant being tall or woody."
+        "bio-adaptation" -> "A population of insects has heritable light and dark colour variants. On dark tree bark, birds detect more light insects, so dark insects leave more offspring on average. Across generations, the dark variant may become more frequent. Individual insects do not change colour because they need to; selection acts on inherited variation already present in the population."
         "bio-populations" -> "A quadrat covers 0.25 m² and contains 8 plants. Density = 8 ÷ 0.25 = 32 plants m⁻². This is a sample estimate, not a complete census."
         "bio-nutrition" -> "If a plant releases 24 cm³ of oxygen in 6 minutes, its mean oxygen production rate is 24 ÷ 6 = 4 cm³ min⁻¹. Bubble counts alone are less reliable because bubble sizes vary."
         "chem-combination" -> "A sample contains 10.0 g of calcium carbonate, CaCO₃ (Mᵣ = 100.0). Amount = mass ÷ molar mass = 10.0 ÷ 100.0 = 0.100 mol."
