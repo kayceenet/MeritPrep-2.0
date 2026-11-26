@@ -1841,7 +1841,7 @@ object ScienceMediaCatalog {
             title = "Ecological succession explorer",
             subjectCode = BIOLOGY,
             topicId = "bio-habitats",
-            mediaType = ScienceMediaType.SIMULATION,
+            mediaType = ScienceMediaType.INTERACTIVE_SIMULATION,
             provider = "The Lab Games",
             summary = "Explore how communities change during ecological succession and compare early and later stages.",
             sourceUrl = "https://thelabgames.org/life-science/succession-explorer",
@@ -1915,6 +1915,7 @@ object ScienceMediaCatalog {
             beforeYouStart = "Predict how sand, silt and clay proportions affect drainage and water retention.",
             afterYouExplore = "Use the soil texture triangle and model evidence to explain infiltration, plant-available water and erosion; state the model limitations.",
             offlineAlternative = "Use MeritPrep's soil-water-retention activity and plan a supervised jar test with local soil samples."
+        ),
         ScienceMediaResource(
             id = "bio-tree-of-life-tlg",
             title = "Tree of Life classification game",
