@@ -82,7 +82,11 @@ internal object ClassificationKeyModel {
     fun expectedDecision(specimenId: String, stepIndex: Int): Boolean? =
         specimen(specimenId)?.decisions?.getOrNull(stepIndex)
 
-    fun result(specimenId: String): String? = specimen(specimenId)?.result
+    fun isCorrectDecision(specimenId: String, stepIndex: Int, answerYes: Boolean): Boolean? =
+        expectedDecision(specimenId, stepIndex)?.let { it == answerYes }
+
+    fun identify(specimenId: String, answers: List<Boolean>): String? =
+        specimen(specimenId)?.takeIf { answers == it.decisions }?.result
 
     fun isComplete(specimenId: String, completedSteps: Int): Boolean =
         specimen(specimenId)?.let { completedSteps >= it.decisions.size } ?: false
@@ -108,7 +112,8 @@ internal fun BiologyClassificationKeyPractical() {
             ?: ClassificationKeyModel.specimens(track).first()
     }
     val steps = remember(track) { ClassificationKeyModel.steps(track) }
-    val finished = ClassificationKeyModel.isComplete(specimen.id, completedSteps)
+    val identifiedResult = ClassificationKeyModel.identify(specimen.id, specimen.decisions.take(completedSteps))
+    val finished = identifiedResult != null
     val stepIndex = completedSteps.coerceAtMost((steps.size - 1).coerceAtLeast(0))
 
     Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
@@ -164,8 +169,8 @@ internal fun BiologyClassificationKeyPractical() {
                     FilterChip(selected = selectedYes == false, onClick = { selectedYes = false; feedback = ""; feedbackIsError = false }, label = { Text(steps[stepIndex].noMeaning) })
                     Button(
                         onClick = {
-                            val expected = ClassificationKeyModel.expectedDecision(specimen.id, completedSteps)
-                            if (selectedYes == expected) {
+                            val correct = selectedYes?.let { ClassificationKeyModel.isCorrectDecision(specimen.id, completedSteps, it) } == true
+                            if (correct) {
                                 completedSteps += 1
                                 feedback = "Correct. Your choice follows the diagnostic feature stated in the key."
                                 feedbackIsError = false
@@ -186,7 +191,7 @@ internal fun BiologyClassificationKeyPractical() {
             Card(Modifier.fillMaxWidth()) {
                 Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                     Text("Identification reached", style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
-                    Text(specimen.result, style = MaterialTheme.typography.headlineSmall)
+                    Text(identifiedResult.orEmpty(), style = MaterialTheme.typography.headlineSmall)
                     Text(specimen.explanation)
                     Text("The identification is only as reliable as the observed diagnostic features. If a specimen is damaged, immature or atypical, use additional evidence and an appropriate key rather than forcing an uncertain identification.", style = MaterialTheme.typography.bodySmall)
                     Button(onClick = { completedSteps = 0; selectedYes = null; feedback = "" }, modifier = Modifier.fillMaxWidth()) { Text("Identify this specimen again") }
