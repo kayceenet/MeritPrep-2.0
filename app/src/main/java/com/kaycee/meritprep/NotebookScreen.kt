@@ -28,14 +28,20 @@ fun NotebookScreen(onOpenLesson: (String) -> Unit) {
     var search by remember { mutableStateOf("") }
     var refreshKey by remember { mutableIntStateOf(0) }
     var pendingDelete by remember { mutableStateOf<SavedStudyNote?>(null) }
+    var createNoteOpen by remember { mutableStateOf(false) }
+    var draftTitle by remember { mutableStateOf("") }
+    var draftBody by remember { mutableStateOf("") }
     val notes = remember(refreshKey, search) { database.getStudyNotes(search) }
     val bookmarks = remember(refreshKey) { database.getBookmarkedItemIds("lesson") }
     val mistakes = remember(refreshKey) { database.getMistakes() }
 
     Column(Modifier.fillMaxSize().padding(top = 12.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
-        Column(Modifier.padding(horizontal = 18.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+        Column(Modifier.padding(horizontal = 18.dp), verticalArrangement = Arrangement.spacedBy(7.dp)) {
             Text("YOUR NOTEBOOK", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
-            Text("Saved learning", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
+            Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween) {
+                Text("Saved learning", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
+                Button(onClick = { createNoteOpen = true }) { Text("New note") }
+            }
             Text("Keep your explanations, bookmarked lessons and corrections together.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
         }
         TabRow(selectedTabIndex = selectedTab) {
@@ -83,7 +89,8 @@ fun NotebookScreen(onOpenLesson: (String) -> Unit) {
                                 ListItem(
                                     headlineContent = { Text(LearningCatalog.find(id)?.title ?: id, fontWeight = FontWeight.SemiBold) },
                                     supportingContent = { Text("Bookmarked lesson") },
-                                    leadingContent = { Icon(Icons.Default.Bookmark, contentDescription = null, tint = MaterialTheme.colorScheme.primary) }
+                                    leadingContent = { Icon(Icons.Default.Bookmark, contentDescription = null, tint = MaterialTheme.colorScheme.primary) },
+                                    trailingContent = { IconButton(onClick = { database.removeBookmark(id); refreshKey++ }) { Icon(Icons.Default.Delete, contentDescription = "Remove bookmark") } }
                                 )
                             }
                         }
@@ -102,6 +109,33 @@ fun NotebookScreen(onOpenLesson: (String) -> Unit) {
                 }
             }
         }
+    }
+
+    if (createNoteOpen) {
+        AlertDialog(
+            onDismissRequest = { createNoteOpen = false },
+            title = { Text("Create a note") },
+            text = {
+                Column(verticalArrangement = Arrangement.spacedBy(9.dp)) {
+                    OutlinedTextField(value = draftTitle, onValueChange = { draftTitle = it }, label = { Text("Note title") }, singleLine = true)
+                    OutlinedTextField(value = draftBody, onValueChange = { draftBody = it }, label = { Text("Your note") }, minLines = 4)
+                }
+            },
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        val id = java.util.UUID.randomUUID().toString()
+                        database.saveNote(id, "general", draftTitle.trim(), draftBody.trim())
+                        draftTitle = ""
+                        draftBody = ""
+                        createNoteOpen = false
+                        refreshKey++
+                    },
+                    enabled = draftTitle.isNotBlank() && draftBody.isNotBlank()
+                ) { Text("Save note") }
+            },
+            dismissButton = { TextButton(onClick = { createNoteOpen = false }) { Text("Cancel") } }
+        )
     }
     if (pendingDelete != null) {
         AlertDialog(
