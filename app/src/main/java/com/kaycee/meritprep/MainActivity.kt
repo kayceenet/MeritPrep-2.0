@@ -56,8 +56,11 @@ private fun MeritPrepApp() {
     var launcherOpen by remember { mutableStateOf(false) }
     LaunchedEffect(currentEntry) { navigationRevision++ }
     val route = currentEntry?.destination?.route.orEmpty()
-    LaunchedEffect(route) {
-        if (route.startsWith("lesson/")) CrashDiagnostics.recordBreadcrumb("Entered $route")
+    val currentTopicId = currentEntry?.arguments?.getString("topicId")
+    LaunchedEffect(route, currentTopicId) {
+        if (route.startsWith("lesson/")) {
+            CrashDiagnostics.recordBreadcrumb("Entered lesson topicId=${currentTopicId.orEmpty()}")
+        }
     }
     val inLesson = route.startsWith("lesson/")
     val isTablet = LocalConfiguration.current.screenWidthDp >= 720
