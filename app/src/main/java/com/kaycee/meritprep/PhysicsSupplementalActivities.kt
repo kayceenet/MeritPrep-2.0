@@ -7,6 +7,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import kotlin.math.*
 
+internal val physicsSupplementalActivityTopicIds = setOf(
+    "phy-measurements", "phy-vectors", "phy-friction", "phy-machines",
+    "phy-pressure", "phy-liquids-rest", "phy-gas-laws", "phy-kinetic-theory",
+    "phy-heat-transfer", "phy-magnetic-force", "phy-ac-circuits", "phy-modern",
+    "phy-temperature", "phy-heat-quantity", "phy-change-state", "phy-vapours",
+    "phy-optical-instruments", "phy-dispersion", "phy-magnetism", "phy-conduction",
+    "phy-electronics"
+)
+
 @Composable
 fun PhysicsSupplementalLessonActivity(topicId: String) {
  when(topicId) {
