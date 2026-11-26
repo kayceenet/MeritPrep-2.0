@@ -75,6 +75,7 @@ fun CbtScreen(mode: CbtMode = CbtMode.JAMB_UTME, questionPool: List<AssessmentQu
     var currentIndex by remember { mutableIntStateOf(0) }
     var remainingSeconds by remember(mode) { mutableIntStateOf(mode.durationSeconds) }
     var started by remember { mutableStateOf(false) }
+    var paused by remember { mutableStateOf(false) }
     var submitted by remember { mutableStateOf(false) }
     var showSubmitDialog by remember { mutableStateOf(false) }
     var result by remember { mutableStateOf<CbtResult?>(null) }
@@ -152,8 +153,8 @@ fun CbtScreen(mode: CbtMode = CbtMode.JAMB_UTME, questionPool: List<AssessmentQu
         }
     }
 
-    LaunchedEffect(started, submitted, endsAtMillis) {
-        while (started && !submitted) {
+    LaunchedEffect(started, submitted, endsAtMillis, paused) {
+        while (started && !submitted && !paused) {
             val secondsLeft = ((endsAtMillis - System.currentTimeMillis()) / 1000L).toInt().coerceAtLeast(0)
             remainingSeconds = secondsLeft
             if (secondsLeft <= 0) {
@@ -294,6 +295,26 @@ fun CbtScreen(mode: CbtMode = CbtMode.JAMB_UTME, questionPool: List<AssessmentQu
             Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                 Text("Answered $answeredCount/${questions.size}", style = MaterialTheme.typography.labelMedium)
                 Text("Flagged $flaggedCount", style = MaterialTheme.typography.labelMedium)
+            }
+            Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                OutlinedButton(
+                    onClick = {
+                        if (paused) {
+                            endsAtMillis = System.currentTimeMillis() + remainingSeconds * 1000L
+                            paused = false
+                        } else {
+                            remainingSeconds = ((endsAtMillis - System.currentTimeMillis()) / 1000L).toInt().coerceAtLeast(0)
+                            paused = true
+                        }
+                    },
+                    modifier = Modifier.weight(1f)
+                ) { Text(if (paused) "Resume timer" else "Pause timer") }
+                OutlinedButton(onClick = { showSubmitDialog = true }, modifier = Modifier.weight(1f)) {
+                    Text("Finish session")
+                }
+            }
+            if (paused) {
+                Text("Timer paused. Your answers and flags remain saved on this device.", color = MaterialTheme.colorScheme.tertiary, style = MaterialTheme.typography.bodySmall)
             }
             if (mode == CbtMode.UTME_SCIENCE_COMBO) {
                 Row(Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(7.dp)) {
