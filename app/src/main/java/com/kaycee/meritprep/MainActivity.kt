@@ -858,6 +858,8 @@ private fun ProfileScreen(refreshKey: Int = 0) {
 
 @Composable
 private fun SubjectComparisonChart(metrics: List<SubjectLearningMetrics>) {
+    val accuracyColor = MaterialTheme.colorScheme.primary
+    val masteryColor = MaterialTheme.colorScheme.tertiary
     androidx.compose.foundation.Canvas(Modifier.fillMaxWidth().height(180.dp).padding(top = 8.dp, bottom = 4.dp)) {
         val groupWidth = size.width / metrics.size
         val barWidth = groupWidth * 0.24f
@@ -866,12 +868,12 @@ private fun SubjectComparisonChart(metrics: List<SubjectLearningMetrics>) {
             val firstHeight = size.height * (metric.questionAccuracy / 100f)
             val secondHeight = size.height * (metric.demonstratedMastery / 100f)
             drawRect(
-                color = androidx.compose.material3.MaterialTheme.colorScheme.primary,
+                color = accuracyColor,
                 topLeft = androidx.compose.ui.geometry.Offset(left, size.height - firstHeight),
                 size = androidx.compose.ui.geometry.Size(barWidth, firstHeight)
             )
             drawRect(
-                color = androidx.compose.material3.MaterialTheme.colorScheme.tertiary,
+                color = masteryColor,
                 topLeft = androidx.compose.ui.geometry.Offset(left + barWidth + groupWidth * 0.06f, size.height - secondHeight),
                 size = androidx.compose.ui.geometry.Size(barWidth, secondHeight)
             )
