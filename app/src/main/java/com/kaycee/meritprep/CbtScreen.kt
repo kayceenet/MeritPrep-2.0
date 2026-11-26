@@ -14,6 +14,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.platform.LocalContext
 import com.kaycee.meritprep.data.AssessmentQuestion
+import com.kaycee.meritprep.data.AssessmentEngine
 import com.kaycee.meritprep.data.CbtResult
 import com.kaycee.meritprep.data.CbtSessionEngine
 import com.kaycee.meritprep.data.MeritDatabase
@@ -32,6 +33,11 @@ enum class CbtMode(
     val durationLabel: String,
     val resultTitle: String
 ) {
+    UTME_SCIENCE_COMBO(
+        "UTME_SCIENCE_COMBO", "180-question Science UTME Combo",
+        "A fixed science combination: 60 Use of English, 40 Biology, 40 Chemistry and 40 Physics questions. All items are original MeritPrep practice, not official JAMB past questions.",
+        180, 120 * 60, "120-minute practice timer", "Science UTME combination result"
+    ),
     JAMB_UTME(
         "BIO", "Timed Biology CBT",
         "A JAMB-style practice mock built from MeritPrep's original Biology question bank.",
@@ -170,7 +176,7 @@ fun CbtScreen(mode: CbtMode = CbtMode.JAMB_UTME, questionPool: List<AssessmentQu
             Card(Modifier.fillMaxWidth()) {
                 Column(Modifier.padding(18.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                     Text("Practice session", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
-                    Text("${mode.questionCount} randomly selected questions")
+                    Text(if (mode == CbtMode.UTME_SCIENCE_COMBO) "60 Use of English + 40 Biology + 40 Chemistry + 40 Physics" else "${mode.questionCount} randomly selected questions")
                     Text(mode.durationLabel)
                     Text("Answer navigation, review flags and final explanations")
                     HorizontalDivider()
@@ -179,7 +185,7 @@ fun CbtScreen(mode: CbtMode = CbtMode.JAMB_UTME, questionPool: List<AssessmentQu
             }
             Button(
                 onClick = {
-                    val generated = CbtSessionEngine.createQuestions(questionPool, mode.questionCount)
+                    val generated = if (mode == CbtMode.UTME_SCIENCE_COMBO) questionPool.take(mode.questionCount).map { AssessmentEngine.present(it) } else CbtSessionEngine.createQuestions(questionPool, mode.questionCount)
                     val now = System.currentTimeMillis()
                     val newSessionId = UUID.randomUUID().toString()
                     database.createCbtSession(newSessionId, mode.sessionSubjectId, now, now + mode.durationSeconds * 1000L, generated)
