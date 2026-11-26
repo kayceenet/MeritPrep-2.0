@@ -106,19 +106,19 @@ private fun MeritPrepApp() {
                     composable("chemistry-practice") { ChemistryPracticeScreen() }
                     composable("physics-practice") { PhysicsPracticeScreen() }
                     composable("mathematics-practice") { MathematicsPracticeScreen() }
-                    composable("mathematics-cbt") { CbtScreen(CbtMode.MATHEMATICS_UTME, MathematicsQuestionBank.all) }
+                    composable("mathematics-cbt") { CbtScreen(CbtMode.MATHEMATICS_UTME, MathematicsQuestionBank.all, onOpenCalculator = { nav.navigate("calculators") }) }
                     composable("physics-waec-practical") { PhysicsWaecPracticalScreen() }
                     composable("physics-waec-theory") { PhysicsWaecTheoryScreen() }
-                    composable("physics-waec-objective") { CbtScreen(CbtMode.WAEC_PHYSICS_OBJECTIVE, PhysicsWaecObjectiveBank.all) }
+                    composable("physics-waec-objective") { CbtScreen(CbtMode.WAEC_PHYSICS_OBJECTIVE, PhysicsWaecObjectiveBank.all, onOpenCalculator = { nav.navigate("calculators") }) }
                     composable("chemistry-waec-theory") { ChemistryWaecTheoryScreen() }
                     composable("chemistry-waec-objective") { ChemistryWaecObjectiveScreen() }
                     composable("chemistry-qualitative") { ChemistryQualitativeGuideScreen() }
                     composable("chemistry-redox-titration") { ChemistryRedoxTitrationScreen() }
                     composable("placement") { PlacementAssessmentScreen(onOpenLesson = { nav.navigate("lesson/$it") }) }
-                    composable("cbt") { CbtScreen(CbtMode.JAMB_UTME) }
-                    composable("utme-science-combo") { CbtScreen(CbtMode.UTME_SCIENCE_COMBO, UtmeComboQuestionBank.all) }
-                    composable("waec-objective") { CbtScreen(CbtMode.WAEC_OBJECTIVE) }
-                    composable("physics-cbt") { CbtScreen(CbtMode.PHYSICS_UTME, PhysicsQuestionBank.all) }
+                    composable("cbt") { CbtScreen(CbtMode.JAMB_UTME, onOpenCalculator = { nav.navigate("calculators") }) }
+                    composable("utme-science-combo") { CbtScreen(CbtMode.UTME_SCIENCE_COMBO, UtmeComboQuestionBank.all, onOpenCalculator = { nav.navigate("calculators") }) }
+                    composable("waec-objective") { CbtScreen(CbtMode.WAEC_OBJECTIVE, onOpenCalculator = { nav.navigate("calculators") }) }
+                    composable("physics-cbt") { CbtScreen(CbtMode.PHYSICS_UTME, PhysicsQuestionBank.all, onOpenCalculator = { nav.navigate("calculators") }) }
                     composable("waec-theory") { BiologyTheoryScreen() }
                     composable("review") { RevisionScreen() }
                     composable("mistakes") { MistakeNotebookScreen() }
