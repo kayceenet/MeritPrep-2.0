@@ -837,9 +837,9 @@ object ScienceMediaCatalog {
             provider = "The Concord Consortium",
             summary = "Use a browser-based computer model to observe rapid population growth and investigate the conditions that affect population size.",
             sourceUrl = "https://learn.concord.org/resources/658/population-explosion",
-            licenceName = "Provider resource terms; review the original activity",
-            licenceUrl = "https://concord.org/terms-of-use/",
-            permittedUse = "Open the original browser activity. Do not rehost, copy or redistribute the model or its materials without checking the provider's terms.",
+            licenceName = "Resource-specific open-content terms; Concord hosted-service terms also apply",
+            licenceUrl = "https://concord.org/licensing/",
+            permittedUse = "Link to the original browser activity only. Do not embed, integrate, rehost or redistribute Concord-hosted services in MeritPrep without a separate written agreement where required. Check the individual resource licence; Concord states that hosted services may not be integrated into a commercial application without written permission.",
             beforeYouStart = "State which conditions could allow a population to increase rapidly and which environmental factors may eventually limit growth.",
             afterYouExplore = "Describe the model's population pattern and identify which real-world limiting factors are absent or simplified.",
             offlineAlternative = "Use the local MeritPrep population-sampling and growth-model activities. Record a prediction, compare model runs and explain limitations."
