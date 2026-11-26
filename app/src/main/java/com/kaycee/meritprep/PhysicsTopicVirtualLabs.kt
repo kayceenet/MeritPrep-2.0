@@ -40,6 +40,12 @@ import kotlin.math.exp
 import kotlin.math.sin
 import kotlin.math.ln
 
+internal val physicsTopicVirtualLabIds = setOf(
+    "phy-temperature", "phy-heat-quantity", "phy-change-state", "phy-vapours",
+    "phy-optical-instruments", "phy-dispersion", "phy-magnetism", "phy-conduction",
+    "phy-electronics"
+)
+
 /** Topic-specific visual laboratories for Physics syllabus areas previously shown as generic calculators. */
 @Composable
 fun PhysicsTopicVirtualLab(topicId: String) {
