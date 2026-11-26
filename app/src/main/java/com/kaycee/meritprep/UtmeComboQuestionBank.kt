@@ -10,7 +10,7 @@ import com.kaycee.meritprep.data.AssessmentQuestion
 object UtmeComboQuestionBank {
     private fun balancedByTopic(pool: List<AssessmentQuestion>, count: Int): List<AssessmentQuestion> {
         require(pool.size >= count)
-        val buckets = pool.groupBy { it.topicId }.toSortedMap().mapValues { (_, items) -> items.shuffled() }
+        val buckets = pool.groupBy { it.topicId }.toSortedMap().mapValues { (_, items) -> items.sortedBy { it.id } }
         val topicOrder = buckets.keys.toList()
         val selected = mutableListOf<AssessmentQuestion>()
         var round = 0
