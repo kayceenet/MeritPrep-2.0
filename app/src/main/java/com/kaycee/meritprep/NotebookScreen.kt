@@ -19,6 +19,7 @@ import com.kaycee.meritprep.data.MeritDatabase
 import com.kaycee.meritprep.data.MistakeNote
 import com.kaycee.meritprep.data.SavedStudyNote
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NotebookScreen(onOpenLesson: (String) -> Unit) {
     val context = LocalContext.current
