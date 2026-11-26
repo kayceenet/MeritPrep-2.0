@@ -30,13 +30,13 @@ internal fun ClassroomPillarNavigation(
                         label = {
                             Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
                                 Text(item.label, fontWeight = FontWeight.SemiBold)
-                                Text(if (item in completed) "Completed" else if (index == 0 || LessonStage.entries.take(index).all { it in completed }) "Ready to study" else "Complete earlier section first", style = MaterialTheme.typography.labelSmall)
+                                Text(if (item in completed) "Completed · available for review" else "Available to explore", style = MaterialTheme.typography.labelSmall)
                             }
                         },
                         selected = stage == item,
-                        onClick = { if (index == 0 || LessonStage.entries.take(index).all { it in completed }) onSelect(item) },
+                        onClick = { onSelect(item) },
                         badge = {
-                            Text(if (item in completed) "✓" else if (index == 0 || LessonStage.entries.take(index).all { it in completed }) "›" else "•")
+                            Text(if (item in completed) "✓" else "›")
                         },
                         modifier = Modifier.fillMaxWidth()
                     )
@@ -58,7 +58,7 @@ internal fun ClassroomPillarNavigation(
                         LessonStage.entries.chunked(3).forEach { rowItems ->
                             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(7.dp)) {
                                 rowItems.forEach { item ->
-                                    val enabled = LessonStage.entries.take(LessonStage.entries.indexOf(item)).all { it in completed }
+                                    val enabled = true
                                     Card(
                                         onClick = { if (enabled) onSelect(item) },
                                         modifier = Modifier.weight(1f),
