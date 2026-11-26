@@ -21,7 +21,7 @@ private enum class LessonLabMode(val label: String) {
 
 @Composable
 fun LessonVirtualLabWorkspace(topicId: String, subjectCode: String) {
-    var mode by remember(topicId) { mutableStateOf(LessonLabMode.BENCH) }
+    var mode by remember(topicId) { mutableStateOf(LessonLabMode.INTERACTIVE) }
     Column(Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(12.dp)) {
         Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
             Text("PRACTICAL LAB WORKSPACE", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
