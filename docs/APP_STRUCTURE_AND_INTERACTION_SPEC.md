@@ -454,13 +454,13 @@ The virtual laboratory workspace has been reorganised so that a guided investiga
 
 #### External media and virtual-lab catalogue
 
-The external catalogue now contains **128 curated resource entries mapped across all 81 Biology, Chemistry and Physics syllabus topic IDs**:
+The external catalogue now contains **139 curated resource entries mapped across all 81 Biology, Chemistry and Physics syllabus topic IDs**:
 
 - Biology: 24 topics
 - Chemistry: 18 topics
 - Physics: 39 topics
 
-Sources include PhET Interactive Simulations, LabXchange, HHMI BioInteractive, The Lab Games, K2 Physics and the Concord Consortium. Resource entries include a topic-specific summary, a prediction prompt, a post-exploration question, source attribution, licensing/usage restrictions and an offline MeritPrep alternative.
+Sources include PhET Interactive Simulations, LabXchange, HHMI BioInteractive, The Lab Games, K2 Physics and the Concord Consortium. Resource entries include a topic-specific summary, a prediction prompt, a post-exploration question, source attribution, licensing/usage restrictions and an offline MeritPrep alternative. The catalogue also contains 20 openly licensed animated GIF references from Wikimedia Commons, each with its creator, exact licence and topic-specific interpretation prompt.
 
 The catalogue deliberately links learners to the original provider pages instead of copying or embedding third-party simulations. This matters because the providers have different terms: standard PhET HTML simulations use CC BY-NC 4.0, LabXchange ordinary hosted-resource use is restricted by its Terms of Service, Concord hosted services have integration restrictions, and The Lab Games/K2 Physics retain their own content rights. The legacy PhET semiconductor activity is marked separately because its Java/CheerpJ compatibility may vary by device. External availability and device compatibility must not be represented as guaranteed.
 
