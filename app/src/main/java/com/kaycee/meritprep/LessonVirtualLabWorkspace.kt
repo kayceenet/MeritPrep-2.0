@@ -12,9 +12,10 @@ import com.kaycee.meritprep.data.PresentedQuestion
 import kotlin.random.Random
 
 private enum class LessonLabMode(val label: String) {
-    BENCH("Bench"),
+    INTERACTIVE("Interactive Lab"),
+    INVESTIGATION("Investigation"),
     CHALLENGE("Challenge"),
-    EXPLORE("Explore")
+    EXPLORE("External Labs")
 }
 
 @Composable
@@ -26,24 +27,45 @@ fun LessonVirtualLabWorkspace(topicId: String, subjectCode: String) {
             Text("Choose how you want to investigate", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
             Text("Use the bench for a guided investigation, test your understanding in a short challenge, or explore a verified external resource.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
         }
-        Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(7.dp)) {
+        Row(
+            Modifier.fillMaxWidth().horizontalScroll(androidx.compose.foundation.rememberScrollState()),
+            horizontalArrangement = Arrangement.spacedBy(7.dp)
+        ) {
             LessonLabMode.entries.forEach { item ->
                 FilterChip(
                     selected = mode == item,
                     onClick = { mode = item },
-                    label = { Text(item.label) },
-                    modifier = Modifier.weight(1f)
+                    label = { Text(item.label) }
                 )
             }
         }
         when (mode) {
-            LessonLabMode.BENCH -> {
-                Text("PREDICT → INVESTIGATE → RECORD → ANALYSE → EVALUATE", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
-                GuidedInvestigationActivity(topicId)
+            LessonLabMode.INTERACTIVE -> {
+                Text("TOPIC-MATCHED SCIENTIFIC MODELS", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
+                Text("Work directly with the structures, processes, apparatus and variables taught in this topic. These are local activities and remain available offline.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                when (subjectCode) {
+                    "BIO" -> {
+                        BiologyInteractiveLessonActivity(topicId)
+                        BiologySupplementalLessonActivity(topicId)
+                        WaecBiologyNigeriaSupplementalActivity(topicId)
+                    }
+                    "CHEM" -> {
+                        ChemistryInteractiveLessonActivity(topicId)
+                        ChemistrySupplementalLessonActivity(topicId)
+                        WaecChemistrySupplementalActivity(topicId)
+                    }
+                    "PHY" -> {
+                        PhysicsInteractiveLessonActivity(topicId)
+                        PhysicsSupplementalLessonActivity(topicId)
+                        WaecPhysicsSupplementalActivity(topicId)
+                    }
+                }
+                TopicScienceAnimation(topicId)
                 LessonPracticalDispatcher(topicId)
-                WaecBiologyNigeriaSupplementalActivity(topicId)
-                WaecPhysicsSupplementalActivity(topicId)
-                WaecChemistrySupplementalActivity(topicId)
+            }
+            LessonLabMode.INVESTIGATION -> {
+                Text("PREDICT → PLAN → RUN → RECORD → ANALYSE → EVALUATE", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
+                GuidedInvestigationActivity(topicId)
             }
             LessonLabMode.CHALLENGE -> LabChallengeRounds(topicId, subjectCode)
             LessonLabMode.EXPLORE -> {
