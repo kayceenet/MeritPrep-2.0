@@ -275,3 +275,18 @@ A topic may not be labelled complete if any applicable critical item above is FA
 - Wide layout: navigation rail at app level and fixed 268 dp classroom section sidebar.
 - Lesson toolbar exposes back navigation, calculator access and bookmarking.
 - Progression tests were updated for the six named pillars. CI on the current main commit must verify all layout, routing and compile changes before the APK is distributed.
+
+
+### Six-pillar classroom alignment follow-up — 26 November 2026
+
+- [x] Fixed classroom footer added for non-quiz pillars with Previous, Complete/Verify and Next controls.
+- [x] Applied Project completion now requires a correct response to all three scientific-reasoning checks.
+- [x] Concepts pillar now places a topic quick-check immediately after the key-equation panel.
+- [ ] Replace generic project prompts and verification with topic-specific project briefs, rubrics and evidence requirements.
+- [ ] Add progressive step-by-step worked solutions and guided hints to all topic worked examples.
+- [ ] Add per-section listen controls, pause/resume and speech-rate selection; current lesson-level TTS is not equivalent.
+- [ ] Add a proper summary/cheat-sheet with spaced-review scheduling to each topic.
+- [ ] Expand misconceptions and exam-intelligence boxes from independently reviewed syllabus-specific content.
+- [ ] Add verified, licence-checked portal cards per relevant lesson.
+- [ ] Add screenshot-based visual QA on small phones and tablets after each release candidate.
+- Latest classroom footer build passed on `a141aa9669d7444069e5184c046ee4a38ad59a56`; subsequent project verification and concept micro-check commits are pending the newest main-branch CI result.
