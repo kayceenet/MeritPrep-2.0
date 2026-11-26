@@ -1399,7 +1399,9 @@ private fun TopicConceptInlineVisual(topicId: String, sectionIndex: Int, section
         ("projectile" in heading || "motion" in heading) && topicId.startsWith("phy") -> ProjectileMotionAnimation(speed = 25f, angleDegrees = 45f)
         "gravitation" in heading && topicId.startsWith("phy") -> SatelliteOrbitAnimation()
         ("gas" in heading || "kinetic theory" in heading) && (topicId.startsWith("phy") || topicId == "chem-kinetic-gas") -> ParticleKineticAnimation(temperatureKelvin = 300f)
-        else -> if (sectionIndex == 0) TopicScienceAnimation(topicId)
+        else -> if (sectionIndex == 0) {
+            if (topicId == "bio-classification") BiologyClassificationVisual() else TopicScienceAnimation(topicId)
+        }
     }
 }
 
@@ -1407,6 +1409,7 @@ private fun TopicConceptInlineVisual(topicId: String, sectionIndex: Int, section
 private fun TopicWorkedExampleCard(topicId: String) {
     val example = when (topicId) {
         "bio-cell" -> "A cell image is 36 mm long. Its actual length is 0.18 mm. Magnification = image size ÷ actual size = 36 ÷ 0.18 = 200×."
+        "bio-classification" -> "An unknown plant has vascular tissue and produces seeds, but it has no flowers or fruits. Follow the key: vascular tissue present → seeds present → flowers/fruits absent. The best classification is a gymnosperm, such as a conifer. The decision is based on observable reproductive structures, not simply on the plant being tall or woody."
         "bio-populations" -> "A quadrat covers 0.25 m² and contains 8 plants. Density = 8 ÷ 0.25 = 32 plants m⁻². This is a sample estimate, not a complete census."
         "bio-nutrition" -> "If a plant releases 24 cm³ of oxygen in 6 minutes, its mean oxygen production rate is 24 ÷ 6 = 4 cm³ min⁻¹. Bubble counts alone are less reliable because bubble sizes vary."
         "chem-combination" -> "A sample contains 10.0 g of calcium carbonate, CaCO₃ (Mᵣ = 100.0). Amount = mass ÷ molar mass = 10.0 ÷ 100.0 = 0.100 mol."
@@ -1503,6 +1506,7 @@ private fun TopicVisualisationGallery(topicId: String) {
         when (topicId) {
             "bio-adaptation" -> AdaptationTypesCard()
             "bio-cell" -> CellDiagramCard()
+            "bio-classification" -> BiologyClassificationVisual()
             "bio-nutrition" -> PhotosynthesisFlowCard()
             "bio-respiration" -> RespirationComparisonCard()
             "bio-interactions" -> FoodChainDiagramCard()
