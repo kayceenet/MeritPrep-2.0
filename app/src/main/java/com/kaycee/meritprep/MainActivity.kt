@@ -714,6 +714,16 @@ private fun PracticeScreen() {
     }
 }
 
+private data class SubjectLearningMetrics(
+    val code: String,
+    val name: String,
+    val questionAccuracy: Int,
+    val demonstratedMastery: Int,
+    val attempts: Int,
+    val masteredTopics: Int,
+    val topicCount: Int
+)
+
 @Composable
 private fun ProfileScreen(refreshKey: Int = 0) {
     val context = LocalContext.current
@@ -724,82 +734,150 @@ private fun ProfileScreen(refreshKey: Int = 0) {
     val topicProgress = remember(refreshKey) { database.getAllTopicProgress() }
     val unresolvedMistakes = remember(refreshKey) { database.getUnresolvedMistakeCount() }
     val accuracy = if (attemptedQuestions == 0) 0 else (correctAnswers * 100) / attemptedQuestions
+    val subjectMetrics = remember(refreshKey, topicProgress) {
+        subjects.map { subject ->
+            val ids = LearningCatalog.forSubject(subject.code).filterNot { it.isSyllabusOutline }.map { it.id }.toSet()
+            val evidence = topicProgress.filter { it.topicId in ids }
+            val attempts = evidence.sumOf { it.questionsAttempted }
+            val correct = evidence.sumOf { it.questionsCorrect }
+            val mastered = evidence.count { it.demonstratedMastery }
+            SubjectLearningMetrics(
+                code = subject.code,
+                name = subject.name,
+                questionAccuracy = if (attempts == 0) 0 else correct * 100 / attempts,
+                demonstratedMastery = if (ids.isEmpty()) 0 else mastered * 100 / ids.size,
+                attempts = attempts,
+                masteredTopics = mastered,
+                topicCount = ids.size
+            )
+        }
+    }
+    var selectedSubject by remember { mutableStateOf("BIO") }
+    val selectedMetrics = subjectMetrics.firstOrNull { it.code == selectedSubject } ?: subjectMetrics.first()
+    val practicedTopics = topicProgress.filter { it.questionsAttempted > 0 }
+    val weakTopics = practicedTopics.sortedBy { it.questionsCorrect * 100 / it.questionsAttempted }.take(3)
+    val strongTopics = practicedTopics.sortedByDescending { it.questionsCorrect * 100 / it.questionsAttempted }.take(3)
 
     LazyColumn(
-        Modifier.fillMaxSize().padding(20.dp),
+        Modifier.fillMaxSize(),
+        contentPadding = PaddingValues(18.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         item {
-            Text("Learner profile", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
-            Text("Your learning activity and practice evidence are stored on this device.")
+            Text("LEARNER ANALYTICS", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
+            Text("Your learning profile", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
+            Text("Progress is calculated from recorded lessons and practice attempts on this device.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
         }
         item {
-            Card(Modifier.fillMaxWidth()) {
-                Column(Modifier.padding(18.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                    Text("Lessons completed", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                    Text(completedLessons.toString(), style = MaterialTheme.typography.headlineLarge, fontWeight = FontWeight.Bold)
-                }
+            Row(horizontalArrangement = Arrangement.spacedBy(9.dp)) {
+                DashboardMetric(completedLessons.toString(), "LESSONS", Modifier.weight(1f))
+                DashboardMetric(attemptedQuestions.toString(), "ATTEMPTS", Modifier.weight(1f))
+                DashboardMetric(unresolvedMistakes.toString(), "TO REVIEW", Modifier.weight(1f))
             }
         }
         item {
             Card(Modifier.fillMaxWidth()) {
-                Column(Modifier.padding(18.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                    Text("Mistakes to review", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                    Text(unresolvedMistakes.toString(), style = MaterialTheme.typography.headlineLarge, fontWeight = FontWeight.Bold)
-                }
-            }
-        }
-        item {
-            Card(Modifier.fillMaxWidth()) {
-                Column(Modifier.padding(18.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                    Text("Questions attempted", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                    Text(attemptedQuestions.toString(), style = MaterialTheme.typography.headlineLarge, fontWeight = FontWeight.Bold)
-                }
-            }
-        }
-        item {
-            Card(Modifier.fillMaxWidth()) {
-                Column(Modifier.padding(18.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                    Text("Practice accuracy", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                    Text("$accuracy%", style = MaterialTheme.typography.headlineLarge, fontWeight = FontWeight.Bold)
+                Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(7.dp)) {
+                    Text("Practice accuracy", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+                    Text("$accuracy%", style = MaterialTheme.typography.headlineLarge, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary)
                     LinearProgressIndicator(progress = { accuracy / 100f }, modifier = Modifier.fillMaxWidth())
-                    Text("$correctAnswers correct answers out of $attemptedQuestions attempts", style = MaterialTheme.typography.bodySmall)
+                    Text("$correctAnswers correct answers out of $attemptedQuestions attempts. This is practice accuracy, not a predicted JAMB or WAEC score.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
             }
         }
         item {
-            Text("Topic-level practice evidence", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
-            Text("Use this to identify topics that need more practice. It is not a mastery score.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
-        }
-        if (topicProgress.isEmpty()) {
-            item {
-                Text("No topic-level activity yet. Complete a lesson or answer practice questions to build your progress record.")
+            Text("Subject performance", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+            Text("Practice accuracy is compared with the share of syllabus topics where mastery evidence has been demonstrated.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            Row(Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(7.dp)) {
+                subjectMetrics.forEach { metric ->
+                    FilterChip(selected = selectedSubject == metric.code, onClick = { selectedSubject = metric.code }, label = { Text(metric.code) })
+                }
             }
+            SubjectComparisonChart(subjectMetrics)
+            Row(horizontalArrangement = Arrangement.spacedBy(14.dp), verticalAlignment = Alignment.CenterVertically) {
+                Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(5.dp)) {
+                    Surface(Modifier.size(10.dp), color = MaterialTheme.colorScheme.primary, shape = MaterialTheme.shapes.small) {}
+                    Text("Practice accuracy", style = MaterialTheme.typography.labelSmall)
+                }
+                Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(5.dp)) {
+                    Surface(Modifier.size(10.dp), color = MaterialTheme.colorScheme.tertiary, shape = MaterialTheme.shapes.small) {}
+                    Text("Mastery evidence", style = MaterialTheme.typography.labelSmall)
+                }
+            }
+            Card(Modifier.fillMaxWidth(), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.45f))) {
+                Column(Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(5.dp)) {
+                    Text(selectedMetrics.name, fontWeight = FontWeight.Bold)
+                    Text("Practice accuracy: " + selectedMetrics.questionAccuracy + "% across " + selectedMetrics.attempts + " attempts")
+                    Text("Demonstrated mastery: " + selectedMetrics.masteredTopics + "/" + selectedMetrics.topicCount + " topics (" + selectedMetrics.demonstratedMastery + "%)")
+                }
+            }
+        }
+        item {
+            Text("Strong and weak areas", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+            Text("Based on topics with at least one recorded practice attempt. These rankings will become more reliable as more questions are answered.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        }
+        if (practicedTopics.isEmpty()) {
+            item { Text("No topic-level practice evidence yet. Complete lessons and answer questions to build your diagnostics.") }
         } else {
-            items(topicProgress, key = { it.topicId }) { progress ->
-                val title = LearningCatalog.find(progress.topicId)?.title ?: progress.topicId
-                val topicAccuracy = if (progress.questionsAttempted == 0) 0
-                    else (progress.questionsCorrect * 100) / progress.questionsAttempted
+            item {
                 Card(Modifier.fillMaxWidth()) {
-                    Column(Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                        Text(title, fontWeight = FontWeight.SemiBold)
-                        Text(
-                            "${progress.questionsCorrect} correct / ${progress.questionsAttempted} attempted · ${progress.lessonsCompleted} lesson(s) completed",
-                            style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
-                        LinearProgressIndicator(progress = { topicAccuracy / 100f }, modifier = Modifier.fillMaxWidth())
-                        Text("$topicAccuracy% practice accuracy · " + if (progress.demonstratedMastery) "mastery evidence recorded" else "mastery not yet demonstrated", style = MaterialTheme.typography.labelSmall)
+                    Column(Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                        Text("Needs attention", fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.error)
+                        weakTopics.forEach { item ->
+                            val percent = item.questionsCorrect * 100 / item.questionsAttempted
+                            Text((LearningCatalog.find(item.topicId)?.title ?: item.topicId) + " · " + percent + "%")
+                        }
+                    }
+                }
+            }
+            item {
+                Card(Modifier.fillMaxWidth()) {
+                    Column(Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                        Text("Current strengths", fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary)
+                        strongTopics.forEach { item ->
+                            val percent = item.questionsCorrect * 100 / item.questionsAttempted
+                            Text((LearningCatalog.find(item.topicId)?.title ?: item.topicId) + " · " + percent + "%")
+                        }
                     }
                 }
             }
         }
         item {
-            Text(
-                "Accuracy is based only on recorded practice attempts. It is not an examination score or a prediction of JAMB/WAEC performance.",
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
+            Card(Modifier.fillMaxWidth(), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)) {
+                Column(Modifier.padding(15.dp), verticalArrangement = Arrangement.spacedBy(5.dp)) {
+                    Text("University course readiness", fontWeight = FontWeight.Bold)
+                    Text("No admission-cutoff prediction is shown yet. A reliable comparison requires a chosen university, course, current UTME subject combination and verified admission data for the relevant year.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                }
+            }
+        }
+        item {
+            Text("A topic is counted as mastered only when the app's mastery evidence policy is met. Opening a lesson or getting one question correct does not count as mastery.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        }
+    }
+}
+
+@Composable
+private fun SubjectComparisonChart(metrics: List<SubjectLearningMetrics>) {
+    androidx.compose.foundation.Canvas(Modifier.fillMaxWidth().height(180.dp).padding(top = 8.dp, bottom = 4.dp)) {
+        val groupWidth = size.width / metrics.size
+        val barWidth = groupWidth * 0.24f
+        metrics.forEachIndexed { index, metric ->
+            val left = index * groupWidth + groupWidth * 0.22f
+            val firstHeight = size.height * (metric.questionAccuracy / 100f)
+            val secondHeight = size.height * (metric.demonstratedMastery / 100f)
+            drawRect(
+                color = androidx.compose.material3.MaterialTheme.colorScheme.primary,
+                topLeft = androidx.compose.ui.geometry.Offset(left, size.height - firstHeight),
+                size = androidx.compose.ui.geometry.Size(barWidth, firstHeight)
+            )
+            drawRect(
+                color = androidx.compose.material3.MaterialTheme.colorScheme.tertiary,
+                topLeft = androidx.compose.ui.geometry.Offset(left + barWidth + groupWidth * 0.06f, size.height - secondHeight),
+                size = androidx.compose.ui.geometry.Size(barWidth, secondHeight)
             )
         }
+    }
+    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly) {
+        metrics.forEach { Text(it.code, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant) }
     }
 }
