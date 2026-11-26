@@ -416,6 +416,7 @@ The following source changes have been committed to the Android application:
 - Lesson pillars are now directly accessible from phone and tablet navigation. Completion indicators remain visible, but learners can inspect and revisit later pillars without completing every earlier pillar first.
 - Completed pillars remain available for revision. Completion records are still stored separately from navigation access.
 - Project verification remains a requirement for verifying the applied-project outcome. The mastery quiz still requires the configured pass result before the lesson can be marked complete.
+- Pillar changes reset the scroll position to the new pillar's heading so learners do not land midway through unrelated content.
 - The lesson quiz now offers question-set sizes based on the available topic bank, including an **All** option that uses the full available topic bank. The default remains a short five-question practice set when the topic bank supports it; smaller banks default to their available size. The 80% target remains a configurable pedagogical default rather than a limit on practice.
 - A quick lesson-note editor is available from the classroom top bar and saves to the existing on-device notebook database.
 - Lesson narration speed choices now include 0.6x, 0.8x, 1.0x, 1.2x and 1.5x.
