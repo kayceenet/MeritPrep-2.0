@@ -1915,6 +1915,37 @@ object ScienceMediaCatalog {
             beforeYouStart = "Predict how sand, silt and clay proportions affect drainage and water retention.",
             afterYouExplore = "Use the soil texture triangle and model evidence to explain infiltration, plant-available water and erosion; state the model limitations.",
             offlineAlternative = "Use MeritPrep's soil-water-retention activity and plan a supervised jar test with local soil samples."
+        ScienceMediaResource(
+            id = "bio-tree-of-life-tlg",
+            title = "Tree of Life classification game",
+            subjectCode = BIOLOGY,
+            topicId = "bio-classification",
+            mediaType = ScienceMediaType.INTERACTIVE_SIMULATION,
+            provider = "The Lab Games",
+            summary = "Practise grouping organisms and interpreting evolutionary relationships through a tree-of-life activity.",
+            sourceUrl = "https://thelabgames.org/games/topic/tree-of-life/",
+            licenceName = "Copyright © Timothy Jackson; free access on The Lab Games website",
+            licenceUrl = "https://thelabgames.org/schools/terms",
+            permittedUse = "Open the original activity on The Lab Games. The site is free to use without an account, but its simulations, art and text remain copyrighted. MeritPrep links out only; do not copy, embed, download, rehost or redistribute the content without permission.",
+            beforeYouStart = "Predict how organisms should be grouped when they share more diagnostic characteristics.",
+            afterYouExplore = "Explain how a branching tree represents relationships and distinguish classification by shared traits from classification by superficial resemblance.",
+            offlineAlternative = "Use MeritPrep's classification activity and construct a dichotomous key from observable features."
+        ),
+        ScienceMediaResource(
+            id = "bio-water-quality-ecology-factors-tlg",
+            title = "Water quality and ecological factors lab",
+            subjectCode = BIOLOGY,
+            topicId = "bio-ecology-factors",
+            mediaType = ScienceMediaType.VIRTUAL_LAB,
+            provider = "The Lab Games",
+            summary = "Investigate dissolved oxygen, nutrient runoff, stream organisms and water-quality indicators to connect abiotic factors with ecosystem health.",
+            sourceUrl = "https://thelabgames.org/earth-science/water-quality-lab/",
+            licenceName = "Copyright © Timothy Jackson; free access on The Lab Games website",
+            licenceUrl = "https://thelabgames.org/schools/terms",
+            permittedUse = "Open the original activity on The Lab Games. The site is free to use without an account, but its simulations, art and text remain copyrighted. MeritPrep links out only; do not copy, embed, download, rehost or redistribute the content without permission.",
+            beforeYouStart = "Predict how temperature and nutrient runoff can affect dissolved oxygen and the organisms found in a stream.",
+            afterYouExplore = "Interpret dissolved-oxygen and indicator-organism evidence, and explain why a single measurement cannot describe the entire ecosystem.",
+            offlineAlternative = "Use MeritPrep's environmental-gradient investigation and design a safe field survey with repeated measurements."
         )
     )
 
