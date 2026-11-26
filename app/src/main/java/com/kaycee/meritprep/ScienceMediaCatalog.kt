@@ -1212,54 +1212,9 @@ object ScienceMediaCatalog {
             afterYouExplore = "Explain dynamic equilibrium as equal forward and reverse rates in a closed system.",
             offlineAlternative = "Use MeritPrep's equilibrium activity and apply Le Chatelier's principle to a Haber-process scenario."
         ),
-        ScienceMediaResource(
-            id = "chem-molecule-shapes-phet",
-            title = "Molecule shapes: bonding pairs and molecular geometry",
-            subjectCode = CHEMISTRY,
-            topicId = "chem-atomic-bonding",
-            mediaType = ScienceMediaType.INTERACTIVE_SIMULATION,
-            provider = "PhET Interactive Simulations",
-            summary = "Build molecular shapes and explore how electron-pair repulsion determines molecular geometry.",
-            sourceUrl = "https://phet.colorado.edu/en/simulations/molecule-shapes",
-            licenceName = "CC BY-NC 4.0 for standard HTML simulations; PhET-iO/Studio separately licensed",
-            licenceUrl = "https://phet.colorado.edu/en/licensing/",
-            permittedUse = "Link to the original PhET page. Do not download, embed, rehost, package, modify or redistribute without checking the applicable licence. Standard HTML simulations are CC BY-NC 4.0; PhET-iO/Studio presets are separately licensed. If MeritPrep is paid, subscription-based, ad-supported or otherwise used commercially, obtain a commercial licence before incorporating the simulation into the product.",
-            beforeYouStart = "Predict the shape of a molecule from the number of bonding and lone pairs around its central atom.",
-            afterYouExplore = "Connect electron-domain geometry to molecular shape and bond angle.",
-            offlineAlternative = "Use MeritPrep's molecular geometry cards and draw Lewis structures before predicting shapes."
-        ),
-        ScienceMediaResource(
-            id = "chem-reactants-products-phet",
-            title = "Reactants, products and leftovers: limiting reactants",
-            subjectCode = CHEMISTRY,
-            topicId = "chem-combination",
-            mediaType = ScienceMediaType.INTERACTIVE_SIMULATION,
-            provider = "PhET Interactive Simulations",
-            summary = "Build particle-level reactions and compare reactant quantities to identify the limiting reactant and excess reagent.",
-            sourceUrl = "https://phet.colorado.edu/en/simulations/reactants-products-and-leftovers",
-            licenceName = "CC BY-NC 4.0 for standard HTML simulations; PhET-iO/Studio separately licensed",
-            licenceUrl = "https://phet.colorado.edu/en/licensing/",
-            permittedUse = "Link to the original PhET page. Do not download, embed, rehost, package, modify or redistribute without checking the applicable licence. Standard HTML simulations are CC BY-NC 4.0; PhET-iO/Studio presets are separately licensed. If MeritPrep is paid, subscription-based, ad-supported or otherwise used commercially, obtain a commercial licence before incorporating the simulation into the product.",
-            beforeYouStart = "Predict which reactant will be used up first when the starting quantities are changed.",
-            afterYouExplore = "Relate particle ratios to balanced equations, mole ratios and theoretical product yield.",
-            offlineAlternative = "Use MeritPrep's stoichiometry worked examples and solve a limiting-reactant problem from a balanced equation."
-        ),
-        ScienceMediaResource(
-            id = "chem-reactions-rates-phet",
-            title = "Reactions and rates: collision theory",
-            subjectCode = CHEMISTRY,
-            topicId = "chem-rates",
-            mediaType = ScienceMediaType.INTERACTIVE_SIMULATION,
-            provider = "PhET Interactive Simulations",
-            summary = "Observe particles reacting and investigate how concentration, temperature and other conditions affect reaction rate.",
-            sourceUrl = "https://phet.colorado.edu/en/simulations/reactions-and-rates",
-            licenceName = "CC BY-NC 4.0 for standard HTML simulations; PhET-iO/Studio separately licensed",
-            licenceUrl = "https://phet.colorado.edu/en/licensing/",
-            permittedUse = "Link to the original PhET page. Do not download, embed, rehost, package, modify or redistribute without checking the applicable licence. Standard HTML simulations are CC BY-NC 4.0; PhET-iO/Studio presets are separately licensed. If MeritPrep is paid, subscription-based, ad-supported or otherwise used commercially, obtain a commercial licence before incorporating the simulation into the product.",
-            beforeYouStart = "Predict how a higher concentration changes the frequency of successful collisions.",
-            afterYouExplore = "Explain reaction rate using collision frequency, activation energy and successful collisions.",
-            offlineAlternative = "Use MeritPrep's reaction-rate model and compare one-variable-at-a-time predictions."
-        ),
+
+
+
         ScienceMediaResource(
             id = "chem-acid-base-solutions-phet",
             title = "Acid–base solutions: ions and pH",
