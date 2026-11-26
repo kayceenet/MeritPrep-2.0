@@ -186,7 +186,7 @@ fun CbtScreen(mode: CbtMode = CbtMode.JAMB_UTME, questionPool: List<AssessmentQu
             }
             Button(
                 onClick = {
-                    val generated = if (mode == CbtMode.UTME_SCIENCE_COMBO) questionPool.take(mode.questionCount).map { AssessmentEngine.present(it) } else CbtSessionEngine.createQuestions(questionPool, mode.questionCount)
+                    val generated = if (mode == CbtMode.UTME_SCIENCE_COMBO) listOf("eng", "bio", "chem", "phy").flatMap { prefix -> questionPool.filter { it.topicId.startsWith(prefix) }.shuffled() }.take(mode.questionCount).map { AssessmentEngine.present(it) } else CbtSessionEngine.createQuestions(questionPool, mode.questionCount)
                     val now = System.currentTimeMillis()
                     val newSessionId = UUID.randomUUID().toString()
                     database.createCbtSession(newSessionId, mode.sessionSubjectId, now, now + mode.durationSeconds * 1000L, generated)
