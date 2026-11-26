@@ -2273,9 +2273,9 @@ object ScienceMediaCatalog {
         ),
         ScienceMediaResource(
             id = "bio-characteristics-life-lucidstem",
-            title = "Characteristics of life: eight interactive simulations",
+            title = "Foundations of life and cell biology: eight interactive simulations",
             subjectCode = BIOLOGY,
-            topicId = "bio-living",
+            topicId = "bio-cell",
             mediaType = ScienceMediaType.INTERACTIVE_SIMULATION,
             provider = "TheLucidSTEM",
             summary = "Test living and non-living objects against MRS GREN, then explore cells, species, dichotomous keys and organism groups using interactive 2D and 3D models.",
