@@ -1,12 +1,14 @@
 package com.kaycee.meritprep
 
 import android.os.Bundle
+import android.content.Intent
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
@@ -47,12 +49,20 @@ class MainActivity : ComponentActivity() {
 @OptIn(androidx.compose.material3.ExperimentalMaterial3Api::class)
 @Composable
 private fun MeritPrepApp() {
+    val context = LocalContext.current
+    var crashReport by remember { mutableStateOf(CrashDiagnostics.readReport(context)) }
     val nav = rememberNavController()
     val currentEntry = nav.currentBackStackEntryAsState().value
     var navigationRevision by remember { mutableIntStateOf(0) }
     var launcherOpen by remember { mutableStateOf(false) }
     LaunchedEffect(currentEntry) { navigationRevision++ }
     val route = currentEntry?.destination?.route.orEmpty()
+    val currentTopicId = currentEntry?.arguments?.getString("topicId")
+    LaunchedEffect(route, currentTopicId) {
+        if (route.startsWith("lesson/")) {
+            CrashDiagnostics.recordBreadcrumb("Entered lesson topicId=${currentTopicId.orEmpty()}")
+        }
+    }
     val inLesson = route.startsWith("lesson/")
     val isTablet = LocalConfiguration.current.screenWidthDp >= 720
     MeritPrepTheme {
@@ -144,6 +154,48 @@ private fun MeritPrepApp() {
                     }
                 )
             }
+        }
+        crashReport?.let { report ->
+            AlertDialog(
+                onDismissRequest = { crashReport = null },
+                title = { Text("A previous session crashed") },
+                text = {
+                    Column {
+                        Text("MeritPrep saved the crash details on this device. Share the report so we can identify the exact failure.")
+                        Spacer(Modifier.height(12.dp))
+                        Text(
+                            report,
+                            modifier = Modifier.heightIn(max = 240.dp).verticalScroll(rememberScrollState()),
+                            style = MaterialTheme.typography.bodySmall
+                        )
+                    }
+                },
+                confirmButton = {
+                    TextButton(onClick = {
+                        try {
+                            val send = Intent(Intent.ACTION_SEND).apply {
+                                type = "text/plain"
+                                putExtra(Intent.EXTRA_SUBJECT, "MeritPrep crash report")
+                                putExtra(Intent.EXTRA_TEXT, report)
+                                putExtra(Intent.EXTRA_STREAM, CrashDiagnostics.reportUri(context))
+                                addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                            }
+                            context.startActivity(Intent.createChooser(send, "Share crash report"))
+                        } catch (_: Exception) {
+                            // The report remains visible and can still be copied from this dialog.
+                        }
+                    }) { Text("Share report") }
+                },
+                dismissButton = {
+                    Row {
+                        TextButton(onClick = {
+                            CrashDiagnostics.clearReport(context)
+                            crashReport = null
+                        }) { Text("Clear") }
+                        TextButton(onClick = { crashReport = null }) { Text("Later") }
+                    }
+                }
+            )
         }
     }
 }

@@ -29,6 +29,13 @@ class ScientificNotationTest {
     }
 
     @Test
+    fun formatsBracedPowersAndMultiDigitSubscriptsWithoutRegexFailure() {
+        assertEquals("x¹² + 10⁻³", ScientificNotation.format("x^{12} + 10^{-3}"))
+        assertEquals("H₁₂O", ScientificNotation.format("H_{12}O"))
+        assertEquals("x¹² + H₁₂O", ScientificNotation.annotated("x^{12} + H_{12}O").text)
+    }
+
+    @Test
     fun splitsDisplayLatexFromSurroundingLessonProse() {
         val segments = parseScientificContent("The force is defined by\n\\[F = ma\\]\nwhere m is mass.")
         assertEquals(3, segments.size)
