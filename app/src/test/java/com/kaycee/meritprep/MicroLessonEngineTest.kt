@@ -97,19 +97,14 @@ class MicroLessonEngineTest {
     @Test
     fun classificationStageEvidenceRequiresEveryIdeaAndBothResponses() {
         val checks = MicroLessonEngine.checks("bio-classification", LessonStage.CONCEPT)
-        val root = org.json.JSONObject()
-        val saved = org.json.JSONObject()
-        checks.forEachIndexed { index, check ->
-            saved.put(check.id, org.json.JSONObject()
-                .put("firstPassed", true)
-                .put("transferPassed", index < checks.lastIndex))
+        val partial = checks.associateIndexed { index, check ->
+            check.id to MicroLessonCheckEvidence(firstPassed = true, transferPassed = index < checks.lastIndex)
         }
-        root.put(LessonStage.CONCEPT.name, saved)
-        assertFalse(MicroLessonEngine.hasCompleteEvidence("bio-classification", LessonStage.CONCEPT, root.toString()))
-        checks.forEach { check ->
-            saved.put(check.id, org.json.JSONObject().put("firstPassed", true).put("transferPassed", true))
+        assertFalse(MicroLessonEngine.hasCompleteEvidence("bio-classification", LessonStage.CONCEPT, partial))
+        val complete = checks.associate { check ->
+            check.id to MicroLessonCheckEvidence(firstPassed = true, transferPassed = true)
         }
-        assertTrue(MicroLessonEngine.hasCompleteEvidence("bio-classification", LessonStage.CONCEPT, root.toString()))
+        assertTrue(MicroLessonEngine.hasCompleteEvidence("bio-classification", LessonStage.CONCEPT, complete))
     }
 
     @Test
