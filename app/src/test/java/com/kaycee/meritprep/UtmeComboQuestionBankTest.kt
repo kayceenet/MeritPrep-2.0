@@ -22,6 +22,12 @@ class UtmeComboQuestionBankTest {
     }
 
     @Test
+    fun cbtModeUsesOneHundredEightyQuestionsAndTwoHourPracticeWindow() {
+        assertEquals(180, CbtMode.UTME_SCIENCE_COMBO.questionCount)
+        assertEquals(120 * 60, CbtMode.UTME_SCIENCE_COMBO.durationSeconds)
+    }
+
+    @Test
     fun scienceCombinationUsesEverySubjectInTheExpectedOrder() {
         assertTrue(UtmeComboQuestionBank.all.take(60).all { it.topicId.startsWith("eng") })
         assertTrue(UtmeComboQuestionBank.all.drop(60).take(40).all { it.topicId.startsWith("bio") })
