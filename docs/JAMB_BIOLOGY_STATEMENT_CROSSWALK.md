@@ -66,3 +66,19 @@ The JAMB A2 source row above is decomposed below into stable **MeritPrep teachin
 | `bio-animal-groups` | Major vertebrate classes and broad vertebrate/invertebrate distinction. | Diagnostic-feature checks and animal-key practical. |
 
 All six ideas have a dedicated check in Concepts, Examples and Context. Each check requires an initial response and a fresh transfer response. The linked practical uses explicit specimen clues and a sequential paired-choice key.
+
+## Adaptation micro-lesson — internal atomic teaching map
+
+The JAMB A3 adaptation syllabus area is decomposed into the following MeritPrep internal teaching-idea IDs. These are traceability keys, not official JAMB statement numbers. Exact verbatim wording and page-level mapping must still be completed in the source audit.
+
+| Internal idea ID | JAMB syllabus scope represented | App evidence |
+|---|---|---|
+| `bio-adaptation-definition` | Inherited adaptation, natural selection and distinction from individual adjustment. | Concept, example and context checks. |
+| `bio-structural-adaptation` | Structural adaptations in plants and animals. | Checks, habitat explorer and natural-selection context. |
+| `bio-physiological-adaptation` | Internal functional adaptations including water and salt balance. | Checks and worked environmental examples. |
+| `bio-behavioural-adaptation` | Behavioural strategies including migration, hibernation and aestivation. | Checks and seasonal-survival examples. |
+| `bio-adaptive-colouration` | Camouflage, warning colouration and mimicry. | Checks, visual and population-selection simulation. |
+| `bio-social-insect-castes` | Social behaviour and division of labour in termites and bees. | Checks and caste-role teaching visual. |
+| `bio-adaptation-functions` | Adaptations for feeding, defence, mate attraction, thermoregulation and water conservation. | Checks, examples and adaptation field-guide project. |
+
+Each idea has a separate check in Concepts, Examples and Context. Every check requires an initial answer and a fresh transfer answer.
