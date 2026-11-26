@@ -891,6 +891,11 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
         }
 
         val lessonBodyScroll = rememberScrollState()
+        LaunchedEffect(stage) {
+            // Every pillar starts at its own heading rather than inheriting the
+            // previous pillar's scroll offset.
+            lessonBodyScroll.scrollTo(0)
+        }
         BoxWithConstraints(Modifier.weight(1f).fillMaxWidth()) {
             val isTablet = maxWidth >= 720.dp
             val lessonContent: @Composable (Modifier) -> Unit = { contentModifier ->
