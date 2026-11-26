@@ -290,3 +290,16 @@ A topic may not be labelled complete if any applicable critical item above is FA
 - [ ] Add verified, licence-checked portal cards per relevant lesson.
 - [ ] Add screenshot-based visual QA on small phones and tablets after each release candidate.
 - Latest classroom footer build passed on `a141aa9669d7444069e5184c046ee4a38ad59a56`; subsequent project verification and concept micro-check commits are pending the newest main-branch CI result.
+
+
+### Home and notebook experience — 26 November 2026
+
+- [x] Subject discovery changed to a two-column gradient tile grid.
+- [x] Due active-recall banner added to the home dashboard.
+- [x] Daily study-session plan card added with lesson, practice and revision actions.
+- [x] Most recently studied unfinished topic is now the resume target.
+- [x] Active classroom pillar and completed-pillar state are persisted locally.
+- [x] Unified notebook provides searchable saved notes, bookmarked lessons and outstanding mistakes, with confirmed note deletion.
+- [x] Light/dark theme palette updated to deep teal, slate blue and warm neutrals.
+- [ ] Run screenshot-based visual review on representative phone sizes and tablet layouts; source/build inspection is not a substitute for rendered UI QA.
+- [ ] Confirm latest main-branch workflow builds and uploads an APK after the notebook, resume and theme changes.
