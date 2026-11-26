@@ -312,25 +312,33 @@ fun CbtScreen(mode: CbtMode = CbtMode.JAMB_UTME, questionPool: List<AssessmentQu
                 }
             }
             Text("Question navigator", style = MaterialTheme.typography.labelLarge, fontWeight = FontWeight.SemiBold)
-            Row(Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-                questions.forEachIndexed { index, item ->
-                    val isCurrent = index == currentIndex
-                    val isAnswered = answers.containsKey(item.questionId)
-                    val isFlagged = flags[item.questionId] == true
-                    FilledTonalButton(
-                        onClick = { currentIndex = index },
-                        modifier = Modifier.size(42.dp),
-                        contentPadding = PaddingValues(0.dp),
-                        colors = ButtonDefaults.filledTonalButtonColors(
-                            containerColor = when {
-                                isCurrent -> MaterialTheme.colorScheme.primary
-                                isFlagged -> MaterialTheme.colorScheme.tertiaryContainer
-                                isAnswered -> MaterialTheme.colorScheme.secondaryContainer
-                                else -> MaterialTheme.colorScheme.surfaceVariant
-                            },
-                            contentColor = if (isCurrent) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSurface
-                        )
-                    ) { Text(if (isFlagged) "${index + 1}⚑" else "${index + 1}") }
+            Column(verticalArrangement = Arrangement.spacedBy(5.dp)) {
+                questions.chunked(10).forEach { rowQuestions ->
+                    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(5.dp)) {
+                        rowQuestions.forEach { item ->
+                            val index = questions.indexOf(item)
+                            val isCurrent = index == currentIndex
+                            val isAnswered = answers.containsKey(item.questionId)
+                            val isFlagged = flags[item.questionId] == true
+                            FilledTonalButton(
+                                onClick = { currentIndex = index },
+                                modifier = Modifier.weight(1f).height(38.dp),
+                                contentPadding = PaddingValues(0.dp),
+                                colors = ButtonDefaults.filledTonalButtonColors(
+                                    containerColor = when {
+                                        isCurrent -> MaterialTheme.colorScheme.primary
+                                        isFlagged -> MaterialTheme.colorScheme.tertiaryContainer
+                                        isAnswered -> MaterialTheme.colorScheme.secondaryContainer
+                                        else -> MaterialTheme.colorScheme.surfaceVariant
+                                    },
+                                    contentColor = if (isCurrent) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSurface
+                                )
+                            ) {
+                                Text(if (isFlagged) "${index + 1}⚑" else (index + 1).toString(), style = MaterialTheme.typography.labelSmall)
+                            }
+                        }
+                        repeat(10 - rowQuestions.size) { Spacer(Modifier.weight(1f)) }
+                    }
                 }
             }
             Card(Modifier.fillMaxWidth()) {
