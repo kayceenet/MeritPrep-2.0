@@ -721,7 +721,15 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
     var exerciseChecked by remember(topicId) { mutableStateOf(false) }
     var exerciseComplete by remember(topicId) { mutableStateOf(false) }
     var projectChecksPassed by remember(topicId) { mutableStateOf(false) }
-    var stage by remember(topicId) { mutableStateOf(LessonStage.CONCEPT) }
+    var stage by remember(topicId) {
+        mutableStateOf(
+            runCatching {
+                LessonStage.valueOf(
+                    JSONObject(database.getNoteBody("lesson-pillar-progress-" + topicId) ?: "{}").optString("activeStage")
+                )
+            }.getOrDefault(LessonStage.CONCEPT)
+        )
+    }
     LaunchedEffect(topicId) { database.recordTopicOpened(topicId) }
     var speechReady by remember(topicId) { mutableStateOf(false) }
     var speechEngine by remember(topicId) { mutableStateOf<TextToSpeech?>(null) }
@@ -762,6 +770,16 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
                     runCatching { LessonStage.valueOf(saved.optString(index)) }.getOrNull()?.let { add(it) }
                 }
             }
+        )
+    }
+    LaunchedEffect(topicId, stage, completedStages) {
+        val saved = JSONArray()
+        stages.filter { it in completedStages }.forEach { saved.put(it.name) }
+        database.saveNote(
+            progressNoteId,
+            topicId,
+            topic.title + " classroom progress",
+            JSONObject().put("completedStages", saved).put("activeStage", stage.name).toString()
         )
     }
     fun markStageComplete(target: LessonStage) {
