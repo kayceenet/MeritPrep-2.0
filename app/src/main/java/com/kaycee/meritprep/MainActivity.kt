@@ -72,7 +72,7 @@ private fun MeritPrepApp() {
                             Triple("Materials", "home", Icons.Default.Home),
                             Triple("Syllabus", "learn", Icons.Default.MenuBook),
                             Triple("Exam Lab", "practice", Icons.Default.Quiz),
-                            Triple("Notebook", "mistakes", Icons.Default.Bookmarks),
+                            Triple("Notebook", "notebook", Icons.Default.Bookmarks),
                             Triple("Profile", "profile", Icons.Default.Person)
                         ).forEach { (label, destination, icon) ->
                             NavigationRailItem(
@@ -121,6 +121,7 @@ private fun MeritPrepApp() {
                     composable("waec-theory") { BiologyTheoryScreen() }
                     composable("review") { RevisionScreen() }
                     composable("mistakes") { MistakeNotebookScreen() }
+                    composable("notebook") { NotebookScreen(onOpenLesson = { nav.navigate("lesson/$it") }) }
                     composable("study-plan") { StudyPlanScreen(onOpenLesson = { nav.navigate("lesson/$it") }, onOpenPractice = { nav.navigate("practice") }, onOpenRevision = { nav.navigate("review") }) }
                     composable("glossary") { BiologyGlossaryScreen(onOpenLesson = { nav.navigate("lesson/$it") }) }
                     composable("bookmarks") { BookmarksScreen(onOpenLesson = { nav.navigate("lesson/$it") }) }
@@ -196,7 +197,7 @@ private fun QuickStudyLauncherSheet(onChoose: (String) -> Unit) {
         Triple("Timed CBT", "A focused examination session", "cbt"),
         Triple("Study plan", "Organise your weekly learning", "study-plan"),
         Triple("Recall cards", "Review concepts due for retrieval", "review"),
-        Triple("Notebook", "Saved notes and mistakes", "mistakes"),
+        Triple("Notebook", "Saved notes, lessons and mistakes", "notebook"),
         Triple("WAEC Biology theory", "Structured answer practice", "waec-theory"),
         Triple("SS3 placement", "Check your starting level", "placement"),
         Triple("Virtual laboratories", "Explore practical investigations", "labs"),
