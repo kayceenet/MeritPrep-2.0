@@ -70,3 +70,29 @@ The interactive practical now keeps specimen identities hidden behind neutral sp
 The animal key first separates vertebrates from invertebrates, then follows the appropriate diagnostic branch. The full decision path is displayed and saved with the learner's practical record. An incorrect choice cannot produce an identification; each step must match the recorded specimen feature.
 
 The concept visual now presents the taxonomic hierarchy, plant divisions, major invertebrate phyla, vertebrate classes and the five-kingdom teaching model. The project brief now requires learners to construct a key for the major invertebrate phyla as well as the vertebrate classes.
+
+
+## Run acceptance checklist and verification evidence
+
+**App-source commit:** `e32ab01fa1230cca568fdda7fba53da3b895cb08`  
+**Latest documentation commit at verification:** `4470f33ed2973c0820d65e0319619002f8bf559b`  
+**CI:** [Android CI run 45864437243](https://github.com/kayceenet/MeritPrep-2.0/actions/runs/45864437243)
+
+| Acceptance item | Status | Evidence / outstanding work |
+|---|---|---|
+| Correct repository and working branch | PASS | `kayceenet/MeritPrep-2.0`, `docs/exam-syllabus-orchestration`; original Merit repository untouched |
+| Mandatory academic framework and Biology crosswalks consulted | PASS | AGENTS, orchestration, academic standard, release checklist, source register, JAMB and WAEC Biology crosswalks |
+| JAMB/WAEC primary-source verification | PARTIAL | JAMB IBASS Biology source register checked; WAEC mapping remains provisional pending direct current WAEC PDF |
+| Lesson content and mapped teaching ideas | IMPLEMENTED / REVIEW PENDING | Expanded explanations and six internal teaching-idea IDs; exact verbatim source wording/page references and independent review remain outstanding |
+| Concepts, Examples and Context checks | PASS (implementation) | Six ideas × three stages; each check requires initial and fresh transfer evidence; unit tests cover map and evidence completeness |
+| Visual teaching | PASS (implementation) | Hierarchy, plant divisions, invertebrate phyla, vertebrate classes and five-kingdom comparison visuals |
+| Interactive practical equivalent | PASS (implementation) | Hidden specimen labels, branching plant/animal keys, eight invertebrate phyla, five vertebrate classes, decision-path record and model tests |
+| Project and rubric | PASS (implementation) | Field-guide deliverables and weighted rubric included |
+| JAMB/WAEC exam assessment completeness | FAIL / IN DEVELOPMENT | Existing question bank remains; complete statement-by-statement objective, theory and practical mapping and marking guidance still required |
+| Independent subject review | NOT DONE | Qualified Biology reviewer sign-off required |
+| Android unit tests | PASS | CI run 45864437243 — `testDebugUnitTest` succeeded |
+| Android debug APK build | PASS | CI run 45864437243 — `assembleDebug` succeeded |
+| APK artifact | PASS | Artifact `MeritPrep-debug-apk`, SHA-256 `69430f896648ea708b261c824827741babb35fbc4505326ecfd6591b2c5c7e39` |
+| Physical-device, accessibility and performance QA | NOT RUN | Must be tested on supported Android devices, including small-screen layout and offline persistence |
+
+**Release decision:** the classification micro-lesson is an implemented reference slice, not an academically verified or release-complete syllabus unit. No whole-course completion claim is made.
