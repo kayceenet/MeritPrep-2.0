@@ -1956,7 +1956,7 @@ object ScienceMediaCatalog {
             title = "Periodic table explorer and element trends",
             subjectCode = CHEMISTRY,
             topicId = "chem-metals",
-            mediaType = ScienceMediaType.VIRTUAL_LAB,
+            mediaType = ScienceMediaType.INTERACTIVE_SIMULATION,
             provider = "The Lab Games",
             summary = "Explore all 118 elements, compare atomic structure and investigate periodic trends and element families.",
             sourceUrl = "https://thelabgames.org/physical-science/periodic-table-explorer",
