@@ -1,6 +1,6 @@
 # Mandatory MeritPrep 2.0 instructions
 
-At the start of EVERY run, read this file, `docs/ACADEMIC_LESSON_MASTERY_STANDARD.md`, `docs/LESSON_RELEASE_CHECKLIST.md` and `docs/OFFICIAL_SYLLABUS_SOURCE_REGISTER.md`. Before editing a subject, read its current JAMB and WAEC crosswalk documents in `docs/`. These are mandatory acceptance requirements, not optional guidance.
+At the start of EVERY run, read this file, `docs/EXAM_SYLLABUS_KNOWLEDGE_BASE_ORCHESTRATION.md`, `docs/ACADEMIC_LESSON_MASTERY_STANDARD.md`, `docs/LESSON_RELEASE_CHECKLIST.md` and `docs/OFFICIAL_SYLLABUS_SOURCE_REGISTER.md`. Before editing a subject, read its current JAMB and WAEC crosswalk documents in `docs/`. These are mandatory acceptance requirements, not optional guidance.
 
 ## Scope
 - Work only in `kayceenet/MeritPrep-2.0`; never modify the separate original `kayceenet/Merit` repository.
