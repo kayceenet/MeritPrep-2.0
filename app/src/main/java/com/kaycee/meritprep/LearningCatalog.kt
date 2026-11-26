@@ -720,6 +720,7 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
     var exerciseSelections by remember(topicId) { mutableStateOf<Map<String, Int>>(emptyMap()) }
     var exerciseChecked by remember(topicId) { mutableStateOf(false) }
     var exerciseComplete by remember(topicId) { mutableStateOf(false) }
+    var projectChecksPassed by remember(topicId) { mutableStateOf(false) }
     var stage by remember(topicId) { mutableStateOf(LessonStage.CONCEPT) }
     var speechReady by remember(topicId) { mutableStateOf(false) }
     var speechEngine by remember(topicId) { mutableStateOf<TextToSpeech?>(null) }
@@ -939,15 +940,7 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
                             if (noteSaved) Text("Notes saved locally.", color = MaterialTheme.colorScheme.primary, style = MaterialTheme.typography.bodySmall)
                         }
                     }
-                    Card(Modifier.fillMaxWidth()) {
-                        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                            Text("Project quality check", fontWeight = FontWeight.Bold)
-                            Text("• Is the scientific principle stated accurately and in your own words?")
-                            Text("• Are variables, symbols and units correct?")
-                            Text("• Does the evidence support the conclusion?")
-                            Text("• Have you stated an assumption, limitation or application?")
-                        }
-                    }
+                    TopicMasteryProjectVerification(topicId, onVerified = { projectChecksPassed = it })
                 }
 
                 LessonStage.QUIZ -> {
@@ -1058,13 +1051,14 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
                     ) { Text("← Prev", maxLines = 1) }
                     Button(
                         onClick = { markStageComplete(stage) },
-                        enabled = stage !in completedStages,
+                        enabled = stage !in completedStages && (stage != LessonStage.PROJECT || projectChecksPassed),
                         modifier = Modifier.weight(1.35f).heightIn(min = 48.dp),
                         contentPadding = PaddingValues(horizontal = 8.dp)
                     ) {
                         Text(
                             when {
                                 stage in completedStages -> "✓ Verified"
+                                stage == LessonStage.PROJECT && !projectChecksPassed -> "Pass project checks"
                                 stage == LessonStage.PROJECT -> "Verify project"
                                 else -> "Complete section"
                             },
@@ -1082,6 +1076,46 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
             }
         } else {
             Spacer(Modifier.windowInsetsBottomHeight(androidx.compose.foundation.layout.WindowInsets.navigationBars))
+        }
+    }
+}
+
+
+@Composable
+private fun TopicMasteryProjectVerification(topicId: String, onVerified: (Boolean) -> Unit) {
+    val prompts = listOf(
+        "My explanation states the governing scientific principle accurately.",
+        "My method identifies variables, units and relevant controls.",
+        "My conclusion refers to evidence and acknowledges a limitation."
+    )
+    var checks by remember(topicId) { mutableStateOf(setOf<Int>()) }
+    var showModel by remember(topicId) { mutableStateOf(false) }
+    val passed = checks.size == prompts.size
+    LaunchedEffect(passed) { onVerified(passed) }
+    Card(Modifier.fillMaxWidth()) {
+        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(9.dp)) {
+            Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+                Text("Project verification", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+                Text(checks.size.toString() + "/3", color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
+            }
+            Text("Review your project against each scientific standard. All three checks are required before this pillar can be completed.")
+            prompts.forEachIndexed { index, prompt ->
+                Row(verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
+                    Checkbox(checked = index in checks, onCheckedChange = { checked ->
+                        checks = if (checked) checks + index else checks - index
+                    })
+                    Text(prompt, modifier = Modifier.weight(1f), style = MaterialTheme.typography.bodyMedium)
+                }
+            }
+            if (passed) {
+                Text("Project verification passed.", color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.SemiBold)
+                OutlinedButton(onClick = { showModel = !showModel }, modifier = Modifier.fillMaxWidth()) {
+                    Text(if (showModel) "Hide model structure" else "Show model structure")
+                }
+                if (showModel) {
+                    Text("A strong " + topicId + " project should present a clear question, explain the governing principle, define variables and units, show evidence, justify its conclusion and identify a limitation.")
+                }
+            }
         }
     }
 }
