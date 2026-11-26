@@ -19,7 +19,6 @@ class ClassificationKeyModelTest {
             val specimen = ClassificationKeyModel.specimen(id)
             assertNotNull(specimen)
             assertEquals(result, specimen!!.result)
-            assertEquals(specimen.decisions.size, specimen.decisions.distinct().size.coerceAtLeast(1).let { specimen.decisions.size })
             assertTrue(specimen.decisions.isNotEmpty())
             assertTrue(ClassificationKeyModel.isComplete(id, specimen.decisions.size))
             assertFalse(ClassificationKeyModel.isComplete(id, specimen.decisions.size - 1))
