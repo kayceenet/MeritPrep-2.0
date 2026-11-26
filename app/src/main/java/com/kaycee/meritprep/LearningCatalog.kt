@@ -718,7 +718,10 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
     val topic = LearningCatalog.find(topicId)
     val context = LocalContext.current
     val database = remember(context) { MeritDatabase(context) }
-    var completed by remember(topicId) { mutableStateOf(runCatching { database.isLessonCompleted(topicId) }.getOrDefault(false)) }
+    val savedMicroLessonEvidence = remember(topicId) { runCatching { database.getNoteBody("micro-lesson-evidence-" + topicId) }.getOrNull() }
+    val requiredMicroLessonStages = listOf(LessonStage.CONCEPT, LessonStage.EXAMPLES, LessonStage.APPLICATIONS)
+    val savedCompletionHasCurrentEvidence = requiredMicroLessonStages.all { MicroLessonEngine.hasCompleteEvidence(topicId, it, savedMicroLessonEvidence) }
+    var completed by remember(topicId) { mutableStateOf(runCatching { database.isLessonCompleted(topicId) && savedCompletionHasCurrentEvidence }.getOrDefault(false)) }
     var bookmarked by remember(topicId) { mutableStateOf(runCatching { database.isBookmarked(topicId) }.getOrDefault(false)) }
     val noteId = "lesson-note-" + topicId
     var noteText by remember(topicId) { mutableStateOf(runCatching { database.getNoteBody(noteId).orEmpty() }.getOrDefault("")) }
@@ -795,7 +798,9 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
             buildSet {
                 val saved = restoredPillars.optJSONArray("completedStages")
                 if (completed) addAll(LessonStage.entries) else if (saved != null) for (index in 0 until saved.length()) {
-                    runCatching { LessonStage.valueOf(saved.optString(index)) }.getOrNull()?.let { add(it) }
+                    runCatching { LessonStage.valueOf(saved.optString(index)) }.getOrNull()?.let { restoredStage ->
+                        if (MicroLessonEngine.hasCompleteEvidence(topicId, restoredStage, savedMicroLessonEvidence)) add(restoredStage)
+                    }
                 }
             }
         )
