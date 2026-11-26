@@ -128,7 +128,7 @@ object ScienceMediaCatalog {
             id = "chem-atom-phet",
             title = "Build an atom",
             subjectCode = CHEMISTRY,
-            topicId = "chem-atomic-bonding",
+            topicId = "chem-atomic",
             mediaType = ScienceMediaType.INTERACTIVE_SIMULATION,
             provider = "PhET Interactive Simulations",
             summary = "Add or remove protons, neutrons and electrons to investigate atomic number, mass number, charge and isotopes.",
@@ -795,6 +795,54 @@ object ScienceMediaCatalog {
             beforeYouStart = "Predict how every point on a wavefront can act as a source of secondary wavelets.",
             afterYouExplore = "Explain how the envelope of secondary wavelets forms the new wavefront.",
             offlineAlternative = "Use MeritPrep's wavefront animation and lesson diagram."
+        )
+        ScienceMediaResource(
+            id = "bio-population-dynamics-hhmi",
+            title = "Population dynamics: exponential and logistic growth",
+            subjectCode = BIOLOGY,
+            topicId = "bio-populations",
+            mediaType = ScienceMediaType.INTERACTIVE_SIMULATION,
+            provider = "HHMI BioInteractive",
+            summary = "Explore exponential and logistic population models, change starting population and carrying capacity, and interpret the resulting growth curves.",
+            sourceUrl = "https://www.biointeractive.org/classroom-resources/population-dynamics",
+            licenceName = "CC BY-NC-SA 4.0; confirm current resource terms before reuse",
+            licenceUrl = "https://www.biointeractive.org/faq",
+            permittedUse = "Launch the original HHMI resource. Do not copy, embed, download or redistribute its interactive or worksheets unless the current resource terms explicitly permit that use. Preserve required attribution and share-alike conditions for any permitted reuse.",
+            beforeYouStart = "Predict how a population will change when resources are unlimited, then predict what changes when carrying capacity is introduced.",
+            afterYouExplore = "Compare exponential and logistic curves. Explain what carrying capacity means and identify assumptions that may not hold in a real Nigerian ecosystem.",
+            offlineAlternative = "Use MeritPrep's population-sampling activity, ecological-succession card and guided investigation notebook. Sketch and label exponential and logistic curves."
+        ),
+        ScienceMediaResource(
+            id = "bio-population-survey-methods-hhmi",
+            title = "Survey methods: estimating wildlife populations",
+            subjectCode = BIOLOGY,
+            topicId = "bio-populations",
+            mediaType = ScienceMediaType.INTERACTIVE_SIMULATION,
+            provider = "HHMI BioInteractive",
+            summary = "Explore how scientists estimate large animal populations, compare survey methods and use sampling evidence to guide conservation decisions.",
+            sourceUrl = "https://www.biointeractive.org/classroom-resources/survey-methods",
+            licenceName = "Resource-specific HHMI terms; review the original resource details",
+            licenceUrl = "https://www.biointeractive.org/faq",
+            permittedUse = "Launch the original HHMI resource. Check its current Terms of Use before any copying, embedding, downloading or redistribution; external linking does not grant those rights.",
+            beforeYouStart = "Explain why a complete census may be impractical for a large, mobile wildlife population. Predict when sampling may be useful.",
+            afterYouExplore = "Compare the strengths and limitations of survey methods. Explain how sampling design and detection affect a population estimate.",
+            offlineAlternative = "Use MeritPrep's editable quadrat-sampling activity. Compare random quadrat counts, mean density and a habitat-wide estimate, then discuss sampling error."
+        ),
+        ScienceMediaResource(
+            id = "bio-population-explosion-concord",
+            title = "Population explosion: model population growth",
+            subjectCode = BIOLOGY,
+            topicId = "bio-populations",
+            mediaType = ScienceMediaType.INTERACTIVE_SIMULATION,
+            provider = "The Concord Consortium",
+            summary = "Use a browser-based computer model to observe rapid population growth and investigate the conditions that affect population size.",
+            sourceUrl = "https://learn.concord.org/resources/658/population-explosion",
+            licenceName = "Provider resource terms; review the original activity",
+            licenceUrl = "https://concord.org/terms-of-use/",
+            permittedUse = "Open the original browser activity. Do not rehost, copy or redistribute the model or its materials without checking the provider's terms.",
+            beforeYouStart = "State which conditions could allow a population to increase rapidly and which environmental factors may eventually limit growth.",
+            afterYouExplore = "Describe the model's population pattern and identify which real-world limiting factors are absent or simplified.",
+            offlineAlternative = "Use the local MeritPrep population-sampling and growth-model activities. Record a prediction, compare model runs and explain limitations."
         )
     )
 
