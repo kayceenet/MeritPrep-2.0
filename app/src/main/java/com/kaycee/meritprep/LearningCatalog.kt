@@ -846,7 +846,7 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
                 }
                 IconButton(onClick = onOpenCalculators) { Icon(Icons.Default.Calculate, contentDescription = "Scientific calculator") }
                 IconButton(onClick = { noteEditorOpen = true }) {
-                    Icon(Icons.Default.NoteAdd, contentDescription = "Save or edit lesson note")
+                    Icon(Icons.Default.Edit, contentDescription = "Save or edit lesson note")
                 }
                 IconButton(onClick = {
                     if (bookmarked) database.removeBookmark(topic.id) else database.bookmark(topic.id, "lesson")
