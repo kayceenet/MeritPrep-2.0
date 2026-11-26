@@ -1094,7 +1094,6 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
 
                 LessonStage.LAB -> {
                     LessonVirtualLabWorkspace(topicId, topic.subjectCode) { labEvidencePassed = it }
-                    if (topicId == "bio-classification") BiologyClassificationKeyPractical { labEvidencePassed = it }
                 }
 
                 LessonStage.PROJECT -> {
