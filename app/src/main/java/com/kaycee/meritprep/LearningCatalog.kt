@@ -810,9 +810,9 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
     }
     fun markStageComplete(target: LessonStage) {
         val requiredChecksPassed = when (target) {
-            LessonStage.CONCEPT -> topic?.id != "bio-cell" || conceptChecksPassed
-            LessonStage.EXAMPLES -> topic?.id != "bio-cell" || exampleChecksPassed
-            LessonStage.APPLICATIONS -> topic?.id != "bio-cell" || contextChecksPassed
+            LessonStage.CONCEPT -> MicroLessonEngine.checks(topicId, LessonStage.CONCEPT).isEmpty() || conceptChecksPassed
+            LessonStage.EXAMPLES -> MicroLessonEngine.checks(topicId, LessonStage.EXAMPLES).isEmpty() || exampleChecksPassed
+            LessonStage.APPLICATIONS -> MicroLessonEngine.checks(topicId, LessonStage.APPLICATIONS).isEmpty() || contextChecksPassed
             else -> true
         }
         if (!requiredChecksPassed) return
@@ -1047,9 +1047,22 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
 
                 LessonStage.LAB -> {
                     LessonVirtualLabWorkspace(topicId, topic.subjectCode)
+                    if (topicId == "bio-classification") BiologyClassificationKeyPractical()
                 }
 
                 LessonStage.PROJECT -> {
+                    if (topic.id == "bio-classification") {
+                        Card(Modifier.fillMaxWidth(), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer)) {
+                            Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                                Text("BIOLOGY PROJECT · BUILD A LOCAL ORGANISM IDENTIFICATION GUIDE", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
+                                Text("Create a field guide that helps a JSS student classify six familiar organisms using observable evidence, not guesswork.", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+                                Text("Include: (1) a dichotomous key for moss, fern, pine and hibiscus; (2) a second key separating fish, amphibians, reptiles, birds and mammals; (3) a comparison of the five traditional kingdoms using cell type, organisation, nutrition and cell-wall features; (4) three correctly formatted binomial names; (5) a note explaining why viruses are acellular and are not placed in the five kingdoms; and (6) a short explanation of why classification can change when new evidence becomes available.")
+                                Text("Assessment rubric", fontWeight = FontWeight.Bold)
+                                Text("Correct diagnostic choices and key logic (30%); scientific accuracy of kingdom and group comparisons (30%); correct naming and terminology (15%); clear evidence-based explanations (15%); readable layout and source acknowledgement (10%).")
+                                Text("Extension: explain why the five-kingdom scheme is useful for introductory study but is not the only classification framework used in modern biology.", style = MaterialTheme.typography.bodySmall)
+                            }
+                        }
+                    }
                     if (topic.id == "bio-cell") {
                         Card(Modifier.fillMaxWidth(), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer)) {
                             Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -1216,9 +1229,9 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
                     Button(
                         onClick = { markStageComplete(stage) },
                         enabled = stage !in completedStages && (stage != LessonStage.PROJECT || projectChecksPassed) && when (stage) {
-                            LessonStage.CONCEPT -> topicId != "bio-cell" || conceptChecksPassed
-                            LessonStage.EXAMPLES -> topicId != "bio-cell" || exampleChecksPassed
-                            LessonStage.APPLICATIONS -> topicId != "bio-cell" || contextChecksPassed
+                            LessonStage.CONCEPT -> MicroLessonEngine.checks(topicId, LessonStage.CONCEPT).isEmpty() || conceptChecksPassed
+                            LessonStage.EXAMPLES -> MicroLessonEngine.checks(topicId, LessonStage.EXAMPLES).isEmpty() || exampleChecksPassed
+                            LessonStage.APPLICATIONS -> MicroLessonEngine.checks(topicId, LessonStage.APPLICATIONS).isEmpty() || contextChecksPassed
                             else -> true
                         },
                         modifier = Modifier.weight(1.35f).heightIn(min = 48.dp),
