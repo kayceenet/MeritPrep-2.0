@@ -798,9 +798,8 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
         val firstIncomplete = stages.firstOrNull { it !in completedStages } ?: LessonStage.QUIZ
         if (!isLessonStageUnlocked(stage, completedStages)) stage = firstIncomplete
     }
-    var quizQuestionCount by remember(topicId) { mutableIntStateOf(5) }
-    val practiceQuestions = remember(topicId, quizQuestionCount) {
-        val bank = when (topic.subjectCode) {
+    val topicQuestionBank = remember(topicId) {
+        when (topic.subjectCode) {
             "BIO" -> BiologyQuestionBank.all.filter { it.topicId == topicId }
             "CHEM" -> ChemistryQuestionBank.forTopic(topicId)
             "PHY" -> PhysicsQuestionBank.forTopic(topicId)
@@ -808,7 +807,15 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
             "ENG" -> EnglishQuestionBank.all.filter { it.topicId == topicId }
             else -> emptyList()
         }
-        val shuffled = bank.shuffled()
+    }
+    val quizQuestionOptions = remember(topicId, topicQuestionBank) {
+        (listOf(5, 10, 20).filter { it <= topicQuestionBank.size } + listOf(topicQuestionBank.size.coerceAtLeast(1), 0)).distinct()
+    }
+    var quizQuestionCount by remember(topicId) {
+        mutableIntStateOf(topicQuestionBank.size.coerceAtMost(5).coerceAtLeast(1))
+    }
+    val practiceQuestions = remember(topicId, quizQuestionCount, topicQuestionBank) {
+        val shuffled = topicQuestionBank.shuffled()
         val chosen = if (quizQuestionCount <= 0) shuffled else shuffled.take(quizQuestionCount)
         val source = if (chosen.isNotEmpty()) chosen else listOf(
             com.kaycee.meritprep.data.AssessmentQuestion(
@@ -1024,7 +1031,7 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
                             Text("Topic assessment", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
                             Text("MeritPrep original practice • " + practiceQuestions.size + " questions • aim for at least 80%", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-                                listOf(5, 10, 20, 0).forEach { count ->
+                                quizQuestionOptions.forEach { count ->
                                     FilterChip(
                                         selected = quizQuestionCount == count,
                                         onClick = {
