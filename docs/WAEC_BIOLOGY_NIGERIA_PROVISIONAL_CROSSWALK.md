@@ -74,3 +74,19 @@ The provisional Section A Topic 1 ("Concept of Living") row above is decomposed 
 | `bio-animal-groups` | Major animal groups and vertebrate classes. | Animal group checks and interactive key. |
 
 This does not establish complete WAEC practical or examination coverage. The interactive key is a MeritPrep practice activity, not an official WAEC practical specimen list or marking scheme.
+
+## Adaptation micro-lesson — internal atomic teaching map
+
+The provisional WAEC Nigeria Section A adaptation topic and relevant Section C evolution/adaptation area are decomposed into MeritPrep teaching-idea IDs below. These are not official WAEC statement numbers. Mapping remains provisional until the current direct WAEC Nigeria syllabus PDF is checked.
+
+| Internal idea ID | WAEC working scope represented | App evidence |
+|---|---|---|
+| `bio-adaptation-definition` | Adaptation and survival in a particular environment. | Three-stage concept checks. |
+| `bio-structural-adaptation` | Structural adaptation in plants and animals. | Checks, examples and visuals. |
+| `bio-physiological-adaptation` | Physiological processes that improve survival. | Checks and applied examples. |
+| `bio-behavioural-adaptation` | Behavioural adaptation and seasonal survival strategies. | Checks and hibernation/aestivation explanations. |
+| `bio-adaptive-colouration` | Adaptive colouration, camouflage and mimicry. | Checks, visual and selection simulation. |
+| `bio-social-insect-castes` | Social behaviour and division of labour in termites and bees. | Checks and caste-role visual. |
+| `bio-adaptation-functions` | Feeding, defence, mate attraction, temperature regulation and water balance. | Checks, worked examples and project. |
+
+The natural-selection simulator is a MeritPrep teaching model. It is not an official WAEC practical, marking scheme or source of empirical survival rates.
