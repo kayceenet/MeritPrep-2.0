@@ -73,7 +73,7 @@ internal object CellMicroscopyModel {
 }
 
 @Composable
-internal fun BiologyCellMicroscopyVirtualLab() {
+internal fun BiologyCellMicroscopyVirtualLab(onEvidenceChanged: (Boolean) -> Unit = {}) {
     val context = LocalContext.current
     val database = remember(context) { MeritDatabase(context) }
     val noteId = "micro-lab-session-bio-cell"
