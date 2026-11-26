@@ -132,3 +132,19 @@ The Explore pillar links to 47 curated external resources from PhET Interactive 
 ## Responsive classroom shell
 
 The lesson workspace now uses a six-pillar navigation component with two presentations: a compact, auto-collapsing mode selector on phones and a fixed 268 dp section sidebar on wide layouts. Pillar selection resets the shared lesson-body scroll position. The app shell also has a compact docked bottom navigation on phones, a navigation rail on wide screens, and a quick-study launcher sheet for high-frequency destinations. The classroom header keeps back navigation, scientific calculators and lesson bookmarking available without competing with the lesson content.
+
+
+## Detailed classroom architecture alignment — 26 November 2026
+
+The implementation now follows the six-pillar classroom model:
+
+1. **Concepts & Theory** — first-principles introduction, learning outcomes, sequenced topic explanations, section-matched visuals, topic equation panel and an immediate-feedback quick concept check.
+2. **Worked Examples** — original worked example and topic-specific simulation/visualisation activities.
+3. **Applications & Notes** — original scenario decision or saved application reflection, plus relevant verified external learning media.
+4. **Virtual Lab** — guided investigation notebook, topic-specific apparatus schematic, practical dispatcher and subject/WAEC supplemental practical activities.
+5. **Applied Project** — learner project workspace and a three-question graded scientific-reasoning verification. Completion is gated until all three checks are answered correctly.
+6. **Mastery Quiz** — a fresh five-question topic set where available, instant explanation after submission and an 80% completion threshold.
+
+The classroom shell retains a fixed title/progress header, responsive tablet sidebar and phone mode selector that collapses on scroll. A fixed bottom navigation row now provides Previous, Complete/Verify and Next controls on non-quiz pillars. The quiz retains its own assessment/lesson-completion controls.
+
+This is a structural alignment milestone, not a claim that every syllabus topic already has all six pillars at the same academic depth. Topic-specific project briefs, full misconception banks, examiner guidance, verified portal coverage, per-topic audio controls, adaptive spaced review and deeper project rubrics remain staged work. The generic project verification checks scientific reasoning process and must not be represented as a topic-specific assessment of mastery.
