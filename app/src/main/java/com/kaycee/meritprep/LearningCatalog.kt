@@ -731,6 +731,7 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
         )
     }
     LaunchedEffect(topicId) { database.recordTopicOpened(topicId) }
+    var speechRate by remember(topicId) { mutableFloatStateOf(1f) }
     var speechReady by remember(topicId) { mutableStateOf(false) }
     var speechEngine by remember(topicId) { mutableStateOf<TextToSpeech?>(null) }
 
@@ -867,6 +868,16 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
                             ScientificContent(topic.introduction, style = MaterialTheme.typography.bodyLarge)
                         }
                     }
+                    Row(Modifier.fillMaxWidth(), verticalAlignment = androidx.compose.ui.Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                        Text("Audio speed", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                        listOf(0.7f, 1f, 1.3f).forEach { rate ->
+                            FilterChip(
+                                selected = speechRate == rate,
+                                onClick = { speechRate = rate; speechEngine?.setSpeechRate(rate) },
+                                label = { Text(rate.toString() + "×") }
+                            )
+                        }
+                    }
                     Card(Modifier.fillMaxWidth()) {
                         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(9.dp)) {
                             Text("What you will learn", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
@@ -886,6 +897,15 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
                                 Text((index + 1).toString().padStart(2, '0'), style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
                                 Text(section.first, style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
                                 ScientificContent(section.second, style = MaterialTheme.typography.bodyLarge)
+                                Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
+                                    TextButton(
+                                        onClick = {
+                                            speechEngine?.setSpeechRate(speechRate)
+                                            speechEngine?.speak(section.first + ". " + section.second, TextToSpeech.QUEUE_FLUSH, null, "section-" + topic.id + "-" + index)
+                                        },
+                                        enabled = speechReady
+                                    ) { Text("Listen to this section") }
+                                }
                                 if (index == 0) { TopicEquationPanel(topicId); TopicConceptQuickCheck(topic) }
                                 TopicConceptInlineVisual(topicId, index, section.first)
                             }
@@ -901,6 +921,7 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
                                     topic.sections.forEach { append(it.first).append(". ").append(it.second).append(". ") }
                                 }
                                 speechEngine?.language = Locale.UK
+                                speechEngine?.setSpeechRate(speechRate)
                                 speechEngine?.speak(narration, TextToSpeech.QUEUE_FLUSH, null, "lesson-" + topic.id)
                             },
                             enabled = speechReady,
