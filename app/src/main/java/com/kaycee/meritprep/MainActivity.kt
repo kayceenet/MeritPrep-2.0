@@ -116,6 +116,7 @@ private fun MeritPrepApp() {
                     composable("chemistry-redox-titration") { ChemistryRedoxTitrationScreen() }
                     composable("placement") { PlacementAssessmentScreen(onOpenLesson = { nav.navigate("lesson/$it") }) }
                     composable("cbt") { CbtScreen(CbtMode.JAMB_UTME) }
+                    composable("utme-science-combo") { CbtScreen(CbtMode.UTME_SCIENCE_COMBO, UtmeComboQuestionBank.all) }
                     composable("waec-objective") { CbtScreen(CbtMode.WAEC_OBJECTIVE) }
                     composable("physics-cbt") { CbtScreen(CbtMode.PHYSICS_UTME, PhysicsQuestionBank.all) }
                     composable("waec-theory") { BiologyTheoryScreen() }
@@ -195,6 +196,7 @@ private fun StudioDockedBottomBar(
 private fun QuickStudyLauncherSheet(onChoose: (String) -> Unit) {
     val tools = listOf(
         Triple("Timed CBT", "A focused examination session", "cbt"),
+        Triple("180-Q Science UTME Combo", "60 English + 40 each Biology, Chemistry and Physics", "utme-science-combo"),
         Triple("Study plan", "Organise your weekly learning", "study-plan"),
         Triple("Recall cards", "Review concepts due for retrieval", "review"),
         Triple("Notebook", "Saved notes, lessons and mistakes", "notebook"),
