@@ -72,6 +72,8 @@ private fun LabChallengeRounds(topicId: String, subjectCode: String) {
             "BIO" -> BiologyQuestionBank.all.filter { it.topicId == topicId }
             "CHEM" -> ChemistryQuestionBank.all.filter { it.topicId == topicId }
             "PHY" -> PhysicsQuestionBank.all.filter { it.topicId == topicId }
+            "MATH" -> MathematicsQuestionBank.all.filter { it.topicId == topicId }
+            "ENG" -> EnglishQuestionBank.all.filter { it.topicId == topicId }
             else -> emptyList()
         }
         val fallback = if (topic == null) emptyList() else listOf(
@@ -96,7 +98,7 @@ private fun LabChallengeRounds(topicId: String, subjectCode: String) {
 
     Card(Modifier.fillMaxWidth()) {
         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
-            Text("THREE-ROUND KNOWLEDGE CHALLENGE", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
+            Text(if (questions.size == 3) "THREE-ROUND KNOWLEDGE CHALLENGE" else "TOPIC KNOWLEDGE CHECK", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
             if (current >= questions.size) {
                 Text("Challenge complete", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
                 Text("You answered " + score + " of " + questions.size + " rounds correctly.")
