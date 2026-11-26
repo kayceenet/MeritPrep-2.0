@@ -80,7 +80,7 @@ internal fun ClassroomPillarNavigation(
                 AnimatedVisibility(visible = compact) {
                     Row(Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(7.dp)) {
                         LessonStage.entries.forEach { item ->
-                            val enabled = LessonStage.entries.take(LessonStage.entries.indexOf(item)).all { it in completed }
+                            val enabled = true
                             FilterChip(
                                 selected = stage == item,
                                 onClick = { if (enabled) onSelect(item) },
