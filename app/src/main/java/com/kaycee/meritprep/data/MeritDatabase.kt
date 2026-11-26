@@ -320,9 +320,9 @@ class MeritDatabase(context: Context) : SQLiteOpenHelper(context, "meritprep_loc
     fun getStudyNotes(search: String = ""): List<SavedStudyNote> {
         val query = search.trim()
         val selection = if (query.isBlank()) {
-            "WHERE note_id NOT LIKE 'lesson-pillar-progress-%'"
+            "WHERE note_id NOT LIKE 'lesson-pillar-progress-%' AND note_id NOT LIKE 'micro-lesson-evidence-%'"
         } else {
-            "WHERE note_id NOT LIKE 'lesson-pillar-progress-%' AND (title LIKE ? OR body LIKE ? OR topic_id LIKE ?)"
+            "WHERE note_id NOT LIKE 'lesson-pillar-progress-%' AND note_id NOT LIKE 'micro-lesson-evidence-%' AND (title LIKE ? OR body LIKE ? OR topic_id LIKE ?)"
         }
         val args = if (query.isBlank()) null else arrayOf("%$query%", "%$query%", "%$query%")
         return readableDatabase.rawQuery(
