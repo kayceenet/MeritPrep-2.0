@@ -144,7 +144,7 @@ class MicroLessonEngineTest {
 
     @Test
     fun unrelatedTopicsDoNotReceiveUnmappedChecks() {
-        assertTrue(MicroLessonEngine.checks("bio-adaptation", LessonStage.CONCEPT).isEmpty())
+        assertTrue(MicroLessonEngine.checks("bio-unmapped", LessonStage.CONCEPT).isEmpty())
         assertTrue(MicroLessonEngine.checks("bio-cell", LessonStage.LAB).isEmpty())
     }
 }
