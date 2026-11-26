@@ -113,8 +113,8 @@ class MicroLessonEngineTest {
     }
 
     @Test
-    fun unrelatedTopicsDoNotReceiveCellSpecificChecks() {
-        assertTrue(MicroLessonEngine.checks("bio-classification", LessonStage.CONCEPT).isEmpty())
+    fun unrelatedTopicsDoNotReceiveUnmappedChecks() {
+        assertTrue(MicroLessonEngine.checks("bio-adaptation", LessonStage.CONCEPT).isEmpty())
         assertTrue(MicroLessonEngine.checks("bio-cell", LessonStage.LAB).isEmpty())
     }
 }
