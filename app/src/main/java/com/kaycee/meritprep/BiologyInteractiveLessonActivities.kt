@@ -25,6 +25,10 @@ fun BiologyInteractiveLessonActivity(topicId: String) {
         "bio-growth" -> CellDivisionInquiryActivity()
         "bio-heredity" -> MendelianCrossInquiryActivity()
         "bio-evolution-theory" -> NaturalSelectionInquiryActivity()
+        "bio-populations" -> Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+            BiologyPopulationSamplingCard()
+            EcologicalSuccessionCard()
+        }
     }
 }
 
