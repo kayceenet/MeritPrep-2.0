@@ -2122,6 +2122,21 @@ object ScienceMediaCatalog {
             beforeYouStart = "Predict how adding donor or acceptor impurities changes the charge carriers in a semiconductor.",
             afterYouExplore = "Explain how the depletion region and energy-level structure produce rectifying behaviour in a p–n junction.",
             offlineAlternative = "Use MeritPrep's local semiconductor diode I–V laboratory and explain the difference between forward and reverse bias."
+        ScienceMediaResource(
+            id = "phy-thermal-expansion-k2",
+            title = "Thermal expansion of solids virtual lab",
+            subjectCode = PHYSICS,
+            topicId = "phy-thermal-expansion",
+            mediaType = ScienceMediaType.VIRTUAL_LAB,
+            provider = "K2 Physics",
+            summary = "Run a 3D practical with heated water, soda-glass and laboratory-glass tubes, capillary readings, a ball-and-ring demonstration and a bimetallic strip.",
+            sourceUrl = "https://k2physics.com/thermal-expansion",
+            licenceName = "Copyright © K2 Physics; free access, no reuse permission stated",
+            licenceUrl = "https://k2physics.com/",
+            permittedUse = "Open the original K2 Physics laboratory. The provider states that its labs are free without sign-up or payment, but this does not grant redistribution rights. MeritPrep links out only; do not copy, embed, download or rehost the simulation without permission.",
+            beforeYouStart = "Predict why the liquid level may fall before it rises when a glass tube containing water is placed in hot water.",
+            afterYouExplore = "Compare soda glass and borosilicate glass, explain the initial fall and relate expansion to railway gaps and bimetallic strips.",
+            offlineAlternative = "Use MeritPrep's thermal-expansion investigation and calculate ΔL = αLΔT for two materials."
         )
     )
 
