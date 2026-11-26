@@ -49,6 +49,7 @@ fun LessonVirtualLabWorkspace(topicId: String, subjectCode: String) {
                         BiologyInteractiveLessonActivity(topicId)
                         BiologySupplementalLessonActivity(topicId)
                         if (topicId == "bio-cell") BiologyCellMicroscopyVirtualLab()
+                        if (topicId == "bio-adaptation") BiologyAdaptationVirtualLab()
                         WaecBiologyNigeriaSupplementalActivity(topicId)
                     }
                     "CHEM" -> {
