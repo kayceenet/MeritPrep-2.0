@@ -150,6 +150,14 @@ private fun ElectrolysisConceptInquiry() {
 }
 
 @Composable
+internal val physicsInteractiveActivityTopicIds = setOf(
+    "phy-current-electricity", "phy-electrical-power", "phy-cells", "phy-capacitors",
+    "phy-waves", "phy-sound-propagation", "phy-sound-characteristics", "phy-light-energy",
+    "phy-motion", "phy-gravity", "phy-elasticity", "phy-thermal-expansion",
+    "phy-equilibrium", "phy-work-energy", "phy-reflection", "phy-refraction",
+    "phy-electrostatics", "phy-induction"
+)
+
 fun PhysicsInteractiveLessonActivity(topicId: String) {
     when (topicId) {
         "phy-current-electricity", "phy-electrical-power", "phy-cells" -> ResistorCircuitInquiry()
