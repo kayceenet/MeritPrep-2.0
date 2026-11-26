@@ -12,8 +12,8 @@ class ChemistryInteractiveActivityCoverageTest {
     }
 
     @Test
-    fun atomicStructureAndAtomicBondingAreKeptAsDistinctTopics() {
-        assertTrue("chem-atomic" in chemistryInteractiveActivityTopicIds)
+    fun atomicStructureAndBondingTopicIncludesBothTheAtomBuilderAndBondingExplorer() {
+        assertTrue("chem-atomic-bonding" in chemistryInteractiveActivityTopicIds)
         assertTrue("chem-atomic-bonding" in chemistrySupplementalActivityTopicIds)
     }
 }
