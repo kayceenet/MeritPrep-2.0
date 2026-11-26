@@ -482,6 +482,16 @@ fun GuidedInvestigationActivity(topicId: String) {
         saved = true
     }
     val y = profile.response(x).coerceAtLeast(0f)
+    val analysedPoints = remember(readings.size, readings.toList()) {
+        readings.groupBy { it.first }
+            .map { (setting, repeats) ->
+                BiologyExperimentPoint(setting.toDouble(), repeats.map { it.second.toDouble() }.average(), repeats.size)
+            }
+            .sortedBy { it.independentValue }
+    }
+    val observedTrend = remember(analysedPoints) {
+        if (analysedPoints.size >= 2) BiologyExperimentAnalysis.describeTrend(analysedPoints) else null
+    }
     val stages = listOf("Brief", "Plan", "Run", "Analyse", "Evaluate")
 
     Card(Modifier.fillMaxWidth()) {
@@ -534,26 +544,41 @@ fun GuidedInvestigationActivity(topicId: String) {
                     else {
                         Text(profile.independent + " (" + profile.xUnit + ")     " + profile.dependent + " (" + profile.yUnit + ")", fontWeight = FontWeight.SemiBold)
                         readings.forEach { pair -> Text("%.2f".format(pair.first) + "                         " + "%.2f".format(pair.second)) }
-                        readings.groupBy { it.first }.filterValues { it.size > 1 }.forEach { (setting, repeats) ->
-                            val mean = repeats.map { it.second }.average()
-                            Text("Mean of " + repeats.size + " repeats at " + "%.2f".format(setting) + " " + profile.xUnit + ": " + "%.2f".format(mean) + " " + profile.yUnit)
+                        analysedPoints.filter { it.readingCount > 1 }.forEach { point ->
+                            Text("Mean of ${point.readingCount} repeats at " + "%.2f".format(point.independentValue) + " " + profile.xUnit + ": " + "%.2f".format(point.meanResult) + " " + profile.yUnit)
                         }
-                        if (readings.size >= 2) {
-                            val first = readings.first(); val last = readings.last()
-                            val gradient = if (abs(last.first - first.first) > 0.0001f) (last.second - first.second) / (last.first - first.first) else Float.NaN
-                            Text("Endpoint gradient: " + if (gradient.isFinite()) "%.4f".format(gradient) + " " + profile.yUnit + "/" + profile.xUnit else "undefined: identical x values")
-                            Text("Explain the gradient in the context of the investigation.")
+                        if (observedTrend != null) {
+                            Text("Observed pattern", fontWeight = FontWeight.Bold)
+                            Text(observedTrend)
+                            Text("This describes the recorded model results; it does not by itself prove causation.")
                         }
                         Text("Horizontal axis: " + profile.independent + " (" + profile.xUnit + ")")
                         Text("Vertical axis: " + profile.dependent + " (" + profile.yUnit + ")")
-                        Canvas(Modifier.fillMaxWidth().height(170.dp)) {
-                            drawLine(Color.Gray, Offset(24f, size.height - 16f), Offset(size.width - 8f, size.height - 16f), 2f)
-                            drawLine(Color.Gray, Offset(24f, 8f), Offset(24f, size.height - 16f), 2f)
-                            val maxX = max(1f, readings.maxOf { it.first }); val maxY = max(1f, readings.maxOf { it.second })
-                            val pts = readings.map { Offset(24f + it.first / maxX * (size.width - 36f), size.height - 16f - it.second / maxY * (size.height - 28f)) }
-                            pts.forEach { drawCircle(Color(0xFF1565C0), 5f, it) }
-                            pts.zipWithNext().forEach { pair -> drawLine(Color(0xFF1565C0), pair.first, pair.second, 2f) }
+                        Canvas(Modifier.fillMaxWidth().height(190.dp)) {
+                            val left = 34f
+                            val right = size.width - 10f
+                            val top = 10f
+                            val bottom = size.height - 25f
+                            drawLine(Color.Gray, Offset(left, bottom), Offset(right, bottom), 2f)
+                            drawLine(Color.Gray, Offset(left, top), Offset(left, bottom), 2f)
+                            val minX = analysedPoints.minOf { it.independentValue }.toFloat()
+                            val maxX = analysedPoints.maxOf { it.independentValue }.toFloat()
+                            val minY = analysedPoints.minOf { it.meanResult }.toFloat()
+                            val maxY = analysedPoints.maxOf { it.meanResult }.toFloat()
+                            val xSpan = (maxX - minX).takeIf { it > 0f } ?: 1f
+                            val ySpan = (maxY - minY).takeIf { it > 0f } ?: 1f
+                            val pts = analysedPoints.map { point ->
+                                Offset(
+                                    left + (point.independentValue.toFloat() - minX) / xSpan * (right - left),
+                                    bottom - (point.meanResult.toFloat() - minY) / ySpan * (bottom - top)
+                                )
+                            }
+                            pts.forEach { drawCircle(Color(0xFF1565C0), 6f, it) }
+                            pts.zipWithNext().forEach { pair ->
+                                drawLine(Color(0xFF1565C0), pair.first, pair.second, 2.5f)
+                            }
                         }
+                        Text("Graph plots the mean at each setting; repeated observations remain visible in the table above.", style = MaterialTheme.typography.bodySmall)
                     }
                 }
                 else -> {
