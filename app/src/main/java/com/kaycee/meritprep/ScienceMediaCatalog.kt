@@ -2113,7 +2113,7 @@ object ScienceMediaCatalog {
             subjectCode = PHYSICS,
             topicId = "phy-electronics",
             mediaType = ScienceMediaType.INTERACTIVE_SIMULATION,
-            provider = "PhET Interactive Simulations",
+            provider = "PhET Legacy Java Simulation",
             summary = "Explore how p-type and n-type doping changes semiconductor energy levels and how a p–n junction acts as a one-way diode.",
             sourceUrl = "https://phet.colorado.edu/en/simulations/semiconductor",
             licenceName = "Legacy Java/CheerpJ simulation; check current PhET licence and compatibility",
