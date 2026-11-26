@@ -303,3 +303,18 @@ A topic may not be labelled complete if any applicable critical item above is FA
 - [x] Light/dark theme palette updated to deep teal, slate blue and warm neutrals.
 - [ ] Run screenshot-based visual review on representative phone sizes and tablet layouts; source/build inspection is not a substitute for rendered UI QA.
 - [ ] Confirm latest main-branch workflow builds and uploads an APK after the notebook, resume and theme changes.
+
+
+### Exam Lab, practical modes and profile analytics — 26 November 2026
+
+- [x] Added original 180-question science UTME combination with 60 English and 40 each Biology, Chemistry and Physics.
+- [x] Added unique subject session ID, deterministic question pool for resume compatibility, per-sitting within-subject randomisation and shuffled answer options.
+- [x] Added subject switcher, 10-column question grid, pause/resume, finish confirmation and scientific calculator shortcut.
+- [x] Added subject-level and topic-level result breakdown.
+- [x] Added Bench / Challenge / Explore modes to the lesson virtual lab workspace.
+- [x] Added replayable challenge rounds using topic-mapped original question banks; shorter checks are labelled accurately when a topic has fewer than three items.
+- [x] Added subject comparison chart for practice accuracy vs demonstrated topic mastery and strong/weak topic diagnostics.
+- [ ] Add user-selectable UTME subject combinations, including non-science electives, only when the corresponding question banks are sufficiently populated and reviewed.
+- [ ] Add score trend history, per-subject CBT attempt history, target-course goal editor and admission cut-off data with current authoritative sources.
+- [ ] Add a proper persisted XP/reward ledger before displaying gamification points.
+- [ ] Verify latest main-branch CI for the complete Exam Lab and virtual-lab workspace changes.
