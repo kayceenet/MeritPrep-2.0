@@ -158,16 +158,29 @@ internal object MicroLessonEngine {
         return banks[i]
     }
 
+    internal fun hasCompleteEvidence(
+        topicId: String,
+        stage: LessonStage,
+        evidence: Map<String, MicroLessonCheckEvidence>
+    ): Boolean {
+        val required = checks(topicId, stage)
+        return required.isEmpty() || required.all { evidence[it.id]?.complete == true }
+    }
+
     internal fun hasCompleteEvidence(topicId: String, stage: LessonStage, evidenceJson: String?): Boolean {
-        val checks = checks(topicId, stage)
-        if (checks.isEmpty()) return true
+        val required = checks(topicId, stage)
+        if (required.isEmpty()) return true
         return runCatching {
             val root = JSONObject(evidenceJson ?: "{}")
             val saved = JSONObject(root.optString(stage.name, "{}"))
-            checks.all { check ->
+            val evidence = required.associate { check ->
                 val item = saved.optJSONObject(check.id) ?: JSONObject()
-                item.optBoolean("firstPassed") && item.optBoolean("transferPassed")
+                check.id to MicroLessonCheckEvidence(
+                    firstPassed = item.optBoolean("firstPassed"),
+                    transferPassed = item.optBoolean("transferPassed")
+                )
             }
+            hasCompleteEvidence(topicId, stage, evidence)
         }.getOrDefault(false)
     }
 
