@@ -454,7 +454,7 @@ The virtual laboratory workspace has been reorganised so that a guided investiga
 
 #### External media and virtual-lab catalogue
 
-The external catalogue now contains **141 curated resource entries mapped across all 81 Biology, Chemistry and Physics syllabus topic IDs**:
+The external catalogue now contains **142 curated resource entries mapped across all 81 Biology, Chemistry and Physics syllabus topic IDs**:
 
 - Biology: 24 topics
 - Chemistry: 18 topics
