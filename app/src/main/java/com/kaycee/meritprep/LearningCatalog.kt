@@ -725,6 +725,9 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
     var exerciseChecked by remember(topicId) { mutableStateOf(false) }
     var exerciseComplete by remember(topicId) { mutableStateOf(false) }
     var projectChecksPassed by remember(topicId) { mutableStateOf(false) }
+    var conceptChecksPassed by remember(topicId) { mutableStateOf(false) }
+    var exampleChecksPassed by remember(topicId) { mutableStateOf(false) }
+    var contextChecksPassed by remember(topicId) { mutableStateOf(false) }
     var stage by remember(topicId) {
         mutableStateOf(
             runCatching {
@@ -806,6 +809,13 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
         }
     }
     fun markStageComplete(target: LessonStage) {
+        val requiredChecksPassed = when (target) {
+            LessonStage.CONCEPT -> topic?.id != "bio-cell" || conceptChecksPassed
+            LessonStage.EXAMPLES -> topic?.id != "bio-cell" || exampleChecksPassed
+            LessonStage.APPLICATIONS -> topic?.id != "bio-cell" || contextChecksPassed
+            else -> true
+        }
+        if (!requiredChecksPassed) return
         val updated = completedStages + target
         completedStages = updated
         val saved = JSONArray()
@@ -988,6 +998,7 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
                             }
                         }
                     }
+                    MicroLessonStageChecks(topicId, LessonStage.CONCEPT, database) { conceptChecksPassed = it }
                     Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                         Button(
                             onClick = {
@@ -1023,6 +1034,7 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
                     ChemistrySupplementalLessonActivity(topicId)
                     PhysicsInteractiveLessonActivity(topicId)
                     PhysicsSupplementalLessonActivity(topicId)
+                    MicroLessonStageChecks(topicId, LessonStage.EXAMPLES, database) { exampleChecksPassed = it }
                 }
 
                 LessonStage.APPLICATIONS -> {
@@ -1030,6 +1042,7 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
                     val hasScenario = TopicScenarioActivity(topicId)
                     if (!hasScenario) TopicScenarioReflectionCard(topicId, topic.title)
                     ScienceMediaTopicSection(topicId)
+                    MicroLessonStageChecks(topicId, LessonStage.APPLICATIONS, database) { contextChecksPassed = it }
                 }
 
                 LessonStage.LAB -> {
@@ -1139,7 +1152,7 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
                             markStageComplete(LessonStage.QUIZ)
                             completed = runCatching { database.markLessonCompleted(topic.id) }.isSuccess
                         },
-                        enabled = !topic.isSyllabusOutline && !completed && exerciseComplete && exercisePercent >= 80,
+                        enabled = !topic.isSyllabusOutline && !completed && exerciseComplete && exercisePercent >= 80 && completedStages.containsAll(stages.filter { it != LessonStage.QUIZ }),
                         modifier = Modifier.fillMaxWidth()
                     ) { Text(if (topic.isSyllabusOutline) "Full lesson in development" else if (completed) "Lesson completed" else "Complete lesson") }
                     if (!completed) Text("Complete the topic assessment with at least 80% to mark this lesson complete.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
@@ -1190,7 +1203,12 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
                     ) { Text("← Prev", maxLines = 1) }
                     Button(
                         onClick = { markStageComplete(stage) },
-                        enabled = stage !in completedStages && (stage != LessonStage.PROJECT || projectChecksPassed),
+                        enabled = stage !in completedStages && (stage != LessonStage.PROJECT || projectChecksPassed) && when (stage) {
+                            LessonStage.CONCEPT -> topicId != "bio-cell" || conceptChecksPassed
+                            LessonStage.EXAMPLES -> topicId != "bio-cell" || exampleChecksPassed
+                            LessonStage.APPLICATIONS -> topicId != "bio-cell" || contextChecksPassed
+                            else -> true
+                        },
                         modifier = Modifier.weight(1.35f).heightIn(min = 48.dp),
                         contentPadding = PaddingValues(horizontal = 8.dp)
                     ) {
