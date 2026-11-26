@@ -2360,6 +2360,9 @@ object ScienceMediaCatalog {
             if (resource.subjectCode !in setOf(BIOLOGY, CHEMISTRY, PHYSICS)) issues += "${resource.id}: unsupported subject code."
             if (!resource.sourceUrl.startsWith("https://")) issues += "${resource.id}: source URL must use HTTPS."
             if (!resource.licenceUrl.startsWith("https://")) issues += "${resource.id}: licence/terms URL must use HTTPS."
+            if (resource.previewUrl != null && !resource.previewUrl.startsWith("https://")) issues += "${resource.id}: preview URL must use HTTPS."
+            if (resource.provider.startsWith("Wikimedia Commons — ") && resource.previewUrl.isNullOrBlank()) issues += "${resource.id}: licensed Commons animation needs an inline preview URL."
+            if (resource.provider.startsWith("Wikimedia Commons — ") && resource.mediaType != ScienceMediaType.ANIMATION) issues += "${resource.id}: Commons GIFs must be classified as animations."
             if (resource.provider.isBlank() || resource.creatorOrPublisher.isBlank() || resource.attributionText.isBlank() || resource.licenceName.isBlank() || resource.permittedUse.isBlank()) {
                 issues += "${resource.id}: provider, licence and permitted-use notes are required."
             }
