@@ -719,6 +719,35 @@ internal enum class LessonStage(val label: String, val subtitle: String, val sho
 @Suppress("UNUSED_PARAMETER")
 internal fun isLessonStageUnlocked(target: LessonStage, completed: Set<LessonStage>): Boolean = true
 
+private fun requiresBiologyLabEvidence(topicId: String): Boolean =
+    topicId in setOf("bio-cell", "bio-classification", "bio-adaptation")
+
+private fun hasBiologyLabEvidence(topicId: String, database: MeritDatabase): Boolean {
+    val noteId = when (topicId) {
+        "bio-cell" -> "micro-lab-session-bio-cell"
+        "bio-classification" -> "micro-lab-session-bio-classification"
+        "bio-adaptation" -> "micro-lab-session-bio-adaptation"
+        else -> return true
+    }
+    return runCatching {
+        val saved = JSONObject(database.getNoteBody(noteId) ?: "{}")
+        when (topicId) {
+            "bio-cell" -> saved.optBoolean("hasRun") &&
+                saved.optBoolean("safetyReviewed") &&
+                saved.optString("prediction").isNotBlank() &&
+                saved.optString("observationNotes").isNotBlank() &&
+                saved.optString("conclusion").isNotBlank()
+            "bio-classification" -> saved.optBoolean("identified") &&
+                saved.optString("decisionPath").isNotBlank() &&
+                saved.optString("observationRecord").isNotBlank()
+            "bio-adaptation" -> saved.optBoolean("hasRun") &&
+                saved.optString("prediction").isNotBlank() &&
+                saved.optString("conclusion").isNotBlank()
+            else -> true
+        }
+    }.getOrDefault(false)
+}
+
 @Composable
 fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: () -> Unit = {}) {
     val topic = LearningCatalog.find(topicId)
@@ -727,7 +756,9 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
     val savedMicroLessonEvidence = remember(topicId) { runCatching { database.getNoteBody("micro-lesson-evidence-" + topicId) }.getOrNull() }
     val requiredMicroLessonStages = listOf(LessonStage.CONCEPT, LessonStage.EXAMPLES, LessonStage.APPLICATIONS)
     val savedCompletionHasCurrentEvidence = requiredMicroLessonStages.all { MicroLessonEngine.hasCompleteEvidence(topicId, it, savedMicroLessonEvidence) }
-    var completed by remember(topicId) { mutableStateOf(runCatching { database.isLessonCompleted(topicId) && savedCompletionHasCurrentEvidence }.getOrDefault(false)) }
+    val savedBiologyLabEvidence = remember(topicId) { hasBiologyLabEvidence(topicId, database) }
+    var labEvidencePassed by remember(topicId) { mutableStateOf(savedBiologyLabEvidence) }
+    var completed by remember(topicId) { mutableStateOf(runCatching { database.isLessonCompleted(topicId) && savedCompletionHasCurrentEvidence && savedBiologyLabEvidence }.getOrDefault(false)) }
     var bookmarked by remember(topicId) { mutableStateOf(runCatching { database.isBookmarked(topicId) }.getOrDefault(false)) }
     val noteId = "lesson-note-" + topicId
     var noteText by remember(topicId) { mutableStateOf(runCatching { database.getNoteBody(noteId).orEmpty() }.getOrDefault("")) }
@@ -805,7 +836,7 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
                 val saved = restoredPillars.optJSONArray("completedStages")
                 if (completed) addAll(LessonStage.entries) else if (saved != null) for (index in 0 until saved.length()) {
                     runCatching { LessonStage.valueOf(saved.optString(index)) }.getOrNull()?.let { restoredStage ->
-                        if (MicroLessonEngine.hasCompleteEvidence(topicId, restoredStage, savedMicroLessonEvidence)) add(restoredStage)
+                        if (MicroLessonEngine.hasCompleteEvidence(topicId, restoredStage, savedMicroLessonEvidence) && (restoredStage != LessonStage.LAB || !requiresBiologyLabEvidence(topicId) || labEvidencePassed)) add(restoredStage)
                     }
                 }
             }
@@ -828,6 +859,7 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
             LessonStage.CONCEPT -> MicroLessonEngine.checks(topicId, LessonStage.CONCEPT).isEmpty() || conceptChecksPassed
             LessonStage.EXAMPLES -> MicroLessonEngine.checks(topicId, LessonStage.EXAMPLES).isEmpty() || exampleChecksPassed
             LessonStage.APPLICATIONS -> MicroLessonEngine.checks(topicId, LessonStage.APPLICATIONS).isEmpty() || contextChecksPassed
+            LessonStage.LAB -> !requiresBiologyLabEvidence(topicId) || labEvidencePassed
             else -> true
         }
         if (!requiredChecksPassed) return
@@ -1061,8 +1093,8 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
                 }
 
                 LessonStage.LAB -> {
-                    LessonVirtualLabWorkspace(topicId, topic.subjectCode)
-                    if (topicId == "bio-classification") BiologyClassificationKeyPractical()
+                    LessonVirtualLabWorkspace(topicId, topic.subjectCode) { labEvidencePassed = it }
+                    if (topicId == "bio-classification") BiologyClassificationKeyPractical { labEvidencePassed = it }
                 }
 
                 LessonStage.PROJECT -> {
