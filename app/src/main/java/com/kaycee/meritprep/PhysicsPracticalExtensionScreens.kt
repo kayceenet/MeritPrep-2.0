@@ -67,11 +67,22 @@ fun PhysicsFluidsLab() {
             Text("Object mass: ${"%.2f".format(mass)} kg")
             Slider(value = mass, onValueChange = { mass = it }, valueRange = 0.1f..5f)
             Text("Object volume: ${"%.4f".format(objectVolume)} m³")
-            Slider(value = objectVolume, onValueChange = { objectVolume = it }, valueRange = 0.001f..0.01f)
+            Slider(
+                value = objectVolume,
+                onValueChange = {
+                    objectVolume = it
+                    displacedVolume = displacedVolume.coerceAtMost(it)
+                },
+                valueRange = 0.001f..0.01f
+            )
             Text("Fluid density: ${"%.0f".format(fluidDensity)} kg/m³")
             Slider(value = fluidDensity, onValueChange = { fluidDensity = it }, valueRange = 500f..1500f)
             Text("Displaced fluid volume: ${"%.4f".format(displacedVolume)} m³")
-            Slider(value = displacedVolume, onValueChange = { displacedVolume = it }, valueRange = 0f..0.005f)
+            Slider(
+                value = displacedVolume.coerceIn(0f, objectVolume),
+                onValueChange = { displacedVolume = it.coerceIn(0f, objectVolume) },
+                valueRange = 0f..objectVolume
+            )
             Text("Depth: ${"%.1f".format(depth)} m")
             Slider(value = depth, onValueChange = { depth = it }, valueRange = 0f..10f)
             HorizontalDivider()
