@@ -113,6 +113,7 @@ A topic should only be marked mastered after the learner demonstrates performanc
 - [x] Add an offline searchable glossary of 57 syllabus-linked terms with examples and lesson links (review pending).
 - [ ] Add reviewed, accessible diagrams and visual assets for the remaining lessons.
 - [x] Add interactive food-test (with prediction feedback), osmosis, microscope-magnification, quadrat-sampling, a guided dichotomous classification-key prototype and a biological-drawing self-check guide.
+- [x] Expand the `bio-classification` lesson with stage-mapped concept checks, an interactive plant/animal dichotomous-key practical and a project brief (review pending).
 - [ ] Add specimen/practical tasks with reviewed marking rubrics and full WAEC practical assessment workflows.
 - [ ] Add syllabus coverage reporting and reviewer workflow.
 - [ ] Independently review and approve the twenty-four authored lesson drafts, 240 objective questions and 198 revision cards.
