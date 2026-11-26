@@ -1039,19 +1039,49 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
             }
         }
         if (stage != LessonStage.QUIZ) {
-            OutlinedButton(
-                onClick = { markStageComplete(stage) },
-                enabled = stage !in completedStages,
-                modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp)
-            ) { Text(if (stage in completedStages) "Pillar completed" else "Mark " + stage.label + " complete") }
-        }
-        Row(Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp), horizontalArrangement = Arrangement.SpaceBetween) {
-            val nextStage = stages.getOrNull(stageIndex + 1)
-            OutlinedButton(onClick = { stage = stages[stageIndex - 1] }, enabled = stageIndex > 0) { Text("Previous") }
-            Button(
-                onClick = { nextStage?.let { stage = it } },
-                enabled = nextStage != null && isLessonStageUnlocked(nextStage, completedStages)
-            ) { Text(if (stage == LessonStage.QUIZ) "End of lesson" else "Continue") }
+            Surface(
+                modifier = Modifier.fillMaxWidth(),
+                tonalElevation = 3.dp,
+                shadowElevation = 5.dp,
+                color = MaterialTheme.colorScheme.surface
+            ) {
+                Row(
+                    Modifier.fillMaxWidth().navigationBarsPadding().heightIn(min = 64.dp).padding(horizontal = 12.dp, vertical = 7.dp),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    verticalAlignment = androidx.compose.ui.Alignment.CenterVertically
+                ) {
+                    OutlinedButton(
+                        onClick = { stages.getOrNull(stageIndex - 1)?.let { stage = it } },
+                        enabled = stageIndex > 0,
+                        modifier = Modifier.weight(0.9f).heightIn(min = 48.dp),
+                        contentPadding = PaddingValues(horizontal = 8.dp)
+                    ) { Text("← Prev", maxLines = 1) }
+                    Button(
+                        onClick = { markStageComplete(stage) },
+                        enabled = stage !in completedStages,
+                        modifier = Modifier.weight(1.35f).heightIn(min = 48.dp),
+                        contentPadding = PaddingValues(horizontal = 8.dp)
+                    ) {
+                        Text(
+                            when {
+                                stage in completedStages -> "✓ Verified"
+                                stage == LessonStage.PROJECT -> "Verify project"
+                                else -> "Complete section"
+                            },
+                            maxLines = 1
+                        )
+                    }
+                    val nextStage = stages.getOrNull(stageIndex + 1)
+                    Button(
+                        onClick = { nextStage?.let { stage = it } },
+                        enabled = nextStage != null && isLessonStageUnlocked(nextStage, completedStages),
+                        modifier = Modifier.weight(0.9f).heightIn(min = 48.dp),
+                        contentPadding = PaddingValues(horizontal = 8.dp)
+                    ) { Text(if (nextStage == null) "Next →" else "Next →", maxLines = 1) }
+                }
+            }
+        } else {
+            Spacer(Modifier.windowInsetsBottomHeight(androidx.compose.foundation.layout.WindowInsets.navigationBars))
         }
     }
 }
