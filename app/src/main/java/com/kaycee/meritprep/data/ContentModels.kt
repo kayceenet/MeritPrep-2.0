@@ -153,3 +153,12 @@ object MasteryPolicy {
         evidence.distinctStudyDays >= 2 &&
         evidence.correctAnswers * 100 >= evidence.attempts * 80
 }
+
+
+data class SavedStudyNote(
+    val noteId: String,
+    val topicId: String,
+    val title: String,
+    val body: String,
+    val updatedAt: Long
+)
