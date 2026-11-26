@@ -22,7 +22,7 @@ fun PhysicsSupplementalLessonActivity(topicId: String) {
   "phy-modern" -> PhotonExplorer()
   "phy-temperature", "phy-heat-quantity", "phy-change-state", "phy-vapours",
   "phy-optical-instruments", "phy-dispersion", "phy-magnetism", "phy-conduction",
-  "phy-electronics" -> PhysicsMissingTopicExplorer(topicId)
+  "phy-electronics" -> PhysicsTopicVirtualLab(topicId)
  }
 }
 @Composable private fun MeasurementExplorer() {
