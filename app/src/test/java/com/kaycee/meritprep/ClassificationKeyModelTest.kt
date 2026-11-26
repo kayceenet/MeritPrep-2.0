@@ -51,6 +51,16 @@ class ClassificationKeyModelTest {
     }
 
     @Test
+    fun wrongDecisionCannotProduceAnOrganismIdentification() {
+        val correctPlantPath = ClassificationKeyModel.specimen("pine")!!.decisions
+        assertEquals("Gymnosperm (conifer)", ClassificationKeyModel.identify("pine", correctPlantPath))
+        assertEquals(null, ClassificationKeyModel.identify("pine", listOf(true, false)))
+        assertEquals(null, ClassificationKeyModel.identify("pine", listOf(true, true)))
+        assertEquals(true, ClassificationKeyModel.isCorrectDecision("pine", 1, true))
+        assertEquals(false, ClassificationKeyModel.isCorrectDecision("pine", 1, false))
+    }
+
+    @Test
     fun everySpecimenDecisionMatchesAnAvailableQuestion() {
         ClassificationKeyTrack.entries.forEach { track ->
             val steps = ClassificationKeyModel.steps(track)
