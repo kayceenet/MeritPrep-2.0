@@ -79,7 +79,7 @@ fun NotebookScreen(onOpenLesson: (String) -> Unit) {
                 } else {
                     LazyColumn(Modifier.weight(1f).fillMaxWidth(), contentPadding = PaddingValues(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                         items(bookmarks, key = { it }) { id ->
-                            Card(Modifier.fillMaxWidth(), onClick = { onOpenLesson(id) }) {
+                            Card(onClick = { onOpenLesson(id) }, modifier = Modifier.fillMaxWidth()) {
                                 ListItem(
                                     headlineContent = { Text(LearningCatalog.find(id)?.title ?: id, fontWeight = FontWeight.SemiBold) },
                                     supportingContent = { Text("Bookmarked lesson") },
