@@ -44,3 +44,17 @@ The closing topic quiz remains separate and cannot substitute for these 18 stage
 ## Release gate
 
 Do not mark the Biology course complete or academically verified on the strength of this reference slice. Release status is **PARTIAL / IN DEVELOPMENT** until all applicable syllabus statements, six pillars, assessment evidence, reviewer sign-off and technical release checks are complete.
+
+
+## Follow-on practical and project implementation
+
+The reference lesson now also includes:
+
+- An offline, topic-routed cell microscopy virtual practical comparing onion bulb epidermis with cheek epithelial cells.
+- A pre-run prediction and safety acknowledgement, apparatus list, method, independent/dependent/controlled variables, specimen and magnification controls, simulated observation record, learner notes, evidence-based conclusion and model evaluation.
+- A deterministic field-of-view model assuming a 10× eyepiece and an 18 mm eyepiece field number. At 40×, 100× and 400× total magnification, the illustrative field diameters are 4.5 mm, 1.8 mm and 0.45 mm respectively. The app labels these as model estimates, not measurements.
+- Explicit limits: the schematic does not substitute for physical microscope handling, and actual visibility depends on specimen preparation, staining, focus and microscope quality.
+- A cell-field-guide project brief with required diagrams, comparisons, cell-theory explanation, organisation example, root-hair exception and a weighted success rubric.
+- Local persistence for the virtual-lab record. Internal evidence and lab-session records are excluded from the learner's ordinary notebook listing.
+
+Automated model tests cover field-of-view scaling, invalid magnification, and correct distinctions for onion and cheek cells. These tests validate the deterministic model; they do not constitute independent academic review or physical-lab validation.
