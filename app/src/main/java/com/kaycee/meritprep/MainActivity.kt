@@ -11,6 +11,9 @@ import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.platform.LocalContext
@@ -320,6 +323,24 @@ private fun HomeScreen(nav: NavHostController, navigationRevision: Int = 0) {
                 }
             }
         }
+        if (dueReviews > 0) {
+            item {
+                Card(
+                    onClick = { nav.navigate("review") },
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.tertiaryContainer)
+                ) {
+                    Row(Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                        Icon(Icons.Default.AutoAwesome, contentDescription = null, tint = MaterialTheme.colorScheme.onTertiaryContainer)
+                        Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(3.dp)) {
+                            Text("Active recall is due", fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onTertiaryContainer)
+                            Text(dueReviews.toString() + " revision cards are ready. Retrieve the idea before you look at the answer.", color = MaterialTheme.colorScheme.onTertiaryContainer, style = MaterialTheme.typography.bodySmall)
+                        }
+                        Icon(Icons.Default.ChevronRight, contentDescription = "Open recall cards", tint = MaterialTheme.colorScheme.onTertiaryContainer)
+                    }
+                }
+            }
+        }
         item {
             Card(
                 Modifier.fillMaxWidth(),
@@ -383,11 +404,54 @@ private fun HomeScreen(nav: NavHostController, navigationRevision: Int = 0) {
                 }
             }
         }
-        items(filteredSubjects) { subject ->
-            SubjectCard(subject) { nav.navigate("subject/" + subject.code) }
+        items(filteredSubjects.chunked(2)) { pair ->
+            Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                pair.forEach { subject ->
+                    HomeSubjectTile(subject, Modifier.weight(1f)) { nav.navigate("subject/" + subject.code) }
+                }
+                if (pair.size == 1) Spacer(Modifier.weight(1f))
+            }
         }
         if (filteredSubjects.isEmpty()) {
             item { Text("No subjects match this search and filter.", color = MaterialTheme.colorScheme.onSurfaceVariant) }
+        }
+        item {
+            Card(Modifier.fillMaxWidth(), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)) {
+                Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(9.dp)) {
+                    Text("TODAY'S LEARNING PLAN", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
+                    Text("A focused study session", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+                    Text("Build understanding, practise retrieval and review what you missed.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Icon(Icons.Default.MenuBook, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
+                        Spacer(Modifier.width(10.dp))
+                        Column(Modifier.weight(1f)) {
+                            Text("1. Learn one topic", fontWeight = FontWeight.SemiBold)
+                            Text("Continue your next lesson", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                        }
+                        TextButton(onClick = { nextTopic?.let { nav.navigate("lesson/" + it.id) } ?: nav.navigate("learn") }) { Text("Start") }
+                    }
+                    HorizontalDivider()
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Icon(Icons.Default.Quiz, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
+                        Spacer(Modifier.width(10.dp))
+                        Column(Modifier.weight(1f)) {
+                            Text("2. Test your understanding", fontWeight = FontWeight.SemiBold)
+                            Text("Answer a short practice set", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                        }
+                        TextButton(onClick = { nav.navigate("practice") }) { Text("Practise") }
+                    }
+                    HorizontalDivider()
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Icon(Icons.Default.Replay, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
+                        Spacer(Modifier.width(10.dp))
+                        Column(Modifier.weight(1f)) {
+                            Text("3. Retrieve and revise", fontWeight = FontWeight.SemiBold)
+                            Text("Review due cards and mistakes", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                        }
+                        TextButton(onClick = { nav.navigate("review") }) { Text("Review") }
+                    }
+                }
+            }
         }
         item {
             Card(colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)) {
@@ -396,6 +460,37 @@ private fun HomeScreen(nav: NavHostController, navigationRevision: Int = 0) {
                     Text("Take a placement check to identify topics that need attention.")
                     OutlinedButton(onClick = { nav.navigate("placement") }, modifier = Modifier.fillMaxWidth()) { Text("Start placement check") }
                 }
+            }
+        }
+    }
+}
+
+@Composable
+private fun HomeSubjectTile(subject: Subject, modifier: Modifier = Modifier, onClick: () -> Unit) {
+    val palette = when (subject.code) {
+        "BIO" -> listOf(Color(0xFF176B55), Color(0xFF2B9B79))
+        "CHEM" -> listOf(Color(0xFF334E91), Color(0xFF5477C5))
+        "PHY" -> listOf(Color(0xFF6B477E), Color(0xFF9870B0))
+        "MATH" -> listOf(Color(0xFF92532E), Color(0xFFC47B45))
+        "ENG" -> listOf(Color(0xFF315C73), Color(0xFF4E8BA7))
+        "ECO" -> listOf(Color(0xFF675A2D), Color(0xFF9A8845))
+        else -> listOf(Color(0xFF4A526B), Color(0xFF7783A5))
+    }
+    Card(
+        onClick = onClick,
+        modifier = modifier,
+        shape = RoundedCornerShape(18.dp),
+        colors = CardDefaults.cardColors(containerColor = Color.Transparent)
+    ) {
+        Column(
+            Modifier.fillMaxWidth().background(Brush.linearGradient(palette), RoundedCornerShape(18.dp)).padding(15.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            Text(subject.code, style = MaterialTheme.typography.labelMedium, color = Color.White.copy(alpha = 0.82f), fontWeight = FontWeight.Bold)
+            Text(subject.name, style = MaterialTheme.typography.titleMedium, color = Color.White, fontWeight = FontWeight.Bold, minLines = 2)
+            Text(subject.description, style = MaterialTheme.typography.bodySmall, color = Color.White.copy(alpha = 0.9f), maxLines = 2)
+            Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
+                Icon(Icons.Default.ArrowForward, contentDescription = "Open " + subject.name, tint = Color.White)
             }
         }
     }
