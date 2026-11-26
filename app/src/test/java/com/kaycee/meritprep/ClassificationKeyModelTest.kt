@@ -31,13 +31,20 @@ class ClassificationKeyModelTest {
         assertEquals(listOf(true, false), ClassificationKeyModel.specimen("fern")!!.decisions)
         assertEquals(listOf(true, true, false), ClassificationKeyModel.specimen("pine")!!.decisions)
         assertEquals(listOf(true, true, true), ClassificationKeyModel.specimen("hibiscus")!!.decisions)
-        assertEquals(3, ClassificationKeyModel.steps(ClassificationKeyTrack.PLANTS).size)
+        assertEquals(3, ClassificationKeyModel.stepsFor("pine").size)
     }
 
     @Test
     fun animalKeyDistinguishesInvertebratesAndFiveVertebrateClasses() {
         val expected = mapOf(
-            "earthworm" to "Invertebrate",
+            "sponge" to "Invertebrate — Porifera",
+            "hydra" to "Invertebrate — Cnidaria",
+            "planarian" to "Invertebrate — Platyhelminthes",
+            "roundworm" to "Invertebrate — Nematoda",
+            "earthworm" to "Invertebrate — Annelida",
+            "grasshopper" to "Invertebrate — Arthropoda",
+            "snail" to "Invertebrate — Mollusca",
+            "starfish" to "Invertebrate — Echinodermata",
             "pigeon" to "Vertebrate — bird (Aves)",
             "bat" to "Vertebrate — mammal (Mammalia)",
             "tilapia" to "Vertebrate — fish",
@@ -47,7 +54,19 @@ class ClassificationKeyModelTest {
         expected.forEach { (id, result) ->
             assertEquals(result, ClassificationKeyModel.specimen(id)!!.result)
         }
-        assertEquals(5, ClassificationKeyModel.steps(ClassificationKeyTrack.ANIMALS).size)
+        assertEquals(9, ClassificationKeyModel.stepsFor("earthworm").size)
+        assertEquals(5, ClassificationKeyModel.stepsFor("pigeon").size)
+    }
+
+
+    @Test
+    fun specimenLabelsDoNotGiveAwayTheIdentification() {
+        ClassificationKeyModel.specimens(ClassificationKeyTrack.PLANTS).forEach {
+            assertTrue(it.name.startsWith("Plant specimen"))
+        }
+        ClassificationKeyModel.specimens(ClassificationKeyTrack.ANIMALS).forEach {
+            assertTrue(it.name.startsWith("Animal specimen"))
+        }
     }
 
     @Test
@@ -63,8 +82,8 @@ class ClassificationKeyModelTest {
     @Test
     fun everySpecimenDecisionMatchesAnAvailableQuestion() {
         ClassificationKeyTrack.entries.forEach { track ->
-            val steps = ClassificationKeyModel.steps(track)
             ClassificationKeyModel.specimens(track).forEach { specimen ->
+                val steps = ClassificationKeyModel.stepsFor(specimen.id)
                 assertTrue(specimen.decisions.size <= steps.size)
                 specimen.decisions.forEachIndexed { index, expected ->
                     assertEquals(expected, ClassificationKeyModel.expectedDecision(specimen.id, index))
