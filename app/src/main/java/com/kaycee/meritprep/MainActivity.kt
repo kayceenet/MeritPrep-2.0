@@ -238,7 +238,9 @@ private fun HomeScreen(nav: NavHostController, navigationRevision: Int = 0) {
     val accuracy = if (attempts == 0) 0 else (correct * 100 / attempts).coerceIn(0, 100)
     val progress = if (studyTopics.isEmpty()) 0f else completedCount.toFloat() / studyTopics.size
     val nextTopic = remember(navigationRevision, studyTopics) {
-        studyTopics.firstOrNull { !database.isLessonCompleted(it.id) }
+        val recentId = database.getMostRecentlyStudiedTopicId()
+        studyTopics.firstOrNull { it.id == recentId && !database.isLessonCompleted(it.id) }
+            ?: studyTopics.firstOrNull { !database.isLessonCompleted(it.id) }
     }
     var search by remember { mutableStateOf("") }
     var subjectFilter by remember { mutableStateOf("All") }
@@ -350,7 +352,7 @@ private fun HomeScreen(nav: NavHostController, navigationRevision: Int = 0) {
                     Text("Continue learning", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onPrimaryContainer)
                     if (nextTopic != null) {
                         Text(nextTopic.title, style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onPrimaryContainer)
-                        Text("Next topic in your course sequence", style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onPrimaryContainer)
+                        Text("Resume your most recently studied topic", style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onPrimaryContainer)
                         Button(onClick = { nav.navigate("lesson/" + nextTopic.id) }, modifier = Modifier.fillMaxWidth()) {
                             Text("Resume lesson")
                         }
