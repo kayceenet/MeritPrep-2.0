@@ -13,7 +13,7 @@ import kotlin.math.exp
 import kotlin.math.roundToInt
 
 internal val biologySupplementalActivityTopicIds = setOf(
-    "bio-classification", "bio-adaptation", "bio-interactions", "bio-plant-anatomy", "bio-respiration", "bio-excretion", "bio-support",
+    "bio-adaptation", "bio-interactions", "bio-plant-anatomy", "bio-respiration", "bio-excretion", "bio-support",
     "bio-reproduction", "bio-coordination", "bio-ecology-factors",
     "bio-habitats", "bio-biomes", "bio-soil", "bio-environment",
     "bio-variation", "bio-biotechnology", "bio-evolution-evidence"
@@ -22,7 +22,6 @@ internal val biologySupplementalActivityTopicIds = setOf(
 @Composable
 fun BiologySupplementalLessonActivity(topicId: String) {
     when (topicId) {
-        "bio-classification" -> ClassificationExplorer()
         "bio-adaptation" -> AdaptationExplorer()
         "bio-interactions" -> FoodWebExplorer()
         "bio-plant-anatomy" -> TranspirationExplorer()
