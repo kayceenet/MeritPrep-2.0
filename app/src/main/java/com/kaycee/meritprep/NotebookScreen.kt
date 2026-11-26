@@ -69,8 +69,12 @@ fun NotebookScreen(onOpenLesson: (String) -> Unit) {
                                     Text(LearningCatalog.find(note.topicId)?.title ?: note.topicId, style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.SemiBold)
                                     Text(note.title, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
                                     Text(note.body, style = MaterialTheme.typography.bodyMedium, maxLines = 5)
-                                    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                                        OutlinedButton(onClick = { onOpenLesson(note.topicId) }, modifier = Modifier.weight(1f)) { Text("Open lesson") }
+                                    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp), verticalAlignment = Alignment.CenterVertically) {
+                                        if (LearningCatalog.find(note.topicId) != null) {
+                                            OutlinedButton(onClick = { onOpenLesson(note.topicId) }, modifier = Modifier.weight(1f)) { Text("Open lesson") }
+                                        } else {
+                                            Spacer(Modifier.weight(1f))
+                                        }
                                         IconButton(onClick = { pendingDelete = note }) { Icon(Icons.Default.Delete, contentDescription = "Delete note", tint = MaterialTheme.colorScheme.error) }
                                     }
                                 }
