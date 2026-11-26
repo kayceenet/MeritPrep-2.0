@@ -317,6 +317,32 @@ class MeritDatabase(context: Context) : SQLiteOpenHelper(context, "meritprep_loc
             arrayOf(noteId)
         ).use { cursor -> if (cursor.moveToFirst()) cursor.getString(0) else null }
 
+    fun getStudyNotes(search: String = ""): List<SavedStudyNote> {
+        val query = search.trim()
+        val selection = if (query.isBlank()) "" else "WHERE title LIKE ? OR body LIKE ? OR topic_id LIKE ?"
+        val args = if (query.isBlank()) null else arrayOf("%$query%", "%$query%", "%$query%")
+        return readableDatabase.rawQuery(
+            "SELECT note_id, topic_id, title, body, updated_at FROM study_notes $selection ORDER BY updated_at DESC",
+            args
+        ).use { cursor ->
+            buildList {
+                while (cursor.moveToNext()) add(
+                    SavedStudyNote(
+                        noteId = cursor.getString(0),
+                        topicId = cursor.getString(1),
+                        title = cursor.getString(2),
+                        body = cursor.getString(3),
+                        updatedAt = cursor.getLong(4)
+                    )
+                )
+            }
+        }
+    }
+
+    fun deleteStudyNote(noteId: String) {
+        writableDatabase.delete("study_notes", "note_id = ?", arrayOf(noteId))
+    }
+
     fun saveNote(noteId: String, topicId: String, title: String, body: String) {
         val values = ContentValues().apply {
             put("note_id", noteId)
