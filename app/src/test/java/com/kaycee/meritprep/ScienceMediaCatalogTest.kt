@@ -58,6 +58,15 @@ class ScienceMediaCatalogTest {
     }
 
     @Test
+    fun atomicStructureAndPopulationEcologyResourcesAreMappedToTheirExactSyllabusTopics() {
+        assertEquals("chem-atomic", ScienceMediaCatalog.find("chem-atom-phet")?.topicId)
+        val populationResources = ScienceMediaCatalog.forTopic("bio-populations")
+        assertTrue(populationResources.any { it.id == "bio-population-dynamics-hhmi" })
+        assertTrue(populationResources.any { it.id == "bio-population-survey-methods-hhmi" })
+        assertTrue(populationResources.any { it.id == "bio-population-explosion-concord" })
+    }
+
+    @Test
     fun topicLookupReturnsOnlyResourcesMappedToThatTopic() {
         val osmosis = ScienceMediaCatalog.forTopic("bio-transport")
         assertTrue(osmosis.isNotEmpty())
