@@ -740,15 +740,31 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
     var speechEngine by remember(topicId) { mutableStateOf<TextToSpeech?>(null) }
 
     DisposableEffect(topicId, context) {
-        val engine = TextToSpeech(context.applicationContext) { status ->
-            speechReady = status == TextToSpeech.SUCCESS
-            if (status == TextToSpeech.SUCCESS) speechEngine?.language = Locale.UK
-        }
+        // Speech is an optional accessibility enhancement. Some Android builds
+        // (including devices without an installed TTS engine) cannot initialise
+        // it; that must never prevent the lesson itself from opening.
+        var disposed = false
+        val engine = runCatching {
+            TextToSpeech(context.applicationContext) { status ->
+                if (!disposed) {
+                    speechReady = status == TextToSpeech.SUCCESS
+                    if (status == TextToSpeech.SUCCESS) {
+                        speechEngine?.let { readyEngine ->
+                            runCatching { readyEngine.language = Locale.UK }
+                        }
+                    }
+                }
+            }
+        }.getOrNull()
         speechEngine = engine
+        if (engine == null) speechReady = false
         onDispose {
-            engine.stop()
-            engine.shutdown()
-            speechEngine = null
+            disposed = true
+            engine?.let { safeEngine ->
+                runCatching { safeEngine.stop() }
+                runCatching { safeEngine.shutdown() }
+            }
+            if (speechEngine === engine) speechEngine = null
             speechReady = false
         }
     }
