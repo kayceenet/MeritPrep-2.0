@@ -167,13 +167,13 @@ internal fun JambBiologyDeepLessonPanel(topicId:String) {
    Column(Modifier.padding(16.dp),verticalArrangement=Arrangement.spacedBy(6.dp)) {
     Text("JAMB SYLLABUS-DEPTH TEACHING",color=MaterialTheme.colorScheme.primary,style=MaterialTheme.typography.labelLarge,fontWeight=FontWeight.Bold)
     Text("Each examinable objective is taught and checked independently.",style=MaterialTheme.typography.bodyMedium)
-    Text("Coverage: \${objectives.size} objectives • \${objectives.sumOf { it.checks.size }} concept checks",style=MaterialTheme.typography.labelMedium,color=MaterialTheme.colorScheme.onSurfaceVariant)
+    Text("Coverage: ${objectives.size} objectives • ${objectives.sumOf { it.checks.size }} concept checks",style=MaterialTheme.typography.labelMedium,color=MaterialTheme.colorScheme.onSurfaceVariant)
    }
   }
   objectives.forEachIndexed { index,obj ->
    Card(Modifier.fillMaxWidth()) {
     Column(Modifier.padding(16.dp),verticalArrangement=Arrangement.spacedBy(10.dp)) {
-     Text("SYLLABUS OBJECTIVE \${index+1}",style=MaterialTheme.typography.labelSmall,color=MaterialTheme.colorScheme.primary,fontWeight=FontWeight.Bold)
+     Text("SYLLABUS OBJECTIVE ${index+1}",style=MaterialTheme.typography.labelSmall,color=MaterialTheme.colorScheme.primary,fontWeight=FontWeight.Bold)
      Text(obj.objective,style=MaterialTheme.typography.titleMedium,fontWeight=FontWeight.Bold)
      obj.points.forEach { point ->
       Column(verticalArrangement=Arrangement.spacedBy(6.dp)) {
@@ -185,13 +185,13 @@ internal fun JambBiologyDeepLessonPanel(topicId:String) {
          Text(point.example,style=MaterialTheme.typography.bodyMedium)
         }
        }
-       Text("Examination focus: \${point.examFocus}",style=MaterialTheme.typography.bodySmall,color=MaterialTheme.colorScheme.primary)
+       Text("Examination focus: ${point.examFocus}",style=MaterialTheme.typography.bodySmall,color=MaterialTheme.colorScheme.primary)
       }
      }
      Surface(color=MaterialTheme.colorScheme.errorContainer.copy(alpha=0.4f),shape=MaterialTheme.shapes.medium) {
       Column(Modifier.fillMaxWidth().padding(12.dp),verticalArrangement=Arrangement.spacedBy(5.dp)) {
        Text("COMMON EXAMINATION TRAPS",style=MaterialTheme.typography.labelSmall,fontWeight=FontWeight.Bold)
-       obj.traps.forEach { Text("• \$it",style=MaterialTheme.typography.bodySmall) }
+       obj.traps.forEach { Text("• $it",style=MaterialTheme.typography.bodySmall) }
       }
      }
      obj.checks.forEachIndexed { i,check -> ObjectiveKnowledgeCheck(check,i+1) }
