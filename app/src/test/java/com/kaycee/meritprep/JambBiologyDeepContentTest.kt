@@ -24,7 +24,10 @@ class JambBiologyDeepContentTest {
 
     @Test
     fun objectiveChecksHaveUniqueStableIds() {
-        val ids = listOf("bio-cell", "bio-classification", "bio-adaptation", "bio-plant-anatomy")\n            .flatMap { JambBiologyDeepContent.forTopic(it) }\n            .flatMap { it.checks }\n            .map { it.id }
+        val ids = listOf("bio-cell", "bio-classification", "bio-adaptation", "bio-plant-anatomy")
+            .flatMap { JambBiologyDeepContent.forTopic(it) }
+            .flatMap { it.checks }
+            .map { it.id }
         assertEquals(ids.size, ids.toSet().size)
     }
 
