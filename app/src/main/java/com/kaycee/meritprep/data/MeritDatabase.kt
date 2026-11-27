@@ -97,6 +97,7 @@ class MeritDatabase(context: Context) : SQLiteOpenHelper(context, "meritprep_loc
                 total_questions INTEGER NOT NULL,
                 status TEXT NOT NULL,
                 current_index INTEGER NOT NULL DEFAULT 0,
+                remaining_seconds INTEGER,
                 score INTEGER,
                 submitted_at INTEGER
             )
