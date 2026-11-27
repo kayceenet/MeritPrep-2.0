@@ -1457,10 +1457,9 @@ private fun TopicVisualisationGallery(topicId: String) {
             "bio-classification" -> EvolutionClassificationLab()
             "bio-adaptation" -> { AdaptationTypesCard(); AdaptationScenarioLab() }
             "bio-plant-anatomy" -> PlantMammalSectionLab()
-            "bio-nutrition" -> PhotosynthesisFactorInvestigation()
+            "bio-nutrition" -> { PhotosynthesisFactorInvestigation(); PhotosynthesisFlowCard() }
             "bio-transport" -> OsmosisInvestigationLab()
             "bio-cell" -> CellDiagramCard()
-            "bio-nutrition" -> PhotosynthesisFlowCard()
             "bio-respiration" -> RespirationComparisonCard()
             "bio-interactions" -> FoodChainDiagramCard()
             "bio-populations" -> { BiologyPopulationSamplingCard(); EcologicalSuccessionCard() }
