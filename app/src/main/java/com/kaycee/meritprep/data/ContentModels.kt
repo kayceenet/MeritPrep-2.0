@@ -98,6 +98,7 @@ data class CbtSessionSnapshot(
     val status: String = "IN_PROGRESS",
     val score: Int? = null,
     val submittedAt: Long? = null,
+    val remainingSeconds: Int? = null,
     val questions: List<CbtQuestionSnapshot>
 )
 
