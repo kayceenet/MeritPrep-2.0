@@ -1,0 +1,36 @@
+package com.kaycee.meritprep
+
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertTrue
+import org.junit.Test
+
+class JambBiologyDeepContentTest {
+    @Test
+    fun livingOrganismsCoversEveryJambCandidateObjectiveWithIndependentChecks() {
+        val objectives = JambBiologyDeepContent.forTopic("bio-cell")
+
+        assertEquals(5, objectives.size)
+        assertTrue(objectives.all { it.points.isNotEmpty() && it.checks.size >= 2 })
+        assertTrue(objectives.all { it.traps.isNotEmpty() })
+        assertTrue(objectives.flatMap { it.points }.all {
+            it.heading.isNotBlank() && it.teaching.length >= 250 &&
+                it.example.isNotBlank() && it.examFocus.isNotBlank()
+        })
+        assertTrue(objectives.flatMap { it.checks }.all {
+            it.options.size == 4 && it.answer in it.options.indices && it.explanation.isNotBlank()
+        })
+    }
+
+    @Test
+    fun objectiveChecksHaveUniqueStableIds() {
+        val ids = JambBiologyDeepContent.forTopic("bio-cell").flatMap { it.checks }.map { it.id }
+        assertEquals(ids.size, ids.toSet().size)
+    }
+
+    @Test
+    fun unrelatedTopicsDoNotReceiveBiologyCellContent() {
+        assertTrue(JambBiologyDeepContent.forTopic("chem-atomic-bonding").isEmpty())
+        assertTrue(JambBiologyDeepContent.forTopic("bio-nutrition").isEmpty())
+    }
+}
