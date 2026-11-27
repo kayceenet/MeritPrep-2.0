@@ -40,6 +40,7 @@ private data class Subject(val name:String,val description:String,val code:Strin
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        CrashReporter.install(applicationContext)
         setContent { MeritPrepApp() }
     }
 }
@@ -145,6 +146,7 @@ private fun MeritPrepApp() {
                 )
             }
         }
+        CrashReportPrompt()
     }
 }
 
