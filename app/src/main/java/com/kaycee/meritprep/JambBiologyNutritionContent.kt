@@ -208,4 +208,5 @@ internal fun PhotosynthesisFactorInvestigation() {
             TextButton(onClick = { light = 5f; carbonDioxide = 5f; waterAvailable = true; temperature = "Moderate" }) { Text("Reset investigation") }
         }
     }
+    BiologyExternalLabLinks("EXPLORE A FULL PHOTOSYNTHESIS VIRTUAL LAB", photosynthesisLabResources)
 }
