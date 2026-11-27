@@ -1454,6 +1454,7 @@ private fun TopicVisualisationGallery(topicId: String) {
     Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
         TopicEquationPanel(topicId)
         when (topicId) {
+            "bio-classification" -> EvolutionClassificationLab()
             "bio-adaptation" -> AdaptationTypesCard()
             "bio-cell" -> CellDiagramCard()
             "bio-nutrition" -> PhotosynthesisFlowCard()
