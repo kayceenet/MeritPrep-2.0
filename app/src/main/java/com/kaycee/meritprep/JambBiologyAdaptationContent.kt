@@ -1,5 +1,12 @@
 package com.kaycee.meritprep
 
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+
 /** Objective-led treatment of the JAMB structural, functional and behavioural adaptation unit. */
 internal object JambBiologyAdaptationContent {
     private val objectives = listOf(
@@ -134,4 +141,46 @@ internal object JambBiologyAdaptationContent {
 
     fun forTopic(topicId: String): List<JambDeepObjective> =
         if (topicId == "bio-adaptation") objectives else emptyList()
+}
+
+@Composable
+internal fun AdaptationScenarioLab() {
+    data class Scenario(val title: String, val challenge: String, val options: List<String>, val answer: Int, val reason: String)
+    val scenarios = listOf(
+        Scenario("Hot, dry habitat", "A small plant loses too much water through broad leaves.", listOf("Develop a larger, thinner leaf surface","Reduce leaf area and develop a thick cuticle","Keep stomata permanently open","Grow soft aquatic stems"),1,"A reduced leaf surface and thick cuticle lower water loss; many desert plants also store water in stems."),
+        Scenario("Waterlogged mangrove mud", "Roots are surrounded by saturated soil with little available oxygen.", listOf("Produce aerial breathing roots","Develop a thick waxy flower","Lose all roots","Use feathers to trap air"),0,"Pneumatophores project above the mud and expose gas-exchange surfaces to air."),
+        Scenario("Cold morning", "An ectothermic lizard needs to warm up before becoming active.", listOf("Aestivate underground","Bask in sunlight","Hibernate in hot sand","Increase transpiration"),1,"Basking allows an ectotherm to absorb heat from the environment."),
+        Scenario("Predator-rich grassland", "A stick insect is exposed on vegetation.", listOf("Use twig-like body shape and colour","Display bright warning colours without defence","Remain motionless on bare soil","Develop a shell like a snail"),0,"Resemblance to twigs makes the insect harder for predators to detect.")
+    )
+    var selected by remember { mutableIntStateOf(0) }
+    var answer by remember { mutableStateOf<Int?>(null) }
+    var checked by remember { mutableStateOf(false) }
+    val scenario = scenarios[selected]
+    Card(Modifier.fillMaxWidth()) {
+        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(9.dp)) {
+            Text("ADAPTATION SCENARIO LAB", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
+            Text("Choose a field condition and predict which adaptation would provide the clearest advantage.")
+            scenarios.forEachIndexed { index, item ->
+                OutlinedButton(onClick = { selected = index; answer = null; checked = false }, modifier = Modifier.fillMaxWidth()) {
+                    Text(if (selected == index) "✓  ${item.title}" else item.title, modifier = Modifier.fillMaxWidth())
+                }
+            }
+            Text(scenario.challenge, fontWeight = FontWeight.SemiBold)
+            scenario.options.forEachIndexed { index, option ->
+                OutlinedButton(
+                    onClick = { if (!checked) answer = index },
+                    enabled = !checked,
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = ButtonDefaults.outlinedButtonColors(containerColor = if (answer == index) MaterialTheme.colorScheme.secondaryContainer else MaterialTheme.colorScheme.surface)
+                ) { Text(option, modifier = Modifier.fillMaxWidth()) }
+            }
+            if (!checked) {
+                Button(onClick = { checked = true }, enabled = answer != null, modifier = Modifier.fillMaxWidth()) { Text("Test prediction") }
+            } else {
+                Text(if (answer == scenario.answer) "Correct prediction" else "Reconsider the environmental challenge", color = if (answer == scenario.answer) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.error, fontWeight = FontWeight.Bold)
+                Text(scenario.reason)
+                TextButton(onClick = { answer = null; checked = false }) { Text("Try this scenario again") }
+            }
+        }
+    }
 }
