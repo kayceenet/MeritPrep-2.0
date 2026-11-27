@@ -74,8 +74,8 @@ object ScientificNotation {
         }
         commands.entries.sortedByDescending { it.key.length }.forEach { (key, replacement) -> value = value.replace(key, replacement) }
         value = value.replace("\\left", "").replace("\\right", "")
-        value = value.replace(Regex("""\^\{([^{}]+)}""")) { m -> m.groupValues[1].map { superscript[it] ?: it }.joinToString("") }
-        value = value.replace(Regex("""_\{([^{}]+)}""")) { m -> m.groupValues[1].map { subscript[it] ?: it }.joinToString("") }
+        value = value.replace(Regex("""\^\{([^{}]+)\}""")) { m -> m.groupValues[1].map { superscript[it] ?: it }.joinToString("") }
+        value = value.replace(Regex("""_\{([^{}]+)\}""")) { m -> m.groupValues[1].map { subscript[it] ?: it }.joinToString("") }
         value = value.replace(Regex("""\^([A-Za-z0-9+\-=])""")) { m -> superscript[m.groupValues[1][0]]?.toString() ?: m.value }
         value = value.replace(Regex("""_([A-Za-z0-9+\-=])""")) { m -> subscript[m.groupValues[1][0]]?.toString() ?: m.value }
         value = value.replace("\\ ", " ").replace("\\%", "%")

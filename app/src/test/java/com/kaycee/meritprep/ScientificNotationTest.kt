@@ -51,4 +51,10 @@ class ScientificNotationTest {
         assertEquals("E", ScientificNotation.format("\\mathcal{E}"))
         assertEquals("∇ × B", ScientificNotation.format("\\nabla \\times B"))
     }
+    @Test
+    fun formatsBracedMultiDigitSuperscriptsAndSubscripts() {
+        assertEquals("x¹² + H₁₂O₆", ScientificNotation.format("x^{12} + H_{12}O_6"))
+        assertEquals("10⁻³ + m²", ScientificNotation.format("10^{-3} + m^2"))
+    }
+
 }
