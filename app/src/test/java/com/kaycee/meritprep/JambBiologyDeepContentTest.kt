@@ -140,7 +140,7 @@ class JambBiologyDeepContentTest {
     fun unrelatedTopicsDoNotReceiveBiologyCellContent() {
         assertTrue(JambBiologyDeepContent.forTopic("chem-atomic-bonding").isEmpty())
         assertTrue(JambBiologyDeepContent.forTopic("bio-excretion").isEmpty())
-        assertTrue(JambBiologyDeepContent.forTopic("bio-excretion").isEmpty())
+        assertTrue(JambBiologyDeepContent.forTopic("bio-support").isEmpty())
         assertFalse(JambBiologyDeepContent.forTopic("bio-nutrition").isEmpty())
         assertFalse(JambBiologyDeepContent.forTopic("bio-transport").isEmpty())
         assertFalse(JambBiologyDeepContent.forTopic("bio-respiration").isEmpty())
