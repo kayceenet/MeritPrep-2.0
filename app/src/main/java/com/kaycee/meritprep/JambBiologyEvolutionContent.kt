@@ -1,5 +1,12 @@
 package com.kaycee.meritprep
 
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+
 /** Objective-led JAMB treatment of evolution and organism diversity. */
 internal object JambBiologyEvolutionContent {
     private val objectives = listOf(
@@ -262,4 +269,72 @@ internal object JambBiologyEvolutionContent {
 
     fun forTopic(topicId: String): List<JambDeepObjective> =
         if (topicId == "bio-classification") objectives else emptyList()
+}
+
+internal data class EvolutionSpecimen(
+    val name: String,
+    val group: String,
+    val evidence: String,
+    val diagnosticFeature: String
+)
+
+@Composable
+internal fun EvolutionClassificationLab() {
+    val specimens = listOf(
+        EvolutionSpecimen("Amoeba", "Protista", "Irregular outline; temporary pseudopodia; food and contractile vacuoles.", "Pseudopodia are used for movement and engulfing food."),
+        EvolutionSpecimen("Euglena", "Protista", "Elongated cell; flagellum; eyespot; chloroplasts; flexible pellicle.", "A flagellum and photosynthetic chloroplasts occur in the same unicellular organism."),
+        EvolutionSpecimen("Paramecium", "Protista", "Slipper-shaped cell covered in cilia; oral groove; contractile vacuoles.", "Cilia provide locomotion and help direct food into the oral groove."),
+        EvolutionSpecimen("Rhizopus", "Fungi", "Cottony mycelium; rhizoids; stolons; upright sporangiophores and sporangia.", "A sporangium produces asexual spores; the fungal wall contains chitin."),
+        EvolutionSpecimen("Moss", "Bryophyta", "Small non-vascular plant; rhizoids; leafy gametophyte; capsule on a seta.", "The gametophyte is dominant and sperm require water for fertilisation."),
+        EvolutionSpecimen("Fern", "Pteridophyta", "True roots, stems and fronds; sori on frond undersides; vascular tissue.", "Sori contain sporangia; the plant reproduces by spores, not seeds."),
+        EvolutionSpecimen("Maize", "Angiosperm monocot", "One cotyledon; parallel leaf venation; fibrous roots; flowers in threes.", "A monocot typically has one cotyledon and parallel venation."),
+        EvolutionSpecimen("Snail", "Mollusca", "Soft unsegmented body; muscular foot; mantle; usually a shell.", "The muscular foot and mantle are characteristic molluscan structures."),
+        EvolutionSpecimen("Earthworm", "Annelida", "Elongated segmented body; moist skin; bristles in many species; true coelom.", "Repeated body segments and a true coelom distinguish annelids."),
+        EvolutionSpecimen("Bee", "Arthropoda: Insecta", "Head, thorax and abdomen; three pairs of jointed legs; antennae; wings.", "Six legs and three body regions identify an insect; bees also pollinate flowers."),
+        EvolutionSpecimen("Frog", "Amphibia", "Moist skin; strong hind limbs; aquatic tadpole stage; adult lungs and skin respiration.", "Amphibians commonly have aquatic larvae and remain dependent on moist conditions."),
+        EvolutionSpecimen("Bird", "Aves", "Feathers; wings; beak; lungs with air sacs; hard-shelled amniotic eggs.", "Feathers are diagnostic of birds; flight is not required for classification."),
+        EvolutionSpecimen("Mammal", "Mammalia", "Hair or fur; mammary glands; lungs; differentiated teeth in many species.", "Mammary glands that produce milk are the defining mammalian feature.")
+    )
+    var selectedName by remember { mutableStateOf("Amoeba") }
+    val selected = specimens.first { it.name == selectedName }
+    Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+        Card(Modifier.fillMaxWidth()) {
+            Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                Text("VIRTUAL SPECIMEN IDENTIFICATION", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
+                Text("Choose a specimen, inspect its evidence and identify the feature that supports its classification.", style = MaterialTheme.typography.bodyMedium)
+                specimens.chunked(3).forEach { group ->
+                    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                        group.forEach { specimen ->
+                            OutlinedButton(
+                                onClick = { selectedName = specimen.name },
+                                modifier = Modifier.weight(1f),
+                                contentPadding = PaddingValues(horizontal = 5.dp, vertical = 7.dp),
+                                colors = ButtonDefaults.outlinedButtonColors(
+                                    containerColor = if (selectedName == specimen.name) MaterialTheme.colorScheme.secondaryContainer else MaterialTheme.colorScheme.surface
+                                )
+                            ) { Text(specimen.name, style = MaterialTheme.typography.labelSmall) }
+                        }
+                        repeat(3 - group.size) { Spacer(Modifier.weight(1f)) }
+                    }
+                }
+                Text(selected.name, style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+                Text("Classification: ${selected.group}", color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.SemiBold)
+                Text("Observed evidence", fontWeight = FontWeight.SemiBold)
+                Text(selected.evidence)
+                Surface(color = MaterialTheme.colorScheme.tertiaryContainer, shape = MaterialTheme.shapes.medium) {
+                    Column(Modifier.fillMaxWidth().padding(12.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                        Text("DIAGNOSTIC FEATURE", style = MaterialTheme.typography.labelSmall, fontWeight = FontWeight.Bold)
+                        Text(selected.diagnosticFeature)
+                    }
+                }
+            }
+        }
+        Card(Modifier.fillMaxWidth()) {
+            Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                Text("INVESTIGATION TASK", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+                Text("Select three organisms from different groups. For each, record two visible or described features, identify its group, and explain why one feature is diagnostic. Then compare how its body organisation differs from a unicellular organism.")
+                Text("Practical skill: classification from observable evidence, not guesswork from habitat or size.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.primary)
+            }
+        }
+    }
 }
