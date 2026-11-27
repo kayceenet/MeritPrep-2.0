@@ -1456,6 +1456,7 @@ private fun TopicVisualisationGallery(topicId: String) {
         when (topicId) {
             "bio-classification" -> EvolutionClassificationLab()
             "bio-adaptation" -> { AdaptationTypesCard(); AdaptationScenarioLab() }
+            "bio-plant-anatomy" -> PlantMammalSectionLab()
             "bio-cell" -> CellDiagramCard()
             "bio-nutrition" -> PhotosynthesisFlowCard()
             "bio-respiration" -> RespirationComparisonCard()
