@@ -963,32 +963,36 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
                             }
                         }
                     }
-                    topic.sections.forEachIndexed { index, section ->
-                        Card(Modifier.fillMaxWidth()) {
-                            Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                                Text((index + 1).toString().padStart(2, '0'), style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
-                                Text(section.first, style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
-                                ScientificContent(section.second, style = MaterialTheme.typography.bodyLarge)
-                                Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
-                                    TextButton(
-                                        onClick = {
-                                            if (!speechReady) {
-                                                prepareLessonSpeech()
-                                            } else {
-                                                runCatching {
-                                                    speechEngine?.setSpeechRate(speechRate)
-                                                    speechEngine?.speak(section.first + ". " + section.second, TextToSpeech.QUEUE_FLUSH, null, "section-" + topic.id + "-" + index)
+                    if (JambBiologyDeepContent.forTopic(topic.id).isNotEmpty()) {
+                        JambBiologyDeepLessonPanel(topic.id)
+                        TopicVisualisationGallery(topicId)
+                    } else {
+                        topic.sections.forEachIndexed { index, section ->
+                            Card(Modifier.fillMaxWidth()) {
+                                Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                                    Text((index + 1).toString().padStart(2, '0'), style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
+                                    Text(section.first, style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+                                    ScientificContent(section.second, style = MaterialTheme.typography.bodyLarge)
+                                    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
+                                        TextButton(
+                                            onClick = {
+                                                if (!speechReady) {
+                                                    prepareLessonSpeech()
+                                                } else {
+                                                    runCatching {
+                                                        speechEngine?.setSpeechRate(speechRate)
+                                                        speechEngine?.speak(section.first + ". " + section.second, TextToSpeech.QUEUE_FLUSH, null, "section-" + topic.id + "-" + index)
+                                                    }
                                                 }
                                             }
-                                        }
-                                    ) { Text(if (speechReady) "Listen to this section" else "Prepare audio") }
+                                        ) { Text(if (speechReady) "Listen to this section" else "Prepare audio") }
+                                    }
+                                    if (index == 0) { TopicEquationPanel(topicId); TopicConceptQuickCheck(topic) }
+                                    TopicConceptInlineVisual(topicId, index, section.first)
                                 }
-                                if (index == 0) { TopicEquationPanel(topicId); TopicConceptQuickCheck(topic) }
-                                TopicConceptInlineVisual(topicId, index, section.first)
                             }
                         }
                     }
-                    JambBiologyDeepLessonPanel(topic.id)
                     Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                         Button(
                             onClick = {
