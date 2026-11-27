@@ -45,8 +45,24 @@ class JambBiologyDeepContentTest {
     }
 
     @Test
+    fun adaptationUnitCoversJambObjectivesAndIndependentChecks() {
+        val objectives = JambBiologyDeepContent.forTopic("bio-adaptation")
+
+        assertEquals(5, objectives.size)
+        assertTrue(objectives.all { it.points.isNotEmpty() && it.checks.size >= 2 })
+        assertTrue(objectives.all { it.traps.isNotEmpty() })
+        assertTrue(objectives.flatMap { it.points }.all {
+            it.heading.isNotBlank() && it.teaching.length >= 250 &&
+                it.example.isNotBlank() && it.examFocus.isNotBlank()
+        })
+        assertTrue(objectives.flatMap { it.checks }.all {
+            it.options.size == 4 && it.answer in it.options.indices && it.explanation.isNotBlank()
+        })
+    }
+
+    @Test
     fun allBiologyDeepConceptChecksUseUniqueIds() {
-        val ids = listOf("bio-cell", "bio-classification")
+        val ids = listOf("bio-cell", "bio-classification", "bio-adaptation")
             .flatMap { JambBiologyDeepContent.forTopic(it) }
             .flatMap { it.checks }
             .map { it.id }
