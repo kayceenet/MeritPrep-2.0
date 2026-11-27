@@ -190,4 +190,5 @@ internal fun PlantMammalSectionLab() {
             }
         }
     }
+    BiologyExternalLabLinks("MORE PLANT ANATOMY PRACTICALS", plantAnatomyLabResources)
 }
