@@ -204,25 +204,26 @@ internal fun JambBiologyDeepLessonPanel(topicId:String) {
 @Composable
 private fun ObjectiveKnowledgeCheck(check:JambDeepCheck,number:Int) {
  var selected by remember(check.id) { mutableStateOf<Int?>(null) }
+ var submitted by remember(check.id) { mutableStateOf(false) }
  Column(verticalArrangement=Arrangement.spacedBy(5.dp)) {
   Text("CONCEPT CHECK $number",style=MaterialTheme.typography.labelSmall,color=MaterialTheme.colorScheme.tertiary,fontWeight=FontWeight.Bold)
   Text(check.question,style=MaterialTheme.typography.bodyLarge,fontWeight=FontWeight.SemiBold)
   check.options.forEachIndexed { index,option ->
    Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.spacedBy(5.dp)) {
-    RadioButton(selected=selected==index,onClick={selected=index})
+    RadioButton(selected=selected==index,onClick={if(!submitted) selected=index},enabled=!submitted)
     Text(option,Modifier.weight(1f).padding(top=11.dp),style=MaterialTheme.typography.bodyMedium)
    }
   }
-  Button(onClick={if(selected==null) selected = -1},enabled=selected==null,modifier=Modifier.fillMaxWidth()) { Text("Check understanding") }
-  if(selected!=null) {
+  Button(onClick={submitted=true},enabled=selected!=null && !submitted,modifier=Modifier.fillMaxWidth()) { Text("Check understanding") }
+  if(submitted && selected!=null) {
    val correct=selected==check.answer
    Surface(color=if(correct) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.errorContainer,shape=MaterialTheme.shapes.medium) {
     Column(Modifier.fillMaxWidth().padding(12.dp),verticalArrangement=Arrangement.spacedBy(5.dp)) {
-     Text(if(correct) "Correct" else if(selected == -1) "Choose an answer first" else "Review this idea",fontWeight=FontWeight.Bold)
-     if(selected != -1) Text(check.explanation,style=MaterialTheme.typography.bodyMedium)
+     Text(if(correct) "Correct" else "Review this idea",fontWeight=FontWeight.Bold)
+     Text(check.explanation,style=MaterialTheme.typography.bodyMedium)
     }
    }
-   if(selected != -1) TextButton(onClick={selected=null}) { Text("Try again") }
+   TextButton(onClick={selected=null;submitted=false}) { Text("Try again") }
   }
  }
 }
