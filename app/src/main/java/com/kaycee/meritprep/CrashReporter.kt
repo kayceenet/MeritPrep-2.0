@@ -42,8 +42,13 @@ import java.util.Locale
 object CrashReporter {
     private const val REPORT_FILE = "meritprep-last-crash.txt"
     private const val MAX_REPORT_CHARS = 80_000
+    @Volatile private var installed = false
 
+    @Synchronized
     fun install(context: Context) {
+        if (installed) return
+        installed = true
+
         val appContext = context.applicationContext
         val previousHandler = Thread.getDefaultUncaughtExceptionHandler()
 
