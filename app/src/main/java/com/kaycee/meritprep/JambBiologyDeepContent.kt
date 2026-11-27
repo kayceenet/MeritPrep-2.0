@@ -155,7 +155,12 @@ The onion bulb is a modified underground shoot and is an organ composed of tissu
    )
   )
  )
- fun forTopic(topicId:String):List<JambDeepObjective> = when(topicId) {\n  "bio-cell" -> livingOrganisms\n  "bio-classification" -> JambBiologyEvolutionContent.forTopic(topicId)\n  else -> emptyList()\n }
+ fun forTopic(topicId:String):List<JambDeepObjective> = when(topicId) {
+  "bio-cell" -> livingOrganisms
+  "bio-classification" -> JambBiologyEvolutionContent.forTopic(topicId)
+  "bio-adaptation" -> JambBiologyAdaptationContent.forTopic(topicId)
+  else -> emptyList()
+ }
 }
 
 @Composable
