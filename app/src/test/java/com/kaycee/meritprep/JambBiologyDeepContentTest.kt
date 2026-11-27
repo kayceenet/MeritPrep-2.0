@@ -24,7 +24,7 @@ class JambBiologyDeepContentTest {
 
     @Test
     fun objectiveChecksHaveUniqueStableIds() {
-        val ids = JambBiologyDeepContent.forTopic("bio-cell").flatMap { it.checks }.map { it.id }
+        val ids = listOf("bio-cell", "bio-classification", "bio-adaptation", "bio-plant-anatomy")\n            .flatMap { JambBiologyDeepContent.forTopic(it) }\n            .flatMap { it.checks }\n            .map { it.id }
         assertEquals(ids.size, ids.toSet().size)
     }
 
@@ -46,7 +46,7 @@ class JambBiologyDeepContentTest {
 
     @Test
     fun adaptationUnitCoversJambObjectivesAndIndependentChecks() {
-        val objectives = JambBiologyDeepContent.forTopic("bio-adaptation", "bio-plant-anatomy")
+        val objectives = JambBiologyDeepContent.forTopic("bio-adaptation")
 
         assertEquals(5, objectives.size)
         assertTrue(objectives.all { it.points.isNotEmpty() && it.checks.size >= 2 })
@@ -78,7 +78,7 @@ class JambBiologyDeepContentTest {
 
     @Test
     fun allBiologyDeepConceptChecksUseUniqueIds() {
-        val ids = listOf("bio-cell", "bio-classification", "bio-adaptation")
+        val ids = listOf("bio-cell", "bio-classification", "bio-adaptation", "bio-plant-anatomy")
             .flatMap { JambBiologyDeepContent.forTopic(it) }
             .flatMap { it.checks }
             .map { it.id }
