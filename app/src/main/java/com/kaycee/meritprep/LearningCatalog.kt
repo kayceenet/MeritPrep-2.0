@@ -988,6 +988,7 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
                             }
                         }
                     }
+                    JambBiologyDeepLessonPanel(topic.id)
                     Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                         Button(
                             onClick = {
