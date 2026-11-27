@@ -152,7 +152,7 @@ internal fun AdaptationScenarioLab() {
         Scenario("Cold morning", "An ectothermic lizard needs to warm up before becoming active.", listOf("Aestivate underground","Bask in sunlight","Hibernate in hot sand","Increase transpiration"),1,"Basking allows an ectotherm to absorb heat from the environment."),
         Scenario("Predator-rich grassland", "A stick insect is exposed on vegetation.", listOf("Use twig-like body shape and colour","Display bright warning colours without defence","Remain motionless on bare soil","Develop a shell like a snail"),0,"Resemblance to twigs makes the insect harder for predators to detect.")
     )
-    var selected by remember { mutableIntStateOf(0) }
+    var selected by remember { mutableStateOf(0) }
     var answer by remember { mutableStateOf<Int?>(null) }
     var checked by remember { mutableStateOf(false) }
     val scenario = scenarios[selected]
