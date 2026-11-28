@@ -719,6 +719,7 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
     var noteText by remember(topicId) { mutableStateOf(runCatching { database.getNoteBody(noteId).orEmpty() }.getOrDefault("")) }
     var noteSaved by remember(topicId) { mutableStateOf(false) }
     var noteEditorOpen by remember(topicId) { mutableStateOf(false) }
+    var headerActionsExpanded by remember(topicId) { mutableStateOf(false) }
     var exerciseIndex by remember(topicId) { mutableIntStateOf(0) }
     var exerciseSelections by remember(topicId) { mutableStateOf<Map<String, Int>>(emptyMap()) }
     var exerciseChecked by remember(topicId) { mutableStateOf(false) }
@@ -862,16 +863,18 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
                     Text(topic.title, style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold, maxLines = 2)
                     Text((stageIndex + 1).toString() + " / " + stages.size + " learning pillars", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
-                IconButton(onClick = onOpenCalculators) { Icon(Icons.Default.Calculate, contentDescription = "Scientific calculator") }
-                IconButton(onClick = { noteEditorOpen = true }) {
-                    Icon(Icons.Default.Edit, contentDescription = "Save or edit lesson note")
+                Box {
+                    IconButton(onClick = { headerActionsExpanded = true }) { Icon(Icons.Default.MoreVert, contentDescription = "Lesson actions") }
+                    DropdownMenu(expanded = headerActionsExpanded, onDismissRequest = { headerActionsExpanded = false }) {
+                        DropdownMenuItem(text = { Text("Scientific calculator") }, leadingIcon = { Icon(Icons.Default.Calculate, contentDescription = null) }, onClick = { headerActionsExpanded = false; onOpenCalculators() })
+                        DropdownMenuItem(text = { Text("Edit lesson note") }, leadingIcon = { Icon(Icons.Default.Edit, contentDescription = null) }, onClick = { headerActionsExpanded = false; noteEditorOpen = true })
+                        DropdownMenuItem(text = { Text(if (bookmarked) "Remove bookmark" else "Bookmark lesson") }, leadingIcon = { Icon(if (bookmarked) Icons.Default.Bookmark else Icons.Default.BookmarkBorder, contentDescription = null) }, onClick = {
+                            headerActionsExpanded = false
+                            val saved = runCatching { if (bookmarked) database.removeBookmark(topic.id) else database.bookmark(topic.id, "lesson") }.isSuccess
+                            if (saved) bookmarked = !bookmarked
+                        })
+                    }
                 }
-                IconButton(onClick = {
-                    val saved = runCatching {
-                        if (bookmarked) database.removeBookmark(topic.id) else database.bookmark(topic.id, "lesson")
-                    }.isSuccess
-                    if (saved) bookmarked = !bookmarked
-                }) { Icon(if (bookmarked) Icons.Default.Bookmark else Icons.Default.BookmarkBorder, contentDescription = if (bookmarked) "Remove bookmark" else "Save lesson") }
             }
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
                 Text(if (completed) "Lesson mastered" else completedStages.size.toString() + " of " + stages.size + " pillars completed", style = MaterialTheme.typography.labelMedium)
@@ -919,7 +922,7 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
             val isTablet = maxWidth >= 720.dp
             val lessonContent: @Composable (Modifier) -> Unit = { contentModifier ->
             Column(
-                contentModifier.fillMaxWidth().verticalScroll(lessonBodyScroll).padding(horizontal = 16.dp, vertical = 14.dp),
+                contentModifier.fillMaxWidth().verticalScroll(lessonBodyScroll).padding(start = 16.dp, top = 14.dp, end = 16.dp, bottom = 112.dp),
             verticalArrangement = Arrangement.spacedBy(14.dp)
         ) {
             Card(Modifier.fillMaxWidth(), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.55f))) {
@@ -930,8 +933,7 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
                 }
             }
 
-            AnimatedContent(targetState = stage, label = "lesson-pillar-transition") { activeStage ->
-                when (activeStage) {
+            when (stage) {
                 LessonStage.CONCEPT -> {
                     Card(Modifier.fillMaxWidth()) {
                         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -939,22 +941,29 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
                             ScientificContent(topic.introduction, style = MaterialTheme.typography.bodyLarge)
                         }
                     }
-                    Column(verticalArrangement = Arrangement.spacedBy(5.dp)) {
-                        Text("Audio speed", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                        Row(
-                            Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()),
-                            horizontalArrangement = Arrangement.spacedBy(6.dp),
-                            verticalAlignment = androidx.compose.ui.Alignment.CenterVertically
-                        ) {
-                            listOf(0.6f, 0.8f, 1f, 1.2f, 1.5f).forEach { rate ->
-                                FilterChip(
-                                    selected = speechRate == rate,
-                                    onClick = { speechRate = rate; runCatching { speechEngine?.setSpeechRate(rate) } },
-                                    label = { Text(rate.toString() + "×") }
-                                )
+                    Card(Modifier.fillMaxWidth()) {
+                        Column(Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                            Text("LESSON AUDIO", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
+                            Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp), verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
+                                Button(onClick = {
+                                    if (!speechReady) prepareLessonSpeech() else {
+                                        val narration = buildString {
+                                            append(topic.title).append(". ").append(topic.introduction).append(". ")
+                                            topic.objectives.forEach { append(it).append(". ") }
+                                            topic.sections.forEach { append(it.first).append(". ").append(it.second).append(". ") }
+                                        }
+                                        runCatching { speechEngine?.language = Locale.UK; speechEngine?.setSpeechRate(speechRate); speechEngine?.speak(narration, TextToSpeech.QUEUE_FLUSH, null, "lesson-" + topic.id) }
+                                    }
+                                }, modifier = Modifier.weight(1f).heightIn(min = 48.dp)) { Text(if (speechReady) "Listen to lesson" else "Prepare audio") }
+                                OutlinedButton(onClick = { speechEngine?.stop() }, enabled = speechReady, modifier = Modifier.heightIn(min = 48.dp)) { Text("Stop") }
+                            }
+                            Text("Playback uses your device's installed text-to-speech voice.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                            Row(Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                                listOf(0.6f, 0.8f, 1f, 1.2f, 1.5f).forEach { rate -> FilterChip(selected = speechRate == rate, onClick = { speechRate = rate; runCatching { speechEngine?.setSpeechRate(rate) } }, label = { Text(rate.toString() + "×") }) }
                             }
                         }
                     }
+
                     Card(Modifier.fillMaxWidth()) {
                         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(9.dp)) {
                             Text("What you will learn", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
@@ -997,30 +1006,7 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
                             }
                         }
                     }
-                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                        Button(
-                            onClick = {
-                                if (!speechReady) {
-                                    prepareLessonSpeech()
-                                } else {
-                                    val narration = buildString {
-                                        append(topic.title).append(". ")
-                                        append(topic.introduction).append(". ")
-                                        topic.objectives.forEach { append(it).append(". ") }
-                                        topic.sections.forEach { append(it.first).append(". ").append(it.second).append(". ") }
-                                    }
-                                    runCatching {
-                                        speechEngine?.language = Locale.UK
-                                        speechEngine?.setSpeechRate(speechRate)
-                                        speechEngine?.speak(narration, TextToSpeech.QUEUE_FLUSH, null, "lesson-" + topic.id)
-                                    }
-                                }
-                            },
-                            modifier = Modifier.weight(1f)
-                        ) { Text(if (speechReady) "Listen to lesson" else "Prepare audio") }
-                        OutlinedButton(onClick = { speechEngine?.stop() }, enabled = speechReady) { Text("Stop") }
-                    }
-                    Text("Audio uses your device's text-to-speech voice. Offline playback depends on an installed voice.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+
                 }
 
                 LessonStage.EXAMPLES -> {
@@ -1162,7 +1148,6 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
-                }
                 }
             }
         }
