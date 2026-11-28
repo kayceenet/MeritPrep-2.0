@@ -234,12 +234,16 @@ object LearningCatalog {
             "bio-support", "Support and movement", "BIO",
             "A young plant bends towards a window, a grasshopper jumps, and a human arm lifts a bag. These movements depend on structures that support the body and systems that generate force. Plants use cell walls, tissues and growth responses; animals use skeletons, joints and muscles.",
             listOf(
-                "Explain how plants support their bodies",
-                "Describe tropic responses in plants",
-                "Compare hydrostatic skeletons, exoskeletons and endoskeletons",
-                "Identify major parts of the mammalian skeleton",
-                "Explain the roles of joints, tendons, ligaments and cartilage",
-                "Describe how antagonistic muscles produce movement"
+                "Explain why organisms need support and movement",
+                "Identify collenchyma, sclerenchyma, xylem fibres and phloem fibres as plant supporting tissues",
+                "Describe the distribution of supporting tissues in roots, stems and leaves",
+                "Distinguish tropic, tactic, nastic and sleep movements",
+                "Explain plant responses to light, water, gravity and touch",
+                "Identify growth regions in roots and shoots and explain the role of auxins in tropism",
+                "Relate the locations and properties of chitin, cartilage and bone to support",
+                "Relate the mammalian skeleton to support, locomotion and respiration",
+                "Differentiate joint types using anatomical examples",
+                "Apply protective, supportive, locomotive and respiratory functions of the skeleton"
             ),
             listOf(
                 "Support in plants" to "Plants do not have bones. Their support comes from cell walls, turgor pressure and specialised tissues. Parenchyma cells can provide support when turgid; collenchyma provides flexible support in growing regions; sclerenchyma has thick, often lignified walls and provides strength; xylem also contributes support. When a plant wilts, loss of turgor reduces support and leaves or stems may droop.",
