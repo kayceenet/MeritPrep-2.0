@@ -939,14 +939,20 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
                             ScientificContent(topic.introduction, style = MaterialTheme.typography.bodyLarge)
                         }
                     }
-                    Row(Modifier.fillMaxWidth(), verticalAlignment = androidx.compose.ui.Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                    Column(verticalArrangement = Arrangement.spacedBy(5.dp)) {
                         Text("Audio speed", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                        listOf(0.6f, 0.8f, 1f, 1.2f, 1.5f).forEach { rate ->
-                            FilterChip(
-                                selected = speechRate == rate,
-                                onClick = { speechRate = rate; runCatching { speechEngine?.setSpeechRate(rate) } },
-                                label = { Text(rate.toString() + "×") }
-                            )
+                        Row(
+                            Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()),
+                            horizontalArrangement = Arrangement.spacedBy(6.dp),
+                            verticalAlignment = androidx.compose.ui.Alignment.CenterVertically
+                        ) {
+                            listOf(0.6f, 0.8f, 1f, 1.2f, 1.5f).forEach { rate ->
+                                FilterChip(
+                                    selected = speechRate == rate,
+                                    onClick = { speechRate = rate; runCatching { speechEngine?.setSpeechRate(rate) } },
+                                    label = { Text(rate.toString() + "×") }
+                                )
+                            }
                         }
                     }
                     Card(Modifier.fillMaxWidth()) {
@@ -1191,7 +1197,7 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
                         enabled = stageIndex > 0,
                         modifier = Modifier.weight(0.9f).heightIn(min = 48.dp),
                         contentPadding = PaddingValues(horizontal = 8.dp)
-                    ) { Text("← Prev", maxLines = 1) }
+                    ) { Text("Back", maxLines = 1) }
                     Button(
                         onClick = { markStageComplete(stage) },
                         enabled = stage !in completedStages && (stage != LessonStage.PROJECT || projectChecksPassed),
@@ -1200,10 +1206,10 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
                     ) {
                         Text(
                             when {
-                                stage in completedStages -> "✓ Verified"
-                                stage == LessonStage.PROJECT && !projectChecksPassed -> "Pass project checks"
-                                stage == LessonStage.PROJECT -> "Verify project"
-                                else -> "Complete section"
+                                stage in completedStages -> "Verified"
+                                stage == LessonStage.PROJECT && !projectChecksPassed -> "Check project"
+                                stage == LessonStage.PROJECT -> "Verify"
+                                else -> "Complete"
                             },
                             maxLines = 1
                         )
@@ -1214,7 +1220,7 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
                         enabled = nextStage != null && isLessonStageUnlocked(nextStage, completedStages),
                         modifier = Modifier.weight(0.9f).heightIn(min = 48.dp),
                         contentPadding = PaddingValues(horizontal = 8.dp)
-                    ) { Text(if (nextStage == null) "Next →" else "Next →", maxLines = 1) }
+                    ) { Text("Next", maxLines = 1) }
                 }
             }
         } else {

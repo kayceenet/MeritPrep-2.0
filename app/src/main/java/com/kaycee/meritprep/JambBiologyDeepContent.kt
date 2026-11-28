@@ -1,6 +1,9 @@
 package com.kaycee.meritprep
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.selection.selectable
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -177,6 +180,8 @@ The onion bulb is a modified underground shoot and is an organ composed of tissu
 internal fun JambBiologyDeepLessonPanel(topicId:String) {
  val objectives=JambBiologyDeepContent.forTopic(topicId)
  if(objectives.isEmpty()) return
+ var selectedObjective by remember(topicId) { mutableIntStateOf(0) }
+ val safeObjective = selectedObjective.coerceIn(0, objectives.lastIndex)
  Column(verticalArrangement=Arrangement.spacedBy(12.dp)) {
   Card(Modifier.fillMaxWidth()) {
    Column(Modifier.padding(16.dp),verticalArrangement=Arrangement.spacedBy(6.dp)) {
@@ -185,31 +190,42 @@ internal fun JambBiologyDeepLessonPanel(topicId:String) {
     Text("Coverage: ${objectives.size} objectives • ${objectives.sumOf { it.checks.size }} concept checks",style=MaterialTheme.typography.labelMedium,color=MaterialTheme.colorScheme.onSurfaceVariant)
    }
   }
-  objectives.forEachIndexed { index,obj ->
-   Card(Modifier.fillMaxWidth()) {
+  Text("JUMP TO AN OBJECTIVE",style=MaterialTheme.typography.labelMedium,color=MaterialTheme.colorScheme.primary,fontWeight=FontWeight.Bold)
+  Row(Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()),horizontalArrangement=Arrangement.spacedBy(8.dp)) {
+   objectives.forEachIndexed { index,obj ->
+    FilterChip(selected=safeObjective==index,onClick={selectedObjective=index},label={Text("Objective ${index+1}")})
+   }
+  }
+  Text("Objective ${safeObjective+1} of ${objectives.size}",style=MaterialTheme.typography.labelMedium,color=MaterialTheme.colorScheme.onSurfaceVariant)
+  val obj = objectives[safeObjective]
+  Card(Modifier.fillMaxWidth()) {
     Column(Modifier.padding(16.dp),verticalArrangement=Arrangement.spacedBy(10.dp)) {
-     Text("SYLLABUS OBJECTIVE ${index+1}",style=MaterialTheme.typography.labelSmall,color=MaterialTheme.colorScheme.primary,fontWeight=FontWeight.Bold)
+     Text("SYLLABUS OBJECTIVE ${safeObjective+1}",style=MaterialTheme.typography.labelSmall,color=MaterialTheme.colorScheme.primary,fontWeight=FontWeight.Bold)
      Text(obj.objective,style=MaterialTheme.typography.titleMedium,fontWeight=FontWeight.Bold)
      obj.points.forEach { point ->
       Column(verticalArrangement=Arrangement.spacedBy(6.dp)) {
        Text(point.heading,style=MaterialTheme.typography.titleSmall,fontWeight=FontWeight.SemiBold)
-       Text(point.teaching,style=MaterialTheme.typography.bodyMedium)
+       Text(point.teaching,style=MaterialTheme.typography.bodyLarge,lineHeight=MaterialTheme.typography.bodyLarge.lineHeight)
        Surface(color=MaterialTheme.colorScheme.secondaryContainer,shape=MaterialTheme.shapes.medium) {
         Column(Modifier.fillMaxWidth().padding(12.dp),verticalArrangement=Arrangement.spacedBy(4.dp)) {
          Text("APPLIED EXAMPLE",style=MaterialTheme.typography.labelSmall,fontWeight=FontWeight.Bold)
-         Text(point.example,style=MaterialTheme.typography.bodyMedium)
+         Text(point.example,style=MaterialTheme.typography.bodyLarge,lineHeight=MaterialTheme.typography.bodyLarge.lineHeight)
         }
        }
-       Text("Examination focus: ${point.examFocus}",style=MaterialTheme.typography.bodySmall,color=MaterialTheme.colorScheme.primary)
+       Text("Examination focus: ${point.examFocus}",style=MaterialTheme.typography.bodyMedium,color=MaterialTheme.colorScheme.primary)
       }
      }
      Surface(color=MaterialTheme.colorScheme.errorContainer.copy(alpha=0.4f),shape=MaterialTheme.shapes.medium) {
       Column(Modifier.fillMaxWidth().padding(12.dp),verticalArrangement=Arrangement.spacedBy(5.dp)) {
        Text("COMMON EXAMINATION TRAPS",style=MaterialTheme.typography.labelSmall,fontWeight=FontWeight.Bold)
-       obj.traps.forEach { Text("• $it",style=MaterialTheme.typography.bodySmall) }
+       obj.traps.forEach { Text("• $it",style=MaterialTheme.typography.bodyMedium) }
       }
      }
      obj.checks.forEachIndexed { i,check -> ObjectiveKnowledgeCheck(check,i+1) }
+     Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.spacedBy(10.dp)) {
+      OutlinedButton(onClick={selectedObjective=(safeObjective-1).coerceAtLeast(0)},enabled=safeObjective>0,modifier=Modifier.weight(1f).heightIn(min=48.dp)) { Text("Previous objective") }
+      Button(onClick={selectedObjective=(safeObjective+1).coerceAtMost(objectives.lastIndex)},enabled=safeObjective<objectives.lastIndex,modifier=Modifier.weight(1f).heightIn(min=48.dp)) { Text("Next objective") }
+     }
     }
    }
   }
@@ -224,9 +240,15 @@ private fun ObjectiveKnowledgeCheck(check:JambDeepCheck,number:Int) {
   Text("CONCEPT CHECK $number",style=MaterialTheme.typography.labelSmall,color=MaterialTheme.colorScheme.tertiary,fontWeight=FontWeight.Bold)
   Text(check.question,style=MaterialTheme.typography.bodyLarge,fontWeight=FontWeight.SemiBold)
   check.options.forEachIndexed { index,option ->
-   Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.spacedBy(5.dp)) {
+   Row(
+    Modifier.fillMaxWidth().heightIn(min=52.dp)
+     .then(if (!submitted) Modifier.selectable(selected=selected==index,onClick={selected=index},role=androidx.compose.ui.semantics.Role.RadioButton) else Modifier)
+     .padding(horizontal=6.dp,vertical=2.dp),
+    horizontalArrangement=Arrangement.spacedBy(5.dp),
+    verticalAlignment=androidx.compose.ui.Alignment.CenterVertically
+   ) {
     RadioButton(selected=selected==index,onClick={if(!submitted) selected=index},enabled=!submitted)
-    Text(option,Modifier.weight(1f).padding(top=11.dp),style=MaterialTheme.typography.bodyMedium)
+    Text(option,Modifier.weight(1f),style=MaterialTheme.typography.bodyLarge)
    }
   }
   Button(onClick={submitted=true},enabled=selected!=null && !submitted,modifier=Modifier.fillMaxWidth()) { Text("Check understanding") }
