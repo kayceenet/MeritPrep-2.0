@@ -24,7 +24,7 @@ class JambBiologyDeepContentTest {
 
     @Test
     fun objectiveChecksHaveUniqueStableIds() {
-        val ids = listOf("bio-cell", "bio-classification", "bio-adaptation", "bio-plant-anatomy", "bio-nutrition", "bio-transport", "bio-respiration", "bio-excretion")
+        val ids = listOf("bio-cell", "bio-classification", "bio-adaptation", "bio-plant-anatomy", "bio-nutrition", "bio-transport", "bio-respiration", "bio-excretion", "bio-support")
             .flatMap { JambBiologyDeepContent.forTopic(it) }
             .flatMap { it.checks }
             .map { it.id }
@@ -144,6 +144,22 @@ class JambBiologyDeepContentTest {
     }
 
     @Test
+    fun supportAndMovementUnitCoversNineSyllabusObjectivesAndIndependentChecks() {
+        val objectives = JambBiologyDeepContent.forTopic("bio-support")
+
+        assertEquals(9, objectives.size)
+        assertTrue(objectives.all { it.points.isNotEmpty() && it.checks.size >= 3 })
+        assertTrue(objectives.all { it.traps.isNotEmpty() })
+        assertTrue(objectives.flatMap { it.points }.all {
+            it.heading.isNotBlank() && it.teaching.length >= 250 &&
+                it.example.isNotBlank() && it.examFocus.isNotBlank()
+        })
+        assertTrue(objectives.flatMap { it.checks }.all {
+            it.options.size == 4 && it.answer in it.options.indices && it.explanation.isNotBlank()
+        })
+    }
+
+    @Test
     fun allBiologyDeepConceptChecksUseUniqueIds() {
         val ids = listOf("bio-cell", "bio-classification", "bio-adaptation", "bio-plant-anatomy", "bio-nutrition", "bio-transport", "bio-respiration", "bio-excretion")
             .flatMap { JambBiologyDeepContent.forTopic(it) }
@@ -156,7 +172,7 @@ class JambBiologyDeepContentTest {
     fun unrelatedTopicsDoNotReceiveBiologyCellContent() {
         assertTrue(JambBiologyDeepContent.forTopic("chem-atomic-bonding").isEmpty())
         assertFalse(JambBiologyDeepContent.forTopic("bio-excretion").isEmpty())
-        assertTrue(JambBiologyDeepContent.forTopic("bio-support").isEmpty())
+        assertFalse(JambBiologyDeepContent.forTopic("bio-support").isEmpty())
         assertFalse(JambBiologyDeepContent.forTopic("bio-nutrition").isEmpty())
         assertFalse(JambBiologyDeepContent.forTopic("bio-transport").isEmpty())
         assertFalse(JambBiologyDeepContent.forTopic("bio-respiration").isEmpty())
