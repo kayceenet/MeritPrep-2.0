@@ -181,14 +181,14 @@ internal fun NephronOsmoregulationLab() {
             Text("NEPHRON INVESTIGATION", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
             Text("Follow the filtrate", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
             Text("Select a hydration condition, then move through the nephron. This is a qualitative learning model, not a measured clinical prediction.")
-            Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+            Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
                 listOf("Dehydrated", "Well hydrated", "High water intake").forEach { option ->
                     FilterChip(selected = condition == option, onClick = { condition = option }, label = { Text(option) })
                 }
             }
             Text("Stage ${stage + 1} of ${stages.size}", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary)
             Text(stages[stage], style = MaterialTheme.typography.bodyLarge)
-            LinearProgressIndicator(progress = { (stage + 1) / stages.size.toFloat() }, modifier = Modifier.fillMaxWidth())
+            LinearProgressIndicator(progress = (stage + 1) / stages.size.toFloat(), modifier = Modifier.fillMaxWidth())
             Text("Predicted response", fontWeight = FontWeight.Bold)
             Text(outcome)
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -201,8 +201,9 @@ internal fun NephronOsmoregulationLab() {
     BiologyExternalLabLinks(
         title = "FREE KIDNEY AND OSMOREGULATION RESOURCES",
         resources = listOf(
-            BiologyLabResource("Kidney and nephron learning resources", "Open educational kidney and nephron activities from the Kidney Foundation of Canada.", "https://kidney.ca/"),
-            BiologyLabResource("HHMI BioInteractive", "Explore free biology interactives and classroom resources; search for kidney and homeostasis activities.", "https://www.biointeractive.org/")
+            BiologyLabResource("Biology Simulations: 3D nephron", "Free browser-based model of ultrafiltration, selective reabsorption and ADH; no sign-in required.", "https://biologysimulations.co.uk/simulations/nephron/"),
+            BiologyLabResource("Biology Simulations: kidney structure", "Free interactive 3D kidney cross-section for identifying cortex, medulla, renal pelvis and urine pathway.", "https://biologysimulations.co.uk/simulations/kidney-structure/"),
+            BiologyLabResource("Humanome: urinary system WebQuest", "Free 3D interactive urinary-system model and guided nephron activity; no student account required.", "https://humanome.co/w/urinary-system")
         )
     )
 }
