@@ -199,7 +199,7 @@ internal fun NephronOsmoregulationLab() {
         }
     }
     BiologyExternalLabLinks(
-        title = "FREE KIDNEY AND OSMOREGULATION RESOURCES",
+        heading = "FREE KIDNEY AND OSMOREGULATION RESOURCES",
         resources = listOf(
             BiologyLabResource("Biology Simulations: 3D nephron", "Free browser-based model of ultrafiltration, selective reabsorption and ADH; no sign-in required.", "https://biologysimulations.co.uk/simulations/nephron/"),
             BiologyLabResource("Biology Simulations: kidney structure", "Free interactive 3D kidney cross-section for identifying cortex, medulla, renal pelvis and urine pathway.", "https://biologysimulations.co.uk/simulations/kidney-structure/"),
