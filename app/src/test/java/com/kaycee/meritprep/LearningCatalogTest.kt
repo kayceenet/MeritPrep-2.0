@@ -109,6 +109,29 @@ class LearningCatalogTest {
     }
 
     @Test
+    fun growthDeepLessonCoversCellDivisionPlantGrowthAndSeedGermination() {
+        val objectives = JambBiologyGrowthContent.forTopic("bio-growth")
+        assertEquals(7, objectives.size)
+        val checks = objectives.flatMap { it.checks }
+        assertEquals(27, checks.size)
+        assertEquals(checks.size, checks.map { it.id }.toSet().size)
+        assertTrue(objectives.all { objective ->
+            objective.objective.isNotBlank() &&
+                objective.points.isNotEmpty() &&
+                objective.traps.isNotEmpty() &&
+                objective.checks.isNotEmpty() &&
+                objective.points.all { point ->
+                    point.heading.isNotBlank() && point.teaching.isNotBlank() &&
+                        point.example.isNotBlank() && point.examFocus.isNotBlank()
+                }
+        })
+        assertTrue(checks.all { check ->
+            check.question.isNotBlank() && check.options.size == 4 &&
+                check.answer in check.options.indices && check.explanation.isNotBlank()
+        })
+    }
+
+    @Test
     fun biologyLessonKnowledgeCheckAnswersAreBalancedAcrossAllFourPositions() {
         val lessons = LearningCatalog.topics.filter { it.subjectCode == "BIO" }
         val counts = lessons.groupingBy { it.correctOption }.eachCount()

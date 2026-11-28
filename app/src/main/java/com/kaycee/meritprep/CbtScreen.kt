@@ -109,7 +109,12 @@ fun CbtScreen(mode: CbtMode = CbtMode.JAMB_UTME, questionPool: List<AssessmentQu
                 sessionId = snapshot.sessionId
                 currentIndex = snapshot.currentIndex.coerceIn(0, restoredQuestions.lastIndex)
                 endsAtMillis = snapshot.endsAt
-                remainingSeconds = ((snapshot.endsAt - System.currentTimeMillis()) / 1000L).toInt().coerceAtLeast(0)
+                paused = snapshot.status == "PAUSED"
+                remainingSeconds = if (paused) {
+                    snapshot.remainingSeconds ?: 0
+                } else {
+                    ((snapshot.endsAt - System.currentTimeMillis()) / 1000L).toInt().coerceAtLeast(0)
+                }
                 started = true
             } else {
                 database.abandonCbtSession(snapshot.sessionId)
@@ -305,11 +310,15 @@ fun CbtScreen(mode: CbtMode = CbtMode.JAMB_UTME, questionPool: List<AssessmentQu
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 OutlinedButton(
                     onClick = {
+                        val activeSessionId = sessionId
                         if (paused) {
-                            endsAtMillis = System.currentTimeMillis() + remainingSeconds * 1000L
+                            val now = System.currentTimeMillis()
+                            endsAtMillis = now + remainingSeconds * 1000L
+                            activeSessionId?.let { database.resumeCbtSession(it, now, remainingSeconds) }
                             paused = false
                         } else {
                             remainingSeconds = ((endsAtMillis - System.currentTimeMillis()) / 1000L).toInt().coerceAtLeast(0)
+                            activeSessionId?.let { database.pauseCbtSession(it, remainingSeconds) }
                             paused = true
                         }
                     },

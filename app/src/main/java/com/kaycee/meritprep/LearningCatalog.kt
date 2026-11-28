@@ -14,6 +14,7 @@ import androidx.compose.material.icons.filled.Bookmark
 import androidx.compose.material.icons.filled.BookmarkBorder
 import androidx.compose.material.icons.filled.Calculate
 import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -209,12 +210,11 @@ object LearningCatalog {
             "bio-excretion", "Excretion and osmoregulation", "BIO",
             "Cells produce waste products as they carry out metabolism. If these substances accumulate, they can damage cells or disturb the internal environment. Organisms therefore remove metabolic wastes and regulate water and ion balance. This lesson separates excretion from egestion and compares the excretory structures of different organisms.",
             listOf(
-                "Define excretion and distinguish it from egestion",
-                "Identify major metabolic waste products",
-                "Compare excretory structures in selected organisms",
-                "Describe the main parts of a mammalian kidney and nephron",
-                "Explain ultrafiltration and selective reabsorption",
-                "Explain the role of the kidney in water and salt balance"
+                "Define excretion, explain its significance and distinguish it from egestion and secretion",
+                "Identify excretory structures in selected organisms and relate their structures to functions",
+                "Relate kidney and nephron structure to ultrafiltration, selective reabsorption and osmoregulation",
+                "Identify the excretory products and functions of the lungs and skin",
+                "Explain the biological and economic importance of plant excretory products"
             ),
             listOf(
                 "Excretion is not egestion" to "Excretion is the removal of metabolic waste products made by cells, such as carbon dioxide, urea and excess salts. Egestion is the removal of undigested material from the alimentary canal as faeces. Defaecation is not the same as excretion because faeces are not primarily metabolic waste. The lungs excrete carbon dioxide and water vapour; the kidneys excrete urea, excess water and salts; the skin can excrete small amounts of water, salts and urea in sweat.",
@@ -234,12 +234,15 @@ object LearningCatalog {
             "bio-support", "Support and movement", "BIO",
             "A young plant bends towards a window, a grasshopper jumps, and a human arm lifts a bag. These movements depend on structures that support the body and systems that generate force. Plants use cell walls, tissues and growth responses; animals use skeletons, joints and muscles.",
             listOf(
-                "Explain how plants support their bodies",
-                "Describe tropic responses in plants",
-                "Compare hydrostatic skeletons, exoskeletons and endoskeletons",
-                "Identify major parts of the mammalian skeleton",
-                "Explain the roles of joints, tendons, ligaments and cartilage",
-                "Describe how antagonistic muscles produce movement"
+                "Explain why organisms need support and movement",
+                "Identify collenchyma, sclerenchyma, xylem fibres and phloem fibres as plant supporting tissues",
+                "Describe the distribution of supporting tissues in roots, stems and leaves",
+                "Distinguish tropic, tactic, nastic and sleep movements and relate responses to light, water, gravity and touch",
+                "Identify growth regions in roots and shoots and explain the role of auxins in tropism",
+                "Relate the locations and properties of chitin, cartilage and bone to support",
+                "Relate the mammalian skeleton to support, locomotion and respiration",
+                "Differentiate joint types using anatomical examples",
+                "Apply protective, supportive, locomotive and respiratory functions of the skeleton"
             ),
             listOf(
                 "Support in plants" to "Plants do not have bones. Their support comes from cell walls, turgor pressure and specialised tissues. Parenchyma cells can provide support when turgid; collenchyma provides flexible support in growing regions; sclerenchyma has thick, often lignified walls and provides strength; xylem also contributes support. When a plant wilts, loss of turgor reduces support and leaves or stems may droop.",
@@ -258,12 +261,14 @@ object LearningCatalog {
             "bio-reproduction", "Reproduction in plants and animals", "BIO",
             "Living organisms produce offspring, allowing their species to continue. Some organisms reproduce asexually from one parent; others reproduce sexually through the fusion of gametes. Flowering plants and mammals use different structures and processes, but both involve the transfer of genetic information to the next generation.",
             listOf(
-                "Distinguish sexual and asexual reproduction",
-                "Compare common methods of asexual reproduction",
-                "Identify the main parts of a flower and their functions",
-                "Explain pollination, fertilisation and seed formation",
-                "Describe the main organs of the mammalian reproductive systems",
-                "Explain fertilisation, implantation and early development in mammals"
+                "Differentiate asexual and sexual reproduction",
+                "Explain fission in Paramecium and budding in yeast",
+                "Apply natural vegetative propagation in crop production",
+                "Apply grafting, budding and layering in artificial propagation",
+                "Relate floral parts to their functions, pollination and fertilisation",
+                "Explain cross-pollination, placentation and fruit development",
+                "Differentiate male and female mammalian reproductive organs",
+                "Explain fertilisation, development, maternal influences, IVF and birth control"
             ),
             listOf(
                 "Why organisms reproduce" to "Reproduction is the biological process by which organisms produce offspring. It is not required for an individual organism to stay alive, but it is essential for the continuation of a species. Asexual reproduction usually involves one parent and no fusion of gametes; offspring are genetically very similar to the parent, apart from mutations. Sexual reproduction involves the fusion of male and female gametes and produces genetically varied offspring.",
@@ -283,14 +288,14 @@ object LearningCatalog {
             "bio-growth", "Growth and development", "BIO",
             "A seed becomes a seedling, a child becomes an adult, and a young shoot grows towards light. Growth increases size or dry mass; development involves changes in form and function as an organism matures. This lesson explains how cells divide, enlarge and specialise, and how seeds begin a new plant.",
             listOf(
-                "Distinguish growth from development",
-                "Identify the main processes responsible for growth",
-                "Describe the regions of growth in a plant root and shoot",
-                "Explain the conditions needed for seed germination",
-                "Compare epigeal and hypogeal germination",
-                "Describe selected roles of plant growth regulators",
-                "Describe the cell cycle and the stages of mitosis",
-                "Compare mitosis and meiosis, including chromosome behaviour and chromosome number"
+                "Define growth and distinguish it from development",
+                "Explain the cell cycle and the roles of G1, S and G2 phases",
+                "Describe the stages, products and significance of mitosis",
+                "Explain meiosis, homologous chromosome pairing, crossing over and chromosome reduction",
+                "Explain the conditions necessary for seed germination and relate them to seedling growth",
+                "Differentiate epigeal and hypogeal germination using cotyledon position and embryonic-axis growth",
+                "Identify regions of growth in roots and shoots and explain how growth is measured",
+                "Explain the roles of plant growth regulators and tropic responses"
             ),
             listOf(
                 "Growth and development are related but different" to "Growth is a relatively permanent increase in size, dry mass or cell number. Development includes the changes in structure and function that occur as an organism matures, including differentiation and the formation of specialised tissues. An organism can develop without a large increase in size at every moment. Dry mass is often a better measure of growth than fresh mass because fresh mass changes with water content.",
@@ -311,13 +316,14 @@ object LearningCatalog {
             "bio-coordination", "Coordination, control and homeostasis", "BIO",
             "When a ball moves towards your face, you blink and move your head before you have time to think about it. When your body becomes hot, sweating helps cool you. These responses depend on coordination: detecting changes, processing information and activating effectors. This lesson introduces the nervous and endocrine systems and explains how the body keeps internal conditions within suitable limits.",
             listOf(
-                "Explain the meaning of coordination and homeostasis",
-                "Identify the main parts of the nervous system",
-                "Describe a reflex arc",
-                "Relate sense organs to the stimuli they detect",
-                "Compare nervous and hormonal coordination",
-                "Explain selected roles of endocrine glands and hormones",
-                "Describe how the body regulates temperature and water balance"
+                "Explain the structure and functions of the central nervous system",
+                "Identify the components and functions of the peripheral nervous system and explain nerve impulse transmission",
+                "Illustrate reflex arcs and distinguish reflex, voluntary and conditioned responses",
+                "Relate the skin, nose, tongue, eye and ear to the stimuli they detect and selected defects",
+                "Locate the major endocrine glands and relate their hormones to functions",
+                "Explain the effects of auxins, gibberellins, cytokinins and ethylene",
+                "Explain hormonal feedback in blood glucose and water balance",
+                "Explain thermoregulation and salt-water homeostasis"
             ),
             listOf(
                 "Coordination and homeostasis" to "Coordination is the organised control of activities in an organism. Receptors detect stimuli; coordination centres process information; effectors such as muscles or glands produce responses. Homeostasis is the regulation of internal conditions within suitable limits despite external or internal changes. Examples include regulation of body temperature, blood glucose and water balance. Homeostasis involves monitoring and negative feedback, not keeping every value perfectly constant.",
@@ -337,11 +343,10 @@ object LearningCatalog {
             "bio-ecology-factors", "Factors affecting the distribution of organisms", "BIO",
             "A mangrove crab, a rainforest tree and a grassland ant do not occur everywhere. Their distribution depends on the conditions they can tolerate and the resources they need. Ecology studies how organisms interact with one another and with their environment. This lesson explains the physical and living factors that influence where organisms are found.",
             listOf(
-                "Define ecology, habitat, population, community and ecosystem",
-                "Distinguish abiotic from biotic environmental factors",
-                "Explain how selected environmental factors affect distribution",
-                "Identify instruments used to measure field conditions",
-                "Explain limiting factors and tolerance ranges"
+                "Explain how temperature, rainfall, humidity, wind and altitude affect organism distribution",
+                "Explain the effects of salinity, turbidity, pH and soil conditions",
+                "Select and use instruments to measure abiotic environmental factors",
+                "Explain how biotic interactions and human activities influence distribution"
             ),
             listOf(
                 "Ecology: organisms and their environment" to "Ecology is the study of interactions among organisms and between organisms and their physical environment. A habitat is the place where an organism lives. A population is a group of organisms of the same species living in an area at a particular time. A community consists of populations of different species in an area. An ecosystem includes the community and the non-living environment interacting as a system.",
@@ -720,6 +725,7 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
     var noteText by remember(topicId) { mutableStateOf(runCatching { database.getNoteBody(noteId).orEmpty() }.getOrDefault("")) }
     var noteSaved by remember(topicId) { mutableStateOf(false) }
     var noteEditorOpen by remember(topicId) { mutableStateOf(false) }
+    var headerActionsExpanded by remember(topicId) { mutableStateOf(false) }
     var exerciseIndex by remember(topicId) { mutableIntStateOf(0) }
     var exerciseSelections by remember(topicId) { mutableStateOf<Map<String, Int>>(emptyMap()) }
     var exerciseChecked by remember(topicId) { mutableStateOf(false) }
@@ -863,16 +869,18 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
                     Text(topic.title, style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold, maxLines = 2)
                     Text((stageIndex + 1).toString() + " / " + stages.size + " learning pillars", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
-                IconButton(onClick = onOpenCalculators) { Icon(Icons.Default.Calculate, contentDescription = "Scientific calculator") }
-                IconButton(onClick = { noteEditorOpen = true }) {
-                    Icon(Icons.Default.Edit, contentDescription = "Save or edit lesson note")
+                Box {
+                    IconButton(onClick = { headerActionsExpanded = true }) { Icon(Icons.Default.MoreVert, contentDescription = "Lesson actions") }
+                    DropdownMenu(expanded = headerActionsExpanded, onDismissRequest = { headerActionsExpanded = false }) {
+                        DropdownMenuItem(text = { Text("Scientific calculator") }, leadingIcon = { Icon(Icons.Default.Calculate, contentDescription = null) }, onClick = { headerActionsExpanded = false; onOpenCalculators() })
+                        DropdownMenuItem(text = { Text("Edit lesson note") }, leadingIcon = { Icon(Icons.Default.Edit, contentDescription = null) }, onClick = { headerActionsExpanded = false; noteEditorOpen = true })
+                        DropdownMenuItem(text = { Text(if (bookmarked) "Remove bookmark" else "Bookmark lesson") }, leadingIcon = { Icon(if (bookmarked) Icons.Default.Bookmark else Icons.Default.BookmarkBorder, contentDescription = null) }, onClick = {
+                            headerActionsExpanded = false
+                            val saved = runCatching { if (bookmarked) database.removeBookmark(topic.id) else database.bookmark(topic.id, "lesson") }.isSuccess
+                            if (saved) bookmarked = !bookmarked
+                        })
+                    }
                 }
-                IconButton(onClick = {
-                    val saved = runCatching {
-                        if (bookmarked) database.removeBookmark(topic.id) else database.bookmark(topic.id, "lesson")
-                    }.isSuccess
-                    if (saved) bookmarked = !bookmarked
-                }) { Icon(if (bookmarked) Icons.Default.Bookmark else Icons.Default.BookmarkBorder, contentDescription = if (bookmarked) "Remove bookmark" else "Save lesson") }
             }
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
                 Text(if (completed) "Lesson mastered" else completedStages.size.toString() + " of " + stages.size + " pillars completed", style = MaterialTheme.typography.labelMedium)
@@ -920,7 +928,7 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
             val isTablet = maxWidth >= 720.dp
             val lessonContent: @Composable (Modifier) -> Unit = { contentModifier ->
             Column(
-                contentModifier.fillMaxWidth().verticalScroll(lessonBodyScroll).padding(horizontal = 16.dp, vertical = 14.dp),
+                contentModifier.fillMaxWidth().verticalScroll(lessonBodyScroll).padding(start = 16.dp, top = 14.dp, end = 16.dp, bottom = 112.dp),
             verticalArrangement = Arrangement.spacedBy(14.dp)
         ) {
             Card(Modifier.fillMaxWidth(), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.55f))) {
@@ -931,8 +939,7 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
                 }
             }
 
-            AnimatedContent(targetState = stage, label = "lesson-pillar-transition") { activeStage ->
-                when (activeStage) {
+            when (stage) {
                 LessonStage.CONCEPT -> {
                     Card(Modifier.fillMaxWidth()) {
                         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -940,16 +947,29 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
                             ScientificContent(topic.introduction, style = MaterialTheme.typography.bodyLarge)
                         }
                     }
-                    Row(Modifier.fillMaxWidth(), verticalAlignment = androidx.compose.ui.Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-                        Text("Audio speed", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                        listOf(0.6f, 0.8f, 1f, 1.2f, 1.5f).forEach { rate ->
-                            FilterChip(
-                                selected = speechRate == rate,
-                                onClick = { speechRate = rate; runCatching { speechEngine?.setSpeechRate(rate) } },
-                                label = { Text(rate.toString() + "×") }
-                            )
+                    Card(Modifier.fillMaxWidth()) {
+                        Column(Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                            Text("LESSON AUDIO", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
+                            Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp), verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
+                                Button(onClick = {
+                                    if (!speechReady) prepareLessonSpeech() else {
+                                        val narration = buildString {
+                                            append(topic.title).append(". ").append(topic.introduction).append(". ")
+                                            topic.objectives.forEach { append(it).append(". ") }
+                                            topic.sections.forEach { append(it.first).append(". ").append(it.second).append(". ") }
+                                        }
+                                        runCatching { speechEngine?.language = Locale.UK; speechEngine?.setSpeechRate(speechRate); speechEngine?.speak(narration, TextToSpeech.QUEUE_FLUSH, null, "lesson-" + topic.id) }
+                                    }
+                                }, modifier = Modifier.weight(1f).heightIn(min = 48.dp)) { Text(if (speechReady) "Listen to lesson" else "Prepare audio") }
+                                OutlinedButton(onClick = { speechEngine?.stop() }, enabled = speechReady, modifier = Modifier.heightIn(min = 48.dp)) { Text("Stop") }
+                            }
+                            Text("Playback uses your device's installed text-to-speech voice.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                            Row(Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                                listOf(0.6f, 0.8f, 1f, 1.2f, 1.5f).forEach { rate -> FilterChip(selected = speechRate == rate, onClick = { speechRate = rate; runCatching { speechEngine?.setSpeechRate(rate) } }, label = { Text(rate.toString() + "×") }) }
+                            }
                         }
                     }
+
                     Card(Modifier.fillMaxWidth()) {
                         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(9.dp)) {
                             Text("What you will learn", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
@@ -963,55 +983,36 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
                             }
                         }
                     }
-                    topic.sections.forEachIndexed { index, section ->
-                        Card(Modifier.fillMaxWidth()) {
-                            Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                                Text((index + 1).toString().padStart(2, '0'), style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
-                                Text(section.first, style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
-                                ScientificContent(section.second, style = MaterialTheme.typography.bodyLarge)
-                                Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
-                                    TextButton(
-                                        onClick = {
-                                            if (!speechReady) {
-                                                prepareLessonSpeech()
-                                            } else {
-                                                runCatching {
-                                                    speechEngine?.setSpeechRate(speechRate)
-                                                    speechEngine?.speak(section.first + ". " + section.second, TextToSpeech.QUEUE_FLUSH, null, "section-" + topic.id + "-" + index)
+                    if (JambBiologyDeepContent.forTopic(topic.id).isNotEmpty()) {
+                        JambBiologyDeepLessonPanel(topic.id)
+                        } else {
+                        topic.sections.forEachIndexed { index, section ->
+                            Card(Modifier.fillMaxWidth()) {
+                                Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                                    Text((index + 1).toString().padStart(2, '0'), style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
+                                    Text(section.first, style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+                                    ScientificContent(section.second, style = MaterialTheme.typography.bodyLarge)
+                                    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
+                                        TextButton(
+                                            onClick = {
+                                                if (!speechReady) {
+                                                    prepareLessonSpeech()
+                                                } else {
+                                                    runCatching {
+                                                        speechEngine?.setSpeechRate(speechRate)
+                                                        speechEngine?.speak(section.first + ". " + section.second, TextToSpeech.QUEUE_FLUSH, null, "section-" + topic.id + "-" + index)
+                                                    }
                                                 }
                                             }
-                                        }
-                                    ) { Text(if (speechReady) "Listen to this section" else "Prepare audio") }
+                                        ) { Text(if (speechReady) "Listen to this section" else "Prepare audio") }
+                                    }
+                                    if (index == 0) { TopicEquationPanel(topicId); TopicConceptQuickCheck(topic) }
+                                    TopicConceptInlineVisual(topicId, index, section.first)
                                 }
-                                if (index == 0) { TopicEquationPanel(topicId); TopicConceptQuickCheck(topic) }
-                                TopicConceptInlineVisual(topicId, index, section.first)
                             }
                         }
                     }
-                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                        Button(
-                            onClick = {
-                                if (!speechReady) {
-                                    prepareLessonSpeech()
-                                } else {
-                                    val narration = buildString {
-                                        append(topic.title).append(". ")
-                                        append(topic.introduction).append(". ")
-                                        topic.objectives.forEach { append(it).append(". ") }
-                                        topic.sections.forEach { append(it.first).append(". ").append(it.second).append(". ") }
-                                    }
-                                    runCatching {
-                                        speechEngine?.language = Locale.UK
-                                        speechEngine?.setSpeechRate(speechRate)
-                                        speechEngine?.speak(narration, TextToSpeech.QUEUE_FLUSH, null, "lesson-" + topic.id)
-                                    }
-                                }
-                            },
-                            modifier = Modifier.weight(1f)
-                        ) { Text(if (speechReady) "Listen to lesson" else "Prepare audio") }
-                        OutlinedButton(onClick = { speechEngine?.stop() }, enabled = speechReady) { Text("Stop") }
-                    }
-                    Text("Audio uses your device's text-to-speech voice. Offline playback depends on an installed voice.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+
                 }
 
                 LessonStage.EXAMPLES -> {
@@ -1154,7 +1155,6 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
-                }
             }
         }
             }
@@ -1187,7 +1187,7 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
                         enabled = stageIndex > 0,
                         modifier = Modifier.weight(0.9f).heightIn(min = 48.dp),
                         contentPadding = PaddingValues(horizontal = 8.dp)
-                    ) { Text("← Prev", maxLines = 1) }
+                    ) { Text("Back", maxLines = 1) }
                     Button(
                         onClick = { markStageComplete(stage) },
                         enabled = stage !in completedStages && (stage != LessonStage.PROJECT || projectChecksPassed),
@@ -1196,10 +1196,10 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
                     ) {
                         Text(
                             when {
-                                stage in completedStages -> "✓ Verified"
-                                stage == LessonStage.PROJECT && !projectChecksPassed -> "Pass project checks"
-                                stage == LessonStage.PROJECT -> "Verify project"
-                                else -> "Complete section"
+                                stage in completedStages -> "Verified"
+                                stage == LessonStage.PROJECT && !projectChecksPassed -> "Check project"
+                                stage == LessonStage.PROJECT -> "Verify"
+                                else -> "Complete"
                             },
                             maxLines = 1
                         )
@@ -1210,7 +1210,7 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
                         enabled = nextStage != null && isLessonStageUnlocked(nextStage, completedStages),
                         modifier = Modifier.weight(0.9f).heightIn(min = 48.dp),
                         contentPadding = PaddingValues(horizontal = 8.dp)
-                    ) { Text(if (nextStage == null) "Next →" else "Next →", maxLines = 1) }
+                    ) { Text("Next", maxLines = 1) }
                 }
             }
         } else {
@@ -1449,19 +1449,24 @@ private fun TopicVisualisationGallery(topicId: String) {
     Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
         TopicEquationPanel(topicId)
         when (topicId) {
-            "bio-adaptation" -> AdaptationTypesCard()
+            "bio-classification" -> EvolutionClassificationLab()
+            "bio-adaptation" -> { AdaptationTypesCard(); AdaptationScenarioLab() }
+            "bio-plant-anatomy" -> PlantMammalSectionLab()
+            "bio-nutrition" -> { PhotosynthesisFactorInvestigation(); PhotosynthesisFlowCard() }
+            "bio-transport" -> { OsmosisInvestigationLab(); PlantTransportCard(); DoubleCirculationCard() }
+            "bio-respiration" -> { VentilationMechanicsLab(); RespirationComparisonCard() }
+            "bio-excretion" -> { NephronOsmoregulationLab(); NephronFlowCard() }
+            "bio-support" -> { PlantSupportTropismInvestigation(); SkeletonJointMovementLab() }
+            "bio-reproduction" -> { FlowerStructureAndPollinationLab(); FertilisationAndDevelopmentSequenceLab(); FlowerReproductionCard() }
             "bio-cell" -> CellDiagramCard()
-            "bio-nutrition" -> PhotosynthesisFlowCard()
-            "bio-respiration" -> RespirationComparisonCard()
             "bio-interactions" -> FoodChainDiagramCard()
             "bio-populations" -> { BiologyPopulationSamplingCard(); EcologicalSuccessionCard() }
             "bio-heredity" -> PunnettSquareCard()
-            "bio-transport" -> { PlantTransportCard(); DoubleCirculationCard() }
-            "bio-excretion" -> NephronFlowCard()
             "bio-soil" -> SoilWaterInvestigationCard()
-            "bio-reproduction" -> FlowerReproductionCard()
             "bio-evolution-theory" -> NaturalSelectionCard()
-            "bio-growth" -> { CellDivisionLessonCard(); CellDivisionKnowledgeCheckCard() }
+            "bio-growth" -> { SeedGerminationInvestigationLab(); GerminationTypeComparisonLab(); CellDivisionLessonCard(); CellDivisionKnowledgeCheckCard() }
+            "bio-coordination" -> { ReflexArcInvestigation(); EndocrineFeedbackInvestigation(); SenseOrganDefectLab() }
+            "bio-ecology-factors" -> { HabitatDistributionInvestigation(); EcologyInstrumentSelectionLab() }
         }
         when (topicId) {
             "phy-projectile", "phy-motion" -> ProjectileMotionAnimation(speed = 25f, angleDegrees = 45f)

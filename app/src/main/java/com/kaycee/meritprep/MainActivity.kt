@@ -23,6 +23,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.navigation.NavHostController
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.*
 import com.kaycee.meritprep.data.MeritDatabase
 
@@ -40,6 +41,7 @@ private data class Subject(val name:String,val description:String,val code:Strin
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        CrashReporter.install(applicationContext)
         setContent { MeritPrepApp() }
     }
 }
@@ -61,7 +63,13 @@ private fun MeritPrepApp() {
                 if (!inLesson && !isTablet) {
                     StudioDockedBottomBar(
                         selectedRoute = route,
-                        onNavigate = { destination -> nav.navigate(destination) { launchSingleTop = true } },
+                        onNavigate = { destination ->
+                            nav.navigate(destination) {
+                                popUpTo(nav.graph.findStartDestination().id) { saveState = true }
+                                launchSingleTop = true
+                                restoreState = true
+                            }
+                        },
                         onOpenLauncher = { launcherOpen = true }
                     )
                 }
@@ -79,7 +87,13 @@ private fun MeritPrepApp() {
                         ).forEach { (label, destination, icon) ->
                             NavigationRailItem(
                                 selected = route == destination,
-                                onClick = { nav.navigate(destination) { launchSingleTop = true } },
+                                onClick = {
+                                    nav.navigate(destination) {
+                                        popUpTo(nav.graph.findStartDestination().id) { saveState = true }
+                                        launchSingleTop = true
+                                        restoreState = true
+                                    }
+                                },
                                 icon = { Icon(icon, contentDescription = label) },
                                 label = { Text(label) }
                             )
@@ -140,11 +154,16 @@ private fun MeritPrepApp() {
                 QuickStudyLauncherSheet(
                     onChoose = { destination ->
                         launcherOpen = false
-                        nav.navigate(destination) { launchSingleTop = true }
+                        nav.navigate(destination) {
+                            popUpTo(nav.graph.findStartDestination().id) { saveState = true }
+                            launchSingleTop = true
+                            restoreState = true
+                        }
                     }
                 )
             }
         }
+        CrashReportPrompt()
     }
 }
 
@@ -608,11 +627,9 @@ private fun SubjectScreen(subject: Subject, nav: NavHostController) {
             Triple("WAEC objective", "Objective practice", "waec-objective"),
             Triple("Virtual laboratories", "Practical investigations", "labs")
         )
-        else -> listOf(
-            Triple("JAMB practice", "Topic questions", "cbt"),
-            Triple("WAEC theory", "Structured responses", "waec-theory"),
-            Triple("WAEC objective", "Objective practice", "waec-objective")
-        )
+        // Do not send subjects without dedicated assessment banks into Biology routes.
+        // Their course content remains accessible while subject-specific assessments are prepared.
+        else -> emptyList()
     }
 
     LazyColumn(
@@ -650,6 +667,21 @@ private fun SubjectScreen(subject: Subject, nav: NavHostController) {
                     HomeQuickAction(action.first, action.second, "OPEN", Modifier.weight(1f)) { nav.navigate(action.third) }
                 }
                 if (pair.size == 1) Spacer(Modifier.weight(1f))
+            }
+        }
+        if (actions.isEmpty()) {
+            item {
+                Card(
+                    Modifier.fillMaxWidth(),
+                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
+                ) {
+                    Text(
+                        "Subject-specific JAMB and WAEC assessment tools are being prepared. You can study the available lessons above, but this subject will not open another subject's question bank.",
+                        Modifier.padding(16.dp),
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
             }
         }
         item {
