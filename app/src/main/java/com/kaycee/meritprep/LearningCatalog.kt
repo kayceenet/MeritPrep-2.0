@@ -315,8 +315,7 @@ object LearningCatalog {
             "When a ball moves towards your face, you blink and move your head before you have time to think about it. When your body becomes hot, sweating helps cool you. These responses depend on coordination: detecting changes, processing information and activating effectors. This lesson introduces the nervous and endocrine systems and explains how the body keeps internal conditions within suitable limits.",
             listOf(
                 "Explain the structure and functions of the central nervous system",
-                "Identify the components and functions of the peripheral nervous system",
-                "Explain nerve impulse transmission and synaptic communication",
+                "Identify the components and functions of the peripheral nervous system and explain nerve impulse transmission",
                 "Illustrate reflex arcs and distinguish reflex, voluntary and conditioned responses",
                 "Relate the skin, nose, tongue, eye and ear to the stimuli they detect and selected defects",
                 "Locate the major endocrine glands and relate their hormones to functions",
