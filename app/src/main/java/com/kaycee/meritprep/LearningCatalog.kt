@@ -1472,7 +1472,7 @@ private fun TopicVisualisationGallery(topicId: String) {
             "bio-heredity" -> PunnettSquareCard()
             "bio-soil" -> SoilWaterInvestigationCard()
             "bio-evolution-theory" -> NaturalSelectionCard()
-            "bio-growth" -> { CellDivisionLessonCard(); CellDivisionKnowledgeCheckCard() }
+            "bio-growth" -> { SeedGerminationInvestigationLab(); GerminationTypeComparisonLab(); CellDivisionLessonCard(); CellDivisionKnowledgeCheckCard() }
         }
         when (topicId) {
             "phy-projectile", "phy-motion" -> ProjectileMotionAnimation(speed = 25f, angleDegrees = 45f)
