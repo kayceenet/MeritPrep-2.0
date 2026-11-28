@@ -227,7 +227,6 @@ internal fun JambBiologyDeepLessonPanel(topicId:String) {
       Button(onClick={selectedObjective=(safeObjective+1).coerceAtMost(objectives.lastIndex)},enabled=safeObjective<objectives.lastIndex,modifier=Modifier.weight(1f).heightIn(min=48.dp)) { Text("Next objective") }
      }
     }
-   }
   }
  }
 }
