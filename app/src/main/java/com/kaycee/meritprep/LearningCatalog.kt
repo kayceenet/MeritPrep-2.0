@@ -1462,6 +1462,7 @@ private fun TopicVisualisationGallery(topicId: String) {
             "bio-respiration" -> { VentilationMechanicsLab(); RespirationComparisonCard() }
             "bio-excretion" -> { NephronOsmoregulationLab(); NephronFlowCard() }
             "bio-support" -> { PlantSupportTropismInvestigation(); SkeletonJointMovementLab() }
+            "bio-support" -> { PlantSupportTropismInvestigation(); SkeletonJointMovementLab() }
             "bio-cell" -> CellDiagramCard()
             "bio-interactions" -> FoodChainDiagramCard()
             "bio-populations" -> { BiologyPopulationSamplingCard(); EcologicalSuccessionCard() }
