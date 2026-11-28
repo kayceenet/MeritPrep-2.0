@@ -1466,13 +1466,11 @@ private fun TopicVisualisationGallery(topicId: String) {
             "bio-excretion" -> { NephronOsmoregulationLab(); NephronFlowCard() }
             "bio-support" -> { PlantSupportTropismInvestigation(); SkeletonJointMovementLab() }
             "bio-reproduction" -> { FlowerStructureAndPollinationLab(); FertilisationAndDevelopmentSequenceLab(); FlowerReproductionCard() }
-            "bio-support" -> { PlantSupportTropismInvestigation(); SkeletonJointMovementLab() }
             "bio-cell" -> CellDiagramCard()
             "bio-interactions" -> FoodChainDiagramCard()
             "bio-populations" -> { BiologyPopulationSamplingCard(); EcologicalSuccessionCard() }
             "bio-heredity" -> PunnettSquareCard()
             "bio-soil" -> SoilWaterInvestigationCard()
-            "bio-reproduction" -> FlowerReproductionCard()
             "bio-evolution-theory" -> NaturalSelectionCard()
             "bio-growth" -> { CellDivisionLessonCard(); CellDivisionKnowledgeCheckCard() }
         }
