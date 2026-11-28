@@ -180,6 +180,7 @@ internal fun PhotosynthesisFactorInvestigation() {
         carbonDioxide < light -> "Carbon dioxide concentration is the more limiting of the two selected factors"
         else -> "Light and carbon dioxide are balanced in this simplified comparison"
     }
+    Column(Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(16.dp)) {
     Card(Modifier.fillMaxWidth()) {
         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(9.dp)) {
             Text("PHOTOSYNTHESIS FACTOR INVESTIGATION", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
@@ -209,4 +210,5 @@ internal fun PhotosynthesisFactorInvestigation() {
         }
     }
     BiologyExternalLabLinks("EXPLORE A FULL PHOTOSYNTHESIS VIRTUAL LAB", photosynthesisLabResources)
+    }
 }
