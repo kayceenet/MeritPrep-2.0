@@ -341,11 +341,10 @@ object LearningCatalog {
             "bio-ecology-factors", "Factors affecting the distribution of organisms", "BIO",
             "A mangrove crab, a rainforest tree and a grassland ant do not occur everywhere. Their distribution depends on the conditions they can tolerate and the resources they need. Ecology studies how organisms interact with one another and with their environment. This lesson explains the physical and living factors that influence where organisms are found.",
             listOf(
-                "Define ecology, habitat, population, community and ecosystem",
-                "Distinguish abiotic from biotic environmental factors",
-                "Explain how selected environmental factors affect distribution",
-                "Identify instruments used to measure field conditions",
-                "Explain limiting factors and tolerance ranges"
+                "Explain how temperature, rainfall, humidity, wind and altitude affect organism distribution",
+                "Explain the effects of salinity, turbidity, pH and soil conditions",
+                "Select and use instruments to measure abiotic environmental factors",
+                "Explain how biotic interactions and human activities influence distribution"
             ),
             listOf(
                 "Ecology: organisms and their environment" to "Ecology is the study of interactions among organisms and between organisms and their physical environment. A habitat is the place where an organism lives. A population is a group of organisms of the same species living in an area at a particular time. A community consists of populations of different species in an area. An ecosystem includes the community and the non-living environment interacting as a system.",
@@ -1475,6 +1474,7 @@ private fun TopicVisualisationGallery(topicId: String) {
             "bio-evolution-theory" -> NaturalSelectionCard()
             "bio-growth" -> { SeedGerminationInvestigationLab(); GerminationTypeComparisonLab(); CellDivisionLessonCard(); CellDivisionKnowledgeCheckCard() }
             "bio-coordination" -> { ReflexArcInvestigation(); EndocrineFeedbackInvestigation(); SenseOrganDefectLab() }
+            "bio-ecology-factors" -> { HabitatDistributionInvestigation(); EcologyInstrumentSelectionLab() }
         }
         when (topicId) {
             "phy-projectile", "phy-motion" -> ProjectileMotionAnimation(speed = 25f, angleDegrees = 45f)
