@@ -225,7 +225,7 @@ class JambBiologyDeepContentTest {
 
     @Test
     fun allBiologyDeepConceptChecksUseUniqueIds() {
-        val ids = listOf("bio-cell", "bio-classification", "bio-adaptation", "bio-plant-anatomy", "bio-nutrition", "bio-transport", "bio-respiration", "bio-excretion", "bio-support")
+        val ids = listOf("bio-cell", "bio-classification", "bio-adaptation", "bio-plant-anatomy", "bio-nutrition", "bio-transport", "bio-respiration", "bio-excretion", "bio-support", "bio-reproduction", "bio-growth", "bio-coordination")
             .flatMap { JambBiologyDeepContent.forTopic(it) }
             .flatMap { it.checks }
             .map { it.id }
