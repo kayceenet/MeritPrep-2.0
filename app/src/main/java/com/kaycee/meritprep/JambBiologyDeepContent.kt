@@ -167,6 +167,7 @@ The onion bulb is a modified underground shoot and is an organ composed of tissu
   "bio-support" -> JambBiologySupportContent.forTopic(topicId)
   "bio-reproduction" -> JambBiologyReproductionContent.forTopic(topicId)
   "bio-growth" -> JambBiologyGrowthContent.forTopic(topicId)
+  "bio-coordination" -> JambBiologyCoordinationContent.forTopic(topicId)
   else -> emptyList()
  }
 }
