@@ -304,7 +304,7 @@ internal fun PlantSupportTropismInvestigation() {
         heading = "FREE INTERACTIVE PLANT AND SKELETON RESOURCES",
         resources = listOf(
             BiologyLabResource("Visualize Biology: Plant Tropisms", "Free browser simulation of phototropism, gravitropism and auxin distribution, with practical activities and quiz.", "https://visualizebiology.com/tools/plant-tropisms/"),
-            BiologyLabResource("AZRS: Phototropism and Gravitropism Lab", "Move the light and rotate a seedling to predict shoot and root growth; free and designed for phones.", "https://www.azrscorp.com/quickfix/simulations/tropism-lab/"),
+            BiologyLabResource("AZRS: Phototropism and Gravitropism Lab", "Move the light and rotate a seedling to predict shoot and root growth; free and designed for phones.", "https://tools.quickyla.com/quickfix/simulations/tropism-lab/"),
             BiologyLabResource("ScienceQuest: 3D Skeleton Explorer", "Explore and identify the 203 bones in an interactive browser-based model; no sign-in, about 8.1 MB on first load.", "https://sciencequest.in/tools/full-skeleton-explorer/")
         )
     )
