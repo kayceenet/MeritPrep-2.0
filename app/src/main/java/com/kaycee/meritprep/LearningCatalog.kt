@@ -209,12 +209,11 @@ object LearningCatalog {
             "bio-excretion", "Excretion and osmoregulation", "BIO",
             "Cells produce waste products as they carry out metabolism. If these substances accumulate, they can damage cells or disturb the internal environment. Organisms therefore remove metabolic wastes and regulate water and ion balance. This lesson separates excretion from egestion and compares the excretory structures of different organisms.",
             listOf(
-                "Define excretion and distinguish it from egestion",
-                "Identify major metabolic waste products",
-                "Compare excretory structures in selected organisms",
-                "Describe the main parts of a mammalian kidney and nephron",
-                "Explain ultrafiltration and selective reabsorption",
-                "Explain the role of the kidney in water and salt balance"
+                "Define excretion, explain its significance and distinguish it from egestion and secretion",
+                "Identify excretory structures in selected organisms and relate their structures to functions",
+                "Relate kidney and nephron structure to ultrafiltration, selective reabsorption and osmoregulation",
+                "Identify the excretory products and functions of the lungs and skin",
+                "Explain the biological and economic importance of plant excretory products"
             ),
             listOf(
                 "Excretion is not egestion" to "Excretion is the removal of metabolic waste products made by cells, such as carbon dioxide, urea and excess salts. Egestion is the removal of undigested material from the alimentary canal as faeces. Defaecation is not the same as excretion because faeces are not primarily metabolic waste. The lungs excrete carbon dioxide and water vapour; the kidneys excrete urea, excess water and salts; the skin can excrete small amounts of water, salts and urea in sweat.",
@@ -261,12 +260,14 @@ object LearningCatalog {
             "bio-reproduction", "Reproduction in plants and animals", "BIO",
             "Living organisms produce offspring, allowing their species to continue. Some organisms reproduce asexually from one parent; others reproduce sexually through the fusion of gametes. Flowering plants and mammals use different structures and processes, but both involve the transfer of genetic information to the next generation.",
             listOf(
-                "Distinguish sexual and asexual reproduction",
-                "Compare common methods of asexual reproduction",
-                "Identify the main parts of a flower and their functions",
-                "Explain pollination, fertilisation and seed formation",
-                "Describe the main organs of the mammalian reproductive systems",
-                "Explain fertilisation, implantation and early development in mammals"
+                "Differentiate asexual and sexual reproduction",
+                "Explain fission in Paramecium and budding in yeast",
+                "Apply natural vegetative propagation in crop production",
+                "Apply grafting, budding and layering in artificial propagation",
+                "Relate floral parts to their functions, pollination and fertilisation",
+                "Explain cross-pollination, placentation and fruit development",
+                "Differentiate male and female mammalian reproductive organs",
+                "Explain fertilisation, development, maternal influences, IVF and birth control"
             ),
             listOf(
                 "Why organisms reproduce" to "Reproduction is the biological process by which organisms produce offspring. It is not required for an individual organism to stay alive, but it is essential for the continuation of a species. Asexual reproduction usually involves one parent and no fusion of gametes; offspring are genetically very similar to the parent, apart from mutations. Sexual reproduction involves the fusion of male and female gametes and produces genetically varied offspring.",
@@ -286,14 +287,9 @@ object LearningCatalog {
             "bio-growth", "Growth and development", "BIO",
             "A seed becomes a seedling, a child becomes an adult, and a young shoot grows towards light. Growth increases size or dry mass; development involves changes in form and function as an organism matures. This lesson explains how cells divide, enlarge and specialise, and how seeds begin a new plant.",
             listOf(
-                "Distinguish growth from development",
-                "Identify the main processes responsible for growth",
-                "Describe the regions of growth in a plant root and shoot",
-                "Explain the conditions needed for seed germination",
-                "Compare epigeal and hypogeal germination",
-                "Describe selected roles of plant growth regulators",
-                "Describe the cell cycle and the stages of mitosis",
-                "Compare mitosis and meiosis, including chromosome behaviour and chromosome number"
+                "Define growth and distinguish it from development",
+                "Explain the conditions necessary for seed germination and relate them to seedling growth",
+                "Differentiate epigeal and hypogeal germination using cotyledon position and embryonic-axis growth"
             ),
             listOf(
                 "Growth and development are related but different" to "Growth is a relatively permanent increase in size, dry mass or cell number. Development includes the changes in structure and function that occur as an organism matures, including differentiation and the formation of specialised tissues. An organism can develop without a large increase in size at every moment. Dry mass is often a better measure of growth than fresh mass because fresh mass changes with water content.",
