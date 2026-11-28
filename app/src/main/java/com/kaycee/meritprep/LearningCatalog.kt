@@ -289,8 +289,13 @@ object LearningCatalog {
             "A seed becomes a seedling, a child becomes an adult, and a young shoot grows towards light. Growth increases size or dry mass; development involves changes in form and function as an organism matures. This lesson explains how cells divide, enlarge and specialise, and how seeds begin a new plant.",
             listOf(
                 "Define growth and distinguish it from development",
+                "Explain the cell cycle and the roles of G1, S and G2 phases",
+                "Describe the stages, products and significance of mitosis",
+                "Explain meiosis, homologous chromosome pairing, crossing over and chromosome reduction",
                 "Explain the conditions necessary for seed germination and relate them to seedling growth",
-                "Differentiate epigeal and hypogeal germination using cotyledon position and embryonic-axis growth"
+                "Differentiate epigeal and hypogeal germination using cotyledon position and embryonic-axis growth",
+                "Identify regions of growth in roots and shoots and explain how growth is measured",
+                "Explain the roles of plant growth regulators and tropic responses"
             ),
             listOf(
                 "Growth and development are related but different" to "Growth is a relatively permanent increase in size, dry mass or cell number. Development includes the changes in structure and function that occur as an organism matures, including differentiation and the formation of specialised tissues. An organism can develop without a large increase in size at every moment. Dry mass is often a better measure of growth than fresh mass because fresh mass changes with water content.",

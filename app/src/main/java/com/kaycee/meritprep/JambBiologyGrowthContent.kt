@@ -96,6 +96,129 @@ internal object JambBiologyGrowthContent {
                 JambDeepCheck("bio-growth-08","Which is a common example of hypogeal germination?",listOf("Bean","Castor","Pea","Cotton"),2,"Pea is a common example in which cotyledons remain below the soil."),
                 JambDeepCheck("bio-growth-09","The main feature distinguishing hypogeal from epigeal germination is that in hypogeal germination",listOf("the radicle never emerges","cotyledons remain below the soil","the plumule fails to develop","water is not absorbed"),1,"In hypogeal germination, the epicotyl elongates and the cotyledons remain below ground.")
             )
+
+        ),
+        JambDeepObjective(
+            "Explain the cell cycle and describe the stages and significance of mitosis.",
+            listOf(
+                JambDeepPoint("The cell cycle and interphase",
+                    """The cell cycle is the ordered sequence of events through which a cell grows, duplicates its DNA and divides. It is commonly described as interphase followed by the mitotic phase. Interphase is not a resting period: the cell is metabolically active and prepares for division. In G1, the cell grows, makes proteins and organelles, and carries out normal functions. During S phase, DNA is replicated so that each chromosome consists of two genetically similar sister chromatids joined at a centromere. In G2, the cell continues to grow, checks replicated DNA and prepares the machinery needed for division.
+
+                    DNA replication doubles the amount of DNA, but it does not double the chromosome number when chromosomes are counted by centromeres. A human somatic cell has 46 chromosomes before S phase and still has 46 duplicated chromosomes after S phase; each duplicated chromosome contains two sister chromatids.""",
+                    "A cell with 46 chromosomes enters S phase; after DNA replication it still has 46 chromosomes, but 92 chromatids.",
+                    "G1 = growth; S = DNA synthesis; G2 = preparation. Interphase includes all three."),
+                JambDeepPoint("Mitosis: nuclear division",
+                    """Mitosis is nuclear division that distributes one copy of each duplicated chromosome to each daughter nucleus. In prophase, chromatin condenses into visible chromosomes, the nucleolus disappears and the spindle begins to form as the nuclear envelope breaks down in the usual school-level description. In metaphase, chromosomes attach to spindle fibres and line up individually at the equator. In anaphase, centromeres divide and sister chromatids separate, moving to opposite poles. In telophase, chromosomes reach the poles, decondense and new nuclear envelopes form around each set.
+
+                    Cytokinesis is division of the cytoplasm and usually follows mitosis. In animal cells, a cleavage furrow pinches the cell into two. In plant cells, vesicles form a cell plate that develops into a new partition between daughter cells. Do not confuse mitosis (nuclear division) with cytokinesis (cytoplasmic division).""",
+                    "An onion root-tip cell with chromosomes aligned at the equator is in metaphase; a cell with chromatids moving to opposite poles is in anaphase.",
+                    "Order: prophase, metaphase, anaphase, telophase; cytokinesis divides the cytoplasm."),
+                JambDeepPoint("Importance and control of mitosis",
+                    """Mitosis maintains chromosome number in daughter cells and produces genetically similar cells, apart from mutations or unusual events. It enables growth in multicellular organisms, replacement of worn-out cells, tissue repair and regeneration. It is also the basis of asexual reproduction in many eukaryotic organisms. In plants, mitosis in apical meristems supports growth in length, while lateral meristems contribute to increase in girth.
+
+                    Cell division is regulated by checkpoints that help ensure DNA is intact and chromosomes are correctly attached to the spindle before separation. Failure of normal cell-cycle control can allow cells to divide uncontrollably and contribute to cancer. Mitosis itself does not create the normal genetic variation produced by meiosis; daughter cells are generally genetically similar to the parent cell.""",
+                    "Healing of a cut involves cell division that replaces damaged cells; growth of a root tip depends on mitosis in its apical meristem.",
+                    "Mitosis maintains chromosome number and supports growth, repair and asexual reproduction.")
+            ),
+            listOf("DNA replicates in S phase, not during mitosis.", "Chromosome number is counted by centromeres; replicated chromosomes have two sister chromatids.", "Mitosis is nuclear division; cytokinesis divides cytoplasm."),
+            listOf(
+                JambDeepCheck("bio-growth-10","During which phase of the cell cycle is DNA replicated?",listOf("G1","S phase","G2","Cytokinesis"),1,"DNA synthesis occurs during the S phase of interphase."),
+                JambDeepCheck("bio-growth-11","A chromosome after DNA replication consists of",listOf("two homologous chromosomes","two sister chromatids joined at a centromere","four unrelated chromatids","one chromatid without DNA"),1,"Replication produces two sister chromatids that remain joined at the centromere."),
+                JambDeepCheck("bio-growth-12","During which stage of mitosis do chromosomes line up at the equator?",listOf("Prophase","Metaphase","Anaphase","Telophase"),1,"Chromosomes align at the equatorial plane during metaphase."),
+                JambDeepCheck("bio-growth-13","The separation of sister chromatids occurs during",listOf("prophase","metaphase","anaphase","telophase"),2,"At anaphase, centromeres divide and sister chromatids move to opposite poles."),
+                JambDeepCheck("bio-growth-14","Which process divides the cytoplasm after nuclear division?",listOf("Replication","Cytokinesis","Crossing over","Synapsis"),1,"Cytokinesis divides the cytoplasm to form separate daughter cells.")
+            )
+        ),
+        JambDeepObjective(
+            "Explain meiosis, including homologous chromosome pairing, crossing over and reduction of chromosome number.",
+            listOf(
+                JambDeepPoint("Why meiosis is necessary",
+                    """Meiosis is a specialised type of cell division that reduces the chromosome number by half and produces haploid cells. It is essential in sexual life cycles because fertilisation joins two haploid nuclei. If gametes retained the diploid chromosome number, chromosome number would double in every generation. In animals, meiosis produces haploid gametes; in flowering plants, meiosis produces haploid spores that develop into the gametophyte generation.
+
+                    Meiosis involves one round of DNA replication followed by two nuclear divisions, meiosis I and meiosis II. It normally produces four haploid products from one diploid precursor cell, although the products do not all necessarily become functional gametes in every organism.""",
+                    "In humans, meiosis produces cells with 23 chromosomes; fertilisation restores the diploid number of 46.",
+                    "Meiosis reduces chromosome number; fertilisation restores the diploid number."),
+                JambDeepPoint("Meiosis I: homologous chromosomes separate",
+                    """During prophase I, homologous chromosomes pair in a process called synapsis, forming bivalents. Non-sister chromatids may exchange corresponding DNA segments at points called chiasmata; this exchange is crossing over. At metaphase I, homologous pairs align at the equator in random orientations. At anaphase I, homologous chromosomes separate and move to opposite poles, while sister chromatids remain joined at their centromeres. This is the reduction division because the chromosome sets are separated into haploid nuclei.
+
+                    Crossing over occurs between non-sister chromatids of homologous chromosomes, not between sister chromatids. Independent assortment results from the random orientation of homologous pairs at metaphase I. Both processes create new combinations of alleles.""",
+                    "A pair of homologous chromosomes may exchange segments during prophase I, producing chromatids with new allele combinations.",
+                    "Meiosis I separates homologous chromosomes; crossing over occurs in prophase I."),
+                JambDeepPoint("Meiosis II and comparison with mitosis",
+                    """There is no second round of DNA replication between meiosis I and meiosis II. During meiosis II, chromosomes align individually, and sister chromatids separate when centromeres divide. The result is usually four haploid cells, each with one chromosome from each homologous pair. Meiosis II resembles mitosis in the separation of sister chromatids, but it begins with haploid cells produced by meiosis I.
+
+                    Mitosis has one nuclear division and usually produces two daughter cells with the same chromosome number as the parent. Meiosis has two nuclear divisions after one DNA replication and usually produces four haploid products. Mitosis supports growth and repair; meiosis supports sexual reproduction and genetic variation. In humans, a diploid cell has 46 chromosomes; meiosis produces haploid gametes with 23 chromosomes, and fertilisation restores 46.""",
+                    "A human sperm cell and egg cell each contain 23 chromosomes; their nuclei fuse at fertilisation to form a zygote with 46.",
+                    "Mitosis: one division, two similar cells. Meiosis: two divisions, four haploid products with genetic variation.")
+            ),
+            listOf("Homologous chromosomes are different copies of the same chromosome type, one inherited from each parent.", "Crossing over occurs between non-sister chromatids during prophase I.", "DNA is not replicated between meiosis I and meiosis II."),
+            listOf(
+                JambDeepCheck("bio-growth-15","The pairing of homologous chromosomes during meiosis is called",listOf("cytokinesis","synapsis","replication","translation"),1,"Synapsis is the pairing of homologous chromosomes during prophase I."),
+                JambDeepCheck("bio-growth-16","Crossing over normally occurs between",listOf("sister chromatids of one chromosome","non-sister chromatids of homologous chromosomes","two unrelated chromosomes","centrioles"),1,"Crossing over exchanges DNA between non-sister chromatids of a homologous pair."),
+                JambDeepCheck("bio-growth-17","At anaphase I of meiosis",listOf("sister chromatids separate","homologous chromosomes separate","DNA is replicated","the cell enters interphase permanently"),1,"Homologous chromosomes move to opposite poles during anaphase I."),
+                JambDeepCheck("bio-growth-18","A normal human gamete contains",listOf("46 chromosomes","92 chromosomes","23 chromosomes","44 chromosomes"),2,"Human gametes are haploid and contain 23 chromosomes."),
+                JambDeepCheck("bio-growth-19","Which event contributes directly to genetic variation during meiosis?",listOf("DNA replication alone","crossing over and independent assortment","cytokinesis alone","mitotic spindle breakdown"),1,"Crossing over and independent assortment create new combinations of alleles.")
+            )
+        ),
+        JambDeepObjective(
+            "Describe the regions of growth in roots and shoots and explain how growth is measured.",
+            listOf(
+                JambDeepPoint("Regions of growth in a root tip",
+                    """A young root tip has distinct regions. The root cap protects the delicate growing point as the root pushes through soil. Immediately behind it is the apical meristem, a region of actively dividing cells. The region of elongation contains cells that increase in length and contribute strongly to root extension. Farther back, cells differentiate and mature into specialised tissues; root hairs develop in this region and increase the surface area for water and mineral absorption.
+
+                    A prepared root-tip slide can be examined under a microscope to identify cells at different stages of mitosis in the meristematic region. The meristem contains small, closely packed cells with dense cytoplasm and prominent nuclei; cells in the elongation region are longer, while mature cells show specialised structures.""",
+                    "In a practical, locate the root cap first, then identify the zone of cell division, elongation and maturation behind it.",
+                    "Root-tip sequence: root cap, cell division, elongation, differentiation/maturation."),
+                JambDeepPoint("Shoot growth and meristems",
+                    """The shoot apical meristem is located at the growing tip of a shoot and produces cells that contribute to primary growth in length. Lateral meristems, including vascular cambium and cork cambium in plants that possess them, contribute to secondary growth in thickness. Intercalary meristems occur at the bases of leaves or internodes in some plants, especially grasses, and allow regrowth after grazing or cutting.
+
+                    Meristematic cells divide by mitosis; their daughter cells enlarge and differentiate. The position of meristems explains why roots and shoots can continue growing at particular regions. Secondary growth is prominent in many woody dicotyledonous plants and gymnosperms but is absent or limited in many herbaceous plants and most monocots.""",
+                    "Grass can regrow after cutting because intercalary meristems near the bases of leaves and internodes may remain intact.",
+                    "Apical meristems produce primary growth; lateral meristems contribute to secondary thickening; intercalary meristems support regrowth in some plants."),
+                JambDeepPoint("Measuring growth and interpreting a growth curve",
+                    """Growth may be measured as change in length, height, leaf area, volume, fresh mass, dry mass or cell number. Choose a method that matches the organism and the question. An auxanometer can record small increases in shoot length over time. Dry mass is useful for estimating accumulated organic material because fresh mass is affected by water content. In a fair investigation, use the same method and time interval, replicate measurements where possible and control factors such as water, light, temperature and nutrient supply.
+
+                    A typical growth curve may show a lag phase, a rapid or exponential phase, a deceleration phase and a stationary phase. The exact shape depends on the organism and conditions. Describe what the graph shows before proposing an explanation, and label axes with the measured variable and units.""",
+                    "Measure seedling length at fixed intervals and plot mean length against time to compare growth under controlled conditions.",
+                    "State the measurement, units, time interval and controlled variables; do not infer growth from one isolated measurement.")
+            ),
+            listOf("The root cap is protective; the apical meristem is the main cell-division region.", "Elongation and differentiation occur behind the meristem.", "Fresh mass varies with water content; dry mass is often more reliable for accumulated material."),
+            listOf(
+                JambDeepCheck("bio-growth-20","The main region of active cell division in a young root is the",listOf("root hair zone","apical meristem","mature xylem","root cap only"),1,"The apical meristem contains actively dividing cells behind the root cap."),
+                JambDeepCheck("bio-growth-21","The region where root cells increase markedly in length is the",listOf("root cap","region of elongation","mature phloem","epidermal cuticle"),1,"Cells elongate behind the region of cell division."),
+                JambDeepCheck("bio-growth-22","Which instrument can be used to measure small increases in shoot length?",listOf("Barometer","Auxanometer","Hygrometer","Potometer only"),1,"An auxanometer records small increases in plant shoot length."),
+                JambDeepCheck("bio-growth-23","Why is dry mass often used to compare plant growth?",listOf("It is dominated by water content","It is less affected by changing water content","It measures only root length","It cannot be repeated"),1,"Dry mass better reflects accumulated material than fresh mass when hydration varies.")
+            )
+        ),
+        JambDeepObjective(
+            "Explain the roles of plant growth regulators and relate tropic responses to directional growth.",
+            listOf(
+                JambDeepPoint("Major plant growth regulators",
+                    """Plant growth regulators are chemical substances that influence growth and development in small concentrations. Auxins promote cell elongation in shoots, contribute to apical dominance and are involved in tropic responses. Gibberellins promote stem elongation in many plants and can stimulate seed germination by promoting mobilisation of stored food. Cytokinins promote cell division and can delay leaf senescence. Ethylene is a gaseous plant hormone involved in fruit ripening, leaf abscission and responses to stress. Abscisic acid is associated with seed dormancy and responses to water stress, including stomatal closure.
+
+                    Hormone effects depend on concentration, tissue type, developmental stage and interaction with other hormones. Avoid treating a hormone as having one identical effect in every plant organ.""",
+                    "Commercial fruit ripening can be accelerated by ethylene; gibberellins may be used to promote elongation in selected crops.",
+                    "Auxin: elongation and tropisms; gibberellin: stem growth and germination; cytokinin: cell division; ethylene: ripening; ABA: dormancy and stress."),
+                JambDeepPoint("Phototropism and gravitropism",
+                    """A tropism is a directional growth response of a plant part to a stimulus. Phototropism is a growth response to light; shoots are commonly positively phototropic because they grow towards light. In a shoot exposed to light from one side, auxin becomes distributed unevenly and accumulates more on the shaded side. In shoots, auxin promotes cell elongation, so cells on the shaded side elongate more and the shoot bends towards the light.
+
+                    Gravitropism is a growth response to gravity. Roots are generally positively gravitropic because they grow in the direction of gravity, while shoots are generally negatively gravitropic because they grow away from it. Auxin has different effects in roots and shoots: higher auxin concentration on the lower side of a horizontal root tends to inhibit elongation there, so the upper side grows faster and the root bends downwards. In a shoot, the lower side generally elongates more, causing upward bending.""",
+                    "A shoot placed horizontally bends upwards; a root bends downwards as each responds to gravity.",
+                    "Positive tropism is growth towards a stimulus; negative tropism is growth away from it. Auxin effects differ between roots and shoots."),
+                JambDeepPoint("Other tropisms and experimental interpretation",
+                    """Hydrotropism is directional growth in response to water; roots commonly show positive hydrotropism. Thigmotropism is a growth response to touch, as seen when tendrils coil around a support. Chemotropism is growth in response to a chemical stimulus; pollen tubes grow towards the ovule under chemical guidance. These are growth responses, not rapid movements caused by changes in turgor pressure.
+
+                    To investigate phototropism, compare seedlings exposed to light from one direction with seedlings receiving uniform light, while keeping water, temperature, age and other conditions similar. Use a control group, repeat observations and record the direction and extent of bending. A plant bending towards light is evidence of positive phototropism; do not conclude that the plant moves its whole body like an animal.""",
+                    "A pea tendril coils around a thin support through a touch-related growth response.",
+                    "Tropisms are directional growth responses; nastic movements are not directed by the direction of the stimulus.")
+            ),
+            listOf("Plant hormones act at low concentrations and their effects depend on tissue and concentration.", "Auxin promotes shoot cell elongation but can inhibit elongation in roots at higher concentrations.", "Tropisms are directional growth responses, unlike non-directional nastic movements."),
+            listOf(
+                JambDeepCheck("bio-growth-24","Which plant hormone is strongly associated with fruit ripening?",listOf("Auxin","Cytokinin","Ethylene","Abscisic acid"),2,"Ethylene is a gaseous plant hormone involved in fruit ripening."),
+                JambDeepCheck("bio-growth-25","A shoot bends towards one-sided light mainly because",listOf("cells on the illuminated side always divide faster","auxin promotes greater elongation on the shaded side","gravity stops acting on the shoot","water leaves the shaded side only"),1,"Auxin accumulates on the shaded side of a shoot and promotes greater cell elongation there."),
+                JambDeepCheck("bio-growth-26","A root growing towards a region of greater moisture shows",listOf("phototropism","hydrotropism","thigmotropism","chemotropism"),1,"Hydrotropism is directional growth in response to water."),
+                JambDeepCheck("bio-growth-27","A tendril coiling around a support is an example of",listOf("positive phototropism","thigmotropism","negative gravitropism","hydrotropism"),1,"Tendrils respond to contact by directional growth, a form of thigmotropism.")
+            )
         )
     )
 
