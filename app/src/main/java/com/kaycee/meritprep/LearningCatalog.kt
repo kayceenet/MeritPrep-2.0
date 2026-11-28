@@ -970,8 +970,7 @@ fun LessonScreen(topicId: String, onBack: () -> Unit = {}, onOpenCalculators: ()
                     }
                     if (JambBiologyDeepContent.forTopic(topic.id).isNotEmpty()) {
                         JambBiologyDeepLessonPanel(topic.id)
-                        TopicVisualisationGallery(topicId)
-                    } else {
+                        } else {
                         topic.sections.forEachIndexed { index, section ->
                             Card(Modifier.fillMaxWidth()) {
                                 Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
