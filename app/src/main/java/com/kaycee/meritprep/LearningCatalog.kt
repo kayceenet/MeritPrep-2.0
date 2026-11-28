@@ -314,13 +314,15 @@ object LearningCatalog {
             "bio-coordination", "Coordination, control and homeostasis", "BIO",
             "When a ball moves towards your face, you blink and move your head before you have time to think about it. When your body becomes hot, sweating helps cool you. These responses depend on coordination: detecting changes, processing information and activating effectors. This lesson introduces the nervous and endocrine systems and explains how the body keeps internal conditions within suitable limits.",
             listOf(
-                "Explain the meaning of coordination and homeostasis",
-                "Identify the main parts of the nervous system",
-                "Describe a reflex arc",
-                "Relate sense organs to the stimuli they detect",
-                "Compare nervous and hormonal coordination",
-                "Explain selected roles of endocrine glands and hormones",
-                "Describe how the body regulates temperature and water balance"
+                "Explain the structure and functions of the central nervous system",
+                "Identify the components and functions of the peripheral nervous system",
+                "Explain nerve impulse transmission and synaptic communication",
+                "Illustrate reflex arcs and distinguish reflex, voluntary and conditioned responses",
+                "Relate the skin, nose, tongue, eye and ear to the stimuli they detect and selected defects",
+                "Locate the major endocrine glands and relate their hormones to functions",
+                "Explain the effects of auxins, gibberellins, cytokinins and ethylene",
+                "Explain hormonal feedback in blood glucose and water balance",
+                "Explain thermoregulation and salt-water homeostasis"
             ),
             listOf(
                 "Coordination and homeostasis" to "Coordination is the organised control of activities in an organism. Receptors detect stimuli; coordination centres process information; effectors such as muscles or glands produce responses. Homeostasis is the regulation of internal conditions within suitable limits despite external or internal changes. Examples include regulation of body temperature, blood glucose and water balance. Homeostasis involves monitoring and negative feedback, not keeping every value perfectly constant.",
@@ -1473,6 +1475,7 @@ private fun TopicVisualisationGallery(topicId: String) {
             "bio-soil" -> SoilWaterInvestigationCard()
             "bio-evolution-theory" -> NaturalSelectionCard()
             "bio-growth" -> { SeedGerminationInvestigationLab(); GerminationTypeComparisonLab(); CellDivisionLessonCard(); CellDivisionKnowledgeCheckCard() }
+            "bio-coordination" -> { ReflexArcInvestigation(); EndocrineFeedbackInvestigation(); SenseOrganDefectLab() }
         }
         when (topicId) {
             "phy-projectile", "phy-motion" -> ProjectileMotionAnimation(speed = 25f, angleDegrees = 45f)
